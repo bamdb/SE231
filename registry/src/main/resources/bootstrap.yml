@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    config:
+      name: registry
+      label: isalb
+      uri: http://config-server:8888
+      fail-fast: true
+#      password: ${CONFIG_SERVICE_PASSWORD}
+#      username: user
+
