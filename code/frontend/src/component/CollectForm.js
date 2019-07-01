@@ -3,6 +3,7 @@ import { Modal} from 'antd';
 import "antd/dist/antd.css";
 import Grid from "@material-ui/core/Grid";
 import Radio from '@material-ui/core/Radio';
+import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -12,10 +13,14 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import Tag from "./tag";
 
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
+    },
+    button: {
+        margin: theme.spacing(1),
     },
     formControl: {
         margin: theme.spacing(3),
@@ -116,10 +121,41 @@ class CollectForm extends Component {
                             />
                         </Grid>
                     </Grid>
+                    <br/>
                     <Typography variant="subtitle1" color="textPrimary" component="p">
-                        简评(最多200字)
+                        热门标签
                     </Typography>
-
+                    <Tag/>
+                    <br/>
+                    <Typography variant="subtitle1" color="textPrimary" component="p">
+                        您的标签
+                    </Typography>
+                    <Tag/>
+                    <br/>
+                    <Grid container spacing={2}>
+                        <Grid item xs={1}/>
+                        <Grid item xs={3.5}>
+                            <br/>
+                            <Typography variant="subtitle1" color="textPrimary" component="p">
+                                添加自定义标签：
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <TextField
+                                id="standard-search"
+                                label="Search field"
+                                type="search"
+                                className={useStyles.textField}
+                                margin="normal"
+                            />
+                        </Grid>
+                        <Grid item xs={2}>
+                            <br/>
+                            <Button variant="contained" color="primary" className={useStyles.button}>
+                                添加
+                            </Button>
+                        </Grid>
+                    </Grid>
                 </Modal>
             </div>
         )
