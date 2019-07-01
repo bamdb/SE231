@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Paper from '@material-ui/core/Paper';
 
-import '../css/Item.css'
+import '../css/item.css'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -11,8 +11,7 @@ import ListItemText from '@material-ui/core/ListItemText';
  信息保存在state中，可以自行添加props或ajax
 */
 
-class Item extends Component
-{
+class Item extends Component {
     constructor(props) {
         super(props);
         this.state={name:"三体",date:"2000-1-1",author:"Liu Cixin",director:"",pages:"100",isbn:"123456"}

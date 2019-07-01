@@ -17,8 +17,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 
 
 
-class UserInfo extends Component
-{
+class Userinfo extends Component {
     constructor(props) {
         super(props);
         this.state={edit:false,username:"shenruien",password:"123456",email:"123456@qq.com",id:"1",date:"2019-7-1",grade:"1"};
@@ -177,4 +176,4 @@ class UserInfo extends Component
 
    }
 }
-export default UserInfo;
+export default Userinfo;
