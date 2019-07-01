@@ -9,7 +9,7 @@ jdk:
  - openjdk11 
 env:
  - CODECOV_TOKEN=c44167bb-18d7-4f63-88f5-6181d3d80c4d
-before_install: 
-  - chmod a+x ./mvnw
+#before_install: 
+#  - chmod a+x ./mvnw
 after_success:
   - bash <(curl -s https://codecov.io/bash)
