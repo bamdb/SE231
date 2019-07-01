@@ -5,6 +5,4 @@ spring:
       label: isalb
       uri: http://localhost:8888
       fail-fast: true
-#      password: ${CONFIG_SERVICE_PASSWORD}
-#      username: user
 

@@ -7,13 +7,10 @@ spring:
           search-paths: /config
   application:
     name: config
-#  security:
-#    user:
-#      password: ${CONFIG_SERVICE_PASSWORD}
 server:
   port: 8888
 eureka:
   client:
     register-with-eureka: true
     serviceUrl:
-      defaultZone: http://registry:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
