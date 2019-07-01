@@ -1,10 +1,10 @@
 language: java
 jdk:
  - oraclejdk8
- - openjdk9
  - oraclejdk11
+ - openjdk11
 env:
- - CODECOV_TOKEN="c44167bb-18d7-4f63-88f5-6181d3d80c4d"
+ - CODECOV_TOKEN=c44167bb-18d7-4f63-88f5-6181d3d80c4d
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
