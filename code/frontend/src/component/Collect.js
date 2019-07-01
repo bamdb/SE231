@@ -15,6 +15,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import {LinearProgress} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -45,16 +46,20 @@ const useStyles = makeStyles(theme => ({
 
 
 /*
-* 需要传入的props
+* 需要传入的props（包装成json后可以简化）
 * props.status : 用户的收藏状态 （如 "在看"）
 * props.comment : 用户对条目的评论 (一段用户在收藏时写下的评论，可能需要字数限制)
+* props.total : 条目总章节数 (如 12)
+* props.completed : 用户完成章节数 （如 6）
+* props.grade : 用户评分 (如 7)
 */
 class Collect extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            expanded : false
+            expanded : false,
+            completed : 0
         };
 
         this.handleExpandClick = this.handleExpandClick.bind(this);
@@ -74,6 +79,9 @@ class Collect extends Component {
                 <hr className={useStyles.board} color="#C7C7C7"/>
                 <CardContent>
                     <Typography variant="subtitle1" color="textPrimary" component="p">
+                        我的评分 ： {this.props.grade}
+                    </Typography>
+                    <Typography variant="subtitle1" color="textPrimary" component="p">
                         我的评论
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
@@ -83,9 +91,9 @@ class Collect extends Component {
                 <hr className={useStyles.board} color="#C7C7C7"/>
                 <CardContent>
                     <Typography variant="subtitle1" color="textPrimary" component="p">
-                        我的完成度
+                        我的完成度:{this.props.completed}/{this.props.total}
                     </Typography>
-
+                    <LinearProgress variant="determinate" value={this.props.completed * 100 / this.props.total}/>
                 </CardContent>
                 <CardActions disableSpacing>
                     <IconButton aria-label="Add to favorites">
