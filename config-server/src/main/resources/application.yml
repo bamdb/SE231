@@ -7,9 +7,6 @@ spring:
           search-paths: /config
   application:
     name: config
-#  security:
-#    user:
-#      password: ${CONFIG_SERVICE_PASSWORD}
 server:
   port: 8888
 eureka:
