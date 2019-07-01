@@ -1,11 +1,11 @@
 sudo: true
 language: java
-addons:
-  apt:
-    packages:
-      - oracle-java11-installer
+#addons:
+#  apt:
+#    packages:
+#      - oracle-java11-installer
 jdk:
- - oraclejdk11
+ - openjdk11
 env:
  - CODECOV_TOKEN=c44167bb-18d7-4f63-88f5-6181d3d80c4d
 before_install: 
