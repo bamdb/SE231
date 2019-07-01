@@ -20,7 +20,7 @@
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
         <java.version>11</java.version>
     </properties>
-
+<packaging>pom</packaging>
     <build>
         <plugins>
             <plugin>
