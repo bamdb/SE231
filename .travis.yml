@@ -6,6 +6,7 @@ language: java
 #      - oracle-java11-installer
 jdk:
  - openjdk11
+dist: xenial
 env:
  - CODECOV_TOKEN=c44167bb-18d7-4f63-88f5-6181d3d80c4d
 before_install: 
