@@ -14,6 +14,8 @@ import FormLabel from '@material-ui/core/FormLabel';
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Tag from "./tag";
+import IconButton from "@material-ui/core/IconButton";
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -83,7 +85,10 @@ class Collectform extends Component {
     render() {
         return (
             <div>
-                <input type="submit" className="button" onClick={this.showModal} value="添加"/>
+                    <IconButton aria-label="Add to favorites" onClick={this.showModal}>
+                        收藏
+                        <FavoriteIcon />
+                    </IconButton>
                 <Modal title="修改收藏状态" visible={this.state.visible}
                        onOk={this.handleOk} onCancel={this.handleCancel}
                 >

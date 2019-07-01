@@ -184,10 +184,6 @@ class Collect extends Component {
                 </CardContent>
                 <CardActions disableSpacing>
                     <Collectform/>
-                    <IconButton aria-label="Add to favorites">
-                        收藏
-                        <FavoriteIcon />
-                    </IconButton>
                     <IconButton aria-label="Share">
                         分享
                         <ShareIcon />

@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6bc43945-11be-472f-a402-71e3a4849f2d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/component/collect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/collect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/collectform.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/collectform.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/listitem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/listitem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -32,8 +33,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/component/collect.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="77" selection-start-line="77" selection-end-line="86" selection-end-column="6" />
+            <state relative-caret-position="-2208">
+              <caret line="33" column="18" lean-forward="true" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -44,8 +45,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/component/listitem.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-560">
-              <caret line="28" column="83" lean-forward="true" selection-start-line="28" selection-start-column="83" selection-end-line="28" selection-end-column="83" />
+            <state relative-caret-position="170">
+              <caret line="55" column="56" selection-start-line="55" selection-start-column="56" selection-end-line="55" selection-end-column="56" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -67,8 +68,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/component/collectform.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1575">
-              <caret line="105" column="45" lean-forward="true" selection-start-line="105" selection-start-column="45" selection-end-line="105" selection-end-column="45" />
+            <state relative-caret-position="455">
+              <caret line="120" column="41" lean-forward="true" selection-start-line="120" selection-start-column="41" selection-end-line="120" selection-end-column="41" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -146,6 +147,9 @@
       <find>classes.</find>
       <find>hr</find>
       <find>collectform</find>
+      <find>form</find>
+      <find>paper:</find>
+      <find>favo</find>
     </findStrings>
     <replaceStrings>
       <replace>useStyles.</replace>
@@ -165,6 +169,8 @@
         <option value="$PROJECT_DIR$/src/css/tag.css" />
         <option value="$PROJECT_DIR$/src/component/CollectForm.js" />
         <option value="$PROJECT_DIR$/src/component/tag.js" />
+        <option value="$PROJECT_DIR$/src/component/collect.js" />
+        <option value="$PROJECT_DIR$/src/component/collectform.js" />
         <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/component/listitem.js" />
       </list>
@@ -277,7 +283,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15622000" />
+    <option name="totallyTimeSpent" value="17451000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -395,8 +401,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/component/collect.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="77" selection-start-line="77" selection-end-line="86" selection-end-column="6" />
+        <state relative-caret-position="-2208">
+          <caret line="33" column="18" lean-forward="true" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -405,8 +411,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/component/collectform.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1575">
-          <caret line="105" column="45" lean-forward="true" selection-start-line="105" selection-start-column="45" selection-end-line="105" selection-end-column="45" />
+        <state relative-caret-position="455">
+          <caret line="120" column="41" lean-forward="true" selection-start-line="120" selection-start-column="41" selection-end-line="120" selection-end-column="41" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
@@ -415,8 +421,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/component/listitem.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-560">
-          <caret line="28" column="83" lean-forward="true" selection-start-line="28" selection-start-column="83" selection-end-line="28" selection-end-column="83" />
+        <state relative-caret-position="170">
+          <caret line="55" column="56" selection-start-line="55" selection-start-column="56" selection-end-line="55" selection-end-column="56" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

@@ -4,11 +4,20 @@ import {makeStyles} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import {Modal} from "antd";
+import Collectform from "./collectform";
 
 const useStyles = makeStyles(theme => ({
     root: {
         padding: theme.spacing(3, 2),
     },
+    paper: {
+        padding: theme.spacing(3, 2),
+        width: 30
+    },
+    image: {
+        height: 120,
+        width: 96,
+    }
 }));
 
 /*
@@ -33,31 +42,35 @@ class Listitem extends Component {
         return(
             <Paper className={useStyles.root}>
                 <Grid container spacing={2}>
-                    <Grid item xs={3}>
-
+                    <Grid item xs={1}/>
+                    <Grid item xs={2}>
+                        <br/>
+                        <img src={require("./a.png")} alt="暂无图片" className={useStyles.image} height="120px" width="96px"/>
                     </Grid>
                     <Grid item xs={6}>
                         <Typography variant="h4" component="h3">
                             {this.props.name}
                         </Typography>
                         <br/>
-                        <Grid container spacing={1}>
-                            <Grid item xs={4}>
-                                <Typography component="p" align="center">
-                                    {this.props.date}
-                                </Typography>
+                        <Paper className={useStyles.paper}>
+                            <Grid container spacing={1}>
+                                <Grid item xs={4}>
+                                    <Typography component="p" align="center">
+                                        {this.props.date}
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={4}>
+                                    <Typography component="p" align="center">
+                                        {this.props.author}
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={4}>
+                                    <Typography component="p" align="center">
+                                        {this.props.chapter}
+                                    </Typography>
+                                </Grid>
                             </Grid>
-                            <Grid item xs={4}>
-                                <Typography component="p" align="center">
-                                    {this.props.author}
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={4}>
-                                <Typography component="p" align="center">
-                                    {this.props.chapter}
-                                </Typography>
-                            </Grid>
-                        </Grid>
+                        </Paper>
                         <br/>
                         <Grid container spacing={2}>
                             <Grid item xs={3}>
@@ -87,8 +100,10 @@ class Listitem extends Component {
                         </Grid>
 
                     </Grid>
-                    <Grid item xs={3}>
-
+                    <Grid item xs={1}/>
+                    <Grid item xs={2}>
+                        <br/>
+                        <Collectform/>
                     </Grid>
                 </Grid>
             </Paper>
