@@ -37,35 +37,38 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const [value, setValue] = React.useState(0);
-
 class Navigation extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            value : 0
+        };
+
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(event, newValue) {
-        setValue(newValue);
+        console.log(newValue);
+        this.setState({value : newValue});
     }
 
     render() {
-        const classes = useStyles();
         return (
-            <div className={classes.root}>
-                <AppBar position="static">
-                    <Tabs variant="fullWidth" value={value} onChange={this.handleChange}>
-                        <LinkTab label="Page One" href="/drafts"/>
-                        <LinkTab label="Page Two" href="/trash"/>
-                        <LinkTab label="Page Three" href="/spam"/>
+            <div className={useStyles.root}>
+                <AppBar position="Relative">
+                    <Tabs centered={true} value={this.state.value} onChange={this.handleChange}>
+                        <LinkTab label="排行榜"/>
+                        <LinkTab label="分类浏览"/>
+                        <LinkTab label="讨论区"/>
                     </Tabs>
                 </AppBar>
-                {value === 0 && <TabContainer>Page One</TabContainer>}
-                {value === 1 && <TabContainer>Page Two</TabContainer>}
-                {value === 2 && <TabContainer>Page Three</TabContainer>}
+                {this.state.value === 0 && <TabContainer>Page One</TabContainer>}
+                {this.state.value === 1 && <TabContainer>Page Two</TabContainer>}
+                {this.state.value === 2 && <TabContainer>Page Three</TabContainer>}
             </div>
         );
-}
+    }
 
 }
 
