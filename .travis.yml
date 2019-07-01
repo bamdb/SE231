@@ -1,10 +1,14 @@
-sudo: required
+sudo: true
 language: java
+addons:
+  apt:
+    packages:
+      - oracle-java11-installer
 jdk:
- - oraclejdk8
- - openjdk11
+ - oraclejdk11
 env:
  - CODECOV_TOKEN=c44167bb-18d7-4f63-88f5-6181d3d80c4d
-
+before_install: 
+  - chmod a+x ./mvnw
 after_success:
   - bash <(curl -s https://codecov.io/bash)
