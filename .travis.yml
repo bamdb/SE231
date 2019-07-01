@@ -4,13 +4,15 @@ language: java
 #  apt:
 #    packages:
 #      - oracle-java11-installer
-dist: xenial
+#dist: xenial
 jdk:
- - openjdk11
-
+ - oraclejdk11
+ 
 env:
  - CODECOV_TOKEN=c44167bb-18d7-4f63-88f5-6181d3d80c4d
 before_install: 
+  - curl -o /tmp/install-jdk.sh -L https://raw.githubusercontent.com/sormuras/bach/master/install-jdk.sh
+  - bash -x /tmp/install-jdk.sh --target "/home/travis/openjdk11" --workspace "/home/travis/.cache/install-jdk" --feature "11" --license "GPL" --cacerts
   - chmod a+x ./mvnw
 after_success:
   - bash <(curl -s https://codecov.io/bash)
