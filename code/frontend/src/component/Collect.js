@@ -19,6 +19,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {LinearProgress} from "@material-ui/core";
 import { Bar as BarChart } from 'react-chartjs';
+import CollectForm from "./CollectForm";
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -182,6 +183,7 @@ class Collect extends Component {
                     <BarChart data={data} options={options} width="600" height="250" />
                 </CardContent>
                 <CardActions disableSpacing>
+                    <CollectForm/>
                     <IconButton aria-label="Add to favorites">
                         收藏
                         <FavoriteIcon />
