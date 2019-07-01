@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import Navigation from "./component/Navigation";
-import Collect from "./component/Collect";
+import Navigation from "./component/navigation";
+import Collect from "./component/collect";
 
 ReactDOM.render(<Collect />, document.getElementById('root'));
 

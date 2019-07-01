@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-class CollectForm extends Component {
+class Collectform extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -162,5 +162,5 @@ class CollectForm extends Component {
     }
 }
 
-export default CollectForm;
+export default Collectform;
 

@@ -34,7 +34,7 @@ class Tag extends Component
         }
 
         return(
-            <div >
+            <div>
                 <Paper id={"tagmain"}>
                     {item}
                 </Paper>
