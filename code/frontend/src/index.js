@@ -2,12 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Userinfo from './component/userinfo';
+import Scheduletable from './component/scheduletable';
+import Tag from './component/tag';
+import Item from './component/item';
 import * as serviceWorker from './serviceWorker';
-import Navigation from "./component/navigation";
-import Collect from "./component/collect";
-import Listitem from "./component/listitem";
 
-ReactDOM.render(<Listitem />, document.getElementById('root'));
+ReactDOM.render(<Scheduletable/>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
