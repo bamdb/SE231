@@ -8,6 +8,9 @@ import Userinfo from './component/userinfo';
 import Scheduletable from './component/scheduletable';
 import Tag from './component/tag';
 import Item from './component/item';
+import Listitem from './component/listitem'
+import Navigation from './component/navigation'
+import Browserlist from './component/browserlist'
 import * as serviceWorker from './serviceWorker';
 import Register from "./component/register";
 
@@ -28,7 +31,7 @@ class Home extends Component{
 
 ReactDOM.render(<Home />, document.getElementById('root'));
 
-//ReactDOM.render(<Scheduletable/>, document.getElementById('root'));
+ReactDOM.render(<Browserlist/>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
