@@ -1,0 +1,8 @@
+server:
+  port: 10000, 20000
+spring:
+  application:
+    name: image
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/bamdb
