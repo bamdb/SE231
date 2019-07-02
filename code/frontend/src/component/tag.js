@@ -17,6 +17,11 @@ class Tag extends Component {
         this.state={tags:["搞笑","热血","王道"]};
     }
     componentWillMount() {
+        if(this.props.tags!=null)
+        {
+            this.setState({tags:this.props.tags})
+        }
+
     }
     componentDidMount() {
     }
