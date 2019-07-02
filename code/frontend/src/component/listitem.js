@@ -47,7 +47,7 @@ class Listitem extends Component {
                     <Grid item xs={1}/>
                     <Grid item xs={2}>
                         <br/>
-                        <img src={require("./a.png")} alt="暂无图片" className={useStyles.image} height="120px" width="96px"/>
+                        <img src="img/3.jpg" alt="暂无图片" className={useStyles.image} height="120px" width="96px"/>
                     </Grid>
                     <Grid item xs={6}>
                         <Typography variant="h4" component="h3">
