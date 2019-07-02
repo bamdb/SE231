@@ -6,8 +6,10 @@ import * as serviceWorker from './serviceWorker';
 import Navigation from "./component/navigation";
 import Collect from "./component/collect";
 import Listitem from "./component/listitem";
+import Browserlist from "./component/browserlist";
+import Item from "./component/item";
 
-ReactDOM.render(<Listitem />, document.getElementById('root'));
+ReactDOM.render(<Browserlist />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

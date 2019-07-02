@@ -9,10 +9,12 @@ import Collectform from "./collectform";
 const useStyles = makeStyles(theme => ({
     root: {
         padding: theme.spacing(3, 2),
+        minWidth: 800,
+        width: '100%',
     },
     paper: {
         padding: theme.spacing(3, 2),
-        width: 30
+        width: 200
     },
     image: {
         height: 120,
