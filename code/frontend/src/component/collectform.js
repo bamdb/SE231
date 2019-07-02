@@ -52,12 +52,28 @@ class Collectform extends Component {
         this.state = {
             visible: false,
             status : '想看',
-            content: ""
+            content: "",
+            tags:["233"],
+            text:""
         };
         this.showModal = this.showModal.bind(this);
         this.handleOk = this.handleOk.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleadd=this.handleadd.bind(this);
+        this.handletextchange=this.handletextchange.bind(this);
+    }
+    handletextchange(e)
+    {
+        this.setState({text:e.target.value});
+    }
+    handleadd(e)
+    {
+        var tags=this.state.tags;
+
+        tags.push(this.state.text);
+        debugger;
+        this.setState({tags:tags});
     }
     showModal(){
         this.setState({
@@ -75,7 +91,8 @@ class Collectform extends Component {
         })
     }
     handleChange(e) {
-        this.setState({status : e.target.value})
+
+        this.setState({status : this.state.content})
     }
 
     handleAlert(content) {
@@ -135,7 +152,7 @@ class Collectform extends Component {
                     <Typography variant="subtitle1" color="textPrimary" component="p">
                         您的标签
                     </Typography>
-                    <Tag/>
+                    <Tag tags={this.state.tags}/>
                     <br/>
                     <Grid container spacing={2}>
                         <Grid item xs={1}/>
@@ -152,11 +169,12 @@ class Collectform extends Component {
                                 type="search"
                                 className={useStyles.textField}
                                 margin="normal"
+                                onChange={this.handletextchange}
                             />
                         </Grid>
                         <Grid item xs={2}>
                             <br/>
-                            <Button variant="contained" color="primary" className={useStyles.button}>
+                            <Button variant="contained" color="primary" onClick={this.handleadd} className={useStyles.button}>
                                 添加
                             </Button>
                         </Grid>
