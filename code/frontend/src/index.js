@@ -11,8 +11,9 @@ import Item from "./component/item";
 import Comment from "./component/comment"
 import Commentlist from "./component/commentlist";
 import Discuss from "./component/discuss";
+import Reply from "./component/reply"
 
-ReactDOM.render(<Discuss />, document.getElementById('root'));
+ReactDOM.render(<Reply />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

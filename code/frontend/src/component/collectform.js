@@ -120,6 +120,7 @@ class Collectform extends Component {
                                 label="简评"
                                 multiline
                                 rows="8"
+                                fullWidth={true}
                                 className={useStyles.textField}
                                 margin="normal"
                                 variant="outlined"
