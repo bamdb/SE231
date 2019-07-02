@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import {Modal} from "antd";
 import Collectform from "./collectform";
+import '../css/listitem.css'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -40,6 +41,7 @@ class Listitem extends Component {
 
     render() {
         return(
+            <div id={"mainlistitem"}>
             <Paper className={useStyles.root}>
                 <Grid container spacing={2}>
                     <Grid item xs={1}/>
@@ -107,6 +109,7 @@ class Listitem extends Component {
                     </Grid>
                 </Grid>
             </Paper>
+            </div>
         );
     }
 }
