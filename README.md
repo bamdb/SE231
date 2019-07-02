@@ -5,7 +5,7 @@
 code for summer project
 
 # 成员信息
-* isadlb 余亚杰
+* isadlb 于亚杰
 * pleiadesian 王祖来
 * scarletfantasy 沈瑞恩
 * YuyangHuang 黄雨瑒
