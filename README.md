@@ -4,6 +4,12 @@
 # SE231
 code for summer project
 
+# 成员信息
+* isadlb 余亚杰
+* pleiadesian 王祖来
+* scarletfantasy 沈瑞恩
+* YuyangHuang 黄雨瑒
+
 # 暑期项目
 * 项目名：bamdb = book and movie database
 
