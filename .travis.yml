@@ -9,10 +9,9 @@ jdk:
  - openjdk11 
 env:
   global:
-    - CODECOV_TOKEN=c44167bb-18d7-4f63-88f5-6181d3d80c4d
+    - CODECOV_TOKEN="c44167bb-18d7-4f63-88f5-6181d3d80c4d"
 script:
- - "mvn cobertura:cobertura"
-# - mvn spring-boot:run
+ - ./mvnw clean install -B
 before_install: 
   - chmod a+x ./mvnw
 after_success:
