@@ -3,6 +3,7 @@
     border: none;
     border-radius: 8px;
     color: white;
+    width: 50px;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -11,6 +12,7 @@
         border: none;
         border-radius: 8px;
         color: white;
+        width: 50px;
         padding: 15px 32px;
         text-align: center;
         text-decoration: none;
@@ -19,3 +21,4 @@
     width:200px;
     height:100px;
 }
+
