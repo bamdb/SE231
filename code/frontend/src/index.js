@@ -13,8 +13,8 @@ import Navigation from './component/navigation'
 import Browserlist from './component/browserlist'
 import * as serviceWorker from './serviceWorker';
 import Register from "./component/register";
-
-
+import Progressmanage from './component/progressmanage'
+import Search from './component/search'
 /*class Home extends Component{
     render() {
         return (
@@ -30,7 +30,7 @@ import Register from "./component/register";
     }
 }*/
 
-ReactDOM.render(<Scheduletable/>, document.getElementById('root'));
+ReactDOM.render(<Search/>, document.getElementById('root'));
 
 
 
