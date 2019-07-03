@@ -13,6 +13,8 @@ import Navigation from './component/navigation'
 import Browserlist from './component/browserlist'
 import * as serviceWorker from './serviceWorker';
 import Register from "./component/register";
+import Topic from "./component/topic";
+import TopicList from "./component/topiclist";
 
 
 /*class Home extends Component{

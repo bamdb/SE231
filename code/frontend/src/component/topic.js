@@ -26,6 +26,8 @@ const useStyles = makeStyles(theme => ({
 * props.date : 发布时间
 */
 
+/* 传值未写，后期不用初始值 */
+
 class Topic extends Component {
     constructor(props){
         super(props);
