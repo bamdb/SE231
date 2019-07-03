@@ -76,7 +76,7 @@ class Reply extends Component {
                                     margin="normal"
                                     variant="outlined"
                                 />
-                                <Button />
+                                <Button id="button" variant="contained" color="primary">提交</Button>
                             </CardActions>
                         </Card>
                     </Grid>
