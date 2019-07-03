@@ -1,4 +1,4 @@
-button{background-color: pink;
+#select{background-color: pink;
         border: none;
         border-radius: 8px;
         color: white;
@@ -7,3 +7,20 @@ button{background-color: pink;
         text-decoration: none;
         display: inline-block;
 }
+#topnavi{
+        margin-left: 2%;
+        margin-right: 2%;
+        margin-top: 2%;
+
+}
+#middle{
+        background-color: gold;
+
+}
+#oneitem{
+        width:500px;
+        height: 200px;
+        float:left;
+        margin: 2%;
+}
+Scheduletable{padding:10%}

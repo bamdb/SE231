@@ -50,6 +50,11 @@ class Scheduletable extends Component {
         console.log(hasread)
     }
     componentWillMount() {
+        if(this.props.hasread!=null)
+        {
+            this.setState({hasread:this.props.hasread,total:this.props.total})
+        }
+
     }
     componentDidMount() {
     }

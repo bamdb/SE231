@@ -8,3 +8,5 @@
 
 # except the workspace.xml
 /code/frontend/.idea
+
+/code.frontend/index.js
