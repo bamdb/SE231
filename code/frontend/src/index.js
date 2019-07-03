@@ -14,8 +14,27 @@ import Reply from "./component/reply";
 import Relateditem from "./component/relatedlist";
 import Activity from "./component/activity"
 import Activitylist from "./component/activitylist";
+import Register from "./component/register";
+import Topic from "./component/topic";
+import TopicList from "./component/topiclist";
+import TopItemList from './component/topitemlist';
 
-ReactDOM.render(<Activitylist/>, document.getElementById('root'));
+/*class Home extends Component{
+    render() {
+        return (
+            <Router>
+                <Switch>
+                    <Route exact path = {"/"} component = {Home}/>
+                    <Route path = {"/login"} component = {Login}/>
+                    <Route path = {"/register"} component = {Register} />
+
+                </Switch>
+            </Router>
+        )
+    }
+}*/
+
+ReactDOM.render(<Scheduletable/>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
