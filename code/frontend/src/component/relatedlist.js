@@ -31,7 +31,7 @@ class Relateditem extends Component {
                         aria-controls="panel1a-content"
                         id="panel1a-header"
                     >
-                        <Typography className={useStyles.heading}>续集</Typography>
+                        <Typography className={useStyles.heading}>前作</Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
                             <Browserlist/>
@@ -43,13 +43,10 @@ class Relateditem extends Component {
                         aria-controls="panel2a-content"
                         id="panel2a-header"
                     >
-                        <Typography className={useStyles.heading}>Expansion Panel 2</Typography>
+                        <Typography className={useStyles.heading}>续集</Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
-                        <Typography>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                            sit amet blandit leo lobortis eget.
-                        </Typography>
+                        <Browserlist/>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
                 <ExpansionPanel disabled>
@@ -58,8 +55,11 @@ class Relateditem extends Component {
                         aria-controls="panel3a-content"
                         id="panel3a-header"
                     >
-                        <Typography className={useStyles.heading}>Disabled Expansion Panel</Typography>
+                        <Typography className={useStyles.heading}>相关作品</Typography>
                     </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                        <Browserlist/>
+                    </ExpansionPanelDetails>
                 </ExpansionPanel>
             </div>
         );
