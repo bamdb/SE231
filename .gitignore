@@ -5,3 +5,6 @@
 *.war
 *.tar.gz
 *.class
+
+# except the workspace.xml
+/code/frontend/.idea

@@ -15,7 +15,7 @@ import * as serviceWorker from './serviceWorker';
 import Register from "./component/register";
 
 
-class Home extends Component{
+/*class Home extends Component{
     render() {
         return (
             <Router>
@@ -23,15 +23,16 @@ class Home extends Component{
                     <Route exact path = {"/"} component = {Home}/>
                     <Route path = {"/login"} component = {Login}/>
                     <Route path = {"/register"} component = {Register} />
+
                 </Switch>
             </Router>
         )
     }
-}
+}*/
 
-ReactDOM.render(<Home />, document.getElementById('root'));
+ReactDOM.render(<Scheduletable/>, document.getElementById('root'));
 
-ReactDOM.render(<Browserlist/>, document.getElementById('root'));
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
