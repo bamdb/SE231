@@ -50,6 +50,7 @@ create table Admin
    password             varchar(20) not null,
    mail                 varchar(20) not null,
    imgurl               varchar(50),
+   role                 int not null,
    primary key (id)
 );
 
@@ -90,6 +91,7 @@ create table Editor
    imgurl               varchar(50),
    author_time          timestamp,
    edit_num             int,
+   role                 int not null,
    primary key (id)
 );
 
@@ -128,6 +130,7 @@ create table Normal
    password             varchar(20) not null,
    mail                 varchar(20) not null,
    imgurl               varchar(50),
+   role                 int not null,
    primary key (id)
 );
 
@@ -175,6 +178,7 @@ create table User
    password             varchar(20) not null,
    mail                 varchar(20) not null,
    imgurl               varchar(50),
+   role                 int not null,
    primary key (id)
 );
 
