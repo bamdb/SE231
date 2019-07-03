@@ -37,8 +37,8 @@ public class UserServiceApplicationTests {
     @Test
     public void contextLoads() {
 //        Assert.assertEquals(null, userService);
-    List<User> list = userService.selectAll();
-        Assert.assertNotNull(list);
+//    List<User> list = userService.selectAll();
+//        Assert.assertNotNull(list);
     }
 
 }
