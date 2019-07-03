@@ -11,6 +11,10 @@ zuul:
       #      url: http://image:10000
       service-id: image
       sensitiveHeaders:
+    fromuser:
+      path: /user/**
+      service-id: user
+      sensitiveHeaders:
   retryable: true
 
 ribbon:

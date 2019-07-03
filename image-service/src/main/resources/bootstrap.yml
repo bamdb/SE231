@@ -4,7 +4,7 @@ spring:
       discovery:
         service-id: config
         enabled: true
-      name: image
+      name: image, mongo
 eureka:
   client:
     serviceUrl:
