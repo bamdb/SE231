@@ -29,7 +29,7 @@ public class ImageServiceApplicationTests {
 
     @Test
     public void contextLoads() {
-        Image image();
+        Image image = new Image();
     }
 
 }
