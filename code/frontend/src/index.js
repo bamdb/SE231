@@ -11,8 +11,9 @@ import Navigation from './component/navigation'
 import Browserlist from './component/browserlist'
 import * as serviceWorker from './serviceWorker';
 import Reply from "./component/reply";
+import Relateditem from "./component/relatedlist";
 
-ReactDOM.render(<Reply/>, document.getElementById('root'));
+ReactDOM.render(<Relateditem/>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
