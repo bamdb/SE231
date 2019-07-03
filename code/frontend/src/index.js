@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import './index.css';
+import Login from './component/login';
 import App from './App';
 import Userinfo from './component/userinfo';
 import Scheduletable from './component/scheduletable';
@@ -10,6 +12,24 @@ import Listitem from './component/listitem'
 import Navigation from './component/navigation'
 import Browserlist from './component/browserlist'
 import * as serviceWorker from './serviceWorker';
+import Register from "./component/register";
+
+
+class Home extends Component{
+    render() {
+        return (
+            <Router>
+                <Switch>
+                    <Route exact path = {"/"} component = {Home}/>
+                    <Route path = {"/login"} component = {Login}/>
+                    <Route path = {"/register"} component = {Register} />
+                </Switch>
+            </Router>
+        )
+    }
+}
+
+ReactDOM.render(<Home />, document.getElementById('root'));
 
 ReactDOM.render(<Browserlist/>, document.getElementById('root'));
 
