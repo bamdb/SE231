@@ -6,4 +6,5 @@
 *.tar.gz
 *.class
 
-.idea/
+# except the workspace.xml
+/code/frontend/.idea
