@@ -12,8 +12,10 @@ import Browserlist from './component/browserlist'
 import * as serviceWorker from './serviceWorker';
 import Reply from "./component/reply";
 import Relateditem from "./component/relatedlist";
+import Activity from "./component/activity"
+import Activitylist from "./component/activitylist";
 
-ReactDOM.render(<Relateditem/>, document.getElementById('root'));
+ReactDOM.render(<Activitylist/>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
