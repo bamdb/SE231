@@ -25,6 +25,7 @@ before_install:
   - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('610878') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
   - sudo mysql_upgrade -u root -p610878
   - sudo service mysql restart
+  - mysql -e "create database bamdb;"
 after_success:
   - bash <(curl -s https://codecov.io/bash) -t c44167bb-18d7-4f63-88f5-6181d3d80c4d
   - sshpass -e  scp -P $DEPLOY_PASS -o stricthostkeychecking=no -r  $DEPLOY_USER@47.102.99.212
