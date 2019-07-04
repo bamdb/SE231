@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Bar as BarChart } from 'react-chartjs';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Paper from '@material-ui/core/Paper';
@@ -18,7 +19,6 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {LinearProgress} from "@material-ui/core";
-import { Bar as BarChart } from 'react-chartjs';
 import Collectform from "./collectform";
 
 const useStyles = makeStyles(theme => ({

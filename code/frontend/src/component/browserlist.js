@@ -1,5 +1,10 @@
-import React, { Component } from 'react';
+/*
+ * 条目列表
+ * 包含对条目的介绍和是否收藏
+ *
+ */
 
+import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';

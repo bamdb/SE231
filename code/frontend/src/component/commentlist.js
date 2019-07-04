@@ -1,5 +1,12 @@
-import React, { Component } from 'react';
+/*
+ * 条目收藏区
+ * 显示在“个人中心--收藏夹”
+ * 包含 条目图片 条目名 收藏日期 评分 简介
+ * img
+ * name date grade comment
+ */
 
+import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';

@@ -18,6 +18,12 @@ import Register from "./component/register";
 import Topic from "./component/topic";
 import TopicList from "./component/topiclist";
 import TopItemList from './component/topitemlist';
+import Search from './component/search';
+import Collect from "./component/collect";
+import Collectform from "./component/collectform";
+import Commentlist from "./component/commentlist";
+import Discuss from "./component/discuss";
+import Login from "./component/login";
 
 /*class Home extends Component{
     render() {
@@ -34,7 +40,7 @@ import TopItemList from './component/topitemlist';
     }
 }*/
 
-ReactDOM.render(<Scheduletable/>, document.getElementById('root'));
+ReactDOM.render(<Navigation/>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
