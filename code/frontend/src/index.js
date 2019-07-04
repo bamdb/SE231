@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import Scheduletable from './component/scheduletable'
 import Progressmanage from './component/progressmanage'
 ReactDOM.render(<App />, document.getElementById('root'));
 
