@@ -59,8 +59,8 @@ class Navigation extends Component {
             <div className={useStyles.root}>
                 <AppBar color={"default"} position={"fixed"}>
                     <Tabs centered={true} value={this.state.value} onChange={this.handleChange}>
-                        <LinkTab label="首页"/>
-                        <LinkTab label="书籍"/>
+                        <LinkTab label="首页" href={"/homepage"}/>
+                        <LinkTab label="书籍" href={"/userpage"}/>
                         <LinkTab label="讨论区"/>
                     </Tabs>
                     <Grid container>
