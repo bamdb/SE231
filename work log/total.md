@@ -28,3 +28,14 @@
   * building microservice
 * huangyuyang:
   * Finish TopItemList & TopicList Start front-end combination Learn material-ui design
+# 2019-7-4
+* wangzulai:
+  * working on user service
+* shenruien:
+  * start writing web pages
+  * basic website has been built
+* yuyajie:
+  * user-service
+  * test
+* huangyuyang:
+  * continue to write web-page
