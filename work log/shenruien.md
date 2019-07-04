@@ -8,3 +8,6 @@
 * complete component progressmanage,search upgrade component scheduletable
 * design the database
 * start installing the environment of react-native
+# 2019-7-4
+* start writing web pages
+* basic website has been built
