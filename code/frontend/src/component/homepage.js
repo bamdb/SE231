@@ -7,11 +7,7 @@ import TopItemList from "./topitemlist";
 import Progressmanage from './progressmanage'
 
 
-const useStyles = makeStyles(theme => ({
-    root:{
-        width: "20%",
-    }
-}));
+
 /*
 class TopPart extends Component{
     constructor(props){
@@ -48,13 +44,11 @@ class HomePage extends Component{
                     <Grid item xs={2}>
                     </Grid>
                     <Grid item xs={8}>
-                        <br/>
-                        <br/>
+
                         <Progressmanage />
                     </Grid>
                     <Grid item xs={2}>
-                        <br/>
-                        <br/>
+
                         <TopItemList />
                     </Grid>
                 </Grid>

@@ -9,7 +9,8 @@ import Homepage from './component/homepage'
 import Navigation from "./component/navigation";
 import TopItemList from "./component/topitemlist";
 import Browserlist from "./component/browserlist";
-
+import EntryPage from './entrypage'
+import LoginPage from './loginpage'
 import {
   HashRouter as Router,
   Route,
@@ -23,6 +24,8 @@ function App() {
     <div >
 
       <Router >
+          <Route path={'/entrypage'} component={EntryPage}></Route>
+          <Route path={'/loginpage'} component={LoginPage}></Route>
         <Route path={'/browserlist'} component={Browserlist}></Route>
         <Route path={'/topitemlist'} component={TopItemList}></Route>
         <Route path={'/navigate'} component={Navigation}></Route>
