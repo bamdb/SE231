@@ -49,5 +49,7 @@ public class Item {
 
     public void setImgurl(String imgurl) {this.imgurl = imgurl;}
 
+    public Score getScore() {return score;}
 
+    public void setScore(Score score) {this.score = score;}
 }
