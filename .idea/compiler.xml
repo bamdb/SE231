@@ -6,11 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="bamdb" />
-        <module name="config-server" />
         <module name="gateway" />
+        <module name="config-server" />
+        <module name="item-service" />
         <module name="image-service" />
         <module name="registry" />
+        <module name="user-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -19,7 +20,9 @@
       <module name="config-service" target="11" />
       <module name="gateway" target="11" />
       <module name="image-service" target="11" />
+      <module name="item-service" target="11" />
       <module name="registry" target="11" />
+      <module name="user-service" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -29,7 +32,9 @@
       <module name="config-service" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="image-service" options="-parameters" />
+      <module name="item-service" options="-parameters" />
       <module name="registry" options="-parameters" />
+      <module name="user-service" options="-parameters" />
     </option>
   </component>
 </project>
