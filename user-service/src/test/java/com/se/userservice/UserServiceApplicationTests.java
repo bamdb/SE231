@@ -55,9 +55,9 @@ public class UserServiceApplicationTests {
     
     @Test
     public void deleteTest() throws Exception {
-        mvc.perform(delete("/delete/username/root2"))
+        mvc.perform(delete("/delete/username/root"))
                 .andExpect(status().isOk());
-        Assert.assertNull(userService.selectByUsername("root2"));
+        Assert.assertNull(userService.selectByUsername("root"));
         mvc.perform(delete("/delete/id/15"))
                 .andExpect(status().isOk());
         Assert.assertNull(userService.selectById(15L));
