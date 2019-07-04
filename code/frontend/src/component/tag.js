@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import '../css/tag.css';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
+import Grid from '@material-ui/core/Grid'
 
 
 /*
@@ -39,7 +40,9 @@ class Tag extends Component {
         return(
             <div>
                 <Paper id={"tagmain"}>
+                    <Grid container direction={"column"} >
                     {item}
+                    </Grid>
                 </Paper>
             </div>
         )
