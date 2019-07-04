@@ -58,9 +58,12 @@ public class UserServiceApplicationTests {
         mvc.perform(delete("/delete/username/root"))
                 .andExpect(status().isOk());
         Assert.assertNull(userService.selectByUsername("root"));
-        mvc.perform(delete("/delete/id/15"))
-                .andExpect(status().isOk());
-        Assert.assertNull(userService.selectById(15L));
+        if (userService.selectAll().iterator().hasNext()) {
+            Long id = userService.selectAll().iterator().next().getId();
+            mvc.perform(delete("/delete/id/"+id))
+                    .andExpect(status().isOk());
+            Assert.assertNull(userService.selectById(id));
+        }
     }
 
 
