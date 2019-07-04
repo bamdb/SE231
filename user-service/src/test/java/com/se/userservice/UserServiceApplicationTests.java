@@ -81,7 +81,7 @@ public class UserServiceApplicationTests {
         mvc.perform(get("/all").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/userid/1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/id/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         mvc.perform(get("/username/root").contentType(MediaType.APPLICATION_JSON))
