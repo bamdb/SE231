@@ -38,16 +38,6 @@ public class UserServiceApplicationTests {
     UserService userService;
 
     @Test
-    public void deleteTest() throws Exception {
-        mvc.perform(delete("/delete/username/root2"))
-                .andExpect(status().isOk());
-        Assert.assertNull(userService.selectByUsername("root2"));
-        mvc.perform(delete("/delete/id/15"))
-                .andExpect(status().isOk());
-        Assert.assertNull(userService.selectById(15L));
-    }
-
-    @Test
     public void updateTest() throws Exception {
         mvc.perform(post("/signup")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -62,6 +52,17 @@ public class UserServiceApplicationTests {
                 .andExpect(status().isOk());
         Assert.assertEquals("modified", userService.selectAll().iterator().next().getUsername());
     }
+    
+    @Test
+    public void deleteTest() throws Exception {
+        mvc.perform(delete("/delete/username/root2"))
+                .andExpect(status().isOk());
+        Assert.assertNull(userService.selectByUsername("root2"));
+        mvc.perform(delete("/delete/id/15"))
+                .andExpect(status().isOk());
+        Assert.assertNull(userService.selectById(15L));
+    }
+
 
 //    @WithMockUser(roles={"ADMIN"})
     @Test
