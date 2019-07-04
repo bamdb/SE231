@@ -83,7 +83,7 @@ class Navigation extends Component {
 
                                 <Grid item xs={10}>
                             <Tabs centered={true} value={this.state.value} onChange={this.handleChange}>
-                                <Tab label="首页" href={"/#/homepage"}/>
+                                <Tab label="首页" href={"/#/"}/>
                                 <Tab label="书籍" href={"/#/userpage"}/>
                                 <Tab label="讨论区" href={"/#/entrypage"}/>
                             </Tabs>

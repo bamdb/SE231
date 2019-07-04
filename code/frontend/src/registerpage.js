@@ -10,9 +10,9 @@ import Userinfo from "./component/userinfo";
 import Commentlist from "./component/commentlist";
 import Listitem from './component/listitem'
 import Progressmanage from "./component/progressmanage";
-import Login from "./component/login"
+import Register from "./component/register"
 
-class LoginPage extends Component{
+class RegisterPage extends Component{
     constructor(props){
         super(props);
     }
@@ -27,7 +27,7 @@ class LoginPage extends Component{
                     <Grid container>
                         <Grid item xs={4}></Grid>
                         <Grid item xs={8}>
-                    <Login></Login>
+                            <Register></Register>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -36,4 +36,4 @@ class LoginPage extends Component{
     }
 }
 
-export  default LoginPage;
+export  default RegisterPage;
