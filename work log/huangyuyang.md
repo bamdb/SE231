@@ -4,7 +4,10 @@ Sprint 1 (July.1-July.10)
     Finish Login & Register basically
     Start Topic & TopicList 
   
-  July 3
+  July.3
     Finish TopItemList & TopicList
     Start front-end combination 
     Learn material-ui design   
+    
+  July.4
+    Continue to write web-page
