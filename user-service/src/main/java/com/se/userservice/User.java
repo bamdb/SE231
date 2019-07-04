@@ -5,19 +5,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames={"username"})})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
-    @Column(name = "username")
     private String username;
-    @Column(name = "password")
     private String password;
-
-
-
+    private String mail;
+    private String imgUrl;
     public Long getId() {
         return id;
     }
@@ -28,6 +24,22 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public void setUsername(String username) {
@@ -43,9 +55,12 @@ public class User {
         this.password = encoder.encode(password);
     }
 
-    public User( String username, String password) {
+    public User(long id, String username, String password, String mail, String imgUrl) {
+        this.id = id;
         this.username = username;
         this.password = password;
+        this.imgUrl = imgUrl;
+        this.mail = mail;
     }
 
     public User() {
