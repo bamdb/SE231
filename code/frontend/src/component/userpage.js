@@ -7,6 +7,7 @@ import TopItemList from "./topitemlist";
 import Browserlist from "./browserlist";
 import Tag from "./tag";
 import Userinfo from "./userinfo";
+import Commentlist from "./commentlist";
 
 
 const useStyles = makeStyles(theme => ({
@@ -44,7 +45,7 @@ class UserPage extends Component{
                 <Grid> <Navigation /> </Grid>
                 <Grid container direction={"row"} alignItems={"center"} spacing={2}>
                     <br />
-                    <Grid item xs>
+                    <Grid item xs={2}>
                         <Tag />
                     </Grid>
                     <Grid item  >
@@ -52,7 +53,7 @@ class UserPage extends Component{
                         <br />
                         <br />
                         <br />
-                        <Userinfo />
+                        <Commentlist />
                     </Grid>
                 </Grid>
             </Grid>
