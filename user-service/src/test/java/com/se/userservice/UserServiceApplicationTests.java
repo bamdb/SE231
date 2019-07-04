@@ -48,7 +48,7 @@ public class UserServiceApplicationTests {
                 .andExpect(status().isOk());
         User user = userService.selectAll().iterator().next();
         mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"id\":"+user.getId()+", \"username\":\"modified\"}"))
+                .content("{\"id\":"+user.getId()+", \"username\":\"modified\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null}"))
                 .andExpect(status().isOk());
         Assert.assertEquals("modified", userService.selectAll().iterator().next().getUsername());
     }
