@@ -34,6 +34,6 @@ public class ItemController {
     public boolean updateItemById(@PathVariable Long itemId, @RequestParam(value = "itemname") String itemname,
                                   @RequestParam(value = "pubTime") Timestamp pubTime, @RequestParam(value = "chapterNum") int chapterNum,
                                   @RequestParam(value = "mainAuthor") String mainAuthor) {
-        return itemService.updateOneItem(itemname, pubTime, chapterNum, mainAuthor);
+        return itemService.updateOneItem(itemId, itemname, pubTime, chapterNum, mainAuthor);
     }
 }
