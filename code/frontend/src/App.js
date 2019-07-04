@@ -5,6 +5,10 @@ import Search from './component/search'
 import Scheduletable from'./component/scheduletable'
 import Item from './component/item'
 import Userinfo from './component/userinfo'
+import Homepage from './component/homepage'
+import Navigation from "./component/navigation";
+import TopItemList from "./component/topitemlist";
+import Browserlist from "./component/browserlist";
 import {
   HashRouter as Router,
   Route,
@@ -17,8 +21,11 @@ function App() {
     <div >
 
       <Router >
-
+        <Route path={'/browserlist'} component={Browserlist}></Route>
+        <Route path={'/topitemlist'} component={TopItemList}></Route>
+        <Route path={'/navigate'} component={Navigation}></Route>
       <Route path={'/search'} component={Search}></Route>
+        <Route path={'/homepage'} component={Homepage}></Route>
       <Route path={'/schedule'} component={Scheduletable}></Route>
         <Route path={'/item'} component={Item}></Route>
         <Route path={'/userinfo'} component={Userinfo}></Route>

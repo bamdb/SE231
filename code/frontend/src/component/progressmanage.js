@@ -16,7 +16,7 @@ class Progressmanage extends Component {
     constructor(props) {
         super(props);
         this.state={label:0};
-        this.state={items:[{readstat:[0,1,0,1],bookname:"233",kind:"book"},{readstat:[1,1,1,1],bookname:"234",kind:"movie"},{readstat:[1,1,1,1],bookname:"234",kind:"movie"},{readstat:[1,1,1,1],bookname:"234",kind:"movie"}]}
+        this.state={items:[{readstat:[0,[1,0,1,0],0,1],bookname:"233",kind:"book"},{readstat:[1,1,1,1],bookname:"234",kind:"movie"},{readstat:[1,1,1,1],bookname:"234",kind:"movie"},{readstat:[1,1,1,1],bookname:"234",kind:"movie"}]}
     }
     componentWillMount() {
 
@@ -32,8 +32,16 @@ class Progressmanage extends Component {
             item.push(
                     <Grid item xs={6}>
                     <Paper>
-                    <h3>{items[i].bookname}</h3>
-                    <Scheduletable readstat={items[i].readstat}></Scheduletable>
+                        <Grid container>
+                            <Grid xs={1}>
+                            </Grid>
+                            <Grid xs={10}>
+                                <h3>{items[i].bookname}</h3>
+                                <Scheduletable readstat={items[i].readstat}></Scheduletable>
+                            </Grid>
+                            <Grid xs={1}>
+                            </Grid>
+                        </Grid>
                     </Paper>
                     </Grid>
 
@@ -45,11 +53,11 @@ class Progressmanage extends Component {
                 <Paper>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                        <Paper >
+
                         <button id={"select"}>全部</button>
                         <button id={"select"}>图书</button>
                         <button id={"select"}>视频</button>
-                        </Paper>
+
                         </Grid>
                         <Grid item xs={12}>
                         <Grid container spacing={2}>
