@@ -58,6 +58,7 @@ class Navigation extends Component {
         return (
             <div className={useStyles.root}>
                 <AppBar color={"default"} >
+                    <Typography variant={"h4"} component={"h4"} >Bamdb</Typography>
                     <Tabs centered={true} value={this.state.value} onChange={this.handleChange}>
                         <LinkTab label="首页"/>
                         <LinkTab label="书籍"/>

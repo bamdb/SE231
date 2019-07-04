@@ -13,18 +13,19 @@ import {
   withRouter
 } from "react-router-dom";
 import UserPage from "./component/userpage";
+import Login from "./component/login";
 function App() {
   return (
     <div >
 
       <Router >
 
-      <Route path={'/search'} component={Search}></Route>
-      <Route path={'/schedule'} component={Scheduletable}></Route>
-        <Route path={'/item'} component={Item}></Route>
+          <Route path={'/search'} component={Search}></Route>
+          <Route path={'/schedule'} component={Scheduletable}></Route>
+          <Route path={'/item'} component={Item}></Route>
           <Route path={'/userinfo'} component={Userinfo}></Route>
           <Route path={'/userpage'} component={UserPage}></Route>
-
+          <Route path={"/login"} component={Login}></Route>
       </Router>
     </div>
   );
