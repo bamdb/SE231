@@ -36,7 +36,22 @@ public class UserServiceApplicationTests {
     }
     @Resource(name="userServiceImpl")
     UserService userService;
-
+    @Test
+    public void updateTest() throws Exception {
+                mvc.perform(post("/signup")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null}"))
+                .andExpect(status().isOk());
+        mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
+                .content("{\"id\":0, \"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null}"))
+                .andExpect(status().isOk());
+        User user = userService.selectAll().iterator().next();
+        mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
+                .content("{\"id\":"+user.getId()+", \"username\":\"modified\"}"))
+                .andExpect(status().isOk());
+        Assert.assertEquals("modified", userService.selectAll().iterator().next().getUsername());
+    }
+    
     @Test
     public void deleteTest() throws Exception {
 //        mvc.perform(delete("/delete").contentType(MediaType.APPLICATION_JSON)
@@ -48,17 +63,7 @@ public class UserServiceApplicationTests {
                 .andExpect(status().isOk());
         Assert.assertNull(userService.selectById(12L));
     }
-    @Test
-    public void updateTest() throws Exception {
-        mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"id\":0, \"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null}"))
-                .andExpect(status().isOk());
-        User user = userService.selectAll().iterator().next();
-        mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"id\":"+user.getId()+", \"username\":\"modified\"}"))
-                .andExpect(status().isOk());
-        Assert.assertEquals("modified", userService.selectAll().iterator().next().getUsername());
-    }
+
 
 //    @WithMockUser(roles={"ADMIN"})
     @Test
