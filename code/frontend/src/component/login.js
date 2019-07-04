@@ -92,7 +92,7 @@ class LoginBody extends Component{
                 <Grid item >
                     <Paper className={useStyles.paper} >
                     <Typography variant={"h5"} component="h4">没有账户？</Typography><br/>
-                    <Button variant="outlined" color="primary" className={useStyles.button} > 注册新用户</Button><br/>
+                    <Button variant="outlined" color="primary" className={useStyles.button} href={"/#/registerpage"}> 注册新用户</Button><br/>
                     <Typography variant={"h5"} component="h4">忘记密码？</Typography><br/>
                     <Button variant="outlined" color="primary" className={useStyles.button} onClick={this.handlePassword} name={"resetPassword"} >重置密码</Button>
                     </Paper>

@@ -169,21 +169,22 @@ class Scheduletable extends Component {
                                         {items1}
                                     </Grid>
                                 </Paper>
-                                <div style={style1}>
-                                    <Paper id={"detail"}>
-                                        <Typography paragraph>
-                                            small introduction
-                                        </Typography>
-                                        <Button onClick={this.handleclickhas1}>
-                                            看过
-                                        </Button>
-                                        <Button onClick={this.handleclickhasnot1}>
-                                            没看过
-                                        </Button>
-                                    </Paper>
-                                </div>
+
                             </div>
                         </Paper>
+                        <div style={style1}>
+                            <Paper id={"detail"}>
+                                <Typography paragraph>
+                                    small introduction
+                                </Typography>
+                                <Button onClick={this.handleclickhas1}>
+                                    看过
+                                </Button>
+                                <Button onClick={this.handleclickhasnot1}>
+                                    没看过
+                                </Button>
+                            </Paper>
+                        </div>
                     </div>
                 )
             }

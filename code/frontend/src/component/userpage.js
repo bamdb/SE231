@@ -44,16 +44,14 @@ class UserPage extends Component{
             <Grid container direction={"column"} spacing={12} >
                 <Grid> <Navigation /> </Grid>
                 <Grid container direction={"row"} alignItems={"center"} spacing={2}>
-                    <br />
+
                     <Grid item xs={2}>
                         <Tag />
                     </Grid>
-                    <Grid item  >
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
+                    <Grid item xs={10} >
+                        <br/>
+                        <br/>
+
                         <Commentlist />
                     </Grid>
                 </Grid>

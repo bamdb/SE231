@@ -4,14 +4,10 @@ import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import Navigation from "./navigation";
 import TopItemList from "./topitemlist";
-import Browserlist from "./browserlist";
+import Progressmanage from './progressmanage'
 
 
-const useStyles = makeStyles(theme => ({
-    root:{
-        width: "20%",
-    }
-}));
+
 /*
 class TopPart extends Component{
     constructor(props){
@@ -39,15 +35,23 @@ class HomePage extends Component{
 
     render(){
         return(
-            <Grid container >
-                <Grid> <Navigation /> </Grid>
-                <Grid container direction={"row"} >
-                    <Grid className={useStyles.root}>
+            <Grid container spacing={10}>
+                <Grid item xs={12}>
+                    <Navigation />
+                </Grid>
+                <Grid item xs={12}>
+                <Grid container spacing={3} >
+                    <Grid item xs={2}>
+                    </Grid>
+                    <Grid item xs={8}>
+
+                        <Progressmanage />
+                    </Grid>
+                    <Grid item xs={2}>
+
                         <TopItemList />
                     </Grid>
-                    <Grid>
-                        <Browserlist />
-                    </Grid>
+                </Grid>
                 </Grid>
             </Grid>
         )
