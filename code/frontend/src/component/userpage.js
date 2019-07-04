@@ -48,7 +48,7 @@ class UserPage extends Component{
                     <Grid item xs={2}>
                         <Tag />
                     </Grid>
-                    <Grid item  >
+                    <Grid item xs={10} >
                         <br />
                         <br />
                         <br />

@@ -33,14 +33,16 @@ class Tag extends Component {
 
         for(var i=0;i<tags.length;++i) {
             item.push(
+                <Grid item xs={'auto'}>
                 <Chip  id="chip" label={tags[i]} clickable color="primary" />
+                </Grid>
             );
         }
 
         return(
             <div>
                 <Paper id={"tagmain"}>
-                    <Grid container direction={"column"} >
+                    <Grid container  >
                     {item}
                     </Grid>
                 </Paper>
