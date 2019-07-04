@@ -5,3 +5,6 @@
 *.war
 *.tar.gz
 *.class
+
+.idea/
+node_modules/
