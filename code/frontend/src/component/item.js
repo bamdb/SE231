@@ -1,5 +1,8 @@
-import React, { Component } from 'react';
+/*
+ * 条目具体信息左栏
+ */
 
+import React, { Component } from 'react';
 import Paper from '@material-ui/core/Paper';
 
 import '../css/item.css'

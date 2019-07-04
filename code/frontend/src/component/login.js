@@ -90,7 +90,7 @@ class Login extends Component{
                 <Grid item xs={3}>
                     <Paper className={useStyles.paper}>
                     <Typography variant={"h5"} component="h4">没有账户？</Typography><br/>
-                    <Button variant="outlined" color="primary" className={useStyles.button} ><Link to={"/register/"}> 注册新用户</Link></Button><br/>
+                    <Button variant="outlined" color="primary" className={useStyles.button} > 注册新用户</Button><br/>
                     <Typography variant={"h5"} component="h4">忘记密码？</Typography><br/>
                     <Button variant="outlined" color="primary" className={useStyles.button} onClick={this.handlePassword} name={"resetPassword"} >重置密码</Button>
                 </Paper>

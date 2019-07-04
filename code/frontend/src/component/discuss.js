@@ -1,3 +1,11 @@
+/*
+ * 单个topic下讨论区
+ * 用户头像
+ * username
+ * date floor
+ * content
+ */
+
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';

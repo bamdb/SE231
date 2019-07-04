@@ -16,7 +16,7 @@ class Progressmanage extends Component {
     constructor(props) {
         super(props);
         this.state={label:0};
-        this.state={items:[{total:20,hasread:[1,3,9],bookname:"233",kind:"book"},{total:15,hasread:[2,3,8],bookname:"234",kind:"movie"},{total:15,hasread:[2,3,8],bookname:"234",kind:"movie"},{total:15,hasread:[2,3,8],bookname:"234",kind:"movie"}]}
+        this.state={items:[{readstat:[0,1,0,1],bookname:"233",kind:"book"},{readstat:[1,1,1,1],bookname:"234",kind:"movie"},{readstat:[1,1,1,1],bookname:"234",kind:"movie"},{readstat:[1,1,1,1],bookname:"234",kind:"movie"}]}
     }
     componentWillMount() {
 
@@ -33,7 +33,7 @@ class Progressmanage extends Component {
                     <Grid item xs={6}>
                     <Paper>
                     <h3>{items[i].bookname}</h3>
-                    <Scheduletable hasread={items[i].hasread} total={items[i].total}></Scheduletable>
+                    <Scheduletable readstat={items[i].readstat}></Scheduletable>
                     </Paper>
                     </Grid>
 
