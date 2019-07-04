@@ -20,8 +20,20 @@ public class ItemController {
     }
 
     @PostMapping(value = "/item/add")
-    public Item insertOneItem(@RequestParam(value = "itemname") String itemname, @RequestParam(value = "pubTime") Timestamp pubTime,
+    public boolean insertOneItem(@RequestParam(value = "itemname") String itemname, @RequestParam(value = "pubTime") Timestamp pubTime,
                               @RequestParam(value = "chapterNum") int chapterNum, @RequestParam(value = "mainAuthor") String mainAuthor) {
+        return itemService.insertOneItem(itemname, pubTime, chapterNum, mainAuthor);
+    }
 
+    @DeleteMapping(value = "item/{itemId}")
+    public boolean deleteItemById(@PathVariable Long itemId) {
+        return itemService.deleteOneItem(itemId);
+    }
+
+    @PutMapping(value = "item/{itemId}")
+    public boolean updateItemById(@PathVariable Long itemId, @RequestParam(value = "itemname") String itemname,
+                                  @RequestParam(value = "pubTime") Timestamp pubTime, @RequestParam(value = "chapterNum") int chapterNum,
+                                  @RequestParam(value = "mainAuthor") String mainAuthor) {
+        return itemService.updateOneItem(itemname, pubTime, chapterNum, mainAuthor);
     }
 }

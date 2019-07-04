@@ -21,7 +21,38 @@ public class ItemServiceImpl implements ItemService{
         return itemMapper.selectOneById(id);
     }
 
-    public boolean insertOneItem(String itemname, Timestamp pubTime, int chapterNum, String mainAuthor {
+    public boolean insertOneItem(String itemname, Timestamp pubTime, int chapterNum, String mainAuthor) {
+        Item item = new Item();
+        item.setItemname(itemname);
+        item.setPubTime(pubTime);
+        item.setChapterNum(chapterNum);
+        item.setMainAuthor(mainAuthor);
+        try {
+            itemMapper.insertItem(item);
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
+    public boolean deleteOneItem(Long id) {
+        try {
+            itemMapper.deleteItem(id);
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateOneItem(Long id, String itemname, Timestamp pubTime, int chapterNum, String mainAuthor) {
+        try {
+            itemMapper.updateItem(id, itemname, pubTime, chapterNum, mainAuthor);
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
