@@ -36,9 +36,20 @@ public class UserServiceApplicationTests {
     }
     @Resource(name="userServiceImpl")
     UserService userService;
+
+    @Test
+    public void deleteTest() throws Exception {
+        mvc.perform(delete("/delete/username/root2"))
+                .andExpect(status().isOk());
+        Assert.assertNull(userService.selectByUsername("root2"));
+        mvc.perform(delete("/delete/id/15"))
+                .andExpect(status().isOk());
+        Assert.assertNull(userService.selectById(15L));
+    }
+
     @Test
     public void updateTest() throws Exception {
-                mvc.perform(post("/signup")
+        mvc.perform(post("/signup")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null}"))
                 .andExpect(status().isOk());
@@ -51,26 +62,13 @@ public class UserServiceApplicationTests {
                 .andExpect(status().isOk());
         Assert.assertEquals("modified", userService.selectAll().iterator().next().getUsername());
     }
-    
-    @Test
-    public void deleteTest() throws Exception {
-//        mvc.perform(delete("/delete").contentType(MediaType.APPLICATION_JSON)
-//                .content("{\"username\":\"root\"}"))
-//                .andExpect(status().isOk());
-//        Assert.assertNull(userService.selectByUsername("root"));
-        mvc.perform(delete("/delete").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"userId\":12}"))
-                .andExpect(status().isOk());
-        Assert.assertNull(userService.selectById(12L));
-    }
-
 
 //    @WithMockUser(roles={"ADMIN"})
     @Test
     public void controllerTest() throws  Exception{
         mvc.perform(post("/signup")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"username\":\"root2\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null}"))
+                .content("{\"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null}"))
                 .andExpect(status().isOk());
 
         mvc.perform(get("/all").contentType(MediaType.APPLICATION_JSON))

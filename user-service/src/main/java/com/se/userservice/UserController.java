@@ -17,8 +17,8 @@ public class UserController {
         return userService.selectAll();
     }
 
-    @GetMapping(value="/userid/{userId}", produces="application/json")
-    public User getUserById(@PathVariable("userId") Long userId) {
+    @GetMapping(value="/id/{id}", produces="application/json")
+    public User getUserById(@PathVariable("id") Long userId) {
         return userService.selectById(userId);
     }
 
@@ -37,13 +37,16 @@ public class UserController {
         return userService.updateUser(user);
     }
 
-    @DeleteMapping(value="/delete")
-    public void deleteUser(
-            @RequestParam(value="userId", required = false)Long id,
-            @RequestParam(value="username", required = false)String username) {
-            if (id != null) userService.deleteUserById(id);
-            else if (username != null) userService.deleteUserByUsername(username);
+    @DeleteMapping(value="/delete/id/{id}")
+    public void deleteUserById(
+            @PathVariable("id") Long id) {
+            userService.deleteUserById(id);
     }
 
+    @DeleteMapping(value="/delete/username/{username}")
+    public void deleteUserByUsername(
+            @PathVariable("username") String username) {
+        userService.deleteUserByUsername(username);
+    }
 
 }
