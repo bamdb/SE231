@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
+import Navigation from "./navigation";
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -8,8 +11,8 @@ const useStyles = makeStyles(theme => ({
         display: "flex",
         flexWrap: "nowrap",
         justifyContent: "space-around",
+        height: 50,
     },
-
 }));
 
 class TopPart extends Component{
@@ -20,12 +23,15 @@ class TopPart extends Component{
 
     render(){
         return(
-            <Grid xs={3} className={useStyles.root} >
-                <Grid>
-
+            <Grid container className={useStyles.root} >
+                <Grid item xs={3}>
+                    <Paper></Paper>/* image of "Bamdb" */
                 </Grid>
-                <Grid>
-
+                <Grid item xs={12}>
+                    <Navigation />
+                </Grid>
+                <Grid item xs={3}>
+                    <Paper></Paper>
                 </Grid>
             </Grid>
         )
@@ -40,7 +46,7 @@ class HomePage extends Component{
 
     render(){
         return(
-            <div></div>
+            <TopPart></TopPart>
         )
     }
 }
