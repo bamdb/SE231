@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
-    public User selectById(long id) {
+    public User selectById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
 
@@ -31,14 +31,20 @@ public class UserServiceImpl implements UserService {
     }
 
     public User updateUser(User user) {
-        return userRepository.save(user);
+        if (userRepository.existsById(user.getId()))
+            return userRepository.save(user);
+        else if (user.getId() == null && userRepository.existsByUsername(user.getUsername())) {
+            user.setId(userRepository.findByUsername(user.getUsername()).get().getId());
+            return userRepository.save(user);
+        }
+        else return null;
     }
 
-    public void deleteUserById(long id) {
+    public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
 
     public void deleteUserByUsername(String username) {
-        userRepository.deleteByUsername(username);
+        userRepository.deleteUserByUsername(username);
     }
 }

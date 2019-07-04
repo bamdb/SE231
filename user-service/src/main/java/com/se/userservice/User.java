@@ -9,10 +9,15 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
+    @Column(name="username", nullable=false)
     private String username;
+    @Column(name="password", nullable=false)
     private String password;
+    @Column(name="mail")
     private String mail;
+    @Column(name="img_url")
     private String imgUrl;
     public Long getId() {
         return id;
