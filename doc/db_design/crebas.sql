@@ -33,8 +33,8 @@ drop table if exists User;
 /*==============================================================*/
 create table Activity
 (
-   user_id              int not null,
-   item_id              int not null,
+   user_id              bigint not null,
+   item_id              bigint not null,
    act_time             timestamp not null,
    act_type             int not null,
    primary key (user_id, item_id, act_time)
@@ -45,7 +45,7 @@ create table Activity
 /*==============================================================*/
 create table Admin
 (
-   id                   int not null,
+   id                   bigint not null,
    username             varchar(20) not null,
    password             varchar(20) not null,
    mail                 varchar(20) not null,
@@ -59,8 +59,8 @@ create table Admin
 /*==============================================================*/
 create table Collect
 (
-   user_id              int not null,
-   item_id              int not null,
+   user_id              bigint not null,
+   item_id              bigint not null,
    grade                int,
    collect_time         timestamp not null,
    status               int not null,
@@ -72,11 +72,11 @@ create table Collect
 /*==============================================================*/
 create table Edit
 (
-   Edi_id               int not null,
-   id                   int not null,
+   Edi_id               bigint not null,
+   Ite_id               bigint not null,
    edit_time            timestamp not null,
    edit_type            int not null,
-   primary key (Edi_id, id)
+   primary key (Edi_id, Ite_id)
 );
 
 /*==============================================================*/
@@ -84,7 +84,7 @@ create table Edit
 /*==============================================================*/
 create table Editor
 (
-   id                   int not null,
+   id                   bigint not null,
    username             varchar(20) not null,
    password             varchar(20) not null,
    mail                 varchar(20) not null,
@@ -100,8 +100,8 @@ create table Editor
 /*==============================================================*/
 create table Friend
 (
-   user_id0             int not null,
-   user_id1             int not null,
+   user_id0             bigint not null,
+   user_id1             bigint not null,
    add_time             timestamp not null,
    primary key (user_id0, user_id1)
 );
@@ -111,7 +111,7 @@ create table Friend
 /*==============================================================*/
 create table Item
 (
-   id                   int not null,
+   id                   bigint not null,
    itemname             varchar(20) not null,
    pub_time             timestamp,
    chapter_num          int not null,
@@ -125,7 +125,7 @@ create table Item
 /*==============================================================*/
 create table Normal
 (
-   id                   int not null,
+   id                   bigint not null,
    username             varchar(20) not null,
    password             varchar(20) not null,
    mail                 varchar(20) not null,
@@ -139,8 +139,8 @@ create table Normal
 /*==============================================================*/
 create table Related
 (
-   prior_id             int not null,
-   subseq_id            int not null,
+   prior_id             bigint not null,
+   subseq_id            bigint not null,
    relate_type          int not null,
    primary key (prior_id, subseq_id)
 );
@@ -150,9 +150,9 @@ create table Related
 /*==============================================================*/
 create table Score
 (
-   item_id              int not null,
+   item_id              bigint not null,
    avg_grade            float,
-   `rank`                 int,
+   `rank`               int,
    primary key (item_id)
 );
 
@@ -161,8 +161,8 @@ create table Score
 /*==============================================================*/
 create table Topic
 (
-   id                   int not null,
-   user_id              int not null,
+   id                   bigint not null,
+   user_id              bigint not null,
    title                varchar(20) not null,
    pub_time             timestamp,
    primary key (id)
@@ -173,7 +173,7 @@ create table Topic
 /*==============================================================*/
 create table User
 (
-   id                   int not null,
+   id                   bigint not null,
    username             varchar(20) not null,
    password             varchar(20) not null,
    mail                 varchar(20) not null,
@@ -200,7 +200,7 @@ alter table Collect add constraint FK_Collect2 foreign key (item_id)
 alter table Edit add constraint FK_Edit foreign key (Edi_id)
       references Editor (id) on delete restrict on update restrict;
 
-alter table Edit add constraint FK_Edit2 foreign key (id)
+alter table Edit add constraint FK_Edit2 foreign key (Ite_id)
       references Item (id) on delete restrict on update restrict;
 
 alter table Editor add constraint FK_Inheritance_3 foreign key (id)
