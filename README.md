@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/bamdb/SE231.svg?branch=master)](https://travis-ci.org/bamdb/SE231)
+[![Build Status](https://travis-ci.org/bamdb/SE231.svg?branch=isalb)](https://travis-ci.org/bamdb/SE231)
 [![Code Coverage](https://codecov.io/github/bamdb/SE231/coverage.svg)](https://codecov.io/gh/bamdb/SE231)
 
 # SE231
