@@ -8,3 +8,6 @@
 * complete component activitylist, discuss and reply form, relatedlist
 * design CDM, PDM and generate DDL for mysql database
 * design data structure for data stored in mongodb
+
+# 2019-07-04
+* working on user service
