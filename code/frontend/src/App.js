@@ -1,24 +1,29 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import Search from './component/search'
+import Scheduletable from'./component/scheduletable'
+import Item from './component/item'
+import Userinfo from './component/userinfo'
+import {
+  HashRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter
+} from "react-router-dom";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+
+      <Router >
+
+      <Route path={'/search'} component={Search}></Route>
+      <Route path={'/schedule'} component={Scheduletable}></Route>
+        <Route path={'/item'} component={Item}></Route>
+        <Route path={'/userinfo'} component={Userinfo}></Route>
+
+      </Router>
     </div>
   );
 }

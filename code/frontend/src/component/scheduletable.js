@@ -11,7 +11,7 @@ import Grid from '@material-ui/core/Grid'
 class Scheduletable extends Component {
     constructor(props) {
         super(props);
-        this.state={readstat:[0,[1,0,1,0],0,1,1,0],x:0,y:0,show:false,current:0,current1:0,x1:0,x2:0,show1:false};
+        this.state={readstat:[0,[1,0,1,0],0,1,1,0],x:0,y:0,show:false,current:0,current1:-1,x1:0,x2:0,show1:false};
         this.handleclick=this.handleclick.bind(this);
         this.handleclickhas=this.handleclickhas.bind(this);
         this.handleclickhasnot=this.handleclickhasnot.bind(this);
@@ -23,13 +23,13 @@ class Scheduletable extends Component {
     {
         var readstat=this.state.readstat;
         readstat[this.state.current][this.state.current1]=1;
-        this.setState({readstat:readstat,show1:false})
+        this.setState({readstat:readstat,show1:false,current1:-1})
     }
     handleclickhasnot1()
     {
         var readstat=this.state.readstat;
         readstat[this.state.current][this.state.current1]=0;
-        this.setState({readstat:readstat,show1:false})
+        this.setState({readstat:readstat,show1:false,current1:-1})
     }
     handleclick1(e)
     {

@@ -30,7 +30,7 @@ class Item extends Component {
                 <Paper id={"main"}>
 
                     <img src="img/3.jpg" id="itemimage" />
-                    <div>
+
                         <List >
                             <ListItem>
                                 <ListItemText primary="中文名" secondary={this.state.name} />
@@ -51,7 +51,7 @@ class Item extends Component {
                                 <ListItemText primary="ISBN" secondary={this.state.isbn}></ListItemText>
                             </ListItem>
                         </List>
-                    </div>
+
                 </Paper>
             </div>
         )
