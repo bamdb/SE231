@@ -22,7 +22,7 @@ class TopPart extends Component{
         return(
             <Grid xs={3} className={useStyles.root} >
                 <Grid>
-                    
+
                 </Grid>
                 <Grid>
 
@@ -40,7 +40,9 @@ class HomePage extends Component{
 
     render(){
         return(
-
+            <div></div>
         )
     }
 }
+
+export  default HomePage;
