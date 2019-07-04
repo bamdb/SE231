@@ -10,5 +10,8 @@ import java.util.List;
 @Component("itemMapper")
 public interface ItemMapper {
     @Select("SELECT * FROM Item")
-    List<Item> selectAll();
+    public List<Item> selectAll();
+
+    @Select("SELECT * FROM Item WHERE id = #{id}")
+    public Item selectOneById(Long id);
 }
