@@ -5,6 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
+import InputBase from '@material-ui/core/InputBase';
 
 function TabContainer(props) {
     return (
@@ -32,7 +33,7 @@ function LinkTab(props) {
 
 const useStyles = makeStyles(theme => ({
     root: {
-        flexGrow: 1,
+        // flexGrow: 1,
         backgroundColor: theme.palette.background.paper,
     },
 }));
@@ -56,16 +57,16 @@ class Navigation extends Component {
     render() {
         return (
             <div className={useStyles.root}>
-                <AppBar position="Relative">
+                <AppBar color={"default"} >
                     <Tabs centered={true} value={this.state.value} onChange={this.handleChange}>
-                        <LinkTab label="排行榜"/>
-                        <LinkTab label="分类浏览"/>
+                        <LinkTab label="首页"/>
+                        <LinkTab label="书籍"/>
                         <LinkTab label="讨论区"/>
                     </Tabs>
+                    <InputBase
+                        placeholder="Search…"
+                        />
                 </AppBar>
-                {this.state.value === 0 && <TabContainer>Page One</TabContainer>}
-                {this.state.value === 1 && <TabContainer>Page Two</TabContainer>}
-                {this.state.value === 2 && <TabContainer>Page Three</TabContainer>}
             </div>
         );
     }

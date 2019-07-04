@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
+import Navigation from "./navigation";
+import TopItemList from "./topitemlist";
+import Browserlist from "./browserlist";
+
 
 const useStyles = makeStyles(theme => ({
-    root: {
-        minWidth: 500,
-        display: "flex",
-        flexWrap: "nowrap",
-        justifyContent: "space-around",
-    },
-
+    root:{
+        width: "20%",
+    }
 }));
-
+/*
 class TopPart extends Component{
     constructor(props){
         super(props);
@@ -20,17 +21,15 @@ class TopPart extends Component{
 
     render(){
         return(
-            <Grid xs={3} className={useStyles.root} >
-                <Grid>
-
-                </Grid>
-                <Grid>
-
+            <Grid container className={useStyles.root} >
+                <Grid item xs={12}>
+                    <Navigation />
                 </Grid>
             </Grid>
         )
     }
 }
+ */
 
 class HomePage extends Component{
     constructor(props){
@@ -40,7 +39,17 @@ class HomePage extends Component{
 
     render(){
         return(
-            <div></div>
+            <Grid container >
+                <Grid> <Navigation /> </Grid>
+                <Grid container direction={"row"} >
+                    <Grid className={useStyles.root}>
+                        <TopItemList />
+                    </Grid>
+                    <Grid>
+                        <Browserlist />
+                    </Grid>
+                </Grid>
+            </Grid>
         )
     }
 }

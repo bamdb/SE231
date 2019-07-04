@@ -8,6 +8,12 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import TopItem from './topitem';
 
+const useStyles = makeStyles(theme => ({
+    root:{
+        minWidth:300,
+    }
+}));
+
 class TopItemList extends Component {
     constructor(props) {
         super(props);
@@ -46,7 +52,7 @@ class TopItemList extends Component {
                 <TopItem />
         );
         return(
-            <Grid container xs={10} spacing={2} >
+            <Grid container className={useStyles.root} spacing={2} >
                 <Grid direction={"column"} >
                 {rows}
                 </Grid>
