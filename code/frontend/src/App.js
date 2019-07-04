@@ -12,6 +12,7 @@ import {
   Redirect,
   withRouter
 } from "react-router-dom";
+import UserPage from "./component/userpage";
 function App() {
   return (
     <div >
@@ -21,7 +22,8 @@ function App() {
       <Route path={'/search'} component={Search}></Route>
       <Route path={'/schedule'} component={Scheduletable}></Route>
         <Route path={'/item'} component={Item}></Route>
-        <Route path={'/userinfo'} component={Userinfo}></Route>
+          <Route path={'/userinfo'} component={Userinfo}></Route>
+          <Route path={'/userpage'} component={UserPage}></Route>
 
       </Router>
     </div>
