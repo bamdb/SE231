@@ -19,6 +19,17 @@ public class User {
     private String mail;
     @Column(name="img_url")
     private String imgUrl;
+    @Column(name="role")
+    private Integer role;
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
+    }
+
     public Long getId() {
         return id;
     }
@@ -60,12 +71,13 @@ public class User {
         this.password = encoder.encode(password);
     }
 
-    public User(long id, String username, String password, String mail, String imgUrl) {
+    public User(long id, String username, String password, String mail, String imgUrl, Integer role) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.imgUrl = imgUrl;
         this.mail = mail;
+        this.role = role;
     }
 
     public User() {
