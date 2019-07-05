@@ -42,16 +42,16 @@ public class ItemServiceApplicationTests {
     public void updateTest() throws Exception {
         mvc.perform(post("/add")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"itemname\":\"three body\", \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
+                .content("{\"itemname\":\"three body\", \"pubTime\":\"1562294429\", \"chapterNum\":12, \"mainAuthor\":\"Cixin Liu\", \"imgurl\":null, \"type\":0}"))
                 .andExpect(status().isOk());
         mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"id\":0,\"title\":\"modified\"}"))
+                .content("{\"id\":0, \"itemname\":\"three body\", \"pubTime\":\"1562294429\", \"chapterNum\":12, \"mainAuthor\":\"Cixin Liu\", \"imgurl\":null, \"type\":0}"))
                 .andExpect(status().isOk());
         Item item = itemService.selectAll().iterator().next();
         mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"id\":"+item.getId()+", \"title\":\"hello bamdb\""))
+                .content("{\"id\":"+item.getId()+", \"itemname\":\"modified\", \"pubTime\":\"1562294429\", \"chapterNum\":12, \"mainAuthor\":\"Cixin Liu\", \"imgurl\":null, \"type\":0}"))
                 .andExpect(status().isOk());
-        //Assert.assertEquals("modified", itemService.selectAll().iterator().next().getTitle());
+        Assert.assertEquals("modified", itemService.selectAll().iterator().next().getItemname());
     }
 
 
@@ -61,7 +61,7 @@ public class ItemServiceApplicationTests {
             Long id = itemService.selectAll().iterator().next().getId();
             mvc.perform(delete("/delete/id/"+id))
                     .andExpect(status().isOk());
-            // Assert.assertNull(itemService.selectById(id));
+            Assert.assertNull(itemService.findItemById(id));
         }
     }
 
@@ -69,12 +69,7 @@ public class ItemServiceApplicationTests {
     public void controllerTest() throws Exception {
         mvc.perform(post("/add")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"userId\":0, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
-                .andExpect(status().isOk());
-
-        mvc.perform(post("/add")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"userId\":1, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
+                .content("{\"itemname\":\"three body\", \"pubTime\":\"1562294429\", \"chapterNum\":12, \"mainAuthor\":\"Cixin Liu\", \"imgurl\":null, \"type\":0}"))
                 .andExpect(status().isOk());
 
         mvc.perform(get("/all").contentType(MediaType.APPLICATION_JSON))

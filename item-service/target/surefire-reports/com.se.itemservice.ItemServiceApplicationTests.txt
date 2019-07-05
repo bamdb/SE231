@@ -1,18 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.se.itemservice.ItemServiceApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 10.159 s <<< FAILURE! - in com.se.itemservice.ItemServiceApplicationTests
-updateTest(com.se.itemservice.ItemServiceApplicationTests)  Time elapsed: 0.541 s  <<< FAILURE!
-java.lang.AssertionError: Status expected:<200> but was:<500>
-	at com.se.itemservice.ItemServiceApplicationTests.updateTest(ItemServiceApplicationTests.java:46)
-
-controllerTest(com.se.itemservice.ItemServiceApplicationTests)  Time elapsed: 0.053 s  <<< ERROR!
-org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
-	at com.se.itemservice.ItemServiceApplicationTests.controllerTest(ItemServiceApplicationTests.java:70)
-Caused by: org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
-	at com.se.itemservice.ItemServiceApplicationTests.controllerTest(ItemServiceApplicationTests.java:70)
-Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement
-	at com.se.itemservice.ItemServiceApplicationTests.controllerTest(ItemServiceApplicationTests.java:70)
-Caused by: java.sql.SQLIntegrityConstraintViolationException: Column 'itemname' cannot be null
-	at com.se.itemservice.ItemServiceApplicationTests.controllerTest(ItemServiceApplicationTests.java:70)
-
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.402 s - in com.se.itemservice.ItemServiceApplicationTests

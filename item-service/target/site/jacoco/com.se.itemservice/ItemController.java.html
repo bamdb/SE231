@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ItemController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">item-service</a> &gt; <a href="index.source.html" class="el_package">com.se.itemservice</a> &gt; <span class="el_source">ItemController.java</span></div><h1>ItemController.java</h1><pre class="source lang-java linenums">package com.se.itemservice;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import java.sql.Timestamp;
+import java.util.List;
+
+@RestController
+<span class="fc" id="L11">public class ItemController {</span>
+    @Resource(name = &quot;itemServiceImpl&quot;)
+    private ItemService itemService;
+
+    @GetMapping(value = &quot;/all&quot;, produces = &quot;application/json&quot;)
+<span class="fc" id="L16">    public Iterable&lt;Item&gt; getAllItem() {return itemService.selectAll();}</span>
+
+    @GetMapping(value = &quot;/id/{itemId}&quot;, produces = &quot;application/json&quot;)
+    public Item getItemById(@PathVariable Long itemId) {
+<span class="fc" id="L20">        return itemService.findItemById(itemId);</span>
+    }
+
+    @PostMapping(value = &quot;/add&quot;)
+    public Item postItem(@RequestBody Item item) {
+<span class="fc" id="L25">        return itemService.postItem(item);</span>
+    }
+
+    @DeleteMapping(value = &quot;/delete/id/{itemId}&quot;)
+    public ResponseEntity&lt;?&gt; deleteItemById(@PathVariable Long itemId) {
+<span class="fc" id="L30">        return itemService.deleteItemById(itemId);</span>
+    }
+
+    @PutMapping(value = &quot;/update&quot;, produces=&quot;application/json&quot;)
+    public Item updateItemById(@RequestBody Item item) {
+<span class="fc" id="L35">        return itemService.updateItem(item);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

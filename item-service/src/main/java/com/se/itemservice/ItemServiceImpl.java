@@ -18,7 +18,6 @@ public class ItemServiceImpl implements ItemService{
         this.itemRepository = itemRepository;
     }
 
-    @Override
     public Item postItem(Item item) {
         return itemRepository.save(item);
     }
