@@ -31,8 +31,8 @@ class Briefitem extends Component {
                         <img src="img/3.jpg" id="itemimage" />
                     </Grid>
                     <Grid item xs={8}>
-                        <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >{this.state.itemName}</Typography>
                         <br/>
+                        <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >{this.state.itemName}</Typography>
                         <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.briefIntro}</Typography>
                         <br/>
                         <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.fansTotal}人关注</Typography>
