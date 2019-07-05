@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper/index'
 import Navigation from "../component/navigation";
 import TopItemList from "../component/topitemlist";
 import Progressmanage from '../component/progressmanage'
-import Listitem from '../component/listitem'
+import Userinfo from '../component/userinfo'
 
 
 /*
@@ -27,7 +27,7 @@ class TopPart extends Component{
 }
  */
 
-class Userhomepage extends Component{
+class Userinfopage extends Component{
     constructor(props){
         super(props);
 
@@ -38,22 +38,27 @@ class Userhomepage extends Component{
             <Grid container spacing={10}>
                 <Grid item xs={12}><Navigation/></Grid>
                 <Grid item xs={12}>
-                <Grid container spacing={3} >
-                    <Grid item xs={2}>
-                    </Grid>
-                    <Grid item xs={8}>
+                    <Grid container spacing={3} >
+                        <Grid item xs={2}>
+                        </Grid>
+                        <Grid item xs={8}>
 
-                        <Listitem />
-                    </Grid>
-                    <Grid item xs={2}>
+                            <Userinfo></Userinfo>
+                            <br/>
+                            <br/>
+                            <Progressmanage></Progressmanage>
+                        </Grid>
+                        <Grid item xs={2}>
 
-                        <TopItemList />
+
+                        </Grid>
+                        <Grid item xs={1}>
+                        </Grid>
                     </Grid>
-                </Grid>
                 </Grid>
             </Grid>
         )
     }
 }
 
-export  default Userhomepage;
+export  default Userinfopage;

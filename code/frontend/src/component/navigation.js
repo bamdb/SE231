@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
+import MenuList from '@material-ui/core/MenuList';
+import MenuItem from '@material-ui/core/MenuItem';
 import  '../css/navigate.css'
 import {
     BrowserRouter as Router,
@@ -16,6 +18,12 @@ import {
     Redirect,
     withRouter
 } from "react-router-dom";
+import {Avatar} from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
+import Userinfo from '../component/userinfo'
+import InputLabel from "@material-ui/core/InputLabel";
+import Input from "@material-ui/core/Input";
+import FormControl from "@material-ui/core/FormControl";
 /*function TabContainer(props) {
     return (
         <Typography component="div" style={{ padding: 8 * 3 }}>
@@ -53,10 +61,30 @@ class Navigation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value : 0
+            value : 0,
+            show:false,
+            x:0,
+            y:0,
+            search:""
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleenter=this.handleenter.bind(this);
+        this.handleleave=this.handleleave.bind(this);
+        this.handlechange=this.handlechange.bind(this);
+    }
+    handlechange(e)
+    {
+        this.setState({search:e.target.value})
+    }
+    handleleave(e){
+        this.setState({show:false,x:e.clientX,y:e.clientY})
+    }
+    handleenter(e)
+    {
+        this.setState({show:true,x:e.clientX,y:e.clientY});
+
+
     }
     componentWillMount() {
         var x=window.location.href.split("#")[1].split("/")[1];
@@ -77,50 +105,116 @@ class Navigation extends Component {
     }
 
     render() {
-        return (
 
-            <div id={"navigateroot"}>
-                <AppBar color={"default"} position={"fixed"} id={"navigateroot"}>
-                    <Grid container>
-                        <Grid item xs={12}>
-                            <Grid container>
+        var style={"position":"absolute"};
+        style["top"]=this.state.y;
+        style["left"]=this.state.x;
+        if(!this.state.show)
+        {
+            return (
 
-                                <Grid item xs={10}>
-                            <Tabs centered={true} value={this.state.value} onChange={this.handleChange}>
-                                <Tab label="首页" href={"/#/"}/>
-                                <Tab label="浏览" href={"/#/itembrowsepage"}/>
-                                <Tab label="进度" href={"/#/useriteminfopage"}/>
-                                <Tab label="收藏" href={"/#/userfavoritepage"}/>
-                                <Tab label="讨论区" href={"/#/topicpage"}/>
-                            </Tabs>
-                                </Grid>
-                                <Grid item xs={2}>
-                                <br/>
-                                    <Button href={"/#/loginpage"} color={"primary"} variant="contained">登录</Button>
-                                    <Button href={"/#/registerpage"} color={"primary"} variant="contained">注册</Button>
+                <div id={"navigateroot"}>
+                    <AppBar color={"default"} position={"fixed"} id={"navigateroot"}>
+                        <Grid container>
+                            <Grid item xs={12}>
+                                <Grid container>
+
+                                    <Grid item xs={8}>
+                                        <Tabs centered={true} value={this.state.value} onChange={this.handleChange}>
+                                            <Tab label="首页" href={"/#/"}/>
+                                            <Tab label="浏览" href={"/#/itembrowsepage"}/>
+                                            <Tab label="进度" href={"/#/useriteminfopage"}/>
+                                            <Tab label="收藏" href={"/#/userfavoritepage"}/>
+                                            <Tab label="讨论区" href={"/#/topicpage"}/>
+                                        </Tabs>
+                                    </Grid>
+                                    <Grid item xs={1}>
+                                        <br/>
+                                        <Avatar src={"/img/3.jpg"} onMouseEnter={this.handleenter} onMouseLeave={this.handleleave}></Avatar>
+                                    </Grid>
+                                    <Grid item xs={1}>
+                                        <br/>
+                                        <Button href={"/#/loginpage"} color={"primary"} variant="contained">登录</Button>
+                                        <Button href={"/#/registerpage"} color={"primary"} variant="contained">注册</Button>
+                                    </Grid>
+                                    <Grid item xs={2}>
+
+                                        <FormControl margin="normal" required fullWidth>
+
+                                            <InputLabel htmlFor="id">search</InputLabel>
+                                            <Input type="text" id="password" value={this.state.search} onChange={this.handlechange}></Input>
+                                        </FormControl>
+
+                                    </Grid>
                                 </Grid>
                             </Grid>
+
                         </Grid>
-                        <Grid item xs={12}>
-                            <Grid container>
-                                <Grid item xs={2}></Grid>
-                                <Grid item xs={10}>
-                                    <InputBase
-                                        placeholder="Search…"
-                                        />
+
+                    </AppBar>
+                    <br/>
+                    <br/>
+
+
+                </div>
+            );
+        }
+        else{
+            console.log(style);
+            return(
+                <div id={"navigateroot"}>
+                    <AppBar color={"default"} position={"fixed"} id={"navigateroot"}>
+                        <Grid container>
+                            <Grid item xs={12}>
+                                <Grid container>
+
+                                    <Grid item xs={8}>
+                                        <Tabs centered={true} value={this.state.value} onChange={this.handleChange}>
+                                            <Tab label="首页" href={"/#/"}/>
+                                            <Tab label="浏览" href={"/#/itembrowsepage"}/>
+                                            <Tab label="进度" href={"/#/useriteminfopage"}/>
+                                            <Tab label="收藏" href={"/#/userfavoritepage"}/>
+                                            <Tab label="讨论区" href={"/#/topicpage"}/>
+                                        </Tabs>
+                                    </Grid>
+                                    <Grid item xs={1}>
+                                        <br/>
+                                        <Avatar src={"/img/3.jpg"} onMouseEnter={this.handleenter} onMouseLeave={this.handleleave}></Avatar>
+                                        <Paper onMouseEnter={this.handleenter} onMouseLeave={this.handleleave}>
+                                            <MenuList>
+                                                <MenuItem >
+                                                    <Link to={{pathname:'/userinfopage'}}>用户信息</Link>
+                                                </MenuItem>
+                                            </MenuList>
+                                        </Paper>
+                                    </Grid>
+                                    <Grid item xs={1}>
+                                        <br/>
+                                        <Button href={"/#/loginpage"} color={"primary"} variant="contained">登录</Button>
+                                        <Button href={"/#/registerpage"} color={"primary"} variant="contained">注册</Button>
+                                    </Grid>
+                                    <Grid item xs={2}>
+
+                                        <FormControl margin="normal" required fullWidth>
+
+                                            <InputLabel htmlFor="id">search</InputLabel>
+                                            <Input type="text" id="password" value={this.state.search} onChange={this.handlechange}></Input>
+                                        </FormControl>
+                                    </Grid>
                                 </Grid>
-                                <Grid item xs={2}></Grid>
                             </Grid>
+
                         </Grid>
-                    </Grid>
 
-                </AppBar>
-                <br/>
-                <br/>
+                    </AppBar>
+                    <br/>
+                    <br/>
 
 
-            </div>
-        );
+                </div>
+            );
+        }
+
     }
 
 }

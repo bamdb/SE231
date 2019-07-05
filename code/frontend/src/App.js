@@ -4,7 +4,7 @@ import './App.css';
 import UserHomepage from './page/userhomepage'
 import Itembrowsepage from './page/itembrowsepage'
 import LoginPage from './page/loginpage'
-import Useriteminfopage from './page/useriteminfopage'
+
 import {
   HashRouter as Router,
   Route,
@@ -17,7 +17,7 @@ import RegisterPage from "./page/registerpage";
 import Topicpage from "./page/topicpage";
 import Useriteminfopage from "./page/useriteminfopage";
 import Topicdetailpage from "./page/topicdetailpage";
-
+import Userinfopage from "./page/userinfopage"
 function App() {
   return (
     <div >
@@ -29,7 +29,8 @@ function App() {
             <Route exact path={'/'} component={UserHomepage}></Route>
             <Route path={'/userfavoritepage'} component={Userfavoritespage}></Route>
             <Route path={'/registerpage'} component={RegisterPage}></Route>
-            <Route path={'/iteminfopage'} component={Useriteminfopage}></Route>
+            <Route path={'/useriteminfopage'} component={Useriteminfopage}></Route>
+            <Route path={"/userinfopage"} component={Userinfopage}></Route>
         </Router>
     </div>
   );

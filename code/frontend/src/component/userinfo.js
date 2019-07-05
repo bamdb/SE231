@@ -73,8 +73,8 @@ class Userinfo extends Component {
     render(){
         if(!this.state.edit){
             return(
-                <div id="itemroot">
-                    <Paper id={"userinfomain"}>
+
+                    <Paper >
 
                         <Grid container >
                             <Grid item xs={3}>
@@ -124,16 +124,17 @@ class Userinfo extends Component {
                             </Grid>
                             <Grid item xs={9}>
                             <Button id="button" onClick={this.handleedit} variant="contained" color="primary">edit user information</Button>
+                                <br/>
                             </Grid>
                         </Grid>
                     </Paper>
-                </div>
+
             )
         }
         else{
             return(
-                <div id="itemroot">
-                    <Paper id={"userinfomain"}>
+
+                    <Paper >
                         <Grid container >
                             <Grid item xs={3}>
                             <Grid container justify="center" alignItems="center">
@@ -194,9 +195,10 @@ class Userinfo extends Component {
                             <Button id="button" onClick={this.handlesave} variant="contained" color="primary">save</Button>
                             <Button id="button" onClick={this.handlecancel}variant="contained" color="primary">cancel</Button>
                             </Grid>
+                            <br/>
                         </Grid>
                     </Paper>
-                </div>
+
 
             )
         }

@@ -23,7 +23,7 @@ class Topicpage extends Component{
                     <TopicList />
                 </Grid>
                 <Grid item xs={4} direction={"column"} spacing={3} ><br/> <br/>
-                    <Tag />
+                    <Tag select={true} />
                     <TopicList />
                 </Grid>
             </Grid>
