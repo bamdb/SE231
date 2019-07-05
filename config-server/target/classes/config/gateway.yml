@@ -1,0 +1,31 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: gateway
+
+zuul:
+  routes:
+    fromimage:
+      path: /image/**
+      #      url: http://image:10000
+      service-id: image
+      sensitiveHeaders:
+    fromuser:
+      path: /user/**
+      service-id: user
+      sensitiveHeaders:
+  retryable: true
+
+ribbon:
+  ConnectTimeout: 1000
+  ReadTimeout: 1000
+  OktoRetryOnAllOperations: true
+  MaxAutoRetriesNextServer: 2
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMillisecond: 6000

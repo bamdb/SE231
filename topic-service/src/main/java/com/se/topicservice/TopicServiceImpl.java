@@ -20,9 +20,9 @@ public class TopicServiceImpl implements TopicService{
 
     public Topic postTopic(Topic topic) {
         // check if topic publisher exists in User table
-        //if (topic.getUserId() == null || userClient.getUserById(topic.getUserId()) == null) {
-        //    return null;
-        //}
+        if (topic.getUserId() == null || userClient.getUserById(topic.getUserId()) == null) {
+            return null;
+        }
         return topicRepository.save(topic);
     }
 

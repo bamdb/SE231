@@ -14,10 +14,10 @@ public class Activity {
     private Timestamp actTime;
     @Column(name = "act_type")
     private Integer actType;
-
-    private User user;
-
-    private Item item;
+    @Column(name = "user_id")
+    private Long userId;
+    @Column(name = "item_id")
+    private Long itemId;
 
     public Long getId() {
         return id;
@@ -43,21 +43,20 @@ public class Activity {
         return actTime;
     }
 
-
-    public User getUser() {
-        return user;
+    public Long getItemId() {
+        return itemId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setItemId(Long itemId) {
+        this.itemId = itemId;
     }
 
-    public Item getItem() {
-        return item;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
 }
