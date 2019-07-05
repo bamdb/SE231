@@ -6,11 +6,12 @@ import React, { Component } from 'react';
 
 import Grid from '@material-ui/core/Grid'
 
-import Navigation from './navigation';
-import Item from './item';
-import Progressmanage from "./progressmanage";
-import Commentlist from "./commentlist";
-
+import Navigation from '../component/navigation';
+import Item from '../component/item';
+import Progressmanage from "../component/progressmanage";
+import Commentlist from "../component/commentlist";
+import Scheduletable from "../component/scheduletable";
+import Tag from "../component/tag"
 
 
 class Useriteminfopage extends Component {
@@ -26,7 +27,9 @@ class Useriteminfopage extends Component {
                         </Grid>
 
                         <Grid  item xs={7} >
-                            <Progressmanage />
+                            <Scheduletable />
+                            <br/>
+                            <Tag></Tag>
                         </Grid>
                         <Grid  item xs={3} >
                             <Commentlist />

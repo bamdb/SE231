@@ -22,7 +22,7 @@ class Itembrowsepage extends Component{
                 <Grid container direction={"row"} alignItems={"center"} spacing={2}>
                     <Grid item xs={1}></Grid>
                     <Grid item xs={2}>
-                        <Tag />
+                        <Tag select={true} tags={["热血","王道"]}/>
                     </Grid>
                     <Grid item xs={8} >
                         <br/>

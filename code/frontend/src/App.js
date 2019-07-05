@@ -11,6 +11,7 @@ import TopItemList from "./component/topitemlist";
 import Browserlist from "./component/browserlist";
 import Itembrowsepage from './page/itembrowsepage'
 import LoginPage from './page/loginpage'
+import Useriteminfopage from './page/useriteminfopage'
 import {
   HashRouter as Router,
   Route,
@@ -32,7 +33,7 @@ function App() {
             <Route exact path={'/'} component={UserHomepage}></Route>
             <Route path={'/userpage'} component={Userfavoritespage}></Route>
             <Route path={'/registerpage'} component={RegisterPage}></Route>
-
+            <Route path={'/iteminfopage'} component={Useriteminfopage}></Route>
         </Router>
     </div>
   );
