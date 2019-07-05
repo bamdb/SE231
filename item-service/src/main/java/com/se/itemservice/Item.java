@@ -22,12 +22,13 @@ public class Item {
     private String mainAuthor;
     @Column(name = "imgurl")
     private String imgurl;
-    @Column(name = "score")
-    private Float score;
-    @Column(name = "rank")
-    private Integer rank;
     @Column(name = "type")
     private Integer type;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName="id")
+    private Score score;
+
     public Long getId() {return id;}
 
     public Integer getType() {
@@ -38,24 +39,8 @@ public class Item {
         this.type = type;
     }
 
-    public Float getScore() {
-        return score;
-    }
-
-    public Integer getRank() {
-        return rank;
-    }
-
     public void setChapterNum(Integer chapterNum) {
         this.chapterNum = chapterNum;
-    }
-
-    public void setRank(Integer rank) {
-        this.rank = rank;
-    }
-
-    public void setScore(Float score) {
-        this.score = score;
     }
 
     public void setId(Long id) {this.id = id;}
@@ -80,5 +65,7 @@ public class Item {
 
     public void setImgurl(String imgurl) {this.imgurl = imgurl;}
 
+    public Score getScore() {return score;}
 
+    public void setScore(Score score) {this.score = score;}
 }
