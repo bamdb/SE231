@@ -43,21 +43,18 @@ class Userfavoritespage extends Component{
         return(
             <Grid container direction={"column"} spacing={12} >
                 <Grid item xs={12}><Navigation/></Grid>
-                <Grid container direction={"row"} alignItems={"center"} spacing={2}>
+                <Grid container direction={"row"} spacing={2}>
                     <Grid item xs={1}>
-
                     </Grid>
                     <Grid item xs={2}>
+                        <br/>
+                        <br/>
                         <Tag />
                     </Grid>
                     <Grid item xs={8} >
-                        <br/>
-                        <br/>
-
                         <Commentlist />
                     </Grid>
                     <Grid item xs={1}>
-
                     </Grid>
                 </Grid>
             </Grid>

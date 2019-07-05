@@ -17,7 +17,7 @@ class Itembrowsepage extends Component{
     render(){
         return(
 
-            <Grid container direction={"column"} spacing={2} >
+            <Grid container direction={"column"} >
                 <Grid item xs={12}><Navigation/></Grid>
                 <Grid container direction={"row"} alignItems={"center"}>
                     <Grid item xs={1}></Grid>
@@ -31,7 +31,7 @@ class Itembrowsepage extends Component{
                         <br/><br/><br/><br/>
                         <TopItemList />
                     </Grid>
-                    <Grid item xs={1}></Grid>
+
                 </Grid>
             </Grid>
 

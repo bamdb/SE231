@@ -112,7 +112,6 @@ class Navigation extends Component {
         if(!this.state.show)
         {
             return (
-
                 <div id={"navigateroot"}>
                     <AppBar color={"default"} position={"fixed"} id={"navigateroot"}>
                         <Grid container>
@@ -148,14 +147,10 @@ class Navigation extends Component {
                                     </Grid>
                                 </Grid>
                             </Grid>
-
                         </Grid>
-
                     </AppBar>
                     <br/>
                     <br/>
-
-
                 </div>
             );
         }

@@ -19,23 +19,21 @@ import Tag from "../component/tag"
 class Useriteminfopage extends Component {
     render(){
         return(
-            <Grid container spacing={10}>
+            <Grid container spacing={2}>
                 <Grid item xs={12}><Navigation/></Grid>
                 <Grid item xs={12}>
-                    <Grid container spacing={2} >
-                        <Grid item xs={1}></Grid>
-                        <Grid  item xs={1} >
+                    <Grid container spacing={2}>
+                        <Grid item xs={1}/>
+                        <Grid item xs={1} >
                             <Item />
                         </Grid>
-
                         <Grid  item xs={7} >
                             <Scheduletable />
-                            <br/>
                             <Tag></Tag>
                         </Grid>
                         <Grid  item xs={3} >
                             <Relateditem />
-                            <Commentlist />
+
                         </Grid>
                     </Grid>
                 </Grid>
