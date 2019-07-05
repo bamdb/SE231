@@ -15,12 +15,14 @@ import Userfavoritespage from "./page/userfavoritespage";
 import RegisterPage from "./page/registerpage";
 import Topicpage from "./page/topicpage";
 import Useriteminfopage from "./page/useriteminfopage";
+import Topicdetailpage from "./page/topicdetailpage";
 
 function App() {
   return (
     <div >
         <Router >
             <Route path={'/topicpage'} component={Topicpage}></Route>
+            <Route path={'/topicdetailpage'} component={Topicdetailpage}></Route>
             <Route path={'/itembrowsepage'} component={Itembrowsepage}></Route>
             <Route path={'/loginpage'} component={LoginPage}></Route>
             <Route exact path={'/'} component={UserHomepage}></Route>

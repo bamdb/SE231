@@ -67,6 +67,7 @@ class Navigation extends Component {
             case "itembrowsepage" :this.setState({value:1});break;
             case "useriteminfopage" :this.setState({value:2});break;
             case "userfavoritepage" :this.setState({value:3});break;
+            case "topicpage" :this.setState({value:4});break;
         }
     }
 
@@ -88,8 +89,9 @@ class Navigation extends Component {
                             <Tabs centered={true} value={this.state.value} onChange={this.handleChange}>
                                 <Tab label="首页" href={"/#/"}/>
                                 <Tab label="浏览" href={"/#/itembrowsepage"}/>
-                                <Tab label="讨论区" href={"/#/useriteminfopage"}/>
+                                <Tab label="进度" href={"/#/useriteminfopage"}/>
                                 <Tab label="收藏" href={"/#/userfavoritepage"}/>
+                                <Tab label="讨论区" href={"/#/topicpage"}/>
                             </Tabs>
                                 </Grid>
                                 <Grid item xs={2}>

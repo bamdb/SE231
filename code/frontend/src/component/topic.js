@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
-
+import {Link} from "react-router-dom";
 import '../css/item.css'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import {Button} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -39,13 +40,17 @@ class Topic extends Component {
             date: "2019-7-2"
         }
     }
+    componentWillMount() {
+        var x = window.location.href.split("#")[1].split("/")[1];
+        console.log(x);
+    }
 
     render(){
         return(
             <List component={"nav"} className={useStyles.root} aria-label="Mailbox folders">
                 <Divider />
                 <ListItem>
-                    <ListItemText primary={this.state.content} />
+                    <Button href={'#/topicdetailpage'} ><ListItemText primary={this.state.content} /></Button>
                     <ListItemText primary={this.state.author} />
                     <ListItemText primary={this.state.replyTotal+" replies"} />
                     <ListItemText primary={this.state.date} />
