@@ -6,6 +6,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Browserlist from "./browserlist";
+import Briefitemlist from "./briefitemlist";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -34,7 +35,7 @@ class Relateditem extends Component {
                         <Typography className={useStyles.heading}>前作</Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
-                            <Browserlist/>
+                            <Briefitemlist/>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
                 <ExpansionPanel>
@@ -46,7 +47,7 @@ class Relateditem extends Component {
                         <Typography className={useStyles.heading}>续集</Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
-                        <Browserlist/>
+                        <Briefitemlist/>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
                 <ExpansionPanel disabled>
@@ -58,7 +59,7 @@ class Relateditem extends Component {
                         <Typography className={useStyles.heading}>相关作品</Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
-                        <Browserlist/>
+                        <Briefitemlist/>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
             </div>
