@@ -1,28 +1,29 @@
 package com.se.itemservice;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "score")
+@Table(name = "Score")
 public class Score {
     @Id
-    @Column(name = "user_id")
-    private Long userId;
-    @Column(name = "rank")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "`rank`")
     private Integer rank;
     @Column(name = "avg_grade")
     private float avgGrade;
 
-    public Long getUserId() {return userId;}
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "score")
+    private Item item;
+
+    public Long getId() {return id;}
 
     public Integer getRank() {return rank;}
 
     public float getAvgGrade() {return avgGrade;}
 
-    public void setUserId(Long userId) { this.userId = userId;}
+    public void setId(Long id) { this.id = id;}
 
     public void setRank(Integer rank) {this.rank = rank;}
 

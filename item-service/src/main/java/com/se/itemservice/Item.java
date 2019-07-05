@@ -26,7 +26,7 @@ public class Item {
     private Integer type;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName="id")
+    @JoinColumn(name = "score")
     private Score score;
 
     public Long getId() {return id;}
