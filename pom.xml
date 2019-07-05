@@ -67,6 +67,6 @@
         <module>gateway</module>
         <module>image-service</module>
         <module>user-service</module>
-        <!--<module>item-service</module>-->
+        <module>item-service</module>
     </modules>
 </project>
