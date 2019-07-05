@@ -26,7 +26,7 @@ class Briefitem extends Component {
     render(){
         return(
             <Paper>
-                <Grid container spacing={2} >
+                <Grid container  >
                     <Grid item xs={4}>
                         <img src="img/3.jpg" id="itemimage" />
                     </Grid>
@@ -53,10 +53,16 @@ class Briefitemlist extends Component {
 
     render(){
         return(
-            <Grid xs={12} >
+            <Grid container >
+                <Grid item xs={12}>
                 <Briefitem />
-                <Briefitem />
-                <Briefitem />
+                </Grid>
+                <Grid item xs={12}>
+                    <Briefitem />
+                </Grid>
+                <Grid item xs={12}>
+                    <Briefitem />
+                </Grid>
             </Grid>
         );
     }

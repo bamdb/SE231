@@ -7,8 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Browserlist from "./browserlist";
 import Briefitemlist from "./briefitemlist";
-import Grid from '@material-ui/core/Grid/index'
-
+import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
 const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
@@ -26,7 +26,7 @@ class Relateditem extends Component {
 
     render() {
         return (
-            <Grid container xs={12} className={useStyles.root}>
+            <Grid container  >
                 <Grid item xs={12}>
                 <ExpansionPanel>
                     <ExpansionPanelSummary
@@ -34,10 +34,10 @@ class Relateditem extends Component {
                         aria-controls="panel1a-content"
                         id="panel1a-header"
                     >
-                        <Typography className={useStyles.heading}>前作</Typography>
+                        <Typography >前作</Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
-                            <Briefitemlist/>
+                        <Briefitemlist/>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
                 </Grid>
@@ -48,7 +48,7 @@ class Relateditem extends Component {
                         aria-controls="panel2a-content"
                         id="panel2a-header"
                     >
-                        <Typography className={useStyles.heading}>续集</Typography>
+                        <Typography >续集</Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
                         <Briefitemlist/>
@@ -62,7 +62,7 @@ class Relateditem extends Component {
                         aria-controls="panel3a-content"
                         id="panel3a-header"
                     >
-                        <Typography className={useStyles.heading}>相关作品</Typography>
+                        <Typography >相关作品</Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
                         <Briefitemlist/>
