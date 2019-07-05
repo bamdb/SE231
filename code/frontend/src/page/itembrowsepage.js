@@ -21,17 +21,12 @@ class Itembrowsepage extends Component{
                 <Grid item xs={12}><Navigation/></Grid>
                 <Grid container direction={"row"} alignItems={"center"}>
                     <Grid item xs={1}></Grid>
-                    <Grid item xs={1}>
+                    <Grid item xs={2}>
                         <Tag select={true} tags={["热血","王道"]}/>
                     </Grid>
                     <Grid item xs={8} >
                         <Listitem></Listitem>
                     </Grid>
-                    <Grid item xs={2}>
-                        <br/><br/><br/><br/>
-                        <TopItemList />
-                    </Grid>
-
                 </Grid>
             </Grid>
 

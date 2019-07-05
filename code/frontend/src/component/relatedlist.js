@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Browserlist from "./browserlist";
 import Briefitemlist from "./briefitemlist";
+import Grid from '@material-ui/core/Grid/index'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -25,7 +26,8 @@ class Relateditem extends Component {
 
     render() {
         return (
-            <div className={useStyles.root}>
+            <Grid container xs={12} className={useStyles.root}>
+                <Grid item xs={12}>
                 <ExpansionPanel>
                     <ExpansionPanelSummary
                         expandIcon={<ExpandMoreIcon/>}
@@ -38,6 +40,8 @@ class Relateditem extends Component {
                             <Briefitemlist/>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
+                </Grid>
+                <Grid item xs={12}>
                 <ExpansionPanel>
                     <ExpansionPanelSummary
                         expandIcon={<ExpandMoreIcon/>}
@@ -50,6 +54,8 @@ class Relateditem extends Component {
                         <Briefitemlist/>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
+                </Grid>
+                <Grid item xs={12}>
                 <ExpansionPanel disabled>
                     <ExpansionPanelSummary
                         expandIcon={<ExpandMoreIcon/>}
@@ -62,7 +68,8 @@ class Relateditem extends Component {
                         <Briefitemlist/>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
-            </div>
+                </Grid>
+            </Grid>
         );
     }
 }

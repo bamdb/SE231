@@ -52,6 +52,7 @@ class Userfavoritespage extends Component{
                         <Tag />
                     </Grid>
                     <Grid item xs={8} >
+                        <br/>
                         <Commentlist />
                     </Grid>
                     <Grid item xs={1}>

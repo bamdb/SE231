@@ -27,14 +27,15 @@ class Useriteminfopage extends Component {
                         <Grid item xs={1} >
                             <Item />
                         </Grid>
-                        <Grid  item xs={7} >
+                        <Grid  item xs={6} >
                             <Scheduletable />
                             <Tag></Tag>
                         </Grid>
                         <Grid  item xs={3} >
                             <Relateditem />
-
+                            <Commentlist />
                         </Grid>
+                        <Grid item xs={1}/>
                     </Grid>
                 </Grid>
             </Grid>

@@ -6,10 +6,9 @@ import React, { Component } from 'react';
 import Paper from '@material-ui/core/Paper';
 
 import '../css/item.css'
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography';
 /*
  信息保存在state中，可以自行添加props或ajax
 */
@@ -26,37 +25,37 @@ class Item extends Component {
 
     render() {
         return(
-
-                <Paper style={{width:100}}>
-                    <Grid container alignItems={"center"}>
-                        <Grid item xs={12}>
-                            <img src="img/3.jpg" id="itemimage" />
-                        </Grid>
-                        <Grid item xs={12}>
-                        <List >
-                            <ListItem>
-                                <ListItemText primary="中文名" secondary={this.state.name} />
-                            </ListItem>
-                            <ListItem>
-                                <ListItemText primary="发行日期" secondary={this.state.date} />
-                            </ListItem>
-                            <ListItem>
-                                <ListItemText primary="作者" secondary={this.state.author} />
-                            </ListItem>
-                            <ListItem>
-                                <ListItemText primary="导演" secondary={this.state.director}></ListItemText>
-                            </ListItem>
-                            <ListItem>
-                                <ListItemText primary="页数" secondary={this.state.page}></ListItemText>
-                            </ListItem>
-                            <ListItem>
-                                <ListItemText primary="ISBN" secondary={this.state.isbn}></ListItemText>
-                            </ListItem>
-                        </List>
-                        </Grid>
-                    </Grid>
+            <Grid container alignItems={"center"} direction={"column"} >
+                <Paper>
+                <Grid item>
+                    <img src="img/3.jpg" id="itemimage" />
+                </Grid>
+                <Grid item>
+                    <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >名称</Typography>
+                    <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.name}</Typography>
+                </Grid>
+                <Grid item>
+                    <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >发行日期</Typography>
+                    <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.date}</Typography>
+                </Grid>
+                <Grid item>
+                    <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >作者</Typography>
+                    <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.author}</Typography>
+                </Grid>
+                <Grid item>
+                    <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >导演</Typography>
+                    <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.director}</Typography>
+                </Grid>
+                <Grid item>
+                    <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >页数</Typography>
+                    <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.page}</Typography>
+                </Grid>
+                <Grid item>
+                    <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >ISBN</Typography>
+                    <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.isbn}</Typography>
+                </Grid>
                 </Paper>
-
+            </Grid>
         )
     }
 }
