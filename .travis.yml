@@ -13,9 +13,10 @@ services:
 dist: xenial
 jdk:
  - openjdk11 
+# - oraclejdk8
 env:
   global:
-    - CODECOV_TOKEN: "c44167bb-18d7-4f63-88f5-6181d3d80c4d"
+#     - CODECOV_TOKEN: "c44167bb-18d7-4f63-88f5-6181d3d80c4d"
     - secure: "jjXILnC4Jbh73vofJiEDJpdJBx5U+rarI2Itto2a0BO09pRkMSej3dt8TLQqnq/2FErW5Yzzx6hgyrLNleWRXUZ5WW8H7Poh+kkhZOMbCE2ppvunSH1xaz0yMbv55AZhkmYRKmMhcG+jaKHKXzcHKZqr46zHqqy1moLB9U7IeBCB2RpZBLEiXX1K9KJpLvdQzU39pifoG0CSW0oXt8iN2JKJv94hi6ticl58/JP24L2HCuiFpbGjWQwgPc7bdMntlUbHJb1ZIYakny7gLNSk4LNF3si6swJ7dF+VcZApZ64ZqeQgxPFQ7FJFK8GhMQlUI3ksuPtn2OEEz07+t4v3y/sPH0+9ouE71+AvY2JBLKHn1TcY3CGw6K0GsG1GDESKr7qv1JWa56K6yb/qqSlWbEsR2K52sQhp9a+1+5IWyYtauord3Jg6b0Vr5KUDJbpBk7+MfXFar1nxXT9ZFevxxABKcCAqEplrE/2ae1p0vvQHNPd8pXxLCtWDmwXUAh8f47Cht/y/nn+TJKzhTU+dHxQ2tlJnHIejCE9B6Sv1l08UrjDptQ0CNP6IsfOKqKPOcrOLDmYnr80S+WKsSiqj5nI5nJ6Ty8IEsyzgeFBcFJWywmoubDxzo6ei4JGqhQ0MAFd3xxKrMzpt8Kclmpivh0YJyyy14eo+iI6Mr0XD+7w="
     - secure: "M4ObbJMiHYcBgejRzf4Gp90N7E1QOOyEPEaMuuvym1mwumDRY0G0IjVBzhWXa5HcgSlxgG1XuIfBI8MELAvA5Dv3Er3RFhcN2kP8jhRHdJ65ZvCbzeDCw3+ZQKi3orc9xQsemxCWIEtJsH9KUewS+aMAUPAFAri73Ivtlrlxq1uo6ukyr6xNJx1zh8X5vFrQCvGw5XpAgI1c9fnrR1BOSfkQe3RfJ8Xt8T5t0eiHNr2+4iFiO5xLS6hHEWl0bttSmgLKkYOKcqJwUOo4xKqxpVd6RJEqrmkfAfOv15q9R/ip3hmADteytn2LzibM71K42YyahSBXtCumXHKSEF9TX4fBWTcLtVdDMfxHOBIHmczNvu+rfhNEjd+9YSN/7CDzqph8/TxWHQlzOsnL2AMWqzhS1B5DMHGffsjeArIZZ6CH4zFVKQHb5ykX0dFxmKkz4OUyEvunZr4792uZxJd8Vq6sR22dCy2Ydsa7qo9nclITfLL5b9/NgyEUU1t49wLWaNQWSxgCHpTm160Tl+FhUyy1TTUC9KBXjDtWGdROqjsVpoEix0ciYMwRixQrWhTWhSASXnTht7cH+5R4/+AWWbgB4DEduAGPFox6PFc1iWHSad8AVlu7fbuYFweN02l0KA3x5Yj2SNW6pcZhq0zN8AgQeUoKEgC+vhKYoSGfka8="
 script:
@@ -27,5 +28,6 @@ before_install:
   - sudo service mysql restart
   - mysql -u root -p610878 -e "create database bamdb;"
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -t c44167bb-18d7-4f63-88f5-6181d3d80c4d
-  - sshpass -e  scp -P $DEPLOY_PASS -o stricthostkeychecking=no -r  $DEPLOY_USER@47.102.99.212
+  - export CODECOV_TOKEN="c44167bb-18d7-4f63-88f5-6181d3d80c4d"
+  - bash <(curl -s https://codecov.io/bash)
+#  - sshpass -e  scp -P $DEPLOY_PASS -o stricthostkeychecking=no -r  $DEPLOY_USER@47.102.99.212

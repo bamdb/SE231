@@ -16,9 +16,9 @@ import org.springframework.web.context.WebApplicationContext;
 import javax.annotation.Resource;
 import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("test")
@@ -37,23 +37,51 @@ public class UserServiceApplicationTests {
     @Resource(name="userServiceImpl")
     UserService userService;
 
-//    @WithMockUser(roles={"ADMIN"})
     @Test
-    public void contextLoads() throws  Exception{
+    public void updateTest() throws Exception {
         mvc.perform(post("/signup")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"username\":\"roott\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null}"))
+                .content("{\"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null}"))
                 .andExpect(status().isOk());
+        mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
+                .content("{\"id\":0, \"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null}"))
+                .andExpect(status().isOk());
+        User user = userService.selectAll().iterator().next();
+        mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
+                .content("{\"id\":"+user.getId()+", \"username\":\"modified\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null}"))
+                .andExpect(status().isOk());
+        Assert.assertEquals("modified", userService.selectAll().iterator().next().getUsername());
+    }
+    
+    @Test
+    public void deleteTest() throws Exception {
+        mvc.perform(delete("/delete/username/root"))
+                .andExpect(status().isOk());
+        Assert.assertNull(userService.selectByUsername("root"));
+        if (userService.selectAll().iterator().hasNext()) {
+            Long id = userService.selectAll().iterator().next().getId();
+            mvc.perform(delete("/delete/id/"+id))
+                    .andExpect(status().isOk());
+            Assert.assertNull(userService.selectById(id));
+        }
+    }
 
-//        mvc.perform(get("/users").contentType(MediaType.APPLICATION_JSON))
-//                .andDo(MockMvcResultHandlers.print())
-//                .andExpect(status().is(404))
-//                .andReturn().getResponse().getContentAsString();
+
+//    @WithMockUser(roles={"ADMIN"})
+    @Test
+    public void controllerTest() throws  Exception{
+        mvc.perform(post("/signup")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null}"))
+                .andExpect(status().isOk());
 
         mvc.perform(get("/all").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/userid/1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/all").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+        mvc.perform(get("/id/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         mvc.perform(get("/username/root").contentType(MediaType.APPLICATION_JSON))

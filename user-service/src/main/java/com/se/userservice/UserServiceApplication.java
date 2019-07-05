@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @SpringBootApplication
-@EnableFeignClients
 public class UserServiceApplication {
 
     public static void main(String[] args) {

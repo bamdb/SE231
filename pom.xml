@@ -23,29 +23,9 @@
 
     <build>
         <plugins>
-                       <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.16</version>
-                <configuration>
-                    <forkCount>5</forkCount>
-                    <reuseForks>true</reuseForks>
-                    <argLine>-Dnet.sf.ehcache.disabled=true</argLine>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-                            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.16</version>
-                <configuration>
-                    <forkCount>5</forkCount>
-                    <reuseForks>true</reuseForks>
-                    <argLine>-Dnet.sf.ehcache.disabled=true</argLine>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -87,6 +67,6 @@
         <module>gateway</module>
         <module>image-service</module>
         <module>user-service</module>
-        <module>item-service</module>
+        <!--<module>item-service</module>-->
     </modules>
 </project>
