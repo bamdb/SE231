@@ -9,7 +9,7 @@ import '../css/item.css'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-
+import Grid from '@material-ui/core/Grid'
 /*
  信息保存在state中，可以自行添加props或ajax
 */
@@ -26,11 +26,13 @@ class Item extends Component {
 
     render() {
         return(
-            <div id="itemroot">
-                <Paper id={"main"}>
 
-                    <img src="img/3.jpg" id="itemimage" />
-
+                <Paper style={{width:100}}>
+                    <Grid container alignItems={"center"}>
+                        <Grid item xs={12}>
+                            <img src="img/3.jpg" id="itemimage" />
+                        </Grid>
+                        <Grid item xs={12}>
                         <List >
                             <ListItem>
                                 <ListItemText primary="中文名" secondary={this.state.name} />
@@ -51,9 +53,10 @@ class Item extends Component {
                                 <ListItemText primary="ISBN" secondary={this.state.isbn}></ListItemText>
                             </ListItem>
                         </List>
-
+                        </Grid>
+                    </Grid>
                 </Paper>
-            </div>
+
         )
     }
 }

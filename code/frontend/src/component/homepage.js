@@ -36,9 +36,7 @@ class HomePage extends Component{
     render(){
         return(
             <Grid container spacing={10}>
-                <Grid item xs={12}>
-                    <Navigation />
-                </Grid>
+                <Grid item xs={12}><Navigation/></Grid>
                 <Grid item xs={12}>
                 <Grid container spacing={3} >
                     <Grid item xs={2}>

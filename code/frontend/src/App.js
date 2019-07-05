@@ -11,6 +11,7 @@ import TopItemList from "./component/topitemlist";
 import Browserlist from "./component/browserlist";
 import EntryPage from './entrypage'
 import LoginPage from './loginpage'
+import ItemInfoPage from './component/iteminfopage'
 import {
   HashRouter as Router,
   Route,
@@ -28,17 +29,17 @@ function App() {
       <Router >
           <Route path={'/entrypage'} component={EntryPage}></Route>
           <Route path={'/loginpage'} component={LoginPage}></Route>
-        <Route path={'/browserlist'} component={Browserlist}></Route>
-        <Route path={'/topitemlist'} component={TopItemList}></Route>
-        <Route path={'/navigate'} component={Navigation}></Route>
-      <Route path={'/search'} component={Search}></Route>
-        <Route exact path={'/'} component={Homepage}></Route>
-      <Route path={'/schedule'} component={Scheduletable}></Route>
-        <Route path={'/item'} component={Item}></Route>
+          <Route path={'/browserlist'} component={Browserlist}></Route>
+          <Route path={'/topitemlist'} component={TopItemList}></Route>
+
+          <Route path={'/search'} component={Search}></Route>
+          <Route exact path={'/'} component={Homepage}></Route>
+          <Route path={'/schedule'} component={Scheduletable}></Route>
+          <Route path={'/item'} component={Item}></Route>
           <Route path={'/userinfo'} component={Userinfo}></Route>
           <Route path={'/userpage'} component={UserPage}></Route>
           <Route path={'/registerpage'} component={RegisterPage}></Route>
-
+          <Route path={"/iteminfopage"} component={ItemInfoPage}></Route>
       </Router>
     </div>
   );
