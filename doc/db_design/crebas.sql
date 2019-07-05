@@ -113,6 +113,7 @@ create table Item
 (
    id                   bigint not null,
    itemname             varchar(20) not null,
+   `type`               int not null,
    pub_time             timestamp,
    chapter_num          int not null,
    main_author          varchar(20),
