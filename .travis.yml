@@ -1,5 +1,7 @@
 language: node_js
 node_js:
   - "6"
-install: npm install
-script: npm test
+before_install: 
+  - cd /code/frontend
+  - npm install
+  - npm test
