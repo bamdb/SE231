@@ -11,3 +11,7 @@
 # 2019-7-4
 * start writing web pages
 * basic website has been built
+# 2019-7-5
+* finish basic web page
+* build CI for frontend
+* prepare the backend environment
