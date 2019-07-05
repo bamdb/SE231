@@ -1,11 +1,10 @@
 package com.se.itemservice;
 
+import com.se.itemservice.entity.Item;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.sql.Timestamp;
-import java.util.List;
 
 @RestController
 public class ItemController {

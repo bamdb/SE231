@@ -1,6 +1,4 @@
-package com.se.itemservice;
-
-import org.hibernate.validator.constraints.CodePointLength;
+package com.se.itemservice.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

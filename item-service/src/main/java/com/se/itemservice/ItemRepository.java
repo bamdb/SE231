@@ -1,5 +1,6 @@
 package com.se.itemservice;
 
+import com.se.itemservice.entity.Item;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 

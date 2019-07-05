@@ -1,4 +1,4 @@
-package com.se.itemservice;
+package com.se.itemservice.entity;
 
 import javax.persistence.*;
 
