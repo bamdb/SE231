@@ -17,6 +17,7 @@ import RegisterPage from "./page/registerpage";
 import Topicpage from "./page/topicpage";
 import Topicdetailpage from "./page/topicdetailpage";
 import Userinfopage from "./page/userinfopage"
+import Useriteminfopage from "./page/useriteminfopage"
 function App() {
   return (
     <div >
