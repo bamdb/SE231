@@ -64,9 +64,9 @@ class Navigation extends Component {
         switch (x)
         {
             case "homepage" :this.setState({value:0});break;
-            case "entrypage" :this.setState({value:1});break;
-            case "iteminfopage" :this.setState({value:2});break;
-            case "userpage" :this.setState({value:3});break;
+            case "itembrowsepage" :this.setState({value:1});break;
+            case "useriteminfopage" :this.setState({value:2});break;
+            case "userfavoritepage" :this.setState({value:3});break;
         }
     }
 
@@ -87,9 +87,9 @@ class Navigation extends Component {
                                 <Grid item xs={10}>
                             <Tabs centered={true} value={this.state.value} onChange={this.handleChange}>
                                 <Tab label="首页" href={"/#/"}/>
-                                <Tab label="书籍" href={"/#/entrypage"}/>
-                                <Tab label="讨论区" href={"/#/iteminfopage"}/>
-                                <Tab label="收藏" href={"/#/userpage"}/>
+                                <Tab label="浏览" href={"/#/itembrowsepage"}/>
+                                <Tab label="讨论区" href={"/#/useriteminfopage"}/>
+                                <Tab label="收藏" href={"/#/userfavoritepage"}/>
                             </Tabs>
                                 </Grid>
                                 <Grid item xs={2}>

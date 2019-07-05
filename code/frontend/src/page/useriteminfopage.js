@@ -6,10 +6,10 @@ import React, { Component } from 'react';
 
 import Grid from '@material-ui/core/Grid'
 
-import Navigation from './navigation';
-import Item from './item';
-import Progressmanage from "./progressmanage";
-import Commentlist from "./commentlist";
+import Navigation from '../component/navigation';
+import Item from '../component/item';
+import Progressmanage from "../component/progressmanage";
+import Commentlist from "../component/commentlist";
 
 
 
