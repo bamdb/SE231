@@ -3,23 +3,13 @@
  */
 
 import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid/index'
+import Grid from '@material-ui/core/Grid';
 import TopicList from "../component/topiclist";
 import Tag from "../component/tag";
 import Typography from "@material-ui/core/Typography";
 import Navigation from "../component/navigation";
 
 class Topicpage extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            hotTopics: [],       //热门话题，详细的话题信息，以卡片样子呈现在屏幕中部
-            tags: [],            //热门标签，，可以分类，topic可以按此筛选
-            relatedTopics: [],   //与用户爱好相关Topic
-            isloaded: false,
-        };
-    }
-
     render(){
         return(
             <Grid container direction={"row"} spacing={3} >
