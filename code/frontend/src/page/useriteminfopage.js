@@ -12,6 +12,8 @@ import Progressmanage from "../component/progressmanage";
 import Commentlist from "../component/commentlist";
 import Relateditem from "../component/relatedlist";
 
+import Scheduletable from "../component/scheduletable";
+import Tag from "../component/tag"
 
 
 class Useriteminfopage extends Component {
@@ -27,7 +29,9 @@ class Useriteminfopage extends Component {
                         </Grid>
 
                         <Grid  item xs={7} >
-                            <Progressmanage />
+                            <Scheduletable />
+                            <br/>
+                            <Tag></Tag>
                         </Grid>
                         <Grid  item xs={3} >
                             <Relateditem />

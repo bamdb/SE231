@@ -4,6 +4,7 @@ import './App.css';
 import UserHomepage from './page/userhomepage'
 import Itembrowsepage from './page/itembrowsepage'
 import LoginPage from './page/loginpage'
+import Useriteminfopage from './page/useriteminfopage'
 import {
   HashRouter as Router,
   Route,
@@ -28,7 +29,7 @@ function App() {
             <Route exact path={'/'} component={UserHomepage}></Route>
             <Route path={'/userfavoritepage'} component={Userfavoritespage}></Route>
             <Route path={'/registerpage'} component={RegisterPage}></Route>
-            <Route path={'/useriteminfopage'} component={Useriteminfopage}></Route>
+            <Route path={'/iteminfopage'} component={Useriteminfopage}></Route>
         </Router>
     </div>
   );
