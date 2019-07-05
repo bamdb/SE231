@@ -2,6 +2,7 @@ package com.se.imageservice;
 
 import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
@@ -9,9 +10,12 @@ public class Image {
     @Id
     private String id;
 
-    private Long bookId;
+    /*combined by type and id*/
+    @Indexed(unique = true)
+    private Long imageId;
 
     private Binary image;
+
 
     public String getId() {
         return id;
@@ -21,12 +25,12 @@ public class Image {
         this.id = id;
     }
 
-    public Long getBookId() {
-        return bookId;
+    public void setImageId(Long imageId) {
+        this.imageId = imageId;
     }
 
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
+    public Long getImageId() {
+        return imageId;
     }
 
     public Binary getImage() {
@@ -40,14 +44,14 @@ public class Image {
     public Image() {
     }
 
-    public Image(Long bookId, Binary image) {
-        this.bookId = bookId;
+    public Image(Long imageId, Binary image) {
+        this.imageId = imageId;
         this.image = image;
     }
 
-    public Image(String id, Long bookId, Binary image) {
+    public Image(String id, Long imageId, Binary image) {
         this.id = id;
-        this.bookId = bookId;
+        this.imageId = imageId;
         this.image = image;
     }
 }

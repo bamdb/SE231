@@ -10,30 +10,36 @@ import java.io.IOException;
 
 @RestController
 public class ImageController {
+    private final ImageRepository imageRepository;
+
     @Autowired
-    private ImageRepository imageRepository;
-
-    @GetMapping(value="/books/{bookId}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
-    public byte[] getImageById(@PathVariable Long bookId){
-        return imageRepository.findByBookId(bookId).get().getImage().getData();
+    public ImageController(ImageRepository imageRepository) {
+        this.imageRepository = imageRepository;
     }
 
-    @DeleteMapping("/books/{bookId}")
-    public ResponseEntity<?> deleteByID(@PathVariable Long bookId){
-        imageRepository.deleteByBookId(bookId);
-        return ResponseEntity.ok().body("delete book successfully!");
+    @GetMapping(value="/{imageId}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
+    public byte[] getImageById(@PathVariable Long imageId){
+        if (imageRepository.existsByImageId(imageId))
+            return imageRepository.findByImageId(imageId).get().getImage().getData();
+        else return null;
     }
 
-    @PutMapping("/books/{bookId}")
-    public Image updateImageById(@PathVariable Long bookId, @RequestParam(value="book") MultipartFile file) throws IOException {
-        Image image = imageRepository.findByBookId(bookId).orElse(new Image(bookId, new Binary(file.getBytes())));
+    @DeleteMapping("/delete/{imageId}")
+    public ResponseEntity<?> deleteByID(@PathVariable Long imageId){
+        imageRepository.deleteByImageId(imageId);
+        return ResponseEntity.ok().body("delete item successfully!");
+    }
+
+    @PostMapping("/update/{imageId}")
+    public Image updateImageById(@PathVariable Long imageId, @RequestParam(value="image") MultipartFile file) throws IOException {
+        Image image = imageRepository.findByImageId(imageId).orElse(new Image(imageId, new Binary(file.getBytes())));
         image.setImage(new Binary(file.getBytes()));
         return imageRepository.save(image);
     }
 
-    @PostMapping("/books/{bookId}")
-    public Image insertImageById(@PathVariable Long bookId, @RequestParam(value="book") MultipartFile file) throws IOException {
-        Image image = new Image(bookId, new Binary(file.getBytes()));
+    @PostMapping("/insert/{imageId}")
+    public Image insertImageById(@PathVariable Long imageId, @RequestParam(value="image") MultipartFile file) throws IOException {
+        Image image = new Image(imageId, new Binary(file.getBytes()));
         return imageRepository.save(image);
     }
 }
