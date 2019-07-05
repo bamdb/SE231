@@ -1,6 +1,6 @@
 package com.se.itemservice;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.hibernate.validator.constraints.CodePointLength;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -12,20 +12,51 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "itemname")
+    @Column(name = "itemname", nullable = false)
     private String itemname;
-    @Column(name = "pub_time")
+    @Column(name = "pub_time", columnDefinition = "TIMESTAMP")
     private Timestamp pubTime;
     @Column(name = "chapter_num")
-    private int chapterNum;
+    private Integer chapterNum;
     @Column(name = "main_author")
     private String mainAuthor;
     @Column(name = "imgurl")
     private String imgurl;
-
-    private Score score;
-
+    @Column(name = "score")
+    private Float score;
+    @Column(name = "rank")
+    private Integer rank;
+    @Column(name = "type")
+    private Integer type;
     public Long getId() {return id;}
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public Float getScore() {
+        return score;
+    }
+
+    public Integer getRank() {
+        return rank;
+    }
+
+    public void setChapterNum(Integer chapterNum) {
+        this.chapterNum = chapterNum;
+    }
+
+    public void setRank(Integer rank) {
+        this.rank = rank;
+    }
+
+    public void setScore(Float score) {
+        this.score = score;
+    }
 
     public void setId(Long id) {this.id = id;}
 

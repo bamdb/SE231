@@ -42,14 +42,14 @@ public class UserServiceApplicationTests {
     public void updateTest() throws Exception {
         mvc.perform(post("/signup")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null}"))
+                .content("{\"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null, \"role\":0}"))
                 .andExpect(status().isOk());
         mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"id\":0, \"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null}"))
+                .content("{\"id\":0, \"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null, \"role\":0}"))
                 .andExpect(status().isOk());
         User user = userService.selectAll().iterator().next();
         mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"id\":"+user.getId()+", \"username\":\"modified\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null}"))
+                .content("{\"id\":"+user.getId()+", \"username\":\"modified\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null, \"role\":0}"))
                 .andExpect(status().isOk());
         Assert.assertEquals("modified", userService.selectAll().iterator().next().getUsername());
     }
@@ -73,7 +73,7 @@ public class UserServiceApplicationTests {
     public void controllerTest() throws  Exception{
         mvc.perform(post("/signup")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null}"))
+                .content("{\"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null, \"role\":0}"))
                 .andExpect(status().isOk());
 
         mvc.perform(get("/all").contentType(MediaType.APPLICATION_JSON))
