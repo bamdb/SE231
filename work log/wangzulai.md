@@ -11,3 +11,7 @@
 
 # 2019-07-04
 * working on user service
+
+# 2019-07-05
+* complete crud func of topic, item, activity services
+* complete test cases of topic, item services
