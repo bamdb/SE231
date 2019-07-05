@@ -1,5 +1,6 @@
 package com.se.topicservice;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,8 +20,8 @@ public class TopicController {
         return topicService.selectAll();
     }
 
-    @GetMapping(value="/id/{id}", produces="application/json")
-    public Topic getTopicById(@PathVariable("id") Long topicId) {
+    @GetMapping(value="/id/{topicId}", produces="application/json")
+    public Topic getTopicById(@PathVariable("topicId") Long topicId) {
         return topicService.selectById(topicId);
     }
 
@@ -30,9 +31,8 @@ public class TopicController {
     }
 
     @DeleteMapping(value="/delete/id/{topicId}")
-    public void deleteTopicById(
-            @PathVariable("topicId") Long topicId) {
-        topicService.deleteTopicById(topicId);
+    public ResponseEntity<?> deleteTopicById(@PathVariable("topicId") Long topicId) {
+        return topicService.deleteTopicById(topicId);
     }
 
 }

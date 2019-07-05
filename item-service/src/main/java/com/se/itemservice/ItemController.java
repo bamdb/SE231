@@ -1,5 +1,6 @@
 package com.se.itemservice;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -20,20 +21,17 @@ public class ItemController {
     }
 
     @PostMapping(value = "/add")
-    public boolean insertOneItem(@RequestParam(value = "itemname") String itemname, @RequestParam(value = "pubTime") Timestamp pubTime,
-                                 @RequestParam(value = "chapterNum") int chapterNum, @RequestParam(value = "mainAuthor") String mainAuthor) {
-        return itemService.insertOneItem(itemname, pubTime, chapterNum, mainAuthor);
+    public Item postItem(@RequestBody Item item) {
+        return itemService.postItem(item);
     }
 
-    @DeleteMapping(value = "/delete/{itemId}")
-    public boolean deleteItemById(@PathVariable Long itemId) {
-        return itemService.deleteOneItem(itemId);
+    @DeleteMapping(value = "/delete/id/{itemId}")
+    public ResponseEntity<?> deleteItemById(@PathVariable Long itemId) {
+        return itemService.deleteItemById(itemId);
     }
 
-    @PutMapping(value = "/update/{itemId}")
-    public boolean updateItemById(@PathVariable Long itemId, @RequestParam(value = "itemname") String itemname,
-                                  @RequestParam(value = "pubTime") Timestamp pubTime, @RequestParam(value = "chapterNum") int chapterNum,
-                                  @RequestParam(value = "mainAuthor") String mainAuthor) {
-        return itemService.updateOneItem(itemId, itemname, pubTime, chapterNum, mainAuthor);
+    @PutMapping(value = "/update", produces="application/json")
+    public Item updateItemById(@RequestBody Item item) {
+        return itemService.updateItem(item);
     }
 }
