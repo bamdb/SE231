@@ -31,13 +31,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public User updateUser(User user) {
-        if (userRepository.existsById(user.getId()))
             return userRepository.save(user);
-        else if (user.getId() == null && userRepository.existsByUsername(user.getUsername())) {
-            user.setId(userRepository.findByUsername(user.getUsername()).get().getId());
-            return userRepository.save(user);
-        }
-        else return null;
     }
 
     public void deleteUserById(Long id) {

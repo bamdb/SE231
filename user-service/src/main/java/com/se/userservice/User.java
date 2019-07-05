@@ -72,12 +72,12 @@ public class User {
     }
 
     public User(long id, String username, String password, String mail, String imgUrl, Integer role) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.imgUrl = imgUrl;
-        this.mail = mail;
-        this.role = role;
+        setId(id);
+        setImgUrl(imgUrl);
+        setMail(mail);
+        setPassword(password);
+        setUsername(username);
+        setRole(role);
     }
 
     public User() {
