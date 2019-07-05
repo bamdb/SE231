@@ -17,6 +17,8 @@ public class TopicServiceImpl implements TopicService{
     }
 
     public Topic postTopic(Topic topic) {
+        // check if topic publisher exists in User table
+        // topicRepository.findById(topic.getId()).get().getUserId()
         return topicRepository.save(topic);
     }
 

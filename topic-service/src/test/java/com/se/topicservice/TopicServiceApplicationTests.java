@@ -60,16 +60,17 @@ public class TopicServiceApplicationTests {
             Assert.assertNull(topicService.selectById(id));
         }
     }
-    
-    /*
+
     @Test
-    public void controllerTest() throws  Exception{
-        mvc.perform(post("/signup")
+    public void controllerTest() throws Exception {
+        mvc.perform(post("/add")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null, \"role\":0}"))
+                .content("{\"userId\":0, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/all").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(post("/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"userId\":1, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
                 .andExpect(status().isOk());
 
         mvc.perform(get("/all").contentType(MediaType.APPLICATION_JSON))
@@ -77,11 +78,5 @@ public class TopicServiceApplicationTests {
 
         mvc.perform(get("/id/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-
-        mvc.perform(get("/username/root").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-
     }
-
-     */
 }
