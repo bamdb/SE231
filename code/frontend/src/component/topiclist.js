@@ -29,16 +29,16 @@ const useStyles = makeStyles(theme => ({
 class TopicList extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            topics:[],
+        }
     }
 
     render(){
         return(
             <Grid container spacing={0} direction={"column"}>
-                <Grid item xs={20}>
-                    <Typography variant={"h6"} component={"h6"} align={"left"} >讨论版</Typography>
-                    <Button /* 添加链接  */ ><Typography variant={"h6"} component={"h6"} align={"right"} >添加新讨论</Typography></Button>
-                </Grid>
-                <Grid item xs={20} sm={3} >
+
+                <Grid item >
                     <Topic
                         topicId = {666}
                         content = {"Who am I? Where am I from?"}
@@ -47,7 +47,7 @@ class TopicList extends Component {
                         date = {"2017-07-03"}
                         />
                 </Grid>
-                <Grid item xs={20} sm={3} >
+                <Grid item>
                     <Topic
                         topicId = {666}
                         content = {"Who am I? Where am I from?"}
@@ -56,7 +56,7 @@ class TopicList extends Component {
                         date = {"2017-07-03"}
                     />
                 </Grid>
-                <Grid item xs={20} sm={3} >
+                <Grid item>
                     <Topic
                         topicId = {666}
                         content = {"Who am I? Where am I from?"}
@@ -65,7 +65,7 @@ class TopicList extends Component {
                         date = {"2017-07-03"}
                     />
                 </Grid>
-                <Grid item xs={20}>
+                <Grid item>
                     <Typography variant={"h6"} component={"h6"} align={"right"} >更多讨论>></Typography>
                 </Grid>
             </Grid>

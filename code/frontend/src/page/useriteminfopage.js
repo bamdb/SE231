@@ -1,11 +1,15 @@
+/*
+ * 显示用户单个条目的阅读进度与书评
+ */
+
 import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
-import Navigation from './navigation';
-import Item from './item';
-import Progressmanage from "./progressmanage";
-import Commentlist from "./commentlist";
+import { makeStyles } from '@material-ui/core/styles/index';
+import Grid from '@material-ui/core/Grid/index'
+import Paper from '@material-ui/core/Paper/index'
+import Navigation from '../component/navigation';
+import Item from '../component/item';
+import Progressmanage from "../component/progressmanage";
+import Commentlist from "../component/commentlist";
 
 const useStyles = makeStyles(theme => ({
     root:{
@@ -13,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-class ItemInfoPage extends Component {
+class Useriteminfopage extends Component {
     render(){
         return(
             <Grid container spacing={10}>
@@ -34,4 +38,4 @@ class ItemInfoPage extends Component {
     }
 }
 
-export default ItemInfoPage;
+export default Useriteminfopage;

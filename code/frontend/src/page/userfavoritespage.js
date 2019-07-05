@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
-import Navigation from "./navigation";
-import TopItemList from "./topitemlist";
-import Browserlist from "./browserlist";
-import Tag from "./tag";
-import Userinfo from "./userinfo";
-import Commentlist from "./commentlist";
+import { makeStyles } from '@material-ui/core/styles/index';
+import Grid from '@material-ui/core/Grid/index'
+import Paper from '@material-ui/core/Paper/index'
+import Navigation from "../component/navigation";
+import TopItemList from "../component/topitemlist";
+import Browserlist from "../component/browserlist";
+import Tag from "../component/tag";
+import Userinfo from "../component/userinfo";
+import Commentlist from "../component/commentlist";
 
 
 const useStyles = makeStyles(theme => ({
@@ -34,7 +34,7 @@ class TopPart extends Component{
 }
  */
 
-class UserPage extends Component{
+class Userfavoritespage extends Component{
     constructor(props){
         super(props);
     }
@@ -60,4 +60,4 @@ class UserPage extends Component{
     }
 }
 
-export  default UserPage;
+export  default Userfavoritespage;

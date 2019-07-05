@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
-import Navigation from "./navigation";
-import TopItemList from "./topitemlist";
-import Progressmanage from './progressmanage'
+import { makeStyles } from '@material-ui/core/styles/index';
+import Grid from '@material-ui/core/Grid/index'
+import Paper from '@material-ui/core/Paper/index'
+import Navigation from "../component/navigation";
+import TopItemList from "../component/topitemlist";
+import Progressmanage from '../component/progressmanage'
 
 
 
@@ -27,7 +27,7 @@ class TopPart extends Component{
 }
  */
 
-class HomePage extends Component{
+class Userhomepage extends Component{
     constructor(props){
         super(props);
 
@@ -58,4 +58,4 @@ class HomePage extends Component{
     }
 }
 
-export  default HomePage;
+export  default Userhomepage;
