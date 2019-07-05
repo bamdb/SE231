@@ -8,7 +8,7 @@
 
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
+import Grid from '@material-ui/core/Grid';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -19,8 +19,6 @@ import Paper from "@material-ui/core/Paper";
 
 const useStyles = makeStyles(theme => ({
     root: {
-        width: '100%',
-        maxWidth: 360,
         backgroundColor: theme.palette.background.paper,
     },
     inline: {
@@ -51,103 +49,77 @@ class Discuss extends Component {
 
     render() {
         return(
+            <Grid container >
             <Paper className={useStyles.root}>
-            <List>
-                <ListItem alignItems="flex-start">
-                    <ListItemAvatar>
+                <Grid container spacing={2}>
+                    <Grid item xs={1}>
                         <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                    </ListItemAvatar>
-                    <ListItemText
-                        primary={this.props.username}
-                        secondary={
-                            <React.Fragment>
-                                <Typography
-                                    component="span"
-                                    variant="body2"
-                                    className={useStyles.inline}
-                                    color="textSecondary"
-                                >
-                                    {this.props.date}  -  #{this.props.floor}
-                                </Typography>
-                                <br/>
-                                <Typography
-                                    component="span"
-                                    variant="body2"
-                                    className={useStyles.inline}
-                                    color="textPrimary"
-                                >
-                                    {this.props.discuss}
-                                </Typography>
-                            </React.Fragment>
-                        }
-                    />
-                </ListItem>
+                    </Grid>
+                <Grid item xs={11}>
+                    <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >{this.props.username}</Typography>
+                    <Typography
+                        component="p"
+                        variant="subtitle1"
+                        color="textSecondary"
+                    >
+                        {this.props.date}  -  #{this.props.floor}
+                    </Typography>
+                    <Typography
+                        component="p"
+                        variant="subtitle1"
+                        color="textPrimary"
+                    >
+                        {this.props.discuss}
+                    </Typography>
+                </Grid>
+                </Grid>
+                <Divider variant="inset" component="li" /><Grid container spacing={2}>
+                <Grid item xs={1}>
+                    <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                </Grid>
+                <Grid item xs={11}>
+                    <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >{this.props.username}</Typography>
+                    <Typography
+                        component="p"
+                        variant="subtitle1"
+                        color="textSecondary"
+                    >
+                        {this.props.date}  -  #{this.props.floor}
+                    </Typography>
+                    <Typography
+                        component="p"
+                        variant="subtitle1"
+                        color="textPrimary"
+                    >
+                        {this.props.discuss}
+                    </Typography>
+                </Grid>
+            </Grid>
                 <Divider variant="inset" component="li" />
-                <ListItem alignItems="flex-start">
-                    <ListItemAvatar>
+                <Grid container spacing={2}>
+                    <Grid item xs={1}>
                         <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                    </ListItemAvatar>
-                    <ListItemText
-                        primary={this.props.username}
-                        secondary={
-                            <React.Fragment>
-                                <Typography
-                                    component="span"
-                                    variant="body2"
-                                    className={useStyles.inline}
-                                    color="textSecondary"
-                                >
-                                    {this.props.date}  -  #{this.props.floor}
-                                </Typography>
-                                <br/>
-                                <Typography
-                                    component="span"
-                                    variant="body2"
-                                    className={useStyles.inline}
-                                    color="textPrimary"
-                                >
-                                    "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ran" +
-                                    "gingacross all continents except Antarctica"
-                                    {this.props.discuss}
-                                </Typography>
-                            </React.Fragment>
-                        }
-                    />
-                </ListItem>
-                <Divider variant="inset" component="li" />
-                <ListItem alignItems="flex-start">
-                    <ListItemAvatar>
-                        <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                    </ListItemAvatar>
-                    <ListItemText
-                        primary={this.props.username}
-                        secondary={
-                            <React.Fragment>
-                                <Typography
-                                    component="span"
-                                    variant="body2"
-                                    className={useStyles.inline}
-                                    color="textSecondary"
-                                >
-                                    {this.props.date}  -  #{this.props.floor}
-                                </Typography>
-                                <br/>
-                                <Typography
-                                    component="span"
-                                    variant="body2"
-                                    className={useStyles.inline}
-                                    color="textPrimary"
-                                >
-                                    "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ran" +
-                                    "gingacross all continents except Antarctica"
-                                    {this.props.discuss}
-                                </Typography>
-                            </React.Fragment>
-                        }
-                    />
-                </ListItem>
-            </List>
+                    </Grid>
+                    <Grid item xs={11}>
+                        <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >{this.props.username}</Typography>
+                        <Typography
+                            component="p"
+                            variant="subtitle1"
+                            color="textSecondary"
+                        >
+                            {this.props.date}  -  #{this.props.floor}
+                        </Typography>
+                        <Typography
+                            component="p"
+                            variant="subtitle1"
+                            color="textPrimary"
+                        >
+                            {this.props.discuss}
+                        </Typography>
+                    </Grid>
+                </Grid>
             </Paper>
+            </Grid>
         );
     }
 }

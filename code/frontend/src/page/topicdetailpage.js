@@ -13,13 +13,13 @@ import Relateditem from "../component/relatedlist";
 class Topicdetailpage extends Component{
     render(){
         return(
-          <Grid container xs={12} spacing={10}>
+          <Grid container spacing={10}>
               <Grid item xs={12}>
                   <Navigation />
               </Grid>
               <Grid item xs={1}>
               </Grid>
-              <Grid item xs={8} spacing={2}>
+              <Grid item xs={8}>
                   <Grid>
                       <Topic />
                   </Grid>
