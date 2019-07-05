@@ -1,8 +1,11 @@
 package com.se.topicservice;
 
+import org.springframework.http.ResponseEntity;
+
 public interface TopicService {
+    Topic postTopic(Topic topic);
     Iterable<Topic> selectAll();
     Topic selectById(Long id);
     Topic updateTopic(Topic topic);
-    void deleteTopicById(Long id);
+    ResponseEntity<?> deleteTopicById(Long id);
 }

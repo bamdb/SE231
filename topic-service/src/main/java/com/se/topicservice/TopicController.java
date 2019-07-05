@@ -9,6 +9,11 @@ public class TopicController {
     @Resource(name="topicServiceImpl")
     private TopicService topicService;
 
+    @PostMapping(value="/add", produces="application/json")
+    public Topic postTopic(@RequestBody Topic topic) {
+        return topicService.postTopic(topic);
+    }
+
     @GetMapping(value ="/all", produces ="application/json")
     public Iterable<Topic> getAllTopics() {
         return topicService.selectAll();
@@ -24,9 +29,10 @@ public class TopicController {
         return topicService.updateTopic(topic);
     }
 
-    @DeleteMapping(value="/delete/id/{id}")
+    @DeleteMapping(value="/delete/id/{topicId}")
     public void deleteTopicById(
-            @PathVariable("id") Long id) {
-        topicService.deleteTopicById(id);
+            @PathVariable("topicId") Long topicId) {
+        topicService.deleteTopicById(topicId);
     }
+
 }
