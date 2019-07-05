@@ -1,3 +1,7 @@
+/*
+ * 显示用户单个条目的阅读进度与书评
+ */
+
 import React, { Component } from 'react';
 
 import Grid from '@material-ui/core/Grid'
@@ -9,7 +13,7 @@ import Commentlist from "./commentlist";
 
 
 
-class ItemInfoPage extends Component {
+class Useriteminfopage extends Component {
     render(){
         return(
             <Grid container spacing={10}>
@@ -34,4 +38,4 @@ class ItemInfoPage extends Component {
     }
 }
 
-export default ItemInfoPage;
+export default Useriteminfopage;
