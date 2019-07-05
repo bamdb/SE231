@@ -2,29 +2,23 @@ import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Avatar from "@material-ui/core/Avatar";
-import {Card} from "@material-ui/core";
-import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
-import CardActions from "@material-ui/core/CardActions";
 import TextField from "@material-ui/core/TextField";
+import Paper from "@material-ui/core/Paper";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme =>({
     root: {
-        minWidth : 1000,
-        maxheight : 500,
+        width: '100%',
+        maxWidth: 360,
+        backgroundColor: theme.palette.background.paper,
     },
     avatar: {
         marginTop : 20,
         margin: 10,
     },
-    card: {
-        borderRadius: 10,
-        borderSize: 3,
-        maxWidth: 50
-    }
-});
+}));
 
 
 /*
@@ -48,9 +42,11 @@ class Reply extends Component {
 
     render() {
         return(
-            <Container fixed className={useStyles.root}>
-                <Grid container spacing={2}>
-                    <Grid item xs={2} justify="center">
+                <Paper className={useStyles.root} >
+                <Grid container >
+                    <br/>
+                    <Grid item xs={1} />
+                    <Grid item xs={1}>
                         <br/>
                         <Avatar alt="Remy Sharp" src="img/3.jpg" className={useStyles.avatar} />
                         <br/>
@@ -58,30 +54,25 @@ class Reply extends Component {
                             {this.props.username}
                         </Typography>
                     </Grid>
-                    <Grid item xs={10} justify="center">
-                        <Card className={useStyles.card}>
-                            <CardContent>
-                                <Typography color="textSecondary" gutterBottom>
-                                    发表评论
-                                </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <TextField
-                                    id="outlined-multiline-static"
-                                    label="回复"
-                                    multiline
-                                    rows="8"
-                                    fullWidth={true}
-                                    className={useStyles.textField}
-                                    margin="normal"
-                                    variant="outlined"
-                                />
-                                <Button id="button" variant="contained" color="primary">提交</Button>
-                            </CardActions>
-                        </Card>
+                    <Grid item xs={9}>
+                        <Typography color="textSecondary" gutterBottom>
+                            发表评论
+                        </Typography>
+                        <TextField
+                            id="outlined-multiline-static"
+                            label="回复"
+                            multiline
+                            rows="8"
+                            fullWidth={true}
+                            className={useStyles.textField}
+                            margin="normal"
+                            variant="outlined"
+                        />
+                        <Button id="button" variant="contained" color="primary">提交</Button>
                     </Grid>
-                </Grid>
-            </Container>
+                    <Grid item xs={1} />
+                </Grid><br/>
+                </Paper>
         );
     }
 

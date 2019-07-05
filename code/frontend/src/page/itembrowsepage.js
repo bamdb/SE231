@@ -17,19 +17,19 @@ class Itembrowsepage extends Component{
     render(){
         return(
 
-            <Grid container direction={"column"} spacing={12} >
+            <Grid container direction={"column"} spacing={2} >
                 <Grid item xs={12}><Navigation/></Grid>
-                <Grid container direction={"row"} alignItems={"center"} spacing={2}>
+                <Grid container direction={"row"} alignItems={"center"}>
                     <Grid item xs={1}></Grid>
-                    <Grid item xs={2}>
+                    <Grid item xs={1}>
                         <Tag select={true} tags={["热血","王道"]}/>
                     </Grid>
                     <Grid item xs={8} >
-                        <br/>
-                        <br/>
-                        <br/>
                         <Listitem></Listitem>
-
+                    </Grid>
+                    <Grid item xs={2}>
+                        <br/><br/><br/><br/>
+                        <TopItemList />
                     </Grid>
                     <Grid item xs={1}></Grid>
                 </Grid>

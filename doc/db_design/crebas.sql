@@ -3,12 +3,9 @@
 /* Created on:     2019/7/3 15:23:45                            */
 /*==============================================================*/
 
-
 drop table if exists Activity;
 
 drop table if exists Collect;
-
-drop table if exists Edit;
 
 drop table if exists Friend;
 
@@ -45,18 +42,6 @@ create table Collect
    collect_time         timestamp not null,
    status               int not null,
    primary key (user_id, item_id)
-);
-
-/*==============================================================*/
-/* Table: Edit                                                  */
-/*==============================================================*/
-create table Edit
-(
-   Edi_id               bigint not null,
-   Ite_id               bigint not null,
-   edit_time            timestamp not null,
-   edit_type            int not null,
-   primary key (Edi_id, Ite_id)
 );
 
 /*==============================================================*/
@@ -145,12 +130,6 @@ alter table Collect add constraint FK_Collect foreign key (user_id)
 alter table Collect add constraint FK_Collect2 foreign key (item_id)
       references Item (id) on delete restrict on update restrict;
 
-alter table Edit add constraint FK_Edit foreign key (Edi_id)
-      references Editor (id) on delete restrict on update restrict;
-
-alter table Edit add constraint FK_Edit2 foreign key (Ite_id)
-      references Item (id) on delete restrict on update restrict;
-
 alter table Friend add constraint FK_Friend foreign key (user_id0)
       references User (id) on delete restrict on update restrict;
 
@@ -168,4 +147,3 @@ alter table Score add constraint FK_Reference_15 foreign key (item_id)
 
 alter table Topic add constraint FK_Publish foreign key (user_id)
       references User (id) on delete restrict on update restrict;
-
