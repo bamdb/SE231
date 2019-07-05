@@ -8,6 +8,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid';
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
 /*
  信息保存在state中，可以自行添加props或ajax
 */
@@ -16,7 +18,12 @@ class Progressmanage extends Component {
     constructor(props) {
         super(props);
         this.state={label:0};
-        this.state={items:[{readstat:[0,[1,0,1,0],0,1],bookname:"233",kind:"book"},{readstat:[1,1,1,1],bookname:"234",kind:"movie"},{readstat:[1,1,1,1],bookname:"234",kind:"movie"},{readstat:[1,1,1,1],bookname:"234",kind:"movie"}]}
+        this.state={items:[{readstat:[0,[1,0,1,0],0,1],bookname:"233",kind:"book"},{readstat:[1,1,1,1],bookname:"234",kind:"movie"},{readstat:[1,1,1,1],bookname:"234",kind:"movie"},{readstat:[1,1,1,1],bookname:"234",kind:"movie"}],value:0}
+        this.handleChange=this.handleChange.bind(this);
+    }
+    handleChange(event, newValue) {
+        console.log(newValue);
+        this.setState({value : newValue});
     }
     componentWillMount() {
 
@@ -54,9 +61,12 @@ class Progressmanage extends Component {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
 
-                        <button id={"select"}>全部</button>
-                        <button id={"select"}>图书</button>
-                        <button id={"select"}>视频</button>
+                            <Tabs  value={this.state.value} onChange={this.handleChange}>
+                                <Tab label="全部"/>
+                                <Tab label="书籍" />
+                                <Tab label="视频" />
+
+                            </Tabs>
 
                         </Grid>
                         <Grid item xs={12}>

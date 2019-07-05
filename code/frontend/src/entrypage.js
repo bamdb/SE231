@@ -23,17 +23,18 @@ class EntryPage extends Component{
             <Grid container direction={"column"} spacing={12} >
                 <Grid item xs={12}><Navigation/></Grid>
                 <Grid container direction={"row"} alignItems={"center"} spacing={2}>
-
+                    <Grid item xs={1}></Grid>
                     <Grid item xs={2}>
                         <Tag />
                     </Grid>
-                    <Grid item xs={10} >
+                    <Grid item xs={8} >
                         <br/>
                         <br/>
                         <br/>
                         <Listitem></Listitem>
 
                     </Grid>
+                    <Grid item xs={1}></Grid>
                 </Grid>
             </Grid>
 
