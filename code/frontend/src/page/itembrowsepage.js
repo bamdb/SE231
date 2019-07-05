@@ -6,10 +6,7 @@ import Navigation from "../component/navigation";
 import TopItemList from "../component/topitemlist";
 import Browserlist from "../component/browserlist";
 import Tag from "../component/tag";
-import Userinfo from "../component/userinfo";
-import Commentlist from "../component/commentlist";
 import Listitem from '../component/listitem'
-import Progressmanage from "../component/progressmanage";
 
 
 class Itembrowsepage extends Component{
@@ -19,23 +16,24 @@ class Itembrowsepage extends Component{
 
     render(){
         return(
-            <Grid container spacing={10}>
-                <Grid item xs={12}>
-                    <Navigation />
-                </Grid>
-                <Grid item xs={12}>
-                    <Grid container spacing={3} >
 
-                        <Grid item xs={2}>
-                            <Tag />
-                        </Grid>
-                        <Grid item xs={10}>
+            <Grid container direction={"column"} spacing={12} >
+                <Grid item xs={12}><Navigation/></Grid>
+                <Grid container direction={"row"} alignItems={"center"} spacing={2}>
 
-                            <Listitem />
-                        </Grid>
+                    <Grid item xs={2}>
+                        <Tag />
+                    </Grid>
+                    <Grid item xs={10} >
+                        <br/>
+                        <br/>
+                        <br/>
+                        <Listitem></Listitem>
+
                     </Grid>
                 </Grid>
             </Grid>
+
         )
     }
 }

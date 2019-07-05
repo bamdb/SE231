@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
-
+import  '../css/navigate.css'
 import {
     BrowserRouter as Router,
     Route,
@@ -16,7 +16,7 @@ import {
     Redirect,
     withRouter
 } from "react-router-dom";
-function TabContainer(props) {
+/*function TabContainer(props) {
     return (
         <Typography component="div" style={{ padding: 8 * 3 }}>
             {props.children}
@@ -26,9 +26,9 @@ function TabContainer(props) {
 
 TabContainer.propTypes = {
     children: PropTypes.node.isRequired,
-};
+};*/
 
-function LinkTab(props) {
+/*function LinkTab(props) {
     return (
         <Tab
             component="a"
@@ -38,14 +38,15 @@ function LinkTab(props) {
             {...props}
         />
     );
-}
+}*/
 
-const useStyles = makeStyles(theme => ({
+/*const useStyles = makeStyles(theme => ({
     root: {
         // flexGrow: 1,
         backgroundColor: theme.palette.background.paper,
+        height:100
     },
-}));
+}));*/
 
 class Navigation extends Component {
 
@@ -63,8 +64,9 @@ class Navigation extends Component {
         switch (x)
         {
             case "homepage" :this.setState({value:0});break;
-            case "userpage" :this.setState({value:1});break;
-            case "entrypage" :this.setState({value:2});break;
+            case "entrypage" :this.setState({value:1});break;
+            case "iteminfopage" :this.setState({value:2});break;
+            case "userpage" :this.setState({value:3});break;
         }
     }
 
@@ -75,8 +77,9 @@ class Navigation extends Component {
 
     render() {
         return (
-            <div className={useStyles.root}>
-                <AppBar color={"default"} position={"fixed"}>
+
+            <div id={"navigateroot"}>
+                <AppBar color={"default"} position={"fixed"} id={"navigateroot"}>
                     <Grid container>
                         <Grid item xs={12}>
                             <Grid container>
@@ -84,8 +87,9 @@ class Navigation extends Component {
                                 <Grid item xs={10}>
                             <Tabs centered={true} value={this.state.value} onChange={this.handleChange}>
                                 <Tab label="首页" href={"/#/"}/>
-                                <Tab label="书籍" href={"/#/userpage"}/>
-                                <Tab label="讨论区" href={"/#/entrypage"}/>
+                                <Tab label="书籍" href={"/#/entrypage"}/>
+                                <Tab label="讨论区" href={"/#/iteminfopage"}/>
+                                <Tab label="收藏" href={"/#/userpage"}/>
                             </Tabs>
                                 </Grid>
                                 <Grid item xs={2}>

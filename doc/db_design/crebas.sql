@@ -6,13 +6,9 @@
 
 drop table if exists Activity;
 
-drop table if exists Admin;
-
 drop table if exists Collect;
 
 drop table if exists Edit;
-
-drop table if exists Editor;
 
 drop table if exists Friend;
 
@@ -21,8 +17,6 @@ drop table if exists Related;
 drop table if exists Score;
 
 drop table if exists Item;
-
-drop table if exists Normal;
 
 drop table if exists Topic;
 
@@ -38,20 +32,6 @@ create table Activity
    act_time             timestamp not null,
    act_type             int not null,
    primary key (user_id, item_id, act_time)
-);
-
-/*==============================================================*/
-/* Table: Admin                                                 */
-/*==============================================================*/
-create table Admin
-(
-   id                   bigint not null,
-   username             varchar(20) not null,
-   password             varchar(20) not null,
-   mail                 varchar(20) not null,
-   imgurl               varchar(50),
-   role                 int not null,
-   primary key (id)
 );
 
 /*==============================================================*/
@@ -80,22 +60,6 @@ create table Edit
 );
 
 /*==============================================================*/
-/* Table: Editor                                                */
-/*==============================================================*/
-create table Editor
-(
-   id                   bigint not null,
-   username             varchar(20) not null,
-   password             varchar(20) not null,
-   mail                 varchar(20) not null,
-   imgurl               varchar(50),
-   author_time          timestamp,
-   edit_num             int,
-   role                 int not null,
-   primary key (id)
-);
-
-/*==============================================================*/
 /* Table: Friend                                                */
 /*==============================================================*/
 create table Friend
@@ -113,24 +77,11 @@ create table Item
 (
    id                   bigint not null,
    itemname             varchar(20) not null,
+   `type`               int not null,
    pub_time             timestamp,
    chapter_num          int not null,
    main_author          varchar(20),
    imgurl               varchar(20),
-   primary key (id)
-);
-
-/*==============================================================*/
-/* Table: Normal                                                */
-/*==============================================================*/
-create table Normal
-(
-   id                   bigint not null,
-   username             varchar(20) not null,
-   password             varchar(20) not null,
-   mail                 varchar(20) not null,
-   imgurl               varchar(50),
-   role                 int not null,
    primary key (id)
 );
 
@@ -188,9 +139,6 @@ alter table Activity add constraint FK_Act foreign key (user_id)
 alter table Activity add constraint FK_Acted foreign key (item_id)
       references Item (id) on delete restrict on update restrict;
 
-alter table Admin add constraint FK_Inheritance_2 foreign key (id)
-      references User (id) on delete restrict on update restrict;
-
 alter table Collect add constraint FK_Collect foreign key (user_id)
       references User (id) on delete restrict on update restrict;
 
@@ -203,16 +151,10 @@ alter table Edit add constraint FK_Edit foreign key (Edi_id)
 alter table Edit add constraint FK_Edit2 foreign key (Ite_id)
       references Item (id) on delete restrict on update restrict;
 
-alter table Editor add constraint FK_Inheritance_3 foreign key (id)
-      references User (id) on delete restrict on update restrict;
-
 alter table Friend add constraint FK_Friend foreign key (user_id0)
       references User (id) on delete restrict on update restrict;
 
 alter table Friend add constraint FK_Friend2 foreign key (user_id1)
-      references User (id) on delete restrict on update restrict;
-
-alter table Normal add constraint FK_Inheritance_1 foreign key (id)
       references User (id) on delete restrict on update restrict;
 
 alter table Related add constraint FK_Related foreign key (prior_id)
