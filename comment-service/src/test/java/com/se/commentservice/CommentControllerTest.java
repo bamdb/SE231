@@ -48,6 +48,12 @@ public class CommentControllerTest {
                 .params(mm))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
+        mvc.perform(get("/userid/22"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.[0].itemId").doesNotExist());
+        mvc.perform(get("/itemid/11"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.[0].itemId").doesNotExist());
         mvc.perform(post("/insert")
                 .content(JSON.toJSONString(comment))
                 .contentType(MediaType.APPLICATION_JSON))

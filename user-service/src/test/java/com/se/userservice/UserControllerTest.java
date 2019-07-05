@@ -45,16 +45,16 @@ public class UserControllerTest {
                 .content("{\"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null, \"role\":0}"))
                 .andExpect(status().isOk());
         MultiValueMap<String, String> mm = new LinkedMultiValueMap<>();
-        mm.add("password","bamd");
-        mm.add("mail", "isa@qq.com");
-
         mvc.perform(put("/update/root").params(mm))
                 .andExpect(status().isOk());
-//        User user = userService.selectAll().iterator().next();
-//        mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
-//                .content("{\"id\":"+user.getId()+", \"username\":\"modified\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null, \"role\":0}"))
-//                .andExpect(status().isOk());
-//        Assert.assertEquals("modified", userService.selectAll().iterator().next().getUsername());
+        mvc.perform(put("/update/notroot").params(mm))
+                .andExpect(status().isOk());
+        mm.add("password","bamd");
+        mm.add("mail", "isa@qq.com");
+        mm.add("imgUrl","nothing");
+        mm.add("role", "0");
+        mvc.perform(put("/update/root").params(mm))
+                .andExpect(status().isOk());
     }
 
     @Test

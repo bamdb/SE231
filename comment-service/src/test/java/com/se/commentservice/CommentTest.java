@@ -4,8 +4,6 @@ import org.bson.BsonTimestamp;
 import org.junit.Test;
 import org.junit.Assert;
 public class CommentTest {
-
-
     @Test
     public void testComment() {
        Comment comment = new Comment();
