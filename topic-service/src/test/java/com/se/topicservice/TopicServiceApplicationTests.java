@@ -1,5 +1,6 @@
 package com.se.topicservice;
 
+import com.se.topicservice.entity.Topic;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,7 +46,7 @@ public class TopicServiceApplicationTests {
                 .andExpect(status().isOk());
         Topic topic = topicService.selectAll().iterator().next();
         mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"id\":"+topic.getId()+", \"title\":\"hello bamdb\""))
+                .content("{\"id\":"+topic.getId()+", \"title\":\"modified\"}"))
                 .andExpect(status().isOk());
         Assert.assertEquals("modified", topicService.selectAll().iterator().next().getTitle());
     }
@@ -68,9 +69,11 @@ public class TopicServiceApplicationTests {
                 .content("{\"userId\":0, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
                 .andExpect(status().isOk());
 
+       // User user = userClient.getAllUsers().iterator().next();
         mvc.perform(post("/add")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"userId\":1, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
+                //        .content("{\"userId\":"+user.getId()+", \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
+                .content("{\"userId\":1 , \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
                 .andExpect(status().isOk());
 
         mvc.perform(get("/all").contentType(MediaType.APPLICATION_JSON))

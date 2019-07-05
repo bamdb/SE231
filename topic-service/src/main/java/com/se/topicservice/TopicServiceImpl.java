@@ -1,10 +1,9 @@
 package com.se.topicservice;
 
+import com.se.topicservice.entity.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class TopicServiceImpl implements TopicService{
@@ -16,9 +15,14 @@ public class TopicServiceImpl implements TopicService{
         this.topicRepository = topicRepository;
     }
 
+    @Autowired
+    public UserClient userClient;
+
     public Topic postTopic(Topic topic) {
         // check if topic publisher exists in User table
-        // topicRepository.findById(topic.getId()).get().getUserId()
+        //if (topic.getUserId() == null || userClient.getUserById(topic.getUserId()) == null) {
+        //    return null;
+        //}
         return topicRepository.save(topic);
     }
 
@@ -32,7 +36,9 @@ public class TopicServiceImpl implements TopicService{
 
     public Topic updateTopic(Topic topic) {
         if (topicRepository.existsById(topic.getId())) {
-            return topicRepository.save(topic);
+            Topic tempTopic = topicRepository.findById(topic.getId()).orElse(null);
+            tempTopic.setTitle(topic.getTitle());
+            return topicRepository.save(tempTopic);
         }
         else return null;
     }

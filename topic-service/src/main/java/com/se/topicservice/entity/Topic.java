@@ -1,10 +1,10 @@
-package com.se.topicservice;
+package com.se.topicservice.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "topic", uniqueConstraints = {@UniqueConstraint(columnNames={"username"})})
+@Table(name = "Topic")
 public class Topic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

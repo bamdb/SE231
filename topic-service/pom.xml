@@ -15,6 +15,8 @@
     <description>Topic service for bamdb project</description>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
         <java.version>11</java.version>
     </properties>
 
@@ -46,6 +48,19 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>2.1.1.RELEASE</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-openfeign-core -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-openfeign-core</artifactId>
+            <version>2.1.2.RELEASE</version>
+        </dependency>
+
         <!--<dependency>-->
         <!--<groupId>org.mybatis.spring.boot</groupId>-->
         <!--<artifactId>mybatis-spring-boot-starter</artifactId>-->
@@ -87,7 +102,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <finalName>user-service</finalName>
+                    <finalName>topic-service</finalName>
                 </configuration>
             </plugin>
             <plugin>
