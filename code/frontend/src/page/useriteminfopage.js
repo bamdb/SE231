@@ -10,6 +10,7 @@ import Navigation from '../component/navigation';
 import Item from '../component/item';
 import Progressmanage from "../component/progressmanage";
 import Commentlist from "../component/commentlist";
+import Relateditem from "../component/relatedlist";
 
 
 
@@ -29,6 +30,7 @@ class Useriteminfopage extends Component {
                             <Progressmanage />
                         </Grid>
                         <Grid  item xs={3} >
+                            <Relateditem />
                             <Commentlist />
                         </Grid>
                     </Grid>

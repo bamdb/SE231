@@ -6,20 +6,34 @@ import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid'
 import Navigation from '../component/navigation';
 import Topic from "../component/topic";
+import Discuss from "../component/discuss";
+import Reply from "../component/reply";
+import Relateditem from "../component/relatedlist";
 
 class Topicdetailpage extends Component{
     render(){
         return(
           <Grid container xs={12} spacing={10}>
-              <Grid item>
+              <Grid item xs={12}>
                   <Navigation />
               </Grid>
-              <Grid item>
-                  <br/><br/><br/>
-                  <Topic />
+              <Grid item xs={1}>
               </Grid>
-              <Grid>
+              <Grid item xs={8} spacing={2}>
+                  <Grid>
+                      <Topic />
+                  </Grid>
+                  <Grid>
+                      <Discuss />
+                  </Grid>
+                  <Grid>
+                      <br/>
+                      <Reply />
+                  </Grid>
+              </Grid>
+              <Grid item xs={3}>
 
+                  <Relateditem />
               </Grid>
           </Grid>
         );
