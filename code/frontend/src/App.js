@@ -15,7 +15,6 @@ import {
 import Userfavoritespage from "./page/userfavoritespage";
 import RegisterPage from "./page/registerpage";
 import Topicpage from "./page/topicpage";
-import Useriteminfopage from "./page/useriteminfopage";
 import Topicdetailpage from "./page/topicdetailpage";
 
 function App() {
