@@ -39,3 +39,15 @@
   * test
 * huangyuyang:
   * continue to write web-page
+ # 2019-7-5
+* wangzulai:
+  * complete crud func of topic, item, activity services
+  * complete test cases of topic, item services
+* shenruien:
+  * finish basic web page
+  * build CI for frontend
+  * prepare the backend environment
+* yuyajie:
+  * user, image, comment
+  * test
+
