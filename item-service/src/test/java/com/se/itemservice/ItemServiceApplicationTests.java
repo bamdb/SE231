@@ -9,7 +9,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class ItemServiceApplicationTests {
     @Test
-    public void testApplication() { ItemServiceApplication.main(new String[] {});
+    public void testApplication() {
+        ItemServiceApplication.main(new String[] {});
     }
 
 }

@@ -1,85 +1,46 @@
 package com.se.topicservice;
 
-import com.se.topicservice.entity.Topic;
-import org.junit.Assert;
-import org.junit.Before;
+import com.github.tomakehurst.wiremock.junit.WireMockClassRule;
+import com.netflix.loadbalancer.Server;
+import com.netflix.loadbalancer.ServerList;
+import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.cloud.netflix.ribbon.StaticServerList;
+import org.springframework.context.annotation.Bean;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.annotation.Resource;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(properties = {
+        "feign.hystrix.enabled=true"
+})
+@ContextConfiguration(classes = {TopicServiceApplicationTests.LocalRibbonClientConfiguration.class})
 public class TopicServiceApplicationTests {
+
     @Autowired
     private WebApplicationContext context;
 
-    private MockMvc mvc;
-
-    @Before
-    public void setup(){
-        mvc = MockMvcBuilders.webAppContextSetup(context)
-                .build();
-    }
-
-    @Resource(name="topicServiceImpl")
-    TopicService topicService;
+    @ClassRule
+    public static WireMockClassRule wiremock = new WireMockClassRule(
+            wireMockConfig().dynamicPort());
 
     @Test
-    public void updateTest() throws Exception {
-        mvc.perform(post("/add")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"userId\":1, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
-                .andExpect(status().isOk());
-        mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"id\":0,\"title\":\"modified\"}"))
-                .andExpect(status().isOk());
-        Topic topic = topicService.selectAll().iterator().next();
-        mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"id\":"+topic.getId()+", \"title\":\"modified\"}"))
-                .andExpect(status().isOk());
-        Assert.assertEquals("modified", topicService.selectAll().iterator().next().getTitle());
+    public void testApplication() {
+        TopicServiceApplication.main(new String[] {});
     }
 
-
-    @Test
-    public void deleteTest() throws Exception {
-        if (topicService.selectAll().iterator().hasNext()) {
-            Long id = topicService.selectAll().iterator().next().getId();
-            mvc.perform(delete("/delete/id/"+id))
-                    .andExpect(status().isOk());
-            Assert.assertNull(topicService.selectById(id));
+    @TestConfiguration
+    public static class LocalRibbonClientConfiguration {
+        @Bean
+        public ServerList<Server> ribbonServerList() {
+            return new StaticServerList<>(new Server("localhost", wiremock.port()));
         }
-    }
-
-    @Test
-    public void controllerTest() throws Exception {
-        mvc.perform(post("/add")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"userId\":0, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
-                .andExpect(status().isOk());
-
-       // User user = userClient.getAllUsers().iterator().next();
-        mvc.perform(post("/add")
-                .contentType(MediaType.APPLICATION_JSON)
-                //        .content("{\"userId\":"+user.getId()+", \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
-                .content("{\"userId\":1 , \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
-                .andExpect(status().isOk());
-
-        mvc.perform(get("/all").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-
-        mvc.perform(get("/id/1").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
     }
 }
