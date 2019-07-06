@@ -15,6 +15,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
 
+import java.sql.Timestamp;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -47,9 +49,15 @@ public class ItemServiceApplicationTests {
                 .andExpect(status().isOk());
         Item item = itemService.selectAll().iterator().next();
         mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"id\":"+item.getId()+", \"itemname\":\"modified\", \"pubTime\":\"1562294429\", \"chapterNum\":12, \"mainAuthor\":\"Cixin Liu\", \"imgurl\":null, \"type\":0}"))
+                .content("{\"id\":"+item.getId()+", \"itemname\":\"modified\", \"pubTime\":\"1562294430\", \"chapterNum\":9, \"mainAuthor\":\"Liu\", \"imgurl\":\"notnull\", \"type\":1}"))
                 .andExpect(status().isOk());
-        Assert.assertEquals("modified", itemService.selectAll().iterator().next().getItemname());
+        Item modifiedItem = itemService.selectAll().iterator().next();
+        Assert.assertEquals("modified", modifiedItem.getItemname());
+        Assert.assertEquals(Timestamp.valueOf("1970-01-19 09:58:14.0"), modifiedItem.getPubTime());
+        Assert.assertEquals(9, modifiedItem.getChapterNum());
+        Assert.assertEquals("Liu", modifiedItem.getMainAuthor());
+        Assert.assertEquals("notnull", modifiedItem.getImgurl());
+        Assert.assertEquals(Integer.valueOf(1), modifiedItem.getType());
     }
 
 

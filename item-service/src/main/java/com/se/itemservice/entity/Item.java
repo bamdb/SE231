@@ -23,10 +23,6 @@ public class Item {
     @Column(name = "type")
     private Integer type;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "score")
-    private Score score;
-
     public Long getId() {return id;}
 
     public Integer getType() {
@@ -37,9 +33,6 @@ public class Item {
         this.type = type;
     }
 
-    public void setChapterNum(Integer chapterNum) {
-        this.chapterNum = chapterNum;
-    }
 
     public void setId(Long id) {this.id = id;}
 
@@ -62,8 +55,4 @@ public class Item {
     public String getImgurl() {return imgurl;}
 
     public void setImgurl(String imgurl) {this.imgurl = imgurl;}
-
-    public Score getScore() {return score;}
-
-    public void setScore(Score score) {this.score = score;}
 }

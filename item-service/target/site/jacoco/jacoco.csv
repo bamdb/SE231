@@ -1,4 +1,6 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+item-service,com.se.itemservice.entity,Item,8,57,0,0,3,17,2,16,2,16
+item-service,com.se.itemservice.entity,Score,21,3,0,0,6,1,6,1,6,1
 item-service,com.se.itemservice,ItemServiceImpl,0,46,0,2,0,11,0,7,0,6
 item-service,com.se.itemservice,ItemServiceApplication,5,3,0,0,2,1,1,1,1,1
 item-service,com.se.itemservice,ItemController,0,27,0,0,0,6,0,6,0,6
