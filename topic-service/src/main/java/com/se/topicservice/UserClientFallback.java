@@ -12,12 +12,16 @@ public class UserClientFallback implements UserClient{
 
     @Override
     public User getUserById(Long userId) {
+        if (userId == 0) {
+            return null;
+        }
         User user = new User();
         user.setId(1L);
         user.setMail("mail@mail.com");
         user.setPassword("123");
         user.setRole(0);
         user.setUsername("mock");
+        user.setImgUrl(null);
         return user;
     }
 
@@ -33,6 +37,7 @@ public class UserClientFallback implements UserClient{
                 user.setPassword("123");
                 user.setRole(0);
                 user.setUsername("mock");
+                user.setImgUrl(null);
                 userList.add(user);
                 return userList.iterator();
             }
