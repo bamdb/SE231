@@ -9,6 +9,7 @@
 
 # testing
 /coverage
+/src/_test_/_snapshots_
 
 
 # production

@@ -10,10 +10,5 @@ it('renders without crashing', () => {
   ReactDOM.render(<App />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
-it('test tag', () => {
-  const testrenderer=TestRenderer.create(<Tag/>);
-  const testinstance=testrenderer.root;
-  let tree = testrenderer.toJSON();
-  expect(tree).toMatchSnapshot();
-});
+
 

@@ -41,8 +41,12 @@ class Topic extends Component {
         }
     }
     componentWillMount() {
-        var x = window.location.href.split("#")[1].split("/")[1];
-        console.log(x);
+        if(window.location.href.split("#")[1]!=undefined)
+        {
+            var x = window.location.href.split("#")[1].split("/")[1];
+            console.log(x);
+        }
+
     }
 
     render(){
