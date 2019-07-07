@@ -6,7 +6,10 @@ import org.springframework.http.ResponseEntity;
 public interface ActivityService {
     Activity postActivity(Activity Activity);
     Iterable<Activity> selectAll();
-    Activity selectByUserId(Long id);
-    Activity selectByItemId(Long id);
+    Activity selectById(Long id);
+    Iterable<Activity> selectByUserId(Long id);
+    Iterable<Activity> selectByItemId(Long id);
     ResponseEntity<?> deleteActivityById(Long id);
+    ResponseEntity<?> deleteActivityByUserId(Long id);
+    ResponseEntity<?> deleteActivityByItemId(Long id);
 }

@@ -11,7 +11,7 @@ public class ActivityController {
     @Resource(name="activityServiceImpl")
     private ActivityService activityService;
 
-    @PostMapping(value="/add", produces="application/json")
+    @PostMapping(value="/add")
     public Activity postActivity(@RequestBody Activity activity) {
         return activityService.postActivity(activity);
     }
@@ -21,18 +21,33 @@ public class ActivityController {
         return activityService.selectAll();
     }
 
+    @GetMapping(value ="/id/{activityId}", produces ="application/json")
+    public Activity getAllActivitys(@PathVariable("activityId") Long activityId) {
+        return activityService.selectById(activityId);
+    }
+
     @GetMapping(value="/userId/{userId}", produces="application/json")
-    public Activity getActivityByUserId(@PathVariable("userId") Long userId) {
+    public Iterable<Activity> getActivityByUserId(@PathVariable("userId") Long userId) {
         return activityService.selectByUserId(userId);
     }
 
     @GetMapping(value="/itemId/{itemId}", produces="application/json")
-    public Activity getActivityByItemId(@PathVariable("itemId") Long itemId) {
+    public Iterable<Activity> getActivityByItemId(@PathVariable("itemId") Long itemId) {
         return activityService.selectByItemId(itemId);
     }
 
     @DeleteMapping(value="/delete/id/{activityId}")
     public ResponseEntity<?> deleteActivityById(@PathVariable("activityId") Long activityId) {
         return activityService.deleteActivityById(activityId);
+    }
+
+    @DeleteMapping(value="/delete/userId/{userId}")
+    public ResponseEntity<?> deleteActivityByUserId(@PathVariable("userId") Long userId) {
+        return activityService.deleteActivityByUserId(userId);
+    }
+
+    @DeleteMapping(value="/delete/itemId/{itemId}")
+    public ResponseEntity<?> deleteActivityByItemId(@PathVariable("itemId") Long itemId) {
+        return activityService.deleteActivityByItemId(itemId);
     }
 }

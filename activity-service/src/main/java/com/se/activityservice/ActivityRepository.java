@@ -7,6 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 public interface ActivityRepository extends CrudRepository<Activity, Long> {
-    Optional<Activity> findByUserId(Long userId);
-    Optional<Activity> findByItemId(Long itemId);
+    Iterable<Activity> findAllByUserId(Long userId);
+    Iterable<Activity> findAllByItemId(Long itemId);
+    @Transactional
+    void deleteAllByUserId(Long userId);
+    @Transactional
+    void deleteAllByItemId(Long itemId);
 }

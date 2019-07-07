@@ -16,7 +16,7 @@ public class UserClientFallback implements UserClient{
             return null;
         }
         User user = new User();
-        user.setId(1L);
+        user.setId(userId);
         user.setMail("mail@mail.com");
         user.setPassword("123");
         user.setRole(0);
