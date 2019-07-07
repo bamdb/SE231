@@ -10,4 +10,14 @@ Sprint 1 (July.1-July.10)
     Learn material-ui design   
     
   July.4
-    Continue to write web-page
+    Continue to write web-page 
+    
+  July.5
+    Perfect web-frontend
+    
+  July.6
+    Relax & Work on ics-lab
+    
+  July.7
+  
+
