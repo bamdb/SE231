@@ -93,12 +93,23 @@ public class RatingServiceApplicationTests {
         item.setPubTime(Timestamp.valueOf("2019-07-01 08:00:00.0"));
         item.setType(0);
         itemClient.postItem(item);
-        item.setId(2L);
-        itemClient.postItem(item);
+        Item item1 = new Item();
+        item1.setId(2L);
+        item1.setImgurl(null);
+        item1.setChapterNum(12);
+        item1.setItemname("mock");
+        item1.setMainAuthor("bamdb");
+        item1.setPubTime(Timestamp.valueOf("2019-07-01 08:00:00.0"));
+        item1.setType(0);
+        itemClient.postItem(item1);
 
         mvc.perform(post("/add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"itemId\":1, \"avgScore\":10, \"rank\":1, \"totScoreNum\":100}"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"itemId\":2, \"avgScore\":9.9, \"rank\":2, \"totScoreNum\":100}"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -176,10 +187,15 @@ public class RatingServiceApplicationTests {
         item.setPubTime(Timestamp.valueOf("2019-07-01 08:00:00.0"));
         item.setType(0);
         itemClient.postItem(item);
-        item.setId(2L);
-        itemClient.postItem(item);
-        item.setId(3L);
-        itemClient.postItem(item);
+        Item item1 = new Item();
+        item1.setId(2L);
+        item1.setImgurl(null);
+        item1.setChapterNum(12);
+        item1.setItemname("mock");
+        item1.setMainAuthor("bamdb");
+        item1.setPubTime(Timestamp.valueOf("2019-07-01 08:00:00.0"));
+        item1.setType(0);
+        itemClient.postItem(item1);
         mvc.perform(post("/add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"itemId\":1, \"avgScore\":10, \"rank\":1, \"totScoreNum\":100}"))
@@ -187,10 +203,6 @@ public class RatingServiceApplicationTests {
         mvc.perform(post("/add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"itemId\":2, \"avgScore\":9.9, \"rank\":2, \"totScoreNum\":100}"))
-                .andExpect(status().isOk());
-        mvc.perform(post("/add")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"itemId\":3, \"avgScore\":9.8, \"rank\":3, \"totScoreNum\":100}"))
                 .andExpect(status().isOk());
         if (ratingService.selectAll().iterator().hasNext()) {
             Long id = ratingService.selectAll().iterator().next().getId();

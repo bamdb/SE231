@@ -14,7 +14,7 @@ public interface ItemClient {
     Item getItemById(@PathVariable("id") Long itemId);
 
     @RequestMapping(value="/delete/id/{id}")
-    void deleteItemById(@PathVariable("id") Long id);
+    void deleteItemById(@PathVariable("id") Long itemId);
 
     @RequestMapping(value = "/add")
     Item postItem(@RequestBody Item item);

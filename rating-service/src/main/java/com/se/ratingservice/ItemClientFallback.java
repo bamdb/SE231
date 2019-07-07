@@ -26,12 +26,18 @@ public class ItemClientFallback implements ItemClient{
         for (Item item : itemList) {
             if (item.getId().equals(itemId)) {
                 itemList.remove(item);
+                break;
             }
         }
     }
 
     @Override
     public Item postItem(Item item) {
+        for (Item itemIter : itemList) {
+            if (item.getId().equals(itemIter.getId())) {
+                return item;
+            }
+        }
         itemList.add(item);
         return item;
     }
