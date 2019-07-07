@@ -41,18 +41,19 @@ public class ItemControllerTest {
     public void updateTest() throws Exception {
         mvc.perform(post("/add")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"itemname\":\"three body\", \"pubTime\":\"1562294429\", \"chapterNum\":12, \"mainAuthor\":\"Cixin Liu\", \"imgurl\":null, \"type\":0}"))
+                .content("{\"itemname\":\"three body\", \"pubTime\":\"1562293010\", \"chapterNum\":12, \"mainAuthor\":\"Cixin Liu\", \"imgurl\":null, \"type\":0}"))
                 .andExpect(status().isOk());
         mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"id\":0, \"itemname\":\"three body\", \"pubTime\":\"1562294429\", \"chapterNum\":12, \"mainAuthor\":\"Cixin Liu\", \"imgurl\":null, \"type\":0}"))
+                .content("{\"id\":0, \"itemname\":\"three body\", \"pubTime\":\"1562293010\", \"chapterNum\":12, \"mainAuthor\":\"Cixin Liu\", \"imgurl\":null, \"type\":0}"))
                 .andExpect(status().isOk());
         Item item = itemService.selectAll().iterator().next();
         mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"id\":"+item.getId()+", \"itemname\":\"modified\", \"pubTime\":\"1562294430\", \"chapterNum\":9, \"mainAuthor\":\"Liu\", \"imgurl\":\"notnull\", \"type\":1}"))
+                .content("{\"id\":"+item.getId()+", \"itemname\":\"modified\", \"pubTime\":\"1562295020\", \"chapterNum\":9, \"mainAuthor\":\"Liu\", \"imgurl\":\"notnull\", \"type\":1}"))
                 .andExpect(status().isOk());
         Item modifiedItem = itemService.selectAll().iterator().next();
+        Long test1 = modifiedItem.getPubTime().getTime();
         Assert.assertEquals("modified", modifiedItem.getItemname());
-        Assert.assertEquals(Timestamp.valueOf("1970-01-19 09:58:14.0"), modifiedItem.getPubTime());
+        Assert.assertEquals(1562295000L, modifiedItem.getPubTime().getTime());
         Assert.assertEquals(9, modifiedItem.getChapterNum());
         Assert.assertEquals("Liu", modifiedItem.getMainAuthor());
         Assert.assertEquals("notnull", modifiedItem.getImgurl());

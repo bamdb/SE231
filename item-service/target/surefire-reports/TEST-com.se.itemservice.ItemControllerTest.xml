@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.se.itemservice.ItemServiceApplicationTests" time="1.806" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.se.itemservice.ItemControllerTest" time="9.475" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
     <property name="java.specification.version" value="12"/>
@@ -56,5 +56,7 @@
     <property name="socksNonProxyHosts" value="local„ÄÅ169.254/16|*.local„ÄÅ169.254/16"/>
     <property name="java.class.version" value="56.0"/>
   </properties>
-  <testcase name="testApplication" classname="com.se.itemservice.ItemServiceApplicationTests" time="1.796"/>
+  <testcase name="updateTest" classname="com.se.itemservice.ItemControllerTest" time="0.77"/>
+  <testcase name="deleteTest" classname="com.se.itemservice.ItemControllerTest" time="0.082"/>
+  <testcase name="controllerTest" classname="com.se.itemservice.ItemControllerTest" time="0.056"/>
 </testsuite>

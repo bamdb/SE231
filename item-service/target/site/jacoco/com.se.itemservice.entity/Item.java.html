@@ -14,57 +14,45 @@ import java.sql.Timestamp;
     private String itemname;
     @Column(name = &quot;pub_time&quot;, columnDefinition = &quot;TIMESTAMP&quot;)
     private Timestamp pubTime;
-    @Column(name = &quot;chapter_num&quot;)
+    @Column(name = &quot;chapter_num&quot;, nullable = false)
     private Integer chapterNum;
     @Column(name = &quot;main_author&quot;)
     private String mainAuthor;
     @Column(name = &quot;imgurl&quot;)
     private String imgurl;
-    @Column(name = &quot;type&quot;)
+    @Column(name = &quot;type&quot;, nullable = false)
     private Integer type;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = &quot;score&quot;)
-    private Score score;
-
-<span class="fc" id="L30">    public Long getId() {return id;}</span>
+<span class="fc" id="L26">    public Long getId() {return id;}</span>
 
     public Integer getType() {
-<span class="fc" id="L33">        return type;</span>
+<span class="fc" id="L29">        return type;</span>
     }
 
     public void setType(Integer type) {
-<span class="fc" id="L37">        this.type = type;</span>
-<span class="fc" id="L38">    }</span>
+<span class="fc" id="L33">        this.type = type;</span>
+<span class="fc" id="L34">    }</span>
 
-    public void setChapterNum(Integer chapterNum) {
-<span class="nc" id="L41">        this.chapterNum = chapterNum;</span>
-<span class="nc" id="L42">    }</span>
+<span class="fc" id="L36">    public void setId(Long id) {this.id = id;}</span>
 
-<span class="fc" id="L44">    public void setId(Long id) {this.id = id;}</span>
+<span class="fc" id="L38">    public String getItemname() {return itemname;}</span>
 
-<span class="fc" id="L46">    public String getItemname() {return itemname;}</span>
+<span class="fc" id="L40">    public void setItemname(String itemname) {this.itemname = itemname;}</span>
 
-<span class="fc" id="L48">    public void setItemname(String itemname) {this.itemname = itemname;}</span>
+<span class="fc" id="L42">    public Timestamp getPubTime() {return pubTime;}</span>
 
-<span class="fc" id="L50">    public Timestamp getPubTime() {return pubTime;}</span>
+<span class="fc" id="L44">    public void setPubTime(Timestamp pubTime) {this.pubTime = pubTime;}</span>
 
-<span class="fc" id="L52">    public void setPubTime(Timestamp pubTime) {this.pubTime = pubTime;}</span>
+<span class="fc" id="L46">    public int getChapterNum() {return chapterNum;}</span>
 
-<span class="fc" id="L54">    public int getChapterNum() {return chapterNum;}</span>
+<span class="fc" id="L48">    public void setChapterNum(Integer chapterNum) {this.chapterNum = chapterNum;}</span>
 
-<span class="fc" id="L56">    public void setChapterNum(int chapterNum) {this.chapterNum = chapterNum;}</span>
+<span class="fc" id="L50">    public String getMainAuthor() {return mainAuthor;}</span>
 
-<span class="fc" id="L58">    public String getMainAuthor() {return mainAuthor;}</span>
+<span class="fc" id="L52">    public void setMainAuthor(String mainAuthor) {this.mainAuthor = mainAuthor;}</span>
 
-<span class="fc" id="L60">    public void setMainAuthor(String mainAuthor) {this.mainAuthor = mainAuthor;}</span>
+<span class="fc" id="L54">    public String getImgurl() {return imgurl;}</span>
 
-<span class="fc" id="L62">    public String getImgurl() {return imgurl;}</span>
-
-<span class="fc" id="L64">    public void setImgurl(String imgurl) {this.imgurl = imgurl;}</span>
-
-<span class="fc" id="L66">    public Score getScore() {return score;}</span>
-
-<span class="nc" id="L68">    public void setScore(Score score) {this.score = score;}</span>
+<span class="fc" id="L56">    public void setImgurl(String imgurl) {this.imgurl = imgurl;}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
