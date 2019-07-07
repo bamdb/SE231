@@ -18,6 +18,8 @@ import Topicpage from "./page/topicpage";
 import Topicdetailpage from "./page/topicdetailpage";
 import Userinfopage from "./page/userinfopage"
 import Useriteminfopage from "./page/useriteminfopage"
+import Activitypage from "./page/activitypage";
+
 function App() {
   return (
     <div >
@@ -31,6 +33,7 @@ function App() {
             <Route path={'/registerpage'} component={RegisterPage}></Route>
             <Route path={'/useriteminfopage'} component={Useriteminfopage}></Route>
             <Route path={"/userinfopage"} component={Userinfopage}></Route>
+            <Route path={"/activitypage"} component={Activitypage}></Route>
         </Router>
     </div>
   );

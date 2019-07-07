@@ -95,7 +95,7 @@ class Navigation extends Component {
             {
                 case "homepage" :this.setState({value:0});break;
                 case "itembrowsepage" :this.setState({value:1});break;
-                case "useriteminfopage" :this.setState({value:2});break;
+                case "activitypage" :this.setState({value:2});break;
                 case "userfavoritepage" :this.setState({value:3});break;
                 case "topicpage" :this.setState({value:4});break;
             }
@@ -126,7 +126,7 @@ class Navigation extends Component {
                                         <Tabs centered={true} value={this.state.value} onChange={this.handleChange}>
                                             <Tab label="首页" href={"/#/"}/>
                                             <Tab label="浏览" href={"/#/itembrowsepage"}/>
-                                            <Tab label="进度" href={"/#/useriteminfopage"}/>
+                                            <Tab label="动态" href={"/#/activitypage"}/>
                                             <Tab label="收藏" href={"/#/userfavoritepage"}/>
                                             <Tab label="讨论区" href={"/#/topicpage"}/>
                                         </Tabs>
@@ -171,7 +171,7 @@ class Navigation extends Component {
                                         <Tabs centered={true} value={this.state.value} onChange={this.handleChange}>
                                             <Tab label="首页" href={"/#/"}/>
                                             <Tab label="浏览" href={"/#/itembrowsepage"}/>
-                                            <Tab label="进度" href={"/#/useriteminfopage"}/>
+                                            <Tab label="动态" href={"/#/activitypage"}/>
                                             <Tab label="收藏" href={"/#/userfavoritepage"}/>
                                             <Tab label="讨论区" href={"/#/topicpage"}/>
                                         </Tabs>
@@ -183,6 +183,11 @@ class Navigation extends Component {
                                             <MenuList>
                                                 <MenuItem >
                                                     <Link to={{pathname:'/userinfopage'}}>用户信息</Link>
+
+
+                                                </MenuItem>
+                                                <MenuItem >
+                                                    <Link to={{pathname:'/activitypage'}}>动态</Link>
                                                 </MenuItem>
                                             </MenuList>
                                         </Paper>
