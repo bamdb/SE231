@@ -32,8 +32,18 @@ public class UserController {
         return userService.selectByUsername(username);
     }
 
-    @PutMapping(value="/update", produces="application/json")
-    public User updateUser(@RequestBody User user) {
+    @PutMapping(value="/update/{username}", produces="application/json")
+    public User updateUser(@PathVariable("username") String username,
+                           @RequestParam(value = "password", defaultValue = "") String password,
+                           @RequestParam(value = "mail", defaultValue = "") String mail,
+                           @RequestParam(value = "imgUrl", defaultValue = "") String imgUrl,
+                           @RequestParam(value = "role", defaultValue = "-1") Integer role) {
+        User user = userService.selectByUsername(username);
+        if (user == null) return null;
+        if (!"".equals(password)) user.setPassword(password);
+        if (!"".equals(mail)) user.setMail(mail);
+        if (!"".equals(imgUrl)) user.setImgUrl(imgUrl);
+        if (role != 0) user.setRole(role);
         return userService.updateUser(user);
     }
 

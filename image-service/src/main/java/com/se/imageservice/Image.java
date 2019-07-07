@@ -45,13 +45,13 @@ public class Image {
     }
 
     public Image(Long imageId, Binary image) {
-        this.imageId = imageId;
-        this.image = image;
+       setImageId(imageId);
+       setImage(image);
     }
 
     public Image(String id, Long imageId, Binary image) {
-        this.id = id;
-        this.imageId = imageId;
-        this.image = image;
+        setId(id);
+        setImage(image);
+        setImageId(imageId);
     }
 }
