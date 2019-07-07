@@ -3097,7 +3097,7 @@ exports[`test login 1`] = `
                           aria-disabled={false}
                           aria-selected={false}
                           className="MuiButtonBase-root MuiTab-root MuiTab-textColorInherit"
-                          href="/#/useriteminfopage"
+                          href="/#/activitypage"
                           onBlur={[Function]}
                           onClick={[Function]}
                           onDragLeave={[Function]}
@@ -3116,7 +3116,7 @@ exports[`test login 1`] = `
                           <span
                             className="MuiTab-wrapper"
                           >
-                            进度
+                            动态
                           </span>
                           <span
                             className="MuiTouchRipple-root"
@@ -3613,7 +3613,7 @@ exports[`test navigation 1`] = `
                       aria-disabled={false}
                       aria-selected={false}
                       className="MuiButtonBase-root MuiTab-root MuiTab-textColorInherit"
-                      href="/#/useriteminfopage"
+                      href="/#/activitypage"
                       onBlur={[Function]}
                       onClick={[Function]}
                       onDragLeave={[Function]}
@@ -3632,7 +3632,7 @@ exports[`test navigation 1`] = `
                       <span
                         className="MuiTab-wrapper"
                       >
-                        进度
+                        动态
                       </span>
                       <span
                         className="MuiTouchRipple-root"
