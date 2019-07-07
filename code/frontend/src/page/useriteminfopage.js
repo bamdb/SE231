@@ -29,7 +29,7 @@ class Useriteminfopage extends Component {
                         </Grid>
                         <Grid  item xs={6} >
                             <Scheduletable />
-                            <Tag></Tag>
+                            <Tag select={true}></Tag>
                         </Grid>
                         <Grid  item xs={3} >
                             <Relateditem />

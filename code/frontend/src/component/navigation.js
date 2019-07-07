@@ -87,16 +87,20 @@ class Navigation extends Component {
 
     }
     componentWillMount() {
-        var x=window.location.href.split("#")[1].split("/")[1];
-        console.log(x);
-        switch (x)
+        if(window.location.href.split("#")[1]!=undefined)
         {
-            case "homepage" :this.setState({value:0});break;
-            case "itembrowsepage" :this.setState({value:1});break;
-            case "useriteminfopage" :this.setState({value:2});break;
-            case "userfavoritepage" :this.setState({value:3});break;
-            case "topicpage" :this.setState({value:4});break;
+            var x=window.location.href.split("#")[1].split("/")[1];
+            console.log(x);
+            switch (x)
+            {
+                case "homepage" :this.setState({value:0});break;
+                case "itembrowsepage" :this.setState({value:1});break;
+                case "useriteminfopage" :this.setState({value:2});break;
+                case "userfavoritepage" :this.setState({value:3});break;
+                case "topicpage" :this.setState({value:4});break;
+            }
         }
+
     }
 
     handleChange(event, newValue) {

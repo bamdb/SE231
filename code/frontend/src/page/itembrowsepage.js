@@ -25,6 +25,10 @@ class Itembrowsepage extends Component{
                         <Tag select={true} tags={["热血","王道"]}/>
                     </Grid>
                     <Grid item xs={8} >
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
                         <Listitem></Listitem>
                     </Grid>
                 </Grid>

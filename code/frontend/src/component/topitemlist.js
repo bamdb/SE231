@@ -43,17 +43,17 @@ class TopItemList extends Component {
         });
     */
         rows.push(
-                <TopItem />
+                <TopItem key={0}/>
         );
         rows.push(
-                <TopItem />
+                <TopItem key={1}/>
         );
         rows.push(
-                <TopItem />
+                <TopItem key={2}/>
         );
         return(
             <Grid container className={useStyles.root} spacing={2} >
-                <Grid direction={"column"} >
+                <Grid  >
                 {rows}
                 </Grid>
             </Grid>

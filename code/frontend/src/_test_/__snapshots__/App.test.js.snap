@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test tag 1`] = `
+<div>
+  <div
+    className="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+    id="tagmain"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
+    >
+      <div
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-auto"
+      >
+        <div
+          className="MuiChip-root MuiChip-colorSecondary MuiChip-clickableColorSecondary MuiChip-clickable"
+          id="chip"
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <span
+            className="MuiChip-label"
+          >
+            搞笑
+          </span>
+        </div>
+      </div>
+      <div
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-auto"
+      >
+        <div
+          className="MuiChip-root MuiChip-colorSecondary MuiChip-clickableColorSecondary MuiChip-clickable"
+          id="chip"
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <span
+            className="MuiChip-label"
+          >
+            热血
+          </span>
+        </div>
+      </div>
+      <div
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-auto"
+      >
+        <div
+          className="MuiChip-root MuiChip-colorSecondary MuiChip-clickableColorSecondary MuiChip-clickable"
+          id="chip"
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <span
+            className="MuiChip-label"
+          >
+            王道
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
