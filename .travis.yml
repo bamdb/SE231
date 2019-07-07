@@ -30,4 +30,5 @@ before_install:
 after_success:
   - export CODECOV_TOKEN="c44167bb-18d7-4f63-88f5-6181d3d80c4d"
   - bash <(curl -s https://codecov.io/bash)
+  - cat codecov.yml | curl --data-binary @- https://codecov.io/validate
 #  - sshpass -e  scp -P $DEPLOY_PASS -o stricthostkeychecking=no -r  $DEPLOY_USER@47.102.99.212
