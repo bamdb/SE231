@@ -81,7 +81,15 @@ public class ActivityServiceApplicationTests {
                 .andExpect(status().isOk());
         mvc.perform(post("/add")
                 .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"actTime\":\"1562294429\", \"actType\":1, \"userId\":null, \"itemId\":2}"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add")
+                .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"actTime\":\"1562294429\", \"actType\":2, \"userId\":2, \"itemId\":0}"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"actTime\":\"1562294429\", \"actType\":2, \"userId\":2, \"itemId\":null}"))
                 .andExpect(status().isOk());
 
         mvc.perform(get("/all").contentType(MediaType.APPLICATION_JSON))

@@ -90,6 +90,10 @@ public class TopicServiceApplicationTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"userId\":0, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
                 .andExpect(status().isOk());
+        mvc.perform(post("/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"userId\":null, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
+                .andExpect(status().isOk());
 
         User user = userClient.getAllUsers().iterator().next();
         mvc.perform(post("/add")

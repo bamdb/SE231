@@ -23,12 +23,13 @@ public class ItemClientFallback implements ItemClient{
 
     @Override
     public void deleteItemById(Long itemId) {
+        Item targetItem = new Item();
         for (Item item : itemList) {
             if (item.getId().equals(itemId)) {
-                itemList.remove(item);
-                break;
+                targetItem = item;
             }
         }
+        itemList.remove(targetItem);
     }
 
     @Override
