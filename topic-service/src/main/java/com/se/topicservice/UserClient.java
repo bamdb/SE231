@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Component
-@FeignClient(name = "user-service")
+@FeignClient(name = "user-service",
+        fallback = UserClientFallback.class,
+        qualifier = "userClient")
 public interface UserClient {
     @RequestMapping(value="/id/{id}", method= RequestMethod.GET)
     User getUserById(@PathVariable("id") Long userId);

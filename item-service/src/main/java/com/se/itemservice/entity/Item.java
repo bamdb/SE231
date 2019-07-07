@@ -1,6 +1,4 @@
-package com.se.itemservice;
-
-import org.hibernate.validator.constraints.CodePointLength;
+package com.se.itemservice.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -16,18 +14,14 @@ public class Item {
     private String itemname;
     @Column(name = "pub_time", columnDefinition = "TIMESTAMP")
     private Timestamp pubTime;
-    @Column(name = "chapter_num")
+    @Column(name = "chapter_num", nullable = false)
     private Integer chapterNum;
     @Column(name = "main_author")
     private String mainAuthor;
     @Column(name = "imgurl")
     private String imgurl;
-    @Column(name = "type")
+    @Column(name = "type", nullable = false)
     private Integer type;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "score")
-    private Score score;
 
     public Long getId() {return id;}
 
@@ -37,10 +31,6 @@ public class Item {
 
     public void setType(Integer type) {
         this.type = type;
-    }
-
-    public void setChapterNum(Integer chapterNum) {
-        this.chapterNum = chapterNum;
     }
 
     public void setId(Long id) {this.id = id;}
@@ -55,7 +45,7 @@ public class Item {
 
     public int getChapterNum() {return chapterNum;}
 
-    public void setChapterNum(int chapterNum) {this.chapterNum = chapterNum;}
+    public void setChapterNum(Integer chapterNum) {this.chapterNum = chapterNum;}
 
     public String getMainAuthor() {return mainAuthor;}
 
@@ -64,8 +54,4 @@ public class Item {
     public String getImgurl() {return imgurl;}
 
     public void setImgurl(String imgurl) {this.imgurl = imgurl;}
-
-    public Score getScore() {return score;}
-
-    public void setScore(Score score) {this.score = score;}
 }

@@ -12,9 +12,6 @@ public class User {
     private String imgUrl;
     private Integer role;
 
-    public Integer getRole() {
-        return role;
-    }
 
     public void setRole(Integer role) {
         this.role = role;
@@ -28,17 +25,6 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public String getMail() {
-        return mail;
-    }
 
     public void setMail(String mail) {
         this.mail = mail;
@@ -52,22 +38,9 @@ public class User {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword(String password) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         this.password = encoder.encode(password);
-    }
-
-    public User(long id, String username, String password, String mail, String imgUrl, Integer role) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.imgUrl = imgUrl;
-        this.mail = mail;
-        this.role = role;
     }
 
     public User() {

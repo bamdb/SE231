@@ -1,0 +1,56 @@
+package com.se.ratingservice;
+
+import com.se.ratingservice.entity.Rating;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+@RestController
+public class RatingController {
+    @Resource(name="ratingServiceImpl")
+    private RatingService ratingService;
+
+    @PostMapping(value="/add", produces="application/json")
+    public Rating postRating(@RequestBody Rating rating) {
+        return ratingService.postRating(rating);
+    }
+
+    @GetMapping(value ="/all", produces ="application/json")
+    public Iterable<Rating> getAllRatings() {
+        return ratingService.selectAll();
+    }
+
+    @GetMapping(value="/id/{ratingId}", produces="application/json")
+    public Rating getRatingById(@PathVariable("ratingId") Long ratingId) {
+        return ratingService.selectById(ratingId);
+    }
+
+    @GetMapping(value="/itemId/{itemId}", produces="application/json")
+    public Rating getRatingByItemId(@PathVariable("itemId") Long itemId) {
+        return ratingService.selectByItemId(itemId);
+    }
+
+    @GetMapping(value="/browser", produces="application/json")
+    public List<Rating> getRatingPageByType(@RequestParam("type") Integer type, @RequestParam("page") int pageNum,
+                                      @RequestParam("pageSize") int pageSize) {
+        return ratingService.selectPageByType(type, pageNum, pageSize);
+    }
+
+    // input an integer array of size 10.Each integer shows the increase number of corresponding score
+    @PutMapping(value="/update/itemId/{itemId}", produces="application/json")
+    public ResponseEntity<?> updateRating(@PathVariable("itemId") Long itemId, @RequestBody List<Integer> ratingList) {
+        return ratingService.updateRating(itemId, ratingList);
+    }
+
+    @DeleteMapping(value="/delete/id/{ratingId}")
+    public ResponseEntity<?> deleteRatingById(@PathVariable("ratingId") Long ratingId) {
+        return ratingService.deleteRatingById(ratingId);
+    }
+
+    @DeleteMapping(value="/delete/itemId/{itemId}")
+    public ResponseEntity<?> deleteRatingByItemId(@PathVariable("itemId") Long itemId) {
+        return ratingService.deleteRatingByItemId(itemId);
+    }
+}
