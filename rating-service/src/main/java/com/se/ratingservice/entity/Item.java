@@ -22,10 +22,6 @@ public class Item {
         this.type = type;
     }
 
-    public void setChapterNum(Integer chapterNum) {
-        this.chapterNum = chapterNum;
-    }
-
     public void setId(Long id) {this.id = id;}
 
     public String getItemname() {return itemname;}
@@ -38,7 +34,9 @@ public class Item {
 
     public int getChapterNum() {return chapterNum;}
 
-    public void setChapterNum(int chapterNum) {this.chapterNum = chapterNum;}
+    public void setChapterNum(Integer chapterNum) {
+        this.chapterNum = chapterNum;
+    }
 
     public String getMainAuthor() {return mainAuthor;}
 

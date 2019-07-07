@@ -14,13 +14,13 @@ public class Item {
     private String itemname;
     @Column(name = "pub_time", columnDefinition = "TIMESTAMP")
     private Timestamp pubTime;
-    @Column(name = "chapter_num")
+    @Column(name = "chapter_num", nullable = false)
     private Integer chapterNum;
     @Column(name = "main_author")
     private String mainAuthor;
     @Column(name = "imgurl")
     private String imgurl;
-    @Column(name = "type")
+    @Column(name = "type", nullable = false)
     private Integer type;
 
     public Long getId() {return id;}

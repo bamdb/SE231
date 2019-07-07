@@ -15,6 +15,10 @@ public class Rating {
     private float avgScore;
     @Column(name = "rank")
     private Integer rank;
+    @Column(name = "tot_score_num")
+    private Integer totScoreNum;
+    @Column(name = "type")
+    private Integer type;
 
     public Long getId() {
         return id;
@@ -48,4 +52,19 @@ public class Rating {
         this.rank = rank;
     }
 
+    public Integer getTotScoreNum() {
+        return totScoreNum;
+    }
+
+    public void setTotScoreNum(Integer totScoreNum) {
+        this.totScoreNum = totScoreNum;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
 }

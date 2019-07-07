@@ -5,9 +5,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
+@RestController
 public class RatingController {
-    @Resource(name="RatingServiceImpl")
+    @Resource(name="ratingServiceImpl")
     private RatingService ratingService;
 
     @PostMapping(value="/add", produces="application/json")
@@ -30,9 +32,16 @@ public class RatingController {
         return ratingService.selectByItemId(itemId);
     }
 
-    @PutMapping(value="/update", produces="application/json")
-    public Rating updateRating(@RequestBody Rating rating) {
-        return ratingService.updateRating(rating);
+    @GetMapping(value="/browser", produces="application/json")
+    public List<Rating> getRatingPageByType(@RequestParam("type") Integer type, @RequestParam("page") int pageNum,
+                                      @RequestParam("pageSize") int pageSize) {
+        return ratingService.selectPageByType(type, pageNum, pageSize);
+    }
+
+    // input an integer array of size 10.Each integer shows the increase number of corresponding score
+    @PutMapping(value="/update/itemId/{itemId}", produces="application/json")
+    public ResponseEntity<?> updateRating(@PathVariable("itemId") Long itemId, @RequestBody List<Integer> ratingList) {
+        return ratingService.updateRating(itemId, ratingList);
     }
 
     @DeleteMapping(value="/delete/id/{ratingId}")
