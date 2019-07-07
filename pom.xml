@@ -49,5 +49,8 @@
         <module>user-service</module>
         <module>item-service</module>
         <module>comment-service</module>
+        <module>activity-service</module>
+        <module>rating-service</module>
+        <module>topic-service</module>
     </modules>
 </project>
