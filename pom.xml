@@ -52,5 +52,6 @@
         <module>activity-service</module>
         <module>rating-service</module>
         <module>topic-service</module>
+        <module>message-service</module>
     </modules>
 </project>
