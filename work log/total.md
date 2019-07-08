@@ -52,3 +52,19 @@
   * test
 * huangyuyang:
   * Perfect web-frontend
+# 2019-7-8
+* shenruien:
+  * deploy frontend
+  * connect frontend and backend
+  * complete frontend test
+* wangzulai:
+  * complete crud for item, topic, activity, rating services
+  * complete 100% test coverage for item, topic, activity, rating services
+  * deploy backend onto server
+  * write open-api doc in SwaggerHub, finish item, activity, rating api doc
+* yuyajie:  
+  * comment, friend, message
+  * test
+* huangyuyang:
+  * upgrade web pages
+
