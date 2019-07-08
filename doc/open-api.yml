@@ -448,25 +448,6 @@ paths:
       responses:
         200:
           $ref: '#/definitions/Topic'
-  /topic/id/{itemId}:
-    get:
-      tags:
-      - developers
-      summary: 获取指定条目信息
-      operationId: getOneItem
-      description: |
-        传入一个item id，返回该id对应item的信息
-      produces:
-      - application/json
-      parameters:
-      - name: itemId
-        in: path
-        description: 需要查找的条目ID
-        required: true
-        type: integer
-      responses:
-        200:
-          $ref: '#/definitions/Item'
   /topic/add:
     post:
       tags:
@@ -497,22 +478,6 @@ paths:
       - name: topicId
         in: path
         description: 需要删除的topic ID
-        required: true
-        type: integer
-      responses:
-        200:
-          description: 成功删除对应条目
-  /topic/delete/{itemId}:
-    delete:
-      tags:
-      - developers
-      summary: 删除一个条目
-      description: 传入一个需要删除的item ID，通过Response body返回处理结果
-      operationId: deleteOneItem
-      parameters:
-      - name: itemId
-        in: path
-        description: 需要删除的item ID
         required: true
         type: integer
       responses:
@@ -771,6 +736,9 @@ definitions:
 schemes:
  - https
  - http
+# Added by API Auto Mocking Plugin
+# host: 202.120.40.8:30741
+# basePath: /
 # Added by API Auto Mocking Plugin
 # host: 202.120.40.8:30741
 # basePath: /
