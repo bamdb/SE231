@@ -76,7 +76,7 @@ definitions:
       pubTime:
         type: string
         format: Timestamp
-        example: "1562293010"
+        example: "1562293000"
       chapterNum:
         type: integer
         example: 12
@@ -91,8 +91,8 @@ definitions:
         type: integer
         example: 0
 # Added by API Auto Mocking Plugin
-host: virtserver.swaggerhub.com
-basePath: /ba818/open-api/1.0.0
+# host: 202.120.40.8:30741
+# basePath: /
 # schemes:
 #  - http
 # Added by API Auto Mocking Plugin
@@ -105,3 +105,6 @@ basePath: /ba818/open-api/1.0.0
 schemes:
  - https
  - http
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /ba818/open-api/1.0.0
