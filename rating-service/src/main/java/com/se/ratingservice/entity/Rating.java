@@ -13,7 +13,7 @@ public class Rating {
     private Long itemId;
     @Column(name = "avg_score")
     private float avgScore;
-    @Column(name = "rank")
+    @Column(name = "`rank`")
     private Integer rank;
     @Column(name = "tot_score_num")
     private Integer totScoreNum;
