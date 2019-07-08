@@ -1,10 +1,15 @@
 package com.se.messageservice;
 
-import org.bson.BsonTimestamp;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.sql.Timestamp;
 
 @Document
 @CompoundIndexes({
@@ -15,7 +20,8 @@ public class Message {
     private String id;
     private Long senderId;
     private Long receiverId;
-    private BsonTimestamp sendTime;
+//    @Temporal(TemporalType.TIMESTAMP)
+    private Timestamp sendTime;
     private String content;
 
     public String getId() {
@@ -42,11 +48,11 @@ public class Message {
         this.receiverId = receiverId;
     }
 
-    public BsonTimestamp getsendTime() {
+    public Timestamp getSendTime() {
         return sendTime;
     }
 
-    public void setsendTime(BsonTimestamp sendTime) {
+    public void setSendTime(Timestamp sendTime) {
         this.sendTime = sendTime;
     }
 
@@ -54,18 +60,19 @@ public class Message {
         return content;
     }
 
-    public Message(String id, Long senderId, Long receiverId, BsonTimestamp sendTime, String content) {
+    public Message(String id, Long senderId, Long receiverId, Timestamp sendTime, String content) {
         setId(id);
         setContent(content);
         setReceiverId(receiverId);
         setSenderId(senderId);
-        setsendTime(sendTime);
+        setSendTime(sendTime);
     }
-    public Message(Long senderId, Long receiverId, BsonTimestamp sendTime, String content) {
+
+    public Message(Long senderId, Long receiverId, Timestamp sendTime, String content) {
         setContent(content);
         setReceiverId(receiverId);
         setSenderId(senderId);
-        setsendTime(sendTime);
+        setSendTime(sendTime);
     }
     public Message() {
     }
