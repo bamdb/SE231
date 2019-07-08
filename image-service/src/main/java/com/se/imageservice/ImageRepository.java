@@ -6,8 +6,8 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 public interface ImageRepository extends CrudRepository<Image, String> {
-    Optional<Image> findByImageId(Long bookId);
+    Optional<Image> findByImageId(Long imageId);
     @Transactional
-    void deleteByImageId(Long bookId);
+    void deleteByImageId(Long imageId);
     Boolean existsByImageId(Long itemId);
 }
