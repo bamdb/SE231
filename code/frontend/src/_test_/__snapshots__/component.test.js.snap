@@ -196,20 +196,6 @@ exports[`test Item 1`] = `
       <h6
         className="MuiTypography-root MuiTypography-h6 MuiTypography-colorTextPrimary"
       >
-        导演
-      </h6>
-      <p
-        className="MuiTypography-root MuiTypography-colorTextSecondary"
-      >
-        
-      </p>
-    </div>
-    <div
-      className="MuiGrid-root MuiGrid-item"
-    >
-      <h6
-        className="MuiTypography-root MuiTypography-h6 MuiTypography-colorTextPrimary"
-      >
         页数
       </h6>
       <p
@@ -5577,24 +5563,12 @@ exports[`test topic 1`] = `
       >
         <div
           className="MuiListItemText-root"
-        >
-          <span
-            className="MuiTypography-root MuiListItemText-primary MuiTypography-body1"
-          >
-            你们对SE231有什么看法
-          </span>
-        </div>
+        />
       </span>
     </a>
     <div
       className="MuiListItemText-root"
-    >
-      <span
-        className="MuiTypography-root MuiListItemText-primary MuiTypography-body1"
-      >
-        小猪佩奇
-      </span>
-    </div>
+    />
     <div
       className="MuiListItemText-root"
     >
@@ -5665,7 +5639,7 @@ exports[`test topiclist 1`] = `
               <span
                 className="MuiTypography-root MuiListItemText-primary MuiTypography-body1"
               >
-                你们对SE231有什么看法
+                Who am I? Where am I from?
               </span>
             </div>
           </span>
@@ -5676,7 +5650,7 @@ exports[`test topiclist 1`] = `
           <span
             className="MuiTypography-root MuiListItemText-primary MuiTypography-body1"
           >
-            小猪佩奇
+            hyy
           </span>
         </div>
         <div
@@ -5744,7 +5718,7 @@ exports[`test topiclist 1`] = `
               <span
                 className="MuiTypography-root MuiListItemText-primary MuiTypography-body1"
               >
-                你们对SE231有什么看法
+                Who am I? Where am I from?
               </span>
             </div>
           </span>
@@ -5755,7 +5729,7 @@ exports[`test topiclist 1`] = `
           <span
             className="MuiTypography-root MuiListItemText-primary MuiTypography-body1"
           >
-            小猪佩奇
+            hyy
           </span>
         </div>
         <div
@@ -5823,7 +5797,7 @@ exports[`test topiclist 1`] = `
               <span
                 className="MuiTypography-root MuiListItemText-primary MuiTypography-body1"
               >
-                你们对SE231有什么看法
+                Who am I? Where am I from?
               </span>
             </div>
           </span>
@@ -5834,7 +5808,7 @@ exports[`test topiclist 1`] = `
           <span
             className="MuiTypography-root MuiListItemText-primary MuiTypography-body1"
           >
-            小猪佩奇
+            hyy
           </span>
         </div>
         <div
@@ -5881,11 +5855,11 @@ exports[`test topitem 1`] = `
     <div
       className="MuiCardContent-root"
     >
-      <h5
-        className="MuiTypography-root MuiTypography-h5"
+      <a
+        href="/#/useriteminfopage/1"
       >
         三体
-      </h5>
+      </a>
       <h6
         className="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary"
       >
@@ -5915,11 +5889,11 @@ exports[`test topitemlist 1`] = `
         <div
           className="MuiCardContent-root"
         >
-          <h5
-            className="MuiTypography-root MuiTypography-h5"
+          <a
+            href="/#/useriteminfopage/1"
           >
             三体
-          </h5>
+          </a>
           <h6
             className="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary"
           >
@@ -5940,11 +5914,11 @@ exports[`test topitemlist 1`] = `
         <div
           className="MuiCardContent-root"
         >
-          <h5
-            className="MuiTypography-root MuiTypography-h5"
+          <a
+            href="/#/useriteminfopage/1"
           >
             三体
-          </h5>
+          </a>
           <h6
             className="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary"
           >
@@ -5965,11 +5939,11 @@ exports[`test topitemlist 1`] = `
         <div
           className="MuiCardContent-root"
         >
-          <h5
-            className="MuiTypography-root MuiTypography-h5"
+          <a
+            href="/#/useriteminfopage/1"
           >
             三体
-          </h5>
+          </a>
           <h6
             className="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary"
           >

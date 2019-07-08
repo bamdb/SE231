@@ -14,10 +14,34 @@ import Relateditem from "../component/relatedlist";
 
 import Scheduletable from "../component/scheduletable";
 import Tag from "../component/tag"
-
+import axios from 'axios'
 
 class Useriteminfopage extends Component {
+    constructor(props)
+    {
+        super(props);
+        this.state={data:{}};
+        this.handletagchange=this.handletagchange.bind(this);
+    }
+    handletagchange(tags){
+        this.setState({tags:tags});
+    }
+    componentWillMount() {
+        var uri=window.location.href;
+        var id=uri.split('#')[1].split('/')[4];
+        var url="/item/id/"+id;
+        axios.get(url).then(
+            function (data){
+                this.setState({data:data});
+            }.bind(this)
+        ).catch(function (error) {
+            alert("error")
+        });
+
+    }
+
     render(){
+        var itemdata=this.state.data;
         return(
             <Grid container spacing={2}>
                 <Grid item xs={12}><Navigation/></Grid>
@@ -25,11 +49,11 @@ class Useriteminfopage extends Component {
                     <Grid container spacing={2}>
                         <Grid item xs={1}/>
                         <Grid item xs={1} >
-                            <Item />
+                            <Item isbn={itemdata.id} date={itemdata.pubTime} name={itemdata.itemname} pages={itemdata.chapterNum} author={itemdata.mainAuthor}/>
                         </Grid>
                         <Grid  item xs={6} >
                             <Scheduletable />
-                            <Tag select={true}></Tag>
+                            <Tag select={true} tagchange={this.handletagchange}></Tag>
                         </Grid>
                         <Grid  item xs={3} >
                             <Relateditem />

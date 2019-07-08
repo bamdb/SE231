@@ -33,7 +33,7 @@ class Pagetable extends Component {
             {
                 item.push(
                     <Grid item xs={1}>
-                        <button class={"type1"}>{i}</button>
+                        <button class={"type3"}>{i}</button>
                     </Grid>
                 )
             }
@@ -41,7 +41,7 @@ class Pagetable extends Component {
             {
                 item.push(
                     <Grid item xs={1}>
-                        <button class={"type2"}>{i} </button>
+                        <button class={"type4"}>{i} </button>
                     </Grid>
                 )
             }

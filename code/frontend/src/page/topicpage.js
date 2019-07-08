@@ -8,8 +8,26 @@ import TopicList from "../component/topiclist";
 import Tag from "../component/tag";
 import Typography from "@material-ui/core/Typography";
 import Navigation from "../component/navigation";
-
+import axios from "axios";
 class Topicpage extends Component{
+    constructor(props)
+    {
+        super(props);
+        this.state={tags:[],topics:[]};
+        this.handletagchange=this.handletagchange.bind(this);
+    }
+    handletagchange(tags){
+        this.setState({tags:tags});
+
+    }
+    componentWillMount() {
+        axios.get("/all").then(
+            function (data){
+            this.setState({topics:data});
+        }.bind(this)
+        )
+    }
+
     render(){
         return(
             <Grid container direction={"row"} spacing={3} >
@@ -23,8 +41,8 @@ class Topicpage extends Component{
                     <TopicList />
                 </Grid>
                 <Grid item xs={4} direction={"column"} spacing={3} ><br/> <br/>
-                    <Tag select={true} />
-                    <TopicList />
+                    <Tag select={true} tagchange={this.handletagchange}/>
+                    <TopicList topics={this.state.topics}/>
                 </Grid>
             </Grid>
         );
