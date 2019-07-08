@@ -12,9 +12,9 @@ public class RatingController {
     @Resource(name="ratingServiceImpl")
     private RatingService ratingService;
 
-    @PostMapping(value="/add", produces="application/json")
-    public Rating postRating(@RequestBody Rating rating) {
-        return ratingService.postRating(rating);
+    @PostMapping(value="/add/itemid/{itemId}", produces="application/json")
+    public Rating postRating(@PathVariable("itemId") Long itemId) {
+        return ratingService.postRating(itemId);
     }
 
     @GetMapping(value ="/all", produces ="application/json")

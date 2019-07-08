@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface RatingService {
-    Rating postRating(Rating rating);
+    Rating postRating(Long itemId);
     Iterable<Rating> selectAll();
     Rating selectById(Long id);
     List<Rating> selectPageByType(Integer type, int pageNum, int pageSize);

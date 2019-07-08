@@ -26,15 +26,18 @@ public class RatingServiceImpl implements RatingService {
     @Autowired
     ItemClient itemClient;
 
-    public Rating postRating(Rating rating) {
+    public Rating postRating(Long itemId) {
         // check if corresponding item exists in Item Service or corresponding item has already been rated
-        Item item = itemClient.getItemById(rating.getItemId());
-        if (rating.getItemId() == null || item == null
-                || ratingRepository.findByItemId(rating.getItemId()).orElse(null) != null) {
+        Item item = itemClient.getItemById(itemId);
+        if (item == null || ratingRepository.findByItemId(itemId).orElse(null) != null) {
             return null;
         }
         // auto save item type from item-service into Rating Entity
+        Rating rating = new Rating();
         rating.setType(item.getType());
+        rating.setRank(null);
+        rating.setAvgScore(0);
+        rating.setTotScoreNum(0);
 
         return ratingRepository.save(rating);
     }
