@@ -18,12 +18,14 @@ public class Friend {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL, targetEntity = User.class)
-    @JoinColumn(name = "user_id1", nullable = false, referencedColumnName = "id")
+//    @ManyToOne(cascade = CascadeType.ALL, targetEntity = User.class)
+//    @JoinColumn(name = "user_id1", nullable = false, referencedColumnName = "id")
+    @Column(nullable = false, name = "user_id1")
     private Long userId1;
 
-    @ManyToOne(cascade = CascadeType.ALL, targetEntity = User.class)
-    @JoinColumn(name = "user_id2", nullable = false, referencedColumnName = "id")
+//    @ManyToOne(cascade = CascadeType.ALL, targetEntity = User.class)
+//    @JoinColumn(name = "user_id2", nullable = false, referencedColumnName = "id")
+    @Column(nullable = false, name = "user_id2")
     private Long userId2;
 
     private Integer status;
@@ -68,6 +70,12 @@ public class Friend {
     }
     public Friend(Long userId1, Long userId2) {
         setUserId1(userId1);
+        setUserId2(userId2);
+    }
+
+    public Friend(Long id, Long userId1, Long userId2) {
+        setUserId1(userId1);
+        setId(id);
         setUserId2(userId2);
     }
 

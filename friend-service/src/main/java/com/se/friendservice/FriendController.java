@@ -22,9 +22,10 @@ public class FriendController {
         return friendService.isFriend(userId1, userId2);
     }
 
+
     @PostMapping(value = "/add", produces = "application/json")
-    Friend addFriends(Long userId1, Long userId2) {
-        return friendService.addFriends(userId1, userId2);
+    Friend addFriends(@RequestBody Friend friend) {
+        return friendService.addFriends(friend);
     }
 
     @DeleteMapping(value = "/delete")
@@ -34,13 +35,13 @@ public class FriendController {
         return ResponseEntity.ok().body("Delete successfully!");
     }
 
-    @DeleteMapping("/delete/{userId}")
+    @DeleteMapping("/delete/userid/{userId}")
     ResponseEntity<?> rmAllFriends(@PathVariable("userId") Long userId) {
         friendService.rmAllFriends(userId);
         return ResponseEntity.ok().body("Delete successfully!");
     }
 
-    @GetMapping(value = "/all/{userId}", produces = "application/json")
+    @GetMapping(value = "/all/userid/{userId}", produces = "application/json")
     Iterable<User> getFriends(@PathVariable("userId") Long userId) {
         return friendService.getFriends(userId);
     }

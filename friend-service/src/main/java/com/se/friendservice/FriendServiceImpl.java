@@ -22,8 +22,8 @@ public class FriendServiceImpl implements FriendService {
     }
     private final
     UserClient userClient;
-    public Friend addFriends(Long userId1, Long userId2) {
-        return friendRepository.save(new Friend(userId1, userId2));
+    public Friend addFriends(Friend friend) {
+        return friendRepository.save(friend);
     }
 
     public void rmFriends(Long userId1, Long userId2) {
