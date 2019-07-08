@@ -6,20 +6,12 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Navigation from "./navigation";
 
 
 const useStyles = makeStyles(theme => ({
     button: {
         margin: theme.spacing(1),
         textAlign:"center"
-    },
-    input: {
-        display: 'none',
-    },
-    container: {
-        display: 'flex',
-        flexWrap: 'wrap',
     },
     textField: {
         marginLeft: theme.spacing(1),
@@ -29,19 +21,17 @@ const useStyles = makeStyles(theme => ({
 
     },
     paper: {
-        padding: theme.spacing(2),
         margin: "auto",
+        height: 500,
         justifyContent: "center"
     },
     root:  {
-        justifyContent:"center",
-        minWidth: 300,
-        alignItems: "center",
-        justifyItems:"center",
+        alignItems:"center",
+        alignContent: "center"
     },
 }));
 
-class LoginBody extends Component{
+class Login extends Component{
     constructor(props){
         super(props);
         this.state={
@@ -75,27 +65,51 @@ class LoginBody extends Component{
         return(
             /* 导航栏 */
             //登录部分
-                <Grid container spacing={1} className={useStyles.root}>
-                    <Grid item spacing={6}>
-                        <Paper item className={useStyles.paper} >
-                            <Typography variant={"h4"} component="h4">登录至Bamdb</Typography> <br/>
-                            <Typography component="p">你的用户名/email地址</Typography><br/>
-                            <TextField className={useStyles.textField} margin={"normal"} name={"name"} type={"text"} value={this.state.name} onChange={this.handleInforChange} /><br/>
-                            <Typography component="p">你的密码</Typography><br/>
-                            <TextField className={useStyles.textField} margin={"normal"} name={"password"} type={"password"} value={this.state.password} onChange={this.handleInforChange} /><br/>
-                         <Grid item className={useStyles.root}>
-                            <Button variant="outlined" color="primary" className={useStyles.button}  name={"submit"}>登录</Button><br/>
-                        </Grid>
-                    </Paper>
+                <Grid container spacing={1}>
+                    <Grid item xs={6} className={useStyles.root}>
+                        <Paper className={useStyles.paper} >
+                            <br/>
+                            <Grid container >
+                                <Grid item xs={2} />
+                                <Grid item xs={8} >
+                                    <Typography variant={"h4"} component="h4">登录至Bamdb</Typography> <br/>
+                                    <Typography component="p">你的用户名/email地址</Typography><br/>
+                                    <TextField className={useStyles.textField} margin={"normal"} name={"name"} type={"text"} value={this.state.name} onChange={this.handleInforChange} /><br/>
+                                    <Typography component="p">你的密码</Typography><br/>
+                                    <TextField className={useStyles.textField} margin={"normal"} name={"password"} type={"password"} value={this.state.password} onChange={this.handleInforChange} /><br/>
+                                    <Button variant="outlined" color="primary" className={useStyles.button}  name={"submit"}>登录</Button><br/>
+                                </Grid>
+                                <Grid item xs={2} />
+                            </Grid>
+                            <br/>
+                        </Paper>
                     </Grid>
 
-                <Grid item >
-                    <Paper className={useStyles.paper} >
-                    <Typography variant={"h5"} component="h4">没有账户？</Typography><br/>
-                    <Button variant="outlined" color="primary" className={useStyles.button} href={"/#/registerpage"}> 注册新用户</Button><br/>
-                    <Typography variant={"h5"} component="h4">忘记密码？</Typography><br/>
-                    <Button variant="outlined" color="primary" className={useStyles.button} onClick={this.handlePassword} name={"resetPassword"} >重置密码</Button>
-                    </Paper>
+                    <Grid item xs={6} className={useStyles.root}>
+                        <Paper className={useStyles.paper} >
+                            <br/><br/><br/>
+                            <Grid container spacing={1}>
+                                <Grid item xs={4} />
+                                <Grid item xs={6} >
+                                    <Typography variant={"subtitle1"} component="h4">没有账户？</Typography><br/>
+                                    <Button variant="outlined" color="primary" className={useStyles.button} href={"/#/registerpage"}> 注册新用户</Button><br/>
+                                    <br/><br/>
+                                    <Typography variant={"subtitle1"} component="h4">忘记密码？</Typography><br/>
+                                    <Link to={"/resetpassword"}>
+                                        <Button
+                                            variant="outlined"
+                                            color="primary"
+                                            className={useStyles.button}
+                                            onClick={this.handlePassword}
+                                            name={"resetPassword"} >
+                                            重置密码
+                                        </Button>
+                                    </Link>
+                                </Grid>
+                                <Grid item xs={2} />
+                            </Grid>
+                            <br/><br/><br/>
+                        </Paper>
                     </Grid>
                 </Grid>
 
@@ -103,25 +117,5 @@ class LoginBody extends Component{
     }
 }
 
-class Login extends Component {
-    render(){
-        return(
-            <Grid container spacing={12} className={useStyles.root} >
-                <Grid item spacing={10}>
-                    <Navigation />
-                </Grid>
-                <Grid item >
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <LoginBody />
-                </Grid>
-            </Grid>
-        );
-    }
-}
 
 export default Login;

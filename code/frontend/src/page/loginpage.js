@@ -25,8 +25,8 @@ class LoginPage extends Component{
                 </Grid>
                 <Grid item xs={12}>
                     <Grid container>
-                        <Grid item xs={4}></Grid>
-                        <Grid item xs={8}>
+                        <Grid item xs={3}></Grid>
+                        <Grid item xs={6}>
                     <Login></Login>
                         </Grid>
                     </Grid>
