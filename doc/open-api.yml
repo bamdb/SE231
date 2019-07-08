@@ -36,7 +36,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Item'
-  /item/id:
+  /item/id/{itemId}:
     get:
       tags:
       - developers
@@ -46,6 +46,12 @@ paths:
         传入一个item id，返回该id对应item的信息
       produces:
       - application/json
+      parameters:
+      - name: itemId
+        in: path
+        description: 需要查找的条目ID
+        required: true
+        type: integer
       responses:
         200:
           $ref: '#/definitions/Item'
