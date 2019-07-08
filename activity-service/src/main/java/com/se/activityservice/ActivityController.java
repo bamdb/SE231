@@ -26,12 +26,12 @@ public class ActivityController {
         return activityService.selectById(activityId);
     }
 
-    @GetMapping(value="/userId/{userId}", produces="application/json")
+    @GetMapping(value="/userid/{userId}", produces="application/json")
     public Iterable<Activity> getActivityByUserId(@PathVariable("userId") Long userId) {
         return activityService.selectByUserId(userId);
     }
 
-    @GetMapping(value="/itemId/{itemId}", produces="application/json")
+    @GetMapping(value="/itemid/{itemId}", produces="application/json")
     public Iterable<Activity> getActivityByItemId(@PathVariable("itemId") Long itemId) {
         return activityService.selectByItemId(itemId);
     }

@@ -27,7 +27,7 @@ public class RatingController {
         return ratingService.selectById(ratingId);
     }
 
-    @GetMapping(value="/itemId/{itemId}", produces="application/json")
+    @GetMapping(value="/itemid/{itemId}", produces="application/json")
     public Rating getRatingByItemId(@PathVariable("itemId") Long itemId) {
         return ratingService.selectByItemId(itemId);
     }
@@ -39,7 +39,7 @@ public class RatingController {
     }
 
     // input an integer array of size 10.Each integer shows the increase number of corresponding score
-    @PutMapping(value="/update/itemId/{itemId}", produces="application/json")
+    @PutMapping(value="/update/itemid/{itemId}", produces="application/json")
     public ResponseEntity<?> updateRating(@PathVariable("itemId") Long itemId, @RequestBody List<Integer> ratingList) {
         return ratingService.updateRating(itemId, ratingList);
     }
@@ -49,7 +49,7 @@ public class RatingController {
         return ratingService.deleteRatingById(ratingId);
     }
 
-    @DeleteMapping(value="/delete/itemId/{itemId}")
+    @DeleteMapping(value="/delete/itemid/{itemId}")
     public ResponseEntity<?> deleteRatingByItemId(@PathVariable("itemId") Long itemId) {
         return ratingService.deleteRatingByItemId(itemId);
     }

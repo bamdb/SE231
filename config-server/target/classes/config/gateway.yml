@@ -15,11 +15,15 @@ zuul:
       path: /user/**
       service-id: user
       sensitiveHeaders:
+    fromitem:
+      path: /item/**
+      service-id: item
+      sensitiveHeaders:
   retryable: true
 
 ribbon:
-  ConnectTimeout: 1000
-  ReadTimeout: 1000
+  ConnectTimeout: 2000
+  ReadTimeout: 2000
   OktoRetryOnAllOperations: true
   MaxAutoRetriesNextServer: 2
 hystrix:
