@@ -8,16 +8,34 @@ import Browserlist from "../component/browserlist";
 import Tag from "../component/tag";
 import Listitem from '../component/listitem'
 import Activitylist from "../component/activitylist";
+import axios from 'axios';
 
 
 class Activitypage extends Component{
     constructor(props){
         super(props);
+        this.state={
+            username: this.props.username,
+            activities: [],
+            isloaded: false,
+        }
+    }
+
+    componentDidMount() {
+        const _this=this;
+        axios.post("http://202.120.40.8:30741/activity/userid/1")
+            .then(function (res) {
+                _this.setState({
+                    activities: res.data,
+                    isloaded: true,
+                });
+            })
+            .catch(function (error) {
+            })
     }
 
     render(){
         return(
-
             <Grid container direction={"column"} >
                 <Grid item xs={12}><Navigation/></Grid>
                 <Grid container direction={"row"} alignItems={"center"}>
@@ -28,7 +46,7 @@ class Activitypage extends Component{
                         <br/>
                         <br/>
                         <br/>
-                        <Activitylist></Activitylist>
+                        <Activitylist activities={this.state.activities} username={this.state.username}></Activitylist>
                     </Grid>
                     <Grid item xs={2}></Grid>
                 </Grid>

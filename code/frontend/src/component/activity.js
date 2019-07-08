@@ -1,3 +1,5 @@
+/* 图片 未完成 */
+
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -7,7 +9,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
+import {Link} from 'react-router-dom';
 import Paper from "@material-ui/core/Paper";
+import axios from 'axios';
 
 const useStyles = makeStyles({
     root: {
@@ -37,8 +41,23 @@ const useStyles = makeStyles({
 class Activity extends Component {
     constructor(props) {
         super(props);
-    }
+        this.state = {
+            userid: this.props.userid,
+            username: this.props.username,
+            date: this.props.date,
+            actType: this.props.actType,
+            itemid: this.props.itemid,
+            itemname: this.props.itemname,
+            comment:this.props.comment,
+            grade:0,
+            loadItemName: false,
+            loadComment: false,
+            loadGrade: false,
+            status: "",
+        }
 
+    }
+/*
     static defaultProps = {
         username : "用户名",
         date : "2000-1-1",
@@ -49,7 +68,92 @@ class Activity extends Component {
         itemname : "条目名"
     };
 
+ */
+
+    componentDidMount() {
+        
+        switch (Number(this.state.actType)) {
+            case 0:
+                this.setState({
+                    status:"未收藏"
+                });
+                break;
+            case 1:
+                this.setState({
+                    status:"想看"
+                });
+                break;
+            case 2:
+                this.setState({
+                    status:"在看"
+                });
+                break;
+            case 3:
+                this.setState({
+                    status:"看过"
+                });
+                break;
+            case 4:
+                this.setState({
+                    status:"搁置"
+                });
+                break;
+            case 5:
+                this.setState({
+                    status:"抛弃"
+                });
+                break;
+            default:
+                this.setState({
+                    status:"Status出错"
+                });
+                break;
+        }
+        /* 获得item中itemname */
+/*
+        const _this=this;
+        axios.get("http://202.120.40.8:30741/item/id/"+_this.state.itemid.toString())
+            .then(function (res) {
+                _this.setState({
+                    itemname: res.data.itemname,
+                    loadItemName: true,
+                })
+            })
+            .catch(function (error) {
+            })
+
+        /* 获得grade */
+/*        axios.get("http://202.120.40.8:30741/rating/itemId/"+_this.state.itemid.toString())
+            .then(function (res) {
+                _this.setState({
+                    grade: res.data.tot_score_num,
+                    loadGrade: true,
+                })
+            })
+            .catch(function (error) {
+
+            })
+        /* 获得comment */
+  /*      axios.get("http://202.120.40.8:30741/comment/",
+                    _this.state.itemid,
+                    _this.state.userid
+                    )
+            .then(function (res) {
+                _this.setState({
+                    comment: res.data.content,
+                    loadComment: true,
+                })
+            })
+            .catch(function (error) {
+
+            })
+
+   */
+    }
+
+
     render() {
+
         return(
             <Container fixed className={useStyles.root}>
                 <Grid container spacing={2}>
@@ -58,41 +162,49 @@ class Activity extends Component {
                         <Avatar alt="Remy Sharp" src="img/3.jpg" className={useStyles.avatar} />
                         <br/>
                         <Typography variant="h5" component="h2">
-                            {this.props.username}
+                            {this.state.username}
                         </Typography>
                     </Grid>
                     <Grid item xs={10} justify="center">
                         <Card className={useStyles.card}>
-                            <Grid container spacing={2}>
+                            <Grid container >
                                 <Grid item xs={9} justify="center">
                                     <CardContent>
                                         <Typography color="textSecondary" gutterBottom>
-                                            在 {this.props.date}
+                                            在 {this.state.date}
                                         </Typography>
-                                        <Typography variant="h5" component="h2">
-                                            {this.props.status + " " + this.props.itemname}
-                                        </Typography>
+                                        <Grid container >
+                                            <Grid item xs={6}>
+                                                <Typography variant="h6" component={Link} to={"/useriteminfopage"}>
+                                                    {this.state.itemname + " " }
+                                                </Typography>
+                                            </Grid>
+                                            <Grid item xs={6}>
+                                                <Typography variant="subtitle1" color={"textSecondary"}>
+                                                    {this.state.status}
+                                                </Typography>
+                                            </Grid>
+                                        </Grid>
+
                                     </CardContent>
                                     <CardContent>
-                                        <Grid container spacing={2}>
+                                        <Grid container spacing={0}>
                                             <Grid item xs={2}>
                                                 <Typography variant="subtitle1" color="textPrimary" component="p">
                                                     评分
                                                 </Typography>
                                             </Grid>
                                             <Grid item xs={2}>
-                                                <Paper className={useStyles.paper}>
-                                                    <Typography variant="h5" component="h3" align="center">
-                                                        {this.props.grade}
-                                                    </Typography>
-                                                </Paper>
+                                                <Typography variant="h5" component="h3" align="center">
+                                                    {this.state.grade}
+                                                </Typography>
                                             </Grid>
                                         </Grid>
                                         <Typography variant="subtitle1" color="textPrimary" component="p">
                                             评论
                                         </Typography>
                                         <Typography variant="body2" color="textSecondary" component="p">
-                                            {this.props.comment}
+                                            {this.state.comment}
                                         </Typography>
                                     </CardContent>
                                 </Grid>

@@ -11,17 +11,42 @@ import {AppBar} from "@material-ui/core";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import Pagetable from "../component/pagetable";
+import axios from 'axios';
+
 
 
 class Itembrowsepage extends Component{
     constructor(props){
         super(props);
-        this.state={value:0};
+        this.state={
+            ItemList: [],
+            isloaded: false,
+
+        };
         this.handleChange=this.handleChange.bind(this);
     }
-    handleChange(e,newvalue)
+    handleChange(e, newvalue)
     {
         this.setState({value:newvalue})
+    }
+
+    componentDidMount() {
+        const _this = this;
+        axios.get(
+            "http://202.120.40.8:30741/item/all"
+        )
+            .then(function (response) {
+                _this.setState(
+                    {
+                        ItemList: response.data,
+                        isloaded: true,
+                    }
+                );
+            })
+            .catch(function (error) {
+                _this.setState({
+                })
+            })
     }
 
     render(){
@@ -34,7 +59,7 @@ class Itembrowsepage extends Component{
                         <Grid item xs={1}></Grid>
                         <Grid item xs={11}>
                             <Tabs  value={this.state.value} onChange={this.handleChange}>
-                                <Tab label="全部"/>
+                                <Tab label="全部" />
                                 <Tab label="书籍" />
                                 <Tab label="视频" />
                             </Tabs>
@@ -53,7 +78,7 @@ class Itembrowsepage extends Component{
                         <br/>
                         <br/>
                         <br/>
-                        <Listitem ></Listitem>
+                        <Listitem itemList={this.state.ItemList} ></Listitem>
                         <br/>
                         <Pagetable></Pagetable>
                     </Grid>

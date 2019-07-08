@@ -25,27 +25,37 @@ const useStyles = makeStyles(theme => ({
 class Activitylist extends Component {
     constructor(props) {
         super(props);
+        this.state={
+            username: this.props.username,
+            activities: this.props.activities,
+        }
     }
 
+
     render() {
-        return (
-            <List className={useStyles.root}>
+        var rows=[];
+        this.state.activities.forEach((activity) =>{
+            rows.push(
                 <ListItem className={useStyles.listitem}>
                     <Activity
-                        username={"用户名"}
-                        date={"2000-1-1"}
-                        grade={"null"}
-                        comment={"Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging\n" +
-                            "across all continents except Antarctica"}
-                        status={"看过"}
-                        itemname={"条目名"}
+                        username={"???"}
+                        date={"2019-1-1"}
+                        actType={1}
+                        itemid={1}
                     />
                 </ListItem>
+            );
+        })
+        return (
+            <List className={useStyles.root}>
+                {rows}
                 <ListItem>
                     <Activity
                         username={"用户名"}
                         date={"2000-1-1"}
                         grade={"null"}
+                        actType={1}
+                        itemid={1}
                         comment={"Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging\n" +
                         "across all continents except Antarctica"}
                         status={"看过"}
