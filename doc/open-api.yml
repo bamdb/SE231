@@ -429,7 +429,25 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/Item'
+              $ref: '#/definitions/Topic'
+  /topic/id/{topicId}:
+    get:
+      tags:
+      - developers
+      summary: 获取指定话题信息
+      operationId: getOneTopic
+      description: 传入一个topic ID，返回该ID对应topic的信息
+      produces:
+      - application/json
+      parameters:
+      - name: topicId
+        in: path
+        description: 需要查找的话题ID
+        required: true
+        type: integer
+      responses:
+        200:
+          $ref: '#/definitions/Topic'
   /topic/id/{itemId}:
     get:
       tags:
@@ -453,21 +471,37 @@ paths:
     post:
       tags:
       - developers
-      summary: 添加一个条目
-      operationId: addOneItem
-      description: 传入一个包含条目除了id以外所有属性的json对象，后端处理存入数据库，并返回这个json对象。其中itemid由数据库自增生成，不需要前端指定。
+      summary: 添加一个话题
+      operationId: addOneTopic
+      description: 传入一个包含除了ID以外所有属性的topic json对象，后端处理存入数据库，并返回这个json对象。其中topic ID由数据库自增生成，不需要前端指定。
       produces:
       - application/json
       parameters:
       - in: body
         name: body
-        description: 需要存储的item object
+        description: 需要存储的topic object
         required: true
         schema:
-          $ref: '#/definitions/ItemIn'
+          $ref: '#/definitions/TopicIn'
       responses:
         200:
-          $ref: '#/definitions/Item'
+          $ref: '#/definitions/Topic'
+  /topic/delete/id/{topicId}:
+    delete:
+      tags:
+      - developers
+      summary: 删除一个话题
+      description: 传入一个需要删除的topic ID，通过Response body返回处理结果
+      operationId: deleteOneTopic
+      parameters:
+      - name: topicId
+        in: path
+        description: 需要删除的topic ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 成功删除对应条目
   /topic/delete/{itemId}:
     delete:
       tags:
@@ -488,21 +522,21 @@ paths:
     put:
       tags:
       - developers
-      summary: 更新一个条目的信息
+      summary: 更新一个话题的信息
       description: 传入一个完整的更新后的item json对象，成功则返回更新后的item对象，否则返回null
-      operationId: updateOneItem
+      operationId: updateOneTopic
       produces:
       - application/json
       parameters:
       - in: body
         name: body
-        description: 用于更新的item object，包括ID在内的所有属性都填入更新后的值
+        description: 用于更新的topic object，包括ID在内的所有属性都填入更新后的值
         required: true
         schema:
-          $ref: '#/definitions/Item'
+          $ref: '#/definitions/Topic'
       responses:
         200:
-          $ref: '#/definitions/Item'
+          $ref: '#/definitions/Topic'
 definitions:
   Item:
     type: object
@@ -687,9 +721,59 @@ definitions:
       default: 0
     description: 十个分数段新增的评分人数，例为2分增加2人，10分增加一人
     example: [0, 2, 0, 0, 0, 0, 0, 0, 0, 1]
+  Topic:
+    type: object
+    required:
+    - id
+    - userId
+    - title
+    - pubTime
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数
+        example: 1
+      userId:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数。发起话题的用户ID。
+        example: 1
+      title:
+        type: string
+        description: 话题的标题
+        example: "hello world"
+      pubTime:
+        type: string
+        format: Timestamp
+        description:  话题发表时间。传入Timestamp的毫秒值，取Timestamp的fasttime值，即最后三位置0（最大精度为秒）
+        example: "1562293010"
+  TopicIn:
+    type: object
+    required:
+    - userId
+    - title
+    - pubTime
+    properties:
+      userId:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数。发起话题的用户ID。
+        example: 1
+      title:
+        type: string
+        description: 话题的标题
+        example: "hello world"
+      pubTime:
+        type: string
+        description:  话题发表时间。传入Timestamp的毫秒值，取Timestamp的fasttime值，即最后三位置0（最大精度为秒）
+        example: "1562293010"
 schemes:
  - https
  - http
+# Added by API Auto Mocking Plugin
+# host: 202.120.40.8:30741
+# basePath: /
 # Added by API Auto Mocking Plugin
 # host: 202.120.40.8:30741
 # basePath: /
