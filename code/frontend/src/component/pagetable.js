@@ -16,7 +16,7 @@ import Typography from '@material-ui/core/Typography';
 class Pagetable extends Component {
     constructor(props) {
         super(props);
-        this.state={currentpage:0}
+        this.state={currentpage: 0}
     }
     componentWillMount() {
     }

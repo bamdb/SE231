@@ -55,6 +55,454 @@ paths:
       responses:
         200:
           $ref: '#/definitions/Item'
+  /item/add:
+    post:
+      tags:
+      - developers
+      summary: 添加一个条目
+      operationId: addOneItem
+      description: 传入一个包含条目除了id以外所有属性的json对象，后端处理存入数据库，并返回这个json对象。其中itemid由数据库自增生成，不需要前端指定。
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: 需要存储的item object
+        required: true
+        schema:
+          $ref: '#/definitions/ItemIn'
+      responses:
+        200:
+          $ref: '#/definitions/Item'
+  /item/delete/{itemId}:
+    delete:
+      tags:
+      - developers
+      summary: 删除一个条目
+      description: 传入一个需要删除的item ID，通过Response body返回处理结果
+      operationId: deleteOneItem
+      parameters:
+      - name: itemId
+        in: path
+        description: 需要删除的item ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 成功删除对应条目
+  /item/update:
+    put:
+      tags:
+      - developers
+      summary: 更新一个条目的信息
+      description: 传入一个完整的更新后的item json对象，成功则返回更新后的item对象，否则返回null
+      operationId: updateOneItem
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: 用于更新的item object，包括ID在内的所有属性都填入更新后的值
+        required: true
+        schema:
+          $ref: '#/definitions/Item'
+      responses:
+        200:
+          $ref: '#/definitions/Item'
+  /activity/all:
+    get:
+      tags:
+      - developers
+      summary: 获取所有条目信息
+      operationId: getAllActivity
+      description: 获取所有用户活动信息，即用户对条目的操作信息
+      produces:
+      - application/json
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Activity'
+  /activity/id/{activityId}:
+    get:
+      tags:
+      - developers
+      summary: 获取指定条目信息
+      operationId: getOneActivity
+      description: 传入一个activity ID，返回该ID对应的活动信息
+      produces:
+      - application/json
+      parameters:
+      - name: activityId
+        in: path
+        description: 用于查找的activity ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            $ref: '#/definitions/Activity'
+  /activity/userid/{userId}:
+    get:
+      tags:
+      - developers
+      summary: 获取用户的所有活动信息
+      operationId: getAllActivityByUserId
+      description: 传入一个user ID，返回该用户所有的活动信息
+      produces:
+      - application/json
+      parameters:
+      - name: userId
+        in: path
+        description: 用于查找的user ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Activity'
+  /activity/itemid/{itemId}:
+    get:
+      tags:
+      - developers
+      summary: 获取条目的所有用户活动信息
+      operationId: getAllActivityByItemId
+      description: 传入一个item ID，返回该条目所有的用户活动信息
+      produces:
+      - application/json
+      parameters:
+      - name: itemId
+        in: path
+        description: 用于查找的item ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Activity'
+  /activity/add:
+    post:
+      tags:
+      - developers
+      summary: 添加一个活动
+      operationId: addOneActivity
+      description: 传入一个包含除了id以外所有属性的活动json对象，后端处理存入数据库，并返回这个json对象。其中activity ID由数据库自增生成，不需要前端指定。
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: 需要存储的activity object
+        required: true
+        schema:
+          $ref: '#/definitions/ActivityIn'
+      responses:
+        200:
+          $ref: '#/definitions/Activity'
+  /activity/delete/id/{activityId}:
+    delete:
+      tags:
+      - developers
+      summary: 删除一个活动
+      description: 传入一个需要删除的activity ID，通过Response body返回处理结果
+      operationId: deleteOneActivity
+      parameters:
+      - name: activityId
+        in: path
+        description: 需要删除的activity ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 成功删除对应活动
+  /activity/delete/userid/{userId}:
+    delete:
+      tags:
+      - developers
+      summary: 删除指定用户的所有活动
+      description: 传入一个需要删除的user ID，通过Response body返回处理结果
+      operationId: deleteAllActivityByUserId
+      parameters:
+      - name: userId
+        in: path
+        description: 需要删除的user ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 成功删除对应所有活动
+  /activity/delete/itemid/{itemId}:
+    delete:
+      tags:
+      - developers
+      summary: 删除指定条目的所有活动
+      description: 传入一个需要删除的item ID，通过Response body返回处理结果
+      operationId: deleteAllActivityByItemId
+      parameters:
+      - name: itemId
+        in: path
+        description: 需要删除的item ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 成功删除对应所有活动
+  /rating/all:
+    get:
+      tags:
+      - developers
+      summary: 获取所有评分与排名信息
+      operationId: getAllRating
+      description: 获取所有条目的平均分以及排名
+      produces:
+      - application/json
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Rating'
+  /rating/id/{ratingId}:
+    get:
+      tags:
+      - developers
+      summary: 获取指定评分与排名信息
+      operationId: getOneRating
+      description: 传入一个rating ID，返回该id对应rating的信息
+      produces:
+      - application/json
+      parameters:
+      - name: ratingId
+        in: path
+        description: 用于查找的rating ID
+        required: true
+        type: integer
+      responses:
+        200:
+          $ref: '#/definitions/Rating'
+  /rating/itemid/{itemId}:
+    get:
+      tags:
+      - developers
+      summary: 获取指定条目的评分与排名信息
+      operationId: getOneRatingByItemId
+      description: 传入一个item ID，返回该id对应的评分与排名的信息
+      produces:
+      - application/json
+      parameters:
+      - name: itemId
+        in: path
+        description: 用于查找的item ID
+        required: true
+        type: integer
+      responses:
+        200:
+          $ref: '#/definitions/Rating'
+  /rating/browser:
+    get:
+      tags:
+      - developers
+      summary: 获取在某一页面大小下，根据某属性排名的某一页所有的条目评分与排名信息
+      description: 在GET请求的参数中指定需要显示的条目类型、显示的页面序号、一个页面显示多少对象，返回该页面的所有评分与排名信息。目前默认按照平均分在同类条目中进行排名
+      operationId: getRatingPage
+      produces:
+      - application/json
+      parameters:
+      - name: type
+        in: query
+        description: 用于排名的条目类型
+        required: true
+        type: integer
+      - name: page
+        in: query
+        description: 显示的页面序号
+        required: true
+        type: integer
+      - name: pageSize
+        in: query
+        description: 每个页面的对象数量
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Rating'
+  /rating/add/itemid/{itemId}:
+    post:
+      tags:
+      - developers
+      summary: 添加一个条目对应的评分与排名信息
+      operationId: addOneRatingByItemId
+      description: 传入一个需要新建评分与排名信息的条目ID，后端处理存入数据库，并返回这个评分与排名信息的json对象
+      produces:
+      - application/json
+      parameters:
+      - name: itemId
+        in: path
+        description: 需要新建评分与排名信息的item ID
+        required: true
+        type: integer
+      responses:
+        200:
+          $ref: '#/definitions/Rating'
+  /rating/delete/id/{ratingId}:
+    delete:
+      tags:
+      - developers
+      summary: 删除一个评分与排名信息
+      description: 传入一个评分与排名信息ID，通过Response body返回处理结果
+      operationId: deleteOneRating
+      parameters:
+      - name: ratingId
+        in: path
+        description: 需要删除的rating ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 成功删除对应条目
+  /rating/delete/itemid/{itemId}:
+    delete:
+      tags:
+      - developers
+      summary: 删除一个条目所对应的评分与排名信息
+      operationId: deleteOneRatingByItemId
+      description: 传入一个需要删除的item ID，通过Response body返回处理结果
+      parameters:
+      - name: itemId
+        in: path
+        description: 需要删除的item ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 成功删除对应条目
+  /rating/update/{itemId}:
+    put:
+      tags:
+      - developers
+      summary: 更新一个条目所对应的评分与排名信息
+      description: 传入需要更新评分与排名的条目ID以及评价10个分数新增人数的数组，通过Response body返回处理结果
+      operationId: updateOneRatingByItemId
+      produces:
+      - application/json
+      parameters:
+      - name: itemId
+        in: path
+        description: 需要更新评分的的item ID
+        required: true
+        type: integer
+      - name: array
+        in: body
+        description: 十个评分分别增加的评分数
+        required: true
+        schema:
+          $ref: '#/definitions/RatingArray'
+      responses:
+        200:
+          $ref: '#/definitions/Item'
+  /topic/all:
+    get:
+      tags:
+      - developers
+      summary: 获取所有话题信息
+      operationId: getAllTopic
+      description: 获取所有话题信息
+      produces:
+      - application/json
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Item'
+  /topic/id/{itemId}:
+    get:
+      tags:
+      - developers
+      summary: 获取指定条目信息
+      operationId: getOneItem
+      description: |
+        传入一个item id，返回该id对应item的信息
+      produces:
+      - application/json
+      parameters:
+      - name: itemId
+        in: path
+        description: 需要查找的条目ID
+        required: true
+        type: integer
+      responses:
+        200:
+          $ref: '#/definitions/Item'
+  /topic/add:
+    post:
+      tags:
+      - developers
+      summary: 添加一个条目
+      operationId: addOneItem
+      description: 传入一个包含条目除了id以外所有属性的json对象，后端处理存入数据库，并返回这个json对象。其中itemid由数据库自增生成，不需要前端指定。
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: 需要存储的item object
+        required: true
+        schema:
+          $ref: '#/definitions/ItemIn'
+      responses:
+        200:
+          $ref: '#/definitions/Item'
+  /topic/delete/{itemId}:
+    delete:
+      tags:
+      - developers
+      summary: 删除一个条目
+      description: 传入一个需要删除的item ID，通过Response body返回处理结果
+      operationId: deleteOneItem
+      parameters:
+      - name: itemId
+        in: path
+        description: 需要删除的item ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 成功删除对应条目
+  /topic/update:
+    put:
+      tags:
+      - developers
+      summary: 更新一个条目的信息
+      description: 传入一个完整的更新后的item json对象，成功则返回更新后的item对象，否则返回null
+      operationId: updateOneItem
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: 用于更新的item object，包括ID在内的所有属性都填入更新后的值
+        required: true
+        schema:
+          $ref: '#/definitions/Item'
+      responses:
+        200:
+          $ref: '#/definitions/Item'
 definitions:
   Item:
     type: object
@@ -69,6 +517,8 @@ definitions:
     properties:
       id:
         type: integer
+        format: int64
+        description: 大于0的Long型整数
         example: 1
       itemname:
         type: string
@@ -76,6 +526,51 @@ definitions:
       pubTime:
         type: string
         format: Timestamp
+        description:  传入Timestamp的毫秒值，取Timestamp的fasttime值，即最后三位置0（最大精度为秒）
+        example: "1562293000"
+      chapterNum:
+        type: integer
+        example: 12
+      mainAuthor:
+        type: string
+        example: "Cixin Liu"
+      imgurl:
+        type: string
+        format: url
+        description: 没有图片时可传入null
+        example: "https://lain.bgm.tv/pic/cover/c/13/6f/1937_6Q7MM.jpg"
+      type:
+        type: integer
+        example: 0
+# Added by API Auto Mocking Plugin
+# host: 202.120.40.8:30741
+# basePath: /
+# schemes:
+#  - http
+# Added by API Auto Mocking Plugin
+# schemes:
+#  - http
+# Added by API Auto Mocking Plugin
+# schemes:
+#  - http
+# Added by API Auto Mocking Plugin
+  ItemIn:
+    type: object
+    required:
+    - itemname
+    - pubTime
+    - chapterNum
+    - mainAuthor
+    - imgurl
+    - type
+    properties:
+      itemname:
+        type: string
+        example: "three body"
+      pubTime:
+        type: string
+        format: Timestamp
+        description:  传入Timestamp的毫秒值，取Timestamp的fasttime值，即最后三位置0（最大精度为秒）
         example: "1562293010"
       chapterNum:
         type: integer
@@ -90,18 +585,114 @@ definitions:
       type:
         type: integer
         example: 0
-# Added by API Auto Mocking Plugin
-host: virtserver.swaggerhub.com
-basePath: /ba818/open-api/1.0.0
-# schemes:
-#  - http
-# Added by API Auto Mocking Plugin
-# schemes:
-#  - http
-# Added by API Auto Mocking Plugin
-# schemes:
-#  - http
-# Added by API Auto Mocking Plugin
+  Activity:
+    type: object
+    required:
+    - id
+    - actTime
+    - actType
+    - userId
+    - itemId
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数
+        example: 1
+      actTime:
+        type: string
+        format: Timestamp
+        description:  传入Timestamp的毫秒值，取Timestamp的fasttime值，即最后三位置0（最大精度为秒）
+        example: "1562293010"
+      actType:
+        type: integer
+        description: 0-未收藏, 1-想看, 2-在看, 3-看过, 4-搁置, 5-抛弃
+        example: 0
+      userId:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数
+        example: 1
+      itemId:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数
+        example: 1
+  ActivityIn:
+    type: object
+    required:
+    - actTime
+    - actType
+    - userId
+    - itemId
+    properties:
+      actTime:
+        type: string
+        format: Timestamp
+        description:  传入Timestamp的毫秒值，取Timestamp的fasttime值，即最后三位置0（最大精度为秒）
+        example: "1562293010"
+      actType:
+        type: integer
+        description: 0-未收藏, 1-想看, 2-在看, 3-看过, 4-搁置, 5-抛弃
+        example: 0
+      userId:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数
+        example: 1
+      itemId:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数
+        example: 1
+  Rating:
+    type: object
+    required:
+    - id
+    - itemId
+    - avgScore
+    - rank
+    - totScoreNum
+    - type
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数
+        example: 1
+      itemId:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数
+        example: 1
+      avgScore:
+        type: number
+        format: float
+        description: 条目的平均分，保留小数点后4位
+        example: 9.2222
+      rank:
+        type: integer
+        description: 条目在同类条目中的平均分排名
+        example: 1
+      totScoreNum:
+        type: integer
+        description: 条目的总评分人数
+      type:
+        type: integer
+        description: 条目类型：0-图书，1-教程，2-电影，3-电视剧，4-动画
+  RatingArray:
+    type: array
+    items:
+      type: integer
+      default: 0
+    description: 十个分数段新增的评分人数，例为2分增加2人，10分增加一人
+    example: [0, 2, 0, 0, 0, 0, 0, 0, 0, 1]
 schemes:
  - https
  - http
+# Added by API Auto Mocking Plugin
+# host: 202.120.40.8:30741
+# basePath: /
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /ba818/open-api/1.0.0

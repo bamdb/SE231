@@ -86,6 +86,12 @@ class Navigation extends Component {
 
 
     }
+
+    handleChange(event, newValue) {
+        console.log(newValue);
+        this.setState({value : newValue});
+    }
+
     componentWillMount() {
         if(window.location.href.split("#")[1]!=undefined)
         {
@@ -100,12 +106,6 @@ class Navigation extends Component {
                 case "topicpage" :this.setState({value:4});break;
             }
         }
-
-    }
-
-    handleChange(event, newValue) {
-        console.log(newValue);
-        this.setState({value : newValue});
     }
 
     render() {
