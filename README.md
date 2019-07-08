@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/bamdb/SE231.svg?branch=isalb)](https://travis-ci.org/bamdb/SE231)
 [![codecov.io](https://codecov.io/github/bamdb/SE231/coverage.svg?branch=isalb)](https://codecov.io/github/bamdb/SE231?branch=isalb)
+![language](https://img.shields.io/badge/Language-Java-orange.svg)
+![license](https://img.shields.io/badge/License-GPL--3.0-blue.svg)
 # SE231
 code for summer project
 
