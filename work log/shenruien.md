@@ -15,3 +15,11 @@
 * finish basic web page
 * build CI for frontend
 * prepare the backend environment
+# 2019-7-6
+* add front test case
+# 2019-7-7
+* add front test case
+* write web pages
+# 2019-7-8
+* deploy frontend
+* connect frontend and backend
