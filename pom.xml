@@ -53,5 +53,6 @@
         <module>rating-service</module>
         <module>topic-service</module>
         <module>message-service</module>
+        <module>friend-service</module>
     </modules>
 </project>
