@@ -38,6 +38,7 @@ public class RatingServiceImpl implements RatingService {
         rating.setRank(null);
         rating.setAvgScore(0);
         rating.setTotScoreNum(0);
+        rating.setItemId(itemId);
 
         return ratingRepository.save(rating);
     }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 @Component
-@FeignClient(name = "item-service",
+@FeignClient(name = "item",
         fallback = ItemClientFallback.class,
         qualifier = "itemClient")
 public interface ItemClient {

@@ -19,6 +19,18 @@ zuul:
       path: /item/**
       service-id: item
       sensitiveHeaders:
+    fromactivity:
+      path: /activity/**
+      service-id: activity
+      sensitiveHeaders:
+    fromrating:
+      path: /rating/**
+      service-id: rating
+      sensitiveHeaders:
+    fromtopic:
+      path: /topic/**
+      service-id: topic
+      sensitiveHeaders:
   retryable: true
 
 ribbon:

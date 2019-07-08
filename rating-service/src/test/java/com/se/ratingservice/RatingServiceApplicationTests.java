@@ -103,25 +103,17 @@ public class RatingServiceApplicationTests {
         item1.setType(0);
         itemClient.postItem(item1);
 
-        mvc.perform(post("/add")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"itemId\":1, \"avgScore\":10, \"rank\":1, \"totScoreNum\":100}"))
+        mvc.perform(post("/add/itemid/1")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        mvc.perform(post("/add")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"itemId\":2, \"avgScore\":9.9, \"rank\":2, \"totScoreNum\":100}"))
+        mvc.perform(post("/add/itemid/2")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        mvc.perform(post("/add")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"itemId\":1, \"avgScore\":10, \"rank\":1, \"totScoreNum\":100}"))
+        mvc.perform(post("/add/itemid/1")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        mvc.perform(post("/add")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"itemId\":0, \"avgScore\":10, \"rank\":1, \"totScoreNum\":100}"))
-                .andExpect(status().isOk());
-        mvc.perform(post("/add")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"itemId\":null, \"avgScore\":10, \"rank\":1, \"totScoreNum\":100}"))
+        mvc.perform(post("/add/itemid/0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         mvc.perform(get("/all").contentType(MediaType.APPLICATION_JSON))
@@ -130,15 +122,15 @@ public class RatingServiceApplicationTests {
         mvc.perform(get("/id/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/itemId/1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/itemid/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
 
-        mvc.perform(get("/itemId/0").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/itemid/0").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         itemClient.deleteItemById(2L);
-        mvc.perform(get("/itemId/2").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/itemid/2").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         mvc.perform(get("/browser?type=0&page=0&pageSize=5").contentType(MediaType.APPLICATION_JSON))
@@ -156,21 +148,23 @@ public class RatingServiceApplicationTests {
         item.setPubTime(Timestamp.valueOf("2019-07-01 08:00:00.0"));
         item.setType(0);
         itemClient.postItem(item);
-        mvc.perform(post("/add")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"itemId\":1, \"avgScore\":10, \"rank\":1, \"totScoreNum\":100}"))
+        mvc.perform(post("/add/itemid/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(put("/update/itemId/1").contentType(MediaType.APPLICATION_JSON)
+        mvc.perform(put("/update/itemid/1").contentType(MediaType.APPLICATION_JSON)
                 .content("[100, 0, 0, 0, 0, 0, 0, 0, 0]"))
                 .andExpect(status().isOk());
 
-        mvc.perform(put("/update/itemId/0").contentType(MediaType.APPLICATION_JSON)
+        mvc.perform(put("/update/itemid/0").contentType(MediaType.APPLICATION_JSON)
                 .content("[0, 100, 0, 0, 0, 0, 0, 0, 0, 0]"))
                 .andExpect(status().isOk());
 
-        mvc.perform(put("/update/itemId/1").contentType(MediaType.APPLICATION_JSON)
+        mvc.perform(put("/update/itemid/1").contentType(MediaType.APPLICATION_JSON)
                 .content("[0, 100, 0, 0, 0, 0, 0, 0, 0, 0]"))
+                .andExpect(status().isOk());
+
+        mvc.perform(put("/update/itemid/1").contentType(MediaType.APPLICATION_JSON)
+                .content("[0, 0, 0, 0, 0, 0, 0, 0, 0, 100]"))
                 .andExpect(status().isOk());
 
         Assert.assertEquals(6.0, ratingService.selectByItemId(1L).getAvgScore(), 0.000001);
@@ -196,13 +190,11 @@ public class RatingServiceApplicationTests {
         item1.setPubTime(Timestamp.valueOf("2019-07-01 08:00:00.0"));
         item1.setType(0);
         itemClient.postItem(item1);
-        mvc.perform(post("/add")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"itemId\":1, \"avgScore\":10, \"rank\":1, \"totScoreNum\":100}"))
+        mvc.perform(post("/add/itemid/1")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        mvc.perform(post("/add")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"itemId\":2, \"avgScore\":9.9, \"rank\":2, \"totScoreNum\":100}"))
+        mvc.perform(post("/add/itemid/2")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
         if (ratingService.selectAll().iterator().hasNext()) {
             Long id = ratingService.selectAll().iterator().next().getId();
@@ -212,7 +204,7 @@ public class RatingServiceApplicationTests {
         }
         if (ratingService.selectAll().iterator().hasNext()) {
             Long itemId = ratingService.selectAll().iterator().next().getItemId();
-            mvc.perform(delete("/delete/itemId/"+itemId))
+            mvc.perform(delete("/delete/itemid/"+itemId))
                     .andExpect(status().isOk());
             Assert.assertNull(ratingService.selectByItemId(itemId));
         }

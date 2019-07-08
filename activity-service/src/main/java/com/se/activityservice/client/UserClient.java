@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Component
-@FeignClient(name = "user-service",
+@FeignClient(name = "user",
         fallback = UserClientFallback.class,
         qualifier = "userClient")
 public interface UserClient {

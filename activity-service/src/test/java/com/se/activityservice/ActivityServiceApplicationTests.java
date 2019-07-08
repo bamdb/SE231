@@ -98,24 +98,24 @@ public class ActivityServiceApplicationTests {
         mvc.perform(get("/id/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/userId/1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/userid/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/itemId/1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/itemid/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/userId/0").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/userid/0").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/itemId/0").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/itemid/0").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         userClient.deleteUserById(1L);
         itemClient.deleteItemById(2L);
-        mvc.perform(get("/userId/1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/userid/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/itemId/2").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/itemid/2").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
@@ -145,13 +145,13 @@ public class ActivityServiceApplicationTests {
         }
         if (activityService.selectAll().iterator().hasNext()) {
             Long userId = activityService.selectAll().iterator().next().getUserId();
-            mvc.perform(delete("/delete/userId/"+userId))
+            mvc.perform(delete("/delete/userid/"+userId))
                     .andExpect(status().isOk());
             Assert.assertNull(activityService.selectByUserId(userId));
         }
         if (activityService.selectAll().iterator().hasNext()) {
             Long itemId = activityService.selectAll().iterator().next().getItemId();
-            mvc.perform(delete("/delete/itemId/"+itemId))
+            mvc.perform(delete("/delete/itemid/"+itemId))
                     .andExpect(status().isOk());
             Assert.assertNull(activityService.selectByUserId(itemId));
         }

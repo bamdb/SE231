@@ -41,12 +41,12 @@ public class ActivityController {
         return activityService.deleteActivityById(activityId);
     }
 
-    @DeleteMapping(value="/delete/userId/{userId}")
+    @DeleteMapping(value="/delete/userid/{userId}")
     public ResponseEntity<?> deleteActivityByUserId(@PathVariable("userId") Long userId) {
         return activityService.deleteActivityByUserId(userId);
     }
 
-    @DeleteMapping(value="/delete/itemId/{itemId}")
+    @DeleteMapping(value="/delete/itemid/{itemId}")
     public ResponseEntity<?> deleteActivityByItemId(@PathVariable("itemId") Long itemId) {
         return activityService.deleteActivityByItemId(itemId);
     }
