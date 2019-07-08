@@ -34,43 +34,42 @@ class TopicList extends Component {
         }
     }
     componentWillMount() {
-        this.setState({topics:this.props.topics});
+
+    }
+    componentWillReceiveProps(nextProps, nextContext) {
+
+        console.log(nextProps.topics);
+        this.setState({topics:nextProps.topics})
     }
 
     render(){
+        var topics=this.state.topics;
+        var item=[];
+        if(topics!=undefined)
+        {
+            for(var i=0;i<topics.length;++i)
+            {
+                item.push(
+                    <Grid item xs={6}>
+                        <Topic
+                            topicId = {topics[i].id}
+                            content = {topics[i].title}
+                            author = {topics[i].userId}
+                            replyTotal = {233}
+                            date = {topics[i].pubTime}
+                        />
+                    </Grid>
+                )
+                debugger;
+            }
+        }
+
+
+
         return(
             <Grid container spacing={0} direction={"column"}>
 
-                <Grid item >
-                    <Topic
-                        topicId = {666}
-                        content = {"Who am I? Where am I from?"}
-                        author = {"hyy"}
-                        replyTotal = {233}
-                        date = {"2017-07-03"}
-                        />
-                </Grid>
-                <Grid item>
-                    <Topic
-                        topicId = {666}
-                        content = {"Who am I? Where am I from?"}
-                        author = {"hyy"}
-                        replyTotal = {233}
-                        date = {"2017-07-03"}
-                    />
-                </Grid>
-                <Grid item>
-                    <Topic
-                        topicId = {666}
-                        content = {"Who am I? Where am I from?"}
-                        author = {"hyy"}
-                        replyTotal = {233}
-                        date = {"2017-07-03"}
-                    />
-                </Grid>
-                <Grid item>
-                    <Typography variant={"h6"} component={"h6"} align={"right"} >更多讨论>></Typography>
-                </Grid>
+                {item}
             </Grid>
         )
     }

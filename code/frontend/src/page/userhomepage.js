@@ -7,7 +7,7 @@ import TopItemList from "../component/topitemlist";
 import Progressmanage from '../component/progressmanage'
 import Listitem from '../component/listitem'
 import axios from 'axios'
-
+import PropTypes from "prop-types"
 /*
 class TopPart extends Component{
     constructor(props){
@@ -28,6 +28,7 @@ class TopPart extends Component{
  */
 
 class Userhomepage extends Component{
+
     constructor(props){
         super(props);
 

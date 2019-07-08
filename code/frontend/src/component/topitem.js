@@ -45,9 +45,9 @@ class TopItem extends Component {
             <Card className={useStyles.card}>
                 <div className={useStyles.details}>
                     <CardContent className={useStyles.content}>
-                        <a href={'/#/useriteminfopage/1'}>
+                        <Link to={'/useriteminfopage/1'}>
                             {this.state.name}
-                        </a>
+                        </Link>
                         <Typography variant="subtitle1" color="textSecondary">
                             {this.state.fansTotal}人关注
                         </Typography>

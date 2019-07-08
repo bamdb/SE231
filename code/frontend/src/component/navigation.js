@@ -124,11 +124,11 @@ class Navigation extends Component {
 
                                     <Grid item xs={8}>
                                         <Tabs centered={true} value={this.state.value} onChange={this.handleChange}>
-                                            <Tab label="首页" href={"/#/"}/>
-                                            <Tab label="浏览" href={"/#/itembrowsepage"}/>
-                                            <Tab label="动态" href={"/#/activitypage"}/>
-                                            <Tab label="收藏" href={"/#/userfavoritepage"}/>
-                                            <Tab label="讨论区" href={"/#/topicpage"}/>
+                                            <Tab component={Link} label="首页" to={"/"}/>
+                                            <Tab component={Link} label="浏览" to={"/itembrowsepage"}/>
+                                            <Tab component={Link} label="动态" to={"/activitypage"}/>
+                                            <Tab component={Link} label="收藏" to={"/userfavoritepage"}/>
+                                            <Tab component={Link} label="讨论区" to={"/topicpage"}/>
                                         </Tabs>
                                     </Grid>
                                     <Grid item xs={1}>
@@ -137,8 +137,8 @@ class Navigation extends Component {
                                     </Grid>
                                     <Grid item xs={1}>
                                         <br/>
-                                        <Button href={"/#/loginpage"} color={"primary"} variant="contained">登录</Button>
-                                        <Button href={"/#/registerpage"} color={"primary"} variant="contained">注册</Button>
+                                        <Button component={Link} to={"/loginpage"} color={"primary"} variant="contained">登录</Button>
+                                        <Button component={Link} to={"/registerpage"} color={"primary"} variant="contained">注册</Button>
                                     </Grid>
                                     <Grid item xs={2}>
 
@@ -169,11 +169,11 @@ class Navigation extends Component {
 
                                     <Grid item xs={8}>
                                         <Tabs centered={true} value={this.state.value} onChange={this.handleChange}>
-                                            <Tab label="首页" href={"/#/"}/>
-                                            <Tab label="浏览" href={"/#/itembrowsepage"}/>
-                                            <Tab label="动态" href={"/#/activitypage"}/>
-                                            <Tab label="收藏" href={"/#/userfavoritepage"}/>
-                                            <Tab label="讨论区" href={"/#/topicpage"}/>
+                                            <Tab component={Link} label="首页" to={"/"}/>
+                                            <Tab component={Link} label="浏览" to={"/itembrowsepage"}/>
+                                            <Tab component={Link} label="动态" to={"/activitypage"}/>
+                                            <Tab component={Link} label="收藏" to={"/userfavoritepage"}/>
+                                            <Tab component={Link} label="讨论区" to={"/topicpage"}/>
                                         </Tabs>
                                     </Grid>
                                     <Grid item xs={1}>
@@ -194,8 +194,8 @@ class Navigation extends Component {
                                     </Grid>
                                     <Grid item xs={1}>
                                         <br/>
-                                        <Button href={"/#/loginpage"} color={"primary"} variant="contained">登录</Button>
-                                        <Button href={"/#/registerpage"} color={"primary"} variant="contained">注册</Button>
+                                        <Button component={Link} to={"/loginpage"} color={"primary"} variant="contained">登录</Button>
+                                        <Button component={Link} to={"/registerpage"} color={"primary"} variant="contained">注册</Button>
                                     </Grid>
                                     <Grid item xs={2}>
 

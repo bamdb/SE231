@@ -12,6 +12,7 @@ import Input from "@material-ui/core/Input";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from '@material-ui/core/InputLabel';
 import axios from 'axios'
+import $ from'jquery'
 /*
 信息保存在state中，可以自行添加props或ajax
 */
@@ -29,12 +30,16 @@ class Userinfo extends Component {
     }
     componentWillMount() {
 
-        axios.get("http://202.120.40.8:30740/user/id/1").then(
-            function (data)
+        axios({url: 'http://202.120.40.8:30741/user/id/1',method:'GET',})
+            .then(
+            function (response)
             {
-                this.setState({username:data.username,password:data.password,email:data.mail})
+                console.log(response.data);
+                this.setState({username:response.data.username,password:response.data.password,email:response.data.mail})
             }.bind(this)
         )
+
+
     }
     componentDidMount() {
     }

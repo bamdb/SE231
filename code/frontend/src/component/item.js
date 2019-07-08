@@ -21,10 +21,19 @@ class Item extends Component {
     componentWillMount() {
         if(this.props.name!=null)
         {
+
             this.setState({name:this.props.name,date:this.props.date,pages:this.props.pages,isbn:this.props.isbn})
         }
 
     }
+    componentWillReceiveProps(nextProps, nextContext) {
+        if(nextProps.name!=null)
+        {
+
+            this.setState({name:nextProps.name,date:nextProps.date,pages:nextProps.pages,isbn:nextProps.isbn})
+        }
+    }
+
     componentDidMount() {
     }
 
@@ -32,27 +41,27 @@ class Item extends Component {
         return(
             <Grid container alignItems={"center"} direction={"column"} >
                 <Paper>
-                <Grid item>
+                <Grid item xs={12}>
                     <img src="img/3.jpg" id="itemimage" />
                 </Grid>
-                <Grid item>
+                <Grid item xs={12}>
                     <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >名称</Typography>
                     <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.name}</Typography>
                 </Grid>
-                <Grid item>
+                <Grid item xs={12}>
                     <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >发行日期</Typography>
-                    <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.date}</Typography>
+                    <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.date.split("T")[0]}</Typography>
                 </Grid>
-                <Grid item>
+                <Grid item xs={12}>
                     <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >作者</Typography>
                     <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.author}</Typography>
                 </Grid>
 
-                <Grid item>
+                <Grid item xs={12}>
                     <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >页数</Typography>
                     <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.page}</Typography>
                 </Grid>
-                <Grid item>
+                <Grid item xs={12}>
                     <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >ISBN</Typography>
                     <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.isbn}</Typography>
                 </Grid>

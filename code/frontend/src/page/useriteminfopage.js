@@ -28,11 +28,14 @@ class Useriteminfopage extends Component {
     }
     componentWillMount() {
         var uri=window.location.href;
-        var id=uri.split('#')[1].split('/')[4];
-        var url="/item/id/"+id;
+        var id=uri.split('#')[1].split('/')[2];
+
+        var url="http://202.120.40.8:30741/item/id/"+id;
+
         axios.get(url).then(
-            function (data){
-                this.setState({data:data});
+            function (response){
+                console.log(response.data);
+                this.setState({data:response.data});
             }.bind(this)
         ).catch(function (error) {
             alert("error")

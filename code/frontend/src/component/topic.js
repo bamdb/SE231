@@ -54,7 +54,7 @@ class Topic extends Component {
             <List component={"nav"} className={useStyles.root} aria-label="Mailbox folders">
                 <Divider />
                 <ListItem>
-                    <Button href={'#/topicdetailpage'} ><ListItemText primary={this.state.content} /></Button>
+                    <Button component={Link} to={'/topicdetailpage'} ><ListItemText primary={this.state.content} /></Button>
                     <ListItemText primary={this.state.author} />
                     <ListItemText primary={this.state.replyTotal+" replies"} />
                     <ListItemText primary={this.state.date} />
