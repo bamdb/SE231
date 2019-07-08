@@ -48,8 +48,7 @@ paths:
       - application/json
       responses:
         200:
-          description: 请求成功
-          content
+          $ref: '#/definitions/Item'
 definitions:
   Item:
     type: object
