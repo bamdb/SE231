@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -10,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 const useStyles = makeStyles(theme => ({
     button: {
         margin: theme.spacing(1),
+        textAlign:"center"
     },
     input: {
         display: 'none',
@@ -59,33 +61,60 @@ class Register extends Component {
 
     render() {
         return(
-            <div className={useStyles.root} >
-
-                <Grid item xs={3} container spacing={1} justify={"center"} alignContent={"center"} >
-                    <Paper className={useStyles.root}>
-                        <Grid item xs={3}>
-                        <Typography variant={"h4"} component="h4" >注册成为Bamdb会员</Typography> <br/>
-                        <Typography component="p">你的email地址</Typography><br/>
-                        <TextField className={useStyles.textField} margin={"normal"} name={"email"} type={"text"} value={this.state.name} onChange={this.handleInforChange} /><br/>
-                        <Typography component="p">输入密码</Typography><br/>
-                        <TextField className={useStyles.textField} margin={"normal"} name={"password"} type={"password"} value={this.state.password} onChange={this.handleInforChange} /><br/>
-                        </Grid>
-                        <Grid item xs={3}>
-                        <Button variant="outlined" color="primary" className={useStyles.button}  name={"submit"}>注册</Button><br/>
+            <Grid container spacing={1}>
+                <Grid item xs={6} >
+                    <Paper>
+                        <br/>
+                        <Grid container spacing={1}>
+                            <Grid item xs={2}/>
+                            <Grid item xs={8}>
+                                <Typography variant={"h4"} component="h4" >注册成为Bamdb会员</Typography> <br/>
+                                <Typography component="p">你的email地址</Typography><br/>
+                                <TextField className={useStyles.textField} margin={"normal"} name={"email"} type={"text"} value={this.state.name} onChange={this.handleInforChange} /><br/>
+                                <Typography component="p">输入密码</Typography><br/>
+                                <TextField className={useStyles.textField} margin={"normal"} name={"password"} type={"password"} value={this.state.password} onChange={this.handleInforChange} /><br/>
+                                <Button
+                                    variant="outlined"
+                                    color="primary"
+                                    className={useStyles.button}
+                                    name={"submit"}
+                                    onClick={this.submit}
+                                ><Link to={"/"}>注册</Link>
+                                </Button>
+                                <br/>
+                            </Grid>
+                            <br/>
                         </Grid>
                     </Paper>
                 </Grid>
 
-                <Grid item xs={3}>
-                    <Paper className={useStyles.paper}>
-                        <Typography variant={"h5"} component="h4">已经注册过Bamdb账号？</Typography><br/>
-                        <Button variant="outlined" color="primary" className={useStyles.button} Link to="/login/">去登录</Button><br/>
-                        <Typography variant={"h5"} component="h4">忘记密码？</Typography><br/>
-                        <Button variant="outlined" color="primary" className={useStyles.button} onClick={this.handlePassword} name={"resetPassword"} >重置密码</Button>
+                <Grid item xs={6}>
+                    <Paper className={useStyles.paper} >
+                        <Grid container spacing={1}>
+                            <Grid item xs={4} />
+                            <Grid item xs={6} >
+                                <br/><br/><br/><br/>
+                                <Typography variant={"subtitle1"} component="h4">已有账户？</Typography><br/>
+                                <Link to={"/loginpage"}><Button variant="outlined" color="primary" className={useStyles.button}> 去登录</Button></Link><br/>
+                                <br/><br/>
+                                <Typography variant={"subtitle1"} component="h4">忘记密码？</Typography><br/>
+                                <Link to={"/resetpassword"}>
+                                    <Button
+                                        variant="outlined"
+                                        color="primary"
+                                        className={useStyles.button}
+                                        name={"resetPassword"} >
+                                        重置密码
+                                    </Button>
+                                </Link>
+                                <br/><br/><br/><br/>
+                            </Grid>
+                            <Grid item xs={2} />
+                            <br/>
+                        </Grid>
                     </Paper>
                 </Grid>
-
-            </div>
+            </Grid>
         );
     }
 }
