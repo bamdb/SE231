@@ -11,6 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import Input from "@material-ui/core/Input";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from '@material-ui/core/InputLabel';
+import axios from 'axios'
 /*
 信息保存在state中，可以自行添加props或ajax
 */
@@ -27,6 +28,13 @@ class Userinfo extends Component {
         this.handlecancel=this.handlecancel.bind(this);
     }
     componentWillMount() {
+
+        axios.get("http://202.120.40.8:30740/user/id/1").then(
+            function (data)
+            {
+                this.setState({username:data.username,password:data.password,email:data.mail})
+            }.bind(this)
+        )
     }
     componentDidMount() {
     }
@@ -47,7 +55,12 @@ class Userinfo extends Component {
         else {
             this.setState({edit:false});
         }
-
+        axios.put('user/update/admin',{username:this.state.username,password:this.state.password,mail:this.state.email}).then(
+            function (data)
+            {
+                alert("success");
+            }.bind(this)
+        )
     }
     handlecancel(){
         this.setState({edit:false});

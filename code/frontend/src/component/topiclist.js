@@ -33,6 +33,9 @@ class TopicList extends Component {
             topics:[],
         }
     }
+    componentWillMount() {
+        this.setState({topics:this.props.topics});
+    }
 
     render(){
         return(

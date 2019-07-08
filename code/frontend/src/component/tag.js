@@ -19,6 +19,7 @@ class Tag extends Component {
         this.handletagchange=this.handletagchange.bind(this);
         this.handleclick=this.handleclick.bind(this);
     }
+
     handleclick(e){
         var tags=this.state.currenttags;
         console.log(tags);
@@ -37,6 +38,7 @@ class Tag extends Component {
         tags.push(e.target.innerText);
 
         this.setState({currenttags:tags})
+        this.handletagchange();
 
         return;
     }

@@ -16,9 +16,14 @@ import Typography from '@material-ui/core/Typography';
 class Item extends Component {
     constructor(props) {
         super(props);
-        this.state={name:"三体",date:"2000-1-1",author:"Liu Cixin",director:"",pages:"100",isbn:"123456"}
+        this.state={name:"三体",date:"2000-1-1",author:"Liu Cixin",pages:"100",isbn:"123456"}
     }
     componentWillMount() {
+        if(this.props.name!=null)
+        {
+            this.setState({name:this.props.name,date:this.props.date,pages:this.props.pages,isbn:this.props.isbn})
+        }
+
     }
     componentDidMount() {
     }
@@ -42,10 +47,7 @@ class Item extends Component {
                     <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >作者</Typography>
                     <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.author}</Typography>
                 </Grid>
-                <Grid item>
-                    <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >导演</Typography>
-                    <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.director}</Typography>
-                </Grid>
+
                 <Grid item>
                     <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >页数</Typography>
                     <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.page}</Typography>

@@ -8,6 +8,8 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
+import {Link} from "react-router-dom";
+
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -43,9 +45,9 @@ class TopItem extends Component {
             <Card className={useStyles.card}>
                 <div className={useStyles.details}>
                     <CardContent className={useStyles.content}>
-                        <Typography component="h5" variant="h5">
+                        <a href={'/#/useriteminfopage/1'}>
                             {this.state.name}
-                        </Typography>
+                        </a>
                         <Typography variant="subtitle1" color="textSecondary">
                             {this.state.fansTotal}人关注
                         </Typography>

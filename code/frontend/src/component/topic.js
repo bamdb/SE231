@@ -46,7 +46,7 @@ class Topic extends Component {
             var x = window.location.href.split("#")[1].split("/")[1];
             console.log(x);
         }
-
+        this.setState({topicId:this.props.topicId,content:this.props.content,author:this.props.author})
     }
 
     render(){

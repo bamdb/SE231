@@ -37,8 +37,12 @@ class TopPart extends Component{
 class Userfavoritespage extends Component{
     constructor(props){
         super(props);
+        this.state={tags:[]}
+        this.handletagchange=this.handletagchange.bind(this);
     }
-
+    handletagchange(tags){
+        this.setState({tags:tags});
+    }
     render(){
         return(
             <Grid container direction={"column"} spacing={12} >
@@ -49,7 +53,7 @@ class Userfavoritespage extends Component{
                     <Grid item xs={2}>
                         <br/>
                         <br/>
-                        <Tag />
+                        <Tag select={true}tagchange={this.handletagchange}/>
                     </Grid>
                     <Grid item xs={8} >
                         <br/>

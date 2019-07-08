@@ -6,7 +6,7 @@ import Navigation from "../component/navigation";
 import TopItemList from "../component/topitemlist";
 import Progressmanage from '../component/progressmanage'
 import Listitem from '../component/listitem'
-
+import axios from 'axios'
 
 /*
 class TopPart extends Component{
@@ -31,6 +31,9 @@ class Userhomepage extends Component{
     constructor(props){
         super(props);
 
+    }
+    componentWillMount() {
+        axios.get()
     }
 
     render(){
