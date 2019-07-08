@@ -1,0 +1,102 @@
+swagger: '2.0'
+info:
+  description: This is API doc for bamdb project
+  version: 1.0.0
+  title: Bamdb API
+  # put the contact info for your development or API team
+  contact:
+    email: wzl574402791@outlook.com
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# tags are used for organizing operations
+tags:
+- name: admins
+  description: Secured Admin-only calls
+- name: developers
+  description: Operations available to regular developers
+
+paths:
+  /item/all:
+    get:
+      tags:
+      - developers
+      summary: 获取所有条目信息
+      operationId: getAllItem
+      description: |
+        获取所有条目信息
+      produces:
+      - application/json
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Item'
+  /item/id:
+    get:
+      tags:
+      - developers
+      summary: 获取指定条目信息
+      operationId: getOneItem
+      description: |
+        传入一个item id，返回该id对应item的信息
+      produces:
+      - application/json
+      responses:
+        200:
+          description: 请求成功
+          content
+definitions:
+  Item:
+    type: object
+    required:
+    - id
+    - itemname
+    - pubTime
+    - chapterNum
+    - mainAuthor
+    - imgurl
+    - type
+    properties:
+      id:
+        type: integer
+        example: 1
+      itemname:
+        type: string
+        example: "three body"
+      pubTime:
+        type: string
+        format: Timestamp
+        example: "1562293010"
+      chapterNum:
+        type: integer
+        example: 12
+      mainAuthor:
+        type: string
+        example: "Cixin Liu"
+      imgurl:
+        type: string
+        format: url
+        example: "https://lain.bgm.tv/pic/cover/c/13/6f/1937_6Q7MM.jpg"
+      type:
+        type: integer
+        example: 0
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /ba818/open-api/1.0.0
+# schemes:
+#  - http
+# Added by API Auto Mocking Plugin
+# schemes:
+#  - http
+# Added by API Auto Mocking Plugin
+# schemes:
+#  - http
+# Added by API Auto Mocking Plugin
+schemes:
+ - https
+ - http
