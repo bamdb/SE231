@@ -40,7 +40,7 @@ public class ImageControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
         MockMultipartFile firstFile = new MockMultipartFile("image", "filename.png", "text/plain", "some xml".getBytes());
-        mvc.perform(MockMvcRequestBuilders.multipart("/insert/1").file(firstFile))
+        mvc.perform(MockMvcRequestBuilders.multipart("/insert/id/1").file(firstFile))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
         mvc.perform(get("/id/0")
