@@ -111,13 +111,13 @@ it('test Discuss', () => {
     expect(tree).toMatchSnapshot();*/
 });
 it('test Item', () => {
-    const testrenderer=TestRenderer.create(<Item/>);
+    const testrenderer=TestRenderer.create(<StaticRouter><Item/></StaticRouter>);
    /* const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
 it('test listitem', () => {
-    const testrenderer=TestRenderer.create(<Listitem/>);
+    const testrenderer=TestRenderer.create(<StaticRouter><Listitem/></StaticRouter>);
    /* const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/

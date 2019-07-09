@@ -26,7 +26,10 @@ class Activitylist extends Component {
 
     render() {
         var rows=[];
-        const activity=this.props.activities;
+        if(this.props.activities!=undefined) {
+            const activity = this.props.activities;
+
+
             rows.push(
                 <ListItem className={useStyles.listitem}>
                     <Activity
@@ -38,6 +41,7 @@ class Activitylist extends Component {
                     />
                 </ListItem>
             );
+        }
         return (
             <List className={useStyles.root}>
                 {rows}

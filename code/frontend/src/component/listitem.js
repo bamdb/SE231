@@ -46,14 +46,14 @@ class Listitem extends Component {
         }
     }
 
-    static defaultProps = {
-        name:"三体",date:"2000-1-1",author:"Liu Cixin",chapter:12,score:"8.0",rank:10
-    };
+    static defaultProps =
+        {name:"三体",date:"2000-1-1",author:"Liu Cixin",chapter:12,score:"8.0",rank:10}
+    ;
 
     render() {
 
         var rows=[];
-        this.state.items.forEach((item) => {
+        /*this.state.items.forEach((item) => {
             rows.push(
                 <Paper className={useStyles.root}>
                     <Grid container spacing={2}>
@@ -97,7 +97,7 @@ class Listitem extends Component {
                     </Grid>
                 </Paper>
             );
-        })
+        })*/
         return(
             <div id={"mainlistitem"}>
                 <Paper className={useStyles.root}>
