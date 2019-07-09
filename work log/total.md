@@ -28,6 +28,7 @@
   * building microservice
 * huangyuyang:
   * Finish TopItemList & TopicList Start front-end combination Learn material-ui design
+---
 # 2019-7-4
 * wangzulai:
   * working on user service
@@ -39,6 +40,7 @@
   * test
 * huangyuyang:
   * continue to write web-page
+---
  # 2019-7-5
 * wangzulai:
   * complete crud func of topic, item, activity services
@@ -52,6 +54,7 @@
   * test
 * huangyuyang:
   * Perfect web-frontend
+---
 # 2019-7-8
 * shenruien:
   * deploy frontend
@@ -67,4 +70,18 @@
   * test
 * huangyuyang:
   * upgrade web pages
+---
+# 2019-7-9
+* shenruien:
+  * fix bugs in test
+  * finishing CD for frontend
+  * writing document for the first sprint
+* wangzulai:
+  * complete topic reply service
+  * building CD for backend
+* yuyajie:
+  * building CD for backend
+* huangyuyang:
+  * 在现有情况下完成了前端的逻辑部分，且前后端连通，开始写第一次迭代报告
+
 
