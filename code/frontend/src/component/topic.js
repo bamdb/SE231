@@ -40,13 +40,17 @@ class Topic extends Component {
             date: "2019-7-2"
         }
     }
-    componentWillMount() {
+    componentDidMount()  {
         if(window.location.href.split("#")[1]!=undefined)
         {
             var x = window.location.href.split("#")[1].split("/")[1];
-            console.log(x);
+
         }
-        this.setState({topicId:this.props.topicId,content:this.props.content,author:this.props.author})
+        if(this.props.topicId!=undefined)
+        {
+            this.setState({topicId:this.props.topicId,content:this.props.content,author:this.props.author});
+        }
+
     }
 
     render(){
@@ -54,7 +58,7 @@ class Topic extends Component {
             <List component={"nav"} className={useStyles.root} aria-label="Mailbox folders">
                 <Divider />
                 <ListItem>
-                    <Button component={Link} to={'/topicdetailpage'} ><ListItemText primary={this.state.content} /></Button>
+                    <Link to={'/topicdetailpage'}><ListItemText primary={this.state.content} /></Link>
                     <ListItemText primary={this.state.author} />
                     <ListItemText primary={this.state.replyTotal+" replies"} />
                     <ListItemText primary={this.state.date} />
