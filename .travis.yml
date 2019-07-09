@@ -9,7 +9,6 @@ before_install:
 - cd code/frontend
 addons: 
   ssh_known_hosts:
-  - 192.168.2.74:22
   - 202.120.40.8:30740
 install:
 - npm install
