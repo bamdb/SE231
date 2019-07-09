@@ -27,6 +27,7 @@ class Activitylist extends Component {
         super(props);
         this.state={
             username: this.props.username,
+            userid: this.props.userid,
             activities: this.props.activities,
         }
     }
@@ -38,10 +39,11 @@ class Activitylist extends Component {
             rows.push(
                 <ListItem className={useStyles.listitem}>
                     <Activity
-                        username={"???"}
-                        date={"2019-1-1"}
-                        actType={1}
-                        itemid={1}
+                        userId={this.state.userid}
+                        username={this.state.name}
+                        date={activity.actTime}
+                        actType={activity.actType}
+                        itemId={activity.itemId}
                     />
                 </ListItem>
             );
