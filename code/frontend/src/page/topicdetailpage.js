@@ -11,6 +11,20 @@ import Reply from "../component/reply";
 import Relateditem from "../component/relatedlist";
 
 class Topicdetailpage extends Component{
+    constructor(props){
+        super(props);
+        this.state = {data:[]}
+
+    }
+
+
+    componentWillMount() {
+        var uri=window.location.href;
+        var id=uri.split('#')[1].split('/')[2];
+
+        var url="http://202.120.40.8:30741/item/id/"+id;
+    }
+
     render(){
         return(
           <Grid container spacing={10}>

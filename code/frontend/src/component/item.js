@@ -1,8 +1,5 @@
-/*
- * 条目具体信息左栏
- */
-
 import React, { Component } from 'react';
+import {Link} from "react-router-dom";
 import Paper from '@material-ui/core/Paper';
 
 import '../css/item.css'
@@ -46,7 +43,7 @@ class Item extends Component {
                 </Grid>
                 <Grid item xs={12}>
                     <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >名称</Typography>
-                    <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.name}</Typography>
+                    <Typography variant={"p"} component={Link} to={"/useriteminfopage/"+this.state.name} color={"textSecondary"} >{this.state.name}</Typography>
                 </Grid>
                 <Grid item xs={12}>
                     <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >发行日期</Typography>

@@ -23,29 +23,21 @@ const useStyles = makeStyles(theme => ({
 }));
 
 class Activitylist extends Component {
-    constructor(props) {
-        super(props);
-        this.state={
-            username: this.props.username,
-            activities: this.props.activities,
-        }
-    }
-
 
     render() {
         var rows=[];
-        this.state.activities.forEach((activity) =>{
+        const activity=this.props.activities;
             rows.push(
                 <ListItem className={useStyles.listitem}>
                     <Activity
-                        username={"???"}
-                        date={"2019-1-1"}
-                        actType={1}
-                        itemid={1}
+                        userId={activity.userId}
+                        username={this.props.username}
+                        date={activity.actTime}
+                        actType={activity.actType}
+                        itemId={activity.itemId}
                     />
                 </ListItem>
             );
-        })
         return (
             <List className={useStyles.root}>
                 {rows}
