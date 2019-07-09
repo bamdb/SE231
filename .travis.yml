@@ -1,7 +1,7 @@
 sudo: required
 language: java
 addons:
-  ssh_known_hosts: 47.102.99.212
+  ssh_known_hosts: 202.120.40.8:30740
 services:
 - mongodb
 - mysql
@@ -15,8 +15,6 @@ env:
 script:
 - "./mvnw clean install -B"
 before_install:
-- openssl aes-256-cbc -K $encrypted_de4ad8c43c8f_key -iv $encrypted_de4ad8c43c8f_iv
-  -in private_key.txt.enc -out ~/.ssh/private_key.txt -d
 - chmod a+x ./mvnw
 - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('610878')
   where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
@@ -27,3 +25,15 @@ after_success:
 - export CODECOV_TOKEN="c44167bb-18d7-4f63-88f5-6181d3d80c4d"
 - bash <(curl -s https://codecov.io/bash)
 - cat codecov.yml | curl --data-binary @- https://codecov.io/validate
+before_deploy:
+- openssl aes-256-cbc -K $encrypted_de4ad8c43c8f_key -iv $encrypted_de4ad8c43c8f_iv
+  -in private_key.txt.enc -out ~/.ssh/private_key.txt -d
+- eval "$(ssh-agent -s)"
+- chmod 600 ~/.ssh/private_key.txt
+- ssh-add ~/.ssh/private_key.txt
+deploy:
+  provider: script
+  script: bash ./deploy.sh
+  skip_cleanup: true
+  on:
+    branch: isalb
