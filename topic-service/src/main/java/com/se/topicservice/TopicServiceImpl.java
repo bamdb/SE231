@@ -69,10 +69,6 @@ public class TopicServiceImpl implements TopicService{
     }
 
     public ResponseEntity<?> deleteReplyById(Long topicId, Long replyId) {
-        if (topicId == null || replyId == null) {
-            ResponseEntity.ok().body("TopicId and replyId cannot be null!");
-        }
-
         // check if topic exists
         if (topicRepository.findById(topicId).orElse(null) == null) {
             return ResponseEntity.ok().body("Topic cannot be found!");
@@ -105,10 +101,6 @@ public class TopicServiceImpl implements TopicService{
     }
 
     public TopicPage postReply(Long topicId, Long userId, String topicContent) {
-        if (topicId == null) {
-            return null;
-        }
-
         User user = userClient.getUserById(userId);
         // check if user exists
         if (user == null) {
@@ -125,7 +117,7 @@ public class TopicServiceImpl implements TopicService{
         reply.setUser(user);
         reply.setReplyContent(topicContent);
         List<Reply> replyList;
-        if(topicPage.getReplyList().size() > 0) {
+        if(topicPage.getReplyList().size()>0) {
             replyList = topicPage.getReplyList();
             reply.setId(replyList.get(replyList.size()-1).getId() + 1);
             replyList.add(reply);

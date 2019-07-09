@@ -25,17 +25,6 @@ public class UserClientFallback implements UserClient{
     }
 
     @Override
-    public Iterable<User> getAllUsers() {
-        Iterable<User> userIterable = new Iterable<User>() {
-            @Override
-            public Iterator<User> iterator() {
-                return userList.iterator();
-            }
-        };
-        return userIterable;
-    }
-
-    @Override
     public User postUser(User user) {
         for (User userIter : userList) {
             if(user.getId().equals(userIter.getId())) {

@@ -61,11 +61,13 @@ public class TopicServiceApplicationTests {
     public void controllerTest() throws Exception {
         mvc.perform(post("/add")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"userId\":0, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
+                .content("{\"topic\":{\"userId\":0, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}, " +
+                        "\"topicContent\":\"This is the first topic in bamdb\"}"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"userId\":null, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
+                .content("{\"topic\":{\"userId\":null, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}, " +
+                        "\"topicContent\":\"This is the first topic in bamdb\"}"))
                 .andExpect(status().isOk());
 
         User user = new User();
@@ -76,16 +78,16 @@ public class TopicServiceApplicationTests {
         userClient.postUser(user);
         mvc.perform(post("/add")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"userId\":"+user.getId()+", \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
-                .andExpect(status().isOk());
-
-        mvc.perform(post("/add/reply?userId="+user.getId())
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("A reply"))
+                .content("{\"topic\":{\"userId\":"+user.getId()+", \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}, " +
+                        "\"topicContent\":\"This is the first topic in bamdb\"}"))
                 .andExpect(status().isOk());
 
         Topic topic = topicService.selectAll().iterator().next();
         mvc.perform(post("/add/reply?topicId="+topic.getId()+"&userId=0")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("A reply"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add/reply?topicId=0&userId="+topic.getUserId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("A reply"))
                 .andExpect(status().isOk());
@@ -112,7 +114,8 @@ public class TopicServiceApplicationTests {
 
         mvc.perform(post("/add")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"userId\":"+user.getId()+", \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
+                .content("{\"topic\":{\"userId\":"+user.getId()+", \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}, " +
+                        "\"topicContent\":\"This is the first topic in bamdb\"}"))
                 .andExpect(status().isOk());
 
         mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
@@ -139,7 +142,8 @@ public class TopicServiceApplicationTests {
 
         mvc.perform(post("/add")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"userId\":"+user.getId()+", \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
+                .content("{\"topic\":{\"userId\":"+user.getId()+", \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}, " +
+                        "\"topicContent\":\"This is the first topic in bamdb\"}"))
                 .andExpect(status().isOk());
 
         Topic topic = topicService.selectAll().iterator().next();
@@ -147,18 +151,46 @@ public class TopicServiceApplicationTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("A reply"))
                 .andExpect(status().isOk());
-        mvc.perform(post("/add/reply?topicId="+topic.getId()+"&userId="+topic.getUserId())
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("A reply"))
+
+        mvc.perform(delete("/delete/reply?topicId=0&replyId=1"))
+                .andExpect(status().isOk());
+        mvc.perform(delete("/delete/reply?topicId="+topic.getId()+"&replyId=10"))
+                .andExpect(status().isOk());
+        mvc.perform(delete("/delete/reply?topicId="+topic.getId()+"&replyId=1"))
+                .andExpect(status().isOk());
+        mvc.perform(delete("/delete/reply?topicId="+topic.getId()+"&replyId=1"))
+                .andExpect(status().isOk());
+        mvc.perform(delete("/delete/reply?topicId="+topic.getId()+"&replyId=1"))
                 .andExpect(status().isOk());
 
-        if (topicService.selectAll().iterator().hasNext()) {
-            Long id = topicService.selectAll().iterator().next().getId();
-            // not completed
-            mvc.perform(delete("/delete/reply?topicId="+topic.getId()+"&userId="+topic.getUserId()))
-                    .andExpect(status().isOk());
-            Assert.assertNull(topicService.selectById(id));
-        }
+        mvc.perform(delete("/delete/id/"+topic.getId()))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void userClientTest() {
+        User user = new User();
+        user.setId(10L);
+        user.setRole(1);
+        user.setUsername("a");
+        user.setImgUrl(null);
+        userClient.postUser(user);
+        User user1 = new User();
+        user1.setId(1L);
+        user1.setRole(1);
+        user1.setUsername("a");
+        user1.setImgUrl(null);
+        userClient.postUser(user1);
+        User user2 = new User();
+        user2.setId(1L);
+        user2.setRole(1);
+        user2.setUsername("a");
+        user2.setImgUrl(null);
+        userClient.postUser(user2);
+
+        userClient.getUserById(0L);
+        userClient.getUserById(1L);
+        userClient.getUserById(100L);
     }
 
 

@@ -13,9 +13,6 @@ public interface UserClient {
     @RequestMapping(value="/id/{id}", method= RequestMethod.GET)
     User getUserById(@PathVariable("id") Long userId);
 
-    @RequestMapping(value="/all", method= RequestMethod.GET)
-    Iterable<User> getAllUsers();
-
     @RequestMapping(value="/signup", method = RequestMethod.POST)
     User postUser(@RequestBody User user);
 }
