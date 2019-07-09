@@ -151,10 +151,23 @@ public class TopicServiceApplicationTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("A reply"))
                 .andExpect(status().isOk());
+        mvc.perform(post("/add/reply?topicId="+topic.getId()+"&userId="+topic.getUserId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("A reply"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add/reply?topicId="+topic.getId()+"&userId="+topic.getUserId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("A reply"))
+                .andExpect(status().isOk());
+
 
         mvc.perform(delete("/delete/reply?topicId=0&replyId=1"))
                 .andExpect(status().isOk());
         mvc.perform(delete("/delete/reply?topicId="+topic.getId()+"&replyId=10"))
+                .andExpect(status().isOk());
+        mvc.perform(delete("/delete/reply?topicId="+topic.getId()+"&replyId=1"))
+                .andExpect(status().isOk());
+        mvc.perform(delete("/delete/reply?topicId="+topic.getId()+"&replyId=1"))
                 .andExpect(status().isOk());
         mvc.perform(delete("/delete/reply?topicId="+topic.getId()+"&replyId=1"))
                 .andExpect(status().isOk());
