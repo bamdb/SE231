@@ -3,6 +3,7 @@
  */
 
 import React, { Component } from 'react';
+import {Link} from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 import {makeStyles} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
@@ -45,14 +46,14 @@ class Listitem extends Component {
         }
     }
 
-    static defaultProps = {
-        name:"三体",date:"2000-1-1",author:"Liu Cixin",chapter:12,score:"8.0",rank:10
-    };
+    static defaultProps =
+        {name:"三体",date:"2000-1-1",author:"Liu Cixin",chapter:12,score:"8.0",rank:10}
+    ;
 
     render() {
 
         var rows=[];
-        this.state.items.forEach((item) => {
+        /*this.state.items.forEach((item) => {
             rows.push(
                 <Paper className={useStyles.root}>
                     <Grid container spacing={2}>
@@ -96,7 +97,7 @@ class Listitem extends Component {
                     </Grid>
                 </Paper>
             );
-        })
+        })*/
         return(
             <div id={"mainlistitem"}>
                 <Paper className={useStyles.root}>
@@ -107,7 +108,7 @@ class Listitem extends Component {
                             <img src="img/3.jpg" alt="暂无图片" className={useStyles.image} height="120px" width="96px"/>
                         </Grid>
                         <Grid item xs={6}>
-                            <Typography variant="h4" component="h3">
+                            <Typography variant="h4" component={Link} to={"/useriteminfopage/"+this.props.name} color={"textPrimary"}>
                                 {this.props.name}
                             </Typography>
                             <br/>
