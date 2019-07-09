@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/bamdb/SE231.svg?branch=isalb)](https://travis-ci.org/bamdb/SE231)
-[![codecov.io](https://codecov.io/github/bamdb/SE231/coverage.svg?branch=isalb)](https://codecov.io/github/bamdb/SE231?branch=isalb)
+[![Build Status](https://travis-ci.org/bamdb/SE231.svg?branch=dev)](https://travis-ci.org/bamdb/SE231)
+[![codecov.io](https://codecov.io/github/bamdb/SE231/coverage.svg?branch=dev)](https://codecov.io/github/bamdb/SE231?branch=isalb)
 # SE231
 
 code for summer project
