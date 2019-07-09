@@ -13,5 +13,9 @@ install:
 - npm install
 script:
 - npm test
-after_success:
-- ssh -p 30740 ubuntu@202.120.40.8 "./frontend/SE231/script.sh"
+deploy:
+  provider: script
+  script: bash ./script.sh
+  skip_cleanup: true
+  on:
+    branch: dev
