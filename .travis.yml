@@ -14,4 +14,4 @@ install:
 script:
 - npm test
 after_success:
-- ssh -p 30740 ubuntu@202.120.40.8 'bash -s' < script.sh
+- ssh -p 30740 ubuntu@202.120.40.8 'bash' < script.sh
