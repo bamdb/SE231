@@ -21,3 +21,6 @@
 * complete 100% test coverage for item, topic, activity, rating services
 * deploy backend onto server
 * write open-api doc in SwaggerHub, finish item, activity, rating api doc
+
+# 2019-07-09
+* complete topic reply service
