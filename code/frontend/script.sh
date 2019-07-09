@@ -1,9 +1,9 @@
 cd /frontend/SE231
 git pull origin
+sleep 20
 cd code
 cd frontend
-sleep 10
-echo '1'
+pwd
 sudo npm install
 sleep 30
 echo '2'
