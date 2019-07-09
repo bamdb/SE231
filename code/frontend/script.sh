@@ -1,4 +1,5 @@
 cd /frontend/SE231
+users
 git pull origin
 sleep 20
 cd code
