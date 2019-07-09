@@ -43,7 +43,7 @@ public class UserController {
         if (!"".equals(password)) user.setPassword(password);
         if (!"".equals(mail)) user.setMail(mail);
         if (!"".equals(imgUrl)) user.setImgUrl(imgUrl);
-        if (role != 0) user.setRole(role);
+        if (role != -1) user.setRole(role);
         return userService.updateUser(user);
     }
 
