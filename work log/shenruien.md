@@ -26,3 +26,4 @@
 # 2019-7-9
 * fix bugs in test
 * finishing CD
+* writing document for the first sprint
