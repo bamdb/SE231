@@ -36,153 +36,153 @@ import TopicList from "../component/topiclist";
 import TopItem from "../component/topitem";
 import TopItemList from "../component/topitemlist";
 import Userinfo from "../component/userinfo";
-it('test tag', () => {
+it('_test_ tag', () => {
     const testrenderer=TestRenderer.create(<Tag/>);
    /* const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-it('test activity', () => {
+it('_test_ activity', () => {
 
     const testrenderer=TestRenderer.create(<StaticRouter><Activity/></StaticRouter>);
     /*const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-/*it('test navigation', () => {
+/*it('_test_ navigation', () => {
     const testrenderer=TestRenderer.create(<StaticRouter><Navigation/></StaticRouter>);
     const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();
 });*/
-it('test activitylist', () => {
+it('_test_ activitylist', () => {
     const testrenderer=TestRenderer.create(<StaticRouter><Activitylist/></StaticRouter>);
     /*const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-it('test briefitemlist', () => {
+it('_test_ briefitemlist', () => {
     const testrenderer=TestRenderer.create(<StaticRouter><Briefitemlist/></StaticRouter>);
     /*const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-it('test browserlist', () => {
+it('_test_ browserlist', () => {
     const testrenderer=TestRenderer.create(<StaticRouter><Browserlist/></StaticRouter>);
     /*const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-/*it('test collect', () => {
+/*it('_test_ collect', () => {
     const testrenderer=TestRenderer.create(<StaticRouter><Collect/></StaticRouter>);
     const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();
 
 });*/
-it('test registry', () => {
+it('_test_ registry', () => {
     const testrenderer=TestRenderer.create(<StaticRouter><Register/></StaticRouter>);
    /* const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-it('test collectform', () => {
+it('_test_ collectform', () => {
     const testrenderer=TestRenderer.create(<Collectform/>);
   /*  const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-it('test comment', () => {
+it('_test_ comment', () => {
     const testrenderer=TestRenderer.create(<Comment/>);
   /* const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-it('test commentlist', () => {
+it('_test_ commentlist', () => {
     const testrenderer=TestRenderer.create(<StaticRouter><Commentlist/></StaticRouter>);
     /*const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-it('test Discuss', () => {
+it('_test_ Discuss', () => {
     const testrenderer=TestRenderer.create(<Discuss/>);
   /*  const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-it('test Item', () => {
+it('_test_ Item', () => {
     const testrenderer=TestRenderer.create(<StaticRouter><Item/></StaticRouter>);
    /* const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-it('test listitem', () => {
+it('_test_ listitem', () => {
     const testrenderer=TestRenderer.create(<StaticRouter><Listitem/></StaticRouter>);
    /* const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-it('test login', () => {
+it('_test_ login', () => {
     const testrenderer=TestRenderer.create(<StaticRouter><Login/></StaticRouter>);
    /* const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-it('test progressmanage', () => {
+it('_test_ progressmanage', () => {
     const testrenderer=TestRenderer.create(<Progressmanage/>);
    /* const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-it('test relateditem', () => {
+it('_test_ relateditem', () => {
     const testrenderer=TestRenderer.create(<Relateditem/>);
    /* const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-it('test reply', () => {
+it('_test_ reply', () => {
     const testrenderer=TestRenderer.create(<Reply/>);
    /* const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-it('test scheduletable', () => {
+it('_test_ scheduletable', () => {
     const testrenderer=TestRenderer.create(<Scheduletable/>);
    /* const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-it('test search', () => {
+it('_test_ search', () => {
     const testrenderer=TestRenderer.create(<Search/>);
    /* const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-it('test topic', () => {
+it('_test_ topic', () => {
     const testrenderer=TestRenderer.create(<StaticRouter><Topic/></StaticRouter>);
     /*const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-it('test topiclist', () => {
+it('_test_ topiclist', () => {
     const testrenderer=TestRenderer.create(<TopicList/>);
     /*const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-it('test topitem', () => {
+it('_test_ topitem', () => {
     const testrenderer=TestRenderer.create(<StaticRouter><TopItem/></StaticRouter>);
    /* const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-it('test topitemlist', () => {
+it('_test_ topitemlist', () => {
     const testrenderer=TestRenderer.create(<StaticRouter><TopItemList/></StaticRouter>);
     /*const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-it('test userinfo', () => {
+it('_test_ userinfo', () => {
     const testrenderer=TestRenderer.create(<Userinfo/>);
     /*const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
