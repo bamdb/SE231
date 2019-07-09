@@ -7,7 +7,7 @@ before_install:
   -in private_key.enc -out /frontend/private_key -d
 - chmod 600 ~/.ssh/id_rsa
 - cd code/frontend
-addons: 
+addons:
   ssh_known_hosts: 202.120.40.8:30740
 install:
 - npm install
