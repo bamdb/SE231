@@ -55,9 +55,26 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.google.collections</groupId>
-            <artifactId>google-collections</artifactId>
-            <version>1.0</version>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.58</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.1.18</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock</artifactId>
+            <version>2.23.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>28.0-jre</version>
         </dependency>
     </dependencies>
     <build>

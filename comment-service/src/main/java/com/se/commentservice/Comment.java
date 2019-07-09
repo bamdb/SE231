@@ -1,6 +1,5 @@
 package com.se.commentservice;
 
-import org.bson.BsonTimestamp;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
@@ -8,6 +7,8 @@ import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Column;
+import java.sql.Timestamp;
+
 @Document
 @CompoundIndexes({
         @CompoundIndex(name = "index", def = "{'itemId' : 1, 'userId': 1}", unique = true)
@@ -17,19 +18,19 @@ public class Comment {
     private String id;
     private Long itemId;
     private Long userId;
-    private BsonTimestamp pubTime;
+    private Timestamp pubTime;
     private String content;
     public Comment() {
     }
 
-    public Comment(Long itemId, Long userId, BsonTimestamp pubTime, String content) {
+    public Comment(Long itemId, Long userId, Timestamp pubTime, String content) {
         setItemId(itemId);
         setContent(content);
         setPubTime(pubTime);
         setUserId(userId);
     }
 
-    public Comment(String id, Long itemId, Long userId, BsonTimestamp pubTime, String content) {
+    public Comment(String id, Long itemId, Long userId, Timestamp pubTime, String content) {
         setItemId(itemId);
         setContent(content);
         setPubTime(pubTime);
@@ -61,11 +62,11 @@ public class Comment {
         this.userId = userId;
     }
 
-    public BsonTimestamp getPubTime() {
+    public Timestamp getPubTime() {
         return pubTime;
     }
 
-    public void setPubTime(BsonTimestamp pubTime) {
+    public void setPubTime(Timestamp pubTime) {
         this.pubTime = pubTime;
     }
 

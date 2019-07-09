@@ -1,7 +1,6 @@
 package com.se.commentservice;
 
 import com.alibaba.fastjson.JSON;
-import org.bson.BsonTimestamp;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +16,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +39,7 @@ public class CommentControllerTest {
 
     @Test
     public void controllerTest() throws Exception  {
-        Comment comment = new Comment(11L, 22L, new BsonTimestamp(33), "nothing");
+        Comment comment = new Comment(11L, 22L, new Timestamp(33), "nothing");
         Map<String, String> hm = new HashMap<>();
         MultiValueMap<String, String> mm = new LinkedMultiValueMap<>();
         mm.add("itemId","11");
@@ -50,10 +50,12 @@ public class CommentControllerTest {
                 .andExpect(status().isOk());
         mvc.perform(get("/userid/22"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.[0].itemId").doesNotExist());
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].itemId").doesNotExist());
         mvc.perform(get("/itemid/11"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.[0].itemId").doesNotExist());
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].itemId").doesNotExist());
         mvc.perform(post("/insert")
                 .content(JSON.toJSONString(comment))
                 .contentType(MediaType.APPLICATION_JSON))

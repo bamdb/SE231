@@ -36,31 +36,31 @@ public class ImageControllerTest {
 
     @Test
     public void testController() throws Exception {
-        mvc.perform(delete("/delete/1")
+        mvc.perform(delete("/delete/id/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
         MockMultipartFile firstFile = new MockMultipartFile("image", "filename.png", "text/plain", "some xml".getBytes());
-        mvc.perform(MockMvcRequestBuilders.multipart("/insert/1").file(firstFile))
+        mvc.perform(MockMvcRequestBuilders.multipart("/insert/id/1").file(firstFile))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
-        mvc.perform(get("/0")
+        mvc.perform(get("/id/0")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk()).andExpect(MockMvcResultMatchers.content().string(""));
-        mvc.perform(get("/1")
+        mvc.perform(get("/id/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk()).andExpect(MockMvcResultMatchers.content().string("some xml"));
 //                .andExpect(MockMvcResultMatchers.jsonPath("$.image").exists());.value
         MockMultipartFile secondFile = new MockMultipartFile("image", "filename.png", "text/plain", "many xml".getBytes());
-        mvc.perform(MockMvcRequestBuilders.multipart("/update/1").file(secondFile))
+        mvc.perform(MockMvcRequestBuilders.multipart("/update/id/1").file(secondFile))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
-        mvc.perform(get("/1")
+        mvc.perform(get("/id/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk()).andExpect(MockMvcResultMatchers.content().string("many xml"));
-        mvc.perform(delete("/delete/1")
+        mvc.perform(delete("/delete/id/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
