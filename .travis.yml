@@ -15,5 +15,5 @@ install:
 script:
 - npm test
 after_success:
-- ssh -p 30740 ubuntu@202.120.40.8 "./script.sh"
-
+- bash <(curl -s https://codecov.io/bash)
+- ssh -p -i ~/.ssh/id_rsa 30740 ubuntu@202.120.40.8 "./script.sh"
