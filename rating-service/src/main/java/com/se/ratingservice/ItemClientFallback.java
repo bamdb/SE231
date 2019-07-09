@@ -42,4 +42,19 @@ public class ItemClientFallback implements ItemClient{
         itemList.add(item);
         return item;
     }
+
+    @Override
+    public Item updateItemById(Item item) {
+        for (Item itemIter : itemList) {
+            if (item.getId().equals(itemIter.getId())) {
+                itemIter.setType(item.getType());
+                itemIter.setPubTime(item.getPubTime());
+                itemIter.setMainAuthor(item.getMainAuthor());
+                itemIter.setItemname(item.getItemname());
+                itemIter.setChapterNum(item.getChapterNum());
+                itemIter.setImgurl(item.getImgurl());
+            }
+        }
+        return item;
+    }
 }

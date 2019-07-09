@@ -1,7 +1,9 @@
 spring:
   cloud:
     config:
-      uri: http://localhost:8888
+      dscovery:
+        service-id: config
+        enabled: true
       fail-fast: true
       name: gateway
 eureka:

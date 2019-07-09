@@ -133,8 +133,14 @@ public class RatingServiceApplicationTests {
         mvc.perform(get("/itemid/2").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
+        item.setType(2);
+        itemClient.updateItemById(item);
+        mvc.perform(get("/itemid/1").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
         mvc.perform(get("/browser?type=0&page=0&pageSize=5").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+
     }
 
     @Test
@@ -168,6 +174,11 @@ public class RatingServiceApplicationTests {
                 .andExpect(status().isOk());
 
         Assert.assertEquals(6.0, ratingService.selectByItemId(1L).getAvgScore(), 0.000001);
+
+        itemClient.deleteItemById(1L);
+        mvc.perform(put("/update/itemid/1").contentType(MediaType.APPLICATION_JSON)
+                .content("[0, 0, 0, 0, 0, 0, 0, 0, 0, 100]"))
+                .andExpect(status().isOk());
     }
 
     @Test

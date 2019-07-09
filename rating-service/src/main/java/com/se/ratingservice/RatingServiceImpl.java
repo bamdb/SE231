@@ -39,6 +39,16 @@ public class RatingServiceImpl implements RatingService {
         rating.setAvgScore(0);
         rating.setTotScoreNum(0);
         rating.setItemId(itemId);
+        rating.setScore1(0);
+        rating.setScore2(0);
+        rating.setScore3(0);
+        rating.setScore4(0);
+        rating.setScore5(0);
+        rating.setScore6(0);
+        rating.setScore7(0);
+        rating.setScore8(0);
+        rating.setScore9(0);
+        rating.setScore10(0);
 
         return ratingRepository.save(rating);
     }
@@ -57,9 +67,14 @@ public class RatingServiceImpl implements RatingService {
             return null;
         }
         // item has been deleted in item-service, then corresponding activity should be delete
-        if (itemClient.getItemById(itemId) == null) {
+        Item item = itemClient.getItemById(itemId);
+        if (item == null) {
             deleteRatingByItemId(itemId);
             return null;
+        }
+        // corresponding item type has been changed, the rating type should be changed too
+        if (!item.getType().equals(rating.getType())) {
+            rating.setType(item.getType());
         }
         return ratingRepository.findByItemId(itemId).orElse(null);
     }
@@ -82,7 +97,6 @@ public class RatingServiceImpl implements RatingService {
         Integer totNum = 0;
         Integer totScore = 0;
         Integer score = 1;
-
         for (Integer num : ratingList) {
             totNum += num;
             totScore += score * num;
@@ -90,10 +104,20 @@ public class RatingServiceImpl implements RatingService {
         }
         Integer totScoreNum = rating.getTotScoreNum() + totNum;
         float avgScore = (rating.getAvgScore() * rating.getTotScoreNum() + totScore) / totScoreNum;
-        Integer rank = ratingRepository.findRankByTypeAndItemId(rating.getType(), avgScore);
+        Integer rank = 1 + ratingRepository.findRankByTypeAndItemId(rating.getType(), avgScore);
         rating.setTotScoreNum(totScoreNum);
         rating.setAvgScore(avgScore);
         rating.setRank(rank);
+        rating.setScore1(ratingList.get(0) + rating.getScore1());
+        rating.setScore2(ratingList.get(1) + rating.getScore2());
+        rating.setScore3(ratingList.get(2) + rating.getScore3());
+        rating.setScore4(ratingList.get(3) + rating.getScore4());
+        rating.setScore5(ratingList.get(4) + rating.getScore5());
+        rating.setScore6(ratingList.get(5) + rating.getScore6());
+        rating.setScore7(ratingList.get(6) + rating.getScore7());
+        rating.setScore8(ratingList.get(7) + rating.getScore8());
+        rating.setScore9(ratingList.get(8) + rating.getScore9());
+        rating.setScore10(ratingList.get(9) + rating.getScore10());
         ratingRepository.save(rating);
         return ResponseEntity.ok().body("update rating successfully");
     }

@@ -13,9 +13,12 @@ public interface ItemClient {
     @RequestMapping(value="/id/{id}", method= RequestMethod.GET)
     Item getItemById(@PathVariable("id") Long itemId);
 
-    @RequestMapping(value="/delete/id/{id}")
+    @RequestMapping(value="/delete/id/{id}", method = RequestMethod.DELETE)
     void deleteItemById(@PathVariable("id") Long itemId);
 
-    @RequestMapping(value = "/add")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     Item postItem(@RequestBody Item item);
+
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    Item updateItemById(@RequestBody Item item);
 }
