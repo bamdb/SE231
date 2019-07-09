@@ -27,5 +27,8 @@ Sprint 1 (July.1-July.10)
     PS:
     前后端的衔接还不完全一致，login与register的功能不完善
     页面跳转的逻辑不太科学，在activity与itembrowser中有重复的地方
+    
+  July.9
+    在现有情况下完成了前端的逻辑部分，且前后端连通，开始写第一次迭代报告。
   
 
