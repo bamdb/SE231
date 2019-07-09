@@ -8,7 +8,10 @@ before_install:
 - chmod 600 ~/.ssh/id_rsa
 - cd code/frontend
 addons: 
-  ssh_known_hosts:202.120.40.8:30740
+  ssh_known_hosts:
+  - 202.120.40.8:30740
+  - 202.120.40.8:22
+  - 192.168.2.74:22
 install:
 - npm install
 script:
