@@ -4,7 +4,7 @@ spring:
       discovery:
         service-id: config
         enabled: true
-      name: topic, mysql
+      name: topic, mysql, mongo
 eureka:
   client:
     serviceUrl:

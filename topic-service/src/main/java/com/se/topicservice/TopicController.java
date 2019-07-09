@@ -1,6 +1,6 @@
 package com.se.topicservice;
 
-import com.se.topicservice.entity.Topic;
+import com.se.topicservice.entity.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +12,13 @@ public class TopicController {
     private TopicService topicService;
 
     @PostMapping(value="/add", produces="application/json")
-    public Topic postTopic(@RequestBody Topic topic) {
-        return topicService.postTopic(topic);
+    public Topic postTopic(@RequestBody TopicIn topicIn) {
+        return topicService.postTopic(topicIn);
+    }
+
+    @PostMapping(value="/add/reply/id/{topicId}", produces="application/json")
+    public TopicPage postReply(@PathVariable("topicId") Long topicId, @RequestBody ReplyIn replyIn) {
+        return topicService.postReply(topicId, replyIn);
     }
 
     @GetMapping(value ="/all", produces ="application/json")
