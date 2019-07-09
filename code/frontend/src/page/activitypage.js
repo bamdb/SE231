@@ -16,6 +16,7 @@ class Activitypage extends Component{
         super(props);
         this.state={
             username: this.props.username,
+            userid:1,
             activities: [],
             isloaded: false,
         }
@@ -23,7 +24,7 @@ class Activitypage extends Component{
 
     componentDidMount() {
         const _this=this;
-        axios.post("http://202.120.40.8:30741/activity/userid/1")
+        axios.get("http://202.120.40.8:30741/activity/userid/"+this.state.userid)
             .then(function (res) {
                 _this.setState({
                     activities: res.data,
@@ -42,11 +43,12 @@ class Activitypage extends Component{
                     <Grid item xs={2}></Grid>
 
                     <Grid item xs={8} >
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <Activitylist activities={this.state.activities} username={this.state.username}></Activitylist>
+                        <br/><br/><br/><br/>
+                        <Activitylist
+                            activities={this.state.activities}
+                            username={this.state.username}
+                            userid={this.state.userid}
+                        ></Activitylist>
                     </Grid>
                     <Grid item xs={2}></Grid>
                 </Grid>

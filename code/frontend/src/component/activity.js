@@ -42,11 +42,11 @@ class Activity extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userid: this.props.userid,
+            userId: this.props.userId,
             username: this.props.username,
             date: this.props.date,
             actType: this.props.actType,
-            itemid: this.props.itemid,
+            itemId: this.props.itemId,
             itemname: this.props.itemname,
             comment:this.props.comment,
             grade:0,
@@ -110,9 +110,9 @@ class Activity extends Component {
                 break;
         }
         /* 获得item中itemname */
-/*
+
         const _this=this;
-        axios.get("http://202.120.40.8:30741/item/id/"+_this.state.itemid.toString())
+        axios.get("http://202.120.40.8:30741/item/id/"+_this.state.itemId)
             .then(function (res) {
                 _this.setState({
                     itemname: res.data.itemname,
@@ -123,10 +123,10 @@ class Activity extends Component {
             })
 
         /* 获得grade */
-/*        axios.get("http://202.120.40.8:30741/rating/itemId/"+_this.state.itemid.toString())
+        axios.get("http://202.120.40.8:30741/rating/itemid/"+_this.state.itemId)
             .then(function (res) {
                 _this.setState({
-                    grade: res.data.tot_score_num,
+                    grade: res.data.avgScore,
                     loadGrade: true,
                 })
             })
@@ -134,7 +134,7 @@ class Activity extends Component {
 
             })
         /* 获得comment */
-  /*      axios.get("http://202.120.40.8:30741/comment/",
+ /*       axios.get("http://202.120.40.8:30741/comment/",
                     _this.state.itemid,
                     _this.state.userid
                     )
@@ -147,8 +147,8 @@ class Activity extends Component {
             .catch(function (error) {
 
             })
+*/
 
-   */
     }
 
 
@@ -175,7 +175,7 @@ class Activity extends Component {
                                         </Typography>
                                         <Grid container >
                                             <Grid item xs={6}>
-                                                <Typography variant="h6" component={Link} to={"/useriteminfopage"}>
+                                                <Typography variant="h6" color={"textPrimary"} component={Link} to={"/useriteminfopage/"+this.state.itemname}>
                                                     {this.state.itemname + " " }
                                                 </Typography>
                                             </Grid>
