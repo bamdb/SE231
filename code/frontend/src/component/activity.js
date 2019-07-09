@@ -42,77 +42,54 @@ class Activity extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userId: this.props.userId,
-            username: this.props.username,
-            date: this.props.date,
-            actType: this.props.actType,
-            itemId: this.props.itemId,
-            itemname: this.props.itemname,
+            itemId:1,
+            itemname:"",
             comment:this.props.comment,
             grade:0,
             loadItemName: false,
             loadComment: false,
             loadGrade: false,
-            status: "",
         }
+
+        this.formatNumber = this.formatNumber.bind(this);
+        this.formatTime = this.formatTime.bind(this);
 
     }
-/*
-    static defaultProps = {
-        username : "用户名",
-        date : "2000-1-1",
-        grade : "null",
-        comment : "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging\n" +
-            "                                    across all continents except Antarctica",
-        status : "看过",
-        itemname : "条目名"
-    };
 
- */
+
+    formatNumber(n) {
+        n = n.toString()
+        return n[1] ? n : '0' + n
+    }
+
+    formatTime(number,format) {
+
+        var formateArr  = ['Y','M','D','h','m','s'];
+        var returnArr   = [];
+
+        var date = new Date(number * 1000);
+        returnArr.push(date.getFullYear());
+        returnArr.push(this.formatNumber(date.getMonth() + 1));
+        returnArr.push(this.formatNumber(date.getDate()));
+
+        returnArr.push(this.formatNumber(date.getHours()));
+        returnArr.push(this.formatNumber(date.getMinutes()));
+        returnArr.push(this.formatNumber(date.getSeconds()));
+
+        for (var i in returnArr)
+        {
+            format = format.replace(formateArr[i], returnArr[i]);
+        }
+        return format;
+    }
+
+
+
 
     componentDidMount() {
-        
-        switch (Number(this.state.actType)) {
-            case 0:
-                this.setState({
-                    status:"未收藏"
-                });
-                break;
-            case 1:
-                this.setState({
-                    status:"想看"
-                });
-                break;
-            case 2:
-                this.setState({
-                    status:"在看"
-                });
-                break;
-            case 3:
-                this.setState({
-                    status:"看过"
-                });
-                break;
-            case 4:
-                this.setState({
-                    status:"搁置"
-                });
-                break;
-            case 5:
-                this.setState({
-                    status:"抛弃"
-                });
-                break;
-            default:
-                this.setState({
-                    status:"Status出错"
-                });
-                break;
-        }
         /* 获得item中itemname */
-
         const _this=this;
-        axios.get("http://202.120.40.8:30741/item/id/"+_this.state.itemId)
+        axios.get("http://202.120.40.8:30741/item/id/"+this.state.itemId)
             .then(function (res) {
                 _this.setState({
                     itemname: res.data.itemname,
@@ -123,7 +100,7 @@ class Activity extends Component {
             })
 
         /* 获得grade */
-        axios.get("http://202.120.40.8:30741/rating/itemid/"+_this.state.itemId)
+        axios.get("http://202.120.40.8:30741/rating/itemid/"+this.state.itemId)
             .then(function (res) {
                 _this.setState({
                     grade: res.data.avgScore,
@@ -134,25 +111,49 @@ class Activity extends Component {
 
             })
         /* 获得comment */
- /*       axios.get("http://202.120.40.8:30741/comment/",
-                    _this.state.itemid,
-                    _this.state.userid
-                    )
-            .then(function (res) {
-                _this.setState({
-                    comment: res.data.content,
-                    loadComment: true,
-                })
-            })
-            .catch(function (error) {
+        /*       axios.get("http://202.120.40.8:30741/comment/",
+                           _this.state.itemid,
+                           _this.state.userid
+                           )
+                   .then(function (res) {
+                       _this.setState({
+                           comment: res.data.content,
+                           loadComment: true,
+                       })
+                   })
+                   .catch(function (error) {
 
-            })
-*/
+                   })
+       */
 
     }
 
 
     render() {
+        var status;
+        switch (Number(this.props.actType)) {
+            case 0:
+                status="未收藏";
+                break;
+            case 1:
+                status="想看";
+                break;
+            case 2:
+                status="在看";
+                break;
+            case 3:
+                status="看过";
+                break;
+            case 4:
+                status="搁置";
+                break;
+            case 5:
+                status="抛弃";
+                break;
+            default:
+                status="Status出错";
+                break;
+        }
 
         return(
             <Container fixed className={useStyles.root}>
@@ -162,7 +163,7 @@ class Activity extends Component {
                         <Avatar alt="Remy Sharp" src="img/3.jpg" className={useStyles.avatar} />
                         <br/>
                         <Typography variant="h5" component="h2">
-                            {this.state.username}
+                            {this.props.username}
                         </Typography>
                     </Grid>
                     <Grid item xs={10} justify="center">
@@ -170,8 +171,9 @@ class Activity extends Component {
                             <Grid container >
                                 <Grid item xs={9} justify="center">
                                     <CardContent>
+                                        {this.state.itemId}
                                         <Typography color="textSecondary" gutterBottom>
-                                            在 {this.state.date}
+                                            在 {this.formatTime(this.props.actType,'Y/M/D')}
                                         </Typography>
                                         <Grid container >
                                             <Grid item xs={6}>
@@ -181,7 +183,7 @@ class Activity extends Component {
                                             </Grid>
                                             <Grid item xs={6}>
                                                 <Typography variant="subtitle1" color={"textSecondary"}>
-                                                    {this.state.status}
+                                                    {status}
                                                 </Typography>
                                             </Grid>
                                         </Grid>

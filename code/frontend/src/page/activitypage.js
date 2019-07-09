@@ -15,16 +15,16 @@ class Activitypage extends Component{
     constructor(props){
         super(props);
         this.state={
-            username: this.props.username,
+            username: "Hyy",
             userid:1,
             activities: [],
             isloaded: false,
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const _this=this;
-        axios.get("http://202.120.40.8:30741/activity/userid/"+this.state.userid)
+        axios.get("http://202.120.40.8:30741/activity/id/"+this.state.userid)    //还要修改
             .then(function (res) {
                 _this.setState({
                     activities: res.data,
@@ -48,7 +48,7 @@ class Activitypage extends Component{
                             activities={this.state.activities}
                             username={this.state.username}
                             userid={this.state.userid}
-                        ></Activitylist>
+                            />
                     </Grid>
                     <Grid item xs={2}></Grid>
                 </Grid>
