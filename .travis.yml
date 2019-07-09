@@ -8,7 +8,3 @@ install:
 - npm install
 script:
 - npm test
-after_success:
-- openssl aes-256-cbc -K $encrypted_955874712cff_key -iv $encrypted_955874712cff_iv
-  -in key_202.120.40.8_30740.pub.enc -out /usr/tmpssh/key_202.120.40.8_30740.pub -d
-- chmod 600 ~/.ssh/id_rsa
