@@ -23,3 +23,6 @@
 # 2019-7-8
 * deploy frontend
 * connect frontend and backend
+# 2019-7-9
+* fix bugs in test
+* finishing CD
