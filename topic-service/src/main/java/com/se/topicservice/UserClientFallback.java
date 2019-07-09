@@ -9,15 +9,19 @@ import java.util.List;
 
 @Component
 public class UserClientFallback implements UserClient{
+    private List<User> userList = new ArrayList<>();
 
     @Override
     public User getUserById(Long userId) {
         if (userId == 0) {
             return null;
         }
-        User user = new User();
-        user.setId(userId);
-        return user;
+        for (User user: userList) {
+            if (user.getId().equals(userId)) {
+                return user;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -25,13 +29,20 @@ public class UserClientFallback implements UserClient{
         Iterable<User> userIterable = new Iterable<User>() {
             @Override
             public Iterator<User> iterator() {
-                List<User> userList = new ArrayList<>();
-                User user = new User();
-                user.setId(1L);
-                userList.add(user);
                 return userList.iterator();
             }
         };
         return userIterable;
+    }
+
+    @Override
+    public User postUser(User user) {
+        for (User userIter : userList) {
+            if(user.getId().equals(userIter.getId())) {
+                return user;
+            }
+        }
+        userList.add(user);
+        return null;
     }
 }

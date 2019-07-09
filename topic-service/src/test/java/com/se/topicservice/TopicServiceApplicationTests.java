@@ -58,33 +58,6 @@ public class TopicServiceApplicationTests {
     UserClient userClient;
 
     @Test
-    public void updateTest() throws Exception {
-        mvc.perform(post("/add")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"userId\":1, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
-                .andExpect(status().isOk());
-        mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"id\":0,\"title\":\"modified\"}"))
-                .andExpect(status().isOk());
-        Topic topic = topicService.selectAll().iterator().next();
-        mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"id\":"+topic.getId()+", \"title\":\"modified\"}"))
-                .andExpect(status().isOk());
-        Assert.assertEquals("modified", topicService.selectAll().iterator().next().getTitle());
-    }
-
-
-    @Test
-    public void deleteTest() throws Exception {
-        if (topicService.selectAll().iterator().hasNext()) {
-            Long id = topicService.selectAll().iterator().next().getId();
-            mvc.perform(delete("/delete/id/"+id))
-                    .andExpect(status().isOk());
-            Assert.assertNull(topicService.selectById(id));
-        }
-    }
-
-    @Test
     public void controllerTest() throws Exception {
         mvc.perform(post("/add")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -95,10 +68,30 @@ public class TopicServiceApplicationTests {
                 .content("{\"userId\":null, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
                 .andExpect(status().isOk());
 
-        User user = userClient.getAllUsers().iterator().next();
+        User user = new User();
+        user.setId(1L);
+        user.setRole(1);
+        user.setUsername("a");
+        user.setImgUrl(null);
+        userClient.postUser(user);
         mvc.perform(post("/add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"userId\":"+user.getId()+", \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
+                .andExpect(status().isOk());
+
+        mvc.perform(post("/add/reply?userId="+user.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("A reply"))
+                .andExpect(status().isOk());
+
+        Topic topic = topicService.selectAll().iterator().next();
+        mvc.perform(post("/add/reply?topicId="+topic.getId()+"&userId=0")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("A reply"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add/reply?topicId="+topic.getId()+"&userId="+topic.getUserId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("A reply"))
                 .andExpect(status().isOk());
 
         mvc.perform(get("/all").contentType(MediaType.APPLICATION_JSON))
@@ -107,6 +100,68 @@ public class TopicServiceApplicationTests {
         mvc.perform(get("/id/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    public void updateTest() throws Exception {
+        User user = new User();
+        user.setId(1L);
+        user.setRole(1);
+        user.setUsername("a");
+        user.setImgUrl(null);
+        userClient.postUser(user);
+
+        mvc.perform(post("/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"userId\":"+user.getId()+", \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
+                .andExpect(status().isOk());
+
+        mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
+                .content("{\"id\":0,\"title\":\"modified\"}"))
+                .andExpect(status().isOk());
+
+        Topic topic = topicService.selectAll().iterator().next();
+        mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
+                .content("{\"id\":"+topic.getId()+", \"title\":\"modified\"}"))
+                .andExpect(status().isOk());
+        Assert.assertEquals("modified", topicService.selectAll().iterator().next().getTitle());
+
+
+    }
+
+    @Test
+    public void deleteTest() throws Exception {
+        User user = new User();
+        user.setId(1L);
+        user.setRole(1);
+        user.setUsername("a");
+        user.setImgUrl(null);
+        userClient.postUser(user);
+
+        mvc.perform(post("/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"userId\":"+user.getId()+", \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
+                .andExpect(status().isOk());
+
+        Topic topic = topicService.selectAll().iterator().next();
+        mvc.perform(post("/add/reply?topicId="+topic.getId()+"&userId="+topic.getUserId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("A reply"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add/reply?topicId="+topic.getId()+"&userId="+topic.getUserId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("A reply"))
+                .andExpect(status().isOk());
+
+        if (topicService.selectAll().iterator().hasNext()) {
+            Long id = topicService.selectAll().iterator().next().getId();
+            // not completed
+            mvc.perform(delete("/delete/reply?topicId="+topic.getId()+"&userId="+topic.getUserId()))
+                    .andExpect(status().isOk());
+            Assert.assertNull(topicService.selectById(id));
+        }
+    }
+
+
 
     @Test
     public void testApplication() {
