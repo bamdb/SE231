@@ -38,14 +38,15 @@ class Userinfo extends Component {
                 this.setState({username:response.data.username,password:response.data.password,email:response.data.mail})
             }.bind(this)
         )
-
-
     }
+
     componentDidMount() {
     }
+
     handleedit(){
         this.setState({edit:true});
     }
+
     handlesave(e){
         /*data of the image*/
 

@@ -19,6 +19,7 @@ import Topicdetailpage from "./page/topicdetailpage";
 import Userinfopage from "./page/userinfopage"
 import Useriteminfopage from "./page/useriteminfopage"
 import Activitypage from "./page/activitypage";
+import Resetpwdpage from "./page/resetpwdpage";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path={'/useriteminfopage/*'} component={Useriteminfopage}></Route>
             <Route path={"/userinfopage"} component={Userinfopage}></Route>
             <Route path={"/activitypage"} component={Activitypage}></Route>
+            <Route path={'/resetpassword'} component={Resetpwdpage}></Route>
         </Router>
     </div>
   );
