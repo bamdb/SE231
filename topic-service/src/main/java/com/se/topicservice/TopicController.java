@@ -1,6 +1,6 @@
 package com.se.topicservice;
 
-import com.se.topicservice.entity.Topic;
+import com.se.topicservice.entity.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +12,14 @@ public class TopicController {
     private TopicService topicService;
 
     @PostMapping(value="/add", produces="application/json")
-    public Topic postTopic(@RequestBody Topic topic) {
-        return topicService.postTopic(topic);
+    public Topic postTopic(@RequestBody TopicIn topicIn) {
+        return topicService.postTopic(topicIn);
+    }
+
+    @PostMapping(value="/add/reply", produces="application/json")
+    public TopicPage postReply(@RequestParam("topicId") Long topicId,
+                               @RequestParam("userId") Long userId, @RequestBody String topicContent) {
+        return topicService.postReply(topicId, userId, topicContent);
     }
 
     @GetMapping(value ="/all", produces ="application/json")
@@ -22,7 +28,7 @@ public class TopicController {
     }
 
     @GetMapping(value="/id/{topicId}", produces="application/json")
-    public Topic getTopicById(@PathVariable("topicId") Long topicId) {
+    public TopicPage getTopicById(@PathVariable("topicId") Long topicId) {
         return topicService.selectById(topicId);
     }
 
@@ -34,6 +40,11 @@ public class TopicController {
     @DeleteMapping(value="/delete/id/{topicId}")
     public ResponseEntity<?> deleteTopicById(@PathVariable("topicId") Long topicId) {
         return topicService.deleteTopicById(topicId);
+    }
+
+    @DeleteMapping(value="/delete/reply")
+    public ResponseEntity<?> deleteReplyById(@RequestParam("topicId") Long topicId, @RequestParam("replyId") Long replyId) {
+        return topicService.deleteReplyById(topicId, replyId);
     }
 
 }

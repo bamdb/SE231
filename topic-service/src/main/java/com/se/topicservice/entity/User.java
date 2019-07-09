@@ -7,8 +7,6 @@ import javax.persistence.*;
 public class User {
     private Long id;
     private String username;
-    private String password;
-    private String mail;
     private String imgUrl;
     private Integer role;
 
@@ -26,21 +24,12 @@ public class User {
     }
 
 
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public void setPassword(String password) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        this.password = encoder.encode(password);
     }
 
     public User() {

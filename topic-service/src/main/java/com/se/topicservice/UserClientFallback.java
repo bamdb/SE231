@@ -9,39 +9,29 @@ import java.util.List;
 
 @Component
 public class UserClientFallback implements UserClient{
+    private List<User> userList = new ArrayList<>();
 
     @Override
     public User getUserById(Long userId) {
         if (userId == 0) {
             return null;
         }
-        User user = new User();
-        user.setId(userId);
-        user.setMail("mail@mail.com");
-        user.setPassword("123");
-        user.setRole(0);
-        user.setUsername("mock");
-        user.setImgUrl(null);
-        return user;
+        for (User user: userList) {
+            if (user.getId().equals(userId)) {
+                return user;
+            }
+        }
+        return null;
     }
 
     @Override
-    public Iterable<User> getAllUsers() {
-        Iterable<User> userIterable = new Iterable<User>() {
-            @Override
-            public Iterator<User> iterator() {
-                List<User> userList = new ArrayList<>();
-                User user = new User();
-                user.setId(1L);
-                user.setMail("mail@mail.com");
-                user.setPassword("123");
-                user.setRole(0);
-                user.setUsername("mock");
-                user.setImgUrl(null);
-                userList.add(user);
-                return userList.iterator();
+    public User postUser(User user) {
+        for (User userIter : userList) {
+            if(user.getId().equals(userIter.getId())) {
+                return user;
             }
-        };
-        return userIterable;
+        }
+        userList.add(user);
+        return null;
     }
 }

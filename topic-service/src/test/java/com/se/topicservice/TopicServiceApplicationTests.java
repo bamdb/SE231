@@ -58,47 +58,42 @@ public class TopicServiceApplicationTests {
     UserClient userClient;
 
     @Test
-    public void updateTest() throws Exception {
-        mvc.perform(post("/add")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"userId\":1, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
-                .andExpect(status().isOk());
-        mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"id\":0,\"title\":\"modified\"}"))
-                .andExpect(status().isOk());
-        Topic topic = topicService.selectAll().iterator().next();
-        mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"id\":"+topic.getId()+", \"title\":\"modified\"}"))
-                .andExpect(status().isOk());
-        Assert.assertEquals("modified", topicService.selectAll().iterator().next().getTitle());
-    }
-
-
-    @Test
-    public void deleteTest() throws Exception {
-        if (topicService.selectAll().iterator().hasNext()) {
-            Long id = topicService.selectAll().iterator().next().getId();
-            mvc.perform(delete("/delete/id/"+id))
-                    .andExpect(status().isOk());
-            Assert.assertNull(topicService.selectById(id));
-        }
-    }
-
-    @Test
     public void controllerTest() throws Exception {
         mvc.perform(post("/add")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"userId\":0, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
+                .content("{\"topic\":{\"userId\":0, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}, " +
+                        "\"topicContent\":\"This is the first topic in bamdb\"}"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"userId\":null, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
+                .content("{\"topic\":{\"userId\":null, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}, " +
+                        "\"topicContent\":\"This is the first topic in bamdb\"}"))
                 .andExpect(status().isOk());
 
-        User user = userClient.getAllUsers().iterator().next();
+        User user = new User();
+        user.setId(1L);
+        user.setRole(1);
+        user.setUsername("a");
+        user.setImgUrl(null);
+        userClient.postUser(user);
         mvc.perform(post("/add")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"userId\":"+user.getId()+", \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}"))
+                .content("{\"topic\":{\"userId\":"+user.getId()+", \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}, " +
+                        "\"topicContent\":\"This is the first topic in bamdb\"}"))
+                .andExpect(status().isOk());
+
+        Topic topic = topicService.selectAll().iterator().next();
+        mvc.perform(post("/add/reply?topicId="+topic.getId()+"&userId=0")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("A reply"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add/reply?topicId=0&userId="+topic.getUserId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("A reply"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add/reply?topicId="+topic.getId()+"&userId="+topic.getUserId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("A reply"))
                 .andExpect(status().isOk());
 
         mvc.perform(get("/all").contentType(MediaType.APPLICATION_JSON))
@@ -107,6 +102,111 @@ public class TopicServiceApplicationTests {
         mvc.perform(get("/id/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    public void updateTest() throws Exception {
+        User user = new User();
+        user.setId(1L);
+        user.setRole(1);
+        user.setUsername("a");
+        user.setImgUrl(null);
+        userClient.postUser(user);
+
+        mvc.perform(post("/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"topic\":{\"userId\":"+user.getId()+", \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}, " +
+                        "\"topicContent\":\"This is the first topic in bamdb\"}"))
+                .andExpect(status().isOk());
+
+        mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
+                .content("{\"id\":0,\"title\":\"modified\"}"))
+                .andExpect(status().isOk());
+
+        Topic topic = topicService.selectAll().iterator().next();
+        mvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON)
+                .content("{\"id\":"+topic.getId()+", \"title\":\"modified\"}"))
+                .andExpect(status().isOk());
+        Assert.assertEquals("modified", topicService.selectAll().iterator().next().getTitle());
+
+
+    }
+
+    @Test
+    public void deleteTest() throws Exception {
+        User user = new User();
+        user.setId(1L);
+        user.setRole(1);
+        user.setUsername("a");
+        user.setImgUrl(null);
+        userClient.postUser(user);
+
+        mvc.perform(post("/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"topic\":{\"userId\":"+user.getId()+", \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}, " +
+                        "\"topicContent\":\"This is the first topic in bamdb\"}"))
+                .andExpect(status().isOk());
+
+        Topic topic = topicService.selectAll().iterator().next();
+        mvc.perform(post("/add/reply?topicId="+topic.getId()+"&userId="+topic.getUserId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("A reply"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add/reply?topicId="+topic.getId()+"&userId="+topic.getUserId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("A reply"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add/reply?topicId="+topic.getId()+"&userId="+topic.getUserId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("A reply"))
+                .andExpect(status().isOk());
+
+
+        mvc.perform(delete("/delete/reply?topicId=0&replyId=1"))
+                .andExpect(status().isOk());
+        mvc.perform(delete("/delete/reply?topicId="+topic.getId()+"&replyId=10"))
+                .andExpect(status().isOk());
+        mvc.perform(delete("/delete/reply?topicId="+topic.getId()+"&replyId=1"))
+                .andExpect(status().isOk());
+        mvc.perform(delete("/delete/reply?topicId="+topic.getId()+"&replyId=1"))
+                .andExpect(status().isOk());
+        mvc.perform(delete("/delete/reply?topicId="+topic.getId()+"&replyId=1"))
+                .andExpect(status().isOk());
+        mvc.perform(delete("/delete/reply?topicId="+topic.getId()+"&replyId=1"))
+                .andExpect(status().isOk());
+        mvc.perform(delete("/delete/reply?topicId="+topic.getId()+"&replyId=1"))
+                .andExpect(status().isOk());
+
+        mvc.perform(delete("/delete/id/"+topic.getId()))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void userClientTest() {
+        User user = new User();
+        user.setId(10L);
+        user.setRole(1);
+        user.setUsername("a");
+        user.setImgUrl(null);
+        userClient.postUser(user);
+        User user1 = new User();
+        user1.setId(1L);
+        user1.setRole(1);
+        user1.setUsername("a");
+        user1.setImgUrl(null);
+        userClient.postUser(user1);
+        User user2 = new User();
+        user2.setId(1L);
+        user2.setRole(1);
+        user2.setUsername("a");
+        user2.setImgUrl(null);
+        userClient.postUser(user2);
+
+        userClient.getUserById(0L);
+        userClient.getUserById(1L);
+        userClient.getUserById(100L);
+    }
+
+
 
     @Test
     public void testApplication() {
