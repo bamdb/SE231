@@ -27,3 +27,7 @@
 * fix bugs in test
 * finishing CD
 * writing document for the first sprint
+# 2019-7-10
+* upgrade test
+* write document
+* fix frontend bugs
