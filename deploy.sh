@@ -1,6 +1,8 @@
 #!/bin/sh
 ps -ef | grep java | grep -v grep | awk '{print $2}' | xargs kill -9
 sleep 3
+git pull
+sleep 20
 cd config-server
 nohup mvn spring-boot:run > bamdb.log &
 sleep 20

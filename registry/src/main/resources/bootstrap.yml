@@ -4,7 +4,10 @@ spring:
       name: registry
       uri: http://localhost:8888
       fail-fast: true
-
+  security:
+    user:
+      password: bamdb
+      name: bamdb
 eureka:
   instance:
     prefer-ip-address: true
