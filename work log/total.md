@@ -83,5 +83,23 @@
   * building CD for backend
 * huangyuyang:
   * 在现有情况下完成了前端的逻辑部分，且前后端连通，开始写第一次迭代报告
+# 2019-7-10
+* shenruien:
+  * upgrade test
+  * write document
+  * fix frontend bugs
+* yuyajie:
+  * 架构文档
+  * 负载均衡
+* wangzulai: 
+  * write docs
+  * write locustfile.py for performance test
+  * work on auto evaluation script
+  * deploy backend on another server
+* huangyuyang:
+  * realize frontend api
+  * write document
+
+
 
 
