@@ -1,4 +1,3 @@
-"Method","Name","# requests","# failures","Median response time","Average response time","Min response time","Max response time","Average Content Size","Requests/s"
 "GET","/item/all",420,0,13,23,6,430,417,43.12
 "GET","/item/id/1",149,0,12,15,7,223,137,15.30
 "GET","/item/id/2",124,0,12,20,7,444,138,12.73
