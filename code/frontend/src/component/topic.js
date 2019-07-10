@@ -54,11 +54,12 @@ class Topic extends Component {
     }
 
     render(){
+        var url='/topicdetailpage/'+this.state.topicId;
         return(
             <List component={"nav"} className={useStyles.root} aria-label="Mailbox folders">
                 <Divider />
                 <ListItem>
-                    <Link to={'/topicdetailpage'}><ListItemText primary={this.state.content} /></Link>
+                    <Link to={url}><ListItemText primary={this.state.content} /></Link>
                     <ListItemText primary={this.state.author} />
                     <ListItemText primary={this.state.replyTotal+" replies"} />
                     <ListItemText primary={this.state.date} />
