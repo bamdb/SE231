@@ -1,3 +1,7 @@
+/*
+ * 前作、续集、相关作品list 渲染
+ */
+
 import React, { Component } from 'react';
 import Paper from "@material-ui/core/Paper";
 import {makeStyles} from "@material-ui/core";
@@ -5,11 +9,16 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 
 /*
- * 条目简略信息
- * itemName 名称
+ * Briefitem类  条目简略信息渲染
+ *
+ * 目前只是界面原型
+ * 逻辑未完成
+ *
+ * 传入数据
+ * props.itemName 名称
+ * props.briefIntro 简介
+ * props.fansTotal 关注人数
  * img 封面
- * briefIntro 简介
- * fansTotal 关注人数
  */
 
 class Briefitem extends Component {

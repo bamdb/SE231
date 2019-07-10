@@ -50,11 +50,11 @@ class Topic extends Component {
         }
         if(this.props.topicId!==undefined)
         {
-            this.setState({topicId:this.props.topicId,content:this.props.content,author:this.props.author});
+            this.setState({topicId:this.props.topicId,content:this.props.content,author:this.props.author,
+                replyTotal:this.props.replyTotal,date:this.props.date});
         }
 
     }
-
     render(){
         var url='/topicdetailpage/'+this.state.topicId;
         var content=this.state.content;
@@ -67,7 +67,7 @@ class Topic extends Component {
                     <ListItemText primary={"   "} />
                     <ListItemText primary={this.state.author} />
                     <ListItemText primary={this.state.replyTotal+" replies"} />
-                    <ListItemText primary={this.state.date} />
+                    <ListItemText primary={this.state.date.split("T")[0]} />
                 </ListItem>
                 <Divider />
             </List>

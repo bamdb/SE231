@@ -70,7 +70,7 @@ class Listitem extends Component {
                                     <Grid container spacing={1}>
                                         <Grid item xs={4}>
                                             <Typography component="p" align="center">
-                                                {item[i].pubTime}
+                                                {item[i].pubTime.split("T")[0]}
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={4}>
@@ -102,7 +102,7 @@ class Listitem extends Component {
         }
 
         return(
-            <div id={"mainlistitem"}>
+            <div id={"mainlistitem"} >
                 {rows}
             </div>
         );
@@ -112,21 +112,13 @@ class Listitem extends Component {
 class Score extends Component{
     constructor(props){
         super(props);
-        this.state = {
-            id : this.props.id,
-            score:[],
-            isloaded:false,
-        }
+        this.state = {data:[], isloaded:false}
     }
-    componentDidMount() {
+    componentWillMount() {
         const _this=this;
-        axios.post("htto://", this.state.id)
+        axios.get("http://202.120.40.8:30741/rating/itemid/"+this.props.id)
             .then(function (res) {
-                _this.setState(
-                    {
-                        score: res.data,
-                        isloaded: true,
-                    }
+                _this.setState({data: res.data, isloaded: true}
                 );
             })
             .catch(function (error) {
@@ -142,11 +134,9 @@ class Score extends Component{
                 </Typography>
             </Grid>
             <Grid item xs={3}>
-                <Paper className={useStyles.paper}>
                     <Typography variant="h5" component="h3" align="center">
-                        {this.state.score}
+                        {this.state.data.avgScore}
                     </Typography>
-                </Paper>
             </Grid>
             <Grid item xs={3}>
                 <Typography variant="h5" component="h3" align="center">
@@ -154,11 +144,9 @@ class Score extends Component{
                 </Typography>
             </Grid>
             <Grid item xs={3}>
-                <Paper className={useStyles.paper}>
                     <Typography variant="h5" component="h3" align="center">
-                        {this.props.rank}
+                        {this.state.data.rank}
                     </Typography>
-                </Paper>
             </Grid>
         </Grid>
         );

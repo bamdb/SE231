@@ -15,12 +15,7 @@ addons:
 install:
 - npm update
 - npm install
-- npm install codecov
-- npm install coveralls --save-dev
 script:
 - npm test
-#- istanbul cover ./node_modules/lab/bin/lab --report lcovonly  -- -l  && codecov
-#- jest && codecov
-- npm run coveralls
 after_success:
 - ssh -p 30740 ubuntu@202.120.40.8 < script.sh
