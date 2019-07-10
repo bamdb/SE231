@@ -34,19 +34,11 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/component/*.{js,jsx,ts,tsx}",
-      "src/*.{js,jsx,ts,tsx}",
+      "src/**/*.{js,jsx,ts,tsx}",
       "!<rootDir>/node_modules/",
-      "!<rootDir>/path/to/dir/",
-      "!<rootDir>/src/page/",
-      "!<rootDir>/src/css/",
-      "!<rootDir>/src/_test_/"
+      "!<rootDir>/path/to/dir/"
     ],
-
-    "coverageReporters": [
-      "text"
-    ]
-
+    "coverageReporters": ["text"]
   },
   "browserslist": {
     "production": [

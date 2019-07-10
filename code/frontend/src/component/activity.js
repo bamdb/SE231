@@ -123,6 +123,11 @@ class Activity extends Component {
                 status="Status出错";
                 break;
         }
+        var time="2019-7-1"
+        if(this.props.date!=undefined)
+        {
+            time=this.props.date.split("T")[0];
+        }
 
         return(
             <Container fixed className={useStyles.root}>
@@ -141,7 +146,7 @@ class Activity extends Component {
                                 <Grid item xs={9} justify="center">
                                     <CardContent>
                                         <Typography color="textSecondary" gutterBottom>
-                                            在 {this.props.date.split("T")[0]}
+                                            在 {time}
                                         </Typography>
                                         <Grid container >
                                             <Grid item xs={6}>
