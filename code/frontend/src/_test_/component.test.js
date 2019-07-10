@@ -36,12 +36,7 @@ import TopicList from "../component/topiclist";
 import TopItem from "../component/topitem";
 import TopItemList from "../component/topitemlist";
 import Userinfo from "../component/userinfo";
-it('_test_ tag', () => {
-    const testrenderer=TestRenderer.create(<Tag/>);
-   /* const testinstance=testrenderer.root;
-    let tree = testrenderer.toJSON();
-    expect(tree).toMatchSnapshot();*/
-});
+
 it('_test_ activity', () => {
 
     const testrenderer=TestRenderer.create(<StaticRouter><Activity/></StaticRouter>);
@@ -148,6 +143,7 @@ it('_test_ reply', () => {
 });
 it('_test_ scheduletable', () => {
     const testrenderer=TestRenderer.create(<Scheduletable/>);
+    const testrenderer1=TestRenderer.create(<Scheduletable readstat={[0,[1,0,1,0],0,1]}/>);
    /* const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
@@ -158,6 +154,10 @@ it('_test_ search', () => {
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
+it('_test_ tag',()=>{
+    const testrenderer=TestRenderer.create(<StaticRouter><Tag/></StaticRouter>);
+    const testrenderer1=TestRenderer.create(<StaticRouter><Tag select={true}/></StaticRouter>);
+})
 it('_test_ topic', () => {
     const testrenderer=TestRenderer.create(<StaticRouter><Topic/></StaticRouter>);
     /*const testinstance=testrenderer.root;
