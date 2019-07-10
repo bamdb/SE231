@@ -6,11 +6,9 @@ import Container from '@material-ui/core/Container';
 import Avatar from "@material-ui/core/Avatar";
 import {Card} from "@material-ui/core";
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
 import {Link} from 'react-router-dom';
-import Paper from "@material-ui/core/Paper";
 import axios from 'axios';
 
 const useStyles = makeStyles({
@@ -89,7 +87,7 @@ class Activity extends Component {
     componentDidMount() {
         /* 获得item中itemname */
         const _this=this;
-        axios.get("http://202.120.40.8:30741/item/id/"+this.state.itemId)
+        axios.get("http://202.120.40.8:30741/item/id/"+this.props.itemId)
             .then(function (res) {
                 _this.setState({
                     itemname: res.data.itemname,
@@ -100,7 +98,7 @@ class Activity extends Component {
             })
 
         /* 获得grade */
-        axios.get("http://202.120.40.8:30741/rating/itemid/"+this.state.itemId)
+        axios.get("http://202.120.40.8:30741/rating/itemid/"+this.props.itemId)
             .then(function (res) {
                 _this.setState({
                     grade: res.data.avgScore,
@@ -171,13 +169,13 @@ class Activity extends Component {
                             <Grid container >
                                 <Grid item xs={9} justify="center">
                                     <CardContent>
-                                        {this.state.itemId}
+                                        {this.props.userId}
                                         <Typography color="textSecondary" gutterBottom>
                                             在 {this.formatTime(this.props.actType,'Y/M/D')}
                                         </Typography>
                                         <Grid container >
                                             <Grid item xs={6}>
-                                                <Typography variant="h6" color={"textPrimary"} component={Link} to={"/useriteminfopage/"+this.state.itemname}>
+                                                <Typography variant="h6" color={"textPrimary"} component={Link} to={"/useriteminfopage/"+this.state.itemId}>
                                                     {this.state.itemname + " " }
                                                 </Typography>
                                             </Grid>

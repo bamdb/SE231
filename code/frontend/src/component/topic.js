@@ -41,7 +41,7 @@ class Topic extends Component {
         }
     }
     componentWillMount() {
-        if(window.location.href.split("#")[1]!=undefined)
+        if(window.location.href.split("#")[1]!==undefined)
         {
             var x = window.location.href.split("#")[1].split("/")[1];
             console.log(x);
@@ -54,7 +54,7 @@ class Topic extends Component {
             <List component={"nav"} className={useStyles.root} aria-label="Mailbox folders">
                 <Divider />
                 <ListItem>
-                    <Button component={Link} to={'/topicdetailpage'} ><ListItemText primary={this.state.content} /></Button>
+                    <Button component={Link} to={'/topicdetailpage/'+this.state.topicId} ><ListItemText primary={this.state.content} /></Button>
                     <ListItemText primary={this.state.author} />
                     <ListItemText primary={this.state.replyTotal+" replies"} />
                     <ListItemText primary={this.state.date} />

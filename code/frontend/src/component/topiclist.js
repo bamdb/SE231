@@ -45,7 +45,7 @@ class TopicList extends Component {
     render(){
         var topics=this.state.topics;
         var item=[];
-        if(topics!=undefined)
+        if(topics!==undefined)
         {
             for(var i=0;i<topics.length;++i)
             {

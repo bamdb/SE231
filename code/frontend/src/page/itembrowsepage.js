@@ -30,7 +30,7 @@ class Itembrowsepage extends Component{
         this.setState({value:newvalue})
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const _this = this;
         axios.get(
             "http://202.120.40.8:30741/item/all"
@@ -51,12 +51,11 @@ class Itembrowsepage extends Component{
 
     render(){
         return(
-
             <Grid container direction={"column"} >
                 <Grid item xs={12}><Navigation/></Grid>
                 <Grid item xs={12}>
                     <Grid container>
-                        <Grid item xs={1}></Grid>
+                        <Grid item xs={1} />
                         <Grid item xs={11}>
                             <Tabs  value={this.state.value} onChange={this.handleChange}>
                                 <Tab label="全部" />
@@ -68,21 +67,20 @@ class Itembrowsepage extends Component{
                 </Grid>
                 <Grid item xs={12}>
                 <Grid container direction={"row"} alignItems={"center"}>
-                    <Grid item xs={1}></Grid>
+                    <Grid item xs={1} />
                     <Grid item xs={2}>
                         <Tag select={true} tags={["热血","王道"]}/>
                     </Grid>
-                    <Grid item xs={1}></Grid>
+                    <Grid item xs={1} />
                     <Grid item xs={7} >
                         <br/>
                         <br/>
                         <br/>
+                        <Listitem itemList={this.state.ItemList}/>
                         <br/>
-                        <Listitem itemList={this.state.ItemList} ></Listitem>
-                        <br/>
-                        <Pagetable></Pagetable>
+                        <Pagetable />
                     </Grid>
-                    <Grid item xs={1}></Grid>
+                    <Grid item xs={1} />
                 </Grid>
                 </Grid>
             </Grid>
