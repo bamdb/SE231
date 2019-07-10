@@ -11,7 +11,10 @@ addons:
   ssh_known_hosts: 202.120.40.8:30740
 install:
 - npm install
+- npm install codecov
 script:
 - npm test
+- istanbul cover ./node_modules/lab/bin/lab --report lcovonly  -- -l  && codecov
+- jest && codecov
 after_success:
 - ssh -p 30740 ubuntu@202.120.40.8 < script.sh
