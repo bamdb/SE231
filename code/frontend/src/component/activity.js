@@ -1,4 +1,11 @@
-/* 图片 未完成 */
+/*
+ * 用户动态
+ * 渲染某一用户对单个item的收藏状态
+ * eg. id为1的用户想看评分为7.12766的《三体》
+ *
+ * 图片调取渲染 未完成
+ *
+ */
 
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
@@ -30,17 +37,15 @@ const useStyles = makeStyles({
 /*
 * 需要传入的props（包装成json后可以简化）
 * props.username : 用户名
+* props.userId : 用户id
 * props.date : 用户收藏时间
-* props.status : 对条目的新收藏状态（如 看过）
-* props.grade : 用户评分
-* props.comment : 用户简评
-* props.itemname : 条目名
+* props.actType : 对条目的新收藏状态（int类型）
+* props.itemId : 条目id
 */
 class Activity extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            itemId:1,
             itemname:"",
             comment:this.props.comment,
             grade:0,
@@ -48,41 +53,7 @@ class Activity extends Component {
             loadComment: false,
             loadGrade: false,
         }
-
-        this.formatNumber = this.formatNumber.bind(this);
-        this.formatTime = this.formatTime.bind(this);
-
     }
-
-
-    formatNumber(n) {
-        n = n.toString()
-        return n[1] ? n : '0' + n
-    }
-
-    formatTime(number,format) {
-
-        var formateArr  = ['Y','M','D','h','m','s'];
-        var returnArr   = [];
-
-        var date = new Date(number * 1000);
-        returnArr.push(date.getFullYear());
-        returnArr.push(this.formatNumber(date.getMonth() + 1));
-        returnArr.push(this.formatNumber(date.getDate()));
-
-        returnArr.push(this.formatNumber(date.getHours()));
-        returnArr.push(this.formatNumber(date.getMinutes()));
-        returnArr.push(this.formatNumber(date.getSeconds()));
-
-        for (var i in returnArr)
-        {
-            format = format.replace(formateArr[i], returnArr[i]);
-        }
-        return format;
-    }
-
-
-
 
     componentDidMount() {
         /* 获得item中itemname */
@@ -152,6 +123,11 @@ class Activity extends Component {
                 status="Status出错";
                 break;
         }
+        var time="2019-7-1"
+        if(this.props.date!=undefined)
+        {
+            time=this.props.date.split("T")[0];
+        }
 
         return(
             <Container fixed className={useStyles.root}>
@@ -169,13 +145,12 @@ class Activity extends Component {
                             <Grid container >
                                 <Grid item xs={9} justify="center">
                                     <CardContent>
-                                        {this.props.userId}
                                         <Typography color="textSecondary" gutterBottom>
-                                            在 {this.formatTime(this.props.actType,'Y/M/D')}
+                                            在 {time}
                                         </Typography>
                                         <Grid container >
                                             <Grid item xs={6}>
-                                                <Typography variant="h6" color={"textPrimary"} component={Link} to={"/useriteminfopage/"+this.state.itemId}>
+                                                <Typography variant="h6" color={"textPrimary"} component={Link} to={"/useriteminfopage/"+this.props.itemId}>
                                                     {this.state.itemname + " " }
                                                 </Typography>
                                             </Grid>

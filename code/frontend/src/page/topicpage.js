@@ -41,13 +41,12 @@ class Topicpage extends Component{
                     <Grid item>
                         <Typography variant={"h6"} component={"h6"} align={"left"} >讨论版</Typography>
                     </Grid>
-                    <TopicList />
+                    <Grid container spacing={1}>
+                    <TopicList topics={this.state.topics}/>
+                    </Grid>
                 </Grid>
                 <Grid item xs={5} ><br/><br/> <Tag select={true} tagchange={this.handletagchange}/></Grid>
-                <Grid item xs={12} direction={"column"} spacing={3} ><br/> <br/>
 
-                    <TopicList topics={this.state.topics}/>
-                </Grid>
             </Grid>
         );
     }

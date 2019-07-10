@@ -10,11 +10,12 @@ import Discuss from "../component/discuss";
 import Reply from "../component/reply";
 import Relateditem from "../component/relatedlist";
 import axios from 'axios';
+import TopicList from "../component/topiclist";
 
 class Topicdetailpage extends Component{
     constructor(props){
         super(props);
-        this.state = {topic:[]}
+        this.state = {topic:[],data:[]}
 
     }
 
@@ -27,17 +28,23 @@ class Topicdetailpage extends Component{
             var url="http://202.120.40.8:30741/topic/id/"+id;
         }
 
-        axios.get(url)
+        axios.get("http://202.120.40.8:30741/topic/all")
             .then(function (res) {
                 this.setState({topic: res.data});
-            })
-            .catch(function (error) {
-                
-            })
+            }.bind(this)
+            )
+
+
+        axios.get("http://202.120.40.8:30741/topic/id/"+id)
+            .then(function (res) {
+                this.setState({data: res.data});
+            }.bind(this)
+            )
     }
 
     render(){
         const topic = this.state.topic;
+        const data = this.state.data;
         return(
           <Grid container spacing={10}>
               <Grid item xs={12}>
@@ -47,16 +54,10 @@ class Topicdetailpage extends Component{
               </Grid>
               <Grid item xs={8}>
                   <Grid>
-                      <Topic
-                          topicId = {topic.id}
-                          content = {topic.title}
-                          author = {topic.userId}
-                          replyTotal = {233}
-                          date = {topic.pubTime}
-                      />
+                      <TopicList topics={topic} />
                   </Grid>
                   <Grid>
-                      <Discuss />
+                      <Discuss replies={data.replyList}/>
                   </Grid>
                   <Grid>
                       <br/>

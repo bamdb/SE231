@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-
+import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -47,6 +47,14 @@ class Register extends Component {
         }
         this.handleInforChange = this.handleInforChange.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
+        this.submit=this.submit.bind(this);
+    }
+    submit()
+    {
+        axios.post("http://202.120.40.8:30741/user/signup",{
+
+
+        })
     }
 
     handlePassword(){

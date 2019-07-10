@@ -31,25 +31,30 @@ class TopItem extends Component {
         this.state = {
             rank:1,
             name: "三体",
-            fansTotal: 71
+            avgScore:8,
+            itemId:1
         }
     }
     componentWillMount() {
-
+        this.setState({rank:this.props.rank,name:this.props.name,avgScore:this.props.avgScore,itemId:this.props.itemId})
     }
     componentDidMount() {
     }
+    componentWillReceiveProps(nextProps, nextContext) {
+        this.setState({rank:nextProps.rank,name:nextProps.name,avgScore:nextProps.avgScore,itemId:nextProps.itemId})
+    }
 
     render() {
+        var url='/useriteminfopage/'+this.state.itemId;
         return(
             <Card className={useStyles.card}>
                 <div className={useStyles.details}>
                     <CardContent className={useStyles.content}>
-                        <Link to={'/useriteminfopage/1'}>
+                        <Link to={url}>
                             {this.state.name}
                         </Link>
                         <Typography variant="subtitle1" color="textSecondary">
-                            {this.state.fansTotal}人关注
+                            {this.state.avgScore}分
                         </Typography>
                     </CardContent>
                 </div>

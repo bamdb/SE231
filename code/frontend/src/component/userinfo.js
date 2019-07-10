@@ -59,14 +59,29 @@ class Userinfo extends Component {
             alert("wrong format of email")
         }
         else {
+
+            var url='http://202.120.40.8:30741/user/update/'+this.state.username;
             this.setState({edit:false});
+            $.ajax({
+                url:url,
+                type:"PUT",
+                params:{"contentType": "application/json;charset=utf-8"},
+                data:{mail:this.state.email},
+                success: function f(data) {
+
+                    console.log(data);
+
+
+                }.bind(this)
+            })
+            /*axios.put(url,{mail:this.state.email}).then(
+                function (data)
+                {
+                    alert("success");
+                }
+            )*/
         }
-        axios.put('user/update/admin',{username:this.state.username,password:this.state.password,mail:this.state.email}).then(
-            function (data)
-            {
-                alert("success");
-            }.bind(this)
-        )
+
     }
     handlecancel(){
         this.setState({edit:false});

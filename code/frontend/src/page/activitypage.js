@@ -24,7 +24,7 @@ class Activitypage extends Component{
 
     componentWillMount() {
         const _this=this;
-        axios.get("http://202.120.40.8:30741/activity/all")
+        axios.get("http://202.120.40.8:30741/activity/userid/"+this.state.userid)
             .then(function (res) {
                 _this.setState({
                     activities: res.data,
@@ -43,7 +43,7 @@ class Activitypage extends Component{
                     <Grid item xs={2}></Grid>
 
                     <Grid item xs={8} >
-                        <br/><br/><br/><br/>
+                        <br/><br/>
                         <Activitylist
                             activities={this.state.activities}
                             username={this.state.username}
