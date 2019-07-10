@@ -26,13 +26,13 @@ class Item extends Component {
     componentWillReceiveProps(nextProps, nextContext) {
         if(nextProps.name!=null)
         {
-
             this.setState({name:nextProps.name,date:nextProps.date,pages:nextProps.pages,isbn:nextProps.isbn})
         }
     }
 
     componentDidMount() {
     }
+
 
     render() {
         return(

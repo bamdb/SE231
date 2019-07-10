@@ -27,10 +27,10 @@ class Briefitem extends Component {
         return(
             <Paper>
                 <Grid container  >
-                    <Grid item xs={4}>
+                    <Grid item xs={5}>
                         <img src="img/3.jpg" id="itemimage" />
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}>
                         <br/>
                         <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >{this.state.itemName}</Typography>
                         <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.briefIntro}</Typography>

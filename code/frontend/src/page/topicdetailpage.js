@@ -9,23 +9,35 @@ import Topic from "../component/topic";
 import Discuss from "../component/discuss";
 import Reply from "../component/reply";
 import Relateditem from "../component/relatedlist";
+import axios from 'axios';
 
 class Topicdetailpage extends Component{
     constructor(props){
         super(props);
-        this.state = {data:[]}
+        this.state = {topic:[]}
 
     }
 
 
     componentWillMount() {
-        var uri=window.location.href;
-        var id=uri.split('#')[1].split('/')[2];
+        if(window.location.href.split("#")[1]!==undefined)
+        {
+            var id = window.location.href.split("#")[1].split("/")[2];
+            console.log(id);
+            var url="http://202.120.40.8:30741/topic/id/"+id;
+        }
 
-        var url="http://202.120.40.8:30741/item/id/"+id;
+        axios.get(url)
+            .then(function (res) {
+                this.setState({topic: res.data});
+            })
+            .catch(function (error) {
+                
+            })
     }
 
     render(){
+        const topic = this.state.topic;
         return(
           <Grid container spacing={10}>
               <Grid item xs={12}>
@@ -35,7 +47,13 @@ class Topicdetailpage extends Component{
               </Grid>
               <Grid item xs={8}>
                   <Grid>
-                      <Topic />
+                      <Topic
+                          topicId = {topic.id}
+                          content = {topic.title}
+                          author = {topic.userId}
+                          replyTotal = {233}
+                          date = {topic.pubTime}
+                      />
                   </Grid>
                   <Grid>
                       <Discuss />

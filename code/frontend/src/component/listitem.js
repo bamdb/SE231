@@ -42,131 +42,67 @@ class Listitem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
         }
     }
 
-    static defaultProps =
-        {name:"三体",date:"2000-1-1",author:"Liu Cixin",chapter:12,score:"8.0",rank:10}
-    ;
 
     render() {
 
         var rows=[];
-        /*this.state.items.forEach((item) => {
-            rows.push(
-                <Paper className={useStyles.root}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={1}/>
-                        <Grid item xs={2}>
-                            <br/>
-                            <img src="img/3.jpg" alt="暂无图片" className={useStyles.image} height="120px" width="96px"/>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="h4" component="h3">
-                                {item.itemname}
-                            </Typography>
-                            <br/>
-                            <Paper className={useStyles.paper}>
-                                <Grid container spacing={1}>
-                                    <Grid item xs={4}>
-                                        <Typography component="p" align="center">
-                                            {item.pubTime}
-                                        </Typography>
+        const item = this.props.ItemList;
+        if(item !== undefined)
+        {
+            for(var i=0; i<item.length; ++i) {
+                rows.push(
+                    <Paper className={useStyles.root}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={1}/>
+                            <Grid item xs={2}>
+                                <br/>
+                                <img src="img/3.jpg" alt="暂无图片" className={useStyles.image} height="120px" width="96px"/>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Typography variant="h4" component="h3">
+                                    {item[i].itemname}
+                                </Typography>
+                                <br/>
+                                <Paper className={useStyles.paper}>
+                                    <Grid container spacing={1}>
+                                        <Grid item xs={4}>
+                                            <Typography component="p" align="center">
+                                                {item[i].pubTime}
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                            <Typography component="p" align="center">
+                                                {item[i].mainAuthor}
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                            <Typography component="p" align="center">
+                                                {item[i].chapterNum}
+                                            </Typography>
+                                        </Grid>
                                     </Grid>
-                                    <Grid item xs={4}>
-                                        <Typography component="p" align="center">
-                                            {item.mainAuthor}
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={4}>
-                                        <Typography component="p" align="center">
-                                            {item.chapterNum}
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
-                            </Paper>
-                            <br/>
-                            <Score id={item.id} />
+                                </Paper>
+                                <br/>
+                                <Score id={item[i].id}/>
+                            </Grid>
+                            <Grid item xs={1}/>
+                            <Grid item xs={2}>
+                                <br/>
+                                <Collectform/>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={1}/>
-                        <Grid item xs={2}>
-                            <br/>
-                            <Collectform/>
-                        </Grid>
-                    </Grid>
-                </Paper>
-            );
-        })*/
+                    </Paper>
+
+                )
+                debugger;
+            }
+        }
+
         return(
             <div id={"mainlistitem"}>
-                <Paper className={useStyles.root}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={1}/>
-                        <Grid item xs={2}>
-                            <br/>
-                            <img src="img/3.jpg" alt="暂无图片" className={useStyles.image} height="120px" width="96px"/>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="h4" component={Link} to={"/useriteminfopage/"+this.props.name} color={"textPrimary"}>
-                                {this.props.name}
-                            </Typography>
-                            <br/>
-                            <Paper className={useStyles.paper}>
-                                <Grid container spacing={1}>
-                                    <Grid item xs={4}>
-                                        <Typography component="p" align="center">
-                                            {this.props.date}
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={4}>
-                                        <Typography component="p" align="center">
-                                            {this.props.author}
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={4}>
-                                        <Typography component="p" align="center">
-                                            {this.props.chapter}
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
-                            </Paper>
-                            <br/>
-                            <Grid container spacing={2}>
-                                <Grid item xs={3}>
-                                    <Typography variant="h5" component="h3" align="center">
-                                        评分
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={3}>
-                                    <Paper className={useStyles.paper}>
-                                        <Typography variant="h5" component="h3" align="center">
-                                            {this.props.score}
-                                        </Typography>
-                                    </Paper>
-                                </Grid>
-                                <Grid item xs={3}>
-                                    <Typography variant="h5" component="h3" align="center">
-                                        排名
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={3}>
-                                    <Paper className={useStyles.paper}>
-                                        <Typography variant="h5" component="h3" align="center">
-                                            {this.props.rank}
-                                        </Typography>
-                                    </Paper>
-                                </Grid>
-                            </Grid>
-
-                        </Grid>
-                        <Grid item xs={1}/>
-                        <Grid item xs={2}>
-                            <br/>
-                            <Collectform/>
-                        </Grid>
-                    </Grid>
-                </Paper>
                 {rows}
             </div>
         );

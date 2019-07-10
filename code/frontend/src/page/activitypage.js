@@ -15,7 +15,7 @@ class Activitypage extends Component{
     constructor(props){
         super(props);
         this.state={
-            username: "Hyy",
+            username: "游客",
             userid:1,
             activities: [],
             isloaded: false,
@@ -24,7 +24,7 @@ class Activitypage extends Component{
 
     componentWillMount() {
         const _this=this;
-        axios.get("http://202.120.40.8:30741/activity/id/"+this.state.userid)    //还要修改
+        axios.get("http://202.120.40.8:30741/activity/all")
             .then(function (res) {
                 _this.setState({
                     activities: res.data,

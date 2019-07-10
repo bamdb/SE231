@@ -390,7 +390,7 @@ paths:
       responses:
         200:
           description: 成功删除对应条目
-  /rating/update/{itemId}:
+  /rating/update/itemid/{itemId}:
     put:
       tags:
       - developers
