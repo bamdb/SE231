@@ -43,5 +43,9 @@
   },
   "devDependencies": {
     "react-test-renderer": "^16.8.6"
-  }
+  },
+  "jest": {
+  "coverageDirectory": "./coverage/",
+  "collectCoverage": true
+}
 }
