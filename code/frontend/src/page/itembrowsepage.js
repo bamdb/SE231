@@ -20,11 +20,18 @@ class Itembrowsepage extends Component{
         super(props);
         this.state={
             ItemList: [],
+            tags: [],
             isloaded: false,
 
         };
         this.handleChange=this.handleChange.bind(this);
+        this.handletagchange=this.handletagchange.bind(this);
     }
+
+    handletagchange(tags){
+        this.setState({tags:tags});
+    }
+
     handleChange(e, newvalue)
     {
         this.setState({value:newvalue})
@@ -68,14 +75,14 @@ class Itembrowsepage extends Component{
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                <Grid container direction={"row"} alignItems={"center"}>
+                <Grid container direction={"row"} >
                     <Grid item xs={1} />
                     <Grid item xs={2}>
-                        <Tag select={true} tags={["热血","王道"]}/>
+                        <br/><br/>
+                        <Tag select={true} tagchange={this.handletagchange} tags={["热血","王道"]}/>
                     </Grid>
                     <Grid item xs={1} />
                     <Grid item xs={7} >
-                        <br/>
                         <br/>
                         <br/>
                         <Listitem ItemList={ItemList}/>

@@ -50,7 +50,7 @@ class TopicList extends Component {
             for(var i=0;i<topics.length;++i)
             {
                 item.push(
-                    <Grid item xs={6}>
+                    <Grid >
                         <Topic
                             topicId = {topics[i].id}
                             content = {topics[i].title}

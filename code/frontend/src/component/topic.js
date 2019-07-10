@@ -48,20 +48,22 @@ class Topic extends Component {
         }
         if(this.props.topicId!=undefined)
         {
-            this.setState({topicId:this.props.topicId,content:this.props.content,author:this.props.author});
+            this.setState({topicId:this.props.topicId,content:this.props.content,author:this.props.author,
+                replyTotal:this.props.replyTotal,date:this.props.date});
         }
 
     }
-
     render(){
         return(
             <List component={"nav"} className={useStyles.root} aria-label="Mailbox folders">
                 <Divider />
                 <ListItem>
-                    <Button component={Link} to={'/topicdetailpage/'+this.state.topicId} ><ListItemText primary={this.state.content} /></Button>
+                    <Button component={Link} to={'/topicdetailpage/'+this.state.topicId} >
+                        <ListItemText primary={this.state.content} />
+                    </Button>
                     <ListItemText primary={this.state.author} />
                     <ListItemText primary={this.state.replyTotal+" replies"} />
-                    <ListItemText primary={this.state.date} />
+                    <ListItemText primary={this.state.date.split("T")[0]} />
                 </ListItem>
                 <Divider />
             </List>

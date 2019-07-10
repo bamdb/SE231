@@ -108,9 +108,9 @@ class Login extends Component{
                                 <Grid item xs={2} />
                                 <Grid item xs={8} >
                                     <Typography variant={"h4"} component="h4">登录至Bamdb</Typography> <br/>
-                                    <Typography component="p">你的用户名/email地址</Typography><br/>
+                                    <Typography component="p">你的用户名/email地址</Typography>
                                     <TextField className={useStyles.textField} margin={"normal"} name={"name"} type={"text"} value={this.state.name} onChange={this.handleInforChange} /><br/>
-                                    <Typography component="p">你的密码</Typography><br/>
+                                    <Typography component="p">你的密码</Typography>
                                     <TextField className={useStyles.textField} margin={"normal"} name={"password"} type={"password"} value={this.state.password} onChange={this.handleInforChange} /><br/>
                                     <Button
                                         variant="outlined"
