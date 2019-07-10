@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from '../App';
+import App from './App';
 
-import Tag from '../component/tag'
+import Tag from './component/tag'
 import TestRenderer from 'react-test-renderer';
 
 it('renders without crashing', () => {

@@ -1,7 +1,7 @@
 /*
  * 条目列表
  * 包含对条目的介绍和是否收藏
- *
+ * 
  */
 
 import React, { Component } from 'react';

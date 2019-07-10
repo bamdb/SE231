@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
 * props.author : 条目作者
 * props.score : 条目评分
 * props.rank : 条目排名
-* props.chapter : 条目章节数
+* props.chapter : 条目章节数 
 */
 class Listitem extends Component {
     constructor(props) {
@@ -62,9 +62,11 @@ class Listitem extends Component {
                                 <img src="img/3.jpg" alt="暂无图片" className={useStyles.image} height="120px" width="96px"/>
                             </Grid>
                             <Grid item xs={6}>
-                                <Typography variant="h4" component="h3">
+
+                                <Typography component={Link} to={'/useriteminfopage/'+item[i].id} align="center">
                                     {item[i].itemname}
                                 </Typography>
+
                                 <br/>
                                 <Paper className={useStyles.paper}>
                                     <Grid container spacing={1}>

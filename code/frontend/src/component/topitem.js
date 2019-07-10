@@ -36,9 +36,10 @@ class TopItem extends Component {
         }
     }
     componentWillMount() {
-        this.setState({rank:this.props.rank,name:this.props.name,avgScore:this.props.avgScore,itemId:this.props.itemId})
+        
     }
     componentDidMount() {
+        this.setState({rank:this.props.rank,name:this.props.name,avgScore:this.props.avgScore,itemId:this.props.itemId})
     }
     componentWillReceiveProps(nextProps, nextContext) {
         this.setState({rank:nextProps.rank,name:nextProps.name,avgScore:nextProps.avgScore,itemId:nextProps.itemId})

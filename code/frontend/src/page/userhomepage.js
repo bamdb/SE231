@@ -34,7 +34,7 @@ class Userhomepage extends Component{
         this.state={rankitem:[]}
 
     }
-    componentWillMount() {
+    componentDidMount() {
         axios.get("http://202.120.40.8:30741/rating/browser",{params:{
                 type:0,
                 page:0,

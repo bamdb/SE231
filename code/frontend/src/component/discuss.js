@@ -42,7 +42,7 @@ class DiscussBody extends Component{
         this.state = {username: "",discuss:this.props.data.replyContent,date:"2019-01-01T1234"}
     }
 
-    componentWillMount() {
+    componentDidMount() {
         const id = this.props.data.user.id;
        // this.state.data.replyContent;
         axios.get("http://202.120.40.8:30741/user/id/"+id).then(
