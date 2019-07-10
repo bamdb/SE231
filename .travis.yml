@@ -14,7 +14,8 @@ install:
 - npm install codecov
 script:
 - npm test
-- istanbul cover ./node_modules/lab/bin/lab --report lcovonly  -- -l  && codecov
-- jest && codecov
+#- istanbul cover ./node_modules/lab/bin/lab --report lcovonly  -- -l  && codecov
+#- jest && codecov
+- bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
 after_success:
 - ssh -p 30740 ubuntu@202.120.40.8 < script.sh
