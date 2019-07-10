@@ -7,15 +7,20 @@ before_install:
   -in private_key.enc -out ~/.ssh/id_rsa -d -d
 - chmod 600 ~/.ssh/id_rsa
 - cd code/frontend
+cache:
+  directories:
+  - node_modules
 addons:
   ssh_known_hosts: 202.120.40.8:30740
 install:
+- npm update
 - npm install
 - npm install codecov
+- npm install coveralls --save-dev
 script:
 - npm test
 #- istanbul cover ./node_modules/lab/bin/lab --report lcovonly  -- -l  && codecov
 #- jest && codecov
-- bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
+- npm run coveralls
 after_success:
 - ssh -p 30740 ubuntu@202.120.40.8 < script.sh
