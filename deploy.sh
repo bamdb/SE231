@@ -4,11 +4,11 @@ git pull
 sleep 20
 cd config-server
 nohup mvn spring-boot:run > bamdb.log &
-sleep 10
+sleep 30
 echo 'config-server deployed'
 cd ../registry
 nohup mvn spring-boot:run > bamdb.log &
-sleep 10
+sleep 30
 echo 'registry deployed'
 cd ../user-service
 nohup mvn spring-boot:run > bamdb.log &
