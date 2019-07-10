@@ -10,3 +10,4 @@
 /code/frontend/.idea
 /code/frontend/src/_test_/_snapshots_
 .idea/
+venv/
