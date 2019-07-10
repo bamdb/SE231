@@ -42,18 +42,15 @@ class Listitem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            items: this.props.itemList,
+            items: this.props.ItemList,
         }
     }
 
-    static defaultProps =
-        {name:"三体",date:"2000-1-1",author:"Liu Cixin",chapter:12,score:"8.0",rank:10}
-    ;
 
     render() {
 
         var rows=[];
-        const item = this.state.items;
+        const item = this.props.ItemList;
         if(item !== undefined)
         {
             for(var i=0; i<item.length; ++i) {
@@ -107,74 +104,6 @@ class Listitem extends Component {
 
         return(
             <div id={"mainlistitem"}>
-                {rows}
-                <Paper className={useStyles.root}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={1}/>
-                        <Grid item xs={2}>
-                            <br/>
-                            <img src="img/3.jpg" alt="暂无图片" className={useStyles.image} height="120px" width="96px"/>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="h4" component={Link} to={"/useriteminfopage/"+this.props.name} color={"textPrimary"}>
-                                {this.props.name}
-                            </Typography>
-                            <br/>
-                            <Paper className={useStyles.paper}>
-                                <Grid container spacing={1}>
-                                    <Grid item xs={4}>
-                                        <Typography component="p" align="center">
-                                            {this.props.date}
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={4}>
-                                        <Typography component="p" align="center">
-                                            {this.props.author}
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={4}>
-                                        <Typography component="p" align="center">
-                                            {this.props.chapter}
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
-                            </Paper>
-                            <br/>
-                            <Grid container spacing={2}>
-                                <Grid item xs={3}>
-                                    <Typography variant="h5" component="h3" align="center">
-                                        评分
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={3}>
-                                    <Paper className={useStyles.paper}>
-                                        <Typography variant="h5" component="h3" align="center">
-                                            {this.props.score}
-                                        </Typography>
-                                    </Paper>
-                                </Grid>
-                                <Grid item xs={3}>
-                                    <Typography variant="h5" component="h3" align="center">
-                                        排名
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={3}>
-                                    <Paper className={useStyles.paper}>
-                                        <Typography variant="h5" component="h3" align="center">
-                                            {this.props.rank}
-                                        </Typography>
-                                    </Paper>
-                                </Grid>
-                            </Grid>
-
-                        </Grid>
-                        <Grid item xs={1}/>
-                        <Grid item xs={2}>
-                            <br/>
-                            <Collectform/>
-                        </Grid>
-                    </Grid>
-                </Paper>
                 {rows}
             </div>
         );

@@ -50,8 +50,10 @@ class Itembrowsepage extends Component{
     }
 
     render(){
+        const ItemList= this.state.ItemList;
         return(
             <Grid container direction={"column"} >
+
                 <Grid item xs={12}><Navigation/></Grid>
                 <Grid item xs={12}>
                     <Grid container>
@@ -76,7 +78,7 @@ class Itembrowsepage extends Component{
                         <br/>
                         <br/>
                         <br/>
-                        <Listitem itemList={this.state.ItemList}/>
+                        <Listitem ItemList={ItemList}/>
                         <br/>
                         <Pagetable />
                     </Grid>
