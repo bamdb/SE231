@@ -13,6 +13,7 @@
     "clsx": "^1.0.4",
     "jest": "^24.7.1",
     "jquery": "^3.4.1",
+    "mocha": "^6.1.4",
     "react": "^16.8.6",
     "react-chartjs": "^1.2.0",
     "react-dom": "^16.8.6",
@@ -42,6 +43,5 @@
   },
   "devDependencies": {
     "react-test-renderer": "^16.8.6"
-  },
-  "proxy": "http://202.120.40.8:30741"
+  }
 }

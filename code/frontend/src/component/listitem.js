@@ -46,9 +46,9 @@ class Listitem extends Component {
         }
     }
 
-    static defaultProps = {
-        name:"三体",date:"2000-1-1",author:"Liu Cixin",chapter:12,score:"8.0",rank:10
-    };
+    static defaultProps =
+        {name:"三体",date:"2000-1-1",author:"Liu Cixin",chapter:12,score:"8.0",rank:10}
+    ;
 
     render() {
 

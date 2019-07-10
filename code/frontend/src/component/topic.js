@@ -44,9 +44,13 @@ class Topic extends Component {
         if(window.location.href.split("#")[1]!==undefined)
         {
             var x = window.location.href.split("#")[1].split("/")[1];
-            console.log(x);
+
         }
-        this.setState({topicId:this.props.topicId,content:this.props.content,author:this.props.author})
+        if(this.props.topicId!=undefined)
+        {
+            this.setState({topicId:this.props.topicId,content:this.props.content,author:this.props.author});
+        }
+
     }
 
     render(){

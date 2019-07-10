@@ -60,7 +60,7 @@ class TopicList extends Component {
                         />
                     </Grid>
                 )
-                debugger;
+
             }
         }
 
