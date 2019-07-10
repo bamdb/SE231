@@ -3,6 +3,10 @@ spring:
     name: gateway
 server:
   port: 8000
+eureka:
+  client:
+    registry-fetch-interval-seconds: 5
+
 zuul:
   routes:
     fromimage:
@@ -28,6 +32,18 @@ zuul:
     fromtopic:
       path: /topic/**
       service-id: topic
+      sensitiveHeaders:
+    fromfriend:
+      path: /friend/**
+      service-id: friend
+      sensitiveHeaders:
+    frommessage:
+      path: /message/**
+      service-id: message
+      sensitiveHeaders:
+    fromcomment:
+      path: /comment/**
+      service-id: comment
       sensitiveHeaders:
   retryable: true
 
