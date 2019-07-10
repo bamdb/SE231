@@ -24,3 +24,9 @@
 
 # 2019-07-09
 * complete topic reply service
+
+# 2019-07-10
+* write docs
+* write locustfile.py for performance test
+* work on auto evaluation script
+* deploy backend on another server
