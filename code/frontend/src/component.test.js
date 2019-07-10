@@ -46,12 +46,12 @@ it('_test_ activity', () => {
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
 });
-it('_test_ navigation', () => {
+/*it('_test_ navigation', () => {
     const testrenderer=TestRenderer.create(<StaticRouter><Navigation/></StaticRouter>);
-    /*const testinstance=testrenderer.root;
+    const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
-    expect(tree).toMatchSnapshot();*/
-});
+    expect(tree).toMatchSnapshot();
+});*/
 it('_test_ activitylist', () => {
     const testrenderer=TestRenderer.create(<StaticRouter><Activitylist/></StaticRouter>);
     /*const testinstance=testrenderer.root;
