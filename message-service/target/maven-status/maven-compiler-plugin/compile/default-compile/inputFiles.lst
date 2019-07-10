@@ -1,9 +1,0 @@
-/home/ubuntu/SE231/message-service/src/main/java/com/se/messageservice/MessageController.java
-/home/ubuntu/SE231/message-service/src/main/java/com/se/messageservice/client/FriendClient.java
-/home/ubuntu/SE231/message-service/src/main/java/com/se/messageservice/MongoConfig.java
-/home/ubuntu/SE231/message-service/src/main/java/com/se/messageservice/MessageRepository.java
-/home/ubuntu/SE231/message-service/src/main/java/com/se/messageservice/client/FriendClientFallBack.java
-/home/ubuntu/SE231/message-service/src/main/java/com/se/messageservice/MessageServiceImpl.java
-/home/ubuntu/SE231/message-service/src/main/java/com/se/messageservice/MessageServiceApplication.java
-/home/ubuntu/SE231/message-service/src/main/java/com/se/messageservice/Message.java
-/home/ubuntu/SE231/message-service/src/main/java/com/se/messageservice/MessageService.java

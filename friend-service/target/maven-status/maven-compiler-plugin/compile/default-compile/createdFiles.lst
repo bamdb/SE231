@@ -1,9 +1,0 @@
-com/se/friendservice/FriendServiceImpl.class
-com/se/friendservice/entity/User.class
-com/se/friendservice/FriendRepository.class
-com/se/friendservice/FriendController.class
-com/se/friendservice/client/UserClientFallBack.class
-com/se/friendservice/client/UserClient.class
-com/se/friendservice/entity/Friend.class
-com/se/friendservice/FriendServiceApplication.class
-com/se/friendservice/FriendService.class
