@@ -16,7 +16,7 @@ WARNING: All illegal access operations will be denied in a future release
 [INFO] 
 [INFO] --- maven-resources-plugin:3.1.0:resources (default-resources) @ image-service ---
 [INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] Copying 1 resource
+[INFO] Copying 0 resource
 [INFO] Copying 1 resource
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ image-service ---
@@ -32,25 +32,25 @@ WARNING: All illegal access operations will be denied in a future release
 [INFO] <<< spring-boot-maven-plugin:2.1.6.RELEASE:run (default-cli) < test-compile @ image-service <<<
 [INFO] 
 [INFO] --- spring-boot-maven-plugin:2.1.6.RELEASE:run (default-cli) @ image-service ---
-2019-07-10 00:12:56.128  INFO 7978 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$49db5580] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-07-10 00:12:56.271  INFO 7978 --- [           main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
-2019-07-10 00:12:56.403  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
-2019-07-10 00:12:56.657  INFO 7978 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
-2019-07-10 00:12:56.657  INFO 7978 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
-2019-07-10 00:12:56.820  INFO 7978 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
-2019-07-10 00:12:56.820  INFO 7978 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
-2019-07-10 00:12:57.050  INFO 7978 --- [           main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2019-07-10 00:12:57.079  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
-2019-07-10 00:12:57.079  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
-2019-07-10 00:12:57.079  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
-2019-07-10 00:12:57.079  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Application is null : false
-2019-07-10 00:12:57.079  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
-2019-07-10 00:12:57.079  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
-2019-07-10 00:12:57.079  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
-2019-07-10 00:12:57.297  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : The response status is 200
-2019-07-10 00:12:57.302  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Not registering with Eureka server per configuration
-2019-07-10 00:12:57.311  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1562717577309 with initial instances count: 5
-2019-07-10 00:12:57.358  INFO 7978 --- [           main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application UNKNOWN with eureka with status UP
+2019-07-10 13:21:53.383  INFO 28126 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$2ef4f09a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-07-10 13:21:54.473  INFO 28126 --- [           main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2019-07-10 13:21:54.930  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2019-07-10 13:21:56.388  INFO 28126 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2019-07-10 13:21:56.397  INFO 28126 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2019-07-10 13:21:57.713  INFO 28126 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2019-07-10 13:21:57.713  INFO 28126 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2019-07-10 13:21:59.134  INFO 28126 --- [           main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2019-07-10 13:21:59.344  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2019-07-10 13:21:59.361  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2019-07-10 13:21:59.362  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2019-07-10 13:21:59.362  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2019-07-10 13:21:59.362  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2019-07-10 13:21:59.362  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2019-07-10 13:21:59.362  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2019-07-10 13:22:01.442  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2019-07-10 13:22:01.503  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Not registering with Eureka server per configuration
+2019-07-10 13:22:01.534  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1562764921529 with initial instances count: 4
+2019-07-10 13:22:01.832  INFO 28126 --- [           main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application UNKNOWN with eureka with status UP
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -60,66 +60,61 @@ WARNING: All illegal access operations will be denied in a future release
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::        (v2.1.6.RELEASE)
 
-2019-07-10 00:12:57.478  INFO 7978 --- [           main] c.c.c.ConfigServicePropertySourceLocator : Fetching config from server at : http://10.0.0.55:8888/
-2019-07-10 00:12:57.607  INFO 7978 --- [           main] c.c.c.ConfigServicePropertySourceLocator : Located environment: name=image, mongo, profiles=[default], label=null, version=null, state=null
-2019-07-10 00:12:57.607  INFO 7978 --- [           main] b.c.PropertySourceBootstrapConfiguration : Located property source: CompositePropertySource {name='configService', propertySources=[MapPropertySource {name='classpath:/config/mongo.yml'}, MapPropertySource {name='classpath:/config/image.yml'}]}
-2019-07-10 00:12:57.614  INFO 7978 --- [           main] c.s.i.ImageServiceApplication            : No active profile set, falling back to default profiles: default
-2019-07-10 00:12:58.108  INFO 7978 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
-2019-07-10 00:12:58.109  INFO 7978 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
-2019-07-10 00:12:58.245  INFO 7978 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 133ms. Found 0 repository interfaces.
-2019-07-10 00:12:58.250  INFO 7978 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
-2019-07-10 00:12:58.250  INFO 7978 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
-2019-07-10 00:12:58.266  INFO 7978 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 16ms. Found 1 repository interfaces.
-2019-07-10 00:12:58.507  INFO 7978 --- [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=8d15732b-f719-3de2-92ff-23f7113339d8
-2019-07-10 00:12:58.584  INFO 7978 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$49db5580] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-07-10 00:12:58.822  INFO 7978 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 0 (http)
-2019-07-10 00:12:58.853  INFO 7978 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2019-07-10 00:12:58.853  INFO 7978 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
-2019-07-10 00:12:59.064  INFO 7978 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2019-07-10 00:12:59.067  INFO 7978 --- [           main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1435 ms
-2019-07-10 00:12:59.475  INFO 7978 --- [           main] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
-2019-07-10 00:12:59.599  INFO 7978 --- [localhost:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:1, serverValue:21}] to localhost:27017
-2019-07-10 00:12:59.602  INFO 7978 --- [localhost:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 10]}, minWireVersion=0, maxWireVersion=2, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=null, roundTripTimeNanos=1077649}
-2019-07-10 00:13:00.020  INFO 7978 --- [           main] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:2, serverValue:22}] to localhost:27017
-2019-07-10 00:13:00.140  WARN 7978 --- [           main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-07-10 00:13:00.140  INFO 7978 --- [           main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2019-07-10 00:13:00.147  WARN 7978 --- [           main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-07-10 00:13:00.147  INFO 7978 --- [           main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2019-07-10 00:13:00.443  INFO 7978 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2019-07-10 00:13:00.765  INFO 7978 --- [           main] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
-2019-07-10 00:13:00.862  INFO 7978 --- [           main] org.mongodb.driver.cluster               : No server chosen by com.mongodb.async.client.ClientSessionHelper$1@b9055f0 from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, serverDescriptions=[ServerDescription{address=localhost:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
-2019-07-10 00:13:00.925  INFO 7978 --- [localhost:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:3, serverValue:23}] to localhost:27017
-2019-07-10 00:13:00.927  INFO 7978 --- [localhost:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 10]}, minWireVersion=0, maxWireVersion=2, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=null, roundTripTimeNanos=1667240}
-2019-07-10 00:13:00.941  INFO 7978 --- [       Thread-5] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:4, serverValue:24}] to localhost:27017
-2019-07-10 00:13:01.357  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
-2019-07-10 00:13:01.391  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient
-2019-07-10 00:13:01.660  INFO 7978 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 37291 (http) with context path ''
-2019-07-10 00:13:01.662  INFO 7978 --- [           main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 37291
-2019-07-10 00:13:01.664  INFO 7978 --- [           main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
-2019-07-10 00:13:01.671  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
-2019-07-10 00:13:01.684  INFO 7978 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
-2019-07-10 00:13:01.684  INFO 7978 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
-2019-07-10 00:13:01.684  INFO 7978 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
-2019-07-10 00:13:01.684  INFO 7978 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
-2019-07-10 00:13:01.862  INFO 7978 --- [           main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2019-07-10 00:13:01.864  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
-2019-07-10 00:13:01.864  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
-2019-07-10 00:13:01.864  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
-2019-07-10 00:13:01.864  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Application is null : false
-2019-07-10 00:13:01.864  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
-2019-07-10 00:13:01.864  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
-2019-07-10 00:13:01.864  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
-2019-07-10 00:13:01.880  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : The response status is 200
-2019-07-10 00:13:01.893  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
-2019-07-10 00:13:01.901  INFO 7978 --- [           main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
-2019-07-10 00:13:01.913  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1562717581913 with initial instances count: 6
-2019-07-10 00:13:01.914  INFO 7978 --- [           main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application IMAGE with eureka with status UP
-2019-07-10 00:13:01.915  INFO 7978 --- [           main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1562717581915, current=UP, previous=STARTING]
-2019-07-10 00:13:01.917  INFO 7978 --- [           main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 37291
-2019-07-10 00:13:01.928  INFO 7978 --- [           main] c.s.i.ImageServiceApplication            : Started ImageServiceApplication in 7.104 seconds (JVM running for 13.874)
-2019-07-10 00:13:01.929  INFO 7978 --- [nfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_IMAGE/image:b0725b9659795f6a7670c0b7038d0a1f: registering service...
-2019-07-10 00:13:01.994  INFO 7978 --- [nfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_IMAGE/image:b0725b9659795f6a7670c0b7038d0a1f - registration status: 204
-2019-07-10 00:18:01.866  INFO 7978 --- [trap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2019-07-10 00:23:01.867  INFO 7978 --- [trap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2019-07-10 00:28:01.868  INFO 7978 --- [trap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2019-07-10 00:33:01.869  INFO 7978 --- [trap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2019-07-10 13:22:02.297  INFO 28126 --- [           main] c.c.c.ConfigServicePropertySourceLocator : Fetching config from server at : http://10.0.0.55:8888/
+2019-07-10 13:22:02.996  INFO 28126 --- [           main] c.c.c.ConfigServicePropertySourceLocator : Located environment: name=image, mongo, profiles=[default], label=null, version=null, state=null
+2019-07-10 13:22:02.997  INFO 28126 --- [           main] b.c.PropertySourceBootstrapConfiguration : Located property source: CompositePropertySource {name='configService', propertySources=[MapPropertySource {name='classpath:/config/mongo.yml'}, MapPropertySource {name='classpath:/config/image.yml'}]}
+2019-07-10 13:22:03.003  INFO 28126 --- [           main] c.s.i.ImageServiceApplication            : No active profile set, falling back to default profiles: default
+2019-07-10 13:22:06.461  INFO 28126 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-07-10 13:22:06.480  INFO 28126 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-07-10 13:22:07.529  INFO 28126 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 1045ms. Found 0 repository interfaces.
+2019-07-10 13:22:07.561  INFO 28126 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-07-10 13:22:07.567  INFO 28126 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-07-10 13:22:07.650  INFO 28126 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 82ms. Found 1 repository interfaces.
+2019-07-10 13:22:09.030  INFO 28126 --- [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=8d15732b-f719-3de2-92ff-23f7113339d8
+2019-07-10 13:22:09.637  INFO 28126 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$2ef4f09a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-07-10 13:22:11.030  INFO 28126 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 0 (http)
+2019-07-10 13:22:11.204  INFO 28126 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-07-10 13:22:11.205  INFO 28126 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-07-10 13:22:11.745  INFO 28126 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-07-10 13:22:11.745  INFO 28126 --- [           main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 8601 ms
+2019-07-10 13:22:12.643  INFO 28126 --- [           main] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2019-07-10 13:22:12.944  INFO 28126 --- [localhost:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:1, serverValue:143}] to localhost:27017
+2019-07-10 13:22:12.967  INFO 28126 --- [localhost:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 10]}, minWireVersion=0, maxWireVersion=2, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=null, roundTripTimeNanos=1206270}
+2019-07-10 13:22:14.465  INFO 28126 --- [           main] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:2, serverValue:145}] to localhost:27017
+2019-07-10 13:22:15.534  WARN 28126 --- [           main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-07-10 13:22:15.534  INFO 28126 --- [           main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2019-07-10 13:22:15.621  WARN 28126 --- [           main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-07-10 13:22:15.644  INFO 28126 --- [           main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2019-07-10 13:22:17.231  INFO 28126 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-07-10 13:22:18.340  INFO 28126 --- [           main] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2019-07-10 13:22:18.496  INFO 28126 --- [localhost:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:3, serverValue:149}] to localhost:27017
+2019-07-10 13:22:18.502  INFO 28126 --- [localhost:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 10]}, minWireVersion=0, maxWireVersion=2, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=null, roundTripTimeNanos=6128773}
+2019-07-10 13:22:18.718  INFO 28126 --- [       Thread-5] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:4, serverValue:150}] to localhost:27017
+2019-07-10 13:22:20.021  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2019-07-10 13:22:20.061  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient
+2019-07-10 13:22:20.659  INFO 28126 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 43744 (http) with context path ''
+2019-07-10 13:22:20.660  INFO 28126 --- [           main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 43744
+2019-07-10 13:22:20.663  INFO 28126 --- [           main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2019-07-10 13:22:20.684  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2019-07-10 13:22:20.697  INFO 28126 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2019-07-10 13:22:20.697  INFO 28126 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2019-07-10 13:22:20.697  INFO 28126 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2019-07-10 13:22:20.697  INFO 28126 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2019-07-10 13:22:20.916  INFO 28126 --- [           main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2019-07-10 13:22:20.922  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2019-07-10 13:22:20.922  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2019-07-10 13:22:20.927  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2019-07-10 13:22:20.929  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2019-07-10 13:22:20.929  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2019-07-10 13:22:20.929  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2019-07-10 13:22:20.929  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2019-07-10 13:22:21.178  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2019-07-10 13:22:21.182  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2019-07-10 13:22:21.203  INFO 28126 --- [           main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2019-07-10 13:22:21.218  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1562764941218 with initial instances count: 4
+2019-07-10 13:22:21.219  INFO 28126 --- [           main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application IMAGE with eureka with status UP
+2019-07-10 13:22:21.220  INFO 28126 --- [           main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1562764941220, current=UP, previous=STARTING]
+2019-07-10 13:22:21.223  INFO 28126 --- [nfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_IMAGE/image:10925d433391dcda3eab9d3d12906d24: registering service...
+2019-07-10 13:22:21.227  INFO 28126 --- [           main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 43744
+2019-07-10 13:22:21.244  INFO 28126 --- [           main] c.s.i.ImageServiceApplication            : Started ImageServiceApplication in 35.481 seconds (JVM running for 67.388)
+2019-07-10 13:22:21.534  INFO 28126 --- [nfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_IMAGE/image:10925d433391dcda3eab9d3d12906d24 - registration status: 204
