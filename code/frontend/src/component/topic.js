@@ -43,6 +43,10 @@ class Topic extends Component {
     }
 
     componentWillMount() {
+
+    }
+    componentDidMount()
+    {
         if(window.location.href.split("#")[1]!==undefined)
         {
             var x = window.location.href.split("#")[1].split("/")[1];
@@ -53,7 +57,6 @@ class Topic extends Component {
             this.setState({topicId:this.props.topicId,content:this.props.content,author:this.props.author,
                 replyTotal:this.props.replyTotal,date:this.props.date});
         }
-
     }
     render(){
         var url='/topicdetailpage/'+this.state.topicId;

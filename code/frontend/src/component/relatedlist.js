@@ -73,5 +73,5 @@ class Relateditem extends Component {
         );
     }
 }
-
+ 
 export default Relateditem;

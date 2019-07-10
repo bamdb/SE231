@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
 * props.author : 条目作者
 * props.score : 条目评分
 * props.rank : 条目排名
-* props.chapter : 条目章节数
+* props.chapter : 条目章节数 
 */
 class Listitem extends Component {
     constructor(props) {

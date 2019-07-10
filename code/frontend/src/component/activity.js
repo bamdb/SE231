@@ -41,6 +41,7 @@ const useStyles = makeStyles({
 * props.date : 用户收藏时间
 * props.actType : 对条目的新收藏状态（int类型）
 * props.itemId : 条目id
+*
 */
 class Activity extends Component {
     constructor(props) {

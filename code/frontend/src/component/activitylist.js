@@ -1,5 +1,6 @@
 /*
  * 动态列表格式渲染
+ *
  */
 
 import React, { Component } from 'react';

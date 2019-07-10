@@ -28,7 +28,7 @@ class Userinfo extends Component {
         this.handlesave=this.handlesave.bind(this);
         this.handlecancel=this.handlecancel.bind(this);
     }
-    componentWillMount() {
+    componentDidMount() {
 
         axios({url: 'http://202.120.40.8:30741/user/id/1',method:'GET',})
             .then(

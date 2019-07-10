@@ -66,7 +66,7 @@ class Register extends Component {
         o[e.target.name]=e.target.value;
         this.setState(o);
     }
-
+ 
     render() {
         return(
             <Grid container spacing={1}>

@@ -22,7 +22,7 @@ class Pagetable extends Component {
     }
     componentDidMount() {
     }
-
+ 
     render() {
         var page=this.state.currentpage;
         var start=page-page%10;

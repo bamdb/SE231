@@ -21,7 +21,7 @@ class TopItemList extends Component {
             items:[]
         }
     }
-
+ 
     componentDidMount() {
 
     }

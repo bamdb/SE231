@@ -52,7 +52,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-/*
+/* 
 * 需要传入的props（包装成json后可以简化）
 * props.status : 用户的收藏状态 （如 "在看"）
 * props.comment : 用户对条目的评论 (一段用户在收藏时写下的评论，可能需要字数限制)
