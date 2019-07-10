@@ -6,7 +6,10 @@ import pandas as pd
 from datetime import datetime
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 from matplotlib import dates
+
+clientNum = 1
 
 hex_colors = [
     '#FF7500',
@@ -73,22 +76,42 @@ hex_colors = [
 ]
 
 
+def read_last_line(filename, csvdata):
+    global clientNum
+    with open(filename) as csvfile:
+        lines = csvfile.readlines()
+        targeline = lines[-1]
+        outputline = "{},".format(clientNum) + targeline
+        csvdata.append(outputline)
+        clientNum = clientNum + 1
+
+
 class DataAnalyse:
-    def __init__(self, filename):
-        self.filename = filename
+    def __init__(self, dirname):
+        self.dirname = dirname
         self.xfmt = dates.DateFormatter('%m/%d %H:%M')
         self._init_graph()  # 初始化趋势图大小
         self._set_graph()  # 初始化趋势图样式
+        self.csvdata = []
+        global clientNum
+        clientNum = 1
+        for root, files in os.walk(dirname):
+            for file in files:
+                read_last_line(os.path.join(root, file), self.csvdata)
+        open("./output.csv", "w").writelines(self.csvdata)
 
-        headers = ['Method', 'Name', '# requests', '# failures', 'Median response time', 'Average response time',
+        headers = ['client', 'Method', 'Name', '# requests', '# failures', 'Median response time', 'Average response time',
                    'Min response time', 'Max response time', 'Average Content Size', 'Requests/s']  # 命名字段标题
-        self.data = pd.read_csv(filename, sep=',', names=headers)  # 从文件获取内容为DATAFRAME格式
+        self.data = pd.read_csv("./output.csv", sep=',', names=headers)  # 从文件获取内容为DATAFRAME格式
         for col in headers[-8:]:  # 转换response_time和size为int型
             self.data[col] = self.data[col].apply(lambda x: int(x))
-        for col in headers[0:-2]:  # 取消掉所有非int型的空格
+        for col in headers[0:1]:  # 取消掉所有非int型的空格
             self.data[col] = self.data[col].apply(lambda x: x.strip())
+        self.sorted_data = self.data.sort_values(by=['client'], ascending=[True])  # 对数据按照time和name进行降序排列
+        self.grouped_data = self.sorted_data.groupby('client')  # 对降序排列的数据，按名称分组
+        self.requests_counts = np.array([[key, len(group)] for key, group in self.grouped_data])  # 构建请求名和请求次数数组
 
-    def _init_graph(self):  # 设定趋势图大小
+    def _init_graph(self):  # 设定趋势图大小 ***
         left, width = 0.1, 0.8
         bottom, height = 0.1, 0.8
         self.trend_scatter = [left, bottom, width, height]
@@ -97,29 +120,31 @@ class DataAnalyse:
         plt.clf()  # 清除figure中所有axes
         self.ax_plot = plt.axes(self.trend_scatter)  # 套用axes大小
         self.ax_plot.grid(True)  # 打开网格
-        self.ax_plot.set_ylabel('Response Time(ms)')  # 纵坐标标题
-        self.ax_plot.set_xlabel('time')  # 横坐标标题
+        self.ax_plot.set_ylabel('Average Response Time(ms)')  # 纵坐标标题
+        self.ax_plot.set_xlabel('Concurrent client amount')  # 横坐标标题
         self.ax_plot.figure.set_size_inches(15, 8)  # 画板大小
+        self.ax_plot.xaxis.set_yscale('linear')
         self.ax_plot.xaxis.set_major_locator(dates.MinuteLocator(interval=5))  # 设定横坐标日期格式为5min间隔
         self.ax_plot.xaxis.set_major_formatter(self.xfmt)  # 设定横坐标格式
 
     def generate_trend(self):  # 生成趋势图
         start_index = 0
         legend_list = []
+        # 需要重写逻辑，调整图片大小
         for index, request in enumerate(self.requests_counts):  # 为数组添加index标签
             name, count = request[0], int(request[1])  # 获取请求名和请求次数
             end_index = start_index + count
-            x = self.grouped_data.get_group(name)['time'][start_index: end_index]  # 设置x轴数据
-            y = self.grouped_data.get_group(name)['response_time'][start_index:end_index]  # 设置y轴数据
+            x = self.grouped_data.get_group(name)['# requests'][start_index: end_index]  # 设置x轴数据
+            y = self.grouped_data.get_group(name)['Average response time'][start_index:end_index]  # 设置y轴数据
             self.ax_plot.plot(x, y, '-', color=hex_colors[index + 1])  # 画图
             legend_list.append(name)  # 添加请求名到legend中
         plt.legend(legend_list)  # 打印legend
-        # plt.show()  # 打印趋势图
-        plt.title(self.filename)
-        plt.savefig(fname='.'.join([self.filename, 'png']), dpi=300, bbox_inches='tight')  # 保存趋势图
+        plt.show()  # 打印趋势图
+        plt.title("load-test")
+        plt.savefig(fname='.'.join(['./test', 'png']), dpi=300, bbox_inches='tight')  # 保存趋势图
 
 
 if __name__ == '__main__':
-    data = data_analyse('E:\\PrintLog\\logs')
+    data = DataAnalyse('/home/wzl/sjtu/22/se/bamdb/SE231/code/loadtest/traces/')
     print(data.sorted_data.info())
-    # data.generate_trend()
+    data.generate_trend()
