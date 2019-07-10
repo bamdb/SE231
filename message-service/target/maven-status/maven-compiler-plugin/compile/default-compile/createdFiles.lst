@@ -1,0 +1,10 @@
+com/se/messageservice/MessageServiceImpl.class
+com/se/messageservice/Message.class
+com/se/messageservice/MongoConfig.class
+com/se/messageservice/MongoConfig$TimeConverter.class
+com/se/messageservice/MessageService.class
+com/se/messageservice/client/FriendClientFallBack.class
+com/se/messageservice/client/FriendClient.class
+com/se/messageservice/MessageServiceApplication.class
+com/se/messageservice/MessageRepository.class
+com/se/messageservice/MessageController.class

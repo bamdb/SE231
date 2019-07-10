@@ -1,0 +1,232 @@
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.google.inject.internal.cglib.core.$ReflectUtils$1 (file:/usr/share/maven/lib/guice.jar) to method java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain)
+WARNING: Please consider reporting this to the maintainers of com.google.inject.internal.cglib.core.$ReflectUtils$1
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building registry 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] >>> spring-boot-maven-plugin:2.1.6.RELEASE:run (default-cli) > test-compile @ registry >>>
+[INFO] 
+[INFO] --- maven-resources-plugin:3.1.0:resources (default-resources) @ registry ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 0 resource
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ registry ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:3.1.0:testResources (default-testResources) @ registry ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/ubuntu/SE231/registry/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @ registry ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] <<< spring-boot-maven-plugin:2.1.6.RELEASE:run (default-cli) < test-compile @ registry <<<
+[INFO] 
+[INFO] --- spring-boot-maven-plugin:2.1.6.RELEASE:run (default-cli) @ registry ---
+2019-07-10 00:11:32.529  INFO 7255 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$c0ec505a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.1.6.RELEASE)
+
+2019-07-10 00:11:32.849  INFO 7255 --- [           main] c.c.c.ConfigServicePropertySourceLocator : Fetching config from server at : http://localhost:8888
+2019-07-10 00:11:33.257  INFO 7255 --- [           main] c.c.c.ConfigServicePropertySourceLocator : Located environment: name=registry, profiles=[default], label=null, version=null, state=null
+2019-07-10 00:11:33.257  INFO 7255 --- [           main] b.c.PropertySourceBootstrapConfiguration : Located property source: CompositePropertySource {name='configService', propertySources=[MapPropertySource {name='classpath:/config/registry.yml'}]}
+2019-07-10 00:11:33.266  INFO 7255 --- [           main] com.se.registry.RegistryApplication      : No active profile set, falling back to default profiles: default
+2019-07-10 00:11:34.244  WARN 7255 --- [           main] o.s.boot.actuate.endpoint.EndpointId     : Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2019-07-10 00:11:34.536  INFO 7255 --- [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=6c8951aa-ae9d-386e-bfdc-16aa6a3759f2
+2019-07-10 00:11:34.645  INFO 7255 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$c0ec505a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-07-10 00:11:34.906  INFO 7255 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8761 (http)
+2019-07-10 00:11:34.934  INFO 7255 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-07-10 00:11:34.934  INFO 7255 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-07-10 00:11:35.024  INFO 7255 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-07-10 00:11:35.025  INFO 7255 --- [           main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1743 ms
+2019-07-10 00:11:35.126  WARN 7255 --- [           main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-07-10 00:11:35.126  INFO 7255 --- [           main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2019-07-10 00:11:35.140  INFO 7255 --- [           main] c.netflix.config.DynamicPropertyFactory  : DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@5015b4d9
+2019-07-10 00:11:35.759  INFO 7255 --- [           main] c.s.j.s.i.a.WebApplicationImpl           : Initiating Jersey application, version 'Jersey: 1.19.1 03/11/2016 02:08 PM'
+2019-07-10 00:11:35.819  INFO 7255 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2019-07-10 00:11:35.821  INFO 7255 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2019-07-10 00:11:35.950  INFO 7255 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2019-07-10 00:11:35.951  INFO 7255 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2019-07-10 00:11:36.395  WARN 7255 --- [           main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-07-10 00:11:36.396  INFO 7255 --- [           main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2019-07-10 00:11:36.579  INFO 7255 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-07-10 00:11:37.038  INFO 7255 --- [           main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2019-07-10 00:11:37.068  INFO 7255 --- [           main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2019-07-10 00:11:37.069  INFO 7255 --- [           main] com.netflix.discovery.DiscoveryClient    : Client configured to neither register nor query for data.
+2019-07-10 00:11:37.077  INFO 7255 --- [           main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1562717497076 with initial instances count: 0
+2019-07-10 00:11:37.113  INFO 7255 --- [           main] c.n.eureka.DefaultEurekaServerContext    : Initializing ...
+2019-07-10 00:11:37.115  INFO 7255 --- [           main] c.n.eureka.cluster.PeerEurekaNodes       : Adding new peer nodes [http://localhost:8761/eureka/]
+2019-07-10 00:11:37.338  INFO 7255 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2019-07-10 00:11:37.338  INFO 7255 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2019-07-10 00:11:37.338  INFO 7255 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2019-07-10 00:11:37.338  INFO 7255 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2019-07-10 00:11:37.479  WARN 7255 --- [           main] c.n.e.transport.JerseyReplicationClient  : Cannot find localhost ip
+
+java.net.UnknownHostException: ubuntu-large: ubuntu-large: Name or service not known
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1642) ~[na:na]
+	at com.netflix.eureka.transport.JerseyReplicationClient.createReplicationClient(JerseyReplicationClient.java:170) ~[eureka-core-1.9.8.jar:1.9.8]
+	at com.netflix.eureka.cluster.PeerEurekaNodes.createPeerEurekaNode(PeerEurekaNodes.java:199) ~[eureka-core-1.9.8.jar:1.9.8]
+	at com.netflix.eureka.cluster.PeerEurekaNodes.updatePeerEurekaNodes(PeerEurekaNodes.java:190) ~[eureka-core-1.9.8.jar:1.9.8]
+	at com.netflix.eureka.cluster.PeerEurekaNodes.start(PeerEurekaNodes.java:88) ~[eureka-core-1.9.8.jar:1.9.8]
+	at com.netflix.eureka.DefaultEurekaServerContext.initialize(DefaultEurekaServerContext.java:64) ~[eureka-core-1.9.8.jar:1.9.8]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleElement.invoke(InitDestroyAnnotationBeanPostProcessor.java:363) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeInitMethods(InitDestroyAnnotationBeanPostProcessor.java:307) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeInitialization(InitDestroyAnnotationBeanPostProcessor.java:136) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:414) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1770) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:277) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1251) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1171) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:857) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:760) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:509) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1321) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1160) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:277) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1251) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1171) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:593) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:90) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:374) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1411) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:592) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:845) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:877) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:742) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:389) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1213) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1202) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at com.se.registry.RegistryApplication.main(RegistryApplication.java:12) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
+	at org.springframework.boot.maven.AbstractRunMojo$LaunchRunner.run(AbstractRunMojo.java:542) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:834) ~[na:na]
+Caused by: java.net.UnknownHostException: ubuntu-large: Name or service not known
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method) ~[na:na]
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:929) ~[na:na]
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1515) ~[na:na]
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:848) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1505) ~[na:na]
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1637) ~[na:na]
+	... 63 common frames omitted
+
+2019-07-10 00:11:37.517  INFO 7255 --- [           main] c.n.eureka.cluster.PeerEurekaNodes       : Replica node URL:  http://localhost:8761/eureka/
+2019-07-10 00:11:37.526  INFO 7255 --- [           main] c.n.e.registry.AbstractInstanceRegistry  : Finished initializing remote region registries. All known remote regions: []
+2019-07-10 00:11:37.527  INFO 7255 --- [           main] c.n.eureka.DefaultEurekaServerContext    : Initialized
+2019-07-10 00:11:37.541  INFO 7255 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2019-07-10 00:11:37.633  INFO 7255 --- [           main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application REGISTRY with eureka with status UP
+2019-07-10 00:11:37.641  INFO 7255 --- [      Thread-10] o.s.c.n.e.server.EurekaServerBootstrap   : Setting the eureka configuration..
+2019-07-10 00:11:37.651  INFO 7255 --- [      Thread-10] o.s.c.n.e.server.EurekaServerBootstrap   : Eureka data center value eureka.datacenter is not set, defaulting to default
+2019-07-10 00:11:37.651  INFO 7255 --- [      Thread-10] o.s.c.n.e.server.EurekaServerBootstrap   : Eureka environment value eureka.environment is not set, defaulting to test
+2019-07-10 00:11:37.684  INFO 7255 --- [      Thread-10] o.s.c.n.e.server.EurekaServerBootstrap   : isAws returned false
+2019-07-10 00:11:37.684  INFO 7255 --- [      Thread-10] o.s.c.n.e.server.EurekaServerBootstrap   : Initialized server context
+2019-07-10 00:11:37.685  INFO 7255 --- [      Thread-10] c.n.e.r.PeerAwareInstanceRegistryImpl    : Got 1 instances from neighboring DS node
+2019-07-10 00:11:37.685  INFO 7255 --- [      Thread-10] c.n.e.r.PeerAwareInstanceRegistryImpl    : Renew threshold is: 1
+2019-07-10 00:11:37.685  INFO 7255 --- [      Thread-10] c.n.e.r.PeerAwareInstanceRegistryImpl    : Changing status to UP
+2019-07-10 00:11:37.693  INFO 7255 --- [      Thread-10] e.s.EurekaServerInitializerConfiguration : Started Eureka Server
+2019-07-10 00:11:37.719  INFO 7255 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8761 (http) with context path ''
+2019-07-10 00:11:37.720  INFO 7255 --- [           main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8761
+2019-07-10 00:11:37.722  INFO 7255 --- [           main] com.se.registry.RegistryApplication      : Started RegistryApplication in 6.165 seconds (JVM running for 9.731)
+2019-07-10 00:11:45.116  INFO 7255 --- [nio-8761-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-07-10 00:11:45.116  INFO 7255 --- [nio-8761-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-07-10 00:11:45.136  INFO 7255 --- [nio-8761-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 20 ms
+2019-07-10 00:11:51.337  INFO 7255 --- [nio-8761-exec-4] c.n.e.registry.AbstractInstanceRegistry  : Registered instance USER/user:d51e68390477acca62b97c493d38e562 with status UP (replication=false)
+2019-07-10 00:11:52.140  INFO 7255 --- [nio-8761-exec-5] c.n.e.registry.AbstractInstanceRegistry  : Registered instance USER/user:d51e68390477acca62b97c493d38e562 with status UP (replication=true)
+2019-07-10 00:11:56.423  WARN 7255 --- [nio-8761-exec-7] c.n.e.registry.AbstractInstanceRegistry  : DS: Registry: lease doesn't exist, registering resource: CONFIG - 10.0.0.55:config:8888
+2019-07-10 00:11:56.423  WARN 7255 --- [nio-8761-exec-7] c.n.eureka.resources.InstanceResource    : Not Found (Renew): CONFIG - 10.0.0.55:config:8888
+2019-07-10 00:11:56.511  INFO 7255 --- [nio-8761-exec-9] c.n.e.registry.AbstractInstanceRegistry  : Registered instance CONFIG/10.0.0.55:config:8888 with status UP (replication=false)
+2019-07-10 00:11:56.534  INFO 7255 --- [io-8761-exec-10] c.n.e.registry.AbstractInstanceRegistry  : Registered instance CONFIG/10.0.0.55:config:8888 with status UP (replication=false)
+2019-07-10 00:11:57.058  INFO 7255 --- [nio-8761-exec-1] c.n.e.registry.AbstractInstanceRegistry  : Registered instance CONFIG/10.0.0.55:config:8888 with status UP (replication=true)
+2019-07-10 00:12:03.356  INFO 7255 --- [nio-8761-exec-4] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ITEM/item:ddb1511d313f5c82139ba9997f81684c with status UP (replication=false)
+2019-07-10 00:12:03.871  INFO 7255 --- [nio-8761-exec-5] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ITEM/item:ddb1511d313f5c82139ba9997f81684c with status UP (replication=true)
+2019-07-10 00:12:14.211  INFO 7255 --- [nio-8761-exec-9] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ACTIVITY/activity:f14cedd37bbcf866fc718e2dfa3cda7d with status UP (replication=false)
+2019-07-10 00:12:14.727  INFO 7255 --- [io-8761-exec-10] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ACTIVITY/activity:f14cedd37bbcf866fc718e2dfa3cda7d with status UP (replication=true)
+2019-07-10 00:12:25.253  INFO 7255 --- [nio-8761-exec-8] c.n.e.registry.AbstractInstanceRegistry  : Registered instance RATING/rating:2106eca7d65cd85caa92e76f5bd46b2b with status UP (replication=false)
+2019-07-10 00:12:25.767  INFO 7255 --- [nio-8761-exec-7] c.n.e.registry.AbstractInstanceRegistry  : Registered instance RATING/rating:2106eca7d65cd85caa92e76f5bd46b2b with status UP (replication=true)
+2019-07-10 00:12:36.456  INFO 7255 --- [nio-8761-exec-7] c.n.e.registry.AbstractInstanceRegistry  : Registered instance TOPIC/topic:afe58f9aec60c0ba1391274d2abe69c8 with status UP (replication=false)
+2019-07-10 00:12:36.976  INFO 7255 --- [nio-8761-exec-9] c.n.e.registry.AbstractInstanceRegistry  : Registered instance TOPIC/topic:afe58f9aec60c0ba1391274d2abe69c8 with status UP (replication=true)
+2019-07-10 00:12:37.686  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2019-07-10 00:12:46.582  INFO 7255 --- [nio-8761-exec-6] c.n.e.registry.AbstractInstanceRegistry  : Registered instance UNKNOWN/10.0.0.55 with status UP (replication=false)
+2019-07-10 00:12:47.091  INFO 7255 --- [nio-8761-exec-8] c.n.e.registry.AbstractInstanceRegistry  : Registered instance UNKNOWN/10.0.0.55 with status UP (replication=true)
+2019-07-10 00:12:54.634  INFO 7255 --- [nio-8761-exec-4] c.n.e.registry.AbstractInstanceRegistry  : Registered instance UNKNOWN/10.0.0.55 with status UP (replication=false)
+2019-07-10 00:12:54.652  INFO 7255 --- [nio-8761-exec-5] c.n.e.registry.AbstractInstanceRegistry  : Registered instance UNKNOWN/10.0.0.55 with status DOWN (replication=false)
+2019-07-10 00:12:54.669  INFO 7255 --- [nio-8761-exec-6] c.n.e.registry.AbstractInstanceRegistry  : Cancelled instance UNKNOWN/10.0.0.55 (replication=false)
+2019-07-10 00:12:55.161  INFO 7255 --- [nio-8761-exec-7] c.n.e.registry.AbstractInstanceRegistry  : Registered instance UNKNOWN/10.0.0.55 with status DOWN (replication=true)
+2019-07-10 00:12:55.163  INFO 7255 --- [nio-8761-exec-7] c.n.e.registry.AbstractInstanceRegistry  : Cancelled instance UNKNOWN/10.0.0.55 (replication=true)
+2019-07-10 00:13:01.989  INFO 7255 --- [io-8761-exec-10] c.n.e.registry.AbstractInstanceRegistry  : Registered instance IMAGE/image:b0725b9659795f6a7670c0b7038d0a1f with status UP (replication=false)
+2019-07-10 00:13:02.508  INFO 7255 --- [nio-8761-exec-2] c.n.e.registry.AbstractInstanceRegistry  : Registered instance IMAGE/image:b0725b9659795f6a7670c0b7038d0a1f with status UP (replication=true)
+2019-07-10 00:13:10.900  INFO 7255 --- [nio-8761-exec-2] c.n.e.registry.AbstractInstanceRegistry  : Registered instance UNKNOWN/10.0.0.55 with status UP (replication=false)
+2019-07-10 00:13:10.950  INFO 7255 --- [nio-8761-exec-3] c.n.e.registry.AbstractInstanceRegistry  : Registered instance UNKNOWN/10.0.0.55 with status DOWN (replication=false)
+2019-07-10 00:13:11.464  INFO 7255 --- [nio-8761-exec-4] c.n.e.registry.AbstractInstanceRegistry  : Registered instance UNKNOWN/10.0.0.55 with status DOWN (replication=true)
+2019-07-10 00:13:14.002  INFO 7255 --- [nio-8761-exec-1] c.n.e.registry.AbstractInstanceRegistry  : Cancelled instance UNKNOWN/10.0.0.55 (replication=false)
+2019-07-10 00:13:14.511  WARN 7255 --- [nio-8761-exec-7] c.n.e.registry.AbstractInstanceRegistry  : DS: Registry: cancel failed because Lease is not registered for: UNKNOWN/10.0.0.55
+2019-07-10 00:13:14.511  INFO 7255 --- [nio-8761-exec-7] c.n.eureka.resources.InstanceResource    : Not Found (Cancel): UNKNOWN - 10.0.0.55
+2019-07-10 00:13:14.514  WARN 7255 --- [et_localhost-16] c.n.eureka.cluster.ReplicationTask       : The replication of task UNKNOWN/10.0.0.55:Cancel@localhost failed with response code 404
+2019-07-10 00:13:14.514  WARN 7255 --- [et_localhost-16] c.netflix.eureka.cluster.PeerEurekaNode  : UNKNOWN/10.0.0.55:Cancel@localhost: missing entry.
+2019-07-10 00:13:16.521  WARN 7255 --- [io-8761-exec-10] c.n.e.registry.AbstractInstanceRegistry  : DS: Registry: lease doesn't exist, registering resource: UNKNOWN - 10.0.0.55
+2019-07-10 00:13:16.691  WARN 7255 --- [io-8761-exec-10] c.n.eureka.resources.InstanceResource    : Not Found (Renew): UNKNOWN - 10.0.0.55
+2019-07-10 00:13:16.698  INFO 7255 --- [nio-8761-exec-2] c.n.e.registry.AbstractInstanceRegistry  : Registered instance UNKNOWN/10.0.0.55 with status UP (replication=false)
+2019-07-10 00:13:17.211  INFO 7255 --- [nio-8761-exec-3] c.n.e.registry.AbstractInstanceRegistry  : Registered instance UNKNOWN/10.0.0.55 with status UP (replication=true)
+2019-07-10 00:13:19.802  INFO 7255 --- [nio-8761-exec-1] c.n.e.registry.AbstractInstanceRegistry  : Registered instance GATEWAY/10.0.0.55:gateway:8000 with status UP (replication=false)
+2019-07-10 00:13:20.317  INFO 7255 --- [nio-8761-exec-5] c.n.e.registry.AbstractInstanceRegistry  : Registered instance GATEWAY/10.0.0.55:gateway:8000 with status UP (replication=true)
+2019-07-10 00:13:37.687  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2019-07-10 00:14:37.687  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2019-07-10 00:15:37.687  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2019-07-10 00:16:37.687  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2019-07-10 00:17:37.687  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2019-07-10 00:18:37.687  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2019-07-10 00:19:37.688  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2019-07-10 00:20:37.689  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2019-07-10 00:21:37.688  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2019-07-10 00:22:37.688  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2019-07-10 00:23:37.688  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2019-07-10 00:24:37.689  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2019-07-10 00:25:37.689  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2019-07-10 00:26:37.526  INFO 7255 --- [hresholdUpdater] c.n.e.r.PeerAwareInstanceRegistryImpl    : Current renewal threshold is : 17
+2019-07-10 00:26:37.690  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2019-07-10 00:27:37.690  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2019-07-10 00:28:37.690  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2019-07-10 00:29:37.690  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2019-07-10 00:30:37.691  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2019-07-10 00:31:37.691  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2019-07-10 00:32:37.691  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2019-07-10 00:33:37.691  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2019-07-10 00:34:37.691  INFO 7255 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms

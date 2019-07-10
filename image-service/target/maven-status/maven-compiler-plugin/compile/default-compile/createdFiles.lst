@@ -1,0 +1,4 @@
+com/se/imageservice/ImageServiceApplication.class
+com/se/imageservice/ImageRepository.class
+com/se/imageservice/ImageController.class
+com/se/imageservice/Image.class

@@ -1,0 +1,9 @@
+/home/ubuntu/SE231/friend-service/src/main/java/com/se/friendservice/entity/Friend.java
+/home/ubuntu/SE231/friend-service/src/main/java/com/se/friendservice/FriendService.java
+/home/ubuntu/SE231/friend-service/src/main/java/com/se/friendservice/FriendRepository.java
+/home/ubuntu/SE231/friend-service/src/main/java/com/se/friendservice/client/UserClient.java
+/home/ubuntu/SE231/friend-service/src/main/java/com/se/friendservice/entity/User.java
+/home/ubuntu/SE231/friend-service/src/main/java/com/se/friendservice/FriendServiceApplication.java
+/home/ubuntu/SE231/friend-service/src/main/java/com/se/friendservice/client/UserClientFallBack.java
+/home/ubuntu/SE231/friend-service/src/main/java/com/se/friendservice/FriendServiceImpl.java
+/home/ubuntu/SE231/friend-service/src/main/java/com/se/friendservice/FriendController.java

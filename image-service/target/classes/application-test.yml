@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: image
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/bamdb
+server:
+  port: ${PORT:0}
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}

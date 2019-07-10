@@ -1,6 +1,6 @@
-/Users/pro/sjtu/22/se/bamdb/SE231/item-service/src/main/java/com/se/itemservice/entity/Item.java
-/Users/pro/sjtu/22/se/bamdb/SE231/item-service/src/main/java/com/se/itemservice/ItemRepository.java
-/Users/pro/sjtu/22/se/bamdb/SE231/item-service/src/main/java/com/se/itemservice/ItemService.java
-/Users/pro/sjtu/22/se/bamdb/SE231/item-service/src/main/java/com/se/itemservice/ItemController.java
-/Users/pro/sjtu/22/se/bamdb/SE231/item-service/src/main/java/com/se/itemservice/ItemServiceApplication.java
-/Users/pro/sjtu/22/se/bamdb/SE231/item-service/src/main/java/com/se/itemservice/ItemServiceImpl.java
+/home/ubuntu/SE231/item-service/src/main/java/com/se/itemservice/ItemController.java
+/home/ubuntu/SE231/item-service/src/main/java/com/se/itemservice/entity/Item.java
+/home/ubuntu/SE231/item-service/src/main/java/com/se/itemservice/ItemRepository.java
+/home/ubuntu/SE231/item-service/src/main/java/com/se/itemservice/ItemServiceImpl.java
+/home/ubuntu/SE231/item-service/src/main/java/com/se/itemservice/ItemService.java
+/home/ubuntu/SE231/item-service/src/main/java/com/se/itemservice/ItemServiceApplication.java
