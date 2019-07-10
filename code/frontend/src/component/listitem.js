@@ -99,7 +99,7 @@ class Listitem extends Component {
                     </Paper>
 
                 )
-                debugger;
+
             }
         }
 
