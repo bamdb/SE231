@@ -221,6 +221,42 @@ public class RatingServiceApplicationTests {
         }
     }
 
+    @Test
+    public void ratingClientTest() throws Exception {
+        Item item = new Item();
+        item.setId(1L);
+        item.setImgurl(null);
+        item.setChapterNum(12);
+        item.setItemname("mock");
+        item.setMainAuthor("bamdb");
+        item.setPubTime(Timestamp.valueOf("2019-07-01 08:00:00.0"));
+        item.setType(0);
+        itemClient.postItem(item);
+        Item item1 = new Item();
+        item1.setId(1L);
+        item1.setImgurl(null);
+        item1.setChapterNum(12);
+        item1.setItemname("mock");
+        item1.setMainAuthor("bamdb");
+        item1.setPubTime(Timestamp.valueOf("2019-07-01 08:00:00.0"));
+        item1.setType(0);
+        itemClient.postItem(item1);
+        itemClient.updateItemById(item1);
+        Item item2 = new Item();
+        item2.setId(3L);
+        item2.setImgurl(null);
+        item2.setChapterNum(12);
+        item2.setItemname("mock");
+        item2.setMainAuthor("bamdb");
+        item2.setPubTime(Timestamp.valueOf("2019-07-01 08:00:00.0"));
+        item2.setType(0);
+        itemClient.postItem(item2);
+        itemClient.getItemById(1L);
+        itemClient.getItemById(5L);
+        itemClient.deleteItemById(10L);
+        itemClient.deleteItemById(1L);
+    }
+
     @TestConfiguration
     public static class LocalRibbonClientConfiguration {
         @Bean
