@@ -30,3 +30,7 @@
 * write locustfile.py for performance test
 * work on auto evaluation script
 * deploy backend on another server
+
+# 2019-07-11
+* complete auto load-test and evaluation plot scripts
+* complete load-test in single-node backend server
