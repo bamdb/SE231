@@ -1,8 +1,11 @@
 #!/bin/sh
 ps -ef | grep java | grep -v grep | awk '{print $2}' | xargs kill -9
 cd ~/bamdb/SE231
-sleep 5
-cd user-service
+cd registry
+nohup mvn spring-boot:run -Drun.profiles=ubuntularge > bamdb.log &
+sleep 10
+echo 'registry deployed'
+cd ../user-service
 nohup mvn spring-boot:run -Drun.profiles=ubuntularge > bamdb.log &
 sleep 5
 echo 'user-service deployed'
