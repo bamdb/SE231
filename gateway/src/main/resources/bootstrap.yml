@@ -5,7 +5,7 @@ spring:
         service-id: config
         enabled: true
       fail-fast: true
-      name: gateway
+      name: gateway, ribbon
 eureka:
   client:
     serviceUrl:

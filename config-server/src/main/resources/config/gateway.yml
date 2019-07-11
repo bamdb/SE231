@@ -47,15 +47,3 @@ zuul:
       sensitiveHeaders:
   retryable: true
 
-ribbon:
-  ConnectTimeout: 2000
-  ReadTimeout: 2000
-  OktoRetryOnAllOperations: true
-  MaxAutoRetriesNextServer: 2
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMillisecond: 6000

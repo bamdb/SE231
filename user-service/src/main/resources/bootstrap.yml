@@ -4,7 +4,7 @@ spring:
       discovery:
         service-id: config
         enabled: true
-      name: user, mysql
+      name: user, mysql, ribbon
 eureka:
   client:
     serviceUrl:
