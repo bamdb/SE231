@@ -21,3 +21,6 @@
 ## 2019.07.10
 + 架构文档
 + 负载均衡
+## 2019.07.11
++ load balancing
++ distrbuted deployment
