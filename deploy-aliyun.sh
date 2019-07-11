@@ -1,6 +1,6 @@
 #!/bin/sh
 ps -ef | grep java | grep -v grep | awk '{print $2}' | xargs kill -9
-cd ~/SE231
+cd ~/bamdb/SE231
 sleep 5
 cd user-service
 nohup mvn spring-boot:run -Drun.profiles=ubuntularge > bamdb.log &
