@@ -28,15 +28,15 @@ echo 'rating-service deployed'
 cd ../topic-service
 nohup mvn spring-boot:run -Drun.profiles=aliyun > bamdb.log &
 sleep 5
-cd ../comment
+cd ../comment-service
 nohup mvn spring-boot:run -Drun.profiles=aliyun > bamdb.log &
 sleep 5
 echo 'comment deployed'
-cd ../message
+cd ../message-service
 nohup mvn spring-boot:run -Drun.profiles=aliyun > bamdb.log &
 sleep 5
 echo 'message deployed'
-cd ../friend
+cd ../friend-service
 nohup mvn spring-boot:run -Drun.profiles=aliyun > bamdb.log &
 sleep 5
 echo 'friend deployed'
