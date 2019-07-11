@@ -31,3 +31,6 @@
 * upgrade test
 * write document
 * fix frontend bugs
+# 2019-7-11
+* continuing writing frontend
+* doing load balance on frontend
