@@ -1,6 +1,5 @@
 package com.se.friendservice;
 
-import com.google.common.collect.Iterables;
 import com.se.friendservice.client.UserClient;
 import com.se.friendservice.entity.Friend;
 import com.se.friendservice.entity.User;
