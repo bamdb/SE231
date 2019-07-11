@@ -99,6 +99,18 @@
 * huangyuyang:
   * realize frontend api
   * write document
+# 2019-7-11
+* shenruien:
+  * continuing writing frontend
+  * doing load balance on frontend
+* yuyajie:
+  * load balancing
+  * distrbuted deployment
+* wangzulai:
+  * complete auto load-test and evaluation plot scripts
+  * complete load-test in single-node backend server
+* huangyuyang:
+  * Ill leave
 
 
 
