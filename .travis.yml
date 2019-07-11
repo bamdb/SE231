@@ -33,6 +33,7 @@ install:
 script:
 - npm test
 - cd ../backend
+- mvn clean install
 #- "../backend/mvnw clean install -B"
 after_success:
 - bash <(curl -s https://codecov.io/bash)
