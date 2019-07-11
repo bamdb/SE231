@@ -1,4 +1,0 @@
-eureka:
-  client:
-    service-url:
-      defaultZone: http://bamdb:bamdb@localhost:8761/eureka/,  http://bamdb:bamdb@202.120.40.8:30743/eureka/
