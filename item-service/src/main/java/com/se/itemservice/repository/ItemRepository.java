@@ -1,4 +1,4 @@
-package com.se.itemservice;
+package com.se.itemservice.repository;
 
 import com.se.itemservice.entity.Item;
 import org.springframework.data.repository.CrudRepository;

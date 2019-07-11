@@ -24,6 +24,12 @@ public class ItemController {
         return itemService.postItem(item);
     }
 
+    @PostMapping(value = "/add/relation")
+    public void postItemRelation(@RequestParam("priorId") Long priorId, @RequestParam("subsequentId") Long subsequentId,
+                                 @RequestParam("relateType") boolean relateType) {
+
+    }
+
     @DeleteMapping(value = "/delete/id/{itemId}")
     public ResponseEntity<?> deleteItemById(@PathVariable Long itemId) {
         return itemService.deleteItemById(itemId);
