@@ -1,3 +1,10 @@
+spring:
+  cloud:
+    config:
+      name: registry
+      discovery:
+        service-id: config
+        enabled: true
 eureka:
   client:
     service-url:
