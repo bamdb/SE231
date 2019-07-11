@@ -1,6 +1,7 @@
 package com.se.ratingservice;
 
 import com.se.ratingservice.entity.Rating;
+import com.se.ratingservice.entity.RatingOut;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,8 +34,8 @@ public class RatingController {
     }
 
     @GetMapping(value="/browser", produces="application/json")
-    public List<Rating> getRatingPageByType(@RequestParam("type") Integer type, @RequestParam("page") int pageNum,
-                                      @RequestParam("pageSize") int pageSize) {
+    public List<RatingOut> getRatingPageByType(@RequestParam("type") Integer type, @RequestParam("page") int pageNum,
+                                               @RequestParam("pageSize") int pageSize) {
         return ratingService.selectPageByType(type, pageNum, pageSize);
     }
 

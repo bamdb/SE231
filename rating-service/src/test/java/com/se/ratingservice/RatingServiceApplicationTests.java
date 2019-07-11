@@ -255,6 +255,9 @@ public class RatingServiceApplicationTests {
         itemClient.getItemById(5L);
         itemClient.deleteItemById(10L);
         itemClient.deleteItemById(1L);
+        Item item3 = new Item();
+        item3.setId(20L);
+        itemClient.updateItemById(item3);
     }
 
     @TestConfiguration

@@ -3,6 +3,7 @@ package com.se.ratingservice;
 import com.netflix.discovery.converters.Auto;
 import com.se.ratingservice.entity.Item;
 import com.se.ratingservice.entity.Rating;
+import com.se.ratingservice.entity.RatingOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -79,11 +81,24 @@ public class RatingServiceImpl implements RatingService {
         return ratingRepository.findByItemId(itemId).orElse(null);
     }
 
-    public List<Rating> selectPageByType(Integer type, int pageNum, int pageSize) {
+    public List<RatingOut> selectPageByType(Integer type, int pageNum, int pageSize) {
         Sort sort = new Sort(Sort.Direction.DESC, "avgScore");
         PageRequest pageRequest = PageRequest.of(pageNum, pageSize, sort);
         Page<Rating> ratingPage = ratingRepository.findAllByType(type, pageRequest);
-        return ratingPage.getContent();
+        List<Rating> ratingList = ratingPage.getContent();
+        List<RatingOut> ratingOuts = new ArrayList<>();
+        for (Rating rating : ratingList) {
+            RatingOut ratingOut = new RatingOut();
+            ratingOut.setRating(rating);
+            Item item = itemClient.getItemById(rating.getItemId());
+            if (item == null) {
+                deleteRatingByItemId(rating.getId());
+            }else {
+                ratingOut.setItem(item);
+                ratingOuts.add(ratingOut);
+            }
+        }
+        return ratingOuts;
     }
 
     public ResponseEntity<?> updateRating(Long itemId, List<Integer> ratingList) {

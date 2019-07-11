@@ -46,7 +46,7 @@ public class ItemClientFallback implements ItemClient{
     @Override
     public Item updateItemById(Item item) {
         for (Item itemIter : itemList) {
-            if (item.getId().equals(itemIter.getId())) {
+            if (item.getId() == itemIter.getId()) {
                 itemIter.setType(item.getType());
                 itemIter.setPubTime(item.getPubTime());
                 itemIter.setMainAuthor(item.getMainAuthor());
