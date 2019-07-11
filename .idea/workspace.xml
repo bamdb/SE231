@@ -38,16 +38,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/activity-service/src/main/resources/application-aliyun.yml">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/deploy-aliyun.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+            <state relative-caret-position="108">
+              <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -62,19 +57,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/registry/src/main/resources/bootstrap-ubuntularge.yml">
+        <entry file="file://$PROJECT_DIR$/registry/src/main/resources/bootstrap.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="108">
-              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+              <caret line="6" selection-start-line="6" selection-end-line="6" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/registry/src/main/resources/bootstrap-aliyun.yml">
+        <entry file="file://$PROJECT_DIR$/registry/src/main/resources/application-aliyun.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="10" column="93" selection-start-line="10" selection-start-column="93" selection-end-line="10" selection-end-column="93" />
+            <state relative-caret-position="54">
+              <caret line="3" column="7" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config-server/src/main/resources/application.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
             </state>
           </provider>
         </entry>
@@ -92,28 +96,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/user-service/src/main/resources/bootstrap.yml">
+        <entry file="file://$PROJECT_DIR$/image-service/src/main/resources/bootstrap.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="3" selection-start-line="3" selection-end-line="5" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/user-service/src/main/resources/application-ubuntularge.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="3" column="64" lean-forward="true" selection-start-line="3" selection-start-column="64" selection-end-line="3" selection-end-column="64" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/user-service/src/main/resources/application-aliyun.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="3" column="56" selection-start-line="3" selection-start-column="56" selection-end-line="3" selection-end-column="56" />
+            <state relative-caret-position="198">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
             </state>
           </provider>
         </entry>
@@ -172,7 +158,6 @@
         <option value="$PROJECT_DIR$/message-service/src/main/resources/bootstrap.yml" />
         <option value="$PROJECT_DIR$/rating-service/src/main/resources/bootstrap-ubuntularge.yml" />
         <option value="$PROJECT_DIR$/rating-service/src/main/resources/bootstrap.yml" />
-        <option value="$PROJECT_DIR$/registry/src/main/resources/application-aliyun.yml" />
         <option value="$PROJECT_DIR$/topic-service/src/main/resources/bootstrap.yml" />
         <option value="$PROJECT_DIR$/user-service/src/main/resources/bootstrap.yml" />
         <option value="$PROJECT_DIR$/deploy.sh" />
@@ -180,8 +165,11 @@
         <option value="$PROJECT_DIR$/user-service/src/main/resources/application-aliyun.yml" />
         <option value="$PROJECT_DIR$/user-service/src/main/resources/application-ubuntularge.yml" />
         <option value="$PROJECT_DIR$/registry/src/main/resources/bootstrap.yml" />
-        <option value="$PROJECT_DIR$/registry/src/main/resources/bootstrap-aliyun.yml" />
         <option value="$PROJECT_DIR$/deploy-ubuntularge.sh" />
+        <option value="$PROJECT_DIR$/registry/src/main/resources/bootstrap-aliyun.yml" />
+        <option value="$PROJECT_DIR$/registry/src/main/resources/application-aliyun.yml" />
+        <option value="$PROJECT_DIR$/item-service/src/main/resources/application-aliyun.yml" />
+        <option value="$PROJECT_DIR$/friend-service/src/main/resources/application-aliyun.yml" />
         <option value="$PROJECT_DIR$/deploy-aliyun.sh" />
       </list>
     </option>
@@ -193,8 +181,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="476" />
-    <option name="y" value="33" />
+    <option name="x" value="-20" />
+    <option name="y" value="189" />
     <option name="width" value="1389" />
     <option name="height" value="965" />
   </component>
@@ -212,170 +200,6 @@
               <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
               <item name="SE231" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="gateway" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="gateway" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="gateway" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="gateway" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="gateway" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="image-service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="image-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="image-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="image-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="item-service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="item-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="item-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="item-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="message-service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="message-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="message-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="message-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="registry" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="registry" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="registry" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="registry" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="user-service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="user-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="user-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SE231" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE231" type="462c0819:PsiDirectoryNode" />
-              <item name="user-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -390,7 +214,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562815630896" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562816099689" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
@@ -522,12 +346,12 @@
       <workItem from="1562202408324" duration="257000" />
       <workItem from="1562748494882" duration="10008000" />
       <workItem from="1562771829832" duration="5004000" />
-      <workItem from="1562805627553" duration="9266000" />
+      <workItem from="1562805627553" duration="10076000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24586000" />
+    <option name="totallyTimeSpent" value="25396000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -539,10 +363,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="476" y="33" width="1389" height="965" extended-state="0" />
+    <frame x="-20" y="189" width="1389" height="965" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49807692" visible="true" weight="0.37246048" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49807692" visible="true" weight="0.37246048" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -558,7 +382,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286052" />
       <window_info anchor="bottom" id="Spring" order="7" weight="0.32932693" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.39109507" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.39109507" />
       <window_info anchor="bottom" id="Docker" order="9" weight="0.32889965" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50075644" side_tool="true" weight="0.33131802" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32932693" />
@@ -620,23 +444,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/registry/src/main/java/com/se/registry/EurekaWebConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/registry/src/main/java/com/se/registry/RegistryApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.m2/repository/com/netflix/eureka/eureka-client/1.9.8/eureka-client-1.9.8.jar!/com/netflix/discovery/shared/transport/decorator/EurekaHttpClientDecorator.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -757,13 +564,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/image-service/src/main/resources/bootstrap.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/message-service/src/main/resources/bootstrap-ubuntularge.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -836,29 +636,10 @@
     <entry file="file://$PROJECT_DIR$/message-service/src/main/resources/application-aliyun.yml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/item-service/src/main/resources/application-aliyun.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/image-service/src/main/resources/application-aliyun.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gateway/src/main/resources/application-aliyun.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/gateway/src/main/resources/bootstrap.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/friend-service/src/main/resources/application-aliyun.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config-server/src/main/resources/application.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>
@@ -874,13 +655,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/activity-service/src/main/resources/application-aliyun.yml">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/registry/src/main/resources/application-ubuntularge.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="48" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="48" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/user-service/src/main/resources/application-ubuntularge.yml">
       <provider selected="true" editor-type-id="text-editor">
@@ -903,13 +677,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/registry/src/main/resources/application-aliyun.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="44" lean-forward="true" selection-end-line="3" selection-end-column="108" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/deploy.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
@@ -920,20 +687,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/registry/src/main/resources/bootstrap-aliyun.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="93" selection-start-line="10" selection-start-column="93" selection-end-line="10" selection-end-column="93" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/registry/src/main/resources/bootstrap-ubuntularge.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/deploy-ubuntularge.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="318">
@@ -941,10 +694,74 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/registry/src/main/resources/bootstrap-aliyun.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registry/src/main/resources/bootstrap.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registry/src/main/resources/application-ubuntularge.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="48" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registry/src/main/resources/application-aliyun.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="7" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/image-service/src/main/resources/bootstrap.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/image-service/src/main/resources/application-ubuntularge.yml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/image-service/src/main/resources/application-aliyun.yml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/item-service/src/main/resources/application-aliyun.yml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gateway/src/main/resources/application-aliyun.yml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gateway/src/main/resources/application-ubuntularge.yml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/friend-service/src/main/resources/application-aliyun.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config-server/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/deploy-aliyun.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+        <state relative-caret-position="108">
+          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
         </state>
       </provider>
     </entry>

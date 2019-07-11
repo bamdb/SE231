@@ -4,7 +4,7 @@ cd ~/bamdb/SE231
 cd config-server
 nohup mvn spring-boot:run -Dspring.profiles.active=aliyun > bamdb.log &
 sleep 30
-echo 'registry deployed'
+echo 'config deployed'
 cd ../registry
 nohup mvn spring-boot:run -Dspring.profiles.active=aliyun > bamdb.log &
 sleep 10
