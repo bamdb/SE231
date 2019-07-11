@@ -24,16 +24,7 @@ before_install:
 after_success:
 - export CODECOV_TOKEN="c44167bb-18d7-4f63-88f5-6181d3d80c4d"
 - bash <(curl -s https://codecov.io/bash)
-#before_deploy:
 - openssl aes-256-cbc -K $encrypted_8f8831fa9ccf_key -iv $encrypted_8f8831fa9ccf_iv
   -in private_key.enc -out ~/.ssh/id_rsa -d -d
-#- eval "$(ssh-agent -s)"
 - chmod 600 ~/.ssh/id_rsa
-#- ssh-add ~/.ssh/private_key.txt
-- ssh -p 30740 ubuntu@202.120.40.8 "cd ~/SE231" < deploy.sh
-#deploy:
- # provider: script
-  #script: bash ./deploy.sh
-  #skip_cleanup: true
-  #on:
-   # branch: isalb
+- ssh -p 30740 ubuntu@202.120.40.8 < deploy-ubuntularge.sh
