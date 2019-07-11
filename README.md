@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/bamdb/SE231.svg?branch=isalb)](https://travis-ci.org/bamdb/SE231)
-[![codecov.io](https://codecov.io/github/bamdb/SE231/coverage.svg?branch=isalb)](https://codecov.io/github/bamdb/SE231?branch=isalb)
+[![Build Status](https://travis-ci.org/bamdb/SE231.svg?branch=master)](https://travis-ci.org/bamdb/SE231)
+[![codecov.io](https://codecov.io/github/bamdb/SE231/coverage.svg?branch=master)](https://codecov.io/github/bamdb/SE231?branch=master)
 ![language](https://img.shields.io/badge/Language-Java-orange.svg)
 ![license](https://img.shields.io/badge/License-GPL--3.0-blue.svg)
 # SE231
