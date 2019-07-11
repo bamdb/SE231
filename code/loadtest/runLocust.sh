@@ -12,6 +12,7 @@ CLIENTS=2
 REQUESTS=10
 RUNTIME=10s
 CSVFILE="./traces/test"
+SCALETIME=3
 
 
 do_check() {
@@ -35,10 +36,6 @@ do_check() {
   	LOCUST_FILE="locustfile.py" 
   	echo "Default Locust file: $LOCUST_FILE" 
   fi
-
-  # assign csv file name by "test"+$CLIENTS
-  CSVFILE="${CSVFILE}${CLIENTS}"
-  echo "$CSVFILE"
 }
 
 do_exec() {
@@ -50,11 +47,23 @@ do_exec() {
       echo "${TARGET_HOST} is not accessible"
       exit 1
   fi
-  
-  echo "Loadbalance test"
-  echo "Will run $LOCUST_FILE against $TARGET_HOST. Spawning $CLIENTS clients and $REQUESTS hatch rate within $RUNTIME."
-  locust --host=http://$TARGET_HOST -f $LOCUST_FILE --csv=$CSVFILE --clients=$CLIENTS --hatch-rate=$REQUESTS --run-time=$RUNTIME --no-web
-  echo "done"
+
+  i=${SCALETIME}
+  sum=${CLIENTS}
+  while [ ${i} -ge 1 ]
+  do
+      # assign csv file name by "test"+$CLIENTS
+      CSVFILE="./traces/test${sum}"
+      echo "Loadbalance test"
+      echo "Will run $LOCUST_FILE against $TARGET_HOST. Spawning $CLIENTS clients and $REQUESTS hatch rate within $RUNTIME."
+      locust --host=http://$TARGET_HOST -f $LOCUST_FILE --csv=$CSVFILE --clients=$sum --hatch-rate=$REQUESTS --run-time=$RUNTIME --no-web
+      echo "done"
+      echo ${sum}
+      echo ${CLIENTS}
+      let sum=sum+CLIENTS
+      let i--
+      echo ${i}
+  done
 }
 
 do_usage() {
@@ -68,6 +77,7 @@ Options:
   -c  Number of clients (default 2)
   -r  Number of requests (default 10)
   -t  Run time
+  -s  Scaling times (default 3)
 
 Description:
   Runs a Locust load simulation against specified host.
@@ -78,7 +88,7 @@ EOF
 
 
 
-while getopts ":d:h:c:r:t:" o; do
+while getopts ":d:h:c:r:t:s:" o; do
   case "${o}" in
     d)
         INITIAL_DELAY=${OPTARG}
@@ -99,6 +109,10 @@ while getopts ":d:h:c:r:t:" o; do
     t)
         RUNTIME=${OPTARG:-10s}
         #echo $RUNTIME
+        ;;
+    s)
+        SCALETIME=${OPTARG:-3}
+        #echo $SCALETIME
         ;;
     *)
         do_usage
