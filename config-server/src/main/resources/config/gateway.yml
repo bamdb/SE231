@@ -46,4 +46,5 @@ zuul:
       service-id: comment
       sensitiveHeaders:
   retryable: true
-
+  semaphore:
+    max-semaphores: 10000
