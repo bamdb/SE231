@@ -141,6 +141,9 @@ public class RatingServiceApplicationTests {
         mvc.perform(get("/browser?type=0&page=0&pageSize=5").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
+        itemClient.deleteItemById(1L);
+        mvc.perform(get("/browser?type=0&page=0&pageSize=5").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 
     @Test

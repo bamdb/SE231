@@ -78,6 +78,8 @@ public class RatingServiceImpl implements RatingService {
         if (!item.getType().equals(rating.getType())) {
             rating.setType(item.getType());
         }
+        Integer rank = 1 + ratingRepository.findRankByTypeAndItemId(rating.getType(), rating.getAvgScore());
+        rating.setRank(rank);
         return ratingRepository.findByItemId(itemId).orElse(null);
     }
 
@@ -94,6 +96,8 @@ public class RatingServiceImpl implements RatingService {
             if (item == null) {
                 deleteRatingByItemId(rating.getId());
             }else {
+                Integer rank = 1 + ratingRepository.findRankByTypeAndItemId(rating.getType(), rating.getAvgScore());
+                rating.setRank(rank);
                 ratingOut.setItem(item);
                 ratingOuts.add(ratingOut);
             }
