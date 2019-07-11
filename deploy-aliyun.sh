@@ -1,7 +1,11 @@
 #!/bin/sh
 ps -ef | grep java | grep -v grep | awk '{print $2}' | xargs kill -9
 cd ~/bamdb/SE231
-cd registry
+cd config
+nohup mvn spring-boot:run -Dspring.profiles.active=aliyun > bamdb.log &
+sleep 30
+echo 'registry deployed'
+cd ../registry
 nohup mvn spring-boot:run -Dspring.profiles.active=aliyun > bamdb.log &
 sleep 10
 echo 'registry deployed'
