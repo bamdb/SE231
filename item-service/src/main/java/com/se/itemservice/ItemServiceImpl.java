@@ -26,23 +26,25 @@ public class ItemServiceImpl implements ItemService{
     }
 
     public ResponseEntity<?> deleteItemRelationById(Long itemId, Long relatedItemId) {
-        Iterable<Relation> relationIterable1 = relationRepository.findAllByItemId1(itemId);
-        Iterator<Relation> relationIterator1 = relationIterable1.iterator();
-        while (relationIterator1.hasNext()) {
-            Relation relation = relationIterator1.next();
-            if (relation.getItemId2() == relatedItemId) {
-                relationRepository.delete(relation);
-            }
-        }
-        Iterable<Relation> relationIterable2 = relationRepository.findAllByItemId2(itemId);
-        Iterator<Relation> relationIterator2 = relationIterable1.iterator();
-        while (relationIterator2.hasNext()) {
-            Relation relation = relationIterator2.next();
-            if (relation.getItemId1() == relatedItemId) {
-                relationRepository.delete(relation);
-            }
-        }
-        return null;
+        relationRepository.deleteRelationByItemId1AndItemId2(itemId, relatedItemId);
+        relationRepository.deleteRelationByItemId1AndItemId2(relatedItemId, itemId);
+//        Iterable<Relation> relationIterable1 = relationRepository.findAllByItemId1(itemId);
+//        Iterator<Relation> relationIterator1 = relationIterable1.iterator();
+//        while (relationIterator1.hasNext()) {
+//            Relation relation = relationIterator1.next();
+//            if (relation.getItemId2() == relatedItemId) {
+//                relationRepository.delete(relation);
+//            }
+//        }
+//        Iterable<Relation> relationIterable2 = relationRepository.findAllByItemId2(itemId);
+//        Iterator<Relation> relationIterator2 = relationIterable1.iterator();
+//        while (relationIterator2.hasNext()) {
+//            Relation relation = relationIterator2.next();
+//            if (relation.getItemId1() == relatedItemId) {
+//                relationRepository.delete(relation);
+//            }
+//        }
+        return ResponseEntity.ok().body("delete relation successfully!");
     }
 
     public void postItemRelation(Long priorId, Long subsequentId, boolean relateType) {
@@ -56,12 +58,20 @@ public class ItemServiceImpl implements ItemService{
     public Iterable<Item> selectAll() {return itemRepository.findAll();}
 
     public Item findItemById(Long id) {
-        return itemRepository.findById(id).orElse(null);
+        Item item = itemRepository.findById(id).orElse(null);
+        if (item != null) {
+            Iterable<Relation> relationIterable1 = relationRepository.findAllByItemId1(item.getId());
+            Iterable<Relation> relationIterable2 = relationRepository.findAllByItemId2(item.getId());
+            Iterable<Relation> relationIterable3 = relationRepository.findAllByItemId1(item.getId());
+        }
+        return item;
     }
 
     public ResponseEntity<?> deleteItemById(Long id) {
         itemRepository.deleteById(id);
-        return ResponseEntity.ok().body("delete topic successfully!");
+        relationRepository.deleteAllByItemId1(id);
+        relationRepository.deleteAllByItemId2(id);
+        return ResponseEntity.ok().body("delete item successfully!");
     }
 
     public Item updateItem(Item item) {

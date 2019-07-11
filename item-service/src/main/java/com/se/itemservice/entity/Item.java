@@ -23,6 +23,8 @@ public class Item {
     @Column(name = "type", nullable = false)
     private Integer type;
 
+    private Relation relation;
+
     public Long getId() {return id;}
 
     public Integer getType() {
@@ -54,4 +56,13 @@ public class Item {
     public String getImgurl() {return imgurl;}
 
     public void setImgurl(String imgurl) {this.imgurl = imgurl;}
+
+    public Relation getRelation() {
+        return relation;
+    }
+
+    public void setRelation(Relation relation) {
+        this.relation = relation;
+    }
+
 }
