@@ -1,0 +1,5 @@
+"Method","Name","# requests","# failures","Median response time","Average response time","Min response time","Max response time","Average Content Size","Requests/s"
+"GET","//202.120.40.8:30741/item/all",1383,1383,2,2,1,8,0,324.37
+"GET","//202.120.40.8:30741/user/all",910,910,2,2,1,14,0,213.43
+"GET","//202.120.40.8:30741/user/id/1",910,910,2,2,1,9,0,213.43
+"None","Total",3203,3203,2,2,1,14,0,751.24

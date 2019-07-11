@@ -10,6 +10,8 @@ INITIAL_DELAY=1
 TARGET_HOST="$HOST"
 CLIENTS=2
 REQUESTS=10
+RUNTIME=10s
+CSVFILE="./traces/test"
 
 
 do_check() {
@@ -17,11 +19,6 @@ do_check() {
   # check hostname is not empty
   if [ "${TARGET_HOST}x" == "x" ]; then
     echo "TARGET_HOST is not set; use '-h hostname:port'"
-    exit 1
-  fi
-
-  if [ "${TARGET_HOST}x" == "x" ]; then
-    echo "TARGET_SINGLE_HOST is not set; use '-s hostname:port'"
     exit 1
   fi
 
@@ -38,30 +35,25 @@ do_check() {
   	LOCUST_FILE="locustfile.py" 
   	echo "Default Locust file: $LOCUST_FILE" 
   fi
+
+  # assign csv file name by "test"+$CLIENTS
+  CSVFILE="${CSVFILE}${CLIENTS}"
+  echo "$CSVFILE"
 }
 
 do_exec() {
   sleep $INITIAL_DELAY
 
   # check if host is running
-  STATUS=$(curl -s -o /dev/null -w "%{http_code}" ${TARGET_HOST}) 
-  if [ $STATUS -ne 200 ]; then
+  STATUS=$(curl -s -o /dev/null -w "%{http_code}" ${TARGET_HOST})
+  if [ $STATUS -ne 200 ]&&[ $STATUS -ne 502 ]; then
       echo "${TARGET_HOST} is not accessible"
-      exit 1
-  fi
-  STATUS_SINGLE=$(curl -s -o /dev/null -w "%{http_code}" ${TARGET_SINGLE_HOST})
-  if [ $STATUS_SINGLE -ne 200 ]; then
-      echo "${TARGET_SINGLE_HOST} is not accessible"
       exit 1
   fi
   
   echo "Loadbalance test"
-  echo "Will run $LOCUST_FILE against $TARGET_HOST. Spawning $CLIENTS clients and $REQUESTS total requests."
-  locust --host=http://$TARGET_HOST -f $LOCUST_FILE --clients=$CLIENTS --hatch-rate=5 --run-time=$REQUESTS --no-web --only-summary
-  echo "done\n\n"
-  echo "No loadbalance test"
-  echo "Will run $LOCUST_FILE against $TARGET_SINGLE_HOST. Spawning $CLIENTS clients and $REQUESTS total requests."
-  locust --host=http://$TARGET_SINGLE_HOST -f $LOCUST_FILE --clients=$CLIENTS --hatch-rate=5 --run-time=$REQUESTS --no-web --only-summary
+  echo "Will run $LOCUST_FILE against $TARGET_HOST. Spawning $CLIENTS clients and $REQUESTS hatch rate within $RUNTIME."
+  locust --host=http://$TARGET_HOST -f $LOCUST_FILE --csv=$CSVFILE --clients=$CLIENTS --hatch-rate=$REQUESTS --run-time=$RUNTIME --no-web
   echo "done"
 }
 
@@ -75,6 +67,7 @@ Options:
   -h  Target host url, e.g. http://localhost/
   -c  Number of clients (default 2)
   -r  Number of requests (default 10)
+  -t  Run time
 
 Description:
   Runs a Locust load simulation against specified host.
@@ -85,7 +78,7 @@ EOF
 
 
 
-while getopts ":d:h:s:c:r:" o; do
+while getopts ":d:h:c:r:t:" o; do
   case "${o}" in
     d)
         INITIAL_DELAY=${OPTARG}
@@ -95,10 +88,6 @@ while getopts ":d:h:s:c:r:" o; do
         TARGET_HOST=${OPTARG}
         #echo $TARGET_HOST
         ;;
-    s)
-	TARGET_SINGLE_HOST=${OPTARG}
-	#echo $TARGET_SINGLE_HOST
-	;;
     c)
         CLIENTS=${OPTARG:-2}
         #echo $CLIENTS
@@ -106,6 +95,10 @@ while getopts ":d:h:s:c:r:" o; do
     r)
         REQUESTS=${OPTARG:-10}
         #echo $REQUESTS
+        ;;
+    t)
+        RUNTIME=${OPTARG:-10s}
+        #echo $RUNTIME
         ;;
     *)
         do_usage
