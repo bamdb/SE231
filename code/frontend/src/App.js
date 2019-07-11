@@ -22,6 +22,7 @@ import Activitypage from "./page/activitypage";
 import Resetpwdpage from "./page/resetpwdpage";
 
 import Messagepage from "./page/messagepage";
+import Rating from "./component/rating";
 function App() {
   return (
     <div >
@@ -38,6 +39,7 @@ function App() {
             <Route path={"/activitypage"} component={Activitypage}></Route>
             <Route path={'/resetpassword'} component={Resetpwdpage}></Route>
             <Route path={'/messagepage'} component={Messagepage}></Route>
+            <Route path={'/test'} component={Rating}></Route>
         </Router>
     </div>
   );
