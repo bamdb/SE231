@@ -35,4 +35,7 @@ Sprint 1 (July.1-July.10)
     完成个人部分的迭代报告及测试用例
     完成sprint2前段工作计划
     
-
+  July.11
+    学习matierial-ui文档并进行页面修改
+    https://www.uisdc.com/comprehensive-material-design-note （类似这种）
+    
