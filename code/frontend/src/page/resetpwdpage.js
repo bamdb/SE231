@@ -24,6 +24,11 @@ class Resetpwdpage extends Component{
     constructor(props){
         super(props);
         this.handleInforChange = this.handleInforChange.bind(this);
+        this.handleSearch=this.handleSearch.bind(this);
+    }
+
+    handleSearch(value){
+
     }
 
     handleInforChange(e){

@@ -32,6 +32,11 @@ class Userhomepage extends Component{
     constructor(props){
         super(props);
 
+        this.handleSearch=this.handleSearch.bind(this);
+    }
+
+    handleSearch(value){
+
     }
     componentWillMount() {
         axios.get()

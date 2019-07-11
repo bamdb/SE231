@@ -18,8 +18,10 @@ class Activitypage extends Component{
             username: "游客",
             userid:1,
             activities: [],
+            search:"",
             isloaded: false,
         }
+        this.handleSearch = this.handleSearch.bind(this);
     }
 
     componentWillMount() {
@@ -35,10 +37,14 @@ class Activitypage extends Component{
             })
     }
 
+    handleSearch(value){
+        this.setState({search:value});
+    }
+
     render(){
         return(
             <Grid container direction={"column"} >
-                <Grid item xs={12}><Navigation/></Grid>
+                <Grid item xs={12}><Navigation handleSearch={this.handleSearch} /></Grid>
                 <Grid container direction={"row"} alignItems={"center"}>
                     <Grid item xs={2}></Grid>
 
