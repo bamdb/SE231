@@ -15,6 +15,11 @@ import Login from "../component/login"
 class LoginPage extends Component{
     constructor(props){
         super(props);
+        this.handleSearch=this.handleSearch.bind(this);
+    }
+
+    handleSearch(value){
+
     }
 
     render(){

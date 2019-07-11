@@ -15,7 +15,12 @@ import TopicList from "../component/topiclist";
 class Topicdetailpage extends Component{
     constructor(props){
         super(props);
-        this.state = {topic:[],data:[]}
+        this.state = {topic:[],data:[],search:""}
+
+        this.handleSearch=this.handleSearch.bind(this);
+    }
+
+    handleSearch(value){
 
     }
 
@@ -54,7 +59,7 @@ class Topicdetailpage extends Component{
               </Grid>
               <Grid item xs={8}>
                   <Grid>
-                      <TopicList topics={topic} />
+                      <TopicList  search={this.state.search} topics={topic} />
                   </Grid>
                   <Grid>
                       <Discuss replies={data.replyList}/>

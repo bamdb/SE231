@@ -17,7 +17,13 @@ class Topicpage extends Component{
         super(props);
         this.state={tags:[],topics:[]};
         this.handletagchange=this.handletagchange.bind(this);
+        this.handleSearch=this.handleSearch.bind(this);
     }
+
+    handleSearch(value){
+        this.setState({search:value});
+    }
+
     handletagchange(tags){
         this.setState({tags:tags});
 
@@ -42,7 +48,7 @@ class Topicpage extends Component{
                         <Typography variant={"h6"} component={"h6"} align={"left"} >讨论版</Typography>
                     </Grid>
                     <Grid container spacing={1}>
-                    <TopicList topics={this.state.topics}/>
+                    <TopicList  search={this.state.search} topics={this.state.topics}/>
                     </Grid>
                 </Grid>
                 <Grid item xs={5} ><br/><br/> <Tag select={true} tagchange={this.handletagchange}/></Grid>

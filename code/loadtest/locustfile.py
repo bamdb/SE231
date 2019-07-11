@@ -9,12 +9,13 @@ class WebTasks(TaskSet):
         self.client.get("/user/all")
         self.client.get("/user/id/1")
 
-    @task(100)
+    @task(30)
     def item_task(self):
-        item = self.client.get("/item/all").json()
-        one_item = choice(item)
-        item_id = one_item["id"]
-        self.client.get("/item/id/{}".format(item_id))
+        item = self.client.get("/item/all")
+        if item:
+            one_item = choice(item.json())
+            item_id = one_item["id"]
+            self.client.get("/item/id/{}".format(item_id))
     """
     @task(20)
     def image_task(self):

@@ -22,7 +22,10 @@ class Useriteminfopage extends Component {
         super(props);
         this.state={data:{}};
         this.handletagchange=this.handletagchange.bind(this);
+        this.handleSearch=this.handleSearch.bind(this);
     }
+
+    handleSearch(value){}
     handletagchange(tags){
         this.setState({tags:tags});
     }

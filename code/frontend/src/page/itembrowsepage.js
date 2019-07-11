@@ -22,10 +22,17 @@ class Itembrowsepage extends Component{
             ItemList: [],
             tags: [],
             isloaded: false,
+            search:"",
 
         };
         this.handleChange=this.handleChange.bind(this);
         this.handletagchange=this.handletagchange.bind(this);
+        this.handleSearch=this.handleSearch.bind(this);
+    }
+
+    handleSearch(value){
+        this.setState({search:value});
+        console.log("搜索框内容："+value);
     }
 
     handletagchange(tags){
@@ -60,8 +67,7 @@ class Itembrowsepage extends Component{
         const ItemList= this.state.ItemList;
         return(
             <Grid container direction={"column"} >
-
-                <Grid item xs={12}><Navigation/></Grid>
+                <Grid item xs={12}><Navigation handleSearch={this.handleSearch}/></Grid>
                 <Grid item xs={12}>
                     <Grid container>
                         <Grid item xs={1} />
@@ -85,7 +91,7 @@ class Itembrowsepage extends Component{
                     <Grid item xs={7} >
                         <br/>
                         <br/>
-                        <Listitem ItemList={ItemList}/>
+                        <Listitem ItemList={ItemList} search={this.state.search}/>
                         <br/>
                         <Pagetable />
                     </Grid>

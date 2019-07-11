@@ -33,6 +33,11 @@ class Userhomepage extends Component{
         super(props);
         this.state={rankitem:[]}
 
+        this.handleSearch=this.handleSearch.bind(this);
+    }
+
+    handleSearch(value){
+
     }
     componentDidMount() {
         axios.get("http://202.120.40.8:30741/rating/browser",{params:{
