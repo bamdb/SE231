@@ -18,22 +18,22 @@ class TopItemList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            items:[]
         }
     }
-
+ 
     componentDidMount() {
-        /*
-         * 收集最热条目信息
-         *
-         */
+
+    }
+    componentWillReceiveProps(nextProps, nextContext) {
+        this.setState({items:nextProps.itemList});
     }
 
     render(){
-        var topItemList = this.props.topItemList;
+
         var rows=[];
         var rank=0;
-
+        var items=this.state.items;
         /*
         topItemList.forEach((topItem) =>{
             rank+=1;
@@ -42,15 +42,13 @@ class TopItemList extends Component {
             );
         });
     */
-        rows.push(
-                <TopItem key={0}/>
-        );
-        rows.push(
-                <TopItem key={1}/>
-        );
-        rows.push(
-                <TopItem key={2}/>
-        );
+        for(var i=0;i<items.length;++i)
+        {
+            rows.push(
+                <TopItem key={i} name={items[i].itemId} rank={items[i].rank} avgScore={items[i].avgScore} itemId={items[i].itemId}/>
+            );
+        }
+
         return(
             <Grid container className={useStyles.root} spacing={2} >
                 <Grid  >

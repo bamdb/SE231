@@ -15,7 +15,7 @@ class Item extends Component {
         super(props);
         this.state={name:"三体",date:"2000-1-1",author:"Liu Cixin",pages:"100",isbn:"123456"}
     }
-    componentWillMount() {
+    componentDidMount() {
         if(this.props.name!=null)
         {
 

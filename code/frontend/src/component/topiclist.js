@@ -34,7 +34,7 @@ class TopicList extends Component {
         }
     }
     componentWillMount() {
-
+ 
     }
     componentWillReceiveProps(nextProps, nextContext) {
 

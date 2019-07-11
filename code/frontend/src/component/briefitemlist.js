@@ -13,7 +13,7 @@ import Grid from "@material-ui/core/Grid";
  *
  * 目前只是界面原型
  * 逻辑未完成
- *
+ *  
  * 传入数据
  * props.itemName 名称
  * props.briefIntro 简介

@@ -36,13 +36,12 @@ const useStyles = makeStyles(theme => ({
 * props.author : 条目作者
 * props.score : 条目评分
 * props.rank : 条目排名
-* props.chapter : 条目章节数
+* props.chapter : 条目章节数 
 */
 class Listitem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            items: this.props.ItemList,
         }
     }
 
@@ -51,56 +50,58 @@ class Listitem extends Component {
 
         var rows=[];
         const item = this.props.ItemList;
-        if(item !== undefined) {
-            for (var i = 0; i < item.length; ++i) {
-                console.log("itemlength:" + item.length);
-                console.log("indexof filter:" + item[i].itemname.indexOf(this.props.search));
+        if(item !== undefined)
+        {
+            for(var i=0; i<item.length; ++i) {
                 if (item[i].itemname.indexOf(this.props.search) !== -1) {
-                    rows.push(
-                        <Paper className={useStyles.root}>
-                            <Grid container spacing={2}>
-                                <Grid item xs={1}/>
-                                <Grid item xs={2}>
-                                    <br/>
-                                    <img src="img/3.jpg" alt="暂无图片" className={useStyles.image} height="120px"
-                                         width="96px"/>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <Typography variant="h4" component="h3">
-                                        {item[i].itemname}
-                                    </Typography>
-                                    <br/>
-                                    <Paper className={useStyles.paper}>
-                                        <Grid container spacing={1}>
-                                            <Grid item xs={4}>
-                                                <Typography component="p" align="center">
-                                                    {item[i].pubTime.split("T")[0]}
-                                                </Typography>
-                                            </Grid>
-                                            <Grid item xs={4}>
-                                                <Typography component="p" align="center">
-                                                    {item[i].mainAuthor}
-                                                </Typography>
-                                            </Grid>
-                                            <Grid item xs={4}>
-                                                <Typography component="p" align="center">
-                                                    {item[i].chapterNum}
-                                                </Typography>
-                                            </Grid>
-                                        </Grid>
-                                    </Paper>
-                                    <br/>
-                                    <Score id={item[i].id}/>
-                                </Grid>
-                                <Grid item xs={1}/>
-                                <Grid item xs={2}>
-                                    <br/>
-                                    <Collectform/>
-                                </Grid>
+                rows.push(
+                    <Paper className={useStyles.root}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={1}/>
+                            <Grid item xs={2}>
+                                <br/>
+                                <img src="img/3.jpg" alt="暂无图片" className={useStyles.image} height="120px" width="96px"/>
                             </Grid>
-                        </Paper>
-                    )
-                }
+                            <Grid item xs={6}>
+
+                                <Typography component={Link} to={'/useriteminfopage/'+item[i].id} align="center">
+                                    {item[i].itemname}
+                                </Typography>
+
+                                <br/>
+                                <Paper className={useStyles.paper}>
+                                    <Grid container spacing={1}>
+                                        <Grid item xs={4}>
+                                            <Typography component="p" align="center">
+                                                {item[i].pubTime.split("T")[0]}
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                            <Typography component="p" align="center">
+                                                {item[i].mainAuthor}
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                            <Typography component="p" align="center">
+                                                {item[i].chapterNum}
+                                            </Typography>
+                                        </Grid>
+                                        </Grid>
+                                </Paper>
+                                <br/>
+                                <Score id={item[i].id}/>
+                            </Grid>
+                            <Grid item xs={1}/>
+                            <Grid item xs={2}>
+                                <br/>
+                                <Collectform/>
+                            </Grid>
+                        </Grid>
+                    </Paper>
+
+                )
+            }
+
             }
         }
 

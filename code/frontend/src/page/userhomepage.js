@@ -31,6 +31,7 @@ class Userhomepage extends Component{
 
     constructor(props){
         super(props);
+        this.state={rankitem:[]}
 
         this.handleSearch=this.handleSearch.bind(this);
     }
@@ -38,8 +39,18 @@ class Userhomepage extends Component{
     handleSearch(value){
 
     }
-    componentWillMount() {
-        axios.get()
+    componentDidMount() {
+        axios.get("http://202.120.40.8:30741/rating/browser",{params:{
+                type:0,
+                page:0,
+                pageSize:3
+            }}).then(
+                function(response)
+                {
+
+                    this.setState({rankitem:response.data});
+                }.bind(this)
+        )
     }
 
     render(){
@@ -54,7 +65,7 @@ class Userhomepage extends Component{
                         <Progressmanage />
                     </Grid>
                     <Grid item xs={2}>
-                        <TopItemList />
+                        <TopItemList itemList={this.state.rankitem}/>
                     </Grid>
                 </Grid>
                 </Grid>

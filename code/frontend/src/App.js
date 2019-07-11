@@ -21,6 +21,7 @@ import Useriteminfopage from "./page/useriteminfopage"
 import Activitypage from "./page/activitypage";
 import Resetpwdpage from "./page/resetpwdpage";
 
+import Messagepage from "./page/messagepage";
 function App() {
   return (
     <div >
@@ -36,6 +37,7 @@ function App() {
             <Route path={"/userinfopage"} component={Userinfopage}></Route>
             <Route path={"/activitypage"} component={Activitypage}></Route>
             <Route path={'/resetpassword'} component={Resetpwdpage}></Route>
+            <Route path={'/messagepage'} component={Messagepage}></Route>
         </Router>
     </div>
   );

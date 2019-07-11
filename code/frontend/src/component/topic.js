@@ -39,28 +39,35 @@ class Topic extends Component {
             replyTotal: 0,
             date: "2019-7-2"
         }
+
     }
+
     componentWillMount() {
+
+    }
+    componentDidMount()
+    {
         if(window.location.href.split("#")[1]!==undefined)
         {
             var x = window.location.href.split("#")[1].split("/")[1];
 
         }
-        if(this.props.topicId!=undefined)
+        if(this.props.topicId!==undefined)
         {
             this.setState({topicId:this.props.topicId,content:this.props.content,author:this.props.author,
                 replyTotal:this.props.replyTotal,date:this.props.date});
         }
-
     }
     render(){
+        var url='/topicdetailpage/'+this.state.topicId;
+        var content=this.state.content;
         return(
             <List component={"nav"} className={useStyles.root} aria-label="Mailbox folders">
                 <Divider />
-                <ListItem>
-                    <Button component={Link} to={'/topicdetailpage/'+this.state.topicId} >
-                        <ListItemText primary={this.state.content} />
-                    </Button>
+
+                <ListItem >
+                    <Link to={'/topicdetailpage/'+this.state.topicId}>{content}</Link>
+                    <ListItemText primary={"   "} />
                     <ListItemText primary={this.state.author} />
                     <ListItemText primary={this.state.replyTotal+" replies"} />
                     <ListItemText primary={this.state.date.split("T")[0]} />

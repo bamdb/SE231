@@ -93,6 +93,10 @@ class Navigation extends Component {
     }
 
     componentWillMount() {
+        
+    }
+    componentDidMount()
+    {
         if(window.location.href.split("#")[1]!=undefined)
         {
             var x=window.location.href.split("#")[1].split("/")[1];
@@ -104,6 +108,7 @@ class Navigation extends Component {
                 case "activitypage" :this.setState({value:2});break;
                 case "userfavoritepage" :this.setState({value:3});break;
                 case "topicpage" :this.setState({value:4});break;
+                case "messagepage" :this.setState({value:5});break;
             }
         }
     }
@@ -129,6 +134,7 @@ class Navigation extends Component {
                                             <Tab component={Link} label="动态" to={"/activitypage"}/>
                                             <Tab component={Link} label="收藏" to={"/userfavoritepage"}/>
                                             <Tab component={Link} label="讨论区" to={"/topicpage"}/>
+                                            <Tab component={Link} label="私信" to={"/messagepage"}/>
                                         </Tabs>
                                     </Grid>
                                     <Grid item xs={1}>
@@ -177,6 +183,7 @@ class Navigation extends Component {
                                             <Tab component={Link} label="动态" to={"/activitypage"}/>
                                             <Tab component={Link} label="收藏" to={"/userfavoritepage"}/>
                                             <Tab component={Link} label="讨论区" to={"/topicpage"}/>
+                                            <Tab component={Link} label="私信" to={"/messagepage"}/>
                                         </Tabs>
                                     </Grid>
                                     <Grid item xs={1}>

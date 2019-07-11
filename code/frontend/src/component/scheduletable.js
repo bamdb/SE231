@@ -54,13 +54,13 @@ class Scheduletable extends Component {
         this.setState({readstat:readstat,show:false,show1:false})
     }
     componentWillMount() {
+
+    }
+    componentDidMount() {
         if(this.props.readstat!=null)
         {
             this.setState({readstat:this.props.readstat,total:this.props.total})
         }
-
-    }
-    componentDidMount() {
     }
 
     render() {
