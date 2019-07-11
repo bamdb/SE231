@@ -53,6 +53,7 @@ class Listitem extends Component {
         if(item !== undefined)
         {
             for(var i=0; i<item.length; ++i) {
+                if (item[i].itemname.indexOf(this.props.search) !== -1) {
                 rows.push(
                     <Paper className={useStyles.root}>
                         <Grid container spacing={2}>
@@ -85,7 +86,7 @@ class Listitem extends Component {
                                                 {item[i].chapterNum}
                                             </Typography>
                                         </Grid>
-                                    </Grid>
+                                        </Grid>
                                 </Paper>
                                 <br/>
                                 <Score id={item[i].id}/>
@@ -99,7 +100,8 @@ class Listitem extends Component {
                     </Paper>
 
                 )
-                debugger;
+            }
+
             }
         }
 

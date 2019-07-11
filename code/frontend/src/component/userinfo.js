@@ -30,7 +30,7 @@ class Userinfo extends Component {
     }
     componentDidMount() {
 
-        axios({url: 'http://202.120.40.8:30741/user/id/1',method:'GET',})
+        axios({url: 'http://202.120.40.8:30741/user/id/1',method:'GET'})
             .then(
             function (response)
             {
@@ -40,8 +40,7 @@ class Userinfo extends Component {
         )
     }
 
-    componentDidMount() {
-    }
+
 
     handleedit(){
         this.setState({edit:true});

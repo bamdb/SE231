@@ -10,6 +10,9 @@ import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import SearchIcon from '@material-ui/icons/Search';
 import  '../css/navigate.css'
 import {
     BrowserRouter as Router,
@@ -83,12 +86,9 @@ class Navigation extends Component {
     handleenter(e)
     {
         this.setState({show:true,x:e.clientX,y:e.clientY});
-
-
     }
 
     handleChange(event, newValue) {
-        console.log(newValue);
         this.setState({value : newValue});
     }
 
@@ -152,6 +152,9 @@ class Navigation extends Component {
 
                                             <InputLabel htmlFor="id">search</InputLabel>
                                             <Input type="text" id="password" value={this.state.search} onChange={this.handlechange}></Input>
+                                            <IconButton aria-label="Search" onClick={()=>this.props.handleSearch(this.state.search)}>
+                                                <SearchIcon />
+                                            </IconButton>
                                         </FormControl>
 
                                     </Grid>

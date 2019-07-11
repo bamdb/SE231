@@ -39,6 +39,11 @@ class Userfavoritespage extends Component{
         super(props);
         this.state={tags:[]}
         this.handletagchange=this.handletagchange.bind(this);
+        this.handleSearch=this.handleSearch.bind(this);
+    }
+
+    handleSearch(value){
+
     }
     handletagchange(tags){
         this.setState({tags:tags});

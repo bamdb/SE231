@@ -15,6 +15,11 @@ import Register from "../component/register"
 class RegisterPage extends Component{
     constructor(props){
         super(props);
+        this.handleSearch=this.handleSearch.bind(this);
+    }
+
+    handleSearch(value){
+
     }
 
     render(){
