@@ -9,6 +9,7 @@ public interface ActivityService {
     Activity selectById(Long id);
     Iterable<Activity> selectByUserId(Long id);
     Iterable<Activity> selectByItemId(Long id);
+    Activity selectByUserIdAndItemId(Long userId, Long itemId);
     ResponseEntity<?> deleteActivityById(Long id);
     ResponseEntity<?> deleteActivityByUserId(Long id);
     ResponseEntity<?> deleteActivityByItemId(Long id);

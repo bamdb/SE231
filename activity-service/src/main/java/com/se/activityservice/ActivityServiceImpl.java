@@ -69,6 +69,10 @@ public class ActivityServiceImpl implements ActivityService{
         return activityRepository.findAllByItemId(id);
     }
 
+    public Activity selectByUserIdAndItemId(Long userId, Long itemId) {
+        return activityRepository.findActivityByUserIdAndItemId(userId, itemId).orElse(null);
+    }
+
     public ResponseEntity<?> deleteActivityById(Long id) {
         activityRepository.deleteById(id);
         return ResponseEntity.ok().body("delete Activity successfully!");
