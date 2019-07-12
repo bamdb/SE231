@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import Navigation from "../component/navigation";
 import axios from "axios";
 import PropTypes from "prop-types";
+import Addtopic from "../component/addtopic";
 class Topicpage extends Component{
 
     constructor(props)
@@ -39,11 +40,11 @@ class Topicpage extends Component{
 
     render(){
         return(
-            <Grid container direction={"row"} spacing={3} >
+            <Grid container direction={"row"} spacing={4} >
                 <Grid item xs={12} spacing={3} ><Navigation /> </Grid>
 
-                <Grid item xs={1} > </Grid>
-                <Grid item xs={6} ><br/> <br/>
+                <Grid item xs={2} ><br/> <Tag select={true} tagchange={this.handletagchange}/></Grid>
+                <Grid item xs={9} >
                     <Grid item>
                         <Typography variant={"h6"} component={"h6"} align={"left"} >讨论版</Typography>
                     </Grid>
@@ -51,7 +52,8 @@ class Topicpage extends Component{
                     <TopicList  search={this.state.search} topics={this.state.topics}/>
                     </Grid>
                 </Grid>
-                <Grid item xs={5} ><br/><br/> <Tag select={true} tagchange={this.handletagchange}/></Grid>
+                <Grid item xs={1}><Addtopic></Addtopic></Grid>
+
 
             </Grid>
         );

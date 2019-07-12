@@ -93,10 +93,6 @@ class Navigation extends Component {
     }
 
     componentWillMount() {
-        
-    }
-    componentDidMount()
-    {
         if(window.location.href.split("#")[1]!=undefined)
         {
             var x=window.location.href.split("#")[1].split("/")[1];
@@ -111,6 +107,10 @@ class Navigation extends Component {
                 case "messagepage" :this.setState({value:5});break;
             }
         }
+    }
+    componentDidMount()
+    {
+
     }
 
     render() {

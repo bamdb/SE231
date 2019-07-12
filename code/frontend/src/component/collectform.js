@@ -96,7 +96,7 @@ class Collectform extends Component {
     }
     handleChange(e) {
 
-        this.setState({status : this.state.content})
+        this.setState({status : e.target.value})
     }
 
     handleAlert(content) {

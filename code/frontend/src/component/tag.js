@@ -46,9 +46,6 @@ class Tag extends Component {
         this.props.tagchange(this.state.currenttags)
     }
     componentWillMount() {
-
-    }
-    componentDidMount() {
         if(this.props.tags!=null)
         {
             this.setState({tags:this.props.tags})
@@ -56,6 +53,9 @@ class Tag extends Component {
         if(this.props.select!=false){
             this.setState({select:this.props.select})
         }
+    }
+    componentDidMount() {
+
     }
 
     render() {

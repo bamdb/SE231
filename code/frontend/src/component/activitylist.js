@@ -45,7 +45,7 @@ class Activitylist extends Component {
                         />
                     </ListItem>
                 )
-                debugger;
+
             }
         }
 

@@ -23,11 +23,23 @@ class Itembrowsepage extends Component{
             tags: [],
             isloaded: false,
             search:"",
+            currentpage:0,
+            value:0
 
         };
         this.handleChange=this.handleChange.bind(this);
         this.handletagchange=this.handletagchange.bind(this);
         this.handleSearch=this.handleSearch.bind(this);
+        this.handlepagechange=this.handlepagechange.bind(this);
+        this.loaddata=this.loaddata.bind(this);
+    }
+    loaddata()
+    {
+
+    }
+    handlepagechange(currentpage)
+    {
+        this.setState({currentpage:currentpage});
     }
 
     handleSearch(value){
@@ -46,8 +58,14 @@ class Itembrowsepage extends Component{
 
     componentWillMount() {
         const _this = this;
+        var type=this.state.value;
+        var currentpage=this.state.currentpage;
         axios.get(
-            "http://202.120.40.8:30741/item/all"
+            "http://202.120.40.8:30741/rating/browser",{params:{
+                    type:type,
+                    page:currentpage,
+                    pageSize:3
+                }}
         )
             .then(function (response) {
                 _this.setState(
@@ -73,7 +91,7 @@ class Itembrowsepage extends Component{
                         <Grid item xs={1} />
                         <Grid item xs={11}>
                             <Tabs  value={this.state.value} onChange={this.handleChange}>
-                                <Tab label="全部" />
+
                                 <Tab label="书籍" />
                                 <Tab label="视频" />
                             </Tabs>
@@ -93,7 +111,7 @@ class Itembrowsepage extends Component{
                         <br/>
                         <Listitem ItemList={ItemList} search={this.state.search}/>
                         <br/>
-                        <Pagetable />
+                        <Pagetable handlepagechange={this.handlepagechange}/>
                     </Grid>
                     <Grid item xs={1} />
                 </Grid>
