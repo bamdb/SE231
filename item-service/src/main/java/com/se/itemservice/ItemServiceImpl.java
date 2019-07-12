@@ -8,12 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 @Service
 public class ItemServiceImpl implements ItemService{
     private final ItemRepository itemRepository;
     private final RelationRepository relationRepository;
+
+    @Resource(name="itemServiceImpl")
+    ItemService itemService;
 
     @Autowired
     public ItemServiceImpl(ItemRepository itemRepository, RelationRepository relationRepository) {
@@ -60,9 +66,44 @@ public class ItemServiceImpl implements ItemService{
     public Item findItemById(Long id) {
         Item item = itemRepository.findById(id).orElse(null);
         if (item != null) {
+            item.setRelationPrior(new ArrayList<>());
+            item.setRelationSubsequent(new ArrayList<>());
+            item.setRelationNormal(new ArrayList<>());
+            List<Item> itemList3 = item.getRelationNormal();
+
             Iterable<Relation> relationIterable1 = relationRepository.findAllByItemId1(item.getId());
+            Iterator<Relation> relationIterator1 = relationIterable1.iterator();
+            List<Item> itemList1 = item.getRelationSubsequent();
+            while (relationIterator1.hasNext()) {
+                Relation relation = relationIterator1.next();
+                Item item1 = itemRepository.findById(relation.getItemId2()).orElse(null);
+                if (item1 != null) {
+                    if (relation.isRelateType()) {
+                        itemList1.add(item1);
+                    } else {
+                        itemList3.add(item1);
+                    }
+                }
+            }
+
             Iterable<Relation> relationIterable2 = relationRepository.findAllByItemId2(item.getId());
-            Iterable<Relation> relationIterable3 = relationRepository.findAllByItemId1(item.getId());
+            Iterator<Relation> relationIterator2 = relationIterable2.iterator();
+            List<Item> itemList2 = item.getRelationPrior();
+            while (relationIterator2.hasNext()) {
+                Relation relation = relationIterator2.next();
+                Item item1 = itemRepository.findById(relation.getItemId1()).orElse(null);
+                if (item1 != null) {
+                    if (relation.isRelateType()) {
+                        itemList2.add(item1);
+                    } else {
+                        itemList3.add(item1);
+                    }
+                }
+            }
+
+            item.setRelationPrior(itemList1);
+            item.setRelationSubsequent(itemList2);
+            item.setRelationNormal(itemList3);
         }
         return item;
     }
