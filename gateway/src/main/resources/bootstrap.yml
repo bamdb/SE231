@@ -4,7 +4,6 @@ spring:
       discovery:
         service-id: config
         enabled: true
-      fail-fast: true
       name: gateway, ribbon
 eureka:
   client:
