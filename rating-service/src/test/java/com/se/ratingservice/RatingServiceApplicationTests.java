@@ -202,6 +202,8 @@ public class RatingServiceApplicationTests {
                 .andExpect(status().isOk());
         mvc.perform(put("/update?userId=1&score=10&itemId=1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+        mvc.perform(put("/update?userId=1&score=11&itemId=1").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
         mvc.perform(put("/update?userId=1&score=5&itemId=100").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 

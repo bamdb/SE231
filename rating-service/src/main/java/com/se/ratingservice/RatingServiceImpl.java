@@ -180,6 +180,7 @@ public class RatingServiceImpl implements RatingService {
             case 8: rating.setScore8(rating.getScore8() + 1); break;
             case 9: rating.setScore9(rating.getScore9() + 1); break;
             case 10: rating.setScore10(rating.getScore10() + 1); break;
+            default: return ResponseEntity.ok().body("Invalid rating!");
         }
         ratingRepository.save(rating);
         return ResponseEntity.ok().body("Update score successfully!");
