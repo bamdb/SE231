@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface ActivityRepository extends CrudRepository<Activity, Long> {
     Iterable<Activity> findAllByUserId(Long userId);
     Iterable<Activity> findAllByItemId(Long itemId);
+    Optional<Activity> findActivityByUserIdAndItemId(Long userId, Long itemId);
     @Transactional
     void deleteAllByUserId(Long userId);
     @Transactional
