@@ -15,6 +15,8 @@ import Relateditem from "../component/relatedlist";
 import Scheduletable from "../component/scheduletable";
 import Tag from "../component/tag"
 import axios from 'axios'
+import Rating from "../component/rating";
+import Collect from "../component/collect";
 
 class Useriteminfopage extends Component {
     constructor(props)
@@ -23,8 +25,12 @@ class Useriteminfopage extends Component {
         this.state={data:{}};
         this.handletagchange=this.handletagchange.bind(this);
         this.handleSearch=this.handleSearch.bind(this);
+        this.handlebuttonclick=this.handlebuttonclick.bind(this);
     }
+    handlebuttonclick(currentpage)
+    {
 
+    }
     handleSearch(value){}
     handletagchange(tags){
         this.setState({tags:tags});
@@ -34,7 +40,7 @@ class Useriteminfopage extends Component {
         var id=uri.split('#')[1].split('/')[2];
 
         var url="http://202.120.40.8:30741/item/id/"+id;
-
+        var url="http://202.120.40.8:30741/item/id/"+id;
         axios.get(url).then(
             function (response){
                 console.log(response.data);
@@ -43,6 +49,7 @@ class Useriteminfopage extends Component {
         ).catch(function (error) {
             alert("error")
         });
+        axios.get()
 
     }
 
@@ -60,8 +67,10 @@ class Useriteminfopage extends Component {
                         <Grid  item xs={6} >
                             <Scheduletable />
                             <Tag select={true} tagchange={this.handletagchange}></Tag>
+                            <Rating handlebuttonclick={this.handlebuttonclick}></Rating>
                         </Grid>
                         <Grid  item xs={3} >
+                            <Collect/>
                             <Relateditem />
                             <Commentlist />
                         </Grid>

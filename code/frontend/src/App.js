@@ -23,6 +23,9 @@ import Resetpwdpage from "./page/resetpwdpage";
 
 import Messagepage from "./page/messagepage";
 import Rating from "./component/rating";
+import Collect from "./component/collect";
+import Collectform from "./component/collectform";
+import Chart from "./component/test";
 function App() {
   return (
     <div >
@@ -39,7 +42,8 @@ function App() {
             <Route path={"/activitypage"} component={Activitypage}></Route>
             <Route path={'/resetpassword'} component={Resetpwdpage}></Route>
             <Route path={'/messagepage'} component={Messagepage}></Route>
-            <Route path={'/test'} component={Rating}></Route>
+            <Route path={"/test"} component={Collect}></Route>
+
         </Router>
     </div>
   );
