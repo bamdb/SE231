@@ -10,9 +10,6 @@ eureka:
 zuul:
   host:
     connect-timeout-millis: 3000
-    socket-timeout-millis: 20000
-    max-per-route-connections: 1000
-    max-total-connections: 5000
   routes:
     fromimage:
       path: /image/**
