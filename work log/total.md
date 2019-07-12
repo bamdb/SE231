@@ -111,6 +111,19 @@
   * complete load-test in single-node backend server
 * huangyuyang:
   * Ill leave
+# 2019-7-12
+* shenruien:
+  * continuing writing frontend
+* yuyajie:
+  * performance tuning
+  * working on authentication
+* huangyuyang:
+  * 学习matierial-ui文档并进行页面修改
+* wangzulai:
+  *  run load test forbackend server
+  *  complete item, topic, activity, rating services
+  *  write 100% coverage test
+
 
 
 
