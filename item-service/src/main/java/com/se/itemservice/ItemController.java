@@ -27,12 +27,18 @@ public class ItemController {
     @PostMapping(value = "/add/relation")
     public void postItemRelation(@RequestParam("priorId") Long priorId, @RequestParam("subsequentId") Long subsequentId,
                                  @RequestParam("relateType") boolean relateType) {
-
+        itemService.postItemRelation(priorId, subsequentId, relateType);
     }
 
     @DeleteMapping(value = "/delete/id/{itemId}")
     public ResponseEntity<?> deleteItemById(@PathVariable Long itemId) {
         return itemService.deleteItemById(itemId);
+    }
+
+    @DeleteMapping(value = "/delete/relation")
+    public void deleteRelationByItemId(@RequestParam("itemId") Long itemId,
+                                       @RequestParam("relatedItemId") Long relatedItemId) {
+        itemService.deleteItemRelationById(itemId, relatedItemId);
     }
 
     @PutMapping(value = "/update", produces="application/json")

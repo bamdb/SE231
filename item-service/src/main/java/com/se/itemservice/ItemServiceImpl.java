@@ -54,6 +54,10 @@ public class ItemServiceImpl implements ItemService{
     }
 
     public void postItemRelation(Long priorId, Long subsequentId, boolean relateType) {
+        if (itemRepository.findById(priorId).orElse(null) == null
+                || itemRepository.findById(subsequentId).orElse(null) == null) {
+            return;
+        }
         Relation relation = new Relation();
         relation.setItemId1(priorId);
         relation.setItemId2(subsequentId);
@@ -77,12 +81,10 @@ public class ItemServiceImpl implements ItemService{
             while (relationIterator1.hasNext()) {
                 Relation relation = relationIterator1.next();
                 Item item1 = itemRepository.findById(relation.getItemId2()).orElse(null);
-                if (item1 != null) {
-                    if (relation.isRelateType()) {
-                        itemList1.add(item1);
-                    } else {
-                        itemList3.add(item1);
-                    }
+                if (relation.isRelateType()) {
+                    itemList1.add(item1);
+                } else {
+                    itemList3.add(item1);
                 }
             }
 
@@ -92,12 +94,10 @@ public class ItemServiceImpl implements ItemService{
             while (relationIterator2.hasNext()) {
                 Relation relation = relationIterator2.next();
                 Item item1 = itemRepository.findById(relation.getItemId1()).orElse(null);
-                if (item1 != null) {
-                    if (relation.isRelateType()) {
-                        itemList2.add(item1);
-                    } else {
-                        itemList3.add(item1);
-                    }
+                if (relation.isRelateType()) {
+                    itemList2.add(item1);
+                } else {
+                    itemList3.add(item1);
                 }
             }
 

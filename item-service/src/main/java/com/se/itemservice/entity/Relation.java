@@ -20,10 +20,6 @@ public class Relation {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Long getItemId1() {
         return itemId1;
     }
