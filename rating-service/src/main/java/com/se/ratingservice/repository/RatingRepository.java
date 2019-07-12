@@ -1,4 +1,4 @@
-package com.se.ratingservice;
+package com.se.ratingservice.repository;
 
 import com.se.ratingservice.entity.Rating;
 import org.springframework.data.domain.Page;

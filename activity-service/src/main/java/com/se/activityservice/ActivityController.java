@@ -36,6 +36,11 @@ public class ActivityController {
         return activityService.selectByItemId(itemId);
     }
 
+    @GetMapping(value="/collect", produces="application/json")
+    public Activity getActivityByItemIdAndUserId(@RequestParam("userId") Long userId, @RequestParam("itemId") Long itemId) {
+        return activityService.selectByUserIdAndItemId(userId, itemId);
+    }
+
     @DeleteMapping(value="/delete/id/{activityId}")
     public ResponseEntity<?> deleteActivityById(@PathVariable("activityId") Long activityId) {
         return activityService.deleteActivityById(activityId);

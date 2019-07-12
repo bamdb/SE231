@@ -104,6 +104,9 @@ public class ActivityServiceApplicationTests {
         mvc.perform(get("/itemid/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
+        mvc.perform(get("/collect?userId=1&itemId=1").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
         mvc.perform(get("/userid/0").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
