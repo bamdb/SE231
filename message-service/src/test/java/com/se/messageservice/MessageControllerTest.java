@@ -74,14 +74,20 @@ public class MessageControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
         Timestamp t = new Timestamp(0);
+        Timestamp t1 = new Timestamp(1);
         Message message = new Message(1L, 2L, t, "NOTHINHG HAPPENS BETWEEN US");
-
+        Message message1 = new Message(0L,2L, t1, "NOTHINHG HAPPENS BETWEEN US");
         mvc.perform(post("/add")
                 .content(JSON.toJSONString(message))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content").value("NOTHINHG HAPPENS BETWEEN US"));
+        mvc.perform(post("/add")
+                .content(JSON.toJSONString(message1))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk());
         mvc.perform(get("/all")
                 .params(mm))
                 .andDo(MockMvcResultHandlers.print())
