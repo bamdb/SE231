@@ -41,6 +41,19 @@ public class MessageServiceImpl implements MessageService {
         messageRepository.findBySenderIdAndReceiverId(receiverId, senderId).forEach(ms::add);
         return ms;
     }
+
+    public Iterable<Message> selectByReceiverId(Long receiverId) {
+        List<Message> ms = new LinkedList<>();
+        messageRepository.findByReceiverId(receiverId).forEach(ms::add);
+        return ms;
+    }
+
+    public Iterable<Message> selectBySenderId(Long senderId) {
+        List<Message> ms = new LinkedList<>();
+        messageRepository.findByReceiverId(senderId).forEach(ms::add);
+        return ms;
+    }
+
     public Message addMessage(Message message) {
         if (!friendClient.isFriend(message.getSenderId(), message.getReceiverId())) return null;
         else return messageRepository.save(message);

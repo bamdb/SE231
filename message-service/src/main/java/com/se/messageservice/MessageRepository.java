@@ -13,4 +13,6 @@ public interface MessageRepository extends CrudRepository<Message, String> {
     @Transactional
     void deleteAllBySenderIdAndReceiverId(Long senderId, Long receiverId);
     Iterable<Message> findBySenderIdAndReceiverId(Long senderId, Long receiverId);
+    Iterable<Message> findByReceiverId(Long receiverId);
+    Iterable<Message> findBySenderId(Long senderId);
 }
