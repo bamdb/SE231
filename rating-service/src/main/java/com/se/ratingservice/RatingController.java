@@ -39,11 +39,19 @@ public class RatingController {
         return ratingService.selectPageByType(type, pageNum, pageSize);
     }
 
-    // input an integer array of size 10.Each integer shows the increase number of corresponding score
+    // input an integer array of size 10.Each integer shows the increase number of corresponding score，just for test
     @PutMapping(value="/update/itemid/{itemId}", produces="application/json")
     public ResponseEntity<?> updateRating(@PathVariable("itemId") Long itemId, @RequestBody List<Integer> ratingList) {
         return ratingService.updateRating(itemId, ratingList);
     }
+
+    // 权限验证，通过token取出用户id
+    @PutMapping(value="/update")
+    public ResponseEntity<?> updateRatingByUserId(@RequestParam("userId") Long userId, @RequestParam("score") int score,
+                                                  @RequestParam("itemId") Long itemId) {
+        return ratingService.updateRatingByUserId(userId, score, itemId);
+    }
+
 
     @DeleteMapping(value="/delete/id/{ratingId}")
     public ResponseEntity<?> deleteRatingById(@PathVariable("ratingId") Long ratingId) {

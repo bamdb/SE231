@@ -37,7 +37,7 @@ public class RatingServiceImpl implements RatingService {
         // auto save item type from item-service into Rating Entity
         Rating rating = new Rating();
         rating.setType(item.getType());
-        rating.setRank(null);
+        rating.setRank(0);
         rating.setAvgScore(0);
         rating.setTotScoreNum(0);
         rating.setItemId(itemId);
@@ -139,6 +139,34 @@ public class RatingServiceImpl implements RatingService {
         rating.setScore10(ratingList.get(9) + rating.getScore10());
         ratingRepository.save(rating);
         return ResponseEntity.ok().body("update rating successfully");
+    }
+
+    @Override
+    public ResponseEntity<?> updateRatingByUserId(Long userId, int score, Long itemId) {
+        Rating rating = selectByItemId(itemId);
+        if (rating == null) {
+            return ResponseEntity.ok().body("Item id not found");
+        }
+        Integer totScoreNum = rating.getTotScoreNum()+1;
+        float avgScore = (rating.getAvgScore() * rating.getTotScoreNum() + score) / totScoreNum;
+        Integer rank = 1 + ratingRepository.findRankByTypeAndItemId(rating.getType(), avgScore);
+        rating.setTotScoreNum(totScoreNum);
+        rating.setRank(rank);
+        rating.setAvgScore(avgScore);
+        switch (score) {
+            case 1: rating.setScore1(rating.getScore1() + 1); break;
+            case 2: rating.setScore2(rating.getScore2() + 1); break;
+            case 3: rating.setScore3(rating.getScore3() + 1); break;
+            case 4: rating.setScore4(rating.getScore4() + 1); break;
+            case 5: rating.setScore5(rating.getScore5() + 1); break;
+            case 6: rating.setScore6(rating.getScore6() + 1); break;
+            case 7: rating.setScore7(rating.getScore7() + 1); break;
+            case 8: rating.setScore8(rating.getScore8() + 1); break;
+            case 9: rating.setScore9(rating.getScore9() + 1); break;
+            case 10: rating.setScore10(rating.getScore10() + 1); break;
+        }
+        ratingRepository.save(rating);
+        return null;
     }
 
     public ResponseEntity<?> deleteRatingById(Long id) {

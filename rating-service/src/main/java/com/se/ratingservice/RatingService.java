@@ -13,6 +13,7 @@ public interface RatingService {
     List<RatingOut> selectPageByType(Integer type, int pageNum, int pageSize);
     Rating selectByItemId(Long itemId);
     ResponseEntity<?> updateRating(Long itemId, List<Integer> ratingList);
+    ResponseEntity<?> updateRatingByUserId(Long userId, int score, Long itemId);
     ResponseEntity<?> deleteRatingById(Long id);
     ResponseEntity<?> deleteRatingByItemId(Long id);
 }
