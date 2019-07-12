@@ -7,13 +7,12 @@ ribbon:
   ConnectTimeout: 6000
   ReadTimeout: 6000
   OktoRetryOnAllOperations: true
-  MaxAutoRetriesNextServer: 3
+  MaxAutoRetriesNextServer: 1
+  MaxAutoRetries: 1
 hystrix:
   command:
     default:
       execution:
         isolation:
           thread:
-            timeoutInMillisecond: 8000
-        timeout:
-          enabled: true
+            timeoutInMilliseconds: 48000

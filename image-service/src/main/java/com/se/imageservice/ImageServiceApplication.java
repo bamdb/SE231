@@ -14,17 +14,17 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
 @EnableEurekaClient
-@EnableCircuitBreaker
-@EnableHystrix
-@RibbonClient(name = "image", configuration = RibbonConfiguration.class)
+
+
+
 public class ImageServiceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ImageServiceApplication.class, args);
     }
-    @Bean
-    @LoadBalanced
-    RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
+
+
+
+
+
 }

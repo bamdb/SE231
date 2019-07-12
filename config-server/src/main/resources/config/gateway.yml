@@ -48,3 +48,4 @@ zuul:
   retryable: true
   semaphore:
     max-semaphores: 10000
+  ignored-services: "*"
