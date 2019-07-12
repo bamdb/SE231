@@ -34,3 +34,8 @@
 # 2019-07-11
 * complete auto load-test and evaluation plot scripts
 * complete load-test in single-node backend server
+
+# 2019-07-12
+* run load test forbackend server
+* complete item, topic, activity, rating services
+* write 100% coverage test
