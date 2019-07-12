@@ -1,0 +1,19 @@
+spring:
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
+ribbon:
+  ConnectTimeout: 6000
+  ReadTimeout: 6000
+  OktoRetryOnAllOperations: true
+  MaxAutoRetriesNextServer: 3
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMillisecond: 8000
+        timeout:
+          enabled: true

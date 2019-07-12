@@ -8,3 +8,6 @@
 
 .idea/
 node_modules/
+
+*/target
+*/bamdb.log

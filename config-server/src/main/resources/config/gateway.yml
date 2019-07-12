@@ -1,14 +1,16 @@
-server:
-  port: 8000
 spring:
   application:
     name: gateway
+server:
+  port: 8000
+eureka:
+  client:
+    registry-fetch-interval-seconds: 5
 
 zuul:
   routes:
     fromimage:
       path: /image/**
-      #      url: http://image:10000
       service-id: image
       sensitiveHeaders:
     fromuser:
@@ -31,17 +33,18 @@ zuul:
       path: /topic/**
       service-id: topic
       sensitiveHeaders:
+    fromfriend:
+      path: /friend/**
+      service-id: friend
+      sensitiveHeaders:
+    frommessage:
+      path: /message/**
+      service-id: message
+      sensitiveHeaders:
+    fromcomment:
+      path: /comment/**
+      service-id: comment
+      sensitiveHeaders:
   retryable: true
-
-ribbon:
-  ConnectTimeout: 2000
-  ReadTimeout: 2000
-  OktoRetryOnAllOperations: true
-  MaxAutoRetriesNextServer: 2
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMillisecond: 6000
+  semaphore:
+    max-semaphores: 10000
