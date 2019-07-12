@@ -1,20 +1,27 @@
+
 [![Build Status](https://travis-ci.org/bamdb/SE231.svg?branch=master)](https://travis-ci.org/bamdb/SE231)
 [![codecov.io](https://codecov.io/github/bamdb/SE231/coverage.svg?branch=master)](https://codecov.io/github/bamdb/SE231?branch=master)
 ![language](https://img.shields.io/badge/Language-Java-orange.svg)
 ![license](https://img.shields.io/badge/License-GPL--3.0-blue.svg)
+
 # SE231
+
 code for summer project
 
 # 成员信息
+
 * isadlb 于亚杰
 * pleiadesian 王祖来
 * scarletfantasy 沈瑞恩
 * YuyangHuang 黄雨瑒
 
+
 # 暑期项目
+
 * 项目名：bamdb = book and movie database
 
 简介
+
 ===
 
 * 通过作品的评价进行作品的个性化推荐
@@ -22,6 +29,7 @@ code for summer project
 * 当学生手头同时在观看/阅读多个作品的时候，便于学生进行学习进度、观看进度的管理，以防遗忘。
 
 开发思路
+
 ---
 
 * 前端 react

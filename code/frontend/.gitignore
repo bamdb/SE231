@@ -4,9 +4,13 @@
 /node_modules
 /.pnp
 .pnp.js
+/.idea
+
 
 # testing
 /coverage
+/src/_test_/_snapshots_
+
 
 # production
 /build
