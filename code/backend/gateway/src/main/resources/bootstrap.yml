@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    config:
+      discovery:
+        service-id: config
+        enabled: true
+      fail-fast: true
+      name: gateway
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://bamdb:bamdb@localhost:8761/eureka/

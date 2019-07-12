@@ -1,15 +1,20 @@
-[![Build Status](https://travis-ci.org/bamdb/SE231.svg?branch=dev)](https://travis-ci.org/bamdb/SE231)
-[![codecov.io](https://codecov.io/github/bamdb/SE231/coverage.svg?branch=dev)](https://codecov.io/github/bamdb/SE231?branch=isalb)
+
+[![Build Status](https://travis-ci.org/bamdb/SE231.svg?branch=master)](https://travis-ci.org/bamdb/SE231)
+[![codecov.io](https://codecov.io/github/bamdb/SE231/coverage.svg?branch=master)](https://codecov.io/github/bamdb/SE231?branch=master)
+![language](https://img.shields.io/badge/Language-Java-orange.svg)
+![license](https://img.shields.io/badge/License-GPL--3.0-blue.svg)
+
 # SE231
 
 code for summer project
 
 # 成员信息
 
-+ isadlb 余亚杰
-+ pleiadesian 王祖来
-+ scarletfantasy 沈瑞恩
-+ YuyangHuang 黄雨瑒
+* isadlb 于亚杰
+* pleiadesian 王祖来
+* scarletfantasy 沈瑞恩
+* YuyangHuang 黄雨瑒
+
 
 # 暑期项目
 
