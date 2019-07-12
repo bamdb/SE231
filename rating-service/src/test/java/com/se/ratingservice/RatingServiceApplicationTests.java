@@ -145,7 +145,7 @@ public class RatingServiceApplicationTests {
         mvc.perform(get("/browser?type=0&page=0&pageSize=5").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/userid/1?itemid=1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/score?userId=1&itemId=1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
     }
@@ -167,6 +167,20 @@ public class RatingServiceApplicationTests {
         mvc.perform(put("/update/itemid/1").contentType(MediaType.APPLICATION_JSON)
                 .content("[100, 0, 0, 0, 0, 0, 0, 0, 0]"))
                 .andExpect(status().isOk());
+
+        mvc.perform(put("/update/itemid/0").contentType(MediaType.APPLICATION_JSON)
+                .content("[0, 100, 0, 0, 0, 0, 0, 0, 0, 0]"))
+                .andExpect(status().isOk());
+
+        mvc.perform(put("/update/itemid/1").contentType(MediaType.APPLICATION_JSON)
+                .content("[0, 100, 0, 0, 0, 0, 0, 0, 0, 0]"))
+                .andExpect(status().isOk());
+
+        mvc.perform(put("/update/itemid/1").contentType(MediaType.APPLICATION_JSON)
+                .content("[0, 0, 0, 0, 0, 0, 0, 0, 0, 100]"))
+                .andExpect(status().isOk());
+
+        Assert.assertEquals(6.0, ratingService.selectByItemId(1L).getAvgScore(), 0.000001);
 
         mvc.perform(put("/update?userId=1&score=1&itemId=1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -190,21 +204,6 @@ public class RatingServiceApplicationTests {
                 .andExpect(status().isOk());
         mvc.perform(put("/update?userId=1&score=5&itemId=100").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-
-
-        mvc.perform(put("/update/itemid/0").contentType(MediaType.APPLICATION_JSON)
-                .content("[0, 100, 0, 0, 0, 0, 0, 0, 0, 0]"))
-                .andExpect(status().isOk());
-
-        mvc.perform(put("/update/itemid/1").contentType(MediaType.APPLICATION_JSON)
-                .content("[0, 100, 0, 0, 0, 0, 0, 0, 0, 0]"))
-                .andExpect(status().isOk());
-
-        mvc.perform(put("/update/itemid/1").contentType(MediaType.APPLICATION_JSON)
-                .content("[0, 0, 0, 0, 0, 0, 0, 0, 0, 100]"))
-                .andExpect(status().isOk());
-
-        Assert.assertEquals(6.0, ratingService.selectByItemId(1L).getAvgScore(), 0.000001);
 
         itemClient.deleteItemById(1L);
         mvc.perform(put("/update/itemid/1").contentType(MediaType.APPLICATION_JSON)
@@ -239,6 +238,16 @@ public class RatingServiceApplicationTests {
         mvc.perform(post("/add/itemid/2")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+
+        mvc.perform(put("/update?userId=1&score=1&itemId=1").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        mvc.perform(delete("/delete/score?userId=1&itemId=1").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        mvc.perform(delete("/delete/score?userId=1&itemId=100").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        mvc.perform(delete("/delete/score?userId=1&itemId=2").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
         if (ratingService.selectAll().iterator().hasNext()) {
             Long id = ratingService.selectAll().iterator().next().getId();
             mvc.perform(delete("/delete/id/"+id))
@@ -251,6 +260,7 @@ public class RatingServiceApplicationTests {
                     .andExpect(status().isOk());
             Assert.assertNull(ratingService.selectByItemId(itemId));
         }
+
     }
 
     @Test

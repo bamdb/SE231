@@ -16,10 +16,6 @@ public class Score {
     @Column(name = "score", nullable = false)
     private int score;
 
-    public int getScore() {
-        return score;
-    }
-
     public void setScore(int score) {
         this.score = score;
     }
@@ -28,20 +24,8 @@ public class Score {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
     public void setUserId(Long userId) {
         this.userId = userId;
-    }
-
-    public Long getItemId() {
-        return itemId;
     }
 
     public void setItemId(Long itemId) {

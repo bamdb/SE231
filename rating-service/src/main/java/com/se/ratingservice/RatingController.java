@@ -34,8 +34,8 @@ public class RatingController {
         return ratingService.selectByItemId(itemId);
     }
 
-    @GetMapping(value="/userid/{userid}", produces = "application/json")
-    public Score getScoreByUserId(@PathVariable Long userId, @RequestParam("itemId") Long itemId) {
+    @GetMapping(value="/score", produces = "application/json")
+    public Score getScoreByUserId(@RequestParam("userId") Long userId, @RequestParam("itemId") Long itemId) {
         return ratingService.selectScoreByUserId(userId, itemId);
     }
 
