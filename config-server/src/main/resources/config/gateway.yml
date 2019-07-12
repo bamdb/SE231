@@ -49,6 +49,3 @@ zuul:
   semaphore:
     max-semaphores: 10000
   ignored-services: "*"
-  ribbon:
-    eager-load:
-      enabled: true
