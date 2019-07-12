@@ -24,3 +24,6 @@
 ## 2019.07.11
 + load balancing
 + distrbuted deployment
+## 2019.07.12
++ performance tuning
++ working on authentication
