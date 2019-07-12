@@ -2,6 +2,7 @@ package com.se.ratingservice;
 
 import com.se.ratingservice.entity.Rating;
 import com.se.ratingservice.entity.RatingOut;
+import com.se.ratingservice.entity.Score;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +34,11 @@ public class RatingController {
         return ratingService.selectByItemId(itemId);
     }
 
+    @GetMapping(value="/userid/{userid}", produces = "application/json")
+    public Score getScoreByUserId(@PathVariable Long userId, @RequestParam("itemId") Long itemId) {
+        return ratingService.selectScoreByUserId(userId, itemId);
+    }
+
     @GetMapping(value="/browser", produces="application/json")
     public List<RatingOut> getRatingPageByType(@RequestParam("type") Integer type, @RequestParam("page") int pageNum,
                                                @RequestParam("pageSize") int pageSize) {
@@ -50,6 +56,11 @@ public class RatingController {
     public ResponseEntity<?> updateRatingByUserId(@RequestParam("userId") Long userId, @RequestParam("score") int score,
                                                   @RequestParam("itemId") Long itemId) {
         return ratingService.updateRatingByUserId(userId, score, itemId);
+    }
+
+    @DeleteMapping(value="/delete/score")
+    public ResponseEntity<?> cancelRatingByUserId(@RequestParam("userId") Long userId, @RequestParam("itemId") Long itemId) {
+        return ratingService.cancelRatingByUserId(userId, itemId);
     }
 
 

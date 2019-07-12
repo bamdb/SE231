@@ -1,9 +1,11 @@
 package com.se.ratingservice;
 
-import com.netflix.discovery.converters.Auto;
 import com.se.ratingservice.entity.Item;
 import com.se.ratingservice.entity.Rating;
 import com.se.ratingservice.entity.RatingOut;
+import com.se.ratingservice.entity.Score;
+import com.se.ratingservice.repository.RatingRepository;
+import com.se.ratingservice.repository.ScoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,17 +14,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Service
 public class RatingServiceImpl implements RatingService {
     private final
     RatingRepository ratingRepository;
+    private final
+    ScoreRepository scoreRepository;
 
     @Autowired
-    public RatingServiceImpl(RatingRepository ratingRepository) {
+    public RatingServiceImpl(RatingRepository ratingRepository, ScoreRepository scoreRepository) {
         this.ratingRepository = ratingRepository;
+        this.scoreRepository = scoreRepository;
     }
 
     @Autowired
@@ -61,6 +65,10 @@ public class RatingServiceImpl implements RatingService {
 
     public Rating selectById(Long id) {
         return ratingRepository.findById(id).orElse(null);
+    }
+
+    public Score selectScoreByUserId(Long userId, Long itemId) {
+        return scoreRepository.findByUserIdAndItemId(userId, itemId).orElse(null);
     }
 
     public Rating selectByItemId(Long itemId) {
@@ -141,12 +149,20 @@ public class RatingServiceImpl implements RatingService {
         return ResponseEntity.ok().body("update rating successfully");
     }
 
-    @Override
     public ResponseEntity<?> updateRatingByUserId(Long userId, int score, Long itemId) {
         Rating rating = selectByItemId(itemId);
         if (rating == null) {
             return ResponseEntity.ok().body("Item id not found");
         }
+        Score scoreAct = scoreRepository.findByUserIdAndItemId(userId, itemId).orElse(null);
+        if (scoreAct == null) {
+            scoreAct = new Score();
+        }
+        scoreAct.setUserId(userId);
+        scoreAct.setItemId(itemId);
+        scoreAct.setScore(score);
+        scoreRepository.save(scoreAct);
+
         Integer totScoreNum = rating.getTotScoreNum()+1;
         float avgScore = (rating.getAvgScore() * rating.getTotScoreNum() + score) / totScoreNum;
         Integer rank = 1 + ratingRepository.findRankByTypeAndItemId(rating.getType(), avgScore);
@@ -166,7 +182,20 @@ public class RatingServiceImpl implements RatingService {
             case 10: rating.setScore10(rating.getScore10() + 1); break;
         }
         ratingRepository.save(rating);
-        return null;
+        return ResponseEntity.ok().body("Update score successfully!");
+    }
+
+    public ResponseEntity<?> cancelRatingByUserId(Long userId, Long itemId) {
+        Rating rating = selectByItemId(itemId);
+        if (rating == null) {
+            return ResponseEntity.ok().body("Item id not found!");
+        }
+        Score scoreAct = scoreRepository.findByUserIdAndItemId(userId, itemId).orElse(null);
+        if (scoreAct == null) {
+            return ResponseEntity.ok().body("User score not found!");
+        }
+        scoreRepository.delete(scoreAct);
+        return ResponseEntity.ok().body("Cancel score successfully!");
     }
 
     public ResponseEntity<?> deleteRatingById(Long id) {
@@ -176,6 +205,7 @@ public class RatingServiceImpl implements RatingService {
 
     public ResponseEntity<?> deleteRatingByItemId(Long itemId) {
         ratingRepository.deleteRatingByItemId(itemId);
+        scoreRepository.deleteAllByItemId(itemId);
         return ResponseEntity.ok().body("delete rating successfully!");
     }
 }
