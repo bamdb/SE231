@@ -103,6 +103,10 @@ public class MessageControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(""));
+        mvc.perform(get("/senderid/1"))
+                .andExpect(status().isOk());
+        mvc.perform(get("/receiverid/2"))
+                .andExpect(status().isOk());
     }
 
 }

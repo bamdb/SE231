@@ -46,6 +46,16 @@ public class MessageController {
         return messageService.selectBySenderIdAndReceiverId(senderId, receiverId);
     }
 
+    @GetMapping(value = "/senderid/{senderId}", produces ="application/json")
+    Iterable<Message> selectBySenderId(@PathVariable Long senderId) {
+        return messageService.selectBySenderId(senderId);
+    }
+
+    @GetMapping(value = "/receiverid/{receiverId}", produces ="application/json")
+    Iterable<Message> selectByReceiverId(@PathVariable Long receiverId) {
+        return messageService.selectByReceiverId(receiverId);
+    }
+
     @PostMapping(value = "/add", produces ="application/json")
     Message addMessage(@RequestBody Message message) {
         return messageService.addMessage(message);
