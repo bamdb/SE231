@@ -11,10 +11,16 @@ class Messagelist extends Component{
     constructor(props)
     {
         super(props);
-        this.state={messages:[1,2]}
+        this.state={messages:[{senderId:1,receiverId:1,content:"asdadadasd"}]}
     }
     componentWillMount() {
-
+        var url="http://202.120.40.8:30741/message/"+this.props.type+"/1";
+        axios.get(url).then(
+            function(response)
+            {
+                this.setState({messages:response.data});
+            }.bind(this)
+        )
     }
 
     render()
@@ -25,18 +31,25 @@ class Messagelist extends Component{
         {
             rows.push(
                 <Grid item xs={12}>
-                    <Paper>
-                        <Grid container>
-                            <Grid item xs={3}>
-                                <Typography>from:shenruien</Typography>
-                                <Typography>to:shenruien</Typography>
-                            </Grid>
-                            <Grid item xs={9}>
-                                <Typography>helloworld</Typography>
-                            </Grid>
+                    <Grid container>
+                        <Grid item xs={1}></Grid>
+                        <Grid item xs={10}>
+                            <Paper>
+                                <Grid container>
+                                    <Grid item xs={3}>
+                                        <Typography>from:{messages[i].senderId}</Typography>
+                                        <Typography>to:{messages[i].receiverId}</Typography>
+                                    </Grid>
+                                    <Grid item xs={9}>
+                                        <Typography>{messages[i].content}</Typography>
+                                    </Grid>
+                                </Grid>
+                            </Paper>
                         </Grid>
-                    </Paper>
+                        <Grid item xs={1}></Grid>
+                    </Grid>
                 </Grid>
+
             )
         }
         return(

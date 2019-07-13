@@ -107,6 +107,10 @@ class Navigation extends Component {
             }
         }
     }
+    componentDidMount()
+    {
+
+    }
 
     render() {
 

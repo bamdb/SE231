@@ -43,19 +43,16 @@ class Reply extends Component {
     handleclick()
     {
         var text=this.state.text;
-        /*axios.post("http://202.120.40.8:30741/topic/add/reply?topicId=1&userId=1",text).then();
+        /*axios.post("http://202.120.40.8:30741/topic/add/reply?topicId=1&userId=1",text).then();*/
         $.ajax({
             url:"http://202.120.40.8:30741/topic/add/reply?topicId=1&userId=1",
             type:"POST",
-            params:{"contentType": "application/json;charset=utf-8"},
-            data:{text},
+            contentType:"application/json",
+            data:text,
             success: function f(data) {
-
                 console.log(data);
-
-
             }.bind(this)
-        })*/
+        })
     }
     static defaultProps = {
         username : "null",

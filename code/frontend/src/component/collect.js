@@ -68,8 +68,8 @@ class Collect extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            expanded : false,
-            completed : 0
+            expanded: false,
+            completed: 0
         };
 
         this.handleExpandClick = this.handleExpandClick.bind(this);
@@ -180,6 +180,7 @@ class Collect extends Component {
                     <Typography variant="subtitle1" color="textPrimary" component="p">
                         评分人数分布
                     </Typography>
+
                     <BarChart data={data} options={options} width="600" height="250" />
                 </CardContent>
                 <CardActions disableSpacing>

@@ -53,7 +53,7 @@ class Listitem extends Component {
         if(item !== undefined)
         {
             for(var i=0; i<item.length; ++i) {
-                if (item[i].itemname.indexOf(this.props.search) !== -1) {
+                if (item[i].item.itemname.indexOf(this.props.search) !== -1) {
                 rows.push(
                     <Paper className={useStyles.root}>
                         <Grid container spacing={2}>
@@ -64,8 +64,8 @@ class Listitem extends Component {
                             </Grid>
                             <Grid item xs={6}>
 
-                                <Typography component={Link} to={'/useriteminfopage/'+item[i].id} align="center">
-                                    {item[i].itemname}
+                                <Typography component={Link} to={'/useriteminfopage/'+item[i].item.id} align="center">
+                                    {item[i].item.itemname}
                                 </Typography>
 
                                 <br/>
@@ -73,23 +73,23 @@ class Listitem extends Component {
                                     <Grid container spacing={1}>
                                         <Grid item xs={4}>
                                             <Typography component="p" align="center">
-                                                {item[i].pubTime.split("T")[0]}
+                                                {item[i].item.pubTime.split("T")[0]}
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={4}>
                                             <Typography component="p" align="center">
-                                                {item[i].mainAuthor}
+                                                {item[i].item.mainAuthor}
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={4}>
                                             <Typography component="p" align="center">
-                                                {item[i].chapterNum}
+                                                {item[i].item.chapterNum}
                                             </Typography>
                                         </Grid>
                                         </Grid>
                                 </Paper>
                                 <br/>
-                                <Score id={item[i].id}/>
+                                <Score id={item[i].item.id}/>
                             </Grid>
                             <Grid item xs={1}/>
                             <Grid item xs={2}>
