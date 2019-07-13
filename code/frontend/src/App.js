@@ -8,9 +8,6 @@ import LoginPage from './page/loginpage'
 import {
   HashRouter as Router,
   Route,
-  Link,
-  Redirect,
-  withRouter
 } from "react-router-dom";
 import Userfavoritespage from "./page/userfavoritespage";
 import RegisterPage from "./page/registerpage";
