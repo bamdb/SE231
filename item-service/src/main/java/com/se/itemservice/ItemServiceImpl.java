@@ -1,9 +1,12 @@
 package com.se.itemservice;
 
 import com.se.itemservice.entity.Item;
+import com.se.itemservice.entity.Itemtag;
 import com.se.itemservice.entity.Relation;
 import com.se.itemservice.repository.ItemRepository;
+import com.se.itemservice.repository.ItemtagRepository;
 import com.se.itemservice.repository.RelationRepository;
+import com.se.itemservice.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,14 +20,19 @@ import java.util.List;
 public class ItemServiceImpl implements ItemService{
     private final ItemRepository itemRepository;
     private final RelationRepository relationRepository;
+    private final ItemtagRepository itemtagRepository;
+    private final TagRepository tagRepository;
 
     @Resource(name="itemServiceImpl")
     ItemService itemService;
 
     @Autowired
-    public ItemServiceImpl(ItemRepository itemRepository, RelationRepository relationRepository) {
+    public ItemServiceImpl(ItemRepository itemRepository, RelationRepository relationRepository,
+                           ItemtagRepository itemtagRepository, TagRepository tagRepository) {
         this.itemRepository = itemRepository;
         this.relationRepository = relationRepository;
+        this.itemtagRepository = itemtagRepository;
+        this.tagRepository = tagRepository;
     }
 
     public Item postItem(Item item) {
@@ -34,22 +42,6 @@ public class ItemServiceImpl implements ItemService{
     public ResponseEntity<?> deleteItemRelationById(Long itemId, Long relatedItemId) {
         relationRepository.deleteRelationByItemId1AndItemId2(itemId, relatedItemId);
         relationRepository.deleteRelationByItemId1AndItemId2(relatedItemId, itemId);
-//        Iterable<Relation> relationIterable1 = relationRepository.findAllByItemId1(itemId);
-//        Iterator<Relation> relationIterator1 = relationIterable1.iterator();
-//        while (relationIterator1.hasNext()) {
-//            Relation relation = relationIterator1.next();
-//            if (relation.getItemId2() == relatedItemId) {
-//                relationRepository.delete(relation);
-//            }
-//        }
-//        Iterable<Relation> relationIterable2 = relationRepository.findAllByItemId2(itemId);
-//        Iterator<Relation> relationIterator2 = relationIterable1.iterator();
-//        while (relationIterator2.hasNext()) {
-//            Relation relation = relationIterator2.next();
-//            if (relation.getItemId1() == relatedItemId) {
-//                relationRepository.delete(relation);
-//            }
-//        }
         return ResponseEntity.ok().body("delete relation successfully!");
     }
 
@@ -63,6 +55,11 @@ public class ItemServiceImpl implements ItemService{
         relation.setItemId2(subsequentId);
         relation.setRelateType(relateType);
         relationRepository.save(relation);
+    }
+
+    public void postItemTag(Long itemId, Long userId, List<String> tagList) {
+        Itemtag itemtag = itemtagRepository.findById(String.valueOf(itemId)).orElse(null);
+
     }
 
     public Iterable<Item> selectAll() {return itemRepository.findAll();}
