@@ -3,10 +3,10 @@ package com.se.itemservice;
 import com.se.itemservice.entity.Item;
 import com.se.itemservice.entity.Itemtag;
 import com.se.itemservice.entity.Relation;
+import com.se.itemservice.entity.Tag;
 import com.se.itemservice.repository.ItemRepository;
 import com.se.itemservice.repository.ItemtagRepository;
 import com.se.itemservice.repository.RelationRepository;
-import com.se.itemservice.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,18 +21,16 @@ public class ItemServiceImpl implements ItemService{
     private final ItemRepository itemRepository;
     private final RelationRepository relationRepository;
     private final ItemtagRepository itemtagRepository;
-    private final TagRepository tagRepository;
 
     @Resource(name="itemServiceImpl")
     ItemService itemService;
 
     @Autowired
     public ItemServiceImpl(ItemRepository itemRepository, RelationRepository relationRepository,
-                           ItemtagRepository itemtagRepository, TagRepository tagRepository) {
+                           ItemtagRepository itemtagRepository) {
         this.itemRepository = itemRepository;
         this.relationRepository = relationRepository;
         this.itemtagRepository = itemtagRepository;
-        this.tagRepository = tagRepository;
     }
 
     public Item postItem(Item item) {
@@ -59,7 +57,13 @@ public class ItemServiceImpl implements ItemService{
 
     public void postItemTag(Long itemId, Long userId, List<String> tagList) {
         Itemtag itemtag = itemtagRepository.findById(String.valueOf(itemId)).orElse(null);
+        if (itemtag.getTagList().size() == 0) {
+            itemtag.setTagList(new ArrayList<>());
+        }
+        List<Tag> tags = itemtag.getTagList();
+        for (String tagName : tagList) {
 
+        }
     }
 
     public Iterable<Item> selectAll() {return itemRepository.findAll();}

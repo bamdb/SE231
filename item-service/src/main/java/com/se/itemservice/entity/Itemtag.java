@@ -12,7 +12,6 @@ public class Itemtag {
     @Id
     private String id;
 
-    @DBRef
     private List<Tag> tagList;
 
     public List<Tag> getTagList() {

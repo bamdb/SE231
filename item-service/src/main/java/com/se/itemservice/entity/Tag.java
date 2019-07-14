@@ -5,9 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Document
 public class Tag {
-    @Id
     private String tag;
 
     private List<Long> userList;
