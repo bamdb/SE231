@@ -1,6 +1,7 @@
 
 [![Build Status](https://travis-ci.org/bamdb/SE231.svg?branch=master)](https://travis-ci.org/bamdb/SE231)
 [![codecov.io](https://codecov.io/github/bamdb/SE231/coverage.svg?branch=master)](https://codecov.io/github/bamdb/SE231?branch=master)
+[![codebeat badge](https://codebeat.co/badges/bcdc599b-3ef2-471a-843d-784fd0de2e48)](https://codebeat.co/projects/github-com-bamdb-se231-master)
 ![language](https://img.shields.io/badge/Language-Java-orange.svg)
 ![license](https://img.shields.io/badge/License-GPL--3.0-blue.svg)
 
