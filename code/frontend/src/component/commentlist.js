@@ -17,14 +17,17 @@ const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
         backgroundColor: theme.palette.background.paper,
+
     },
 }));
 
 class Commentlist extends Component {
     constructor(props) {
         super(props);
+
     }
- 
+
+
     render() {
         return (
             <Grid container spacing={1} >

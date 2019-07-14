@@ -94,7 +94,7 @@ class Listitem extends Component {
                             <Grid item xs={1}/>
                             <Grid item xs={2}>
                                 <br/>
-                                <Collectform/>
+                                <Collectform itemid={item[i].item.id}/>
                             </Grid>
                         </Grid>
                     </Paper>

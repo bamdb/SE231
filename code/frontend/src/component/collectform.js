@@ -20,6 +20,7 @@ import Typography from "@material-ui/core/Typography";
 import Tag from "./tag";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import  axios from "axios";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -87,7 +88,9 @@ class Collectform extends Component {
     handleOk() {
         this.setState({
             visible: false
-        })
+        });
+        var date = Date.parse(new Date());
+        axios.post("http://202.120.40.8:30741/activity/add",{actTime:date,actType:this.state.status,userId:1,itemId:this.props.itemid});
     }
     handleCancel() {
         this.setState({
@@ -124,11 +127,11 @@ class Collectform extends Component {
                                     value={this.state.status}
                                     onChange={this.handleChange}
                                 >
-                                    <FormControlLabel value="想看" control={<Radio />} label="想看" />
-                                    <FormControlLabel value="在看" control={<Radio />} label="在看" />
-                                    <FormControlLabel value="看过" control={<Radio />} label="看过" />
-                                    <FormControlLabel value="搁置" control={<Radio />} label="抛弃" />
-                                    <FormControlLabel value="抛弃" control={<Radio />} label="搁置" />
+                                    <FormControlLabel value={0} control={<Radio />} label="想看" />
+                                    <FormControlLabel value={1} control={<Radio />} label="在看" />
+                                    <FormControlLabel value={2} control={<Radio />} label="看过" />
+                                    <FormControlLabel value={3} control={<Radio />} label="抛弃" />
+                                    <FormControlLabel value={4} control={<Radio />} label="搁置" />
                                 </RadioGroup>
                             </FormControl>
                         </Grid>
