@@ -12,14 +12,14 @@ import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import MovieOutlinedIcon from '@material-ui/icons/MovieOutlined';
 import BookOutlinedIcon from '@material-ui/icons/BookOutlined';
 import PersonOutlinedIcon from '@material-ui/icons/PersonOutlined';
-import {ListItem} from "@material-ui/core";
-import List from "@material-ui/core/List";
+import GraphicEqIcon from '@material-ui/icons/GraphicEq';
 
 const theme = createMuiTheme({
     palette: {
         background: blueGrey[50],
         secondary: {
             main: grey[700],
+            dark:grey[400],
             light:grey[100],
         },
     },
@@ -32,8 +32,8 @@ const useStyles = makeStyles({
     },
     avatar:{
         margin: 10,
-        width: 60,
-        height: 60,
+        width: 100,
+        height: 100,
     },
 })
 
@@ -99,16 +99,39 @@ class LeftAppBar extends Component {
                                     <PersonOutlinedIcon className={useStyles.icon} style={{color:theme.palette.secondary.main}} />
                                 </Grid>
                                 <Grid item xs={9}>
-                                    <Typography style={{color:theme.palette.secondary.main}}>???</Typography>
+                                    <Typography style={{color:theme.palette.secondary.main}}>HELP</Typography>
                                 </Grid>
                             </Grid>
                         </Grid>
+
+                        <Grid item style={{paddingLeft:80}}>
+                            <Grid container >
+                                <Grid item xs={3}>
+                                    <GraphicEqIcon className={useStyles.icon} style={{color:theme.palette.secondary.dark}} />
+                                </Grid>
+                                <Grid item xs={9}>
+                                    <Typography style={{color:theme.palette.secondary.dark}}>--------------</Typography>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <br/><br/>
+                        <Grid item style={{paddingLeft:100}}>
+                            <Grid container >
+                                <Grid item xs={3}>
+                                    <PersonOutlinedIcon className={useStyles.icon} style={{color:theme.palette.secondary.main}} />
+                                </Grid>
+                                <Grid item xs={9}>
+                                    <Typography style={{color:theme.palette.secondary.main}}>HELP</Typography>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+
                     </Grid>
-                    <Grid container spacing={2} direction={"row"} style={{height:110}}>
-                        <Grid item xs={3} alignItems={"flex-right"} >
+                    <Grid container spacing={2}  direction={"row"} style={{height:110}}>
+                        <Grid item xs={3}  >
                         <Avatar src="..\img.jpg" className={useStyles.avatar} />
                         </Grid>
-                        <Grid item xs={9} >
+                        <Grid item  >
                             <Typography variant={"subtitle1"} style={{color:theme.palette.secondary.main}} >{this.state.username}</Typography>
                         </Grid>
                     </Grid>

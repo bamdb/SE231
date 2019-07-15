@@ -15,7 +15,7 @@ import Grid from '@material-ui/core/Grid'
 class Tag extends Component {
     constructor(props) {
         super(props);
-        this.state={tags:["搞笑","热血","王道"],select:false,currenttags:[]};
+        this.state={tags:[],select:false,currenttags:[]};
         this.handletagchange=this.handletagchange.bind(this);
         this.handleclick=this.handleclick.bind(this);
     }
@@ -66,16 +66,14 @@ class Tag extends Component {
 
             for(var i=0;i<tags.length;++i) {
                 item.push(
-                    <Grid item xs={'auto'}>
-                        <Chip  id="chip" label={tags[i]} clickable color="secondary" />
-                    </Grid>
+                    <Chip  id="chip" label={tags[i]} clickable color="secondary" />
                 );
             }
             return(
 
                 <div>
                     <Paper id={"tagmain"}>
-                        <Grid container spacing={2} >
+                        <Grid container spacing={0} >
                             {item}
                         </Grid>
                     </Paper>
@@ -99,17 +97,13 @@ class Tag extends Component {
                 if(!flag)
                 {
                     item.push(
-                        <Grid item xs={'auto'}>
                             <Chip  id="chip" label={tags[i]} clickable onClick={this.handleclick} />
-                        </Grid>
                     );
                 }
                 else
                 {
                     item.push(
-                        <Grid item xs={'auto'}>
                             <Chip  id="chip" label={tags[i]} clickable color="secondary" onClick={this.handleclick}/>
-                        </Grid>
                     );
                 }
 
@@ -117,11 +111,9 @@ class Tag extends Component {
             return(
 
                 <div>
-                    <Paper id={"tagmain"}>
-                        <Grid container spacing={2} >
-                            {item}
-                        </Grid>
-                    </Paper>
+                    <Grid container spacing={0} >
+                        {item}
+                    </Grid>
                 </div>
             )
 

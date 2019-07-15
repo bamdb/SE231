@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles/index';
+import {createMuiTheme, makeStyles} from '@material-ui/core/styles/index';
 import Grid from '@material-ui/core/Grid/index'
 import Paper from '@material-ui/core/Paper/index'
 import Navigation from "../component/navigation";
@@ -12,31 +12,27 @@ import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import Pagetable from "../component/pagetable";
 import axios from 'axios';
-
+import {blueGrey, grey} from "@material-ui/core/colors";
 
 
 class Itembrowsepage extends Component{
     constructor(props){
         super(props);
         this.state={
-            ItemList: [],
+            ItemList1: [],
+            ItemList2: [],
             tags: [],
             isloaded: false,
             search:"",
-            currentpage:0,
-            value:0
+            currentpage0:0,
+            currentpage1:0
 
         };
-        this.handleChange=this.handleChange.bind(this);
         this.handletagchange=this.handletagchange.bind(this);
         this.handleSearch=this.handleSearch.bind(this);
         this.handlepagechange=this.handlepagechange.bind(this);
-        this.loaddata=this.loaddata.bind(this);
     }
-    loaddata()
-    {
 
-    }
     handlepagechange(currentpage)
     {
         this.setState({currentpage:currentpage});
@@ -44,22 +40,36 @@ class Itembrowsepage extends Component{
 
     handleSearch(value){
         this.setState({search:value});
-        console.log("搜索框内容："+value);
     }
 
     handletagchange(tags){
         this.setState({tags:tags});
     }
 
-    handleChange(e, newvalue)
-    {
-        this.setState({value:newvalue})
-    }
-
     componentWillMount() {
         const _this = this;
-        var type=this.state.value;
-        var currentpage=this.state.currentpage;
+        var currentpage0=this.state.currentpage0;
+        var currentpage1=this.state.currentpage1;
+        axios.get(
+            "http://47.103.107.39:34371/browser",{params:{
+                    type:0,
+                    page:currentpage0,
+                    pageSize:4,
+                }}
+        )
+        .then(function (response) {
+            _this.setState(
+                {
+                    ItemList0: response.data,
+                    isloaded: true,
+                }
+            );
+            console.log(response.data);
+        })
+        .catch(function (error) {
+            _this.setState({
+            })
+        })
         axios.get(
             "http://202.120.40.8:30741/rating/browser",{params:{
                     type:type,
@@ -70,10 +80,11 @@ class Itembrowsepage extends Component{
             .then(function (response) {
                 _this.setState(
                     {
-                        ItemList: response.data,
+                        ItemList1: response.data,
                         isloaded: true,
                     }
                 );
+                console.log(response.data);
             })
             .catch(function (error) {
                 _this.setState({
@@ -82,35 +93,29 @@ class Itembrowsepage extends Component{
     }
 
     render(){
-        const ItemList= this.state.ItemList;
+        const ItemList0= this.state.ItemList0;
+        const ItemList1= this.state.ItemList1;
         return(
-            <Grid container direction={"column"} >
+
+            <Grid container direction={"column"}>
                 <Grid item xs={12}><Navigation handleSearch={this.handleSearch}/></Grid>
                 <Grid item xs={12}>
-                    <Grid container>
-                        <Grid item xs={1} />
-                        <Grid item xs={11}>
-                            <Tabs  value={this.state.value} onChange={this.handleChange}>
-                                <Tab label="书籍" />
-                                <Tab label="视频" />
-                            </Tabs>
+                <Grid container direction={"column"} >
+                    <br/>
+                    <Grid item xs={12}>
+                        <Tag select={true} tagchange={this.handletagchange} tags={["热血","王道","搞怪","不高兴","没头脑"]}/>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Grid container>
+                            <Grid item xs={6}>
+                                <Listitem ItemList={ItemList0} search={this.state.search}/>
+                                <Pagetable handlepagechange={this.handlepagechange}/>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Listitem ItemList={ItemList1} search={this.state.search}/>
+                                <Pagetable handlepagechange={this.handlepagechange}/>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </Grid>
-                <Grid item xs={12}>
-                <Grid container direction={"row"} >
-                    <Grid item xs={1} />
-                    <Grid item xs={2}>
-                        <br/><br/>
-                        <Tag select={true} tagchange={this.handletagchange} tags={["热血","王道"]}/>
-                    </Grid>
-                    <Grid item xs={1} />
-                    <Grid item xs={7} >
-                        <br/>
-                        <br/>
-                        <Listitem ItemList={ItemList} search={this.state.search}/>
-                        <br/>
-                        <Pagetable handlepagechange={this.handlepagechange}/>
                     </Grid>
                     <Grid item xs={1} />
                 </Grid>
@@ -121,4 +126,17 @@ class Itembrowsepage extends Component{
     }
 }
 
-export  default Itembrowsepage;
+export  default Itembrowsepage
+/*
+<Grid item xs={12}>
+                    <Grid container>
+                        <Grid item xs={1} />
+                        <Grid item xs={11}>
+                            <Tabs  value={this.state.value} onChange={this.handleChange}>
+                                <Tab label="书籍" />
+                                <Tab label="视频" />
+                            </Tabs>
+                        </Grid>
+                    </Grid>
+                </Grid>;
+ */
