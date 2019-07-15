@@ -45,7 +45,7 @@ class TopItemList extends Component {
         for(var i=0;i<items.length;++i)
         {
             rows.push(
-                <TopItem key={i} name={items[i].item.itemname} rank={items[i].rating.rank} avgScore={items[i].rating.avgScore} itemId={items[i].item.itemId}/>
+                <TopItem key={i} name={items[i].item.itemname} rank={items[i].rating.rank} avgScore={items[i].rating.avgScore} itemId={items[i].item.id}/>
             );
         }
 

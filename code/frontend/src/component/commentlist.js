@@ -29,26 +29,35 @@ class Commentlist extends Component {
     componentWillMount() {
         this.setState({comments:this.props.comments});
     }
+    componentWillReceiveProps(nextProps, nextContext) {
+        this.setState({comments:nextProps.comments});
+    }
+
+
 
     render() {
         var comments=this.state.comments;
         if(comments.length>0)
         {
             var rows=[];
-            for(var i=0;i<rows.length;++i)
+            for(var i=0;i<comments.length;++i)
             {
                 rows.push(
                     <Grid item xs={12}>
                         <Comment
-                            username = {"abc"}
-                            date = {"2000-1-1"}
+                            username = {comments[i].userId}
+                            date = {comments[i].pubTime}
                             grade = {8}
-                            comment = {"Lizards are a widespread group of squamate reptiles, with over 6,000 species, ran" +
-                            "gingacross all continents except Antarctica"}
+                            comment = {comments[i].content}
                         />
                     </Grid>
                 )
             }
+            return(
+                <Grid container spacing={1}>
+                    {rows}
+                </Grid>
+            )
         }
 
         return (

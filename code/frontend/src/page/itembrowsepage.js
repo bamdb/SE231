@@ -61,7 +61,7 @@ class Itembrowsepage extends Component{
         var type=this.state.value;
         var currentpage=this.state.currentpage;
         axios.get(
-            "http://47.103.107.39:34371/browser",{params:{
+            "http://202.120.40.8:30741/rating/browser",{params:{
                     type:type,
                     page:currentpage,
                     pageSize:3
@@ -91,7 +91,6 @@ class Itembrowsepage extends Component{
                         <Grid item xs={1} />
                         <Grid item xs={11}>
                             <Tabs  value={this.state.value} onChange={this.handleChange}>
-
                                 <Tab label="书籍" />
                                 <Tab label="视频" />
                             </Tabs>

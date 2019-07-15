@@ -22,12 +22,12 @@ class Useriteminfopage extends Component {
     constructor(props)
     {
         super(props);
-        this.state={data:{},rating:{},totgrade:[],comments:[]};
+        this.state={data:{},rating:{},totgrade:[],comments:[],id:0};
         this.handletagchange=this.handletagchange.bind(this);
         this.handleSearch=this.handleSearch.bind(this);
-        this.handlebuttonclick=this.handlebuttonclick.bind(this);
+
     }
-    handlebuttonclick(currentpage)
+    /*handlebuttonclick()
     {
         var uri=window.location.href;;
         var id=uri.split('#')[1].split('/')[2];
@@ -42,7 +42,7 @@ class Useriteminfopage extends Component {
                 console.log(data);
             }.bind(this)
         })
-    }
+    }*/
     handleSearch(value){}
     handletagchange(tags){
         this.setState({tags:tags});
@@ -50,10 +50,11 @@ class Useriteminfopage extends Component {
     componentWillMount() {
         var uri=window.location.href;
         var id=uri.split('#')[1].split('/')[2];
-
+        this.setState({id:id})
         var url="http://202.120.40.8:30741/item/id/"+id;
         var url1="http://202.120.40.8:30741/rating/itemid/"+id;
         var url3="http://202.120.40.8:30741/comment/itemid/"+id
+
         axios.get(url).then(
             function (response){
                 console.log(response.data);
@@ -66,9 +67,9 @@ class Useriteminfopage extends Component {
         axios.get(url1).then(
             function(response){
                 var totgrade=[];
-                totgrade.push(response.data.rating.score1,response.data.rating.score2,response.data.rating.score3,response.data.rating.score4,response.data.rating.score5,response.data.rating.score6,response.data.rating.score7,response.data.rating.score8,response.data.rating.score9,response.data.rating.score10)
+                totgrade.push(response.data.score1,response.data.score2,response.data.score3,response.data.score4,response.data.score5,response.data.score6,response.data.score7,response.data.score8,response.data.score9,response.data.score10)
 
-                this.setState({rating:response.data.rating,totgrade:totgrade})
+                this.setState({rating:response.data,totgrade:totgrade})
             }.bind(this)
         )
         axios.get(url3).then(
@@ -96,11 +97,11 @@ class Useriteminfopage extends Component {
                             <Scheduletable />
                             <Tag select={true} tagchange={this.handletagchange}></Tag>
                             <br/>
-                            <Rating handlebuttonclick={this.handlebuttonclick}></Rating>
+
                             <Commentlist comments={this.state.comments}/>
                         </Grid>
                         <Grid  item xs={3} >
-                            <Collect totGrade={this.state.totgrade} avgGrade={this.state.rating.avgScore} rank={this.state.rating.rank}/>
+                            <Collect totGrade={this.state.totgrade} avgGrade={this.state.rating.avgScore} rank={this.state.rating.rank} itemid={this.state.id}/>
                             <Relateditem />
 
                         </Grid>
