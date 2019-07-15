@@ -16,5 +16,6 @@ public interface ItemService {
     Itemtag findItemtag(Long itemId);
     ResponseEntity<?> deleteItemById(Long id);
     ResponseEntity<?> deleteItemRelationById(Long itemId, Long relatedItemId);
+    ResponseEntity<?> deleteItemTag(Long itemId, Long userId, List<String> tagList);
     Item updateItem(Item item);
 }

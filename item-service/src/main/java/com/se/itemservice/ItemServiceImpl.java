@@ -37,6 +37,43 @@ public class ItemServiceImpl implements ItemService{
         return itemRepository.save(item);
     }
 
+    @Override
+    public ResponseEntity<?> deleteItemTag(Long itemId, Long userId, List<String> tagList) {
+        Itemtag itemtag = itemtagRepository.findById(String.valueOf(itemId)).orElse(null);
+        if (itemtag == null) {
+            return ResponseEntity.ok().body("Item has no tag!");
+        }
+        List<Tag> tags = itemtag.getTags();
+        List<Tag> tagDeleted = new ArrayList<>();
+        for (String tagname : tagList) {
+            boolean tagExist = false;
+            for (Tag tag : tags) {
+                if (tag.getTagname().equals(tagname)) {
+                    if (tag.getUserList() == null) {
+                        return ResponseEntity.ok().body("User has no such tag!");
+                    }else{
+                        List<Long> userList = tag.getUserList();
+                        if (!userList.contains(userId)) {
+                            return ResponseEntity.ok().body("User has no such tag!");
+                        }
+                        userList.remove(userId);
+                        if (userList.size() == 0) {
+                            tagDeleted.add(tag);
+                        }else {
+                            tag.setUserList(userList);
+                        }
+                    }
+                }
+            }
+        }
+        for (Tag tag : tagDeleted) {
+            tags.remove(tag);
+        }
+        itemtag.setTags(tags);
+        itemtagRepository.save(itemtag);
+        return ResponseEntity.ok().body("Delete tag successfully");
+    }
+
     public ResponseEntity<?> deleteItemRelationById(Long itemId, Long relatedItemId) {
         relationRepository.deleteRelationByItemId1AndItemId2(itemId, relatedItemId);
         relationRepository.deleteRelationByItemId1AndItemId2(relatedItemId, itemId);
@@ -55,7 +92,6 @@ public class ItemServiceImpl implements ItemService{
         relationRepository.save(relation);
     }
 
-    @Override
     public Itemtag findItemtag(Long itemId) {
         return itemtagRepository.findById(String.valueOf(itemId)).orElse(null);
     }
