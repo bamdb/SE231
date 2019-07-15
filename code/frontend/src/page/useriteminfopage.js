@@ -18,6 +18,7 @@ import axios from 'axios'
 import Rating from "../component/rating";
 import Collect from "../component/collect";
 import $ from 'jquery'
+import Scheduletableold from "../component/scheduletableold";
 class Useriteminfopage extends Component {
     constructor(props)
     {
@@ -94,7 +95,7 @@ class Useriteminfopage extends Component {
                             <Item isbn={itemdata.id} date={itemdata.pubTime} name={itemdata.itemname} pages={itemdata.chapterNum} author={itemdata.mainAuthor}/>
                         </Grid>
                         <Grid  item xs={6} >
-                            <Scheduletable />
+                            <Scheduletableold />
                             <Tag select={true} tagchange={this.handletagchange}></Tag>
                             <br/>
 
