@@ -1,6 +1,7 @@
 package com.se.activityservice;
 
 import com.se.activityservice.entity.Activity;
+import com.se.activityservice.entity.Progress;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,6 +42,11 @@ public class ActivityController {
         return activityService.selectByUserIdAndItemId(userId, itemId);
     }
 
+    @GetMapping(value="/progress")
+    public Progress getProgress(@RequestParam("userId") Long userId, @RequestParam("itemId") Long itemId) {
+        return activityService.selectProgress(userId, itemId);
+    }
+
     @DeleteMapping(value="/delete/id/{activityId}")
     public ResponseEntity<?> deleteActivityById(@PathVariable("activityId") Long activityId) {
         return activityService.deleteActivityById(activityId);
@@ -54,5 +60,10 @@ public class ActivityController {
     @DeleteMapping(value="/delete/itemid/{itemId}")
     public ResponseEntity<?> deleteActivityByItemId(@PathVariable("itemId") Long itemId) {
         return activityService.deleteActivityByItemId(itemId);
+    }
+
+    @PutMapping(value="/add/progress")
+    public Progress updateProgress(@RequestBody Progress progress) {
+        return activityService.updateProgress(progress);
     }
 }

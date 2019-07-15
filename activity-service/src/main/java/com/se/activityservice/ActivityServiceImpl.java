@@ -3,6 +3,9 @@ package com.se.activityservice;
 import com.se.activityservice.client.ItemClient;
 import com.se.activityservice.client.UserClient;
 import com.se.activityservice.entity.Activity;
+import com.se.activityservice.entity.Progress;
+import com.se.activityservice.repository.ActivityRepository;
+import com.se.activityservice.repository.ProgressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,10 +14,12 @@ import org.springframework.stereotype.Service;
 public class ActivityServiceImpl implements ActivityService{
     private final
     ActivityRepository activityRepository;
+    private final ProgressRepository progressRepository;
 
     @Autowired
-    public ActivityServiceImpl(ActivityRepository activityRepository) {
+    public ActivityServiceImpl(ActivityRepository activityRepository, ProgressRepository progressRepository) {
         this.activityRepository = activityRepository;
+        this.progressRepository = progressRepository;
     }
 
     @Autowired
@@ -22,6 +27,18 @@ public class ActivityServiceImpl implements ActivityService{
 
     @Autowired
     ItemClient itemClient;
+
+    public Progress selectProgress(Long userId, Long itemId) {
+        return progressRepository.findByItemIdAndUserId(userId, itemId).orElse(null);
+    }
+
+    public Progress updateProgress(Progress progress) {
+        Progress progress1 = progressRepository.findByItemIdAndUserId(progress.getItemId(), progress.getUserId()).orElse(null);
+        if (progress1 != null) {
+            progress.setId(progress1.getId());
+        }
+        return progressRepository.save(progress);
+    }
 
     public Activity postActivity(Activity activity) {
         // check if user exists in User table
