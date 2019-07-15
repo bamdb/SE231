@@ -9,7 +9,7 @@ eureka:
 
 zuul:
   host:
-    connect-timeout-millis: 6000
+    connect-timeout-millis: 12000
   routes:
     fromimage:
       path: /image/**
