@@ -39,3 +39,7 @@
 * run load test forbackend server
 * complete item, topic, activity, rating services
 * write 100% coverage test
+
+# 2019-07-15
+* complete tag and progress services
+* configured load balance in three server
