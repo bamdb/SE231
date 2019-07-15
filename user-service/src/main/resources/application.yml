@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: user
+  main:
+    allow-bean-definition-overriding: true
+server:
+  port: ${PORT:0}
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    lease-expiration-duration-in-seconds: 3
+    lease-renewal-interval-in-seconds: 3
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+security:
+  oauth2:
+    client:
+      clientId: user-service
+      clientSecret: 123
+      accessTokenUri: http://localhost:8000/auth/oauth/token
+      grant-type: client_credentials
+      scope: server
+    resource:
+      user-info-uri: http://localhost:8000/auth/user
+ribbon:
+  ReadTimeout: 1000
+  ConnectTimeout: 500
+  MaxAutoRetriesNextServer: 0
+  MaxAutoRetries: 1
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+feign:
+  hystrix:
+    enabled: true
