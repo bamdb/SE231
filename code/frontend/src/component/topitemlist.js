@@ -7,6 +7,7 @@ import '../css/item.css'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import TopItem from './topitem';
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles(theme => ({
     root:{
@@ -50,11 +51,17 @@ class TopItemList extends Component {
         }
 
         return(
-            <Grid container className={useStyles.root} spacing={2} >
-                <Grid  >
-                {rows}
+            <div>
+                <br/>
+                <Typography variant={"subtitle1"} color={"textSecondary"} >排行榜</Typography>
+                <Divider />
+                <br/>
+                <Grid container className={useStyles.root} spacing={2} >
+                    <Grid >
+                    {rows}
+                    </Grid>
                 </Grid>
-            </Grid>
+            </div>
         );
     }
 }

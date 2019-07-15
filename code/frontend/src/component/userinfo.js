@@ -108,7 +108,6 @@ class Userinfo extends Component {
             return(
 
                     <Paper >
-
                         <Grid container >
                             <Grid item xs={3}>
 
