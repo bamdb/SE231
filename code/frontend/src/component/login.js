@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import axios from 'axios';
+import Divider from '@material-ui/core/Divider';
 
 
 const useStyles = makeStyles(theme => ({
@@ -102,40 +103,38 @@ class Login extends Component{
         return(
             /* 导航栏 */
             //登录部分
-                <Grid container spacing={1}>
-                    <Grid item xs={6} className={useStyles.root}>
-                        <Paper className={useStyles.paper} >
-                            <br/>
-                            <Grid container >
-                                <Grid item xs={2} />
-                                <Grid item xs={8} >
-                                    <Typography variant={"h4"} component="h4">登录至Bamdb</Typography> <br/>
-                                    <Typography component="p">你的用户名/email地址</Typography>
-                                    <TextField className={useStyles.textField} margin={"normal"} name={"name"} type={"text"} value={this.state.name} onChange={this.handleInforChange} /><br/>
-                                    <Typography component="p">你的密码</Typography>
-                                    <TextField className={useStyles.textField} margin={"normal"} name={"password"} type={"password"} value={this.state.password} onChange={this.handleInforChange} /><br/>
-                                    <Button
-                                        variant="outlined"
-                                        color="primary"
-                                        className={useStyles.button}
-                                        name={"submit"}
-                                        onClick={this.submit}
-                                    ><Link to={"/"}>登录</Link>
-                                    </Button>
-                                    <br/>
-                                </Grid>
-                                <Grid item xs={2} />
-                            </Grid>
-                            <br/>
-                        </Paper>
-                    </Grid>
 
-                    <Grid item xs={6} className={useStyles.root}>
-                        <Paper className={useStyles.paper} >
+            <Paper className={useStyles.paper} >
+                <Grid container spacing={0} direction={"row"}>
+                    <Grid item xs={7} className={useStyles.root}>
+                        <br/>
+                        <Grid container >
+                            <Grid item xs={2} />
+                            <Grid item xs={9} >
+                                <Typography variant={"h4"} component="h4">登录至Bamdb</Typography> <br/>
+                                <Typography component="p">你的用户名/email地址</Typography>
+                                <TextField className={useStyles.textField} margin={"normal"} name={"name"} type={"text"} value={this.state.name} onChange={this.handleInforChange} /><br/>
+                                <Typography component="p">你的密码</Typography>
+                                <TextField className={useStyles.textField} margin={"normal"} name={"password"} type={"password"} value={this.state.password} onChange={this.handleInforChange} /><br/>
+                                <Button
+                                    variant="outlined"
+                                    color="primary"
+                                    className={useStyles.button}
+                                    name={"submit"}
+                                    onClick={this.submit}
+                                ><Link to={"/"}>登录</Link>
+                                </Button>
+                                <br/>
+                            </Grid>
+                            <Grid item xs={1} />
+                        </Grid>
+                        <br/>
+                    </Grid>
+                    <Grid item xs={5} className={useStyles.root}>
                             <br/><br/><br/>
                             <Grid container spacing={1}>
-                                <Grid item xs={4} />
-                                <Grid item xs={6} >
+                                <Grid item xs={2} />
+                                <Grid item xs={8} >
                                     <Typography variant={"subtitle1"} component="h4">没有账户？</Typography><br/>
                                     <Link to={"/registerpage"}><Button variant="outlined" color="primary" className={useStyles.button} >注册新用户</Button></Link><br/>
                                     <br/><br/>
@@ -153,10 +152,9 @@ class Login extends Component{
                                 <Grid item xs={2} />
                             </Grid>
                             <br/><br/><br/>
-                        </Paper>
                     </Grid>
                 </Grid>
-
+            </Paper>
         );
     }
 }

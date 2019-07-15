@@ -54,7 +54,7 @@ class Itembrowsepage extends Component{
             "http://47.103.107.39:34371/browser",{params:{
                     type:0,
                     page:currentpage0,
-                    pageSize:4,
+                    pageSize:4
                 }}
         )
         .then(function (response) {

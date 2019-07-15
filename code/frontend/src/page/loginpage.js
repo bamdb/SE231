@@ -16,6 +16,7 @@ import Login from "../component/login"
 const useStyles = makeStyles({
     root: {
         height: '100vh',
+        backgroundImage: 'url(/img/3.jpg)',
     },
 })
 
@@ -32,11 +33,15 @@ class LoginPage extends Component{
     render(){
         return(
             <div id={"login"} >
-            <Grid container className={useStyles.root} >
-                <Grid item xs={6}>
-                    <Login></Login>
+                <Grid container className={useStyles.root} >
+                    <Grid item xs={6}>
+                    </Grid>
+                    <Grid item xs={5}>
+                        <br/><br/><br/>
+                        <br/><br/><br/>
+                        <Login></Login>
+                    </Grid>
                 </Grid>
-            </Grid>
             </div>
         )
     }

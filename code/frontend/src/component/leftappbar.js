@@ -13,6 +13,8 @@ import MovieOutlinedIcon from '@material-ui/icons/MovieOutlined';
 import BookOutlinedIcon from '@material-ui/icons/BookOutlined';
 import PersonOutlinedIcon from '@material-ui/icons/PersonOutlined';
 import GraphicEqIcon from '@material-ui/icons/GraphicEq';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 const theme = createMuiTheme({
     palette: {
@@ -55,6 +57,7 @@ class LeftAppBar extends Component {
     }
 
     render(){
+        const [value, setValue] = React.useState(0);
         return(
             <MuiThemeProvider theme={theme} >
                 <Paper square={true} elevation={10} style={{backgroundColor: theme.palette.background}}>
