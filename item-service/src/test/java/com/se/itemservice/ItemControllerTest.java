@@ -158,17 +158,28 @@ public class ItemControllerTest {
     }
 
     @Test
-    public void mytest() {
+    public void tagTest() {
         List<String> tags = new ArrayList<>();
         tags.add("tag1");
         tags.add("tag2");
+        List<String> tags1 = new ArrayList<>();
+        tags1.add("tag1");
+        tags1.add("tag2");
+        tags1.add("tag3");
         itemService.postItemTag(1L, 1L, tags);
-        Itemtag itemtag = itemService.findItemtag(1L);
+        itemService.postItemTag(1L, 2L, tags);
+        itemService.postItemTag(1L, 2L, tags1);
+        itemService.postItemTag(1L, 1L, tags);
 
+        itemService.findItemtag(1L);
+        itemService.findUsertag(1L,1L);
+        itemService.findUsertag(1L,3L);
 
-        List<String> tagList = itemService.findUsertag(1L,1L);
-
+        tags.add("tag3");
         itemService.deleteItemTag(1L, 1L, tags);
-        Itemtag itemtag2 = itemService.findItemtag(1L);
+        tags.remove("tag3");
+        itemService.deleteItemTag(1L, 1L, tags);
+        tags1.add("tag4");
+        itemService.deleteItemTag(1L, 2L, tags1);
     }
 }

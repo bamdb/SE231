@@ -34,34 +34,37 @@ public class ItemServiceImpl implements ItemService{
     }
 
     public Item postItem(Item item) {
-        return itemRepository.save(item);
+        Item itemOut = itemRepository.save(item);
+
+        // tag initialization
+        Itemtag itemtag = new Itemtag();
+        itemtag.setTags(new ArrayList<>());
+        itemtag.setItemId(itemOut.getId());
+        itemtagRepository.save(itemtag);
+
+        return itemOut;
     }
 
     @Override
     public ResponseEntity<?> deleteItemTag(Long itemId, Long userId, List<String> tagList) {
         Itemtag itemtag = itemtagRepository.findByItemId(itemId).orElse(null);
-        if (itemtag == null) {
-            return ResponseEntity.ok().body("Item has no tag!");
-        }
         List<Tag> tags = itemtag.getTags();
         List<Tag> tagDeleted = new ArrayList<>();
         for (String tagname : tagList) {
-            boolean tagExist = false;
             for (Tag tag : tags) {
+                // tagname exists in item tag list
                 if (tag.getTagname().equals(tagname)) {
-                    if (tag.getUserList() == null) {
+                    List<Long> userList = tag.getUserList();
+                    // user makes no such tag
+                    if (!userList.contains(userId)) {
                         return ResponseEntity.ok().body("User has no such tag!");
-                    }else{
-                        List<Long> userList = tag.getUserList();
-                        if (!userList.contains(userId)) {
-                            return ResponseEntity.ok().body("User has no such tag!");
-                        }
-                        userList.remove(userId);
-                        if (userList.size() == 0) {
-                            tagDeleted.add(tag);
-                        }else {
-                            tag.setUserList(userList);
-                        }
+                    }
+                    userList.remove(userId);
+                    // when remove all user in a tag, the tag shoud be deleted
+                    if (userList.size() == 0) {
+                        tagDeleted.add(tag);
+                    }else {
+                        tag.setUserList(userList);
                     }
                 }
             }
@@ -100,9 +103,6 @@ public class ItemServiceImpl implements ItemService{
     public List<String> findUsertag(Long itemId, Long userId) {
         Itemtag itemtag = itemtagRepository.findByItemIdAndUserId(itemId, userId).orElse(null);
         List<String> tagString = new ArrayList<>();
-        if (itemtag == null) {
-            return null;
-        }
         List<Tag> tagList = itemtag.getTags();
         for (Tag tag : tagList) {
             if (tag.getUserList().contains(userId)) {
@@ -114,30 +114,23 @@ public class ItemServiceImpl implements ItemService{
 
     public void postItemTag(Long itemId, Long userId, List<String> tagList) {
         Itemtag itemtag = itemtagRepository.findByItemId(itemId).orElse(null);
-        if (itemtag == null) {
-            itemtag = new Itemtag();
-            itemtag.setTags(new ArrayList<>());
-            itemtag.setItemId(itemId);
-        }
+
         List<Tag> tags = itemtag.getTags();
         for (String tagname : tagList) {
             boolean tagExist = false;
             for (Tag tag : tags) {
+                // tagname exists, push userId to userList
                 if (tag.getTagname().equals(tagname)) {
                     tagExist = true;
-                    if (tag.getUserList() == null) {
-                        List<Long> userList = new ArrayList<>();
+                    List<Long> userList = tag.getUserList();
+                    // user has added same tag before, do nothing
+                    if (!userList.contains(userId)) {
                         userList.add(userId);
-                        tag.setUserList(userList);
-                    }else{
-                        List<Long> userList = tag.getUserList();
-                        if (!userList.contains(userId)) {
-                            userList.add(userId);
-                        }
-                        tag.setUserList(userList);
                     }
+                    tag.setUserList(userList);
                 }
             }
+            // tagname not exists, create new tag and push it to itemtag's tag list
             if (!tagExist) {
                 Tag newTag = new Tag();
                 newTag.setTagname(tagname);
@@ -146,12 +139,6 @@ public class ItemServiceImpl implements ItemService{
                 newTag.setUserList(userList);
                 tags.add(newTag);
             }
-//            Itemtag itemtag = itemtagRepository.findByItemIdAndTagname(String.valueOf(itemId), tagname).orElse(null);
-//            if (itemtag.getTags().size() == 0) {
-//                itemtag.
-//            }else{
-//
-//            }
         }
         itemtag.setTags(tags);
         itemtagRepository.save(itemtag);

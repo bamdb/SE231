@@ -24,19 +24,6 @@ public class Itemtag {
         this.tags = tags;
     }
 
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Long getItemId() {
-        return itemId;
-    }
-
     public void setItemId(Long itemId) {
         this.itemId = itemId;
     }
