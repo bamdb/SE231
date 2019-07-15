@@ -1,6 +1,7 @@
 package com.se.itemservice;
 
 import com.se.itemservice.entity.Item;
+import com.se.itemservice.entity.Itemtag;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +16,9 @@ import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -152,5 +155,14 @@ public class ItemControllerTest {
                 .andExpect(status().isOk());
         mvc.perform(get("/id/0").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void mytest() {
+        List<String> tags = new ArrayList<>();
+        tags.add("tag1");
+        tags.add("tag2");
+        itemService.postItemTag(1L, 1L, tags);
+        Itemtag itemtag = itemService.findItemtag(1L);
     }
 }

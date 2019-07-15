@@ -21,15 +21,15 @@ public class ItemController {
         return itemService.findItemById(itemId);
     }
 
-    @GetMapping(value = "/tag/id/{itemId}", produces = "application/json")
-    public List<Itemtag> getItemTag(@PathVariable Long itemId) {
-
-    }
-
-    @GetMapping(value = "/tag")
-    public List<String> getUserTag(@RequestParam("itemId") Long itemId, @RequestParam("userId") Long userId) {
-
-    }
+//    @GetMapping(value = "/tag/id/{itemId}", produces = "application/json")
+//    public List<Itemtag> getItemTag(@PathVariable Long itemId) {
+//
+//    }
+//
+//    @GetMapping(value = "/tag")
+//    public List<String> getUserTag(@RequestParam("itemId") Long itemId, @RequestParam("userId") Long userId) {
+//
+//    }
 
     @PostMapping(value = "/add")
     public Item postItem(@RequestBody Item item) {
@@ -42,10 +42,10 @@ public class ItemController {
         itemService.postItemRelation(priorId, subsequentId, relateType);
     }
 
-    @PostMapping(value = "/add/tag")
-    public void postTag(@RequestParam("itemId") Long itemId, @RequestParam("userId") Long userId, @RequestBody List<String> tagList) {
-
-    }
+//    @PostMapping(value = "/add/tag")
+//    public void postTag(@RequestParam("itemId") Long itemId, @RequestParam("userId") Long userId, @RequestBody List<String> tagList) {
+//
+//    }
 
     @DeleteMapping(value = "/delete/id/{itemId}")
     public ResponseEntity<?> deleteItemById(@PathVariable Long itemId) {
@@ -58,10 +58,10 @@ public class ItemController {
         itemService.deleteItemRelationById(itemId, relatedItemId);
     }
 
-    @DeleteMapping(value = "/delete/tag")
-    public void deleteTag(@RequestParam("itemId") Long itemId, @RequestParam("userId") Long userId, @RequestBody List<String> tagList) {
-
-    }
+//    @DeleteMapping(value = "/delete/tag")
+//    public void deleteTag(@RequestParam("itemId") Long itemId, @RequestParam("userId") Long userId, @RequestBody List<String> tagList) {
+//
+//    }
 
     @PutMapping(value = "/update", produces="application/json")
     public Item updateItemById(@RequestBody Item item) {

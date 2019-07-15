@@ -55,15 +55,54 @@ public class ItemServiceImpl implements ItemService{
         relationRepository.save(relation);
     }
 
+    @Override
+    public Itemtag findItemtag(Long itemId) {
+        return itemtagRepository.findById(String.valueOf(itemId)).orElse(null);
+    }
+
     public void postItemTag(Long itemId, Long userId, List<String> tagList) {
         Itemtag itemtag = itemtagRepository.findById(String.valueOf(itemId)).orElse(null);
-        if (itemtag.getTagList().size() == 0) {
-            itemtag.setTagList(new ArrayList<>());
+        if (itemtag == null) {
+            itemtag = new Itemtag();
+            itemtag.setTags(new ArrayList<>());
+            itemtag.setItemId(String.valueOf(itemId));
         }
-        List<Tag> tags = itemtag.getTagList();
-        for (String tagName : tagList) {
-
+        List<Tag> tags = itemtag.getTags();
+        for (String tagname : tagList) {
+            boolean tagExist = false;
+            for (Tag tag : tags) {
+                if (tag.getTagname().equals(tagname)) {
+                    tagExist = true;
+                    if (tag.getUserList() == null) {
+                        List<Long> userList = new ArrayList<>();
+                        userList.add(userId);
+                        tag.setUserList(userList);
+                    }else{
+                        List<Long> userList = tag.getUserList();
+                        if (!userList.contains(userId)) {
+                            userList.add(userId);
+                        }
+                        tag.setUserList(userList);
+                    }
+                }
+            }
+            if (!tagExist) {
+                Tag newTag = new Tag();
+                newTag.setTagname(tagname);
+                List<Long> userList = new ArrayList<>();
+                userList.add(userId);
+                newTag.setUserList(userList);
+                tags.add(newTag);
+            }
+//            Itemtag itemtag = itemtagRepository.findByItemIdAndTagname(String.valueOf(itemId), tagname).orElse(null);
+//            if (itemtag.getTags().size() == 0) {
+//                itemtag.
+//            }else{
+//
+//            }
         }
+        itemtag.setTags(tags);
+        itemtagRepository.save(itemtag);
     }
 
     public Iterable<Item> selectAll() {return itemRepository.findAll();}

@@ -6,16 +6,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
 public class Tag {
-    private String tag;
+    private String tagname;
 
     private List<Long> userList;
 
-    public String getTag() {
-        return tag;
+    public String getTagname() {
+        return tagname;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setTagname(String tagname) {
+        this.tagname = tagname;
     }
 
     public List<Long> getUserList() {

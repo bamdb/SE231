@@ -10,24 +10,24 @@ import java.util.List;
 @Document
 public class Itemtag {
     @Id
-    private String id;
+    private String itemId;
 
-    private List<Tag> tagList;
+    private List<Tag> tags;
 
-    public List<Tag> getTagList() {
-        return tagList;
+    public List<Tag> getTags() {
+        return tags;
     }
 
-    public void setTagList(List<Tag> tagList) {
-        this.tagList = tagList;
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 
-    public String getId() {
-        return id;
+    public String getItemId() {
+        return itemId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
 
 }
