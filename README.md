@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/bamdb/SE231.svg?branch=isalb)](https://travis-ci.org/bamdb/SE231)
 [![codecov.io](https://codecov.io/github/bamdb/SE231/coverage.svg?branch=isalb)](https://codecov.io/github/bamdb/SE231?branch=isalb)
+[![codebeat badge](https://codebeat.co/badges/bcdc599b-3ef2-471a-843d-784fd0de2e48)](https://codebeat.co/projects/github-com-bamdb-se231-isalb)
 # SE231
 code for summer project
 
