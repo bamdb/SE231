@@ -123,6 +123,20 @@
   *  run load test forbackend server
   *  complete item, topic, activity, rating services
   *  write 100% coverage test
+# 2019-7-15
+* shenruien:
+  * beautify the frontpage
+  * upgrade the frontend
+* wangzulai: 
+  * complete tag and progress services
+  * configured load balance in three server
+* yuyajie: 
+  * 继续搞security+oauth2
+  * 解决负载均衡的问题
+* huangyuyang:
+  * 页面美化及整理前后端接口需求
+
+
 
 
 
