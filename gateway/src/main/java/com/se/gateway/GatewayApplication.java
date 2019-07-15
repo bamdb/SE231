@@ -26,7 +26,7 @@ import org.springframework.web.client.RestTemplate;
 	@RibbonClient(name = "comment", configuration = RibbonConfiguration.class),
 	@RibbonClient(name = "activity", configuration = RibbonConfiguration.class),
 	@RibbonClient(name = "friend", configuration = RibbonConfiguration.class),
-	@RibbonClient(name = "message", configuration = RibbonConfiguration.class).
+	@RibbonClient(name = "message", configuration = RibbonConfiguration.class),
 	@RibbonClient(name = "topic", configuration = RibbonConfiguration.class)
 })
 public class GatewayApplication {
