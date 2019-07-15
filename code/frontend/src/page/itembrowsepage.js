@@ -61,7 +61,7 @@ class Itembrowsepage extends Component{
         var type=this.state.value;
         var currentpage=this.state.currentpage;
         axios.get(
-            "http://202.120.40.8:30741/rating/browser",{params:{
+            "http://47.103.107.39:34371/browser",{params:{
                     type:type,
                     page:currentpage,
                     pageSize:3

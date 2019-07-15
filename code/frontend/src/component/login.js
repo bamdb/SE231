@@ -63,6 +63,8 @@ class Login extends Component{
                     islogin: 0,
                 })
             })
+        localStorage.setItem("id","1");
+
     }
 
     handleInforChange(e){

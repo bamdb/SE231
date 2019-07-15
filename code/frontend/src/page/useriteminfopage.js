@@ -22,7 +22,7 @@ class Useriteminfopage extends Component {
     constructor(props)
     {
         super(props);
-        this.state={data:{},rating:{},totgrade:[]};
+        this.state={data:{},rating:{},totgrade:[],comments:[]};
         this.handletagchange=this.handletagchange.bind(this);
         this.handleSearch=this.handleSearch.bind(this);
         this.handlebuttonclick=this.handlebuttonclick.bind(this);
@@ -53,6 +53,7 @@ class Useriteminfopage extends Component {
 
         var url="http://202.120.40.8:30741/item/id/"+id;
         var url1="http://202.120.40.8:30741/rating/itemid/"+id;
+        var url3="http://202.120.40.8:30741/comment/itemid/"+id
         axios.get(url).then(
             function (response){
                 console.log(response.data);
@@ -61,12 +62,18 @@ class Useriteminfopage extends Component {
         ).catch(function (error) {
             alert("error")
         });
+
         axios.get(url1).then(
             function(response){
                 var totgrade=[];
                 totgrade.push(response.data.rating.score1,response.data.rating.score2,response.data.rating.score3,response.data.rating.score4,response.data.rating.score5,response.data.rating.score6,response.data.rating.score7,response.data.rating.score8,response.data.rating.score9,response.data.rating.score10)
 
                 this.setState({rating:response.data.rating,totgrade:totgrade})
+            }.bind(this)
+        )
+        axios.get(url3).then(
+            function(response){
+                this.setState({comments:response.data});
             }.bind(this)
         )
 
@@ -90,7 +97,7 @@ class Useriteminfopage extends Component {
                             <Tag select={true} tagchange={this.handletagchange}></Tag>
                             <br/>
                             <Rating handlebuttonclick={this.handlebuttonclick}></Rating>
-                            <Commentlist />
+                            <Commentlist comments={this.state.comments}/>
                         </Grid>
                         <Grid  item xs={3} >
                             <Collect totGrade={this.state.totgrade} avgGrade={this.state.rating.avgScore} rank={this.state.rating.rank}/>

@@ -22,7 +22,7 @@ class Userhomepage extends Component{
 
     }
     componentDidMount() {
-        axios.get("http://202.120.40.8:30741/rating/browser",{params:{
+        axios.get("http://47.103.107.39:34371/browser",{params:{
                 type:0,
                 page:0,
                 pageSize:3
@@ -39,7 +39,7 @@ class Userhomepage extends Component{
         return(
             <Grid container spacing={0}>
                 <Grid item xs={2}>
-                    <LeftAppBar />
+                   <Navigation></Navigation>
                 </Grid>
                 <Grid item xs={10}>
                     <Grid container spacing={10}>
