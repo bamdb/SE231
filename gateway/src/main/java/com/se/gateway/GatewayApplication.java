@@ -22,7 +22,12 @@ import org.springframework.web.client.RestTemplate;
         @RibbonClient(name = "user", configuration = RibbonConfiguration.class),
         @RibbonClient(name = "image", configuration = RibbonConfiguration.class),
         @RibbonClient(name = "item", configuration = RibbonConfiguration.class),
-	@RibbonClient(name = "rating", configuration = RibbonConfiguration.class)
+	@RibbonClient(name = "rating", configuration = RibbonConfiguration.class),
+	@RibbonClient(name = "comment", configuration = RibbonConfiguration.class),
+	@RibbonClient(name = "activity", configuration = RibbonConfiguration.class),
+	@RibbonClient(name = "friend", configuration = RibbonConfiguration.class),
+	@RibbonClient(name = "message", configuration = RibbonConfiguration.class).
+	@RibbonClient(name = "topic", configuration = RibbonConfiguration.class)
 })
 public class GatewayApplication {
 
