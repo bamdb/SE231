@@ -23,6 +23,10 @@ class Messagepage extends Component{
         this.state={type:"receive",value:0};
         this.handleChange=this.handleChange.bind(this);
     }
+    componentWillMount() {
+        alert(localStorage.getItem("id"));
+    }
+
     handleChange(e,newvalue)
     {
         this.setState({value:newvalue})

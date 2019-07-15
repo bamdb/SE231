@@ -17,15 +17,40 @@ const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
         backgroundColor: theme.palette.background.paper,
+
     },
 }));
 
 class Commentlist extends Component {
     constructor(props) {
         super(props);
+        this.state={comments:[]};
     }
- 
+    componentWillMount() {
+        this.setState({comments:this.props.comments});
+    }
+
     render() {
+        var comments=this.state.comments;
+        if(comments.length>0)
+        {
+            var rows=[];
+            for(var i=0;i<rows.length;++i)
+            {
+                rows.push(
+                    <Grid item xs={12}>
+                        <Comment
+                            username = {"abc"}
+                            date = {"2000-1-1"}
+                            grade = {8}
+                            comment = {"Lizards are a widespread group of squamate reptiles, with over 6,000 species, ran" +
+                            "gingacross all continents except Antarctica"}
+                        />
+                    </Grid>
+                )
+            }
+        }
+
         return (
             <Grid container spacing={1} >
                 <Grid item xs={12}>

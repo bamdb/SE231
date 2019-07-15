@@ -16,7 +16,6 @@ class Topicdetailpage extends Component{
     constructor(props){
         super(props);
         this.state = {topic:[],data:[],search:""}
-
         this.handleSearch=this.handleSearch.bind(this);
     }
 
@@ -70,7 +69,6 @@ class Topicdetailpage extends Component{
                   </Grid>
               </Grid>
               <Grid item xs={3}>
-
                   <Relateditem />
               </Grid>
           </Grid>

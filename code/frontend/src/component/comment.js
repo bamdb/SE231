@@ -7,6 +7,12 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import Input from "@material-ui/core/Input";
+import TextField from "@material-ui/core/TextField";
+import {Modal} from "antd";
+import  axios from "axios";
  
 const useStyles = makeStyles({
     root: {
@@ -34,6 +40,26 @@ const useStyles = makeStyles({
 class Comment extends Component {
     constructor(props) {
         super(props);
+        this.state={visible:false};
+        this.handlevisible=this.handlevisible.bind(this);
+        this.handleOk=this.handleOk.bind(this);
+        this.handleCancel=this.handleCancel.bind(this);
+    }
+    handleOk()
+    {
+        var date=Date.parse(new Date());
+        axios.post("http://202.120.40.8:30741/message/add",{senderId:1,receiverId:1,sendTime:date,content:"加为好友"})
+        this.setState({visible:false});
+    }
+    handleCancel()
+    {
+        this.setState({visible:false});
+
+    }
+
+    handlevisible()
+    {
+        this.setState({visible:true});
     }
 
     static defaultProps = {
@@ -50,7 +76,12 @@ class Comment extends Component {
                 <Grid container spacing={2}>
                     <Grid item xs={2} justify="center">
                         <br/>
-                        <Avatar alt="Remy Sharp" src="img/3.jpg" className={useStyles.avatar} />
+                        <Avatar alt="Remy Sharp" src="img/3.jpg" className={useStyles.avatar} onClick={this.handlevisible}/>
+                        <Modal title="加为好友" visible={this.state.visible}
+                               onOk={this.handleOk} onCancel={this.handleCancel}
+                        >
+
+                        </Modal>
                         <br/>
                         <Typography variant="h5" component="h2">
                             {this.props.username}
@@ -71,7 +102,7 @@ class Comment extends Component {
                     </Grid>
                 </Grid>
             </Container>
-    </Card>
+            </Card>
         );
     }
 

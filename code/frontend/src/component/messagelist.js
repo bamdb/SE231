@@ -6,12 +6,18 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import axios from 'axios'; 
+import axios from 'axios';
+import Message from "./message";
 class Messagelist extends Component{
     constructor(props)
     {
         super(props);
-        this.state={messages:[{senderId:1,receiverId:1,content:"asdadadasd"}]}
+        this.state={messages:[{senderId:1,receiverId:1,content:"asdadadasd"},{senderId:1,receiverId:1,content:"加为好友"}]}
+        this.handleaddfriend=this.handleaddfriend.bind(this);
+    }
+    handleaddfriend()
+    {
+
     }
     componentWillMount() {
         var url="http://202.120.40.8:30741/message/"+this.props.type+"/1";
@@ -29,28 +35,27 @@ class Messagelist extends Component{
         var rows=[];
         for(var i=0;i<messages.length;++i)
         {
-            rows.push(
-                <Grid item xs={12}>
-                    <Grid container>
-                        <Grid item xs={1}></Grid>
-                        <Grid item xs={10}>
-                            <Paper>
-                                <Grid container>
-                                    <Grid item xs={3}>
-                                        <Typography>from:{messages[i].senderId}</Typography>
-                                        <Typography>to:{messages[i].receiverId}</Typography>
-                                    </Grid>
-                                    <Grid item xs={9}>
-                                        <Typography>{messages[i].content}</Typography>
-                                    </Grid>
-                                </Grid>
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={1}></Grid>
-                    </Grid>
-                </Grid>
 
-            )
+                if(messages[i].content!="加为好友")
+                {
+                    rows.push(
+                        <Grid item xs={12}>
+                            <Message message={messages[i]} button={0}></Message>
+                        </Grid>
+                    )
+                }
+                else
+                {
+                    rows.push(
+                        <Grid item xs={12}>
+                            <Message message={messages[i]} button={1}></Message>
+                        </Grid>
+                    )
+                }
+
+
+
+
         }
         return(
             <Paper>

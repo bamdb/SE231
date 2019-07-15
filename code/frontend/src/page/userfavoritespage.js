@@ -8,6 +8,8 @@ import Browserlist from "../component/browserlist";
 import Tag from "../component/tag";
 import Userinfo from "../component/userinfo";
 import Commentlist from "../component/commentlist";
+import axios from "axios";
+import Listitem from "../component/listitem";
 
 
 const useStyles = makeStyles(theme => ({
@@ -37,9 +39,17 @@ class TopPart extends Component{
 class Userfavoritespage extends Component{
     constructor(props){
         super(props);
-        this.state={tags:[]}
+        this.state={tags:[],activities:[]}
         this.handletagchange=this.handletagchange.bind(this);
         this.handleSearch=this.handleSearch.bind(this);
+    }
+    componentWillMount() {
+        axios.get("http://202.120.40.8:30741/activity/userid/1").then(
+            function(response)
+            {
+                this.setState({activities:response.data})
+            }.bind(this)
+        )
     }
 
     handleSearch(value){
@@ -62,7 +72,7 @@ class Userfavoritespage extends Component{
                     </Grid>
                     <Grid item xs={8} >
                         <br/>
-                        <Commentlist />
+                        <Listitem  />
                     </Grid>
                     <Grid item xs={1}>
                     </Grid>

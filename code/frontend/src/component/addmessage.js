@@ -124,7 +124,7 @@ class Addmessage extends Component {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <InputLabel shrink htmlFor="age-label-placeholder">
-                                Age
+                                to
                             </InputLabel>
                             <Select
                                 value={this.state.to}
