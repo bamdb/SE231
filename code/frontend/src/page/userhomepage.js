@@ -24,7 +24,7 @@ class Userhomepage extends Component{
 
     }
     componentDidMount() {
-        axios.get("http://47.103.107.39:34371/browser",{params:{
+        axios.get("http://202.120.40.8:30741/rating/browser",{params:{
                 type:0,
                 page:0,
                 pageSize:3

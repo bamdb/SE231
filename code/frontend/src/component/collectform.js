@@ -21,6 +21,7 @@ import Tag from "./tag";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import  axios from "axios";
+import Rating from "./rating";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -59,7 +60,8 @@ class Collectform extends Component {
             status : '想看',
             content: "",
             tags:["233"],
-            text:""
+            text:"",
+            score:5
         };
         this.showModal = this.showModal.bind(this);
         this.handleOk = this.handleOk.bind(this);
@@ -67,6 +69,17 @@ class Collectform extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleadd=this.handleadd.bind(this);
         this.handletextchange=this.handletextchange.bind(this);
+        this.handlebuttonclick=this.handlebuttonclick.bind(this);
+        this.handlescorechange=this.handlescorechange.bind(this);
+    }
+
+    handlescorechange(score)
+    {
+        this.setState({score:score});
+    }
+    handlebuttonclick()
+    {
+
     }
     handletextchange(e)
     {
@@ -89,8 +102,14 @@ class Collectform extends Component {
         this.setState({
             visible: false
         });
+        var rank=[0,0,0,0,0,0,0,0,0,0];
+
+
         var date = Date.parse(new Date());
         axios.post("http://202.120.40.8:30741/activity/add",{actTime:date,actType:this.state.status,userId:1,itemId:this.props.itemid});
+        axios.post("http://202.120.40.8:30741/comment/insert",{itemId:this.props.itemid,userId:1,content:this.state.content,pubTime:date});
+        axios.put("http://202.120.40.8:30741/rating/update",{userId:1,itemId:this.props.itemid,score:this.state.score});
+
     }
     handleCancel() {
         this.setState({
@@ -185,6 +204,9 @@ class Collectform extends Component {
                             <Button variant="contained" color="primary" onClick={this.handleadd} className={useStyles.button}>
                                 添加
                             </Button>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Rating handlescorechange={this.handlescorechange}></Rating>
                         </Grid>
                     </Grid>
                 </Modal>

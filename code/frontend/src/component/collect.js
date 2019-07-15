@@ -20,6 +20,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {LinearProgress} from "@material-ui/core";
 import Collectform from "./collectform";
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -69,10 +70,27 @@ class Collect extends Component {
         super(props);
         this.state = {
             expanded: false,
-            completed: 0
+            completed: 0,
+            comment:{},
+            score:0
         };
 
         this.handleExpandClick = this.handleExpandClick.bind(this);
+    }
+    componentWillMount() {
+        axios.get("http://202.120.40.8:30741/comment",{params:{itemId:this.props.itemid,userId:1}}).then(
+            function(response)
+            {
+                this.setState({comment:response.data});
+            }.bind(this)
+        )
+        axios.get("http://202.120.40.8:30741/rating/score",{params:{itemId:this.props.itemid,userId:1}}).then(
+            function(response)
+            {
+                this.setState({score:response.data.score});
+            }.bind(this)
+        )
+
     }
 
     static defaultProps = {
@@ -126,7 +144,7 @@ class Collect extends Component {
                         <Grid item xs={2}>
                             <Paper className={useStyles.paper}>
                                 <Typography variant="h5" component="h3" align="center">
-                                    {this.props.grade}
+                                    {this.state.score}
                                 </Typography>
                             </Paper>
                         </Grid>
@@ -135,7 +153,7 @@ class Collect extends Component {
                         我的评论
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        {this.props.comment}
+                        {this.state.comment.content}
                     </Typography>
                 </CardContent>
                 <hr className={useStyles.board} color="#C7C7C7"/>
@@ -184,7 +202,7 @@ class Collect extends Component {
                     <BarChart data={data} options={options} width="600" height="250" />
                 </CardContent>
                 <CardActions disableSpacing>
-                    <Collectform/>
+                    <Collectform itemid={this.props.itemid}/>
                     <IconButton aria-label="Share">
                         分享
                         <ShareIcon />

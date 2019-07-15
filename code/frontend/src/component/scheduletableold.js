@@ -17,6 +17,7 @@ import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
+import '../css/scheduletable.css'
 import Typography from '@material-ui/core/Typography';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
@@ -30,11 +31,11 @@ const useStyle = makeStyles({
     },
 })
 
-class Scheduletable extends Component {
+class Scheduletableold extends Component {
     constructor(props) {
         super(props);
         this.state={
-            readstat:[0,1,0,1,1,0],
+            readstat:[0,[0,1,0],0,1,1,0],
             show:false,
             completed:35,
             current:0,
@@ -103,7 +104,7 @@ class Scheduletable extends Component {
     }
 
     componentDidMount() {
-        if(this.props.readstat!==null)
+        if(this.props.readstat!=null)
         {
             this.setState({readstat:this.props.readstat,itemname:this.props.itemname})
         }
@@ -112,73 +113,24 @@ class Scheduletable extends Component {
     render() {
         var readstat=this.state.readstat;
         var item=[];
-
+        console.log(this.state.readstat)
         for(var i=0;i<readstat.length;++i) {
 
             if(readstat[i]==0) {
                 item.push(
-                    <FormControlLabel
-                        value={"readstat["+i+"]"}
-                        control={<Radio color="primary" />}
-                        label={"Chap "+i}
-                        labelPlacement="top"
-                        defaultChecked={readstat[i]}
-                    />
+                    <button class="type1" id={i} onClick={this.handleclick}>{i}</button>
                 );
             }
             else{
                 item.push(
-                    <FormControlLabel
-                        value={"readstat["+i+"]"}
-                        control={<Radio color="primary" />}
-                        label={"Chap "+i}
-                        labelPlacement="top"
-                        defaultChecked={readstat[i]}
-                    />
+                    <button class="type2" id={i} onClick={this.handleclick}>{i}</button>
                 );
             }
         }
 
-        return (
-            <Card className={useStyle.card} style={{width:150}}>
 
-                <CardActionArea onClick={this.showEditBar}>
-                <CardMedia
-                    style={{height:120}}
-                    className={useStyle.media}
-                    image={"img/3.jpg"}
-                />
-                <CardContent >
-                        {this.state.itemname}
-                    <LinearProgress variant="determinate" value={this.state.completed} />
-                </CardContent>
-                </CardActionArea>
-                <Dialog open={this.state.show} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">修改进度</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>
-                            点击下方按钮修改当前进度
-                        </DialogContentText>
-                    </DialogContent>
-                        <FormControl component="fieldset">
-                            <RadioGroup aria-label="position" name="position" onChange={this.handleChange} row>
-                                {item}
-                            </RadioGroup>
-                        </FormControl>
-                    <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
-                            Cancel
-                        </Button>
-                        <Button onClick={this.handleClose} color="primary">
-                            Submit
-                        </Button>
-                    </DialogActions>
-                </Dialog>
 
-            </Card>
-        )
 
-        /*
         if(!this.state.show){
             return(
                 <div >
@@ -285,9 +237,9 @@ class Scheduletable extends Component {
                 )
             }
         }
-         */
+
 
 
     }
 }
-export default Scheduletable;
+export default Scheduletableold;

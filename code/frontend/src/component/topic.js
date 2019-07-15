@@ -70,7 +70,7 @@ class Topic extends Component {
                     <ListItemText primary={"   "} />
                     <ListItemText primary={this.state.author} />
                     <ListItemText primary={this.state.replyTotal+" replies"} />
-                    <ListItemText primary={this.state.date.split("T")[0]} />
+                    <ListItemText primary={this.state.date.split("T")[0]||""} />
                 </ListItem>
                 <Divider />
             </List>

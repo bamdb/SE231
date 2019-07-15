@@ -51,7 +51,7 @@ class Itembrowsepage extends Component{
         var currentpage0=this.state.currentpage0;
         var currentpage1=this.state.currentpage1;
         axios.get(
-            "http://47.103.107.39:34371/browser",{params:{
+            "http://202.120.40.8:30741/browser",{params:{
                     type:0,
                     page:currentpage0,
                     pageSize:4
@@ -71,10 +71,10 @@ class Itembrowsepage extends Component{
             })
         })
         axios.get(
-            "http://47.103.107.39:34371/browser",{params:{
-                    type:"1",
+            "http://202.120.40.8:30741/rating/browser",{params:{
+                    type:1,
                     page:currentpage1,
-                    pageSize:4,
+                    pageSize:3
                 }}
         )
             .then(function (response) {
@@ -99,7 +99,6 @@ class Itembrowsepage extends Component{
 
             <Grid container direction={"column"}>
                 <Grid item xs={12}><Navigation handleSearch={this.handleSearch}/></Grid>
-
                 <Grid item xs={12}>
                 <Grid container direction={"column"} >
                     <br/>

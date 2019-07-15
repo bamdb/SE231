@@ -27,6 +27,7 @@ import Addmessage from "./component/addmessage";
 import Addtopic from "./component/addtopic";
 import Editorpage from "./page/editorpage";
 import Comment from './component/comment'
+import Scheduletableold from './component/scheduletableold'
 function App() {
   return (
     <div >
@@ -43,7 +44,7 @@ function App() {
             <Route path={"/activitypage"} component={Activitypage}></Route>
             <Route path={'/resetpassword'} component={Resetpwdpage}></Route>
             <Route path={'/messagepage'} component={Messagepage}></Route>
-            <Route path={"/test"} component={Comment}></Route>
+            <Route path={"/test"} component={Scheduletableold}></Route>
 
         </Router>
     </div>

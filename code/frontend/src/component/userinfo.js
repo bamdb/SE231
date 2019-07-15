@@ -87,6 +87,7 @@ class Userinfo extends Component {
     }
     handlechange(e){
         var kind=e.target.id;
+        var filedata=$("#userimage")[0].files[0];
         switch(kind){
             case"username":
                 this.setState({username:e.target.value});
@@ -173,7 +174,7 @@ class Userinfo extends Component {
                                 <Avatar alt="Remy Sharp" src="/img/3.jpg" id={"avatar"} />
 
                             </Grid>
-                            <Input type={"file"}/>
+
                             </Grid>
                             <Grid item xs={9}>
                                 <Grid container>
