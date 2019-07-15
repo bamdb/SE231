@@ -14,6 +14,7 @@ public interface ItemService {
     Iterable<Item> selectAll();
     Item findItemById(Long id);
     Itemtag findItemtag(Long itemId);
+    List<String> findUsertag(Long itemId, Long userId);
     ResponseEntity<?> deleteItemById(Long id);
     ResponseEntity<?> deleteItemRelationById(Long itemId, Long relatedItemId);
     ResponseEntity<?> deleteItemTag(Long itemId, Long userId, List<String> tagList);

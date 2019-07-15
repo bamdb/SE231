@@ -39,7 +39,7 @@ public class ItemServiceImpl implements ItemService{
 
     @Override
     public ResponseEntity<?> deleteItemTag(Long itemId, Long userId, List<String> tagList) {
-        Itemtag itemtag = itemtagRepository.findById(String.valueOf(itemId)).orElse(null);
+        Itemtag itemtag = itemtagRepository.findByItemId(itemId).orElse(null);
         if (itemtag == null) {
             return ResponseEntity.ok().body("Item has no tag!");
         }
@@ -96,12 +96,28 @@ public class ItemServiceImpl implements ItemService{
         return itemtagRepository.findById(String.valueOf(itemId)).orElse(null);
     }
 
+
+    public List<String> findUsertag(Long itemId, Long userId) {
+        Itemtag itemtag = itemtagRepository.findByItemIdAndUserId(itemId, userId).orElse(null);
+        List<String> tagString = new ArrayList<>();
+        if (itemtag == null) {
+            return null;
+        }
+        List<Tag> tagList = itemtag.getTags();
+        for (Tag tag : tagList) {
+            if (tag.getUserList().contains(userId)) {
+                tagString.add(tag.getTagname());
+            }
+        }
+        return tagString;
+    }
+
     public void postItemTag(Long itemId, Long userId, List<String> tagList) {
-        Itemtag itemtag = itemtagRepository.findById(String.valueOf(itemId)).orElse(null);
+        Itemtag itemtag = itemtagRepository.findByItemId(itemId).orElse(null);
         if (itemtag == null) {
             itemtag = new Itemtag();
             itemtag.setTags(new ArrayList<>());
-            itemtag.setItemId(String.valueOf(itemId));
+            itemtag.setItemId(itemId);
         }
         List<Tag> tags = itemtag.getTags();
         for (String tagname : tagList) {

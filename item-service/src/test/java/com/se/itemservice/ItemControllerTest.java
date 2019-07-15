@@ -165,6 +165,9 @@ public class ItemControllerTest {
         itemService.postItemTag(1L, 1L, tags);
         Itemtag itemtag = itemService.findItemtag(1L);
 
+
+        List<String> tagList = itemService.findUsertag(1L,1L);
+
         itemService.deleteItemTag(1L, 1L, tags);
         Itemtag itemtag2 = itemService.findItemtag(1L);
     }

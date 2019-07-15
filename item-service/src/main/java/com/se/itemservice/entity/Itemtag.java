@@ -10,7 +10,9 @@ import java.util.List;
 @Document
 public class Itemtag {
     @Id
-    private String itemId;
+    private String id;
+    @Indexed(unique = true)
+    private Long itemId;
 
     private List<Tag> tags;
 
@@ -22,11 +24,20 @@ public class Itemtag {
         this.tags = tags;
     }
 
-    public String getItemId() {
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Long getItemId() {
         return itemId;
     }
 
-    public void setItemId(String itemId) {
+    public void setItemId(Long itemId) {
         this.itemId = itemId;
     }
 
