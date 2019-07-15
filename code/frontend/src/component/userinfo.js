@@ -175,7 +175,7 @@ class Userinfo extends Component {
                                 <Avatar alt="Remy Sharp" src="/img/3.jpg" id={"avatar"} />
 
                             </Grid>
-                           
+
                             </Grid>
                             <Grid item xs={9}>
                                 <Grid container>
