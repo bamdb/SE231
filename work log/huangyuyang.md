@@ -39,3 +39,8 @@ Sprint 1 (July.1-July.10)
     学习matierial-ui文档并进行页面修改
     https://www.uisdc.com/comprehensive-material-design-note （类似这种）
     
+  July.12-14
+    页面美化
+    
+  July.15
+    页面美化及整理前后端接口需求
