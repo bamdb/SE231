@@ -32,6 +32,7 @@ echo 'rating-service deployed'
 cd ../topic-service
 nohup mvn clean spring-boot:run -Dspring.profiles.active=aliyun > bamdb.log &
 sleep 5
+echo 'topic-service deployed'
 cd ../comment-service
 nohup mvn clean spring-boot:run -Dspring.profiles.active=aliyun > bamdb.log &
 sleep 5

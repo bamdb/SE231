@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
+    url: jdbc:mysql://202.120.40.8:30745/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
     username: bamdb
     password: bamdb
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -15,7 +15,3 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
         enable_lazy_load_no_trans: true
-
-
-#mybatis:
-#  type-aliases-package: com.se.userservice
