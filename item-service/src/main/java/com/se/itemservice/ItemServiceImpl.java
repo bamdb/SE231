@@ -1,8 +1,11 @@
 package com.se.itemservice;
 
 import com.se.itemservice.entity.Item;
+import com.se.itemservice.entity.Itemtag;
 import com.se.itemservice.entity.Relation;
+import com.se.itemservice.entity.Tag;
 import com.se.itemservice.repository.ItemRepository;
+import com.se.itemservice.repository.ItemtagRepository;
 import com.se.itemservice.repository.RelationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,39 +20,66 @@ import java.util.List;
 public class ItemServiceImpl implements ItemService{
     private final ItemRepository itemRepository;
     private final RelationRepository relationRepository;
+    private final ItemtagRepository itemtagRepository;
 
     @Resource(name="itemServiceImpl")
     ItemService itemService;
 
     @Autowired
-    public ItemServiceImpl(ItemRepository itemRepository, RelationRepository relationRepository) {
+    public ItemServiceImpl(ItemRepository itemRepository, RelationRepository relationRepository,
+                           ItemtagRepository itemtagRepository) {
         this.itemRepository = itemRepository;
         this.relationRepository = relationRepository;
+        this.itemtagRepository = itemtagRepository;
     }
 
     public Item postItem(Item item) {
-        return itemRepository.save(item);
+        Item itemOut = itemRepository.save(item);
+
+        // tag initialization
+        Itemtag itemtag = new Itemtag();
+        itemtag.setTags(new ArrayList<>());
+        itemtag.setItemId(itemOut.getId());
+        itemtagRepository.save(itemtag);
+
+        return itemOut;
+    }
+
+    @Override
+    public ResponseEntity<?> deleteItemTag(Long itemId, Long userId, List<String> tagList) {
+        Itemtag itemtag = itemtagRepository.findByItemId(itemId).orElse(null);
+        List<Tag> tags = itemtag.getTags();
+        List<Tag> tagDeleted = new ArrayList<>();
+        for (String tagname : tagList) {
+            for (Tag tag : tags) {
+                // tagname exists in item tag list
+                if (tag.getTagname().equals(tagname)) {
+                    List<Long> userList = tag.getUserList();
+                    // user makes no such tag
+                    if (!userList.contains(userId)) {
+                        return ResponseEntity.ok().body("User has no such tag!");
+                    }
+                    userList.remove(userId);
+                    // when remove all user in a tag, the tag shoud be deleted
+                    if (userList.size() == 0) {
+                        tagDeleted.add(tag);
+                    }else {
+                        tag.setUserList(userList);
+                    }
+                }
+            }
+        }
+        for (Tag tag : tagDeleted) {
+            tags.remove(tag);
+        }
+        itemtag.setTags(tags);
+        itemtagRepository.save(itemtag);
+        return ResponseEntity.ok().body("Delete tag successfully");
     }
 
     public ResponseEntity<?> deleteItemRelationById(Long itemId, Long relatedItemId) {
         relationRepository.deleteRelationByItemId1AndItemId2(itemId, relatedItemId);
         relationRepository.deleteRelationByItemId1AndItemId2(relatedItemId, itemId);
-//        Iterable<Relation> relationIterable1 = relationRepository.findAllByItemId1(itemId);
-//        Iterator<Relation> relationIterator1 = relationIterable1.iterator();
-//        while (relationIterator1.hasNext()) {
-//            Relation relation = relationIterator1.next();
-//            if (relation.getItemId2() == relatedItemId) {
-//                relationRepository.delete(relation);
-//            }
-//        }
-//        Iterable<Relation> relationIterable2 = relationRepository.findAllByItemId2(itemId);
-//        Iterator<Relation> relationIterator2 = relationIterable1.iterator();
-//        while (relationIterator2.hasNext()) {
-//            Relation relation = relationIterator2.next();
-//            if (relation.getItemId1() == relatedItemId) {
-//                relationRepository.delete(relation);
-//            }
-//        }
         return ResponseEntity.ok().body("delete relation successfully!");
     }
 
@@ -63,6 +93,55 @@ public class ItemServiceImpl implements ItemService{
         relation.setItemId2(subsequentId);
         relation.setRelateType(relateType);
         relationRepository.save(relation);
+    }
+
+    public Itemtag findItemtag(Long itemId) {
+        return itemtagRepository.findById(String.valueOf(itemId)).orElse(null);
+    }
+
+
+    public List<String> findUsertag(Long itemId, Long userId) {
+        Itemtag itemtag = itemtagRepository.findByItemIdAndUserId(itemId, userId).orElse(null);
+        List<String> tagString = new ArrayList<>();
+        List<Tag> tagList = itemtag.getTags();
+        for (Tag tag : tagList) {
+            if (tag.getUserList().contains(userId)) {
+                tagString.add(tag.getTagname());
+            }
+        }
+        return tagString;
+    }
+
+    public void postItemTag(Long itemId, Long userId, List<String> tagList) {
+        Itemtag itemtag = itemtagRepository.findByItemId(itemId).orElse(null);
+
+        List<Tag> tags = itemtag.getTags();
+        for (String tagname : tagList) {
+            boolean tagExist = false;
+            for (Tag tag : tags) {
+                // tagname exists, push userId to userList
+                if (tag.getTagname().equals(tagname)) {
+                    tagExist = true;
+                    List<Long> userList = tag.getUserList();
+                    // user has added same tag before, do nothing
+                    if (!userList.contains(userId)) {
+                        userList.add(userId);
+                    }
+                    tag.setUserList(userList);
+                }
+            }
+            // tagname not exists, create new tag and push it to itemtag's tag list
+            if (!tagExist) {
+                Tag newTag = new Tag();
+                newTag.setTagname(tagname);
+                List<Long> userList = new ArrayList<>();
+                userList.add(userId);
+                newTag.setUserList(userList);
+                tags.add(newTag);
+            }
+        }
+        itemtag.setTags(tags);
+        itemtagRepository.save(itemtag);
     }
 
     public Iterable<Item> selectAll() {return itemRepository.findAll();}

@@ -1,4 +1,4 @@
-package com.se.activityservice;
+package com.se.activityservice.repository;
 
 import com.se.activityservice.entity.Activity;
 import org.springframework.data.repository.CrudRepository;
