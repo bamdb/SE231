@@ -62,7 +62,7 @@ public class ActivityController {
         return activityService.deleteActivityByItemId(itemId);
     }
 
-    @PutMapping(value="/add/progress")
+    @PutMapping(value="/update/progress")
     public Progress updateProgress(@RequestBody Progress progress) {
         return activityService.updateProgress(progress);
     }

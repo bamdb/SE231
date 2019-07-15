@@ -158,7 +158,7 @@ public class ItemControllerTest {
     }
 
     @Test
-    public void tagTest() {
+    public void tagTest() throws Exception {
         List<String> tags = new ArrayList<>();
         tags.add("tag1");
         tags.add("tag2");
@@ -167,19 +167,43 @@ public class ItemControllerTest {
         tags1.add("tag2");
         tags1.add("tag3");
         itemService.postItemTag(1L, 1L, tags);
+        mvc.perform(post("/add/tag?itemId=1&userId=1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("[\"tag1\",\"tag2\"]"))
+                .andExpect(status().isOk());
         itemService.postItemTag(1L, 2L, tags);
+        mvc.perform(post("/add/tag?itemId=1&userId=2")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("[\"tag1\",\"tag2\"]"))
+                .andExpect(status().isOk());
         itemService.postItemTag(1L, 2L, tags1);
-        itemService.postItemTag(1L, 1L, tags);
+        mvc.perform(post("/add/tag?itemId=1&userId=2")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("[\"tag1\",\"tag2\",\"tag3\"]"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add/tag?itemId=1&userId=1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("[\"tag1\",\"tag2\"]"))
+                .andExpect(status().isOk());
 
-        itemService.findItemtag(1L);
-        itemService.findUsertag(1L,1L);
-        itemService.findUsertag(1L,3L);
+        mvc.perform(get("/tag/id/1").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        mvc.perform(get("/tag?itemId=1&userId=1").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        mvc.perform(get("/tag?itemId=1&userId=3").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
 
-        tags.add("tag3");
-        itemService.deleteItemTag(1L, 1L, tags);
-        tags.remove("tag3");
-        itemService.deleteItemTag(1L, 1L, tags);
-        tags1.add("tag4");
-        itemService.deleteItemTag(1L, 2L, tags1);
+        mvc.perform(delete("/delete/tag?itemId=1&userId=1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("[\"tag1\",\"tag2\",\"tag3\"]"))
+                .andExpect(status().isOk());
+        mvc.perform(delete("/delete/tag?itemId=1&userId=1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("[\"tag1\",\"tag2\"]"))
+                .andExpect(status().isOk());
+        mvc.perform(delete("/delete/tag?itemId=1&userId=2")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("[\"tag1\",\"tag2\",\"tag3\",\"tag4\"]"))
+                .andExpect(status().isOk());
     }
 }

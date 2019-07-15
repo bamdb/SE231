@@ -160,6 +160,16 @@ public class ActivityServiceApplicationTests {
         }
     }
 
+    @Test
+    public void progressTest() throws Exception  {
+        mvc.perform(put("/update/progress")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"itemId\":1, \"userId\":2, \"chapters\":[{\"chapterNum\":1,\"finish\":1,\"sections\":[1,1,1]}]}"))
+                .andExpect(status().isOk());
+        mvc.perform(get("/progress?itemId=1&userId=2"))
+                .andExpect(status().isOk());
+    }
+
     @TestConfiguration
     public static class LocalRibbonClientConfiguration {
         @Bean

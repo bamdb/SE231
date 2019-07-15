@@ -3,6 +3,7 @@ package com.se.activityservice.entity;
 import java.util.List;
 
 public class Innerprogress {
+    private String chapterNum;
     private Boolean finish;
     private List<Boolean> sections;
 
@@ -20,6 +21,14 @@ public class Innerprogress {
 
     public void setSections(List<Boolean> sections) {
         this.sections = sections;
+    }
+
+    public String getChapterNum() {
+        return chapterNum;
+    }
+
+    public void setChapterNum(String chapterNum) {
+        this.chapterNum = chapterNum;
     }
 
 }
