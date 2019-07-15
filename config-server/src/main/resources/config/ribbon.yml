@@ -7,8 +7,8 @@ ribbon:
   ConnectTimeout: 10000
   ReadTimeout: 10000
   OktoRetryOnAllOperations: true
-  MaxAutoRetriesNextServer: 1
-  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 3
+  MaxAutoRetries: 3
 hystrix:
   command:
     default:
