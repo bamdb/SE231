@@ -32,8 +32,8 @@ const useStyles = makeStyles({
     },
     avatar:{
         margin: 10,
-        width: 60,
-        height: 60,
+        width: 100,
+        height: 100,
     },
 })
 
@@ -115,7 +115,6 @@ class LeftAppBar extends Component {
                             </Grid>
                         </Grid>
                         <br/><br/>
-
                         <Grid item style={{paddingLeft:100}}>
                             <Grid container >
                                 <Grid item xs={3}>
@@ -128,11 +127,11 @@ class LeftAppBar extends Component {
                         </Grid>
 
                     </Grid>
-                    <Grid container spacing={2} direction={"row"} style={{height:110}}>
-                        <Grid item xs={3} alignItems={"flex-right"} >
+                    <Grid container spacing={2}  direction={"row"} style={{height:110}}>
+                        <Grid item xs={3}  >
                         <Avatar src="..\img.jpg" className={useStyles.avatar} />
                         </Grid>
-                        <Grid item xs={9} >
+                        <Grid item  >
                             <Typography variant={"subtitle1"} style={{color:theme.palette.secondary.main}} >{this.state.username}</Typography>
                         </Grid>
                     </Grid>
