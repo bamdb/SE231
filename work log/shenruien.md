@@ -36,3 +36,6 @@
 * doing load balance on frontend
 # 2019-7-12
 * continuing writing frontend
+# 2019-7-15
+* beautify the frontpage
+* upgrade the frontend
