@@ -55,15 +55,6 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//        clients
-//                .inMemory()
-//                .withClient("app")
-//                .authorizedGrantTypes("password", "refresh_token")
-//                .authorities("USER")
-//                .scopes("read", "write")
-//                .resourceIds("rest_service")
-//                .secret("secret")
-//                .accessTokenValiditySeconds(24 * 365 * 60 * 60);
         clients.inMemory()
                 .withClient("browser")
                 .authorizedGrantTypes("refresh_token", "password")
@@ -73,7 +64,7 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 
                 .and()
                 .withClient("user-service")
-                .secret(encoder.encode("123"))
+                .secret(encoder.encode("user-service"))
                 .authorizedGrantTypes("client_credentials", "refresh_token")
                 .scopes("server");
     }
@@ -84,7 +75,6 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
                 .tokenKeyAccess("permitAll()")
                 /*need to be authenticated to visit check_token*/
                 /*default: denyAll*/
-//                .checkTokenAccess("permitAll()")
                 .checkTokenAccess("isAuthenticated()")
 //                .passwordEncoder(new BCryptPasswordEncoder());
                 .allowFormAuthenticationForClients();

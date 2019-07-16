@@ -18,7 +18,7 @@ security:
   oauth2:
     client:
       clientId: user-service
-      clientSecret: 123
+      clientSecret: user-service
       accessTokenUri: http://localhost:8000/auth/oauth/token
       grant-type: client_credentials
       scope: server

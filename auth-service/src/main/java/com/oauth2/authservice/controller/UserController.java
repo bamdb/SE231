@@ -53,20 +53,12 @@ public class UserController {
         else return ResponseEntity.badRequest().body("Revoke Failed!");
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize(" hasRole('wth')")
     @GetMapping("/test")
     public String test() {
         return "Authority is involved!";
     }
 
-    @Autowired
-    UserRepository userRepository;
-    @PreAuthorize("#oauth2.hasScope('server')")
-    @RequestMapping(value = "/user", method = RequestMethod.GET,
-            produces = "application/json; charset=utf-8")
-    public User getDetail() {
-        return (User) userRepository.findAll().iterator();
-    }
 
 
 

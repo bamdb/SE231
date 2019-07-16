@@ -45,15 +45,15 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public OAuth2RestTemplate clientCredentialsRestTemplate() {
         return new OAuth2RestTemplate(clientCredentialsResourceDetails());
     }
-//    @Bean
-//    public ResourceServerTokenServices tokenServices() {
-//        RemoteTokenServices tokenServices = new RemoteTokenServices();
-//        tokenServices.setClientId("user-service");
-//        tokenServices.setClientSecret("123");
-//        tokenServices.setCheckTokenEndpointUrl("http://localhost:8000/auth/oauth/check_token");
-//        return tokenServices;
-////        return new CustomUserInfoTokenService(sso.getUserInfoUri(), sso.getClientId());
-//    }
+    @Bean
+    public ResourceServerTokenServices tokenServices() {
+        RemoteTokenServices tokenServices = new RemoteTokenServices();
+        tokenServices.setClientId("user-service");
+        tokenServices.setClientSecret("user-service");
+        tokenServices.setCheckTokenEndpointUrl("http://localhost:8000/auth/oauth/check_token");
+        return tokenServices;
+//        return new CustomUserInfoTokenService(sso.getUserInfoUri(), sso.getClientId());
+    }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {

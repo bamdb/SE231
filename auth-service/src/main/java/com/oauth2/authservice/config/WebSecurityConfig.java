@@ -24,10 +24,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
+        /*authorities will cover the role makes hasRole('USER')fail*/
+        /*on the contrary authority cannot serve as a role*/
         auth
                 .inMemoryAuthentication()
                 .withUser("user").password(passwordEncoder().encode("password"))
-                .roles("USER").authorities("wth");
+                .roles("USER").authorities("wth","OOO");
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
