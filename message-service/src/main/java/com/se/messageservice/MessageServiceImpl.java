@@ -1,11 +1,15 @@
 package com.se.messageservice;
 
 import com.se.messageservice.client.FriendClient;
+import com.se.messageservice.client.UserClient;
 import com.se.messageservice.entity.Message;
+import com.se.messageservice.entity.MessageOut;
+import com.se.messageservice.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,12 +20,14 @@ public class MessageServiceImpl implements MessageService {
     MessageRepository messageRepository;
 
     @Autowired
-    public MessageServiceImpl(MessageRepository messageRepository, FriendClient friendClient) {
+    public MessageServiceImpl(MessageRepository messageRepository, FriendClient friendClient, UserClient userClient) {
         this.messageRepository = messageRepository;
         this.friendClient = friendClient;
+        this.userClient = userClient;
     }
 
     private final FriendClient friendClient;
+    private final UserClient userClient;
     public String selectBySenderIdAndReceiverIdAndSendTime(Long senderId, Long receiverId, Long send_time) {
         Message message = messageRepository.findBySenderIdAndReceiverIdAndSendTime(senderId, receiverId, new Timestamp( send_time)).orElse(null);
         return (message == null)?null: message.getContent();
@@ -42,15 +48,33 @@ public class MessageServiceImpl implements MessageService {
         return ms;
     }
 
-    public Iterable<Message> selectByReceiverId(Long receiverId) {
-        List<Message> ms = new LinkedList<>();
-        messageRepository.findByReceiverId(receiverId).forEach(ms::add);
+    public List<MessageOut> selectByReceiverId(Long receiverId) {
+        List<MessageOut> ms = new LinkedList<>();
+        Iterable<Message> messageIterable = messageRepository.findByReceiverId(receiverId);
+        Iterator<Message> messageIterator = messageIterable.iterator();
+        while (messageIterator.hasNext()) {
+            Message message = messageIterator.next();
+            User user = userClient.getUserById(message.getSenderId());
+            MessageOut messageOut = new MessageOut();
+            messageOut.setMessage(message);
+            messageOut.setUser(user);
+            ms.add(messageOut);
+        }
         return ms;
     }
 
-    public Iterable<Message> selectBySenderId(Long senderId) {
-        List<Message> ms = new LinkedList<>();
-        messageRepository.findByReceiverId(senderId).forEach(ms::add);
+    public List<MessageOut> selectBySenderId(Long senderId) {
+        List<MessageOut> ms = new LinkedList<>();
+        Iterable<Message> messageIterable = messageRepository.findBySenderId(senderId);
+        Iterator<Message> messageIterator = messageIterable.iterator();
+        while (messageIterator.hasNext()) {
+            Message message = messageIterator.next();
+            User user = userClient.getUserById(message.getReceiverId());
+            MessageOut messageOut = new MessageOut();
+            messageOut.setMessage(message);
+            messageOut.setUser(user);
+            ms.add(messageOut);
+        }
         return ms;
     }
 

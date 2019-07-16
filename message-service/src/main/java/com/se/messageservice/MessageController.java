@@ -2,9 +2,12 @@ package com.se.messageservice;
 
 
 import com.se.messageservice.entity.Message;
+import com.se.messageservice.entity.MessageOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -47,12 +50,12 @@ public class MessageController {
     }
 
     @GetMapping(value = "/senderid/{senderId}", produces ="application/json")
-    Iterable<Message> selectBySenderId(@PathVariable Long senderId) {
+    List<MessageOut> selectBySenderId(@PathVariable Long senderId) {
         return messageService.selectBySenderId(senderId);
     }
 
     @GetMapping(value = "/receiverid/{receiverId}", produces ="application/json")
-    Iterable<Message> selectByReceiverId(@PathVariable Long receiverId) {
+    List<MessageOut> selectByReceiverId(@PathVariable Long receiverId) {
         return messageService.selectByReceiverId(receiverId);
     }
 
