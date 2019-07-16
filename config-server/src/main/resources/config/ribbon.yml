@@ -4,24 +4,17 @@ spring:
       retry:
         enabled: true
 ribbon:
-  ConnectTimeout: 10000
-  ReadTimeout: 10000
+  ConnectTimeout: 1000
+  ReadTimeout: 3000
   OktoRetryOnAllOperations: true
-  MaxAutoRetriesNextServer: 1
-  MaxAutoRetries: 2
+  MaxAutoRetriesNextServer: 2
+  MaxAutoRetries: 1
 hystrix:
   command:
     default:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 240000
+            timeoutInMilliseconds: 19000
         timeout:
           enabled: false
-rating:
-  ribbon:
-    ConnectTimeout: 20000
-    ReadTimeout: 20000
-    OktoRetryOnAllOperations: true
-    MaxAutoRetriesNextServer: 1
-    MaxAutoRetries: 2
