@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
  
 import Paper from '@material-ui/core/Paper';
-
+import { Button, Radio, Icon } from 'antd';
 import '../css/progressmanage.css';
 import Scheduletable from './scheduletable'
 import Divider from '@material-ui/core/Divider';
@@ -11,6 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
+import axios from "axios"
 /*
  信息保存在state中，可以自行添加props或ajax
 */
@@ -24,17 +25,55 @@ class Progressmanage extends Component {
                 {readstat:[0,[1,0,1,0],0,1],itemname:"book1",kind:"book"},
                 {readstat:[1,1,1],itemname:"book2",kind:"movie"},
                 {readstat:[1,1,1,1],itemname:"book3",kind:"movie"},
-                {readstat:[1,1,1,1],itemname:"book4",kind:"movie"}
+                {readstat:[1,1,1,1],itemname:"book3",kind:"movie"}
                 ],
-            value:0
+            value:0,
+            uppage:0,
+            downpage:0,
+            data:[]
         }
         this.handleChange=this.handleChange.bind(this);
+        this.upleft=this.upleft.bind(this);
+        this.downleft=this.downleft.bind(this);
+        this.upright=this.upright.bind(this);
+        this.downright=this.downright.bind(this);
+
+    }
+    upleft()
+    {
+        if(this.state.uppage>0)
+        {
+            this.setState({uppage:this.state.uppage-1});
+        }
+    }
+    upright()
+    {
+        this.setState({uppage:this.state.uppage+1});
+    }
+    downleft()
+    {
+        if(this.state.downpage>0)
+        {
+            this.setState({downpage:this.state.downpage-1});
+        }
+    }
+    downright()
+    {
+
+            this.setState({downpage:this.state.downpage+1});
+
     }
     handleChange(event, newValue) {
         console.log(newValue);
         this.setState({value : newValue});
     }
     componentWillMount() {
+        axios.get("202.120.40.8/activity/userid/1").then(
+            function(response)
+            {
+                this.setState({data:response.data});
+            }.bind(this)
+        )
     }
 
     componentDidMount() {
@@ -59,15 +98,55 @@ class Progressmanage extends Component {
                 <Typography variant={"subtitle1"} color={"textSecondary"} >我的图书</Typography>
                 <Divider />
                 <br/>
-                <Grid container spacing={3}>
-                    {item}
+                <Grid container>
+                <Grid item xs={1}>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <Button type="normal" shape={"circle"} size={"large"} onClick={this.upleft}>
+                        <Icon type="left" />
+                    </Button>
+                </Grid>
+                    <Grid item xs={10}>
+                        <Grid container spacing={3}>
+                            {item}
+                        </Grid>
+                    </Grid>
+                <Grid item xs={1}>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <Button type="normal" shape={"circle"} size={"large"} onClick={this.upright}>
+                        <Icon type="right" />
+                    </Button>
+                </Grid>
                 </Grid>
                 <br/>
                 <Typography variant={"subtitle1"} color={"textSecondary"} >我的电影</Typography>
                 <Divider />
                 <br/>
-                <Grid container spacing={3}>
-                    {item}
+                <Grid container>
+                    <Grid item xs={1}>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <Button type="normal" shape={"circle"} size={"large"} onClick={this.downleft}>
+                            <Icon type="left" />
+                        </Button>
+                    </Grid>
+                    <Grid item xs={10}>
+                        <Grid container spacing={3}>
+                            {item}
+                        </Grid>
+                    </Grid>
+                    <Grid item xs={1}>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <Button type="normal" shape={"circle"} size={"large"}onClick={this.downright}>
+                            <Icon type="right" />
+                        </Button>
+                    </Grid>
                 </Grid>
                 <br/>
             </div>

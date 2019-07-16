@@ -13,6 +13,7 @@ import MovieOutlinedIcon from '@material-ui/icons/MovieOutlined';
 import BookOutlinedIcon from '@material-ui/icons/BookOutlined';
 import PersonOutlinedIcon from '@material-ui/icons/PersonOutlined';
 import GraphicEqIcon from '@material-ui/icons/GraphicEq';
+import {Link} from "react-router-dom";
 
 const theme = createMuiTheme({
     palette: {
@@ -64,10 +65,10 @@ class LeftAppBar extends Component {
                         <Grid item style={{paddingLeft:100}}>
                             <Grid container >
                                 <Grid item xs={3} >
-                                    <HomeOutlinedIcon className={useStyles.icon} style={{color:theme.palette.secondary.main}} />
+                                    <HomeOutlinedIcon  className={useStyles.icon} style={{color:theme.palette.secondary.main}} />
                                 </Grid>
                                 <Grid item xs={9}>
-                                    <Typography style={{color:theme.palette.secondary.main}}>HOME</Typography>
+                                    <Typography component={Link} to={"/"} style={{color:theme.palette.secondary.main}}>HOME</Typography>
                                 </Grid>
                             </Grid>
                         </Grid>
