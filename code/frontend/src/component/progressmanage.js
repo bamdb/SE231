@@ -30,7 +30,9 @@ class Progressmanage extends Component {
             value:0,
             uppage:0,
             downpage:0,
-            data:[]
+            data:[],
+            book:[],
+            movie:[]
         }
         this.handleChange=this.handleChange.bind(this);
         this.upleft=this.upleft.bind(this);
@@ -48,7 +50,10 @@ class Progressmanage extends Component {
     }
     upright()
     {
-        this.setState({uppage:this.state.uppage+1});
+        if(this.state.uppage*4+4<this.state.book.length)
+        {
+            this.setState({uppage:this.state.uppage+1});
+        }
     }
     downleft()
     {
@@ -60,7 +65,12 @@ class Progressmanage extends Component {
     downright()
     {
 
-            this.setState({downpage:this.state.downpage+1});
+            if(this.state.downpage*4+4<this.state.movie.length)
+            {
+                this.setState({downpage:this.state.downpage+1});
+            }
+
+
 
     }
     handleChange(event, newValue) {
@@ -71,7 +81,19 @@ class Progressmanage extends Component {
         axios.get("202.120.40.8/activity/userid/1").then(
             function(response)
             {
-                this.setState({data:response.data});
+                var book=[];
+                var movie=[];
+                for(var i=0;i<response.data.length;++i)
+                {
+                    if(response.data[i].item.type==0)
+                    {
+                        book.push(response.data[i].item);
+                    }
+                    else
+                    {
+                        movie.push(response.data[i].item);
+                    }
+                }
             }.bind(this)
         )
     }
@@ -81,12 +103,35 @@ class Progressmanage extends Component {
 
     render() {
         var item=[];
+
         var items=this.state.items;
         for(var i=0;i<items.length;++i) {
             item.push(
                 <Grid item xs={3}>
                     <Grid container >
                     <Scheduletable readstat={items[i].readstat} itemname={items[i].itemname} />
+                    </Grid>
+                </Grid>
+            )
+        }
+        var items1=[];
+        var items2=[];
+        for(var i=this.state.uppage*4;i<this.state.uppage*4&&i<this.state.book.length;++i)
+        {
+            items1.push(
+                <Grid item xs={3}>
+                    <Grid container >
+                        <Scheduletable readstat={this.state.book[i].readstat} itemname={this.state.book[i].itemname} />
+                    </Grid>
+                </Grid>
+            )
+        }
+        for(var i=this.state.downpage*4;i<this.state.downpage*4&&i<this.state.movie.length;++i)
+        {
+            items1.push(
+                <Grid item xs={3}>
+                    <Grid container >
+                        <Scheduletable readstat={this.state.movie[i].readstat} itemname={this.state.movie[i].itemname} />
                     </Grid>
                 </Grid>
             )
