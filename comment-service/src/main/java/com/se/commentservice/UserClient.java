@@ -14,7 +14,4 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface UserClient {
     @RequestMapping(value="/id/{id}", method= RequestMethod.GET)
     User getUserById(@PathVariable("id") Long userId);
-
-    @RequestMapping(value="/delete/id/{id}")
-    void deleteUserById(@PathVariable("id") Long id);
 }

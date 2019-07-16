@@ -12,9 +12,6 @@ public class UserClientFallback implements UserClient{
 
     @Override
     public User getUserById(Long userId) {
-        if (userId == 0 || deletedList.contains(userId)) {
-            return null;
-        }
         User user = new User();
         user.setId(userId);
         user.setMail("mail@mail.com");
@@ -22,10 +19,5 @@ public class UserClientFallback implements UserClient{
         user.setUsername("mock");
         user.setImgUrl(null);
         return user;
-    }
-
-    @Override
-    public void deleteUserById(Long id) {
-        deletedList.add(id);
     }
 }

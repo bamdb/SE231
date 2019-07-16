@@ -1,13 +1,21 @@
 package com.se.commentservice;
 
 import com.alibaba.fastjson.JSON;
+import com.github.tomakehurst.wiremock.junit.WireMockClassRule;
+import com.netflix.loadbalancer.Server;
+import com.netflix.loadbalancer.ServerList;
 import com.se.commentservice.entity.Comment;
 import org.junit.Before;
+import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.cloud.netflix.ribbon.StaticServerList;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -21,10 +29,15 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(properties = {
+        "feign.hystrix.enabled=true"
+})
+@ContextConfiguration(classes = {CommentControllerTest.LocalRibbonClientConfiguration.class})
 public class CommentControllerTest {
     @Autowired
     private WebApplicationContext context;
@@ -36,6 +49,18 @@ public class CommentControllerTest {
         mvc = MockMvcBuilders.webAppContextSetup(context)
 //                .apply(springSecurity())
                 .build();
+    }
+
+    @ClassRule
+    public static WireMockClassRule wiremock = new WireMockClassRule(
+            wireMockConfig().dynamicPort());
+
+    @Autowired
+    UserClient userClient;
+
+    @Test
+    public void testApplication() {
+        CommentServiceApplication.main(new String[] {});
     }
 
     @Test
@@ -72,10 +97,18 @@ public class CommentControllerTest {
                 .andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.[0].itemId").exists());
         mvc.perform(get("/itemid/11"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.[0].itemId").exists());
+                .andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.[0].comment.itemId").exists());
         mvc.perform(delete("/delete")
                 .params(mm))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
+    }
+
+    @TestConfiguration
+    public static class LocalRibbonClientConfiguration {
+        @Bean
+        public ServerList<Server> ribbonServerList() {
+            return new StaticServerList<>(new Server("localhost", wiremock.port()));
+        }
     }
 }
