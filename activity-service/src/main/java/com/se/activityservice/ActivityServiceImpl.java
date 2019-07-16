@@ -3,12 +3,18 @@ package com.se.activityservice;
 import com.se.activityservice.client.ItemClient;
 import com.se.activityservice.client.UserClient;
 import com.se.activityservice.entity.Activity;
+import com.se.activityservice.entity.ActivityOut;
+import com.se.activityservice.entity.Item;
 import com.se.activityservice.entity.Progress;
 import com.se.activityservice.repository.ActivityRepository;
 import com.se.activityservice.repository.ProgressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 @Service
 public class ActivityServiceImpl implements ActivityService{
@@ -60,7 +66,7 @@ public class ActivityServiceImpl implements ActivityService{
         return activityRepository.findById(id).orElse(null);
     }
 
-    public Iterable<Activity> selectByUserId(Long id) {
+    public List<ActivityOut> selectByUserId(Long id) {
         Iterable<Activity> activityIterable = activityRepository.findAllByUserId(id);
         if (!activityIterable.iterator().hasNext()) {
             return null;
@@ -70,7 +76,17 @@ public class ActivityServiceImpl implements ActivityService{
             deleteActivityByUserId(id);
             return null;
         }
-        return activityIterable;
+        Iterator<Activity> activityIterator = activityIterable.iterator();
+        List<ActivityOut> activityOuts = new ArrayList<>();
+        while (activityIterator.hasNext()) {
+            Activity activity = activityIterator.next();
+            ActivityOut activityOut = new ActivityOut();
+            activityOut.setActivity(activity);
+            Item item = itemClient.getItemById(activity.getItemId());
+            activityOut.setItem(item);
+            activityOuts.add(activityOut);
+        }
+        return activityOuts;
     }
 
     public Iterable<Activity> selectByItemId(Long id) {

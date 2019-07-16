@@ -1,8 +1,11 @@
 package com.se.activityservice;
 
 import com.se.activityservice.entity.Activity;
+import com.se.activityservice.entity.ActivityOut;
 import com.se.activityservice.entity.Progress;
 import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 public interface ActivityService {
     Activity postActivity(Activity Activity);
@@ -11,7 +14,7 @@ public interface ActivityService {
 
     Activity selectById(Long id);
 
-    Iterable<Activity> selectByUserId(Long id);
+    List<ActivityOut> selectByUserId(Long id);
 
     Iterable<Activity> selectByItemId(Long id);
 

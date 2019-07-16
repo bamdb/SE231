@@ -1,11 +1,13 @@
 package com.se.activityservice;
 
 import com.se.activityservice.entity.Activity;
+import com.se.activityservice.entity.ActivityOut;
 import com.se.activityservice.entity.Progress;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 public class ActivityController {
@@ -28,7 +30,7 @@ public class ActivityController {
     }
 
     @GetMapping(value="/userid/{userId}", produces="application/json")
-    public Iterable<Activity> getActivityByUserId(@PathVariable("userId") Long userId) {
+    public List<ActivityOut> getActivityByUserId(@PathVariable("userId") Long userId) {
         return activityService.selectByUserId(userId);
     }
 
