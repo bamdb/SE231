@@ -43,3 +43,7 @@
 # 2019-07-15
 * complete tag and progress services
 * configured load balance in three server
+
+# 2019-07-16
+* add more info in service response
+* config mongodb to solve socket exception
