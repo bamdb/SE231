@@ -2,10 +2,7 @@ package com.se.activityservice;
 
 import com.se.activityservice.client.ItemClient;
 import com.se.activityservice.client.UserClient;
-import com.se.activityservice.entity.Activity;
-import com.se.activityservice.entity.ActivityOut;
-import com.se.activityservice.entity.Item;
-import com.se.activityservice.entity.Progress;
+import com.se.activityservice.entity.*;
 import com.se.activityservice.repository.ActivityRepository;
 import com.se.activityservice.repository.ProgressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +63,7 @@ public class ActivityServiceImpl implements ActivityService{
         return activityRepository.findById(id).orElse(null);
     }
 
-    public List<ActivityOut> selectByUserId(Long id) {
+    public List<ActivityItemOut> selectByUserId(Long id) {
         Iterable<Activity> activityIterable = activityRepository.findAllByUserId(id);
         if (!activityIterable.iterator().hasNext()) {
             return null;
@@ -77,16 +74,16 @@ public class ActivityServiceImpl implements ActivityService{
             return null;
         }
         Iterator<Activity> activityIterator = activityIterable.iterator();
-        List<ActivityOut> activityOuts = new ArrayList<>();
+        List<ActivityItemOut> activityItemOuts = new ArrayList<>();
         while (activityIterator.hasNext()) {
             Activity activity = activityIterator.next();
-            ActivityOut activityOut = new ActivityOut();
-            activityOut.setActivity(activity);
+            ActivityItemOut activityItemOut = new ActivityItemOut();
+            activityItemOut.setActivity(activity);
             Item item = itemClient.getItemById(activity.getItemId());
-            activityOut.setItem(item);
-            activityOuts.add(activityOut);
+            activityItemOut.setItem(item);
+            activityItemOuts.add(activityItemOut);
         }
-        return activityOuts;
+        return activityItemOuts;
     }
 
     public Iterable<Activity> selectByItemId(Long id) {
@@ -102,8 +99,13 @@ public class ActivityServiceImpl implements ActivityService{
         return activityRepository.findAllByItemId(id);
     }
 
-    public Activity selectByUserIdAndItemId(Long userId, Long itemId) {
-        return activityRepository.findActivityByUserIdAndItemId(userId, itemId).orElse(null);
+    public ActivityUserOut selectByUserIdAndItemId(Long userId, Long itemId) {
+        Activity activity = activityRepository.findActivityByUserIdAndItemId(userId, itemId).orElse(null);
+        User user = userClient.getUserById(userId);
+        ActivityUserOut activityUserOut = new ActivityUserOut();
+        activityUserOut.setActivity(activity);
+        activityUserOut.setUser(user);
+        return activityUserOut;
     }
 
     public ResponseEntity<?> deleteActivityById(Long id) {

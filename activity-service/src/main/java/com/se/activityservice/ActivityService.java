@@ -1,7 +1,8 @@
 package com.se.activityservice;
 
 import com.se.activityservice.entity.Activity;
-import com.se.activityservice.entity.ActivityOut;
+import com.se.activityservice.entity.ActivityItemOut;
+import com.se.activityservice.entity.ActivityUserOut;
 import com.se.activityservice.entity.Progress;
 import org.springframework.http.ResponseEntity;
 
@@ -14,11 +15,11 @@ public interface ActivityService {
 
     Activity selectById(Long id);
 
-    List<ActivityOut> selectByUserId(Long id);
+    List<ActivityItemOut> selectByUserId(Long id);
 
     Iterable<Activity> selectByItemId(Long id);
 
-    Activity selectByUserIdAndItemId(Long userId, Long itemId);
+    ActivityUserOut selectByUserIdAndItemId(Long userId, Long itemId);
 
     Progress selectProgress(Long userId, Long itemId);
 

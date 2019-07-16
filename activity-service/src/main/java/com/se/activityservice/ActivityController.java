@@ -1,7 +1,8 @@
 package com.se.activityservice;
 
 import com.se.activityservice.entity.Activity;
-import com.se.activityservice.entity.ActivityOut;
+import com.se.activityservice.entity.ActivityItemOut;
+import com.se.activityservice.entity.ActivityUserOut;
 import com.se.activityservice.entity.Progress;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ public class ActivityController {
     }
 
     @GetMapping(value="/userid/{userId}", produces="application/json")
-    public List<ActivityOut> getActivityByUserId(@PathVariable("userId") Long userId) {
+    public List<ActivityItemOut> getActivityByUserId(@PathVariable("userId") Long userId) {
         return activityService.selectByUserId(userId);
     }
 
@@ -40,7 +41,7 @@ public class ActivityController {
     }
 
     @GetMapping(value="/collect", produces="application/json")
-    public Activity getActivityByItemIdAndUserId(@RequestParam("userId") Long userId, @RequestParam("itemId") Long itemId) {
+    public ActivityUserOut getActivityByItemIdAndUserId(@RequestParam("userId") Long userId, @RequestParam("itemId") Long itemId) {
         return activityService.selectByUserIdAndItemId(userId, itemId);
     }
 

@@ -1,10 +1,8 @@
 package com.se.activityservice.entity;
 
-import java.sql.Timestamp;
-
-public class ActivityOut {
+public class ActivityUserOut {
     private Activity activity;
-    private Item item;
+    private User user;
 
     public Activity getActivity() {
         return activity;
@@ -14,12 +12,11 @@ public class ActivityOut {
         this.activity = activity;
     }
 
-    public Item getItem() {
-        return item;
+    public User getUser() {
+        return user;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setUser(User user) {
+        this.user = user;
     }
-
 }
