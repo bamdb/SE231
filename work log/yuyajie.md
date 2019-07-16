@@ -30,3 +30,5 @@
 ## 2019.07.15
 + 继续搞security+oauth2
 + 解决负载均衡的问题
+## 2019.07.16
++ authentication + authorization
