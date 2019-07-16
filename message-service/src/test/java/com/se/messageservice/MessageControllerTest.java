@@ -93,6 +93,10 @@ public class MessageControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].content").value("NOTHINHG HAPPENS BETWEEN US"));
+        mvc.perform(get("/senderid/1"))
+                .andExpect(status().isOk());
+        mvc.perform(get("/receiverid/2"))
+                .andExpect(status().isOk());
         Long i = new Timestamp(0).getTime();
         mm.add("sendTime", i.toString());
         mvc.perform(get("/content")
@@ -109,10 +113,6 @@ public class MessageControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(""));
-        mvc.perform(get("/senderid/1"))
-                .andExpect(status().isOk());
-        mvc.perform(get("/receiverid/2"))
-                .andExpect(status().isOk());
     }
 
 }
