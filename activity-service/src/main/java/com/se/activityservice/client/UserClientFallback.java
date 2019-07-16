@@ -19,7 +19,6 @@ public class UserClientFallback implements UserClient{
         User user = new User();
         user.setId(userId);
         user.setMail("mail@mail.com");
-        user.setPassword("123");
         user.setRole(0);
         user.setUsername("mock");
         user.setImgUrl(null);

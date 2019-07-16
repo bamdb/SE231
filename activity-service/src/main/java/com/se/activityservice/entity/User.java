@@ -5,7 +5,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class User {
     private Long id;
     private String username;
-    private String password;
     private String mail;
     private String imgUrl;
     private Integer role;
@@ -30,11 +29,24 @@ public class User {
         this.username = username;
     }
 
-    public void setPassword(String password) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        this.password = encoder.encode(password);
+    public Long getId() {
+        return id;
     }
 
-    public User() {
+    public String getUsername() {
+        return username;
+    }
+
+
+    public String getMail() {
+        return mail;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public Integer getRole() {
+        return role;
     }
 }
