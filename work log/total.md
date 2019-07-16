@@ -135,6 +135,18 @@
   * 解决负载均衡的问题
 * huangyuyang:
   * 页面美化及整理前后端接口需求
+# 2019-7-16
+* shenruien:
+  * modify homepage
+* wangzulai:
+  * add more info in service response
+  * config mongodb to solve socket exception
+* yuyajie:
+  * authentication + authorization
+* huangyuyang:
+  * beautify the frontend
+  * redisign the frontend
+
 
 
 
