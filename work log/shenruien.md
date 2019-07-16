@@ -39,3 +39,5 @@
 # 2019-7-15
 * beautify the frontpage
 * upgrade the frontend
+# 2019-7-16
+* modify homepage
