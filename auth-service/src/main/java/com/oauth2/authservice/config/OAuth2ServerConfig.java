@@ -69,6 +69,7 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
                 .authorities("updatesomething")
                 .secret(encoder.encode(""))
                 .scopes("ui")
+
                 .and()
                 .withClient("user-service")
                 .secret(encoder.encode("123"))
@@ -81,8 +82,8 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         oauthServer
                 .tokenKeyAccess("permitAll()")
                 .checkTokenAccess("isAuthenticated()")
-                .passwordEncoder(new BCryptPasswordEncoder());
-//                .allowFormAuthenticationForClients();
+//                .passwordEncoder(new BCryptPasswordEncoder());
+                .allowFormAuthenticationForClients();
 
     }
 

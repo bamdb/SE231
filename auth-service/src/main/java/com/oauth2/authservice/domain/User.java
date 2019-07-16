@@ -100,8 +100,9 @@ public class User implements UserDetails {
     }
 
     public void setPassword(String password) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        this.password = encoder.encode(password);
+//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//        this.password = encoder.encode(password);
+        this.password = password;
     }
 
     public User(long id, String username, String password, String mail, String imgUrl) {
