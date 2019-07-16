@@ -1,6 +1,7 @@
 package com.se.commentservice;
 
 import com.alibaba.fastjson.JSON;
+import com.se.commentservice.entity.Comment;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

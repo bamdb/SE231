@@ -1,8 +1,12 @@
 package com.se.commentservice;
 
+import com.se.commentservice.entity.Comment;
+import com.se.commentservice.entity.CommentOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class CommentController {
@@ -15,7 +19,7 @@ public class CommentController {
 
     @GetMapping(value="/", produces="application/json")
     public Comment getCommentById(@RequestParam("itemId") Long itemId,
-                                 @RequestParam("userId") Long userId) {
+                                  @RequestParam("userId") Long userId) {
         return commentService.selectCommentByItemIdAndUserId(itemId, userId);
     }
 
@@ -25,7 +29,7 @@ public class CommentController {
     }
 
     @GetMapping(value="/itemid/{itemId}", produces="application/json")
-    public Iterable<Comment> getCommentByItemId(@PathVariable("itemId") Long itemId) {
+    public List<CommentOut> getCommentByItemId(@PathVariable("itemId") Long itemId) {
         return commentService.selectCommentByItemId(itemId);
     }
 

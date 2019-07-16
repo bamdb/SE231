@@ -1,5 +1,6 @@
 package com.se.commentservice;
 
+import com.se.commentservice.entity.Comment;
 import org.springframework.data.repository.CrudRepository;
 
 import javax.transaction.Transactional;

@@ -1,4 +1,4 @@
-package com.se.commentservice;
+package com.se.commentservice.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.jpa.repository.Temporal;
