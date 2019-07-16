@@ -2,8 +2,7 @@ package com.se.messageservice;
 
 
 
-import javax.transaction.Transactional;
-import java.util.Optional;
+import com.se.messageservice.entity.Message;
 
 public interface MessageService {
     String selectBySenderIdAndReceiverIdAndSendTime(Long senderId, Long receiverId, Long send_time);

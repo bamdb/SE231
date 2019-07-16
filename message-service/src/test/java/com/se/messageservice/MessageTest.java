@@ -1,10 +1,8 @@
 package com.se.messageservice;
 
-import org.bson.BsonTimestamp;
+import com.se.messageservice.entity.Message;
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 

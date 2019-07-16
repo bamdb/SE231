@@ -1,9 +1,9 @@
 package com.se.messageservice;
 
 import com.se.messageservice.client.FriendClient;
+import com.se.messageservice.entity.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.google.common.collect.Iterables;
 
 import java.sql.Timestamp;
 import java.util.LinkedList;

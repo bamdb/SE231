@@ -1,5 +1,6 @@
 package com.se.messageservice;
 
+import com.se.messageservice.entity.Message;
 import org.springframework.data.repository.CrudRepository;
 
 import javax.transaction.Transactional;

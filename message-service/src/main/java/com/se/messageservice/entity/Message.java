@@ -1,4 +1,4 @@
-package com.se.messageservice;
+package com.se.messageservice.entity;
 
 
 import org.springframework.data.annotation.Id;
