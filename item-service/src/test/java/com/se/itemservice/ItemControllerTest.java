@@ -159,39 +159,48 @@ public class ItemControllerTest {
 
     @Test
     public void tagTest() throws Exception {
-        mvc.perform(post("/add/tag?itemId=1&userId=1")
+        mvc.perform(post("/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"itemname\":\"three body\", \"pubTime\":\"1562294429\", \"chapterNum\":12, \"mainAuthor\":\"Cixin Liu\", \"imgurl\":null, \"type\":0}"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add/tag?itemId=0&userId=1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("[\"tag1\",\"tag2\"]"))
                 .andExpect(status().isOk());
-        mvc.perform(post("/add/tag?itemId=1&userId=2")
+        Item item = itemService.selectAll().iterator().next();
+        mvc.perform(post("/add/tag?itemId="+item.getId()+"&userId=1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("[\"tag1\",\"tag2\"]"))
                 .andExpect(status().isOk());
-        mvc.perform(post("/add/tag?itemId=1&userId=2")
+        mvc.perform(post("/add/tag?itemId="+item.getId()+"&userId=2")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("[\"tag1\",\"tag2\"]"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add/tag?itemId="+item.getId()+"&userId=2")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("[\"tag1\",\"tag2\",\"tag3\"]"))
                 .andExpect(status().isOk());
-        mvc.perform(post("/add/tag?itemId=1&userId=1")
+        mvc.perform(post("/add/tag?itemId="+item.getId()+"&userId=1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("[\"tag1\",\"tag2\"]"))
                 .andExpect(status().isOk());
 
         mvc.perform(get("/tag/id/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        mvc.perform(get("/tag?itemId=1&userId=1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/tag?itemId="+item.getId()+"&userId=1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        mvc.perform(get("/tag?itemId=1&userId=3").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/tag?itemId="+item.getId()+"&userId=3").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(delete("/delete/tag?itemId=1&userId=1")
+        mvc.perform(delete("/delete/tag?itemId="+item.getId()+"&userId=1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("[\"tag1\",\"tag2\",\"tag3\"]"))
                 .andExpect(status().isOk());
-        mvc.perform(delete("/delete/tag?itemId=1&userId=1")
+        mvc.perform(delete("/delete/tag?itemId="+item.getId()+"&userId=1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("[\"tag1\",\"tag2\"]"))
                 .andExpect(status().isOk());
-        mvc.perform(delete("/delete/tag?itemId=1&userId=2")
+        mvc.perform(delete("/delete/tag?itemId="+item.getId()+"&userId=2")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("[\"tag1\",\"tag2\",\"tag3\",\"tag4\"]"))
                 .andExpect(status().isOk());

@@ -34,15 +34,7 @@ public class ItemServiceImpl implements ItemService{
     }
 
     public Item postItem(Item item) {
-        Item itemOut = itemRepository.save(item);
-
-        // tag initialization
-        Itemtag itemtag = new Itemtag();
-        itemtag.setTags(new ArrayList<>());
-        itemtag.setItemId(itemOut.getId());
-        itemtagRepository.save(itemtag);
-
-        return itemOut;
+        return itemRepository.save(item);
     }
 
     @Override
@@ -114,6 +106,17 @@ public class ItemServiceImpl implements ItemService{
 
     public void postItemTag(Long itemId, Long userId, List<String> tagList) {
         Itemtag itemtag = itemtagRepository.findByItemId(itemId).orElse(null);
+        Item item = itemRepository.findById(itemId).orElse(null);
+
+        if (item == null) {
+            return;
+        }
+
+        if (itemtag == null) {
+            itemtag = new Itemtag();
+            itemtag.setTags(new ArrayList<>());
+            itemtag.setItemId(item.getId());
+        }
 
         List<Tag> tags = itemtag.getTags();
         for (String tagname : tagList) {
