@@ -1,4 +1,4 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://202.120.40.8:30746/bamdb?connectTimeoutMS=300000&maxIdleTimeMS=60000
+      uri: mongodb://202.120.40.8:30746/bamdb?serverSelectionTimeoutMS=30000&connectTimeoutMS=10000&maxIdleTimeMS=60000
