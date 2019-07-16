@@ -17,26 +17,9 @@ import org.springframework.web.client.RestTemplate;
 @EnableZuulProxy
 @EnableEurekaClient
 @EnableHystrix
-@EnableCircuitBreaker
-@RibbonClients(value = {
-        @RibbonClient(name = "user", configuration = RibbonConfiguration.class),
-        @RibbonClient(name = "image", configuration = RibbonConfiguration.class),
-        @RibbonClient(name = "item", configuration = RibbonConfiguration.class),
-	@RibbonClient(name = "rating", configuration = RibbonConfiguration.class),
-	@RibbonClient(name = "comment", configuration = RibbonConfiguration.class),
-	@RibbonClient(name = "activity", configuration = RibbonConfiguration.class),
-	@RibbonClient(name = "friend", configuration = RibbonConfiguration.class),
-	@RibbonClient(name = "message", configuration = RibbonConfiguration.class),
-	@RibbonClient(name = "topic", configuration = RibbonConfiguration.class)
-})
 public class GatewayApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(GatewayApplication.class, args);
-    }
-    @Bean
-    @LoadBalanced
-    RestTemplate restTemplate() {
-        return new RestTemplate();
     }
 }

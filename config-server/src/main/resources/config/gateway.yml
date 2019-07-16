@@ -53,6 +53,5 @@ zuul:
   semaphore:
     max-semaphores: 10000
   ignored-services: "*"
-rating:
-  ribbon:
-    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.AvailabilityFilteringRule
+ribbon:
+  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.AvailabilityFilteringRule
