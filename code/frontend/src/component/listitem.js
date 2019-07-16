@@ -12,6 +12,10 @@ import {Modal} from "antd";
 import Collectform from "./collectform";
 import '../css/listitem.css'
 import axios from 'axios';
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import Card from "@material-ui/core/Card";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -26,7 +30,11 @@ const useStyles = makeStyles(theme => ({
     image: {
         height: 120,
         width: 96,
-    }
+    },
+    card: {
+        maxWidth: 345,
+        height:100
+    },
 }));
 
 /*
@@ -42,6 +50,17 @@ class Listitem extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            ItemList:[
+                {
+                    item: {
+                        id:1,
+                        itemname:"ThreeBody",
+                        pubTime: "2010-3-1T00",
+                        mainAuthor:"liucixin",
+                        chapterNum:3,
+                    }
+                }
+            ]
         }
     }
 
@@ -49,25 +68,40 @@ class Listitem extends Component {
     render() {
 
         var rows=[];
-        const item = this.props.ItemList;
+        const item = this.state.ItemList;
         if(item !== undefined)
         {
             for(var i=0; i<item.length; ++i) {
                 if (item[i].item.itemname.indexOf(this.props.search) !== -1) {
                 rows.push(
-                    <Paper className={useStyles.root}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={1}/>
-                            <Grid item xs={2}>
-                                <br/>
-                                <img src="img/3.jpg" alt="暂无图片" className={useStyles.image} height="120px" width="96px"/>
-                            </Grid>
-                            <Grid item xs={6}>
+                    /*
+                    <Card className={useStyle.card} style={{width:120}}>
 
+                        <CardActionArea onClick={this.showEditBar}>
+                            <CardMedia
+                                style={{height:120}}
+                                className={useStyle.media}
+                                image={"img/3.jpg"}
+                            />
+                            <CardContent >
+                                {this.state.itemname}
+
+                     */
+                    <Card className={useStyles.card} style={{width:120}}>
+                        <CardActionArea onClick={this.showEditBar}>
+                            <CardMedia
+                                style={{height:80}}
+                                className={useStyles.media}
+                                image={"img/3.jpg"}
+                            />
+                            <CardContent >
                                 <Typography component={Link} to={'/useriteminfopage/'+item[i].item.id} align="center">
                                     {item[i].item.itemname}
                                 </Typography>
-
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                    /*
                                 <br/>
                                 <Paper className={useStyles.paper}>
                                     <Grid container spacing={1}>
@@ -97,8 +131,8 @@ class Listitem extends Component {
                                 <Collectform itemid={item[i].item.id}/>
                             </Grid>
                         </Grid>
-                    </Paper>
-
+                    </Card>
+*/
                 )
             }
 

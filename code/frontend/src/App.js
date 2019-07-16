@@ -28,9 +28,38 @@ import Addtopic from "./component/addtopic";
 import Editorpage from "./page/editorpage";
 import Comment from './component/comment'
 import Scheduletableold from './component/scheduletableold'
+import leftappbar from "./component/leftappbar";
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { makeStyles } from '@material-ui/core/styles/index';
+
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: 'flex',
+    },
+    toolbar: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        padding: '0 8px',
+        ...theme.mixins.toolbar,
+    },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing(3),
+    },
+}))
+
 function App() {
+    const [needDrawer, setneedDrawer]=React.useState(true);
+    const leftBar = needDrawer ? leftappbar() : <div />
+    const classes=useStyles();
   return (
-    <div >
+    <div className={classes.root}>
+        <CssBaseline />
+        {leftBar}
+        <main className={classes.content}>
+            <div className={classes.toolbar} />
         <Router >
             <Route path={'/topicpage'} component={Topicpage}></Route>
             <Route path={'/topicdetailpage'} component={Topicdetailpage}></Route>
@@ -47,6 +76,7 @@ function App() {
             <Route path={"/test"} component={Scheduletableold}></Route>
 
         </Router>
+        </main>
     </div>
   );
 }

@@ -19,13 +19,12 @@ class Itembrowsepage extends Component{
     constructor(props){
         super(props);
         this.state={
-            ItemList1: [],
-            ItemList2: [],
+            ItemList: [],
             tags: [],
             isloaded: false,
             search:"",
-            currentpage0:0,
-            currentpage1:0
+            currentpage:0,
+            type:0,
 
         };
         this.handletagchange=this.handletagchange.bind(this);
@@ -48,12 +47,12 @@ class Itembrowsepage extends Component{
 
     componentWillMount() {
         const _this = this;
-        var currentpage0=this.state.currentpage0;
-        var currentpage1=this.state.currentpage1;
+        var type = this.state.type;
+        var currentpage=this.state.currentpage;
         axios.get(
             "http://202.120.40.8:30741/browser",{params:{
-                    type:0,
-                    page:currentpage0,
+                    type:type,
+                    page:currentpage,
                     pageSize:4
                 }}
         )
@@ -70,33 +69,11 @@ class Itembrowsepage extends Component{
             _this.setState({
             })
         })
-        axios.get(
-            "http://202.120.40.8:30741/rating/browser",{params:{
-                    type:1,
-                    page:currentpage1,
-                    pageSize:3
-                }}
-        )
-            .then(function (response) {
-                _this.setState(
-                    {
-                        ItemList1: response.data,
-                        isloaded: true,
-                    }
-                );
-                console.log(response.data);
-            })
-            .catch(function (error) {
-                _this.setState({
-                })
-            })
     }
 
     render(){
-        const ItemList0= this.state.ItemList0;
-        const ItemList1= this.state.ItemList1;
+        const ItemList= this.state.ItemList;
         return(
-
             <Grid container direction={"column"}>
                 <Grid item xs={12}><Navigation handleSearch={this.handleSearch}/></Grid>
                 <Grid item xs={12}>
@@ -107,12 +84,7 @@ class Itembrowsepage extends Component{
                     </Grid>
                     <Grid item xs={12}>
                         <Grid container>
-                            <Grid item xs={6}>
-                                <Listitem ItemList={ItemList0} search={this.state.search}/>
-                                <Pagetable handlepagechange={this.handlepagechange}/>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <Listitem ItemList={ItemList1} search={this.state.search}/>
+                                <Listitem ItemList={ItemList} search={this.state.search}/>
                                 <Pagetable handlepagechange={this.handlepagechange}/>
                             </Grid>
                         </Grid>
@@ -120,7 +92,6 @@ class Itembrowsepage extends Component{
                     <Grid item xs={1} />
                 </Grid>
                 </Grid>
-            </Grid>
 
         )
     }
