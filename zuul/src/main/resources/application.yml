@@ -25,6 +25,7 @@ zuul:
   host:
     connect-timeout-millis: 15000
     socket-timeout-millis: 60000
+  add-proxy-headers: true
 ribbon:
   ReadTimeout: 2000
   ConnectTimeout: 2000

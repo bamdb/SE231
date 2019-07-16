@@ -2,7 +2,6 @@ package com.oauth2.userservice.domain;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -26,6 +25,8 @@ public class User implements UserDetails {
 
     @Column(name="img_url")
     private String imgUrl;
+
+//    private Collection<? extends GrantedAuthority> authorities;
 //
 //    @Column(name="role", columnDefinition = "varchar('10') default 'ROLE_USER'")
 //    private Integer role;
@@ -100,8 +101,9 @@ public class User implements UserDetails {
     }
 
     public void setPassword(String password) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        this.password = encoder.encode(password);
+//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//        this.password = encoder.encode(password);
+        this.password = password;
     }
 
     public User(long id, String username, String password, String mail, String imgUrl) {

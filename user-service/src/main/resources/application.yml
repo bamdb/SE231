@@ -22,12 +22,14 @@ security:
       accessTokenUri: http://localhost:8000/auth/oauth/token
       grant-type: client_credentials
       scope: server
+#      user-authorization-uri: http://localhost:8000/oauth/authorize
     resource:
       user-info-uri: http://localhost:8000/auth/user
+
 ribbon:
   ReadTimeout: 1000
   ConnectTimeout: 500
-  MaxAutoRetriesNextServer: 0
+  MaxAutoRetriesNextServer: 1
   MaxAutoRetries: 1
 hystrix:
   command:
@@ -35,7 +37,7 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 3000
+            timeoutInMilliseconds: 6100
 feign:
   hystrix:
     enabled: true

@@ -1,5 +1,6 @@
 package com.oauth2.authservice.domain;
 
+import org.springframework.security.authentication.jaas.AuthorityGranter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,6 +27,8 @@ public class User implements UserDetails {
 
     @Column(name="img_url")
     private String imgUrl;
+
+//    private Collection<? extends GrantedAuthority> authorities;
 //
 //    @Column(name="role", columnDefinition = "varchar('10') default 'ROLE_USER'")
 //    private Integer role;

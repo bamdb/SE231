@@ -1,6 +1,8 @@
 spring:
   application:
     name: registry
+  main:
+    allow-bean-definition-overriding: true
 eureka:
   instance:
     prefer-ip-address: true

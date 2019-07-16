@@ -16,6 +16,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
@@ -47,8 +48,8 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         endpoints
                 .tokenStore(this.tokenStore)
                 .authenticationManager(this.authenticationManager)
-                .userDetailsService(userDetailsService);
-        endpoints.tokenServices(defaultTokenServices());
+                .userDetailsService(userDetailsService)
+                .tokenServices(defaultTokenServices());
     }
 
     @Override
@@ -68,7 +69,7 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
                 .authorizedGrantTypes("refresh_token", "password")
                 .authorities("updatesomething")
                 .secret(encoder.encode(""))
-                .scopes("ui")
+                .scopes("server")
 
                 .and()
                 .withClient("user-service")
@@ -81,10 +82,12 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
         oauthServer
                 .tokenKeyAccess("permitAll()")
+                /*need to be authenticated to visit check_token*/
+                /*default: denyAll*/
+//                .checkTokenAccess("permitAll()")
                 .checkTokenAccess("isAuthenticated()")
 //                .passwordEncoder(new BCryptPasswordEncoder());
                 .allowFormAuthenticationForClients();
-
     }
 
     @Bean
@@ -93,9 +96,10 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         DefaultTokenServices tokenServices = new DefaultTokenServices();
         tokenServices.setSupportRefreshToken(true);
         tokenServices.setTokenStore(this.tokenStore);
-        tokenServices.setAccessTokenValiditySeconds(60);
+        tokenServices.setAccessTokenValiditySeconds(60 * 60 * 2);
         tokenServices.setRefreshTokenValiditySeconds(60 * 60 * 24 * 7);
         return tokenServices;
     }
+
 
 }

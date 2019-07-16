@@ -13,10 +13,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 @Slf4j
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
@@ -26,7 +26,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .inMemoryAuthentication()
-                .withUser("user").password(passwordEncoder().encode("password")).roles("USER");
+                .withUser("user").password(passwordEncoder().encode("password"))
+                .roles("USER").authorities("wth");
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
@@ -39,11 +40,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                .antMatchers("/signup").permitAll()
-                .anyRequest().authenticated()
-                .and()
+
                 .csrf().disable();
+//                  .httpBasic().and().formLogin().loginPage("/login").defaultSuccessUrl("/index")
+//                .failureUrl("/login?error").permitAll()
+//                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login")
+//                .permitAll().and().rememberMe();//注销请求可直接访问
+
 //        http.authorizeRequests()
 //                .antMatchers(HttpMethod.GET, ROOT_PATTERN).access("#oauth2.hasScope('read')")
 //                .antMatchers(HttpMethod.POST, ROOT_PATTERN).access("#oauth2.hasScope('write')")

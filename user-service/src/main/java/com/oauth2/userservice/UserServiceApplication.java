@@ -11,7 +11,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 
 @SpringBootApplication
 @EnableEurekaClient
-@EnableOAuth2Client
+@EnableOAuth2Sso
 @EnableFeignClients
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class UserServiceApplication {
