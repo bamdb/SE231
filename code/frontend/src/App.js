@@ -61,19 +61,19 @@ function App() {
         <main className={classes.content}>
             <div className={classes.toolbar} />
         <Router >
-            <Route path={'/topicpage'} component={Topicpage}></Route>
-            <Route path={'/topicdetailpage'} component={Topicdetailpage}></Route>
-            <Route path={'/itembrowsepage'} component={Itembrowsepage}></Route>
-            <Route path={'/loginpage'} component={LoginPage}></Route>
+            <Route path={'/topic'} component={Topicpage}></Route>
+            <Route path={'/topicdetail/*'} component={Topicdetailpage}></Route>
+            <Route path={'/itembrowse'} component={Itembrowsepage}></Route>
+            <Route path={'/login'} component={LoginPage}></Route>
             <Route exact path={'/'} component={UserHomepage}></Route>
             <Route path={'/userfavoritepage'} component={Userfavoritespage}></Route>
-            <Route path={'/registerpage'} component={RegisterPage}></Route>
-            <Route path={'/useriteminfopage/*'} component={Useriteminfopage}></Route>
-            <Route path={"/userinfopage"} component={Userinfopage}></Route>
-            <Route path={"/activitypage"} component={Activitypage}></Route>
+            <Route path={'/register'} component={RegisterPage}></Route>
+            <Route path={'/itemdetail/*'} component={Useriteminfopage}></Route>
+            <Route path={"/userinfo"} component={Userinfopage}></Route>
+            <Route path={"/activity"} component={Activitypage}></Route>
             <Route path={'/resetpassword'} component={Resetpwdpage}></Route>
-            <Route path={'/messagepage'} component={Messagepage}></Route>
-            <Route path={"/test"} component={Scheduletableold}></Route>
+            <Route path={'/message'} component={Messagepage}></Route>
+            <Route path={"/test"} component={Comment}></Route>
 
         </Router>
         </main>

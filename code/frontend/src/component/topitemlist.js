@@ -46,7 +46,9 @@ class TopItemList extends Component {
         for(var i=0;i<items.length;++i)
         {
             rows.push(
+                <Grid item xs={3}>
                 <TopItem key={i} name={items[i].item.itemname} rank={items[i].rating.rank} avgScore={items[i].rating.avgScore} itemId={items[i].item.id}/>
+                </Grid>
             );
         }
 
@@ -57,9 +59,9 @@ class TopItemList extends Component {
                 <Divider />
                 <br/>
                 <Grid container className={useStyles.root} spacing={2} >
-                    <Grid >
+
                     {rows}
-                    </Grid>
+
                 </Grid>
             </div>
         );

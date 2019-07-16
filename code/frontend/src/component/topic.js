@@ -66,7 +66,7 @@ class Topic extends Component {
                 <Divider />
 
                 <ListItem >
-                    <Link to={'/topicdetailpage/'+this.state.topicId}>{content}</Link>
+                    <Link to={'/topicdetail/'+this.state.topicId}>{content}</Link>
                     <ListItemText primary={"   "} />
                     <ListItemText primary={this.state.author} />
                     <ListItemText primary={this.state.replyTotal+" replies"} />
