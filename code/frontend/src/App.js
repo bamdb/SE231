@@ -51,15 +51,23 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
+
+
+function selectDrawer(isneeded) {
+    if(!isneeded) var leftBar=<div/>;
+    else var leftBar=leftappbar({username:"hyy"});
+    console.log("login");
+    return leftBar;
+}
 function App() {
-    const [needDrawer, setneedDrawer]=React.useState(true);
-    const leftBar = needDrawer ? leftappbar({username:"hyy"}) : <div />
     const classes=useStyles();
+    var needDrawer=true;
+    if(window.location.href.split("#")[1]==='/login'||window.location.href.split("#")[1]==='/register') needDrawer=false;
   return (
       <Router >
         <div className={classes.root}>
             <CssBaseline />
-            {leftBar}
+            {selectDrawer(needDrawer)}
             <main className={classes.content}>
                 <div className={classes.toolbar} />
                 <Route path={'/topic'} component={Topicpage}></Route>
