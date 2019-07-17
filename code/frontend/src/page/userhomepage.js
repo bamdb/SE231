@@ -31,7 +31,7 @@ class Userhomepage extends Component{
         axios.get("http://202.120.40.8:30741/rating/browser",{params:{
                 type:0,
                 page:0,
-                pageSize:3
+                pageSize:10
             }}).then(
                 function(response)
                 {
@@ -42,30 +42,29 @@ class Userhomepage extends Component{
 
     render(){
         return(
-                <main>
-                    <Grid container >
-                        <Grid item xs={1} />
-                        <Grid item xs={10}>
-                            <TextField
-                                id="outlined-dense"
-                                label="Search"
-                                margin="dense"
-                                variant="outlined"
-                            />
-                            <Grid container spacing={2}>
-                                <Grid item xs={12}>
-                                    <Progressmanage />
-                                </Grid>
-                            </Grid>
-                            <Grid container spacing={2} >
-                                <Grid item xs={12}>
-                                    <TopItemList itemList={this.state.rankitem}/>
-                                </Grid>
-                            </Grid>
+            <Grid container justify={"space-around"} alignContent={"center"}>
+                <Grid item xs={9}>
+                    <TextField
+                        id="outlined-dense"
+                        label="Search"
+                        margin="dense"
+                        variant="outlined"
+                    />
+                    <Grid container spacing={2} alignContent={"center"}>
+                        <Grid item xs={12}>
+                            <Progressmanage />
                         </Grid>
-                        <Grid item xs={1} />
                     </Grid>
-                </main>
+                </Grid>
+                <Grid item xs={3} >
+
+                    <Grid container spacing={2} alignContent={"center"} >
+                        <Grid item xs={12}>
+                            <TopItemList itemList={this.state.rankitem}/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
 
         )
     }
