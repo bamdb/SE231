@@ -1,10 +1,11 @@
-package com.se.topicservice.service;
+package com.se.topicservice.service.impl;
 
 import com.se.topicservice.client.UserClient;
 import com.se.topicservice.config.ds.DataSource;
 import com.se.topicservice.entity.*;
 import com.se.topicservice.repository.TopicMongoRepository;
 import com.se.topicservice.repository.TopicRepository;
+import com.se.topicservice.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class TopicServiceImpl implements TopicService{
+public class TopicServiceImpl implements TopicService {
     private final
     TopicRepository topicRepository;
 
@@ -48,6 +49,7 @@ public class TopicServiceImpl implements TopicService{
     }
 
     @Override
+    @DataSource("slave")
     public Iterable<Topic> selectAll() {
         return topicRepository.findAll();
     }
