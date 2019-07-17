@@ -1,7 +1,7 @@
 package com.se.itemservice;
 
 import com.se.itemservice.entity.Item;
-import com.se.itemservice.entity.Itemtag;
+import com.se.itemservice.service.ItemService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,10 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
