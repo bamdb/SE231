@@ -52,8 +52,8 @@ class Login extends Component{
             username: this.state.name,
             password: this.state.password,
         }
-        axios.post("???",
-                user)
+        axios.post("http://202.120.40.8:30741/login",
+            {})
             .then(function (res) {
                 _this.setState({
                     islogin: res.data,
@@ -65,6 +65,7 @@ class Login extends Component{
                 })
             })
         localStorage.setItem("id","1");
+        window.location.reload()
 
     }
 

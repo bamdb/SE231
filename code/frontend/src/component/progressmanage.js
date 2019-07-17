@@ -78,7 +78,7 @@ class Progressmanage extends Component {
         this.setState({value : newValue});
     }
     componentWillMount() {
-        axios.get("202.120.40.8/activity/userid/1").then(
+        axios.get("http://202.120.40.8:30741/activity/userid/1").then(
             function(response)
             {
                 var book=[];
@@ -102,7 +102,7 @@ class Progressmanage extends Component {
     }
 
     render() {
-        var item=[];
+        /*var item=[];
 
         var items=this.state.items;
         for(var i=0;i<items.length;++i) {
@@ -113,7 +113,7 @@ class Progressmanage extends Component {
                     </Grid>
                 </Grid>
             )
-        }
+        }*/
         var items1=[];
         var items2=[];
         for(var i=this.state.uppage*4;i<this.state.uppage*4&&i<this.state.book.length;++i)
@@ -154,7 +154,7 @@ class Progressmanage extends Component {
                 </Grid>
                     <Grid item xs={10}>
                         <Grid container spacing={3}>
-                            {item}
+                            {items1}
                         </Grid>
                     </Grid>
                 <Grid item xs={1}>
@@ -181,7 +181,7 @@ class Progressmanage extends Component {
                     </Grid>
                     <Grid item xs={10}>
                         <Grid container spacing={3}>
-                            {item}
+                            {items2}
                         </Grid>
                     </Grid>
                     <Grid item xs={1}>

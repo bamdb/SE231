@@ -66,7 +66,7 @@ class Tag extends Component {
 
             for(var i=0;i<tags.length;++i) {
                 item.push(
-                    <Chip  id="chip" label={tags[i]} clickable color="secondary" />
+                    <Chip  id="chip" label={tags[i].tagname} clickable color="secondary" />
                 );
             }
             return(

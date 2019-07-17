@@ -23,7 +23,7 @@ class Useriteminfopage extends Component {
     constructor(props)
     {
         super(props);
-        this.state={data:{},rating:{},totgrade:[],comments:[],id:0};
+        this.state={data:{},rating:{},totgrade:[],comments:[],id:0,readstat:[],tags:[{tagname:"哈哈哈"}]};
         this.handletagchange=this.handletagchange.bind(this);
         this.handleSearch=this.handleSearch.bind(this);
 
@@ -54,7 +54,9 @@ class Useriteminfopage extends Component {
         this.setState({id:id})
         var url="http://202.120.40.8:30741/item/id/"+id;
         var url1="http://202.120.40.8:30741/rating/itemid/"+id;
-        var url3="http://202.120.40.8:30741/comment/itemid/"+id
+        var url3="http://202.120.40.8:30741/comment/itemid/"+id;
+        var url4="http://202.120.40.8:30741/activity/progress/"+id;
+        var url5="http://202.120.40.8:30741/item/tag/id/"+id
 
         axios.get(url).then(
             function (response){
@@ -78,6 +80,18 @@ class Useriteminfopage extends Component {
                 this.setState({comments:response.data});
             }.bind(this)
         )
+        axios.get(url4,{params:{itemId:id,userId:1}}).then(
+            function(response){
+                this.setState({readstat:response.datat.chapters})
+            }.bind(this)
+        )
+        axios.get(url5).then(
+            function(response)
+            {
+                this.setState({tags:response.data.tags})
+            }.bind(this)
+        )
+
 
     }
 
@@ -95,8 +109,8 @@ class Useriteminfopage extends Component {
                             <Item isbn={itemdata.id} date={itemdata.pubTime} name={itemdata.itemname} pages={itemdata.chapterNum} author={itemdata.mainAuthor}/>
                         </Grid>
                         <Grid  item xs={6} >
-                            <Scheduletableold />
-                            <Tag select={true} tagchange={this.handletagchange}></Tag>
+                            <Scheduletableold readstat={this.state.readstat}/>
+                            <Tag select={false} tagchange={this.handletagchange} tags={this.state.tags}></Tag>
                             <br/>
 
                             <Commentlist comments={this.state.comments}/>
