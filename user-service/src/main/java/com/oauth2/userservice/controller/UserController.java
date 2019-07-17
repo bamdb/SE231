@@ -70,4 +70,12 @@ public class UserController {
         userService.deleteUserByUsername(username);
     }
 
+
+    @PreAuthorize("hasRole('ADMIN') && hasAuthority('doUsers') && #oauth2.hasScope('server')")
+    @GetMapping(value="/test", produces="application/json")
+    public String postUser() {
+
+        return "Succeed!!!!";
+    }
+
 }

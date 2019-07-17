@@ -1,22 +1,24 @@
 package com.oauth2.authservice.domain;
 
-import org.springframework.security.authentication.jaas.AuthorityGranter;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.annotations.Cascade;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.util.Assert;
 
 import javax.persistence.*;
-import java.util.Collection;
+import javax.validation.constraints.AssertTrue;
+import java.util.*;
 
 @Entity
-@Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames={"username"})})
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Long id;
 
-    @Column(name="username", nullable=false)
+    @Column(name="username", nullable=false, unique = true)
     private String username;
 
     @Column(name="password", nullable=false)
@@ -28,18 +30,37 @@ public class User implements UserDetails {
     @Column(name="img_url")
     private String imgUrl;
 
-//    private Collection<? extends GrantedAuthority> authorities;
-//
-//    @Column(name="role", columnDefinition = "varchar('10') default 'ROLE_USER'")
-//    private Integer role;
 
-//    public Integer getRole() {
-//        return role;
-//    }
+    @ManyToMany
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
 
-//    public void setRole(Integer role) {
-//        this.role = role;
-//    }
+
+    @ManyToMany
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
+    @JoinTable(
+            name = "users_revoked_authorities",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "authority_id", referencedColumnName = "id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "authority_id"}))
+    private Collection<Role> revokeAuthorities;
+
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
 
     public Long getId() {
         return id;
@@ -95,7 +116,16 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+            List<GrantedAuthority> authorities
+                    = new ArrayList<>();
+            if (roles != null)
+                for (Role role: roles) {
+                    authorities.add(new SimpleGrantedAuthority(role.getName()));
+                    role.getAuthorities().stream()
+                            .map(p -> new SimpleGrantedAuthority(p.getName()))
+                            .forEach(authorities::add);
+                }
+        return authorities;
     }
 
     public String getPassword() {
@@ -103,13 +133,11 @@ public class User implements UserDetails {
     }
 
     public void setPassword(String password) {
-//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//        this.password = encoder.encode(password);
         this.password = password;
     }
 
-    public User(long id, String username, String password, String mail, String imgUrl) {
-        setId(id);
+
+    public User(String username, String password, String mail, String imgUrl) {
         setImgUrl(imgUrl);
         setMail(mail);
         this.password = password;

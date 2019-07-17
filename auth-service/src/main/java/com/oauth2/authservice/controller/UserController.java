@@ -35,6 +35,8 @@ public class UserController {
     private UserService userService;
 
     @Autowired
+    private UserRepository repository;
+    @Autowired
     private DefaultTokenServices defaultTokenServices;
 
     @PostMapping(value = "/signup", produces = "application/json")
@@ -53,7 +55,7 @@ public class UserController {
         else return ResponseEntity.badRequest().body("Revoke Failed!");
     }
 
-    @PreAuthorize(" hasRole('wth')")
+    @PreAuthorize(" hasRole('ROLE_WTH')")
     @GetMapping("/test")
     public String test() {
         return "Authority is involved!";

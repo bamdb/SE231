@@ -23,10 +23,8 @@ public class UserServiceImpl implements UserService {
         existing.ifPresent(it-> {throw new IllegalArgumentException("userDetail already exists: " + it.getUsername());});
 
         User userDetail = new User();
-//        System.out.println(user.getPassword());
-//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//        encoder.encode( user.getPassword() );
-        userDetail.setPassword(user.getPassword());
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        userDetail.setPassword(encoder.encode(user.getPassword()));
         userDetail.setUsername(user.getUsername());
         return repository.save(userDetail);
     }

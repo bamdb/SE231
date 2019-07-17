@@ -75,7 +75,8 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
                 .tokenKeyAccess("permitAll()")
                 /*need to be authenticated to visit check_token*/
                 /*default: denyAll*/
-                .checkTokenAccess("isAuthenticated()")
+//                .checkTokenAccess("isAuthenticated()")
+                .checkTokenAccess("permitAll()")
 //                .passwordEncoder(new BCryptPasswordEncoder());
                 .allowFormAuthenticationForClients();
     }
