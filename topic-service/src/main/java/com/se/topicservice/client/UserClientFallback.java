@@ -1,10 +1,9 @@
-package com.se.topicservice;
+package com.se.topicservice.client;
 
 import com.se.topicservice.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Component

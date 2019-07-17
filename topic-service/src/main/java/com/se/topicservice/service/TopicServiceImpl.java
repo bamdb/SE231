@@ -1,5 +1,6 @@
-package com.se.topicservice;
+package com.se.topicservice.service;
 
+import com.se.topicservice.client.UserClient;
 import com.se.topicservice.entity.*;
 import com.se.topicservice.repository.TopicMongoRepository;
 import com.se.topicservice.repository.TopicRepository;

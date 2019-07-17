@@ -1,4 +1,4 @@
-package com.se.topicservice;
+package com.se.topicservice.service;
 
 import com.se.topicservice.entity.Topic;
 import com.se.topicservice.entity.TopicIn;

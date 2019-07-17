@@ -1,4 +1,4 @@
-package com.se.topicservice;
+package com.se.topicservice.client;
 
 import com.se.topicservice.entity.User;
 import org.springframework.cloud.openfeign.FeignClient;

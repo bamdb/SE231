@@ -1,6 +1,7 @@
-package com.se.topicservice;
+package com.se.topicservice.controller;
 
 import com.se.topicservice.entity.*;
+import com.se.topicservice.service.TopicService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
