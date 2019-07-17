@@ -16,6 +16,7 @@ import Input from "@material-ui/core/Input";
 import FormControl from "@material-ui/core/FormControl";
 import * as axios from "axios";
 import Button from "@material-ui/core/Button";
+import Uploadavatar from "../component/uploadavatar";
 
 class Editorpage extends Component{
     constructor(props){
@@ -62,6 +63,7 @@ class Editorpage extends Component{
                     <Grid container>
                         <Grid item xs={2}></Grid>
                         <Grid item xs={10}>
+                            <Uploadavatar/>
                             <FormControl margin="normal" required fullWidth>
 
                                 <InputLabel htmlFor="id">itemname</InputLabel>

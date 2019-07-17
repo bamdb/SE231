@@ -101,7 +101,7 @@ class Useriteminfopage extends Component {
         totgrade.push(this.state.rating.score1,this.state.rating.score2,this.state.rating.score3,this.state.rating.score4,this.state.rating.score5,this.state.rating.score6,this.state.rating.score7,this.state.rating.score8,this.state.rating.score9,this.state.rating.score10)
         return(
             <Grid container spacing={2}>
-                <Grid item xs={12}><Navigation/></Grid>
+
                 <Grid item xs={12}>
                     <Grid container spacing={2}>
                         <Grid item xs={1}/>

@@ -61,7 +61,7 @@ class Userfavoritespage extends Component{
     render(){
         return(
             <Grid container direction={"column"} spacing={12} >
-                <Grid item xs={12}><Navigation/></Grid>
+
                 <Grid container direction={"row"} spacing={2}>
                     <Grid item xs={1}>
                     </Grid>
