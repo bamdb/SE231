@@ -51,10 +51,11 @@ class Uploadavatar extends Component {
 
             <Upload
                 name="image"
+                data={{imageId: 1}}
                 listType="picture-card"
                 className="avatar-uploader"
                 showUploadList={false}
-                action="http://202.120.40.8:30741/image/update/id/12"
+                action={"http://202.120.40.8:30741/image/update"}
                 beforeUpload={beforeUpload}
                 onChange={this.handleChange}
             >
