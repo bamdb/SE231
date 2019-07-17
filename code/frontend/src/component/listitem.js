@@ -95,7 +95,7 @@ class Listitem extends Component {
                                 image={"img/3.jpg"}
                             />
                             <CardContent >
-                                <Typography component={Link} to={'/useriteminfopage/'+item[i].item.id} align="center">
+                                <Typography component={Link} to={'/itemdetail/'+item[i].item.id} align="center">
                                     {item[i].item.itemname}
                                 </Typography>
                             </CardContent>
