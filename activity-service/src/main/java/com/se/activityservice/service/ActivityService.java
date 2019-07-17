@@ -1,4 +1,4 @@
-package com.se.activityservice;
+package com.se.activityservice.service;
 
 import com.se.activityservice.entity.Activity;
 import com.se.activityservice.entity.ActivityItemOut;

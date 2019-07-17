@@ -1,5 +1,6 @@
-package com.se.activityservice;
+package com.se.activityservice.controller;
 
+import com.se.activityservice.service.ActivityService;
 import com.se.activityservice.entity.Activity;
 import com.se.activityservice.entity.ActivityItemOut;
 import com.se.activityservice.entity.ActivityUserOut;

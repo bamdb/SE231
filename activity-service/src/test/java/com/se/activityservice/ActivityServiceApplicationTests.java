@@ -5,6 +5,7 @@ import com.netflix.loadbalancer.Server;
 import com.netflix.loadbalancer.ServerList;
 import com.se.activityservice.client.ItemClient;
 import com.se.activityservice.client.UserClient;
+import com.se.activityservice.service.ActivityService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;

@@ -1,10 +1,11 @@
-package com.se.activityservice;
+package com.se.activityservice.service.impl;
 
 import com.se.activityservice.client.ItemClient;
 import com.se.activityservice.client.UserClient;
 import com.se.activityservice.entity.*;
 import com.se.activityservice.repository.ActivityRepository;
 import com.se.activityservice.repository.ProgressRepository;
+import com.se.activityservice.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @Service
-public class ActivityServiceImpl implements ActivityService{
+public class ActivityServiceImpl implements ActivityService {
     private final
     ActivityRepository activityRepository;
     private final ProgressRepository progressRepository;
