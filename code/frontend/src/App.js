@@ -17,7 +17,6 @@ import Userinfopage from "./page/userinfopage"
 import Useriteminfopage from "./page/useriteminfopage"
 import Activitypage from "./page/activitypage";
 import Resetpwdpage from "./page/resetpwdpage";
-
 import Messagepage from "./page/messagepage";
 import Rating from "./component/rating";
 import Collect from "./component/collect";
@@ -52,7 +51,7 @@ const useStyles = makeStyles(theme => ({
 
 function App() {
     const [needDrawer, setneedDrawer]=React.useState(true);
-    const leftBar = needDrawer ? leftappbar() : <div />
+    const leftBar = needDrawer ? leftappbar({username:"hyy"}) : <div />
     const classes=useStyles();
   return (
       <Router >
@@ -74,8 +73,6 @@ function App() {
                 <Route path={'/resetpassword'} component={Resetpwdpage}></Route>
                 <Route path={'/message'} component={Messagepage}></Route>
                 <Route path={"/test"} component={Comment}></Route>
-
-
             </main>
         </div>
       </Router>
