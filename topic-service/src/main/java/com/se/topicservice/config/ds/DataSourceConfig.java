@@ -14,19 +14,19 @@ import java.util.Map;
 
 @Configuration
 public class DataSourceConfig {
-    @Value("${datasource.type}")
-    private Class<? extends DataSource> dataSourceType;
+//    @Value("${datasource.type}")
+//    private Class<? extends DataSource> dataSourceType;
 
     @Bean(name = "masterDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.master")
     public DataSource masterDataSource() {
-        return DataSourceBuilder.create().type(dataSourceType).build();
+        return DataSourceBuilder.create().build();
     }
 
     @Bean(name = "slaveDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.slave")
     public DataSource slaveDataSource() {
-        return DataSourceBuilder.create().type(dataSourceType).build();
+        return DataSourceBuilder.create().build();
     }
 
     @Bean(name = "dynamicDataSource")

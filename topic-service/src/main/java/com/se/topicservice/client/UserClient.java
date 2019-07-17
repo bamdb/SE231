@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 @Component
-@FeignClient(name = "user",
-        fallback = UserClientFallback.class,
-        qualifier = "userClient")
+//@FeignClient(name = "user",
+//        fallback = UserClientFallback.class,
+//        qualifier = "userClient")
 public interface UserClient {
     @RequestMapping(value="/id/{id}", method= RequestMethod.GET)
     User getUserById(@PathVariable("id") Long userId);
