@@ -14,7 +14,7 @@ import GraphicEqIcon from '@material-ui/icons/GraphicEq';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import clsx from 'clsx';
-import { StaticRouter } from 'react-router'
+import {Link} from "react-router-dom";
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -180,15 +180,13 @@ export default function LeftAppBar(props) {
             </div>
             <Divider />
             <div>
-                <StaticRouter>
-                <Button component={Link} to={'activity'}>activity</Button>
-                <ListItem button>
+                <ListItem button component={Link} to={'/'}>
                     <ListItemIcon>
-                        <HomeOutlinedIcon  />
+                        <HomeOutlinedIcon/>
                     </ListItemIcon>
-                    <ListItemText component={Link} to={'/'}>HOME</ListItemText>
+                    <ListItemText><Typography color={"textSecondary"}> HOME</Typography></ListItemText>
                 </ListItem>
-                <ListItem button>
+                <ListItem  component={Link} to={'/userfavoritepage'}>
                     <ListItemIcon>
                         <MovieOutlinedIcon  />
                     </ListItemIcon>
@@ -215,7 +213,7 @@ export default function LeftAppBar(props) {
                     </ListItemIcon>
                     <ListItemText>Comment</ListItemText>
                 </ListItem>
-                <ListItem button>
+                <ListItem button >
                     <ListItemIcon>
                         <PersonOutlinedIcon  />
                     </ListItemIcon>

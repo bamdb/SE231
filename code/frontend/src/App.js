@@ -55,29 +55,30 @@ function App() {
     const leftBar = needDrawer ? leftappbar() : <div />
     const classes=useStyles();
   return (
-    <div className={classes.root}>
-        <CssBaseline />
-        {leftBar}
-        <main className={classes.content}>
-            <div className={classes.toolbar} />
-        <Router >
-            <Route path={'/topic'} component={Topicpage}></Route>
-            <Route path={'/topicdetail/*'} component={Topicdetailpage}></Route>
-            <Route path={'/itembrowse'} component={Itembrowsepage}></Route>
-            <Route path={'/login'} component={LoginPage}></Route>
-            <Route exact path={'/'} component={UserHomepage}></Route>
-            <Route path={'/userfavoritepage'} component={Userfavoritespage}></Route>
-            <Route path={'/register'} component={RegisterPage}></Route>
-            <Route path={'/itemdetail/*'} component={Useriteminfopage}></Route>
-            <Route path={"/userinfo"} component={Userinfopage}></Route>
-            <Route path={"/activity"} component={Activitypage}></Route>
-            <Route path={'/resetpassword'} component={Resetpwdpage}></Route>
-            <Route path={'/message'} component={Messagepage}></Route>
-            <Route path={"/test"} component={Comment}></Route>
+      <Router >
+        <div className={classes.root}>
+            <CssBaseline />
+            {leftBar}
+            <main className={classes.content}>
+                <div className={classes.toolbar} />
+                <Route path={'/topic'} component={Topicpage}></Route>
+                <Route path={'/topicdetail/*'} component={Topicdetailpage}></Route>
+                <Route path={'/itembrowse'} component={Itembrowsepage}></Route>
+                <Route path={'/login'} component={LoginPage}></Route>
+                <Route exact path={'/'} component={UserHomepage}></Route>
+                <Route path={'/userfavoritepage'} component={Userfavoritespage}></Route>
+                <Route path={'/register'} component={RegisterPage}></Route>
+                <Route path={'/itemdetail/*'} component={Useriteminfopage}></Route>
+                <Route path={"/userinfo"} component={Userinfopage}></Route>
+                <Route path={"/activity"} component={Activitypage}></Route>
+                <Route path={'/resetpassword'} component={Resetpwdpage}></Route>
+                <Route path={'/message'} component={Messagepage}></Route>
+                <Route path={"/test"} component={Comment}></Route>
 
-        </Router>
-        </main>
-    </div>
+
+            </main>
+        </div>
+      </Router>
   );
 }
 
