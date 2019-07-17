@@ -41,3 +41,5 @@
 * upgrade the frontend
 # 2019-7-16
 * modify homepage
+# 2019-7-16
+* modify frontendpage
