@@ -32,3 +32,6 @@
 + 解决负载均衡的问题
 ## 2019.07.16
 + authentication + authorization
+## 2019.07.17
++ finish security + oauth2
++ modify security test
