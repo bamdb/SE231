@@ -1,12 +1,13 @@
 package com.se.activityservice.dao;
 
-import com.se.topicservice.entity.TopicPage;
+import com.se.activityservice.entity.Progress;
 
 public interface MongoDao {
 
-    TopicPage save(TopicPage topicPage);
-
-    TopicPage findById(String topicId);
-
-    void deleteById(String topicId);
+    Progress findByItemIdAndUserId(Long userId, Long itemId);
+    Progress save(Progress progress);
+//
+//    TopicPage findById(String topicId);
+//
+//    void deleteById(String topicId);
 }

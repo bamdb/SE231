@@ -1,34 +1,28 @@
 package com.se.activityservice.dao.Impl;
 
-import com.se.topicservice.dao.MongoDao;
-import com.se.topicservice.entity.TopicPage;
-import com.se.topicservice.repository.TopicMongoRepository;
+import com.se.activityservice.entity.Progress;
+import com.se.activityservice.repository.ProgressRepository;
+import com.se.activityservice.dao.MongoDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class MongoDaoImpl implements MongoDao {
-
-    private final
-    TopicMongoRepository topicMongoRepository;
+    
+    private final ProgressRepository progressRepository;
 
     @Autowired
-    public MongoDaoImpl(TopicMongoRepository topicMongoRepository) {
-        this.topicMongoRepository = topicMongoRepository;
+    public MongoDaoImpl(ProgressRepository progressRepository) {
+        this.progressRepository = progressRepository;
     }
 
     @Override
-    public TopicPage save(TopicPage topicPage) {
-        return topicMongoRepository.save(topicPage);
+    public Progress findByItemIdAndUserId(Long userId, Long itemId) {
+        return progressRepository.findByItemIdAndUserId(userId, itemId).orElse(null);
     }
 
     @Override
-    public TopicPage findById(String topicId) {
-        return topicMongoRepository.findById(topicId).orElse(null);
-    }
-
-    @Override
-    public void deleteById(String topicId) {
-        topicMongoRepository.deleteById(topicId);
+    public Progress save(Progress progress) {
+        return progressRepository.save(progress);
     }
 }

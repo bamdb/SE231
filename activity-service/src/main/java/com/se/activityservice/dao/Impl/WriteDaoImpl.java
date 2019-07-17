@@ -1,33 +1,39 @@
 package com.se.activityservice.dao.Impl;
 
-import com.se.topicservice.config.ds.DataSource;
-import com.se.topicservice.dao.WriteDao;
-import com.se.topicservice.entity.Topic;
-import com.se.topicservice.repository.TopicRepository;
+import com.se.activityservice.dao.WriteDao;
+import com.se.activityservice.entity.Activity;
+import com.se.activityservice.repository.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class WriteDaoImpl implements WriteDao {
 
-    private final
-    TopicRepository topicRepository;
+    private final ActivityRepository activityRepository;
 
     @Autowired
-    public WriteDaoImpl(TopicRepository topicRepository) {
-        this.topicRepository = topicRepository;
+    public WriteDaoImpl(ActivityRepository activityRepository) {
+        this.activityRepository = activityRepository;
+    }
+
+
+    @Override
+    public Activity save(Activity activity) {
+        return activityRepository.save(activity);
     }
 
     @Override
-    @DataSource("master")
-    public Topic save(Topic topic) {
-        return topicRepository.save(topic);
+    public void deleteById(Long activityId) {
+        activityRepository.deleteById(activityId);
     }
 
     @Override
-    @DataSource("master")
-    public void deleteById(Long topicId) {
-        topicRepository.deleteById(topicId);
+    public void deleteAllByUserId(Long userId) {
+        activityRepository.deleteAllByUserId(userId);
     }
 
+    @Override
+    public void deleteAllByItemId(Long itemId) {
+        activityRepository.deleteAllByItemId(itemId);
+    }
 }

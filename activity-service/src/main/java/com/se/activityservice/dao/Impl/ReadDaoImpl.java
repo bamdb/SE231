@@ -1,38 +1,49 @@
 package com.se.activityservice.dao.Impl;
 
-import com.se.topicservice.config.ds.DataSource;
-import com.se.topicservice.dao.ReadDao;
-import com.se.topicservice.entity.Topic;
-import com.se.topicservice.repository.TopicRepository;
+import com.se.activityservice.config.ds.DataSource;
+import com.se.activityservice.dao.ReadDao;
+import com.se.activityservice.entity.Activity;
+import com.se.activityservice.repository.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class ReadDaoImpl implements ReadDao {
 
-    private final
-    TopicRepository topicRepository;
+    private final ActivityRepository activityRepository;
 
     @Autowired
-    public ReadDaoImpl(TopicRepository topicRepository) {
-        this.topicRepository = topicRepository;
+    public ReadDaoImpl(ActivityRepository activityRepository) {
+        this.activityRepository = activityRepository;
     }
 
     @Override
     @DataSource("slave")
-    public Iterable<Topic> findAll() {
-        return topicRepository.findAll();
+    public Iterable<Activity> findAll() {
+        return activityRepository.findAll();
     }
 
     @Override
     @DataSource("slave")
-    public boolean existsById(Long topicId) {
-        return topicRepository.existsById(topicId);
+    public Activity findById(Long activityId) {
+        return activityRepository.findById(activityId).orElse(null);
     }
 
     @Override
     @DataSource("slave")
-    public Topic findById(Long topicId) {
-        return topicRepository.findById(topicId).orElse(null);
+    public Iterable<Activity> findAllByUserId(Long userId) {
+        return activityRepository.findAllByUserId(userId);
+    }
+
+    @Override
+    @DataSource("slave")
+    public Iterable<Activity> findAllByItemId(Long itemId) {
+        return activityRepository.findAllByItemId(itemId);
+    }
+
+    @Override
+    @DataSource("slave")
+    public Activity findActivityByUserIdAndItemId(Long userId, Long itemId) {
+        return activityRepository.findActivityByUserIdAndItemId(userId, itemId).orElse(null);
     }
 }

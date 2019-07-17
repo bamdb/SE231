@@ -2,6 +2,9 @@ package com.se.activityservice.service.impl;
 
 import com.se.activityservice.client.ItemClient;
 import com.se.activityservice.client.UserClient;
+import com.se.activityservice.dao.MongoDao;
+import com.se.activityservice.dao.ReadDao;
+import com.se.activityservice.dao.WriteDao;
 import com.se.activityservice.entity.*;
 import com.se.activityservice.repository.ActivityRepository;
 import com.se.activityservice.repository.ProgressRepository;
@@ -10,21 +13,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 @Service
 public class ActivityServiceImpl implements ActivityService {
-    private final
-    ActivityRepository activityRepository;
-    private final ProgressRepository progressRepository;
 
-    @Autowired
-    public ActivityServiceImpl(ActivityRepository activityRepository, ProgressRepository progressRepository) {
-        this.activityRepository = activityRepository;
-        this.progressRepository = progressRepository;
-    }
+    @Resource(name="mongoDaoImpl")
+    private MongoDao mongoDao;
+
+    @Resource(name="readDaoImpl")
+    private ReadDao readDao;
+
+    @Resource(name="writeDaoImpl")
+    private WriteDao writeDao;
 
     @Autowired
     UserClient userClient;
@@ -33,15 +37,15 @@ public class ActivityServiceImpl implements ActivityService {
     ItemClient itemClient;
 
     public Progress selectProgress(Long userId, Long itemId) {
-        return progressRepository.findByItemIdAndUserId(userId, itemId).orElse(null);
+        return mongoDao.findByItemIdAndUserId(userId, itemId);
     }
 
     public Progress updateProgress(Progress progress) {
-        Progress progress1 = progressRepository.findByItemIdAndUserId(progress.getItemId(), progress.getUserId()).orElse(null);
+        Progress progress1 = mongoDao.findByItemIdAndUserId(progress.getItemId(), progress.getUserId());
         if (progress1 != null) {
             progress.setId(progress1.getId());
         }
-        return progressRepository.save(progress);
+        return mongoDao.save(progress);
     }
 
     public Activity postActivity(Activity activity) {
@@ -53,19 +57,19 @@ public class ActivityServiceImpl implements ActivityService {
         if (activity.getItemId() == null || itemClient.getItemById(activity.getItemId()) == null) {
             return null;
         }
-        return activityRepository.save(activity);
+        return writeDao.save(activity);
     }
 
     public Iterable<Activity> selectAll() {
-        return activityRepository.findAll();
+        return readDao.findAll();
     }
 
     public Activity selectById(Long id) {
-        return activityRepository.findById(id).orElse(null);
+        return readDao.findById(id);
     }
 
     public List<ActivityItemOut> selectByUserId(Long id) {
-        Iterable<Activity> activityIterable = activityRepository.findAllByUserId(id);
+        Iterable<Activity> activityIterable = readDao.findAllByUserId(id);
         if (!activityIterable.iterator().hasNext()) {
             return null;
         }
@@ -88,7 +92,7 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     public Iterable<Activity> selectByItemId(Long id) {
-        Iterable<Activity> activityIterable = activityRepository.findAllByItemId(id);
+        Iterable<Activity> activityIterable = readDao.findAllByItemId(id);
         if (!activityIterable.iterator().hasNext()) {
             return null;
         }
@@ -97,11 +101,11 @@ public class ActivityServiceImpl implements ActivityService {
             deleteActivityByItemId(id);
             return null;
         }
-        return activityRepository.findAllByItemId(id);
+        return readDao.findAllByItemId(id);
     }
 
     public ActivityUserOut selectByUserIdAndItemId(Long userId, Long itemId) {
-        Activity activity = activityRepository.findActivityByUserIdAndItemId(userId, itemId).orElse(null);
+        Activity activity = readDao.findActivityByUserIdAndItemId(userId, itemId);
         User user = userClient.getUserById(userId);
         ActivityUserOut activityUserOut = new ActivityUserOut();
         activityUserOut.setActivity(activity);
@@ -110,17 +114,17 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     public ResponseEntity<?> deleteActivityById(Long id) {
-        activityRepository.deleteById(id);
+        writeDao.deleteById(id);
         return ResponseEntity.ok().body("delete Activity successfully!");
     }
 
     public ResponseEntity<?> deleteActivityByUserId(Long id) {
-        activityRepository.deleteAllByUserId(id);
+        writeDao.deleteAllByUserId(id);
         return ResponseEntity.ok().body("delete Activity successfully!");
     }
 
     public ResponseEntity<?> deleteActivityByItemId(Long id) {
-        activityRepository.deleteAllByItemId(id);
+        writeDao.deleteAllByItemId(id);
         return ResponseEntity.ok().body("delete Activity successfully!");
     }
 }

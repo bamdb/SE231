@@ -1,12 +1,18 @@
 package com.se.activityservice.dao;
 
-import com.se.topicservice.entity.Topic;
+import com.se.activityservice.entity.Activity;
 
 public interface ReadDao {
 
-    Iterable<Topic> findAll();
+    Iterable<Activity> findAll();
+//
+//    boolean existsById(Long topicId);
+//
+    Activity findById(Long activityId);
 
-    boolean existsById(Long topicId);
+    Iterable<Activity> findAllByUserId(Long userId);
 
-    Topic findById(Long topicId);
+    Iterable<Activity> findAllByItemId(Long itemId);
+
+    Activity findActivityByUserIdAndItemId(Long userId, Long itemId);
 }
