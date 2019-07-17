@@ -47,3 +47,8 @@
 # 2019-07-16
 * add more info in service response
 * config mongodb to solve socket exception
+
+# 2019-07-17
+* fix bug in image upload
+* configure replication in three mysql database server
+* configure read write splitting in backend
