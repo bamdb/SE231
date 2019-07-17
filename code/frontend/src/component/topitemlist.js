@@ -9,11 +9,6 @@ import CardContent from '@material-ui/core/CardContent';
 import TopItem from './topitem';
 import Typography from "@material-ui/core/Typography";
 
-const useStyles = makeStyles(theme => ({
-    root:{
-        minWidth:300,
-    }
-}));
 
 class TopItemList extends Component {
     constructor(props) {
@@ -22,10 +17,7 @@ class TopItemList extends Component {
             items:[]
         }
     }
- 
-    componentDidMount() {
 
-    }
     componentWillReceiveProps(nextProps, nextContext) {
         this.setState({items:nextProps.itemList});
     }
@@ -33,7 +25,6 @@ class TopItemList extends Component {
     render(){
 
         var rows=[];
-        var rank=0;
         var items=this.state.items;
         /*
         topItemList.forEach((topItem) =>{
@@ -46,22 +37,21 @@ class TopItemList extends Component {
         for(var i=0;i<items.length;++i)
         {
             rows.push(
-                <Grid item xs={3}>
                 <TopItem key={i} name={items[i].item.itemname} rank={items[i].rating.rank} avgScore={items[i].rating.avgScore} itemId={items[i].item.id}/>
-                </Grid>
             );
+            rows.push(<Divider />);
         }
 
         return(
             <div>
-                <br/>
-                <Typography variant={"subtitle1"} color={"textSecondary"} >排行榜</Typography>
-                <Divider />
-                <br/>
-                <Grid container className={useStyles.root} spacing={2} >
-
-                    {rows}
-
+                <Grid container spacing={2} alignContent={"center"} justify={"flex-end"} wrap={"nowrap"}>
+                    <Grid item xs={11} >
+                        <br/>
+                        <Typography variant={"subtitle1"} color={"textSecondary"} >排行榜</Typography>
+                        <Divider />
+                        <br/>
+                        {rows}
+                    </Grid>
                 </Grid>
             </div>
         );

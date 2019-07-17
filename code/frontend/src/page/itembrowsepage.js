@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper/index'
 import Navigation from "../component/navigation";
 import TopItemList from "../component/topitemlist";
 import Browserlist from "../component/browserlist";
-import Tag from "../component/tag";
+import Tags from "../component/tag";
 import Listitem from '../component/listitem'
 import {AppBar} from "@material-ui/core";
 import Tab from "@material-ui/core/Tab";
@@ -75,12 +75,10 @@ class Itembrowsepage extends Component{
         const ItemList= this.state.ItemList;
         return(
             <Grid container direction={"column"}>
-                <Grid item xs={12}><Navigation handleSearch={this.handleSearch}/></Grid>
                 <Grid item xs={12}>
                 <Grid container direction={"column"} >
-                    <br/>
                     <Grid item xs={12}>
-                        <Tag select={true} tagchange={this.handletagchange} tags={["热血","王道","搞怪","不高兴","没头脑"]}/>
+                        <Tags select={true} tagchange={this.handletagchange} tags={["热血","王道","搞怪","不高兴","没头脑"]}/>
                     </Grid>
                     <Grid item xs={12}>
                         <Grid container>
