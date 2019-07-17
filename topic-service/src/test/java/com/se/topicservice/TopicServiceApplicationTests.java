@@ -90,6 +90,16 @@ public class TopicServiceApplicationTests {
                         "\"topicContent\":\"This is the first topic in bamdb\"}"))
                 .andExpect(status().isOk());
 
+        Topic topic1 = new Topic();
+        topic1.setPubTime(Timestamp.valueOf("2019-07-01 08:00:00"));
+        topic1.setUserId(1L);
+        topic1.setTitle("mock");
+        writeDao.save(topic1);
+        mvc.perform(post("/add/reply?topicId="+topic1.getId()+"&userId=1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("A reply"))
+                .andExpect(status().isOk());
+
         Topic topic = topicService.selectAll().iterator().next();
         mvc.perform(post("/add/reply?topicId="+topic.getId()+"&userId=0")
                 .contentType(MediaType.APPLICATION_JSON)

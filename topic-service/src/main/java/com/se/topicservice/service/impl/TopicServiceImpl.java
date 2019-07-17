@@ -86,10 +86,10 @@ public class TopicServiceImpl implements TopicService {
             topicPage = new TopicPage();
             topicPage.setReplyList(new ArrayList<>());
         }
-        if (topicPage.getReplyList() == null) {
+        List<Reply> replyList = topicPage.getReplyList();
+        if (replyList.size() == 0) {
             return ResponseEntity.ok().body("Reply cannot be found!");
         }
-        List<Reply> replyList = topicPage.getReplyList();
         Reply replyDeleted = new Reply();
         boolean deleted = false;
         for (Reply reply : replyList) {
@@ -131,13 +131,14 @@ public class TopicServiceImpl implements TopicService {
         if (topicPage == null) {
             topicPage = new TopicPage();
             topicPage.setReplyList(new ArrayList<>());
+            topicPage.setId(String.valueOf(topicId));
+            topicPage.setTopicContent(topicContent);
         }
-        if(topicPage.getReplyList().size()>0) {
-            replyList = topicPage.getReplyList();
+        replyList = topicPage.getReplyList();
+        if(replyList.size()>0) {
             reply.setId(replyList.get(replyList.size()-1).getId() + 1);
             replyList.add(reply);
         }else {
-            replyList = new ArrayList<>();
             reply.setId(1L);
             replyList.add(reply);
         }
