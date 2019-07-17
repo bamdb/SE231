@@ -2,6 +2,9 @@ package com.se.topicservice.service.impl;
 
 import com.se.topicservice.client.UserClient;
 import com.se.topicservice.config.ds.DataSource;
+import com.se.topicservice.dao.MongoDao;
+import com.se.topicservice.dao.ReadDao;
+import com.se.topicservice.dao.WriteDao;
 import com.se.topicservice.entity.*;
 import com.se.topicservice.repository.TopicMongoRepository;
 import com.se.topicservice.repository.TopicRepository;
@@ -10,11 +13,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class TopicServiceImpl implements TopicService {
+
+    @Resource(name="mongoDaoImpl")
+    private MongoDao mongoDao;
+
+    @Resource(name="readDaoImpl")
+    private ReadDao readDao;
+
+    @Resource(name="writeDaoImpl")
+    private WriteDao writeDao;
 
     @Autowired
     public UserClient userClient;
@@ -25,14 +38,14 @@ public class TopicServiceImpl implements TopicService {
         if (topic.getUserId() == null || userClient.getUserById(topic.getUserId()) == null) {
             return null;
         }
-        Topic returnTopic = topicRepository.save(topic);
+        Topic returnTopic = writeDao.save(topic);
 
         // initialize corresponding topic page
         TopicPage topicPage = new TopicPage();
         topicPage.setId(String.valueOf(returnTopic.getId()));
         topicPage.setTopicContent(topicIn.getTopicContent());
         topicPage.setReplyList(new ArrayList<>());
-        topicMongoRepository.save(topicPage);
+        mongoDao.save(topicPage);
 
         return returnTopic;
     }
@@ -40,36 +53,40 @@ public class TopicServiceImpl implements TopicService {
     @Override
     @DataSource("slave")
     public Iterable<Topic> selectAll() {
-        return topicRepository.findAll();
+        return readDao.findAll();
     }
 
     public TopicPage selectById(Long id) {
-        return topicMongoRepository.findById(String.valueOf(id)).orElse(null);
+        return mongoDao.findById(String.valueOf(id));
     }
 
     public Topic updateTopic(Topic topic) {
-        if (topicRepository.existsById(topic.getId())) {
-            Topic tempTopic = topicRepository.findById(topic.getId()).orElse(null);
+        if (readDao.existsById(topic.getId())) {
+            Topic tempTopic = readDao.findById(topic.getId());
             tempTopic.setTitle(topic.getTitle());
-            return topicRepository.save(tempTopic);
+            return writeDao.save(tempTopic);
         }
         else return null;
     }
 
     public ResponseEntity<?> deleteTopicById(Long id) {
-        topicRepository.deleteById(id);
-        topicMongoRepository.deleteById(String.valueOf(id));
+        writeDao.deleteById(id);
+        mongoDao.deleteById(String.valueOf(id));
         return ResponseEntity.ok().body("delete topic successfully!");
     }
 
     public ResponseEntity<?> deleteReplyById(Long topicId, Long replyId) {
         // check if topic exists
-        if (topicRepository.findById(topicId).orElse(null) == null) {
+        if (readDao.findById(topicId) == null) {
             return ResponseEntity.ok().body("Topic cannot be found!");
         }
 
-        TopicPage topicPage = topicMongoRepository.findById(String.valueOf(topicId)).orElse(null);
-        if (topicPage.getReplyList().size() == 0) {
+        TopicPage topicPage = mongoDao.findById(String.valueOf(topicId));
+        if (topicPage == null) {
+            topicPage = new TopicPage();
+            topicPage.setReplyList(new ArrayList<>());
+        }
+        if (topicPage.getReplyList() == null) {
             return ResponseEntity.ok().body("Reply cannot be found!");
         }
         List<Reply> replyList = topicPage.getReplyList();
@@ -89,7 +106,7 @@ public class TopicServiceImpl implements TopicService {
         }
         replyList.remove(replyDeleted);
         topicPage.setReplyList(replyList);
-        topicMongoRepository.save(topicPage);
+        mongoDao.save(topicPage);
 
         return ResponseEntity.ok().body("delete topic successfully!");
     }
@@ -102,15 +119,19 @@ public class TopicServiceImpl implements TopicService {
         }
 
         // check if topic exists
-        if (topicRepository.findById(topicId).orElse(null) == null) {
+        if (readDao.findById(topicId) == null) {
             return null;
         }
 
-        TopicPage topicPage = topicMongoRepository.findById(String.valueOf(topicId)).orElse(null);
+        TopicPage topicPage = mongoDao.findById(String.valueOf(topicId));
         Reply reply = new Reply();
         reply.setUser(user);
         reply.setReplyContent(topicContent);
         List<Reply> replyList;
+        if (topicPage == null) {
+            topicPage = new TopicPage();
+            topicPage.setReplyList(new ArrayList<>());
+        }
         if(topicPage.getReplyList().size()>0) {
             replyList = topicPage.getReplyList();
             reply.setId(replyList.get(replyList.size()-1).getId() + 1);
@@ -122,7 +143,7 @@ public class TopicServiceImpl implements TopicService {
         }
         topicPage.setReplyList(replyList);
 
-        topicMongoRepository.save(topicPage);
+        mongoDao.save(topicPage);
 
         return topicPage;
     }

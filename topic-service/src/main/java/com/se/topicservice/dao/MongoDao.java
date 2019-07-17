@@ -8,4 +8,6 @@ public interface MongoDao {
     TopicPage save(TopicPage topicPage);
 
     TopicPage findById(String topicId);
+
+    void deleteById(String topicId);
 }
