@@ -14,7 +14,7 @@ import GraphicEqIcon from '@material-ui/icons/GraphicEq';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import clsx from 'clsx';
-import Link from '@material-ui/core/Link';
+import { StaticRouter } from 'react-router'
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -25,6 +25,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import {blueGrey} from "@material-ui/core/colors";
+import {Link} from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 const drawerWidth=240;
 const color = blueGrey[50];
@@ -37,6 +39,7 @@ const useStyles = makeStyles(theme=>({
     },
     drawerPaper: {
         position: 'relative',
+        height:"100%",
         whiteSpace: 'nowrap',
         width: drawerWidth,
         transition: theme.transitions.create('width', {
@@ -177,17 +180,19 @@ export default function LeftAppBar(props) {
             </div>
             <Divider />
             <div>
+                <StaticRouter>
+                <Button component={Link} to={'activity'}>activity</Button>
                 <ListItem button>
                     <ListItemIcon>
                         <HomeOutlinedIcon  />
                     </ListItemIcon>
-                    <ListItemText>HOME</ListItemText>
+                    <ListItemText component={Link} to={'/'}>HOME</ListItemText>
                 </ListItem>
                 <ListItem button>
                     <ListItemIcon>
                         <MovieOutlinedIcon  />
                     </ListItemIcon>
-                    <ListItemText>MOVIE</ListItemText>
+                    <ListItemText component={Link} to={'/activity'}>activity</ListItemText>
                 </ListItem>
                 <ListItem button>
                     <ListItemIcon>
@@ -240,6 +245,7 @@ export default function LeftAppBar(props) {
                 </ListItemIcon>
                 <ListItemText>讨论区</ListItemText>
             </ListItem>
+                </StaticRouter>
             </div>
 
         </Drawer>
