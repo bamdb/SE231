@@ -157,7 +157,7 @@ public class ActivityServiceApplicationTests {
             Long itemId = activityService.selectAll().iterator().next().getItemId();
             mvc.perform(delete("/delete/itemid/"+itemId))
                     .andExpect(status().isOk());
-            Assert.assertNull(activityService.selectByUserId(itemId));
+            Assert.assertNull(activityService.selectByItemId(itemId));
         }
     }
 

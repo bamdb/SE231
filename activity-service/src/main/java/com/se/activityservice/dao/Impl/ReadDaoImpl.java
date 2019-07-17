@@ -44,6 +44,6 @@ public class ReadDaoImpl implements ReadDao {
     @Override
     @DataSource("slave")
     public Activity findActivityByUserIdAndItemId(Long userId, Long itemId) {
-        return activityRepository.findActivityByUserIdAndItemId(userId, itemId).orElse(null);
+        return activityRepository.findCollectByUserIdAndItemId(userId, itemId).orElse(null);
     }
 }

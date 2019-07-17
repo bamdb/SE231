@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 @Aspect
 @Component
 public class DataSourceAspect {
-    @Before("@annotation(com.se.topicservice.config.ds.DataSource)")
+    @Before("@annotation(com.se.activityservice.config.ds.DataSource)")
     public void beforeSwitchDS(JoinPoint point) throws Exception{
 
         Class<?> className = point.getTarget().getClass();
@@ -32,7 +32,7 @@ public class DataSourceAspect {
     }
 
 
-    @After("@annotation(com.se.topicservice.config.ds.DataSource)")
+    @After("@annotation(com.se.activityservice.config.ds.DataSource)")
     public void afterSwitchDS(JoinPoint point){
         DynamicDataSourceHolder.clearDataSource();
     }

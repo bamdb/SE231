@@ -106,6 +106,7 @@ public class ActivityServiceImpl implements ActivityService {
 
     public ActivityUserOut selectByUserIdAndItemId(Long userId, Long itemId) {
         Activity activity = readDao.findActivityByUserIdAndItemId(userId, itemId);
+
         User user = userClient.getUserById(userId);
         ActivityUserOut activityUserOut = new ActivityUserOut();
         activityUserOut.setActivity(activity);

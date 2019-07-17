@@ -5,9 +5,7 @@ import com.se.activityservice.entity.Activity;
 public interface ReadDao {
 
     Iterable<Activity> findAll();
-//
-//    boolean existsById(Long topicId);
-//
+
     Activity findById(Long activityId);
 
     Iterable<Activity> findAllByUserId(Long userId);
