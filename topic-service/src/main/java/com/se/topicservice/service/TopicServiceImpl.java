@@ -48,7 +48,6 @@ public class TopicServiceImpl implements TopicService{
     }
 
     @Override
-    @DataSource("slave")
     public Iterable<Topic> selectAll() {
         return topicRepository.findAll();
     }

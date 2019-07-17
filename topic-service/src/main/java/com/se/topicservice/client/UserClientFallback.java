@@ -15,21 +15,12 @@ public class UserClientFallback implements UserClient{
         if (userId == 0) {
             return null;
         }
-        User user = new User();
-        user.setImgUrl(null);
-        user.setUsername("mock");
-        user.setRole(0);
-        user.setId(userId);
-        return user;
-//        if (userId == 0) {
-//            return null;
-//        }
-//        for (User user: userList) {
-//            if (user.getId().equals(userId)) {
-//                return user;
-//            }
-//        }
-//        return null;
+        for (User user: userList) {
+            if (user.getId().equals(userId)) {
+                return user;
+            }
+        }
+        return null;
     }
 
     @Override

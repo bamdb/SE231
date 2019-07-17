@@ -1,8 +1,8 @@
 package com.se.topicservice;
 
 import com.github.tomakehurst.wiremock.junit.WireMockClassRule;
-//import com.netflix.loadbalancer.Server;
-//import com.netflix.loadbalancer.ServerList;
+import com.netflix.loadbalancer.Server;
+import com.netflix.loadbalancer.ServerList;
 import com.se.topicservice.client.UserClient;
 import com.se.topicservice.entity.Topic;
 import com.se.topicservice.entity.User;
@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(properties = {
         "feign.hystrix.enabled=true"
 })
-//@ContextConfiguration(classes = {TopicServiceApplicationTests.LocalRibbonClientConfiguration.class})
+@ContextConfiguration(classes = {TopicServiceApplicationTests.LocalRibbonClientConfiguration.class})
 public class TopicServiceApplicationTests {
 
     @Autowired
@@ -215,11 +215,11 @@ public class TopicServiceApplicationTests {
         TopicServiceApplication.main(new String[] {});
     }
 
-//    @TestConfiguration
-//    public static class LocalRibbonClientConfiguration {
-//        @Bean
-//        public ServerList<Server> ribbonServerList() {
-//            return new StaticServerList<>(new Server("localhost", wiremock.port()));
-//        }
-//    }
+    @TestConfiguration
+    public static class LocalRibbonClientConfiguration {
+        @Bean
+        public ServerList<Server> ribbonServerList() {
+            return new StaticServerList<>(new Server("localhost", wiremock.port()));
+        }
+    }
 }
