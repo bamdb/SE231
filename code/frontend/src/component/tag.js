@@ -8,6 +8,7 @@ import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
 import { Divider } from 'antd';
 import { Tag } from 'antd';
+import axios from "axios";
 
 const { CheckableTag } = Tag;
 /*
@@ -25,6 +26,7 @@ class Tags extends Component {
     handleclick(tag,checked) {
         const selectedTags = this.state.selectedtags;
         const nextSelectedTags = checked ? [...selectedTags, tag] : selectedTags.filter(t => t !== tag);
+
         console.log('You are interested in: ', nextSelectedTags);
         this.setState({ selectedtags: nextSelectedTags });
         this.handletagchange();
@@ -36,12 +38,34 @@ class Tags extends Component {
     componentWillMount() {
         if(this.props.tags!=null)
         {
-            this.setState({tags:this.props.tags})
+            var tags=this.props.tags;
+            var tagnames=[];
+            tags.map(tag=>{
+                tagnames.push(tag.tagname);
+            })
+            this.setState({tags:tagnames})
         }
         if(this.props.select!=false){
             this.setState({select:this.props.select})
         }
+
     }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        if(nextProps.tags!=null)
+        {
+            var tags=nextProps.tags;
+            var tagnames=[];
+            tags.map(tag=>{
+                tagnames.push(tag.tagname);
+            })
+            this.setState({tags:tagnames})
+        }
+        if(nextProps.select!=false){
+            this.setState({select:nextProps.select})
+        }
+    }
+
     componentDidMount() {
 
     }
@@ -75,7 +99,7 @@ class Tags extends Component {
 
             for(var i=0;i<tags.length;++i) {
                 item.push(
-                    <CheckableTag label={tags[i]} clickable color="secondary" />
+                    <Chip  id="chip" label={tags[i].tagname} clickable color="secondary" />
                 );
                 item.push(<Divider type={"vertical"}/> )
             }

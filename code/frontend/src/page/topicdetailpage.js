@@ -51,15 +51,11 @@ class Topicdetailpage extends Component{
         const data = this.state.data;
         return(
           <Grid container spacing={10}>
-              <Grid item xs={12}>
-                  <Navigation />
-              </Grid>
+
               <Grid item xs={1}>
               </Grid>
               <Grid item xs={8}>
-                  <Grid>
-                      <TopicList  search={this.state.search} topics={topic} />
-                  </Grid>
+
                   <Grid>
                       <Discuss replies={data.replyList}/>
                   </Grid>

@@ -1,241 +1,77 @@
+import { Menu, Icon, Button } from 'antd';
 import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles/index';
-import Grid from '@material-ui/core/Grid/index'
-import Paper from '@material-ui/core/Paper/index';
-import Typography from '@material-ui/core/Typography';
-import AppBar from  '@material-ui/core/AppBar';
-import Toolbar from  '@material-ui/core/Toolbar';
-import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
-import MovieOutlinedIcon from '@material-ui/icons/MovieOutlined';
-import BookOutlinedIcon from '@material-ui/icons/BookOutlined';
-import PersonOutlinedIcon from '@material-ui/icons/PersonOutlined';
-import MessageIcon from '@material-ui/icons/Message';
-import GraphicEqIcon from '@material-ui/icons/GraphicEq';
-import Drawer from '@material-ui/core/Drawer';
-import Divider from '@material-ui/core/Divider';
-import clsx from 'clsx';
 
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import EmailIcon from '@material-ui/icons/Email';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import IconButton from '@material-ui/core/IconButton';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import {blueGrey} from "@material-ui/core/colors";
-import {Link} from "react-router-dom";
-import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import { StaticRouter } from 'react-router'
-const drawerWidth=240;
-const color = blueGrey[50];
+const { SubMenu } = Menu;
 
-const useStyles = makeStyles(theme=>({
-    avatar:{
-        margin: 10,
-        width: 100,
-        height: 100,
-    },
-    drawerPaper: {
-        position:'relative',
-        height:"100%",
-        whiteSpace: 'nowrap',
-        width: drawerWidth,
-        transition: theme.transitions.create('width', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    },
-    drawerPaperClose: {
+class Leftappbarnew extends Component {
+    state = {
+        collapsed: false,
+    };
 
-        overflowX: 'hidden',
-        transition: theme.transitions.create('width', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        width: theme.spacing(2),
-        [theme.breakpoints.up('sm')]: {
-            width: theme.spacing(9),
-        },
-    },
-    toolbarIcon: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: '0 8px',
-    },
-    toolbar: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        padding: '0 8px',
-    },
-    appBar: {
-        height:48,
-        zIndex: theme.zIndex.drawer + 1,
-        transition: theme.transitions.create(['width', 'margin'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-    },
-    appBarShift: {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    },
-    menuButton: {
-        marginRight: 36,
-    },
-    Iconbutton: {
-        paddingLeft: 50,
-    },
-}))
+    toggleCollapsed = () => {
+        this.setState({
+            collapsed: !this.state.collapsed,
+        });
+    };
 
-class Leftappbarnew extends Component{
-    constructor(props)
-    {
-        super(props)
-        this.state={open:true}
-        this.handleDrawerClose=this.handleDrawerClose.bind(this);
-        this.handleDrawerOpen=this.handleDrawerOpen.bind(this);
-    }
-
-
-
-
-   handleDrawerClose(){
-
-    }
-
-    handleDrawerOpen(){
-
-    }
-    render()
-    {
-        return(
-            <StaticRouter>
-            <div>
-                <AppBar>
-                    <div  >
-                        <IconButton
-
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography variant="h6" noWrap  color={"inherit"}>
-                            Bamdb
-                        </Typography>
-
-                        <div  >
-                            <IconButton color="inherit"
-                                        aria-label="Open drawer"
-                                        edge="start">
-                                <EmailIcon />
-                            </IconButton>
-                            <IconButton color="inherit"
-                                        aria-label="Open drawer"
-                                        edge="start">
-                                <PersonOutlinedIcon />
-                            </IconButton>
-                            <IconButton color="inherit"
-                                        aria-label="Open drawer"
-                                        edge="start">
-                                <MessageIcon />
-                            </IconButton>
-                        </div>
-                    </div>
-                </AppBar>
-                <Drawer
-                    variant="permanent"
-
-                    open={this.state.open}
+    render() {
+        return (
+            <div style={{ width: 256 }}>
+                <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
+                    <Icon type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} />
+                </Button>
+                <Menu
+                    defaultSelectedKeys={['1']}
+                    defaultOpenKeys={['sub1']}
+                    mode="inline"
+                    theme="dark"
+                    inlineCollapsed={this.state.collapsed}
                 >
-                    <div  >
-                        <IconButton >
-
-                        </IconButton>
-                    </div>
-                    <Divider />
-                    <div>
-                        <ListItem button component={Link} to={'/'}>
-                            <ListItemIcon>
-                                <HomeOutlinedIcon/>
-                            </ListItemIcon>
-                            <ListItemText><Typography color={"textSecondary"}> HOME</Typography></ListItemText>
-                        </ListItem>
-                        <ListItem  component={Link} to={'/userfavoritepage'}>
-                            <ListItemIcon>
-                                <MovieOutlinedIcon  />
-                            </ListItemIcon>
-                            <ListItemText component={Link} to={'/activity'}>activity</ListItemText>
-                        </ListItem>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <BookOutlinedIcon  />
-                            </ListItemIcon>
-                            <ListItemText>BOOK</ListItemText>
-                        </ListItem>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <PersonOutlinedIcon  />
-                            </ListItemIcon>
-                            <ListItemText>HELP</ListItemText>
-                        </ListItem>
-                        <br/><br/><br/>
-                        <Divider />
-                        <br/><br/><br/>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <PersonOutlinedIcon  />
-                            </ListItemIcon>
-                            <ListItemText>Comment</ListItemText>
-                        </ListItem>
-                        <ListItem button >
-                            <ListItemIcon>
-                                <PersonOutlinedIcon  />
-                            </ListItemIcon>
-                            <ListItemText>Comment</ListItemText>
-                        </ListItem>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <PersonOutlinedIcon  />
-                            </ListItemIcon>
-                            <ListItemText>？？？</ListItemText>
-                        </ListItem>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <PersonOutlinedIcon  />
-                            </ListItemIcon>
-                            <ListItemText>动态</ListItemText>
-                        </ListItem>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <PersonOutlinedIcon  />
-                            </ListItemIcon>
-                            <ListItemText>浏览</ListItemText>
-                        </ListItem>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <PersonOutlinedIcon  />
-                            </ListItemIcon>
-                            <ListItemText>讨论区</ListItemText>
-                        </ListItem>
-
-                    </div>
-
-                </Drawer>
-
+                    <Menu.Item key="1">
+                        <Icon type="pie-chart" />
+                        <span>Option 1</span>
+                    </Menu.Item>
+                    <Menu.Item key="2">
+                        <Icon type="desktop" />
+                        <span>Option 2</span>
+                    </Menu.Item>
+                    <Menu.Item key="3">
+                        <Icon type="inbox" />
+                        <span>Option 3</span>
+                    </Menu.Item>
+                    <SubMenu
+                        key="sub1"
+                        title={
+                            <span>
+                <Icon type="mail" />
+                <span>Navigation One</span>
+              </span>
+                        }
+                    >
+                        <Menu.Item key="5">Option 5</Menu.Item>
+                        <Menu.Item key="6">Option 6</Menu.Item>
+                        <Menu.Item key="7">Option 7</Menu.Item>
+                        <Menu.Item key="8">Option 8</Menu.Item>
+                    </SubMenu>
+                    <SubMenu
+                        key="sub2"
+                        title={
+                            <span>
+                <Icon type="appstore" />
+                <span>Navigation Two</span>
+              </span>
+                        }
+                    >
+                        <Menu.Item key="9">Option 9</Menu.Item>
+                        <Menu.Item key="10">Option 10</Menu.Item>
+                        <SubMenu key="sub3" title="Submenu">
+                            <Menu.Item key="11">Option 11</Menu.Item>
+                            <Menu.Item key="12">Option 12</Menu.Item>
+                        </SubMenu>
+                    </SubMenu>
+                </Menu>
             </div>
-            </StaticRouter>
-        )
+        );
     }
-
-
-
 }
-export default Leftappbarnew
+export default Leftappbarnew;

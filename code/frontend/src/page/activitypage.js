@@ -44,7 +44,7 @@ class Activitypage extends Component{
     render(){
         return(
             <Grid container direction={"column"} >
-                <Grid item xs={12}><Navigation handleSearch={this.handleSearch} /></Grid>
+
                 <Grid container direction={"row"} alignItems={"center"}>
                     <Grid item xs={2}></Grid>
 

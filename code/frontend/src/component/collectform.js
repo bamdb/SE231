@@ -72,6 +72,15 @@ class Collectform extends Component {
         this.handlebuttonclick=this.handlebuttonclick.bind(this);
         this.handlescorechange=this.handlescorechange.bind(this);
     }
+    componentWillMount() {
+        var url5="http://202.120.40.8:30741/item/tag/id/"+this.props.itemid;
+        axios.get(url5).then(
+            function(response)
+            {
+                this.setState({tags:response.data.tags})
+            }.bind(this)
+        )
+    }
 
     handlescorechange(score)
     {
@@ -174,7 +183,7 @@ class Collectform extends Component {
                     <Typography variant="subtitle1" color="textPrimary" component="p">
                         热门标签
                     </Typography>
-                    <Tag/>
+                    <Tag tags={this.state.tags}/>
                     <br/>
                     <Typography variant="subtitle1" color="textPrimary" component="p">
                         您的标签

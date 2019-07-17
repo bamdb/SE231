@@ -41,7 +41,7 @@ class Topicpage extends Component{
     render(){
         return(
             <Grid container direction={"row"} spacing={4} >
-                <Grid item xs={12} spacing={3} ><Navigation /> </Grid>
+
 
                 <Grid item xs={2} ><br/> <Tag select={true} tagchange={this.handletagchange}/></Grid>
                 <Grid item xs={9} >

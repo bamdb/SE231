@@ -13,6 +13,7 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from '@material-ui/core/InputLabel';
 import axios from 'axios'
 import $ from'jquery'
+import Uploadavatar from "./uploadavatar";
 /*
 信息保存在state中，可以自行添加props或ajax
 */
@@ -64,7 +65,7 @@ class Userinfo extends Component {
             $.ajax({
                 url:url,
                 type:"PUT",
-                params:{"contentType": "application/json;charset=utf-8"},
+                contentType: "application/json;charset=utf-8",
                 data:{mail:this.state.email},
                 success: function f(data) {
 
@@ -171,8 +172,14 @@ class Userinfo extends Component {
                         <Grid container >
                             <Grid item xs={3}>
                             <Grid container justify="center" alignItems="center">
+                                <Grid item xs={3}/>
+                                <Grid item xs={9}>
                                 <Avatar alt="Remy Sharp" src="/img/3.jpg" id={"avatar"} />
-
+                                </Grid>
+                                <Grid item xs={4}/>
+                                <Grid item xs={8}>
+                                <Uploadavatar></Uploadavatar>
+                                </Grid>
                             </Grid>
 
                             </Grid>
@@ -208,13 +215,7 @@ class Userinfo extends Component {
                                     <ListItem>
                                         <ListItemText primary="注册日期" secondary={this.state.date}></ListItemText>
                                     </ListItem>
-                                    <ListItem>
-                                        <FormControl margin="normal" required fullWidth>
 
-                                            <InputLabel htmlFor="id">password</InputLabel>
-                                            <Input type="text" id="password" value={this.state.password} onChange={this.handlechange}></Input>
-                                        </FormControl>
-                                    </ListItem>
                                 </List>
                                     </Grid>
                                 </Grid>

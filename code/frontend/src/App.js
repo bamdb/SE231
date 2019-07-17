@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect , Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import UserHomepage from './page/userhomepage'
@@ -30,6 +30,7 @@ import Scheduletableold from './component/scheduletableold'
 import leftappbar from "./component/leftappbar";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles/index';
+import Leftappbarnew from "./component/leftappbarnew";
 
 
 
@@ -61,8 +62,15 @@ function selectDrawer(isneeded) {
 }
 function App() {
     const classes=useStyles();
+    /*
     var needDrawer=true;
     if(window.location.href.split("#")[1]==='/login'||window.location.href.split("#")[1]==='/register') needDrawer=false;
+    */
+    const [needDrawer, setneedDrawer]=useState(true);
+    const [username]=useState("");
+    const leftBar = needDrawer ? leftappbar({username:"hyy"}) : <div />
+
+
   return (
       <Router >
         <div className={classes.root}>

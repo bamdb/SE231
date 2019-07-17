@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import axios from 'axios';
+import $ from "jquery";
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -42,6 +43,7 @@ class Register extends Component {
         this.state={
             name:"",
             password:"",
+            email:"",
             islogin: false,
             forgetPassword: false,
         }
@@ -51,9 +53,23 @@ class Register extends Component {
     }
     submit()
     {
-        axios.post("http://202.120.40.8:30741/user/signup",{
+        /*axios.post("http://202.120.40.8:30741/user/signup",{
+            usernmae:this.state.name,
+            password:this.state.password
+
+        })*/
+        $.ajax({
+            url:"http://202.120.40.8:30741/user/signup",
+            type:"POST",
+            contentType: "application/json",
+            data:JSON.stringify({username:this.state.name,
+                password:this.state.password}),
+            success: function f(data) {
+
+                console.log(data);
 
 
+            }.bind(this)
         })
     }
 
@@ -78,7 +94,9 @@ class Register extends Component {
                             <Grid item xs={8}>
                                 <Typography variant={"h4"} component="h4" >注册成为Bamdb会员</Typography> <br/>
                                 <Typography component="p">你的email地址</Typography><br/>
-                                <TextField className={useStyles.textField} margin={"normal"} name={"email"} type={"text"} value={this.state.name} onChange={this.handleInforChange} /><br/>
+                                <TextField className={useStyles.textField} margin={"normal"} name={"email"} type={"text"} value={this.state.email} onChange={this.handleInforChange} /><br/>
+                                <Typography component="p">你的用户名</Typography><br/>
+                                <TextField className={useStyles.textField} margin={"normal"} name={"name"} type={"text"} value={this.state.name} onChange={this.handleInforChange} /><br/>
                                 <Typography component="p">输入密码</Typography><br/>
                                 <TextField className={useStyles.textField} margin={"normal"} name={"password"} type={"password"} value={this.state.password} onChange={this.handleInforChange} /><br/>
                                 <Button

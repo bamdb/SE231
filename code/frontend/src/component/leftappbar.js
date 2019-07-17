@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect , Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles/index';
 import Grid from '@material-ui/core/Grid/index'
 import Paper from '@material-ui/core/Paper/index';
@@ -116,10 +116,14 @@ const useStyles = makeStyles(theme=>({
 
 export default function LeftAppBar(props) {
     const classes = useStyles();
-    const [open, setopen] = React.useState(true);
+    const [open, setopen] = useState(true);
+    const [username,setusername]=useState("");
     var drawerbutton = open ? <ChevronLeftIcon />:<ChevronRightIcon />
+    useEffect(() => {
 
-    const username= props.username;
+        setusername(localStorage.getItem("id"))
+    });
+
     /*
     constructor(props){
         super(props);

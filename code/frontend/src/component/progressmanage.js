@@ -78,7 +78,7 @@ class Progressmanage extends Component {
         this.setState({value : newValue});
     }
     componentWillMount() {
-        axios.get("202.120.40.8/activity/userid/1").then(
+        axios.get("http://202.120.40.8:30741/activity/userid/1").then(
             function(response)
             {
                 var book=[];
@@ -94,6 +94,7 @@ class Progressmanage extends Component {
                         movie.push(response.data[i].item);
                     }
                 }
+                this.setState({book:book,movie:movie});
             }.bind(this)
         )
     }
@@ -102,7 +103,7 @@ class Progressmanage extends Component {
     }
 
     render() {
-        var item=[];
+        /*var item=[];
 
         var items=this.state.items;
         for(var i=0;i<items.length;++i) {
@@ -113,25 +114,25 @@ class Progressmanage extends Component {
                     </Grid>
                 </Grid>
             )
-        }
+        }*/
         var items1=[];
         var items2=[];
-        for(var i=this.state.uppage*4;i<this.state.uppage*4&&i<this.state.book.length;++i)
+        for(var i=this.state.uppage*4;(i<this.state.uppage*4+4)&&i<this.state.book.length;++i)
         {
             items1.push(
                 <Grid item xs={3}>
                     <Grid container >
-                        <Scheduletable readstat={this.state.book[i].readstat} itemname={this.state.book[i].itemname} />
+                        <Scheduletable readstat={[]} itemname={this.state.book[i].itemname} />
                     </Grid>
                 </Grid>
             )
         }
-        for(var i=this.state.downpage*4;i<this.state.downpage*4&&i<this.state.movie.length;++i)
+        for(var i=this.state.downpage*4;i<(this.state.downpage*4+4)&&i<this.state.movie.length;++i)
         {
             items1.push(
                 <Grid item xs={3}>
                     <Grid container >
-                        <Scheduletable readstat={this.state.movie[i].readstat} itemname={this.state.movie[i].itemname} />
+                        <Scheduletable readstat={[]} itemname={this.state.movie[i].itemname} />
                     </Grid>
                 </Grid>
             )
@@ -154,7 +155,7 @@ class Progressmanage extends Component {
                 </Grid>
                     <Grid item xs={10}>
                         <Grid container spacing={3}>
-                            {item}
+                            {items1}
                         </Grid>
                     </Grid>
                 <Grid item xs={1}>
@@ -181,7 +182,7 @@ class Progressmanage extends Component {
                     </Grid>
                     <Grid item xs={10}>
                         <Grid container spacing={3}>
-                            {item}
+                            {items2}
                         </Grid>
                     </Grid>
                     <Grid item xs={1}>
