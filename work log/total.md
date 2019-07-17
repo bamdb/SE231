@@ -146,6 +146,21 @@
 * huangyuyang:
   * beautify the frontend
   * redisign the frontend
+# 2019-7-16
+* shenruien:
+  * modify frontendpage
+* huangyuyang：
+  * beautify the frontend
+  * redisign the frontend
+* yuyajie:
+  * finish security + oauth2
+  * modify security test
+* wangzulai:
+  * fix bug in image upload
+  * configure replication in three mysql database server
+  * configure read write splitting in backend
+
+
 
 
 
