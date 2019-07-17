@@ -14,7 +14,7 @@ import GraphicEqIcon from '@material-ui/icons/GraphicEq';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import clsx from 'clsx';
-import {Link} from "react-router-dom";
+
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -27,6 +27,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import {blueGrey} from "@material-ui/core/colors";
 import {Link} from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
 
 const drawerWidth=240;
 const color = blueGrey[50];
@@ -38,7 +39,7 @@ const useStyles = makeStyles(theme=>({
         height: 100,
     },
     drawerPaper: {
-        position: 'relative',
+        position:'relative',
         height:"100%",
         whiteSpace: 'nowrap',
         width: drawerWidth,
@@ -48,6 +49,7 @@ const useStyles = makeStyles(theme=>({
         }),
     },
     drawerPaperClose: {
+
         overflowX: 'hidden',
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
@@ -186,17 +188,17 @@ export default function LeftAppBar(props) {
                     </ListItemIcon>
                     <ListItemText><Typography color={"textSecondary"}> HOME</Typography></ListItemText>
                 </ListItem>
-                <ListItem  component={Link} to={'/userfavoritepage'}>
+                <ListItem  button component={Link} to={'/activity'}>
                     <ListItemIcon>
                         <MovieOutlinedIcon  />
                     </ListItemIcon>
-                    <ListItemText component={Link} to={'/activity'}>activity</ListItemText>
+                    <ListItemText >activity</ListItemText>
                 </ListItem>
-                <ListItem button>
+                <ListItem button component={Link} to={'/message'}>
                     <ListItemIcon>
                         <BookOutlinedIcon  />
                     </ListItemIcon>
-                    <ListItemText>BOOK</ListItemText>
+                    <ListItemText>message</ListItemText>
                 </ListItem>
                 <ListItem button>
                     <ListItemIcon>
@@ -207,17 +209,17 @@ export default function LeftAppBar(props) {
                 <br/><br/><br/>
                 <Divider />
                 <br/><br/><br/>
-                <ListItem button>
+                <ListItem button component={Link} to={'/itembrowse'}>
                     <ListItemIcon>
                         <PersonOutlinedIcon  />
                     </ListItemIcon>
-                    <ListItemText>Comment</ListItemText>
+                    <ListItemText>browse</ListItemText>
                 </ListItem>
-                <ListItem button >
+                <ListItem button component={Link} to={'/topic'}>
                     <ListItemIcon>
                         <PersonOutlinedIcon  />
                     </ListItemIcon>
-                    <ListItemText>Comment</ListItemText>
+                    <ListItemText>topic</ListItemText>
                 </ListItem>
                 <ListItem button>
                     <ListItemIcon>
@@ -243,10 +245,11 @@ export default function LeftAppBar(props) {
                 </ListItemIcon>
                 <ListItemText>讨论区</ListItemText>
             </ListItem>
-                </StaticRouter>
+
             </div>
 
         </Drawer>
+
         </div>
     /*
             <Grid container spacing={2} direction={"column"} justify={"flex-start"} wrap={"nowrap"} >

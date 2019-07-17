@@ -22,7 +22,7 @@ import Messagepage from "./page/messagepage";
 import Rating from "./component/rating";
 import Collect from "./component/collect";
 import Collectform from "./component/collectform";
-import Chart from "./component/test";
+
 import Addmessage from "./component/addmessage";
 import Addtopic from "./component/addtopic";
 import Editorpage from "./page/editorpage";
@@ -31,6 +31,7 @@ import Scheduletableold from './component/scheduletableold'
 import leftappbar from "./component/leftappbar";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles/index';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -73,9 +74,6 @@ function App() {
                 <Route path={"/activity"} component={Activitypage}></Route>
                 <Route path={'/resetpassword'} component={Resetpwdpage}></Route>
                 <Route path={'/message'} component={Messagepage}></Route>
-                <Route path={"/test"} component={Comment}></Route>
-
-
             </main>
         </div>
       </Router>
