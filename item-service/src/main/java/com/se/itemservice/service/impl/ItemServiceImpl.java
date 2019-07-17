@@ -20,6 +20,15 @@ import java.util.List;
 @Service
 public class ItemServiceImpl implements ItemService {
 
+    @Resource(name="mongoDaoImpl")
+    private MongoDao mongoDao;
+
+    @Resource(name="readDaoImpl")
+    private ReadDao readDao;
+
+    @Resource(name="writeDaoImpl")
+    private WriteDao writeDao;
+
     public Item postItem(Item item) {
         return itemRepository.save(item);
     }

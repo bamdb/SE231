@@ -1,44 +1,31 @@
 package com.se.itemservice.dao.Impl;
 
-import com.se.activityservice.config.ds.DataSource;
-import com.se.activityservice.dao.WriteDao;
-import com.se.activityservice.entity.Activity;
-import com.se.activityservice.repository.ActivityRepository;
+import com.se.itemservice.config.ds.DataSource;
+import com.se.itemservice.dao.ItemWriteDao;
+import com.se.itemservice.entity.Item;
+import com.se.itemservice.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ItemWriteDaoImpl implements WriteDao {
-
-    private final ActivityRepository activityRepository;
+public class ItemWriteDaoImpl implements ItemWriteDao {
+    private final ItemRepository itemRepository;
 
     @Autowired
-    public ItemWriteDaoImpl(ActivityRepository activityRepository) {
-        this.activityRepository = activityRepository;
-    }
-
-
-    @Override
-    @DataSource("master")
-    public Activity save(Activity activity) {
-        return activityRepository.save(activity);
+    public ItemWriteDaoImpl(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
     }
 
     @Override
     @DataSource("master")
-    public void deleteById(Long activityId) {
-        activityRepository.deleteById(activityId);
+    public Item save(Item item) {
+        return itemRepository.save(item);
     }
 
     @Override
     @DataSource("master")
-    public void deleteAllByUserId(Long userId) {
-        activityRepository.deleteAllByUserId(userId);
+    public void deleteById(Long itemId) {
+        itemRepository.deleteById(itemId);
     }
 
-    @Override
-    @DataSource("master")
-    public void deleteAllByItemId(Long itemId) {
-        activityRepository.deleteAllByItemId(itemId);
-    }
 }

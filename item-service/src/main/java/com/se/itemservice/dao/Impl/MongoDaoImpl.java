@@ -1,28 +1,33 @@
 package com.se.itemservice.dao.Impl;
 
-import com.se.activityservice.dao.MongoDao;
-import com.se.activityservice.entity.Progress;
-import com.se.activityservice.repository.ProgressRepository;
+import com.se.itemservice.dao.MongoDao;
+import com.se.itemservice.entity.Itemtag;
+import com.se.itemservice.repository.ItemtagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class MongoDaoImpl implements MongoDao {
-    
-    private final ProgressRepository progressRepository;
+
+    private final ItemtagRepository itemtagRepository;
 
     @Autowired
-    public MongoDaoImpl(ProgressRepository progressRepository) {
-        this.progressRepository = progressRepository;
+    public MongoDaoImpl(ItemtagRepository itemtagRepository) {
+        this.itemtagRepository = itemtagRepository;
     }
 
     @Override
-    public Progress findByItemIdAndUserId(Long userId, Long itemId) {
-        return progressRepository.findByItemIdAndUserId(userId, itemId).orElse(null);
+    public Itemtag findByItemId(Long itemId) {
+        return itemtagRepository.findByItemId(itemId).orElse(null);
     }
 
     @Override
-    public Progress save(Progress progress) {
-        return progressRepository.save(progress);
+    public Itemtag save(Itemtag itemtag) {
+        return itemtagRepository.save(itemtag);
+    }
+
+    @Override
+    public Itemtag findByItemIdAndUserId(Long itemId, Long userId) {
+        return itemtagRepository.findByItemIdAndUserId(itemId, userId).orElse(null);
     }
 }
