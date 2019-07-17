@@ -50,16 +50,16 @@ class Itembrowsepage extends Component{
         var type = this.state.type;
         var currentpage=this.state.currentpage;
         axios.get(
-            "http://202.120.40.8:30741/browser",{params:{
+            "http://202.120.40.8:30741/rating/browser",{params:{
                     type:type,
                     page:currentpage,
-                    pageSize:4
+                    pageSize:8
                 }}
         )
         .then(function (response) {
             _this.setState(
                 {
-                    ItemList0: response.data,
+                    ItemList: response.data,
                     isloaded: true,
                 }
             );
@@ -82,7 +82,7 @@ class Itembrowsepage extends Component{
                     </Grid>
                     <Grid item xs={12}>
                         <Grid container>
-                                <Listitem ItemList={ItemList} search={this.state.search}/>
+                                <Listitem ItemList={this.state.ItemList} search={this.state.search}/>
                                 <Pagetable handlepagechange={this.handlepagechange}/>
                             </Grid>
                         </Grid>

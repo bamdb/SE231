@@ -63,7 +63,12 @@ class Listitem extends Component {
             ]
         }
     }
-
+    componentWillMount() {
+        this.setState({ItemList:this.props.ItemList})
+    }
+    componentWillReceiveProps(nextProps, nextContext) {
+        this.setState({ItemList:nextProps.ItemList})
+    }
 
     render() {
 

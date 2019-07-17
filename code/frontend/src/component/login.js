@@ -137,7 +137,7 @@ class Login extends Component{
                                 <Grid item xs={2} />
                                 <Grid item xs={8} >
                                     <Typography variant={"subtitle1"} component="h4">没有账户？</Typography><br/>
-                                    <Link to={"/registerpage"}><Button variant="outlined" color="primary" className={useStyles.button} >注册新用户</Button></Link><br/>
+                                    <Link to={"/register"}><Button variant="outlined" color="primary" className={useStyles.button} >注册新用户</Button></Link><br/>
                                     <br/><br/>
                                     <Typography variant={"subtitle1"} component="h4">忘记密码？</Typography><br/>
                                     <Link to={"/resetpassword"}>

@@ -94,6 +94,7 @@ class Progressmanage extends Component {
                         movie.push(response.data[i].item);
                     }
                 }
+                this.setState({book:book,movie:movie});
             }.bind(this)
         )
     }
@@ -116,22 +117,22 @@ class Progressmanage extends Component {
         }*/
         var items1=[];
         var items2=[];
-        for(var i=this.state.uppage*4;i<this.state.uppage*4&&i<this.state.book.length;++i)
+        for(var i=this.state.uppage*4;(i<this.state.uppage*4+4)&&i<this.state.book.length;++i)
         {
             items1.push(
                 <Grid item xs={3}>
                     <Grid container >
-                        <Scheduletable readstat={this.state.book[i].readstat} itemname={this.state.book[i].itemname} />
+                        <Scheduletable readstat={[]} itemname={this.state.book[i].itemname} />
                     </Grid>
                 </Grid>
             )
         }
-        for(var i=this.state.downpage*4;i<this.state.downpage*4&&i<this.state.movie.length;++i)
+        for(var i=this.state.downpage*4;i<(this.state.downpage*4+4)&&i<this.state.movie.length;++i)
         {
             items1.push(
                 <Grid item xs={3}>
                     <Grid container >
-                        <Scheduletable readstat={this.state.movie[i].readstat} itemname={this.state.movie[i].itemname} />
+                        <Scheduletable readstat={[]} itemname={this.state.movie[i].itemname} />
                     </Grid>
                 </Grid>
             )
