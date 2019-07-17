@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.Order;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,7 +22,11 @@ import org.springframework.security.oauth2.provider.client.ClientCredentialsToke
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
+
+import java.security.KeyPair;
 
 @Configuration
 @EnableAuthorizationServer
@@ -50,7 +55,8 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
                 .tokenStore(this.tokenStore)
                 .authenticationManager(this.authenticationManager)
                 .userDetailsService(userDetailsService)
-                .tokenServices(defaultTokenServices());
+                .tokenServices(defaultTokenServices())
+                .accessTokenConverter(jwtAccessTokenConverter());
     }
 
     @Override
@@ -102,5 +108,20 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         return tokenServices;
     }
 
+    @Bean
+
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+
+        converter.setSigningKey("bamdb");
+//        KeyPair keyPair = new KeyStoreKeyFactory(new ClassPathResource("keystore.jks"), "foobar".toCharArray())
+//
+//                .getKeyPair("test");
+//
+//        converter.setKeyPair(keyPair);
+        return converter;
+
+    }
 
 }

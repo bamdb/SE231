@@ -1,44 +1,33 @@
 package com.oauth2.userservice.controller;
 
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.oauth2.userservice.client.AuthClient;
 import com.oauth2.userservice.domain.User;
 import com.oauth2.userservice.service.UserService;
-import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
-import java.util.Optional;
 
 
 @RestController
 public class UserController {
+
     @Autowired
     AuthClient authClient;
     @Resource(name="userServiceImpl")
     private UserService userService;
 
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value ="/all", produces ="application/json")
     public Iterable<User> getAllUsers() {
         return userService.selectAll();
     }
 
-    @PreAuthorize("#oauth2.hasScope('server')")
-    @GetMapping(value="/id/{id}", produces="application/json")
-    public User getUserById(@PathVariable("id") Long userId) {
-        return userService.selectById(userId);
-    }
-
     @PostMapping(value="/signup", produces="application/json")
     public User postUser(@RequestBody User user) {
-
         return authClient.postUser(user);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value="/username/{username}", produces="application/json")
     public User selectByUsername(@PathVariable("username") String username) {
         return userService.selectByUsername(username);
@@ -58,12 +47,6 @@ public class UserController {
         return userService.updateUser(user);
     }
 
-    @DeleteMapping(value="/delete/id/{id}")
-    public void deleteUserById(
-            @PathVariable("id") Long id) {
-            userService.deleteUserById(id);
-    }
-
     @DeleteMapping(value="/delete/username/{username}")
     public void deleteUserByUsername(
             @PathVariable("username") String username) {
@@ -71,11 +54,10 @@ public class UserController {
     }
 
 
-    @PreAuthorize("hasRole('ADMIN') && hasAuthority('doUsers') && #oauth2.hasScope('server')")
-    @GetMapping(value="/test", produces="application/json")
-    public String postUser() {
-
-        return "Succeed!!!!";
-    }
+//    @PreAuthorize("hasRole('EDITOR') && #oauth2.hasScope('server')")
+//    @GetMapping(value="/test", produces="application/json")
+//    public String postUser() {
+//        return "Succeed!!!!";
+//    }
 
 }

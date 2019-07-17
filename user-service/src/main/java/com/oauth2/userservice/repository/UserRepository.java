@@ -1,4 +1,4 @@
-package com.oauth2.userservice.dao;
+package com.oauth2.userservice.repository;
 
 
 import com.oauth2.userservice.domain.User;
