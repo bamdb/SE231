@@ -1,4 +1,4 @@
-package com.se.friendservice;
+package com.se.friendservice.repository;
 
 import com.se.friendservice.entity.Friend;
 import org.springframework.data.repository.CrudRepository;

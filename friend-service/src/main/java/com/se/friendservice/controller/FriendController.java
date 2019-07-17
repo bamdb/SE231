@@ -1,5 +1,6 @@
-package com.se.friendservice;
+package com.se.friendservice.controller;
 
+import com.se.friendservice.service.FriendService;
 import com.se.friendservice.entity.Friend;
 import com.se.friendservice.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
