@@ -1,10 +1,10 @@
 package com.se.imageservice;
 
+import com.se.imageservice.entity.Image;
 import org.bson.types.Binary;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
