@@ -1,6 +1,8 @@
 package com.oauth2.authservice.config;
 
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
@@ -11,14 +13,13 @@ import org.springframework.stereotype.Component;
  **/
 @EnableResourceServer
 @Configuration
+@Order(SecurityProperties.BASIC_AUTH_ORDER)
 public class ResourceServer extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http    .authorizeRequests()
-                .antMatchers("/user").permitAll()
+                .antMatchers("/").permitAll()
                 .antMatchers("/signup").permitAll()
-                .antMatchers("/exit/**").access("#oauth2.hasScope('server')")
                 .anyRequest().authenticated();
     }
 }
-

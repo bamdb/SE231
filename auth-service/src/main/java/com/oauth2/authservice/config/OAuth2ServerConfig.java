@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,6 +17,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.client.ClientCredentialsTokenEndpointFilter;
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -25,7 +27,6 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 @EnableAuthorizationServer
 @Slf4j
 public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
-//    private final RedisConnectionFactory connectionFactory;
 
     private final TokenStore tokenStore;
     private final AuthenticationManager authenticationManager;
@@ -77,10 +78,19 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
                 /*default: denyAll*/
 //                .checkTokenAccess("isAuthenticated()")
                 .checkTokenAccess("permitAll()")
-//                .passwordEncoder(new BCryptPasswordEncoder());
                 .allowFormAuthenticationForClients();
-    }
+//                .addTokenEndpointAuthenticationFilter(checkTokenEndpointFilter())
+//                .passwordEncoder(new BCryptPasswordEncoder());
 
+    }
+//    @Bean
+//    public ClientCredentialsTokenEndpointFilter checkTokenEndpointFilter() {
+//        ClientCredentialsTokenEndpointFilter filter =
+//                new ClientCredentialsTokenEndpointFilter("/oauth/check_token");
+//        filter.setAuthenticationManager(authenticationManager);
+//        filter.setAllowOnlyPost(true);
+//        return filter;
+//    }
     @Bean
     @Primary
     public DefaultTokenServices defaultTokenServices() {

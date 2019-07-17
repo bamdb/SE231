@@ -1,18 +1,17 @@
 package com.oauth2.authservice.domain;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.hibernate.annotations.Cascade;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.util.Assert;
-
 import javax.persistence.*;
-import javax.validation.constraints.AssertTrue;
 import java.util.*;
 
 @Entity
 public class User implements UserDetails {
+    private static final long serialVersionUID = 4151898811080960799L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -30,33 +29,27 @@ public class User implements UserDetails {
     @Column(name="img_url")
     private String imgUrl;
 
+    @Column(name="enabled")
+    private Boolean enabled;
 
     @ManyToMany
-    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "id"),
+                    name = "user_id", referencedColumnName = "id", nullable = false),
             inverseJoinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id"))
+                    name = "role_id", referencedColumnName = "id", nullable = false))
     private Collection<Role> roles;
 
-
     @ManyToMany
-    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     @JoinTable(
             name = "users_revoked_authorities",
             joinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "id"),
+                    name = "user_id", referencedColumnName = "id", nullable = false),
             inverseJoinColumns = @JoinColumn(
-                    name = "authority_id", referencedColumnName = "id"),
+                    name = "authority_id", referencedColumnName = "id", nullable = false),
             uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "authority_id"}))
-    private Collection<Role> revokeAuthorities;
-
-
-    public Collection<Role> getRoles() {
-        return roles;
-    }
+    private Collection<Authority> revokeAuthorities;
 
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
@@ -91,7 +84,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.enabled;
     }
 
     public String getImgUrl() {
@@ -114,6 +107,17 @@ public class User implements UserDetails {
         this.username = username;
     }
 
+    @JsonIgnore
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    @JsonIgnore
+    public Collection<Authority> getRevokeAuthorities() {
+        return revokeAuthorities;
+    }
+
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
             List<GrantedAuthority> authorities
@@ -125,6 +129,8 @@ public class User implements UserDetails {
                             .map(p -> new SimpleGrantedAuthority(p.getName()))
                             .forEach(authorities::add);
                 }
+            revokeAuthorities.stream().map(p -> new SimpleGrantedAuthority(p.getName()))
+                    .forEach(authorities::remove);
         return authorities;
     }
 
@@ -136,17 +142,36 @@ public class User implements UserDetails {
         this.password = password;
     }
 
+    public void setRevokeAuthorities(Collection<Authority> revokeAuthorities) {
+        this.revokeAuthorities = revokeAuthorities;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
 
     public User(String username, String password, String mail, String imgUrl) {
         setImgUrl(imgUrl);
         setMail(mail);
-        this.password = password;
+        setPassword(password);
         setUsername(username);
+        this.roles = new HashSet<>(0);
+        this.revokeAuthorities = new HashSet<>(0);
+        this.enabled = true;
     }
 
     public User(String username, String password) {
         setUsername(username);
-        this.password = password;
+        setPassword(password);
+        this.roles = new HashSet<>(0);
+        this.revokeAuthorities = new HashSet<>(0);
+        setEnabled(true);
     }
-    public User() {}
+
+    public User() {
+        this.roles = new HashSet<>(0);
+        this.revokeAuthorities = new HashSet<>(0);
+        setEnabled(true);
+    }
+
 }

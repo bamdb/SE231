@@ -1,10 +1,12 @@
 package com.oauth2.authservice.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashSet;
 
 @Entity
 public class Role implements Serializable {
@@ -15,18 +17,21 @@ public class Role implements Serializable {
 
     private String name;
 
+
     @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
     private Collection<User> users;
 
+
     @ManyToMany
-    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     @JoinTable(
             name = "roles_authorities",
             joinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id"),
+                    name = "role_id", referencedColumnName = "id", nullable = false),
             inverseJoinColumns = @JoinColumn(
-                    name = "authority_id", referencedColumnName = "id"),
+                    name = "authority_id", referencedColumnName = "id", nullable = false),
             uniqueConstraints = @UniqueConstraint(columnNames = {"role_id", "authority_id"}))
+    @JsonIgnore
     private Collection<Authority> authorities;
 
     public Long getId() {
@@ -62,17 +67,19 @@ public class Role implements Serializable {
     }
 
     public Role(String name, Collection<User> users, Collection<Authority> authorities) {
-        this.name = name;
-        this.users = users;
-        this.authorities = authorities;
+        setName(name);
+        setUsers(users);
+        setAuthorities(authorities);
     }
 
     public Role(String name) {
         this.name = name;
     }
     public Role(Long id, String name) {
-        this.id = id;
-        this.name = name;
+        setId(id);
+        setName(name);
+        users = new HashSet<>(0);
+        authorities = new HashSet<>(0);
     }
     public Role() {
 

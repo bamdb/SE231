@@ -1,20 +1,23 @@
-package com.oauth2.userservice.domain;
+package com.oauth2.authservice.domain;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.*;
 
 @Entity
-@Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames={"username"})})
 public class User implements UserDetails {
+    private static final long serialVersionUID = 4151898811080960799L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Long id;
 
-    @Column(name="username", nullable=false)
+    @Column(name="username", nullable=false, unique = true)
     private String username;
 
     @Column(name="password", nullable=false)
@@ -26,18 +29,31 @@ public class User implements UserDetails {
     @Column(name="img_url")
     private String imgUrl;
 
-//    private Collection<? extends GrantedAuthority> authorities;
-//
-//    @Column(name="role", columnDefinition = "varchar('10') default 'ROLE_USER'")
-//    private Integer role;
+    @Column(name="enabled")
+    private Boolean enabled;
 
-//    public Integer getRole() {
-//        return role;
-//    }
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id", nullable = false),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id", nullable = false))
+    private Collection<Role> roles;
 
-//    public void setRole(Integer role) {
-//        this.role = role;
-//    }
+    @ManyToMany
+    @JoinTable(
+            name = "users_revoked_authorities",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id", nullable = false),
+            inverseJoinColumns = @JoinColumn(
+                    name = "authority_id", referencedColumnName = "id", nullable = false),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "authority_id"}))
+    private Collection<Authority> revokeAuthorities;
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
 
     public Long getId() {
         return id;
@@ -68,7 +84,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.enabled;
     }
 
     public String getImgUrl() {
@@ -91,9 +107,31 @@ public class User implements UserDetails {
         this.username = username;
     }
 
+    @JsonIgnore
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    @JsonIgnore
+    public Collection<Authority> getRevokeAuthorities() {
+        return revokeAuthorities;
+    }
+
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+            List<GrantedAuthority> authorities
+                    = new ArrayList<>();
+            if (roles != null)
+                for (Role role: roles) {
+                    authorities.add(new SimpleGrantedAuthority(role.getName()));
+                    role.getAuthorities().stream()
+                            .map(p -> new SimpleGrantedAuthority(p.getName()))
+                            .forEach(authorities::add);
+                }
+            revokeAuthorities.stream().map(p -> new SimpleGrantedAuthority(p.getName()))
+                    .forEach(authorities::remove);
+        return authorities;
     }
 
     public String getPassword() {
@@ -101,22 +139,39 @@ public class User implements UserDetails {
     }
 
     public void setPassword(String password) {
-//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//        this.password = encoder.encode(password);
         this.password = password;
     }
 
-    public User(long id, String username, String password, String mail, String imgUrl) {
-        setId(id);
+    public void setRevokeAuthorities(Collection<Authority> revokeAuthorities) {
+        this.revokeAuthorities = revokeAuthorities;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public User(String username, String password, String mail, String imgUrl) {
         setImgUrl(imgUrl);
         setMail(mail);
-        this.password = password;
+        setPassword(password);
         setUsername(username);
+        this.roles = new HashSet<>(0);
+        this.revokeAuthorities = new HashSet<>(0);
+        this.enabled = true;
     }
 
     public User(String username, String password) {
         setUsername(username);
-        this.password = password;
+        setPassword(password);
+        this.roles = new HashSet<>(0);
+        this.revokeAuthorities = new HashSet<>(0);
+        setEnabled(true);
     }
-    public User() {}
+
+    public User() {
+        this.roles = new HashSet<>(0);
+        this.revokeAuthorities = new HashSet<>(0);
+        setEnabled(true);
+    }
+
 }
