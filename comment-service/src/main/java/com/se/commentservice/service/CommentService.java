@@ -1,4 +1,4 @@
-package com.se.commentservice;
+package com.se.commentservice.service;
 
 import com.se.commentservice.entity.Comment;
 import com.se.commentservice.entity.CommentOut;

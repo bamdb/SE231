@@ -1,5 +1,6 @@
-package com.se.commentservice;
+package com.se.commentservice.controller;
 
+import com.se.commentservice.service.CommentService;
 import com.se.commentservice.entity.Comment;
 import com.se.commentservice.entity.CommentOut;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.se.commentservice;
+package com.se.commentservice.config.mongo;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.se.commentservice;
+package com.se.commentservice.client;
 
 import com.se.commentservice.entity.User;
 import org.springframework.stereotype.Component;

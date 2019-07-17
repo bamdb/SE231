@@ -1,4 +1,4 @@
-package com.se.commentservice;
+package com.se.commentservice.repository;
 
 import com.se.commentservice.entity.Comment;
 import org.springframework.data.repository.CrudRepository;
