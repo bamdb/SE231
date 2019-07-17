@@ -15,17 +15,6 @@ import java.util.List;
 
 @Service
 public class TopicServiceImpl implements TopicService {
-    private final
-    TopicRepository topicRepository;
-
-    private final
-    TopicMongoRepository topicMongoRepository;
-
-    @Autowired
-    public TopicServiceImpl(TopicRepository topicRepository, TopicMongoRepository topicMongoRepository) {
-        this.topicRepository = topicRepository;
-        this.topicMongoRepository = topicMongoRepository;
-    }
 
     @Autowired
     public UserClient userClient;
