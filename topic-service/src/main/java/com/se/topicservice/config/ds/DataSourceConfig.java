@@ -17,20 +17,20 @@ public class DataSourceConfig {
 //    @Value("${datasource.type}")
 //    private Class<? extends DataSource> dataSourceType;
 
-    @Bean(name = "masterDataSource")
+    @Bean(name = "master")
     @ConfigurationProperties(prefix = "spring.datasource.master")
     public DataSource masterDataSource() {
         return DataSourceBuilder.create().build();
     }
 
-    @Bean(name = "slaveDataSource")
+    @Bean(name = "slave")
     @ConfigurationProperties(prefix = "spring.datasource.slave")
     public DataSource slaveDataSource() {
         return DataSourceBuilder.create().build();
     }
 
     @Bean(name = "dynamicDataSource")
-    @DependsOn({ "masterDataSource", "slaveDataSource"})
+    @DependsOn({ "master", "slave"})
     @Primary
     public DataSource getDataSource() {
         DynamicDataSource dataSource = new DynamicDataSource();

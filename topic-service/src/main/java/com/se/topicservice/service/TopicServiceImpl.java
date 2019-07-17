@@ -1,6 +1,7 @@
 package com.se.topicservice.service;
 
 import com.se.topicservice.client.UserClient;
+import com.se.topicservice.config.ds.DataSource;
 import com.se.topicservice.entity.*;
 import com.se.topicservice.repository.TopicMongoRepository;
 import com.se.topicservice.repository.TopicRepository;
@@ -46,6 +47,8 @@ public class TopicServiceImpl implements TopicService{
         return returnTopic;
     }
 
+    @Override
+    @DataSource("slave")
     public Iterable<Topic> selectAll() {
         return topicRepository.findAll();
     }
