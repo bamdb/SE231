@@ -2,19 +2,20 @@ spring:
   application:
     name: topic
   datasource:
-    url: jdbc:mysql://202.120.40.8:30745/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
-    username: bamdb
-    password: bamdb
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    testWhileIdle: true
-    validationQuery: SELECT 1
-#      slave:
-#        url: jdbc:mysql://47.102.207.87:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
-#        username: bamdb
-#        password: bamdb
-#        driver-class-name: com.mysql.cj.jdbc.Driver
-#        testWhileIdle: true
-#        validationQuery: SELECT 1
+    master:
+      jdbcUrl: jdbc:mysql://202.120.40.8:30745/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
+      username: bamdb
+      password: bamdb
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      testWhileIdle: true
+      validationQuery: SELECT 1
+    slave:
+      jdbcUrl: jdbc:mysql://47.102.207.87:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
+      username: bamdb
+      password: bamdb
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      testWhileIdle: true
+      validationQuery: SELECT 1
   jpa:
     show-sql: true
     hibernate:

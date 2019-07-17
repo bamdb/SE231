@@ -1,7 +1,7 @@
 package com.se.topicservice.client;
 
 import com.se.topicservice.entity.User;
-import org.springframework.cloud.openfeign.FeignClient;
+// import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 

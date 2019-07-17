@@ -11,7 +11,8 @@ public class DynamicDataSourceHolder {
     private static final ThreadLocal<String> holder = new ThreadLocal<>();
 
     public static void putDataSource(String dataSourceType) {
-        log.info("change data source to {}", dataSourceType);
+        System.out.println("change data source to");
+        System.out.println(dataSourceType);
         holder.set(dataSourceType);
     }
 
@@ -22,6 +23,7 @@ public class DynamicDataSourceHolder {
     public static void clearDataSource() {
         log.info("recover datasource");
         holder.remove();
-        log.info("after recover datasource change to {}", holder.get());
+        log.info("after recover datasource change to");
+        System.out.println(holder.get());
     }
 }

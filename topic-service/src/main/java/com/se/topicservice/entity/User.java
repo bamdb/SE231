@@ -1,7 +1,7 @@
 package com.se.topicservice.entity;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//
 import javax.persistence.*;
 
 public class User {
