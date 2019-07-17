@@ -88,7 +88,7 @@ public class ItemServiceImpl implements ItemService{
     }
 
     public Itemtag findItemtag(Long itemId) {
-        return itemtagRepository.findById(String.valueOf(itemId)).orElse(null);
+        return itemtagRepository.findByItemId(itemId).orElse(null);
     }
 
 
@@ -104,12 +104,12 @@ public class ItemServiceImpl implements ItemService{
         return tagString;
     }
 
-    public void postItemTag(Long itemId, Long userId, List<String> tagList) {
+    public Itemtag postItemTag(Long itemId, Long userId, List<String> tagList) {
         Itemtag itemtag = itemtagRepository.findByItemId(itemId).orElse(null);
         Item item = itemRepository.findById(itemId).orElse(null);
 
         if (item == null) {
-            return;
+            return null;
         }
 
         if (itemtag == null) {
@@ -144,7 +144,7 @@ public class ItemServiceImpl implements ItemService{
             }
         }
         itemtag.setTags(tags);
-        itemtagRepository.save(itemtag);
+        return itemtagRepository.save(itemtag);
     }
 
     public Iterable<Item> selectAll() {return itemRepository.findAll();}

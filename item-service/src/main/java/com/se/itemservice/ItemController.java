@@ -43,8 +43,8 @@ public class ItemController {
     }
 
     @PostMapping(value = "/add/tag")
-    public void postTag(@RequestParam("itemId") Long itemId, @RequestParam("userId") Long userId, @RequestBody List<String> tagList) {
-        itemService.postItemTag(itemId, userId, tagList);
+    public Itemtag postTag(@RequestParam("itemId") Long itemId, @RequestParam("userId") Long userId, @RequestBody List<String> tagList) {
+        return itemService.postItemTag(itemId, userId, tagList);
     }
 
     @DeleteMapping(value = "/delete/id/{itemId}")
