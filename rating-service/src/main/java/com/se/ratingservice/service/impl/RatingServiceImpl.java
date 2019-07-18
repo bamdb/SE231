@@ -1,11 +1,13 @@
-package com.se.ratingservice;
+package com.se.ratingservice.service.impl;
 
+import com.se.ratingservice.client.ItemClient;
 import com.se.ratingservice.entity.Item;
 import com.se.ratingservice.entity.Rating;
 import com.se.ratingservice.entity.RatingOut;
 import com.se.ratingservice.entity.Score;
 import com.se.ratingservice.repository.RatingRepository;
 import com.se.ratingservice.repository.ScoreRepository;
+import com.se.ratingservice.service.RatingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

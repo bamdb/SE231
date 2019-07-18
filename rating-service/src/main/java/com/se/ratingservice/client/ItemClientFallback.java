@@ -1,9 +1,8 @@
-package com.se.ratingservice;
+package com.se.ratingservice.client;
 
 import com.se.ratingservice.entity.Item;
 import org.springframework.stereotype.Component;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 

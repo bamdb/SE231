@@ -1,5 +1,6 @@
-package com.se.ratingservice;
+package com.se.ratingservice.controller;
 
+import com.se.ratingservice.service.RatingService;
 import com.se.ratingservice.entity.Rating;
 import com.se.ratingservice.entity.RatingOut;
 import com.se.ratingservice.entity.Score;

@@ -1,4 +1,4 @@
-package com.se.ratingservice;
+package com.se.ratingservice.service;
 
 import com.se.ratingservice.entity.Rating;
 import com.se.ratingservice.entity.RatingOut;

@@ -1,4 +1,4 @@
-package com.se.ratingservice;
+package com.se.ratingservice.client;
 
 import com.se.ratingservice.entity.Item;
 import org.springframework.cloud.openfeign.FeignClient;
