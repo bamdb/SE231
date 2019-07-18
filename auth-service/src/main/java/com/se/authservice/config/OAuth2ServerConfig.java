@@ -62,12 +62,6 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
                 .scopes("server")
 
                 .and()
-                .withClient("user-service")
-                .secret(encoder.encode("user-service"))
-                .authorizedGrantTypes("client_credentials", "refresh_token")
-                .scopes("server")
-
-                .and()
                 .withClient("activity-service")
                 .secret(encoder.encode("activity-service"))
                 .authorizedGrantTypes("client_credentials", "refresh_token")
