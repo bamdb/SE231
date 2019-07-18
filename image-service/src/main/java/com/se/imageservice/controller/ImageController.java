@@ -1,6 +1,4 @@
-package com.se.imageservice.controller;
-import com.se.imageservice.repository.ImageRepository;
-import com.se.imageservice.entity.Image;
+package com.se.imageservice;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -8,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @RestController
@@ -32,15 +31,15 @@ public class ImageController {
         return ResponseEntity.ok().body("delete item successfully!");
     }
 
-    @PostMapping("/update/id/{imageId}")
-    public Image updateImageById(@PathVariable Long imageId, @RequestParam(value="image") MultipartFile file) throws IOException {
+    @PostMapping("/update")
+    public Image updateImageById(@RequestParam("imageId") Long imageId, @RequestParam("image") MultipartFile file) throws IOException {
         Image image = imageRepository.findByImageId(imageId).orElse(new Image(imageId, new Binary(file.getBytes())));
         image.setImage(new Binary(file.getBytes()));
         return imageRepository.save(image);
     }
 
-    @PostMapping("/insert/id/{imageId}")
-    public Image insertImageById(@PathVariable Long imageId, @RequestParam(value="image") MultipartFile file) throws IOException {
+    @PostMapping("/insert")
+    public Image insertImageById(@RequestParam("imageId") Long imageId, @RequestParam("image") MultipartFile file) throws IOException {
         Image image = new Image(imageId, new Binary(file.getBytes()));
         return imageRepository.save(image);
     }

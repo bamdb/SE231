@@ -1,6 +1,5 @@
-package com.se.itemservice.controller;
+package com.se.itemservice;
 
-import com.se.itemservice.service.ItemService;
 import com.se.itemservice.entity.Item;
 import com.se.itemservice.entity.Itemtag;
 import org.springframework.http.ResponseEntity;
@@ -44,8 +43,8 @@ public class ItemController {
     }
 
     @PostMapping(value = "/add/tag")
-    public void postTag(@RequestParam("itemId") Long itemId, @RequestParam("userId") Long userId, @RequestBody List<String> tagList) {
-        itemService.postItemTag(itemId, userId, tagList);
+    public Itemtag postTag(@RequestParam("itemId") Long itemId, @RequestParam("userId") Long userId, @RequestBody List<String> tagList) {
+        return itemService.postItemTag(itemId, userId, tagList);
     }
 
     @DeleteMapping(value = "/delete/id/{itemId}")
