@@ -1,4 +1,4 @@
-package com.se.messageservice;
+package com.se.messageservice.repository;
 
 import com.se.messageservice.entity.Message;
 import org.springframework.data.repository.CrudRepository;

@@ -1,5 +1,6 @@
 package com.se.itemservice.dao.Impl;
 
+import com.se.itemservice.config.ds.DataSource;
 import com.se.itemservice.dao.RelationWriteDao;
 import com.se.itemservice.entity.Relation;
 import com.se.itemservice.repository.RelationRepository;
@@ -22,16 +23,19 @@ public class RelationWriteDaoImpl implements RelationWriteDao {
     }
 
     @Override
+    @DataSource("master")
     public Relation save(Relation relation) {
         return relationRepository.save(relation);
     }
 
     @Override
+    @DataSource("master")
     public void deleteAllByItemId1(Long itemId) {
         relationRepository.deleteAllByItemId1(itemId);
     }
 
     @Override
+    @DataSource("master")
     public void deleteAllByItemId2(Long itemId) {
         relationRepository.deleteAllByItemId2(itemId);
     }

@@ -1,4 +1,4 @@
-package com.se.messageservice;
+package com.se.messageservice.config.mongo;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

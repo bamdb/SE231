@@ -1,4 +1,4 @@
-package com.se.messageservice;
+package com.se.messageservice.service;
 
 import com.se.messageservice.entity.Message;
 import com.se.messageservice.entity.MessageOut;

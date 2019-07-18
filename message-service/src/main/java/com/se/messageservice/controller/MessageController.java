@@ -1,6 +1,7 @@
-package com.se.messageservice;
+package com.se.messageservice.controller;
 
 
+import com.se.messageservice.service.MessageService;
 import com.se.messageservice.entity.Message;
 import com.se.messageservice.entity.MessageOut;
 import org.springframework.beans.factory.annotation.Autowired;

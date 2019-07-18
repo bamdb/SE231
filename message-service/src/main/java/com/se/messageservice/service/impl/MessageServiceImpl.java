@@ -1,13 +1,17 @@
-package com.se.messageservice;
+package com.se.messageservice.service.impl;
 
+import com.netflix.discovery.converters.Auto;
 import com.se.messageservice.client.FriendClient;
 import com.se.messageservice.client.UserClient;
+import com.se.messageservice.dao.MongoDao;
 import com.se.messageservice.entity.Message;
 import com.se.messageservice.entity.MessageOut;
 import com.se.messageservice.entity.User;
+import com.se.messageservice.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.sql.Timestamp;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -16,41 +20,39 @@ import java.util.List;
 
 @Service
 public class MessageServiceImpl implements MessageService {
-    private final
-    MessageRepository messageRepository;
+
+    @Resource(name="mongoDaoImpl")
+    private MongoDao mongoDao;
 
     @Autowired
-    public MessageServiceImpl(MessageRepository messageRepository, FriendClient friendClient, UserClient userClient) {
-        this.messageRepository = messageRepository;
-        this.friendClient = friendClient;
-        this.userClient = userClient;
-    }
+    private FriendClient friendClient;
 
-    private final FriendClient friendClient;
-    private final UserClient userClient;
+    @Autowired
+    private  UserClient userClient;
+
     public String selectBySenderIdAndReceiverIdAndSendTime(Long senderId, Long receiverId, Long send_time) {
-        Message message = messageRepository.findBySenderIdAndReceiverIdAndSendTime(senderId, receiverId, new Timestamp( send_time)).orElse(null);
+        Message message = mongoDao.findBySenderIdAndReceiverIdAndSendTime(senderId, receiverId, new Timestamp( send_time));
         return (message == null)?null: message.getContent();
     }
     public void deleteBySenderIdAndReceiverIdAndSendTime(Long senderId, Long receiverId, Long send_time) {
-        messageRepository.deleteBySenderIdAndReceiverIdAndSendTime(senderId, receiverId, new Timestamp( send_time));
+        mongoDao.deleteBySenderIdAndReceiverIdAndSendTime(senderId, receiverId, new Timestamp( send_time));
     }
     public void deleteAllBySenderIdAndReceiverId(Long senderId, Long receiverId) {
         /*delete messages sent from both sides*/
-        messageRepository.deleteAllBySenderIdAndReceiverId(senderId, receiverId);
-        messageRepository.deleteAllBySenderIdAndReceiverId(receiverId, senderId);
+        mongoDao.deleteAllBySenderIdAndReceiverId(senderId, receiverId);
+        mongoDao.deleteAllBySenderIdAndReceiverId(receiverId, senderId);
     }
     public Iterable<Message> selectBySenderIdAndReceiverId(Long senderId, Long receiverId) {
         /*select messages sent from both sides*/
         List<Message> ms = new LinkedList<>();
-        messageRepository.findBySenderIdAndReceiverId(senderId, receiverId).forEach(ms::add);
-        messageRepository.findBySenderIdAndReceiverId(receiverId, senderId).forEach(ms::add);
+        mongoDao.findBySenderIdAndReceiverId(senderId, receiverId).forEach(ms::add);
+        mongoDao.findBySenderIdAndReceiverId(receiverId, senderId).forEach(ms::add);
         return ms;
     }
 
     public List<MessageOut> selectByReceiverId(Long receiverId) {
         List<MessageOut> ms = new LinkedList<>();
-        Iterable<Message> messageIterable = messageRepository.findByReceiverId(receiverId);
+        Iterable<Message> messageIterable = mongoDao.findByReceiverId(receiverId);
         Iterator<Message> messageIterator = messageIterable.iterator();
         while (messageIterator.hasNext()) {
             Message message = messageIterator.next();
@@ -65,7 +67,7 @@ public class MessageServiceImpl implements MessageService {
 
     public List<MessageOut> selectBySenderId(Long senderId) {
         List<MessageOut> ms = new LinkedList<>();
-        Iterable<Message> messageIterable = messageRepository.findBySenderId(senderId);
+        Iterable<Message> messageIterable = mongoDao.findBySenderId(senderId);
         Iterator<Message> messageIterator = messageIterable.iterator();
         while (messageIterator.hasNext()) {
             Message message = messageIterator.next();
@@ -80,6 +82,6 @@ public class MessageServiceImpl implements MessageService {
 
     public Message addMessage(Message message) {
         if (!friendClient.isFriend(message.getSenderId(), message.getReceiverId())) return null;
-        else return messageRepository.save(message);
+        else return mongoDao.save(message);
     }
 }
