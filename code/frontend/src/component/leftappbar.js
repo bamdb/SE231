@@ -30,6 +30,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import EmailIcon from '@material-ui/icons/Email';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import PaletteOutlinedIcon from '@material-ui/icons/PaletteOutlined';
+import { Icon } from 'antd';
 import IconButton from '@material-ui/core/IconButton';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -201,6 +202,12 @@ export default function LeftAppBar(props) {
                     <MessageIcon />
                 </IconButton>
                 </Link>
+                <IconButton
+                color={"inherit"}
+                aria-label="Open drawer"
+                edge="start">
+                <Icon type="logout" />
+            </IconButton>
             </div>
             </div>
         </AppBar>
@@ -225,13 +232,13 @@ export default function LeftAppBar(props) {
                     </ListItemIcon>
                     <ListItemText><Typography color={"textSecondary"}> HOME</Typography></ListItemText>
                 </ListItem>
-                <ListItem button  component={Link} to={'/userfavoritepage'}>
+                <ListItem button  component={Link} to={'/userinfo'}>
                     <ListItemIcon>
                         <MovieOutlinedIcon  />
                     </ListItemIcon>
                     <ListItemText><Typography color={"textSecondary"}> MOVIE</Typography></ListItemText>
                 </ListItem>
-                <ListItem button component={Link} to={'/userfavoritepage'}>
+                <ListItem button component={Link} to={'/userinfo'}>
                     <ListItemIcon>
                         <BookOutlinedIcon  />
                     </ListItemIcon>
@@ -285,6 +292,7 @@ export default function LeftAppBar(props) {
                     <Typography color={"textSecondary"}>{username}</Typography>
                     </Grid>
                 </ListItem>
+                <br/><br/>
             </div>
 
         </Drawer>
