@@ -42,7 +42,7 @@
 
 # 2019-07-15
 * complete tag and progress services
-* configured load balance in three server
+* config load balance in three server
 
 # 2019-07-16
 * add more info in service response
@@ -50,5 +50,9 @@
 
 # 2019-07-17
 * fix bug in image upload
-* configure replication in three mysql database server
-* configure read write splitting in backend
+* config replication in three mysql database server
+* config read write splitting in backend
+
+# 2019-07-18
+* complete dao layer in all services
+* config mongodb sharding in four servers 
