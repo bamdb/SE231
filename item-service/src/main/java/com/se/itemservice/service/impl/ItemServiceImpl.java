@@ -1,5 +1,8 @@
-package com.se.itemservice;
+package com.se.itemservice.service.impl;
 
+import com.se.itemservice.ItemService;
+import com.se.itemservice.dao.*;
+import com.se.itemservice.dao.Impl.ItemReadDaoImpl;
 import com.se.itemservice.entity.Item;
 import com.se.itemservice.entity.Itemtag;
 import com.se.itemservice.entity.Relation;
@@ -17,29 +20,26 @@ import java.util.Iterator;
 import java.util.List;
 
 @Service
-public class ItemServiceImpl implements ItemService{
-    private final ItemRepository itemRepository;
-    private final RelationRepository relationRepository;
-    private final ItemtagRepository itemtagRepository;
+public class ItemServiceImpl implements ItemService {
 
-    @Resource(name="itemServiceImpl")
-    ItemService itemService;
-
-    @Autowired
-    public ItemServiceImpl(ItemRepository itemRepository, RelationRepository relationRepository,
-                           ItemtagRepository itemtagRepository) {
-        this.itemRepository = itemRepository;
-        this.relationRepository = relationRepository;
-        this.itemtagRepository = itemtagRepository;
-    }
+    @Resource(name="itemReadDaoImpl")
+    ItemReadDao itemReadDao;
+    @Resource(name="itemWriteDaoImpl")
+    ItemWriteDao itemWriteDao;
+    @Resource(name="relationReadDaoImpl")
+    RelationReadDao relationReadDao;
+    @Resource(name="relationWriteDaoImpl")
+    RelationWriteDao relationWriteDao;    
+    @Resource(name="mongoDaoImpl")
+    MongoDao mongoDao;
 
     public Item postItem(Item item) {
-        return itemRepository.save(item);
+        return itemWriteDao.save(item);
     }
 
     @Override
     public ResponseEntity<?> deleteItemTag(Long itemId, Long userId, List<String> tagList) {
-        Itemtag itemtag = itemtagRepository.findByItemId(itemId).orElse(null);
+        Itemtag itemtag = mongoDao.findByItemId(itemId);
         List<Tag> tags = itemtag.getTags();
         List<Tag> tagDeleted = new ArrayList<>();
         for (String tagname : tagList) {
@@ -65,35 +65,35 @@ public class ItemServiceImpl implements ItemService{
             tags.remove(tag);
         }
         itemtag.setTags(tags);
-        itemtagRepository.save(itemtag);
+        mongoDao.save(itemtag);
         return ResponseEntity.ok().body("Delete tag successfully");
     }
 
     public ResponseEntity<?> deleteItemRelationById(Long itemId, Long relatedItemId) {
-        relationRepository.deleteRelationByItemId1AndItemId2(itemId, relatedItemId);
-        relationRepository.deleteRelationByItemId1AndItemId2(relatedItemId, itemId);
+        relationWriteDao.deleteRelationByItemId1AndItemId2(itemId, relatedItemId);
+        relationWriteDao.deleteRelationByItemId1AndItemId2(relatedItemId, itemId);
         return ResponseEntity.ok().body("delete relation successfully!");
     }
 
     public void postItemRelation(Long priorId, Long subsequentId, boolean relateType) {
-        if (itemRepository.findById(priorId).orElse(null) == null
-                || itemRepository.findById(subsequentId).orElse(null) == null) {
+        if (itemReadDao.findById(priorId) == null
+                || itemReadDao.findById(subsequentId) == null) {
             return;
         }
         Relation relation = new Relation();
         relation.setItemId1(priorId);
         relation.setItemId2(subsequentId);
         relation.setRelateType(relateType);
-        relationRepository.save(relation);
+        relationWriteDao.save(relation);
     }
 
     public Itemtag findItemtag(Long itemId) {
-        return itemtagRepository.findByItemId(itemId).orElse(null);
+        return mongoDao.findByItemId(itemId);
     }
 
 
     public List<String> findUsertag(Long itemId, Long userId) {
-        Itemtag itemtag = itemtagRepository.findByItemIdAndUserId(itemId, userId).orElse(null);
+        Itemtag itemtag = mongoDao.findByItemIdAndUserId(itemId, userId);
         List<String> tagString = new ArrayList<>();
         List<Tag> tagList = itemtag.getTags();
         for (Tag tag : tagList) {
@@ -105,8 +105,8 @@ public class ItemServiceImpl implements ItemService{
     }
 
     public Itemtag postItemTag(Long itemId, Long userId, List<String> tagList) {
-        Itemtag itemtag = itemtagRepository.findByItemId(itemId).orElse(null);
-        Item item = itemRepository.findById(itemId).orElse(null);
+        Itemtag itemtag = mongoDao.findByItemId(itemId);
+        Item item = itemReadDao.findById(itemId);
 
         if (item == null) {
             return null;
@@ -144,25 +144,25 @@ public class ItemServiceImpl implements ItemService{
             }
         }
         itemtag.setTags(tags);
-        return itemtagRepository.save(itemtag);
+        return mongoDao.save(itemtag);
     }
 
-    public Iterable<Item> selectAll() {return itemRepository.findAll();}
+    public Iterable<Item> selectAll() {return itemReadDao.findAll();}
 
     public Item findItemById(Long id) {
-        Item item = itemRepository.findById(id).orElse(null);
+        Item item = itemReadDao.findById(id);
         if (item != null) {
             item.setRelationPrior(new ArrayList<>());
             item.setRelationSubsequent(new ArrayList<>());
             item.setRelationNormal(new ArrayList<>());
             List<Item> itemList3 = item.getRelationNormal();
 
-            Iterable<Relation> relationIterable1 = relationRepository.findAllByItemId1(item.getId());
+            Iterable<Relation> relationIterable1 = relationReadDao.findAllByItemId1(item.getId());
             Iterator<Relation> relationIterator1 = relationIterable1.iterator();
             List<Item> itemList1 = item.getRelationSubsequent();
             while (relationIterator1.hasNext()) {
                 Relation relation = relationIterator1.next();
-                Item item1 = itemRepository.findById(relation.getItemId2()).orElse(null);
+                Item item1 = itemReadDao.findById(relation.getItemId2());
                 if (relation.isRelateType()) {
                     itemList1.add(item1);
                 } else {
@@ -170,12 +170,12 @@ public class ItemServiceImpl implements ItemService{
                 }
             }
 
-            Iterable<Relation> relationIterable2 = relationRepository.findAllByItemId2(item.getId());
+            Iterable<Relation> relationIterable2 = relationReadDao.findAllByItemId2(item.getId());
             Iterator<Relation> relationIterator2 = relationIterable2.iterator();
             List<Item> itemList2 = item.getRelationPrior();
             while (relationIterator2.hasNext()) {
                 Relation relation = relationIterator2.next();
-                Item item1 = itemRepository.findById(relation.getItemId1()).orElse(null);
+                Item item1 = itemReadDao.findById(relation.getItemId1());
                 if (relation.isRelateType()) {
                     itemList2.add(item1);
                 } else {
@@ -191,15 +191,15 @@ public class ItemServiceImpl implements ItemService{
     }
 
     public ResponseEntity<?> deleteItemById(Long id) {
-        itemRepository.deleteById(id);
-        relationRepository.deleteAllByItemId1(id);
-        relationRepository.deleteAllByItemId2(id);
+        itemWriteDao.deleteById(id);
+        relationWriteDao.deleteAllByItemId1(id);
+        relationWriteDao.deleteAllByItemId2(id);
         return ResponseEntity.ok().body("delete item successfully!");
     }
 
     public Item updateItem(Item item) {
-        if (itemRepository.existsById(item.getId())) {
-            return itemRepository.save(item);
+        if (itemReadDao.existsById(item.getId())) {
+            return itemWriteDao.save(item);
         }
         else return null;
     }

@@ -1,4 +1,4 @@
-package com.se.itemservice;
+package com.se.itemservice.controller;
 
 import com.se.itemservice.entity.Item;
 import com.se.itemservice.entity.Itemtag;
@@ -10,8 +10,9 @@ import java.util.List;
 
 @RestController
 public class ItemController {
-    @Resource(name = "itemServiceImpl")
-    private ItemService itemService;
+
+    @Resource(name ="itemServiceImpl")
+    private com.se.itemservice.ItemService itemService;
 
     @GetMapping(value = "/all", produces = "application/json")
     public Iterable<Item> getAllItem() {return itemService.selectAll();}
