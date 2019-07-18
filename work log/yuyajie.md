@@ -35,3 +35,7 @@
 ## 2019.07.17
 + finish security + oauth2
 + modify security test
+## 2019.07.18
++ auth config
++ unit test
++ in-memory database
