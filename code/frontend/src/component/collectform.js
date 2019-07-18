@@ -61,7 +61,8 @@ class Collectform extends Component {
             content: "",
             tags:["233"],
             text:"",
-            score:5
+            score:5,
+            yourtags:[],
         };
         this.showModal = this.showModal.bind(this);
         this.handleOk = this.handleOk.bind(this);
@@ -71,6 +72,7 @@ class Collectform extends Component {
         this.handletextchange=this.handletextchange.bind(this);
         this.handlebuttonclick=this.handlebuttonclick.bind(this);
         this.handlescorechange=this.handlescorechange.bind(this);
+        this.tagchange=this.tagchange.bind(this);
     }
     componentWillMount() {
         var url5="http://202.120.40.8:30741/item/tag/id/"+this.props.itemid;
@@ -96,11 +98,11 @@ class Collectform extends Component {
     }
     handleadd(e)
     {
-        var tags=this.state.tags;
+        var yourtags=this.state.yourtags;
 
-        tags.push(this.state.text);
+        yourtags.push(this.state.text);
         debugger;
-        this.setState({tags:tags});
+        this.setState({yourtags:yourtags});
     }
     showModal(){
         this.setState({
@@ -124,6 +126,9 @@ class Collectform extends Component {
         this.setState({
             visible: false
         })
+    }
+    tagchange(currenttags){
+        this.setState({yourtags:currenttags})
     }
     handleChange(e) {
 
@@ -188,7 +193,7 @@ class Collectform extends Component {
                     <Typography variant="subtitle1" color="textPrimary" component="p">
                         您的标签
                     </Typography>
-                    <Tag tags={this.state.tags}/>
+                    <Tag tags={this.state.yourtags} tagchange={this.tagchange}/>
                     <br/>
                     <Grid container spacing={2}>
                         <Grid item xs={1}/>
