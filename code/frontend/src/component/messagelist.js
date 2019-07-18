@@ -12,7 +12,7 @@ class Messagelist extends Component{
     constructor(props)
     {
         super(props);
-        this.state={messages:[{senderId:1,receiverId:1,content:"asdadadasd"},{senderId:1,receiverId:1,content:"加为好友"}]}
+        this.state={messages:[{message:{senderId:1,receiverId:1,content:"asdadadasd"},user:{username:"shenruien"}}]}
         this.handleaddfriend=this.handleaddfriend.bind(this);
     }
     handleaddfriend()
@@ -36,7 +36,7 @@ class Messagelist extends Component{
         for(var i=0;i<messages.length;++i)
         {
 
-                if(messages[i].content!="加为好友")
+                if(messages[i].message.content!="加为好友")
                 {
                     rows.push(
                         <Grid item xs={12}>

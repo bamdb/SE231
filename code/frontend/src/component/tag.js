@@ -41,7 +41,7 @@ class Tags extends Component {
             var tags=this.props.tags;
             var tagnames=[];
             tags.map(tag=>{
-                tagnames.push(tag.tagname);
+                tagnames.push(tag.tagname||tag);
             })
             this.setState({tags:tagnames})
         }
@@ -57,7 +57,7 @@ class Tags extends Component {
             var tags=nextProps.tags;
             var tagnames=[];
             tags.map(tag=>{
-                tagnames.push(tag.tagname);
+                tagnames.push(tag.tagname||tag);
             })
             this.setState({tags:tagnames})
         }
@@ -78,10 +78,17 @@ class Tags extends Component {
                 <CheckableTag
                     key={tag}
                     checked={selectedTags.indexOf(tag) > -1}
-                    onChange={checked => this.handleclick(tag, checked)}
+
                 >
                     {tag}
                 </CheckableTag>
+                /*<CheckableTag
+            key={tag}
+            checked={selectedTags.indexOf(tag) > -1}
+            onChange={checked => this.handleclick(tag, checked)}
+        >
+            {tag}
+        </CheckableTag>*/
             );
             rows.push(<Divider type="vertical" />);
         })

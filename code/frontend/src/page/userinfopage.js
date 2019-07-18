@@ -37,6 +37,12 @@ class Userinfopage extends Component{
     handleSearch(value){
 
     }
+    componentWillMount() {
+        if(localStorage.getItem("userid")==null)
+        {
+            window.location.href="/#/login";
+        }
+    }
 
     render(){
         return(

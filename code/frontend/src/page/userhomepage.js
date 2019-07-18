@@ -23,6 +23,12 @@ class Userhomepage extends Component{
 
         this.handleSearch=this.handleSearch.bind(this);
     }
+    componentWillMount() {
+        if(localStorage.getItem("userid")==null)
+        {
+            window.location.href="/#/login";
+        }
+    }
 
     handleSearch(value){
 

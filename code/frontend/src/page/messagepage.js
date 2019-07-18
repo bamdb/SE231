@@ -20,11 +20,14 @@ class Messagepage extends Component{
     constructor(props){
         super(props);
 
-        this.state={type:"receive",value:0};
+        this.state={type:"receiverid",value:0};
         this.handleChange=this.handleChange.bind(this);
     }
     componentWillMount() {
-        alert(localStorage.getItem("id"));
+        if(localStorage.getItem("userid")==null)
+        {
+            window.location.href="/#/login";
+        }
     }
 
     handleChange(e,newvalue)

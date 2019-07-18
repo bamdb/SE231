@@ -31,6 +31,7 @@ import leftappbar from "./component/leftappbar";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles/index';
 import Leftappbarnew from "./component/leftappbarnew";
+import Neweditor from "./page/neweditorpage";
 
 
 
@@ -75,7 +76,7 @@ function App() {
       <Router >
         <div className={classes.root}>
             <CssBaseline />
-            {selectDrawer(needDrawer)}
+            {leftBar}
             <main className={classes.content}>
                 <div className={classes.toolbar} />
                 <Route path={'/topic'} component={Topicpage}></Route>
@@ -90,6 +91,7 @@ function App() {
                 <Route path={"/activity"} component={Activitypage}></Route>
                 <Route path={'/resetpassword'} component={Resetpwdpage}></Route>
                 <Route path={'/message'} component={Messagepage}></Route>
+                <Route path={'/test'} component={Neweditor}></Route>
             </main>
         </div>
       </Router>

@@ -22,7 +22,7 @@ import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import  axios from "axios";
 import Rating from "./rating";
-
+import $ from 'jquery'
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
@@ -79,7 +79,15 @@ class Collectform extends Component {
         axios.get(url5).then(
             function(response)
             {
-                this.setState({tags:response.data.tags})
+                var tagnames=[];
+                var yourtagnames=[];
+
+                response.data.tags.map(tag=>{
+                    tagnames.push(tag.tagname);
+                    yourtagnames.push(tag.tagname);
+                })
+
+                this.setState({tags:tagnames,yourtags:yourtagnames})
             }.bind(this)
         )
     }
@@ -99,8 +107,12 @@ class Collectform extends Component {
     handleadd(e)
     {
         var yourtags=this.state.yourtags;
-
+        debugger;
+        console.log(this.state.tags);
+        console.log(this.state.yourtags);
         yourtags.push(this.state.text);
+        debugger;
+        console.log(this.state.tags);
         debugger;
         this.setState({yourtags:yourtags});
     }
@@ -120,6 +132,13 @@ class Collectform extends Component {
         axios.post("http://202.120.40.8:30741/activity/add",{actTime:date,actType:this.state.status,userId:1,itemId:this.props.itemid});
         axios.post("http://202.120.40.8:30741/comment/insert",{itemId:this.props.itemid,userId:1,content:this.state.content,pubTime:date});
         axios.put("http://202.120.40.8:30741/rating/update",{userId:1,itemId:this.props.itemid,score:this.state.score});
+        $.ajax({
+            url:"http://202.120.40.8/item/add/tag",
+            param:{userId:1,itemId:this.props.itemid},
+            data:this.state.yourtags,
+
+
+        })
 
     }
     handleCancel() {
@@ -193,7 +212,7 @@ class Collectform extends Component {
                     <Typography variant="subtitle1" color="textPrimary" component="p">
                         您的标签
                     </Typography>
-                    <Tag tags={this.state.yourtags} tagchange={this.tagchange}/>
+                    <Tag tags={this.state.yourtags} />
                     <br/>
                     <Grid container spacing={2}>
                         <Grid item xs={1}/>
