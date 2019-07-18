@@ -1,6 +1,10 @@
 package com.se.ratingservice.service.impl;
 
 import com.se.ratingservice.client.ItemClient;
+import com.se.ratingservice.dao.RatingReadDao;
+import com.se.ratingservice.dao.RatingWriteDao;
+import com.se.ratingservice.dao.ScoreReadDao;
+import com.se.ratingservice.dao.ScoreWriteDao;
 import com.se.ratingservice.entity.Item;
 import com.se.ratingservice.entity.Rating;
 import com.se.ratingservice.entity.RatingOut;
@@ -15,21 +19,24 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class RatingServiceImpl implements RatingService {
-    private final
-    RatingRepository ratingRepository;
-    private final
-    ScoreRepository scoreRepository;
+    
+    @Resource(name="ratingReadDaoImpl")
+    private RatingReadDao ratingReadDao;
 
-    @Autowired
-    public RatingServiceImpl(RatingRepository ratingRepository, ScoreRepository scoreRepository) {
-        this.ratingRepository = ratingRepository;
-        this.scoreRepository = scoreRepository;
-    }
+    @Resource(name="ratingWriteDaoImpl")
+    private RatingWriteDao ratingWriteDao;
+
+    @Resource(name="scoreReadDaoImpl")
+    private ScoreReadDao scoreReadDao;
+
+    @Resource(name="scoreWriteDaoImpl")
+    private ScoreWriteDao scoreWriteDao;
 
     @Autowired
     ItemClient itemClient;
@@ -37,7 +44,7 @@ public class RatingServiceImpl implements RatingService {
     public Rating postRating(Long itemId) {
         // check if corresponding item exists in Item Service or corresponding item has already been rated
         Item item = itemClient.getItemById(itemId);
-        if (item == null || ratingRepository.findByItemId(itemId).orElse(null) != null) {
+        if (item == null || ratingReadDao.findByItemId(itemId) != null) {
             return null;
         }
         // auto save item type from item-service into Rating Entity
@@ -58,23 +65,23 @@ public class RatingServiceImpl implements RatingService {
         rating.setScore9(0);
         rating.setScore10(0);
 
-        return ratingRepository.save(rating);
+        return ratingWriteDao.save(rating);
     }
 
     public Iterable<Rating> selectAll() {
-        return ratingRepository.findAll();
+        return ratingReadDao.findAll();
     }
 
     public Rating selectById(Long id) {
-        return ratingRepository.findById(id).orElse(null);
+        return ratingReadDao.findById(id);
     }
 
     public Score selectScoreByUserId(Long userId, Long itemId) {
-        return scoreRepository.findByUserIdAndItemId(userId, itemId).orElse(null);
+        return scoreReadDao.findByUserIdAndItemId(userId, itemId);
     }
 
     public Rating selectByItemId(Long itemId) {
-        Rating rating = ratingRepository.findByItemId(itemId).orElse(null);
+        Rating rating = ratingReadDao.findByItemId(itemId);
         if (rating == null) {
             return null;
         }
@@ -88,15 +95,15 @@ public class RatingServiceImpl implements RatingService {
         if (!item.getType().equals(rating.getType())) {
             rating.setType(item.getType());
         }
-        Integer rank = 1 + ratingRepository.findRankByTypeAndItemId(rating.getType(), rating.getAvgScore());
+        Integer rank = 1 + ratingReadDao.findRankByTypeAndItemId(rating.getType(), rating.getAvgScore());
         rating.setRank(rank);
-        return ratingRepository.findByItemId(itemId).orElse(null);
+        return ratingReadDao.findByItemId(itemId);
     }
 
     public List<RatingOut> selectPageByType(Integer type, int pageNum, int pageSize) {
         Sort sort = new Sort(Sort.Direction.DESC, "avgScore");
         PageRequest pageRequest = PageRequest.of(pageNum, pageSize, sort);
-        Page<Rating> ratingPage = ratingRepository.findAllByType(type, pageRequest);
+        Page<Rating> ratingPage = ratingReadDao.findAllByType(type, pageRequest);
         List<Rating> ratingList = ratingPage.getContent();
         List<RatingOut> ratingOuts = new ArrayList<>();
         for (Rating rating : ratingList) {
@@ -106,7 +113,7 @@ public class RatingServiceImpl implements RatingService {
             if (item == null) {
                 deleteRatingByItemId(rating.getId());
             }else {
-                Integer rank = 1 + ratingRepository.findRankByTypeAndItemId(rating.getType(), rating.getAvgScore());
+                Integer rank = 1 + ratingReadDao.findRankByTypeAndItemId(rating.getType(), rating.getAvgScore());
                 rating.setRank(rank);
                 ratingOut.setItem(item);
                 ratingOuts.add(ratingOut);
@@ -133,7 +140,7 @@ public class RatingServiceImpl implements RatingService {
         }
         Integer totScoreNum = rating.getTotScoreNum() + totNum;
         float avgScore = (rating.getAvgScore() * rating.getTotScoreNum() + totScore) / totScoreNum;
-        Integer rank = 1 + ratingRepository.findRankByTypeAndItemId(rating.getType(), avgScore);
+        Integer rank = 1 + ratingReadDao.findRankByTypeAndItemId(rating.getType(), avgScore);
         rating.setTotScoreNum(totScoreNum);
         rating.setAvgScore(avgScore);
         rating.setRank(rank);
@@ -147,7 +154,7 @@ public class RatingServiceImpl implements RatingService {
         rating.setScore8(ratingList.get(7) + rating.getScore8());
         rating.setScore9(ratingList.get(8) + rating.getScore9());
         rating.setScore10(ratingList.get(9) + rating.getScore10());
-        ratingRepository.save(rating);
+        ratingWriteDao.save(rating);
         return ResponseEntity.ok().body("update rating successfully");
     }
 
@@ -156,18 +163,18 @@ public class RatingServiceImpl implements RatingService {
         if (rating == null) {
             return ResponseEntity.ok().body("Item id not found");
         }
-        Score scoreAct = scoreRepository.findByUserIdAndItemId(userId, itemId).orElse(null);
+        Score scoreAct = scoreReadDao.findByUserIdAndItemId(userId, itemId);
         if (scoreAct == null) {
             scoreAct = new Score();
         }
         scoreAct.setUserId(userId);
         scoreAct.setItemId(itemId);
         scoreAct.setScore(score);
-        scoreRepository.save(scoreAct);
+        scoreWriteDao.save(scoreAct);
 
         Integer totScoreNum = rating.getTotScoreNum()+1;
         float avgScore = (rating.getAvgScore() * rating.getTotScoreNum() + score) / totScoreNum;
-        Integer rank = 1 + ratingRepository.findRankByTypeAndItemId(rating.getType(), avgScore);
+        Integer rank = 1 + ratingReadDao.findRankByTypeAndItemId(rating.getType(), avgScore);
         rating.setTotScoreNum(totScoreNum);
         rating.setRank(rank);
         rating.setAvgScore(avgScore);
@@ -184,7 +191,7 @@ public class RatingServiceImpl implements RatingService {
             case 10: rating.setScore10(rating.getScore10() + 1); break;
             default: return ResponseEntity.ok().body("Invalid rating!");
         }
-        ratingRepository.save(rating);
+        ratingWriteDao.save(rating);
         return ResponseEntity.ok().body("Update score successfully!");
     }
 
@@ -193,22 +200,22 @@ public class RatingServiceImpl implements RatingService {
         if (rating == null) {
             return ResponseEntity.ok().body("Item id not found!");
         }
-        Score scoreAct = scoreRepository.findByUserIdAndItemId(userId, itemId).orElse(null);
+        Score scoreAct = scoreReadDao.findByUserIdAndItemId(userId, itemId);
         if (scoreAct == null) {
             return ResponseEntity.ok().body("User score not found!");
         }
-        scoreRepository.delete(scoreAct);
+        scoreWriteDao.delete(scoreAct);
         return ResponseEntity.ok().body("Cancel score successfully!");
     }
 
     public ResponseEntity<?> deleteRatingById(Long id) {
-        ratingRepository.deleteById(id);
+        ratingWriteDao.deleteById(id);
         return ResponseEntity.ok().body("delete rating successfully!");
     }
 
     public ResponseEntity<?> deleteRatingByItemId(Long itemId) {
-        ratingRepository.deleteRatingByItemId(itemId);
-        scoreRepository.deleteAllByItemId(itemId);
+        ratingWriteDao.deleteRatingByItemId(itemId);
+        scoreWriteDao.deleteAllByItemId(itemId);
         return ResponseEntity.ok().body("delete rating successfully!");
     }
 }
