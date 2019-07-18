@@ -1,4 +1,6 @@
-package com.se.imageservice;
+package com.se.imageservice.controller;
+import com.se.imageservice.entity.Image;
+import com.se.imageservice.repository.ImageRepository;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
