@@ -72,19 +72,21 @@ class Collect extends Component {
             expanded: false,
             completed: 0,
             comment:{},
-            score:0
+            score:0,
+            userid:1
         };
 
         this.handleExpandClick = this.handleExpandClick.bind(this);
     }
     componentWillMount() {
-        axios.get("http://202.120.40.8:30741/comment",{params:{itemId:this.props.itemid,userId:1}}).then(
+
+        axios.get("http://202.120.40.8:30741/comment",{params:{itemId:this.props.itemid,userId:this.props.userid}}).then(
             function(response)
             {
                 this.setState({comment:response.data});
             }.bind(this)
         )
-        axios.get("http://202.120.40.8:30741/rating/score",{params:{itemId:this.props.itemid,userId:1}}).then(
+        axios.get("http://202.120.40.8:30741/rating/score",{params:{itemId:this.props.itemid,userId:this.props.userid}}).then(
             function(response)
             {
                 this.setState({score:response.data.score});
@@ -92,6 +94,21 @@ class Collect extends Component {
         )
 
     }
+    componentWillReceiveProps(nextProps, nextContext) {
+        axios.get("http://202.120.40.8:30741/comment",{params:{itemId:this.props.itemid,userId:nextProps.userid}}).then(
+            function(response)
+            {
+                this.setState({comment:response.data});
+            }.bind(this)
+        )
+        axios.get("http://202.120.40.8:30741/rating/score",{params:{itemId:this.props.itemid,userId:nextProps.userid}}).then(
+            function(response)
+            {
+                this.setState({score:response.data.score});
+            }.bind(this)
+        )
+    }
+
 
     static defaultProps = {
         status : "未收藏",

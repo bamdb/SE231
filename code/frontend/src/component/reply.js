@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme =>({
 class Reply extends Component {
     constructor(props) {
         super(props);
-        this.state={text:""}
+        this.state={text:"",userid:1}
         this.handleclick=this.handleclick.bind(this);
         this.handlechange=this.handlechange.bind(this);
     }
@@ -40,12 +40,22 @@ class Reply extends Component {
     {
         this.setState({text:e.target.value})
     }
+    componentWillMount() {
+        if(localStorage.getItem("userid")==null)
+        {
+            window.location.href="/#/login";
+        }
+        else {
+            this.setState({userid:localStorage.getItem("userid")})
+        }
+    }
+
     handleclick()
     {
         var text=this.state.text;
         /*axios.post("http://202.120.40.8:30741/topic/add/reply?topicId=1&userId=1",text).then();*/
         $.ajax({
-            url:"http://202.120.40.8:30741/topic/add/reply?topicId=1&userId=1",
+            url:"http://202.120.40.8:30741/topic/add/reply?topicId=",
             type:"POST",
             contentType:"application/json",
             data:text,

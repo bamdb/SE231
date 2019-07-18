@@ -12,7 +12,7 @@ class Messagelist extends Component{
     constructor(props)
     {
         super(props);
-        this.state={messages:[{message:{senderId:1,receiverId:1,content:"asdadadasd"},user:{username:"shenruien"}}]}
+        this.state={messages:[{message:{senderId:1,receiverId:1,content:"asdadadasd"},user:{username:"shenruien"}}],userid:1}
         this.handleaddfriend=this.handleaddfriend.bind(this);
     }
     handleaddfriend()
@@ -20,7 +20,26 @@ class Messagelist extends Component{
 
     }
     componentWillMount() {
-        var url="http://202.120.40.8:30741/message/"+this.props.type+"/1";
+        if(localStorage.getItem("userid")==null)
+        {
+
+        }
+        else {
+            this.setState({userid:localStorage.getItem("userid")})
+        }
+    }
+
+    componentDidMount() {
+        var url="http://202.120.40.8:30741/message/"+this.props.type+"/"+this.state.userid;
+        axios.get(url).then(
+            function(response)
+            {
+                this.setState({messages:response.data});
+            }.bind(this)
+        )
+    }
+    componentWillReceiveProps(nextProps, nextContext) {
+        var url="http://202.120.40.8:30741/message/"+nextProps.type+"/"+this.state.userid;
         axios.get(url).then(
             function(response)
             {

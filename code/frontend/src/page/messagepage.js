@@ -28,11 +28,14 @@ class Messagepage extends Component{
         {
             window.location.href="/#/login";
         }
+        else {
+            this.setState({userid:localStorage.getItem("userid")})
+        }
     }
 
     handleChange(e,newvalue)
     {
-        this.setState({value:newvalue})
+        this.setState({type:newvalue})
     }
 
     render(){
