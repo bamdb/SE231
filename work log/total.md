@@ -159,6 +159,17 @@
   * fix bug in image upload
   * configure replication in three mysql database server
   * configure read write splitting in backend
+# 2019-7-17
+* shenruien:
+  * modify frotend logic to fit the user auth
+* wangzulai:
+  * complete dao layer in all services
+  * config mongodb sharding in four servers
+* huangyuyang:
+  * rewrite the component to fit the backend
+* yuyajie:
+  * dealong with auth problem in micro service deploy
+
 
 
 
