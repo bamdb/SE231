@@ -5,8 +5,9 @@ server:
   port: 8000
 eureka:
   client:
-    registry-fetch-interval-seconds: 5
-
+    registry-fetch-interval-seconds: 60
+    register-with-eureka: false
+    fetch-registry: true
 zuul:
   routes:
     fromimage:
