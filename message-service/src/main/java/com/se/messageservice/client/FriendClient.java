@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.*;
 @Primary
 public interface FriendClient {
     @RequestMapping(value = "/isfriend", method = RequestMethod.GET)
-    Boolean isFriend(@RequestParam("senderId") Long senderId,
-                     @RequestParam("receiverId") Long receiverId);
+    Boolean isFriend(@RequestParam("userId1") Long senderId,
+                     @RequestParam("userId2") Long receiverId);
 }

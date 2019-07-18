@@ -1,5 +1,6 @@
 package com.se.commentservice;
 
+import com.se.commentservice.entity.Comment;
 import org.junit.Test;
 import org.junit.Assert;
 

@@ -5,6 +5,7 @@ import com.netflix.loadbalancer.Server;
 import com.netflix.loadbalancer.ServerList;
 import com.se.activityservice.client.ItemClient;
 import com.se.activityservice.client.UserClient;
+import com.se.activityservice.service.ActivityService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -104,6 +105,9 @@ public class ActivityServiceApplicationTests {
         mvc.perform(get("/itemid/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
+        mvc.perform(get("/collect?userId=1&itemId=1").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
         mvc.perform(get("/userid/0").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
@@ -153,8 +157,18 @@ public class ActivityServiceApplicationTests {
             Long itemId = activityService.selectAll().iterator().next().getItemId();
             mvc.perform(delete("/delete/itemid/"+itemId))
                     .andExpect(status().isOk());
-            Assert.assertNull(activityService.selectByUserId(itemId));
+            Assert.assertNull(activityService.selectByItemId(itemId));
         }
+    }
+
+    @Test
+    public void progressTest() throws Exception  {
+        mvc.perform(put("/update/progress")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"itemId\":1, \"userId\":2, \"chapters\":[{\"chapterNum\":1,\"finish\":1,\"sections\":[1,1,1]}]}"))
+                .andExpect(status().isOk());
+        mvc.perform(get("/progress?itemId=1&userId=2"))
+                .andExpect(status().isOk());
     }
 
     @TestConfiguration

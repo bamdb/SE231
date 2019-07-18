@@ -17,21 +17,9 @@ import org.springframework.web.client.RestTemplate;
 @EnableZuulProxy
 @EnableEurekaClient
 @EnableHystrix
-@EnableCircuitBreaker
-@RibbonClients(value = {
-        @RibbonClient(name = "user", configuration = RibbonConfiguration.class),
-        @RibbonClient(name = "image", configuration = RibbonConfiguration.class),
-        @RibbonClient(name = "item", configuration = RibbonConfiguration.class)
-
-})
 public class GatewayApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(GatewayApplication.class, args);
-    }
-    @Bean
-    @LoadBalanced
-    RestTemplate restTemplate() {
-        return new RestTemplate();
     }
 }

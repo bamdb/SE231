@@ -3,11 +3,11 @@ ps -ef | grep java | grep -v grep | awk '{print $2}' | xargs kill -9
 cd ~/bamdb/SE231
 cd config-server
 nohup mvn clean spring-boot:run > bamdb.log &
-sleep 30
+sleep 50
 echo 'config deployed'
 cd ../registry
 nohup mvn clean spring-boot:run -Dspring.profiles.active=aliyun > bamdb.log &
-sleep 10
+sleep 50
 echo 'registry deployed'
 cd ../user-service
 nohup mvn clean spring-boot:run -Dspring.profiles.active=aliyun > bamdb.log &
@@ -32,6 +32,7 @@ echo 'rating-service deployed'
 cd ../topic-service
 nohup mvn clean spring-boot:run -Dspring.profiles.active=aliyun > bamdb.log &
 sleep 5
+echo 'topic-service deployed'
 cd ../comment-service
 nohup mvn clean spring-boot:run -Dspring.profiles.active=aliyun > bamdb.log &
 sleep 5

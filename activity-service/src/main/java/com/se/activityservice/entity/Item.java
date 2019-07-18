@@ -29,4 +29,34 @@ public class Item {
     public void setMainAuthor(String mainAuthor) {this.mainAuthor = mainAuthor;}
 
     public void setImgurl(String imgurl) {this.imgurl = imgurl;}
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getItemname() {
+        return itemname;
+    }
+
+    public Timestamp getPubTime() {
+        return pubTime;
+    }
+
+    public Integer getChapterNum() {
+        return chapterNum;
+    }
+
+    public String getMainAuthor() {
+        return mainAuthor;
+    }
+
+    public String getImgurl() {
+        return imgurl;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
 }

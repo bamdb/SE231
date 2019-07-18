@@ -12,18 +12,18 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableEurekaClient
-@EnableCircuitBreaker
-@EnableHystrix
-@RibbonClient(name = "item", configuration = RibbonConfiguration.class)
+
+
+
 public class ItemServiceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ItemServiceApplication.class, args);
     }
-    @Bean
-    @LoadBalanced
-    RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
+
+
+
+
+
 
 }

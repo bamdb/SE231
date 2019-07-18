@@ -40,7 +40,7 @@ public class ImageControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
         MockMultipartFile firstFile = new MockMultipartFile("image", "filename.png", "text/plain", "some xml".getBytes());
-        mvc.perform(MockMvcRequestBuilders.multipart("/insert/id/1").file(firstFile))
+        mvc.perform(MockMvcRequestBuilders.multipart("/insert?imageId=1").file(firstFile))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
         mvc.perform(get("/id/0")
@@ -53,7 +53,7 @@ public class ImageControllerTest {
                 .andExpect(status().isOk()).andExpect(MockMvcResultMatchers.content().string("some xml"));
 //                .andExpect(MockMvcResultMatchers.jsonPath("$.image").exists());.value
         MockMultipartFile secondFile = new MockMultipartFile("image", "filename.png", "text/plain", "many xml".getBytes());
-        mvc.perform(MockMvcRequestBuilders.multipart("/update/id/1").file(secondFile))
+        mvc.perform(MockMvcRequestBuilders.multipart("/update?imageId=1").file(secondFile))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
         mvc.perform(get("/id/1")

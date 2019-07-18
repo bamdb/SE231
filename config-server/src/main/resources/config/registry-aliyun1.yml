@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: registry
+  security:
+    user:
+      password: bamdb
+      name: bamdb
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    service-url:
+      defaultZone:  http://bamdb:bamdb@47.103.107.39:8761/eureka/, http://bamdb:bamdb@47.103.98.30:8761/eureka/
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 5000
+server:
+  port: 8761

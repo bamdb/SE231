@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 public class FriendClientFallBack implements FriendClient {
     @Override
     public Boolean isFriend(Long senderId, Long receiverId) {
-        return true;
+        return senderId != 0;
     }
 }

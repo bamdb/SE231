@@ -1,6 +1,7 @@
 package com.se.itemservice;
 
 import com.se.itemservice.entity.Item;
+import com.se.itemservice.service.ItemService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
-import java.sql.Timestamp;
+import java.util.Iterator;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -63,12 +64,47 @@ public class ItemControllerTest {
 
     @Test
     public void deleteTest() throws Exception {
+        mvc.perform(post("/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"itemname\":\"three body\", \"pubTime\":\"1562294429\", \"chapterNum\":12, \"mainAuthor\":\"Cixin Liu\", \"imgurl\":null, \"type\":0}"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"itemname\":\"three body\", \"pubTime\":\"1562294429\", \"chapterNum\":12, \"mainAuthor\":\"Cixin Liu\", \"imgurl\":null, \"type\":0}"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"itemname\":\"three body\", \"pubTime\":\"1562294429\", \"chapterNum\":12, \"mainAuthor\":\"Cixin Liu\", \"imgurl\":null, \"type\":0}"))
+                .andExpect(status().isOk());
+
         if (itemService.selectAll().iterator().hasNext()) {
             Long id = itemService.selectAll().iterator().next().getId();
             mvc.perform(delete("/delete/id/"+id))
                     .andExpect(status().isOk());
             Assert.assertNull(itemService.findItemById(id));
         }
+
+        mvc.perform(post("/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"itemname\":\"three body\", \"pubTime\":\"1562294429\", \"chapterNum\":12, \"mainAuthor\":\"Cixin Liu\", \"imgurl\":null, \"type\":0}"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"itemname\":\"three body\", \"pubTime\":\"1562294429\", \"chapterNum\":12, \"mainAuthor\":\"Cixin Liu\", \"imgurl\":null, \"type\":0}"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"itemname\":\"three body\", \"pubTime\":\"1562294429\", \"chapterNum\":12, \"mainAuthor\":\"Cixin Liu\", \"imgurl\":null, \"type\":0}"))
+                .andExpect(status().isOk());
+
+        Iterator<Item> itemIterator = itemService.selectAll().iterator();
+        Item item = itemIterator.next();
+        Item item1 = itemIterator.next();
+        mvc.perform(post("/add/relation?priorId="+item.getId()+"&subsequentId="+item1.getId()+"&relateType=0")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        mvc.perform(delete("/delete/relation?itemId="+item.getId()+"&relatedItemId="+item1.getId()))
+                .andExpect(status().isOk());
     }
 
     @Test
@@ -77,11 +113,93 @@ public class ItemControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"itemname\":\"three body\", \"pubTime\":\"1562294429\", \"chapterNum\":12, \"mainAuthor\":\"Cixin Liu\", \"imgurl\":null, \"type\":0}"))
                 .andExpect(status().isOk());
+        mvc.perform(post("/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"itemname\":\"three body\", \"pubTime\":\"1562294429\", \"chapterNum\":12, \"mainAuthor\":\"Cixin Liu\", \"imgurl\":null, \"type\":0}"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"itemname\":\"three body\", \"pubTime\":\"1562294429\", \"chapterNum\":12, \"mainAuthor\":\"Cixin Liu\", \"imgurl\":null, \"type\":0}"))
+                .andExpect(status().isOk());
+
+        Iterator<Item> itemIterator = itemService.selectAll().iterator();
+        Item item = itemIterator.next();
+        Item item1 = itemIterator.next();
+        Item item2 = itemIterator.next();
+        mvc.perform(post("/add/relation?priorId="+item.getId()+"&subsequentId="+item1.getId()+"&relateType=0")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add/relation?priorId="+item.getId()+"&subsequentId="+item2.getId()+"&relateType=1")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add/relation?priorId="+item1.getId()+"&subsequentId="+item.getId()+"&relateType=1")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add/relation?priorId="+item2.getId()+"&subsequentId="+item.getId()+"&relateType=0")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add/relation?priorId="+item.getId()+"&subsequentId=0&relateType=1")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add/relation?priorId=0&subsequentId="+item2.getId()+"&relateType=1")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
 
         mvc.perform(get("/all").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/id/1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/id/"+item.getId()).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        mvc.perform(get("/id/0").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void tagTest() throws Exception {
+        mvc.perform(post("/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"itemname\":\"three body\", \"pubTime\":\"1562294429\", \"chapterNum\":12, \"mainAuthor\":\"Cixin Liu\", \"imgurl\":null, \"type\":0}"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add/tag?itemId=0&userId=1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("[\"tag1\",\"tag2\"]"))
+                .andExpect(status().isOk());
+        Item item = itemService.selectAll().iterator().next();
+        mvc.perform(post("/add/tag?itemId="+item.getId()+"&userId=1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("[\"tag1\",\"tag2\"]"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add/tag?itemId="+item.getId()+"&userId=2")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("[\"tag1\",\"tag2\"]"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add/tag?itemId="+item.getId()+"&userId=2")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("[\"tag1\",\"tag2\",\"tag3\"]"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add/tag?itemId="+item.getId()+"&userId=1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("[\"tag1\",\"tag2\"]"))
+                .andExpect(status().isOk());
+
+        mvc.perform(get("/tag/id/1").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        mvc.perform(get("/tag?itemId="+item.getId()+"&userId=1").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        mvc.perform(get("/tag?itemId="+item.getId()+"&userId=3").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+        mvc.perform(delete("/delete/tag?itemId="+item.getId()+"&userId=1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("[\"tag1\",\"tag2\",\"tag3\"]"))
+                .andExpect(status().isOk());
+        mvc.perform(delete("/delete/tag?itemId="+item.getId()+"&userId=1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("[\"tag1\",\"tag2\"]"))
+                .andExpect(status().isOk());
+        mvc.perform(delete("/delete/tag?itemId="+item.getId()+"&userId=2")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("[\"tag1\",\"tag2\",\"tag3\",\"tag4\"]"))
                 .andExpect(status().isOk());
     }
 }

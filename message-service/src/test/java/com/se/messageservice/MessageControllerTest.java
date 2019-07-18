@@ -4,7 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.github.tomakehurst.wiremock.junit.WireMockClassRule;
 import com.netflix.loadbalancer.Server;
 import com.netflix.loadbalancer.ServerList;
-import org.junit.Assert;
+import com.se.messageservice.entity.Message;
+import com.se.messageservice.repository.MessageRepository;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -74,19 +75,29 @@ public class MessageControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
         Timestamp t = new Timestamp(0);
+        Timestamp t1 = new Timestamp(1);
         Message message = new Message(1L, 2L, t, "NOTHINHG HAPPENS BETWEEN US");
-
+        Message message1 = new Message(0L,2L, t1, "NOTHINHG HAPPENS BETWEEN US");
         mvc.perform(post("/add")
                 .content(JSON.toJSONString(message))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content").value("NOTHINHG HAPPENS BETWEEN US"));
+        mvc.perform(post("/add")
+                .content(JSON.toJSONString(message1))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk());
         mvc.perform(get("/all")
                 .params(mm))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].content").value("NOTHINHG HAPPENS BETWEEN US"));
+        mvc.perform(get("/senderid/1"))
+                .andExpect(status().isOk());
+        mvc.perform(get("/receiverid/2"))
+                .andExpect(status().isOk());
         Long i = new Timestamp(0).getTime();
         mm.add("sendTime", i.toString());
         mvc.perform(get("/content")

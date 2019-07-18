@@ -5,10 +5,19 @@ server:
   port: 8000
 eureka:
   client:
+<<<<<<< HEAD
     registry-fetch-interval-seconds: 60
     register-with-eureka: false
     fetch-registry: true
+=======
+    registry-fetch-interval-seconds: 5
+    registerWithEureka: false
+    fetchRegistry: true
+
+>>>>>>> 129c22f014f75eb56fe4ee46e3ce1f75e39780ad
 zuul:
+#  host:
+#    connect-timeout-millis: 3000
   routes:
     fromimage:
       path: /image/**
@@ -49,3 +58,6 @@ zuul:
   retryable: true
   semaphore:
     max-semaphores: 10000
+  ignored-services: "*"
+ribbon:
+  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.AvailabilityFilteringRule

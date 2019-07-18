@@ -2,6 +2,7 @@ package com.se.itemservice.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "Item")
@@ -22,6 +23,13 @@ public class Item {
     private String imgurl;
     @Column(name = "type", nullable = false)
     private Integer type;
+
+    @Transient
+    private List<Item> relationPrior;
+    @Transient
+    private List<Item> relationSubsequent;
+    @Transient
+    private List<Item> relationNormal;
 
     public Long getId() {return id;}
 
@@ -54,4 +62,36 @@ public class Item {
     public String getImgurl() {return imgurl;}
 
     public void setImgurl(String imgurl) {this.imgurl = imgurl;}
+
+    @Transient
+    public List<Item> getRelationPrior() {
+        return relationPrior;
+    }
+
+    @Transient
+    public void setRelationPrior(List<Item> relationPrior) {
+        this.relationPrior = relationPrior;
+    }
+
+    @Transient
+    public List<Item> getRelationSubsequent() {
+        return relationSubsequent;
+    }
+
+    @Transient
+    public void setRelationSubsequent(List<Item> relationSubsequent) {
+        this.relationSubsequent = relationSubsequent;
+    }
+
+    @Transient
+    public List<Item> getRelationNormal() {
+        return relationNormal;
+    }
+
+    @Transient
+    public void setRelationNormal(List<Item> relationNormal) {
+        this.relationNormal = relationNormal;
+    }
+
+
 }

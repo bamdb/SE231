@@ -88,6 +88,14 @@ public class FriendControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("true"));
+        MultiValueMap<String, String> mm1 = new LinkedMultiValueMap<>();
+        mm1.add("userId1","22");
+        mm1.add("userId2", "11");
+        mvc.perform(get("/isfriend")
+                .params(mm1))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string("true"));
         mvc.perform(get("/all/userid/11"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());

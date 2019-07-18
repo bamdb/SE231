@@ -3,3 +3,11 @@ spring:
     name: rating
 server:
   port: ${PORT:0}
+<<<<<<< HEAD
+=======
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    lease-renewal-interval-in-seconds: 1
+    lease-expiration-duration-in-seconds: 2
+>>>>>>> 129c22f014f75eb56fe4ee46e3ce1f75e39780ad
