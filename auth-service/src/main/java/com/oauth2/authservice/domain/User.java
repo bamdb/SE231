@@ -2,6 +2,7 @@ package com.oauth2.authservice.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class User implements UserDetails {
     private static final long serialVersionUID = 4151898811080960799L;
 
@@ -29,6 +31,7 @@ public class User implements UserDetails {
     @Column(name="img_url")
     private String imgUrl;
 
+    @JsonIgnore
     @Column(name="enabled")
     private Boolean enabled;
 

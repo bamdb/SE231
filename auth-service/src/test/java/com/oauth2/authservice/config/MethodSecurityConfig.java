@@ -1,5 +1,6 @@
 package com.oauth2.authservice.config;
 
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
@@ -7,11 +8,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
 import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecurityExpressionHandler;
 
-import java.lang.annotation.Retention;
-
-@Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-//@Profile({"default"})
+@TestConfiguration
+@EnableGlobalMethodSecurity(securedEnabled = true)
+@Profile({"test"})
 public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
 
     @Override

@@ -10,7 +10,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class AuthServiceApplicationTests {
 
     @Test
-    public void contextLoads() {
+    public void testApplication() {
+        AuthServiceApplication.main(new String[] {});
     }
 
 }

@@ -27,6 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         /*authorities will cover the role makes hasRole('USER')fail*/
         /*on the contrary authority cannot serve as a role except with a prefix ROLE_*/
+        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
@@ -38,7 +39,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
-        http
+        http    .formLogin()
+                .loginPage("/login")
+                .successForwardUrl("/")
+                .loginProcessingUrl("/login")
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
+                .and()
                 .csrf().disable();
     }
 

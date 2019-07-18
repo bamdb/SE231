@@ -1,6 +1,8 @@
 package com.oauth2.authservice.config;
 
+import org.junit.Test;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
@@ -8,25 +10,19 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
-import org.springframework.stereotype.Component;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
-/* A necessity if you want expression #oauth2.hasScope to work!
- * And also some endpoints depend on the config, e.g usrinfo.
- **/
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.test.context.ActiveProfiles;
 
 @EnableResourceServer
-@Configuration
-@Order(SecurityProperties.BASIC_AUTH_ORDER)
+@TestConfiguration
 public class ResourceServer extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http    .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/signup").permitAll()
-                .antMatchers("/login").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().permitAll();
+    }
+    @Override
+    public void configure(ResourceServerSecurityConfigurer security) throws Exception {
+        security.stateless(false);
     }
 }

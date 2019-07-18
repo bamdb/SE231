@@ -66,12 +66,6 @@ public class Role implements Serializable {
         this.authorities = authorities;
     }
 
-    public Role(String name, Collection<User> users, Collection<Authority> authorities) {
-        setName(name);
-        setUsers(users);
-        setAuthorities(authorities);
-    }
-
     public Role(String name) {
         this.name = name;
     }

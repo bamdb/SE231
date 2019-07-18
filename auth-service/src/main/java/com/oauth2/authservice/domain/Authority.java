@@ -58,12 +58,7 @@ public class Authority implements Serializable {
         return users;
     }
 
-    public Authority(String name, Collection<Role> roles, Collection<User> users) {
-        setName(name);
-        setRoles(roles);
-        setRoles(roles);
-        roles = new HashSet<>(0);
-    }
+
 
     public Authority(String name, Long id) {
         setName(name);
