@@ -43,3 +43,5 @@
 * modify homepage
 # 2019-7-16
 * modify frontendpage
+# 2019-7-17
+* modify frotend logic to fit the user auth
