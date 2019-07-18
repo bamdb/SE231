@@ -16,7 +16,6 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EnableZuulProxy
 @EnableEurekaClient
-@EnableHystrix
 public class GatewayApplication {
 
     public static void main(String[] args) {
