@@ -14,11 +14,7 @@ eureka:
     service-url:
       defaultZone:  http://bamdb:bamdb@47.103.104.210:8761/eureka/, http://bamdb:bamdb@47.103.98.30:8761/eureka/
   server:
-<<<<<<< HEAD
     eviction-interval-timer-in-ms: 30000
-=======
     enable-self-preservation: false
-    eviction-interval-timer-in-ms: 5000
->>>>>>> 129c22f014f75eb56fe4ee46e3ce1f75e39780ad
 server:
   port: 8761

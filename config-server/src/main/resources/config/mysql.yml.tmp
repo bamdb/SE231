@@ -15,7 +15,3 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
         enable_lazy_load_no_trans: true
-
-
-#mybatis:
-#  type-aliases-package: com.se.userservice
