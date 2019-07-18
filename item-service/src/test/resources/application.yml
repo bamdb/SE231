@@ -1,9 +1,21 @@
 spring:
+  application:
+    name: item
   datasource:
-    url: jdbc:mysql://localhost:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
-    username: root
-    password: 610878
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    master:
+      jdbcUrl: jdbc:mysql://localhost:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
+      username: root
+      password: 610878
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      testWhileIdle: true
+      validationQuery: SELECT 1
+    slave:
+      jdbcUrl: jdbc:mysql://localhost:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
+      username: root
+      password: 610878
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      testWhileIdle: true
+      validationQuery: SELECT 1
   jpa:
     show-sql: true
     hibernate:
@@ -12,3 +24,6 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
         enable_lazy_load_no_trans: true
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/bamdb

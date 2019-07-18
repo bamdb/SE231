@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.github.tomakehurst.wiremock.junit.WireMockClassRule;
 import com.netflix.loadbalancer.Server;
 import com.netflix.loadbalancer.ServerList;
+import com.se.commentservice.client.UserClient;
 import com.se.commentservice.entity.Comment;
 import org.junit.Before;
 import org.junit.ClassRule;

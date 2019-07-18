@@ -5,6 +5,7 @@ import com.github.tomakehurst.wiremock.junit.WireMockClassRule;
 import com.netflix.loadbalancer.Server;
 import com.netflix.loadbalancer.ServerList;
 import com.se.messageservice.entity.Message;
+import com.se.messageservice.repository.MessageRepository;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;

@@ -4,6 +4,7 @@ import com.github.tomakehurst.wiremock.junit.WireMockClassRule;
 import com.netflix.loadbalancer.Server;
 import com.netflix.loadbalancer.ServerList;
 import com.se.topicservice.client.UserClient;
+import com.se.topicservice.dao.WriteDao;
 import com.se.topicservice.entity.Topic;
 import com.se.topicservice.entity.User;
 import com.se.topicservice.service.TopicService;
@@ -25,6 +26,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
+
+import java.sql.Timestamp;
 
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -51,6 +54,9 @@ public class TopicServiceApplicationTests {
 
     @Resource(name="topicServiceImpl")
     TopicService topicService;
+
+    @Resource(name="writeDaoImpl")
+    private WriteDao writeDao;
 
     @ClassRule
     public static WireMockClassRule wiremock = new WireMockClassRule(
@@ -82,6 +88,16 @@ public class TopicServiceApplicationTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"topic\":{\"userId\":"+user.getId()+", \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}, " +
                         "\"topicContent\":\"This is the first topic in bamdb\"}"))
+                .andExpect(status().isOk());
+
+        Topic topic1 = new Topic();
+        topic1.setPubTime(Timestamp.valueOf("2019-07-01 08:00:00"));
+        topic1.setUserId(1L);
+        topic1.setTitle("mock");
+        writeDao.save(topic1);
+        mvc.perform(post("/add/reply?topicId="+topic1.getId()+"&userId=1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("A reply"))
                 .andExpect(status().isOk());
 
         Topic topic = topicService.selectAll().iterator().next();
@@ -142,13 +158,24 @@ public class TopicServiceApplicationTests {
         user.setImgUrl(null);
         userClient.postUser(user);
 
+        Topic topic1 = new Topic();
+        topic1.setPubTime(Timestamp.valueOf("2019-07-01 08:00:00"));
+        topic1.setUserId(1L);
+        topic1.setTitle("mock");
+        writeDao.save(topic1);
+        mvc.perform(delete("/delete/reply?topicId=1&replyId=10"))
+                .andExpect(status().isOk());
+
         mvc.perform(post("/add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"topic\":{\"userId\":"+user.getId()+", \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}, " +
                         "\"topicContent\":\"This is the first topic in bamdb\"}"))
                 .andExpect(status().isOk());
 
+
         Topic topic = topicService.selectAll().iterator().next();
+        mvc.perform(delete("/delete/reply?topicId="+topic.getId()+"&replyId=10"))
+                .andExpect(status().isOk());
         mvc.perform(post("/add/reply?topicId="+topic.getId()+"&userId="+topic.getUserId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("A reply"))
