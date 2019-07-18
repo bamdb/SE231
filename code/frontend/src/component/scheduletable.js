@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -19,6 +18,8 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import { TreeSelect } from "antd";
+import { Modal, Button } from 'antd';
 
 const useStyle = makeStyles({
     img:{
@@ -36,22 +37,17 @@ class Scheduletable extends Component {
         this.state={
             readstat:[0,1,0,1,1,0],
             show:false,
+            treeData:[],
             completed:35,
             current:0,
             current1:-1,
-            x1:0,
-            x2:0,
+            value: [],
             show1:false,
             itemname: ""};
         this.handleClose = this.handleClose.bind(this);
         this.showEditBar = this.showEditBar.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleclick=this.handleclick.bind(this);
-        this.handleclickhas=this.handleclickhas.bind(this);
-        this.handleclickhasnot=this.handleclickhasnot.bind(this);
-        this.handleclick1=this.handleclick1.bind(this);
-        this.handleclickhas1=this.handleclickhas1.bind(this);
-        this.handleclickhasnot1=this.handleclickhasnot1.bind(this);
+        this.transform = this.transform.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
     showEditBar(){
@@ -65,42 +61,62 @@ class Scheduletable extends Component {
             show:false,
         })
     }
+    transform(tree, readdata, parentTitle,parentValue, value){
 
-    handleChange(e) {
+        const length=readdata.length;
+        console.log(length);
+        for (var i=0;i<length;++i){
+
+            console.log("child",readdata[i].length)
+            if(readdata[i].length===undefined) //下面没有子章节了
+            {
+                if(readdata[i]===1) {
+                    tree.push({
+                        title: "Node"+ parentTitle +'-'+ (i + 1).toString(),
+                        value: parentValue + '-' + i.toString(),
+                        done: true
+                    });
+                    value.push(parentValue + '-' + i.toString());
+                }
+                else
+                    tree.push({
+                        title: "Node"+ parentTitle +'-'+ (i + 1).toString(),
+                        value: parentValue+'-'+i.toString(),
+                        done: false
+                    });
+
+            }
+            else {
+                const parenttitle = parentTitle +'-'+ (i + 1).toString()
+                const parentvalue=parentValue+'-'+i.toString()
+                var children=[];
+                this.transform(children,readdata[i], parenttitle, parentvalue, value);
+                tree.push({
+                    title:  "Node"+ parentTitle +'-'+ (i + 1).toString(),
+                    value: parentvalue,
+                    done: false,
+                    children:children
+                });
+            }
+
+        }
+    }
+    componentWillMount() {
+        var treeData = [];
+        var value=[];
+        const data=this.props.readstat;
+        this.transform(treeData,data,'','0',value);
+        this.setState({
+            treeData:treeData,
+            value:value
+        })
     }
 
-    handleclickhas1() {
-        var readstat=this.state.readstat;
-        readstat[this.state.current][this.state.current1]=1;
-        this.setState({readstat:readstat,show1:false,current1:-1})
-    }
-
-    handleclickhasnot1() {
-        var readstat=this.state.readstat;
-        readstat[this.state.current][this.state.current1]=0;
-        this.setState({readstat:readstat,show1:false,current1:-1})
-    }
-
-    handleclick1(e) {
-        this.setState({x1:e.clientX,y1:e.clientY,show:true,current1:e.target.id,show1:true})
-    }
-
-    handleclick(e) {
-        this.setState({x:e.clientX,y:e.clientY,show:true,current:e.target.id})
-    }
-
-    handleclickhas()
-    {
-        var readstat=this.state.readstat;
-        readstat[this.state.current]=1;
-        this.setState({readstat:readstat,show:false,show1:false})
-    }
-
-    handleclickhasnot() {
-        var readstat=this.state.readstat;
-        readstat[this.state.current]=0;
-        this.setState({readstat:readstat,show:false,show1:false})
-    }
+    onChange = value => {
+        console.log(value);
+        this.setState({
+            value:value });
+    };
 
     componentDidMount() {
         if(this.props.readstat!==null)
@@ -110,35 +126,19 @@ class Scheduletable extends Component {
     }
 
     render() {
-        var readstat=this.state.readstat;
-        var item=[];
-
-        for(var i=0;i<readstat.length;++i) {
-
-            if(readstat[i]==0) {
-                item.push(
-                    <FormControlLabel
-                        value={"readstat["+i+"]"}
-                        control={<Radio color="primary" />}
-                        label={"Chap "+i}
-                        labelPlacement="top"
-                        defaultChecked={readstat[i]}
-                    />
-                );
+        const treeData = this.state.treeData;
+        const { SHOW_PARENT } = TreeSelect;
+        const tProps = {
+            treeData,
+            value: this.state.value,
+            onChange: this.onChange,
+            treeCheckable: true,
+            showCheckedStrategy: SHOW_PARENT,
+            searchPlaceholder: "Please select",
+            style: {
+                width: 300
             }
-            else{
-                item.push(
-                    <FormControlLabel
-                        value={"readstat["+i+"]"}
-                        control={<Radio color="primary" />}
-                        label={"Chap "+i}
-                        labelPlacement="top"
-                        defaultChecked={readstat[i]}
-                    />
-                );
-            }
-        }
-
+        };
         return (
             <Card className={useStyle.card} style={{width:150}}>
 
@@ -153,27 +153,17 @@ class Scheduletable extends Component {
                     <LinearProgress variant="determinate" value={this.state.completed} />
                 </CardContent>
                 </CardActionArea>
-                <Dialog open={this.state.show} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">修改进度</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>
+                <Modal
+                    title="进度编辑"
+                    visible={this.state.show}
+                    onOk={this.handleClose}
+                    onCancel={this.handleClose}
+                >
+                    <Typography>
                             点击下方按钮修改当前进度
-                        </DialogContentText>
-                    </DialogContent>
-                        <FormControl component="fieldset">
-                            <RadioGroup aria-label="position" name="position" onChange={this.handleChange} row>
-                                {item}
-                            </RadioGroup>
-                        </FormControl>
-                    <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
-                            Cancel
-                        </Button>
-                        <Button onClick={this.handleClose} color="primary">
-                            Submit
-                        </Button>
-                    </DialogActions>
-                </Dialog>
+                    </Typography>
+                    <TreeSelect {...tProps} />
+                </Modal>
 
             </Card>
         )
