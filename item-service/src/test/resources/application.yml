@@ -3,14 +3,14 @@ spring:
     master:
       jdbcUrl: jdbc:mysql://localhost:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
       username: root
-      password: 610878
+      password: wzl574402791 # 610878
       driver-class-name: com.mysql.cj.jdbc.Driver
       testWhileIdle: true
       validationQuery: SELECT 1
     slave:
       jdbcUrl: jdbc:mysql://localhost:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
       username: root
-      password: 610878
+      password: wzl574402791 # 610878
       driver-class-name: com.mysql.cj.jdbc.Driver
       testWhileIdle: true
       validationQuery: SELECT 1
