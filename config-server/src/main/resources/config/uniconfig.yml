@@ -9,7 +9,3 @@ management:
     web:
       exposure:
         include: '*'
-
-spring:
-  main:
-    allow-bean-definition-overriding: true
