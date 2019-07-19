@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -32,47 +31,31 @@ class Message extends Component{
             if(this.props.button==0)
             {
                 return(
-                <Grid container>
-                    <Grid item xs={1}></Grid>
-                    <Grid item xs={10}>
-                        <Paper>
-                            <Grid container>
-                                <Grid item xs={3}>
-                                    <Typography>from:{message.user.username||1}</Typography>
-                                    <Typography>to:{message.message.receiverId||1}</Typography>
-                                </Grid>
-                                <Grid item xs={9}>
-                                    <Typography>{message.message.content||"hello"}</Typography>
-                                </Grid>
-                            </Grid>
-                        </Paper>
+                    <Grid container>
+                        <Grid item xs={3}>
+                            <Typography>from:{message.user.username||1}</Typography>
+                            <Typography>to:{message.message.receiverId||1}</Typography>
+                        </Grid>
+                        <Grid item xs={9}>
+                            <Typography>{message.message.content||"hello"}</Typography>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={1}></Grid>
-                </Grid>
                 )
             }
             else
             {
                 return(
                 <Grid container>
-                    <Grid item xs={1}></Grid>
-                    <Grid item xs={10}>
-                        <Paper>
-                            <Grid container>
-                                <Grid item xs={3}>
-                                    <Typography>from:{message.user.username||1}</Typography>
-                                    <Typography>to:{message.message.receiverId}</Typography>
-                                </Grid>
-                                <Grid item xs={9}>
-                                    <Typography>{message.message.content}</Typography>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Button onClick={this.handleaddfriend}>同意</Button>
-                                </Grid>
-                            </Grid>
-                        </Paper>
+                    <Grid item xs={3}>
+                        <Typography>from:{message.user.username||1}</Typography>
+                        <Typography>to:{message.message.receiverId}</Typography>
                     </Grid>
-                    <Grid item xs={1}></Grid>
+                    <Grid item xs={9}>
+                        <Typography>{message.message.content}</Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button onClick={this.handleaddfriend}>同意</Button>
+                    </Grid>
                 </Grid>
                 );
             }
