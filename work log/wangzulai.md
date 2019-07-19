@@ -56,3 +56,7 @@
 # 2019-07-18
 * complete dao layer in all services
 * config mongodb sharding in four servers 
+
+# 2019-07-19
+* deploy services
+* work on mongodb sharding in four servers 
