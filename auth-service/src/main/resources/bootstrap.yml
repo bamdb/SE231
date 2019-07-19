@@ -4,7 +4,18 @@ spring:
       discovery:
         service-id: config
         enabled: true
-      name: auth, redis, mysql, uniconfig
+      name: auth, redis, uniconfig
+  datasource:
+    slave:
+      jdbcUrl: jdbc:mysql://202.120.40.8:30745/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
+      username: bamdb
+      password: bamdb
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    master:
+      jdbcUrl: jdbc:mysql://47.102.207.87:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
+      username: bamdb
+      password: bamdb
+      driver-class-name: com.mysql.cj.jdbc.Driver
 eureka:
   client:
     serviceUrl:
