@@ -34,8 +34,14 @@ class Neweditor extends React.Component {
         this.setState({id:id});
     }
     next() {
-        const current = this.state.current + 1;
-        this.setState({ current });
+        if(this.state.id!=null)
+        {
+            const current = this.state.current + 1;
+            this.setState({ current });
+        }
+        else{
+            alert("please finish the formerstep")
+        }
     }
 
     prev() {

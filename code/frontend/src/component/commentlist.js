@@ -27,10 +27,10 @@ class Commentlist extends Component {
         this.state={comments:[]};
     }
     componentWillMount() {
-        this.setState({comments:this.props.comments});
+        this.setState({comments:this.props.comments||[]});
     }
     componentWillReceiveProps(nextProps, nextContext) {
-        this.setState({comments:nextProps.comments});
+        this.setState({comments:nextProps.comments||[]});
     }
 
 

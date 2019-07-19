@@ -57,12 +57,13 @@ class Collectform extends Component {
         super(props);
         this.state = {
             visible: false,
-            status : '想看',
+            status : 0,
             content: "",
             tags:["233"],
             text:"",
             score:5,
             yourtags:[],
+            userid:1
         };
         this.showModal = this.showModal.bind(this);
         this.handleOk = this.handleOk.bind(this);
@@ -73,8 +74,16 @@ class Collectform extends Component {
         this.handlebuttonclick=this.handlebuttonclick.bind(this);
         this.handlescorechange=this.handlescorechange.bind(this);
         this.tagchange=this.tagchange.bind(this);
+        this.handleAlert=this.handleAlert.bind(this);
     }
     componentWillMount() {
+        if(localStorage.getItem("userid")==null)
+        {
+
+        }
+        else {
+            this.setState({userid:localStorage.getItem("userid")})
+        }
         var url5="http://202.120.40.8:30741/item/tag/id/"+this.props.itemid;
         axios.get(url5).then(
             function(response)
@@ -129,9 +138,9 @@ class Collectform extends Component {
 
 
         var date = Date.parse(new Date());
-        axios.post("http://202.120.40.8:30741/activity/add",{actTime:date,actType:this.state.status,userId:1,itemId:this.props.itemid});
-        axios.post("http://202.120.40.8:30741/comment/insert",{itemId:this.props.itemid,userId:1,content:this.state.content,pubTime:date});
-        axios.put("http://202.120.40.8:30741/rating/update",{userId:1,itemId:this.props.itemid,score:this.state.score});
+        axios.post("http://202.120.40.8:30741/activity/add",{actTime:date,actType:this.state.status,userId:this.state.userid,itemId:this.props.itemid});
+        axios.post("http://202.120.40.8:30741/comment/insert",{itemId:this.props.itemid,userId:this.state.userid,content:this.state.content,pubTime:date});
+        axios.put("http://202.120.40.8:30741/rating/update","success",{params:{userId:this.state.userid,itemId:this.props.itemid,score:this.state.score}});
         $.ajax({
             url:"http://202.120.40.8/item/add/tag",
             param:{userId:1,itemId:this.props.itemid},
@@ -151,13 +160,15 @@ class Collectform extends Component {
     }
     handleChange(e) {
 
+
         this.setState({status : e.target.value})
+
     }
 
-    handleAlert(content) {
-        this.setState({content : content})
+    handleAlert(e) {
+        this.setState({content : e.target.value})
     }
-    
+
     render() {
         return (
             <div>
@@ -176,7 +187,7 @@ class Collectform extends Component {
                                     aria-label="收藏状态"
                                     name="status"
                                     className={useStyles.group}
-                                    value={this.state.status}
+                                    value={parseInt(this.state.status)}
                                     onChange={this.handleChange}
                                 >
                                     <FormControlLabel value={0} control={<Radio />} label="想看" />
@@ -200,6 +211,7 @@ class Collectform extends Component {
                                 className={useStyles.textField}
                                 margin="normal"
                                 variant="outlined"
+                                onChange={this.handleAlert}
                             />
                         </Grid>
                     </Grid>
@@ -230,6 +242,7 @@ class Collectform extends Component {
                                 className={useStyles.textField}
                                 margin="normal"
                                 onChange={this.handletextchange}
+
                             />
                         </Grid>
                         <Grid item xs={2}>
