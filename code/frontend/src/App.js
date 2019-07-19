@@ -23,15 +23,17 @@ import Collectform from "./component/collectform";
 
 import Addmessage from "./component/addmessage";
 import Addtopic from "./component/addtopic";
-import Editorpage from "./page/editorpage";
+import Edititem from "./component/edititem";
 import Comment from './component/comment'
 import Scheduletableold from './component/scheduletableold'
 import leftappbar from "./component/leftappbar";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles/index';
 import Leftappbarnew from "./component/leftappbarnew";
-import Neweditor from "./page/neweditorpage";
-
+import Neweditor from "./page/editorpage";
+import Adminpage from "./page/adminpage";
+import Editorpage from './page/editorpage'
+import axios from "axios";
 
 
 const useStyles = makeStyles(theme => ({
@@ -76,7 +78,7 @@ function App() {
                 <div className={classes.toolbar} />
                 <Route path={'/topic'} component={Topicpage}></Route>
                 <Route path={'/topicdetail/*'} component={Topicdetailpage}></Route>
-                <Route path={'/itembrowse'} component={Itembrowsepage}></Route>
+                <Route path={'/itembrowse/*'} component={Itembrowsepage}></Route>
                 <Route path={'/login'} component={LoginPage}></Route>
                 <Route exact path={'/'} component={UserHomepage}></Route>
                 <Route path={'/register'} component={RegisterPage}></Route>
@@ -85,7 +87,8 @@ function App() {
                 <Route path={"/activity"} component={Activitypage}></Route>
                 <Route path={'/resetpassword'} component={Resetpwdpage}></Route>
                 <Route path={'/message'} component={Messagepage}></Route>
-                <Route path={'/test'} component={Neweditor}></Route>
+                <Route path={'/editor'} component={Editorpage}></Route>
+                <Route path={'/admin'} component={Adminpage}></Route>
             </main>
         </div>
       </Router>

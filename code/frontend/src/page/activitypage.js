@@ -68,6 +68,9 @@ class Activitypage extends Component{
     }
 
     render(){
+        var activities=this.state.activity.sort((a,b)=>{
+            return a.actTime>b.actTime;
+        });
         return(
             <Grid container direction={"column"} >
 
@@ -77,7 +80,7 @@ class Activitypage extends Component{
                     <Grid item xs={8} >
                         <br/><br/>
                         <Activitylist
-                            activities={this.state.activities}
+                            activities={activities}
                             username={this.state.username}
                             userid={this.state.userid}
                             />

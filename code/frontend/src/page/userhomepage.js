@@ -24,6 +24,11 @@ class Userhomepage extends Component{
         this.handleSearch=this.handleSearch.bind(this);
     }
     componentWillMount() {
+        axios.defaults.headers.common = {
+
+            "Authorization": "123456",
+
+        };
         if(localStorage.getItem("userid")==null)
         {
             window.location.href="/#/login";

@@ -47,7 +47,15 @@ class Itembrowsepage extends Component{
 
     componentWillMount() {
         const _this = this;
-        var type = this.state.type;
+        var value=window.location.href.split("#")[1].split("/")[2];
+        var type = 0;
+        switch(value)
+        {
+            case "book":type=0;break;
+            case "movie": type=1;break;
+        }
+        this.setState({type:type})
+
         var currentpage=this.state.currentpage;
         axios.get(
             "http://202.120.40.8:30741/rating/browser",{params:{

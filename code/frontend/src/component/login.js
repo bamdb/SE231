@@ -64,7 +64,7 @@ class Login extends Component{
                     islogin: 0,
                 })
             })
-        localStorage.setItem("userid","2");
+        localStorage.setItem("userid","1");
         window.location.reload()
 
     }

@@ -9,9 +9,11 @@ import TextsmsIcon from '@material-ui/icons/Textsms';
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import MovieOutlinedIcon from '@material-ui/icons/MovieOutlined';
 import BookOutlinedIcon from '@material-ui/icons/BookOutlined';
+import BuildOutlinedIcon from '@material-ui/icons/BuildOutlined'
 import FaceIcon from '@material-ui/icons/Face';
 import PersonOutlinedIcon from '@material-ui/icons/PersonOutlined';
 import VideocanOutlinedIcon from '@material-ui/icons/VideocamOutlined';
+import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined'
 import MessageIcon from '@material-ui/icons/Message';
 import GraphicEqIcon from '@material-ui/icons/GraphicEq';
 import Drawer from '@material-ui/core/Drawer';
@@ -149,7 +151,11 @@ export default function LeftAppBar(props) {
     function handleDrawerOpen(){
         setopen(true);
     }
-
+    function logout()
+    {
+        localStorage.clear();
+        window.location.reload();
+    }
     return(
         <div>
             <ThemeProvider theme={theme}>
@@ -202,7 +208,7 @@ export default function LeftAppBar(props) {
                     <MessageIcon />
                 </IconButton>
                 </Link>
-                <IconButton
+                <IconButton onClick={logout}
                 color={"inherit"}
                 aria-label="Open drawer"
                 edge="start">
@@ -253,13 +259,13 @@ export default function LeftAppBar(props) {
                 <br/><br/><br/>
                 <Divider />
                 <br/><br/><br/>
-                <ListItem button component={Link} to={'/itembrowse'}>
+                <ListItem button component={Link} to={'/itembrowse/book'}>
                     <ListItemIcon>
                         <GraphicEqIcon />
                     </ListItemIcon>
                     <ListItemText><Typography color={"textSecondary"}>发现书籍</Typography></ListItemText>
                 </ListItem>
-                <ListItem button component={Link} to={'/itembrowse'}>
+                <ListItem button component={Link} to={'/itembrowse/movie'}>
                     <ListItemIcon>
                         <VideocanOutlinedIcon />
                     </ListItemIcon>
@@ -283,6 +289,18 @@ export default function LeftAppBar(props) {
                     </ListItemIcon>
                     <ListItemText><Typography color={"textSecondary"}>个性推荐</Typography></ListItemText>
                 </ListItem>
+                <ListItem button component={Link} to={'/editor'}>
+                    <ListItemIcon>
+                        <BuildOutlinedIcon />
+                    </ListItemIcon>
+                    <ListItemText><Typography color={"textSecondary"}>编辑</Typography></ListItemText>
+                </ListItem>
+                <ListItem button component={Link} to={'/admin'}>
+                    <ListItemIcon>
+                        <VpnKeyOutlinedIcon />
+                    </ListItemIcon>
+                    <ListItemText><Typography color={"textSecondary"}>admin</Typography></ListItemText>
+                </ListItem>
                 <br/><br/>
                 <Divider />
                 <br/><br/>
@@ -292,6 +310,7 @@ export default function LeftAppBar(props) {
                     <Typography color={"textSecondary"}>{username}</Typography>
                     </Grid>
                 </ListItem>
+
                 <br/><br/>
             </div>
 

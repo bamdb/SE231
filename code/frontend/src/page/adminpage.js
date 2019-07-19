@@ -20,84 +20,88 @@ import Button from "@material-ui/core/Button";
 class Adminpage extends Component{
     constructor(props){
         super(props);
-        this.state={itemname:"",pubtime:"",chapternum:"",author:"",imgurl:"",type:""};
-        this.handleSearch=this.handleSearch.bind(this);
+        this.state={userid:1,username:"",password:"",email:""};
+        this.handlesearch=this.handlesearch.bind(this);
         this.handlechange=this.handlechange.bind(this);
-        this.handlesubmit=this.handlesubmit.bind(this);
+
+        this.handleidchange=this.handlechange.bind(this);
     }
-    handlesubmit()
-    {
-        axios.post("http://202.120.40.8:30741/item/add",{itemname:this.state.itemname,pubTime:this.state.pubtime,chapterNum:this.state.chapternum,mainauthor:this.state.author,imgurl:this.state.imgurl,type:this.state.type}).then(
-            function(response){
-                alert("success");
-            }
+   handleidchange(e)
+   {
+       this.setState({userid:e.target.value})
+   }
+    componentWillMount() {
+        axios.get("http:202.120.40.8/auth/id").then(
+            function(res){
+                this.setState({userinfo:res.data});
+            }.bind(this)
         )
     }
+
     handlechange(e)
     {
         var id=e.target.id;
         switch(id)
         {
-            case "itemname":this.setState({itemname:e.target.value});break;
-            case "pubtime":this.setState({pubtime:e.target.value});break;
-            case "chapternum":this.setState({chapternum:e.target.value});break;
-            case "author":this.setState({author:e.target.value});break;
-            case "imgurl":this.setState({imgurl:e.target.value});break;
-            case "type":this.setState({type:e.target.value});break;
+            case "username":this.setState({username:e.target.value});break;
+            case "password":this.setState({password:e.target.value});break;
+            case "email":this.setState({email:e.target.value});break;
+
         }
 
     }
 
-    handleSearch(value){
-
+    handlesearch(){
+        axios.get("http://202.120.40.8/auth/id"+this.state.userid).then(
+            function(res)
+            {
+                this.setState({username:res.data.username,password:res.data.password,email:res.data.mail});
+            }.bind(this)
+        )
     }
 
     render(){
+
+
+
+
+
         return(
             <Grid container spacing={10}>
-                <Grid item xs={12}>
-                    <Navigation />
+                <Grid item xs={6}>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <FormControl margin="normal" required fullWidth>
+                        <InputLabel htmlFor="id">userid</InputLabel>
+                        <Input type="text" id="userid" value={this.state.userid} onChange={this.handleidchange}></Input>
+                    </FormControl>
                 </Grid>
-                <Paper>
-                    <Grid container>
-                        <Grid item xs={2}></Grid>
-                        <Grid item xs={10}>
-                            <FormControl margin="normal" required fullWidth>
-
-                                <InputLabel htmlFor="id">itemname</InputLabel>
-                                <Input type="text" id="itemname" value={this.state.itemname} onChange={this.handlechange}></Input>
-                            </FormControl>
-                            <FormControl margin="normal" required fullWidth>
-
-                                <InputLabel htmlFor="id">pubtime</InputLabel>
-                                <Input type="text" id="pubtime" value={this.state.pubtime} onChange={this.handlechange}></Input>
-                            </FormControl>
-                            <FormControl margin="normal" required fullWidth>
-
-                                <InputLabel htmlFor="id">chapternum</InputLabel>
-                                <Input type="text" id="chapternum" value={this.state.chapternum} onChange={this.handlechange}></Input>
-                            </FormControl>
-                            <FormControl margin="normal" required fullWidth>
-
-                                <InputLabel htmlFor="id">author</InputLabel>
-                                <Input type="text" id="author" value={this.state.author} onChange={this.handlechange}></Input>
-                            </FormControl>
-                            <FormControl margin="normal" required fullWidth>
-
-                                <InputLabel htmlFor="id">imgurl</InputLabel>
-                                <Input type="text" id="imgurl" value={this.state.imgurl} onChange={this.handlechange}></Input>
-                            </FormControl>
-                            <FormControl margin="normal" required fullWidth>
-
-                                <InputLabel htmlFor="id">type</InputLabel>
-                                <Input type="text" id="type" value={this.state.type} onChange={this.handlechange}></Input>
-                            </FormControl>
-                            <Button onClick={this.handlesubmit}variant={"contained"}color={"secondary"}>创建</Button>
-
-                        </Grid>
-                        <Grid item xs={2}></Grid>
-                    </Grid>
-                </Paper>
+                <Grid item xs={6}>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <Button onClick={this.handlesearch} variant={"contained"} color={"primary"}>查询</Button>
+                </Grid>
+                <Grid item xs={3}>
+                    <FormControl margin="normal" required fullWidth>
+                        <InputLabel htmlFor="id">username</InputLabel>
+                        <Input type="text" id="username" value={this.state.username} onChange={this.handlechange}></Input>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={3}>
+                    <FormControl margin="normal" required fullWidth>
+                        <InputLabel htmlFor="id">password</InputLabel>
+                        <Input type="text" id="password" value={this.state.password} onChange={this.handlechange}></Input>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={3}>
+                    <FormControl margin="normal" required fullWidth>
+                        <InputLabel htmlFor="id">email</InputLabel>
+                        <Input type="text" id="userid" value={this.state.email} onChange={this.handlechange}></Input>
+                    </FormControl>
+                </Grid>
             </Grid>
         )
     }
