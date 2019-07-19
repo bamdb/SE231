@@ -1,43 +1,54 @@
-package com.se.activityservice.config;
-
-import com.mongodb.client.MongoClient;
-import de.flapdoodle.embed.mongo.MongodExecutable;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-
-@Configuration
-@EnableMongoRepositories
-public class EmbeddedMongoConfig {
-
-    private static final String DB_NAME = "integrationTest";
-    private static final int DB_PORT = 12345;
-    private static final String DB_HOST = "localhost";
-    private static final String DB_COLLECTION = "products";
-
-    private MongodExecutable mongodExecutable = null;
-
-    @Bean(name="mongoClient")
-    public MongoClient mongoClient() throws IOException {
-        // Lots of calls here to de.flapdoodle.embed.mongo code base to
-        // create an embedded db and insert some JSON data
-    }
-
-    @Autowired
-    @Bean(name="mongoDbFactory")
-    public MongoDbFactory mongoDbFactory(MongoClient mongoClient) {
-        return new SimpleMongoDbFactory(mongoClient, DB_NAME);
-    }
-
-    @Autowired
-    @Bean(name="mongoTemplate")
-    public MongoTemplate mongoTemplate(MongoClient mongoClient) {
-        return new MongoTemplate(mongoClient, DB_NAME);
-    }
-
-    @PreDestroy
-    public void shutdownEmbeddedMongoDB() {
-        if (this.mongodExecutable != null) {
-            this.mongodExecutable.stop();
-        }
-    }
-}
+//package com.se.activityservice.config;
+//
+//import com.mongodb.Mongo;
+//import com.mongodb.MongoClientOptions;
+//import de.flapdoodle.embed.mongo.MongodExecutable;
+//import de.flapdoodle.embed.mongo.MongodProcess;
+//import de.flapdoodle.embed.mongo.MongodStarter;
+//import de.flapdoodle.embed.mongo.config.IMongodConfig;
+//import de.flapdoodle.embed.mongo.config.MongodConfigBuilder;
+//import de.flapdoodle.embed.mongo.config.Net;
+//import de.flapdoodle.embed.mongo.distribution.Version;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.autoconfigure.mongo.MongoProperties;
+//import org.springframework.boot.test.context.TestConfiguration;
+//import org.springframework.context.annotation.Bean;
+//import java.io.IOException;
+//
+//@TestConfiguration
+//public class EmbeddedMongoConfig {
+//
+//    @Autowired
+//    private MongoProperties properties;
+//
+//    @Autowired(required = false)
+//    private MongoClientOptions options;
+//
+//    @Bean(destroyMethod = "close")
+//    public Mongo mongo(MongodProcess mongodProcess) throws IOException {
+//        Net net = mongodProcess.getConfig().net();
+//        properties.setHost(net.getServerAddress().getHostName());
+//        properties.setPort(net.getPort());
+//        return properties.createMongoClient(this.options);
+//    }
+//
+//    @Bean(destroyMethod = "stop")
+//    public MongodProcess mongodProcess(MongodExecutable mongodExecutable) throws IOException {
+//        return mongodExecutable.start();
+//    }
+//
+//    @Bean(destroyMethod = "stop")
+//    public MongodExecutable mongodExecutable(MongodStarter mongodStarter, IMongodConfig iMongodConfig) throws IOException {
+//        return mongodStarter.prepare(iMongodConfig);
+//    }
+//
+//    @Bean
+//    public IMongodConfig mongodConfig() throws IOException {
+//        return new MongodConfigBuilder().version(Version.Main.PRODUCTION).build();
+//    }
+//
+//    @Bean
+//    public MongodStarter mongodStarter() {
+//        return MongodStarter.getDefaultInstance();
+//    }
+//}
