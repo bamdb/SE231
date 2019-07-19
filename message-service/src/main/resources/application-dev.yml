@@ -1,22 +1,22 @@
 spring:
   application:
-    name: image
+    name: message
   data:
     mongodb:
       uri: mongodb://localhost:27017/bamdb
-server:
-  port: 3232
 eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
     lease-expiration-duration-in-seconds: 10
     lease-renewal-interval-in-seconds: 10
+server:
+  port: ${PORT:0}
 
 security:
   oauth2:
     client:
-      clientId: image-service
-      clientSecret: image-service
+      clientId: message-service
+      clientSecret: message-service
       accessTokenUri: http://localhost:8000/auth/oauth/token
       grant-type: client_credentials
       scope: server

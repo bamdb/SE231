@@ -30,4 +30,4 @@ spring:
         web-allow-others: false
   data:
     mongodb:
-      uri: mongodb://localhost:27017/bamdb
+      uri: mongodb://localhost:27017/test

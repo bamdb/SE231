@@ -1,6 +1,6 @@
 spring:
   application:
-    name: activity
+    name: item
   datasource:
     master:
       jdbcUrl: jdbc:mysql://localhost:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
@@ -10,7 +10,7 @@ spring:
       testWhileIdle: true
       validationQuery: SELECT 1
     slave:
-      jdbcUrl: jdbc:mysql://47.102.207.87:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
+      jdbcUrl: jdbc:mysql://localhost:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
       username: root
       password: 610878
       driver-class-name: com.mysql.cj.jdbc.Driver
@@ -36,8 +36,8 @@ server:
 security:
   oauth2:
     client:
-      clientId: activity-service
-      clientSecret: activity-service
+      clientId: item-service
+      clientSecret: item-service
       accessTokenUri: http://localhost:8000/auth/oauth/token
       grant-type: client_credentials
       scope: server

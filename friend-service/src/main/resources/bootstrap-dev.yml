@@ -8,8 +8,3 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://bamdb:bamdb@localhost:8761/eureka/
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'

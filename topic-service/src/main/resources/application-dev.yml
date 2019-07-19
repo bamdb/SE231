@@ -1,6 +1,6 @@
 spring:
   application:
-    name: activity
+    name: rating
   datasource:
     master:
       jdbcUrl: jdbc:mysql://localhost:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
@@ -10,7 +10,7 @@ spring:
       testWhileIdle: true
       validationQuery: SELECT 1
     slave:
-      jdbcUrl: jdbc:mysql://47.102.207.87:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
+      jdbcUrl: jdbc:mysql://localhost:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
       username: root
       password: 610878
       driver-class-name: com.mysql.cj.jdbc.Driver
@@ -22,9 +22,6 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
         enable_lazy_load_no_trans: true
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/bamdb
 eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
@@ -36,8 +33,8 @@ server:
 security:
   oauth2:
     client:
-      clientId: activity-service
-      clientSecret: activity-service
+      clientId: topic-service
+      clientSecret: topic-service
       accessTokenUri: http://localhost:8000/auth/oauth/token
       grant-type: client_credentials
       scope: server
