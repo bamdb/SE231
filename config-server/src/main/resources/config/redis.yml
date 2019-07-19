@@ -1,8 +1,8 @@
 spring:
   redis:
     database: 0
-    host: http://202.120.40.8
-    port: 30749
+    host: http://47.103.107.39
+    port: 6379
     password:
     jedis:
       pool:

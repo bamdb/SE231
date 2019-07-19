@@ -5,6 +5,8 @@ import com.netflix.loadbalancer.Server;
 import com.netflix.loadbalancer.ServerList;
 import com.se.activityservice.client.ItemClient;
 import com.se.activityservice.client.UserClient;
+import com.se.activityservice.config.MethodSecurityConfig;
+import com.se.activityservice.config.ResourceServer;
 import com.se.activityservice.service.ActivityService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,24 +18,29 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.cloud.netflix.ribbon.StaticServerList;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
-
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(properties = {
         "feign.hystrix.enabled=true"
 })
+@WebAppConfiguration
+@Import({ResourceServer.class, MethodSecurityConfig.class})
+@ActiveProfiles("test")
 @ContextConfiguration(classes = {ActivityServiceApplicationTests.LocalRibbonClientConfiguration.class})
 public class ActivityServiceApplicationTests {
 
@@ -45,6 +52,7 @@ public class ActivityServiceApplicationTests {
     @Before
     public void setup(){
         mvc = MockMvcBuilders.webAppContextSetup(context)
+                .apply(springSecurity())
                 .build();
     }
 

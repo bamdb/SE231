@@ -1,5 +1,5 @@
 package com.se.authservice.config;
-import com.se.authservice.service.CustomUserDetailsService;
+import com.se.authservice.service.impl.CustomUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

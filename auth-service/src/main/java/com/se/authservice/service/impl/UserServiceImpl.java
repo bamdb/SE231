@@ -1,10 +1,11 @@
-package com.se.authservice.service;
+package com.se.authservice.service.impl;
 import com.se.authservice.domain.Authority;
 import com.se.authservice.domain.Role;
 import com.se.authservice.domain.User;
 import com.se.authservice.repository.AuthorityRepository;
 import com.se.authservice.repository.RoleRepository;
 import com.se.authservice.repository.UserRepository;
+import com.se.authservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

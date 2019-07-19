@@ -1,4 +1,4 @@
-package com.se.authservice.service;
+package com.se.authservice.service.impl;
 
 import com.se.authservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
