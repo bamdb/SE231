@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.se.authservice.config.MethodSecurityConfig;
 import com.se.authservice.config.ResourceServer;
 import com.se.authservice.controller.AuthController;
-import com.se.authservice.domain.User;
+import com.se.authservice.entity.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

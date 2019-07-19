@@ -1,7 +1,7 @@
 package com.se.authservice.service;
 
 
-import com.se.authservice.domain.User;
+import com.se.authservice.entity.User;
 
 public interface UserService {
     User create(User user);

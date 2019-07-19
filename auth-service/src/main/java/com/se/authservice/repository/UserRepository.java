@@ -1,7 +1,7 @@
 package com.se.authservice.repository;
 
 
-import com.se.authservice.domain.User;
+import com.se.authservice.entity.User;
 import org.springframework.data.repository.CrudRepository;
 import javax.transaction.Transactional;
 import java.util.Optional;

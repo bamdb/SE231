@@ -1,4 +1,4 @@
-package com.se.authservice.domain;
+package com.se.authservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

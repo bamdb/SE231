@@ -1,7 +1,7 @@
 package com.se.authservice.DomainTest;
 
-import com.se.authservice.domain.Role;
-import com.se.authservice.domain.User;
+import com.se.authservice.entity.Role;
+import com.se.authservice.entity.User;
 import com.se.authservice.service.UserService;
 import org.junit.Assert;
 import org.junit.Test;

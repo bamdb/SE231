@@ -1,7 +1,7 @@
 package com.se.authservice.repository;
 
 
-import com.se.authservice.domain.Role;
+import com.se.authservice.entity.Role;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

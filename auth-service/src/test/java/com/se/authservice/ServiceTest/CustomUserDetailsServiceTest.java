@@ -1,6 +1,6 @@
 package com.se.authservice.ServiceTest;
 
-import com.se.authservice.domain.User;
+import com.se.authservice.entity.User;
 import com.se.authservice.service.impl.CustomUserDetailsService;
 import com.se.authservice.service.UserService;
 import org.junit.Assert;
