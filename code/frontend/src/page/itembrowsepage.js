@@ -80,10 +80,9 @@ class Itembrowsepage extends Component{
                     <Grid item xs={12}>
                         <Tags select={true} tagchange={this.handletagchange} tags={["热血","王道","搞怪","不高兴","没头脑"]}/>
                     </Grid>
-                    <Grid item xs={12}>
-                        <Grid container>
-                                <Listitem ItemList={this.state.ItemList} search={this.state.search}/>
-                                <Pagetable handlepagechange={this.handlepagechange}/>
+                    <Grid item xs={12} style={{padding:20}}>
+                        <Grid container spacing={2}>
+                                <Listitem ItemList={this.state.ItemList} search={this.state.search} handlepagechange={this.handlepagechange}/>
                             </Grid>
                         </Grid>
                     </Grid>

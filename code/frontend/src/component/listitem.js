@@ -12,10 +12,7 @@ import {Modal} from "antd";
 import Collectform from "./collectform";
 import '../css/listitem.css'
 import axios from 'axios';
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import Card from "@material-ui/core/Card";
+import { List, Avatar, Icon, Card } from "antd";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -46,156 +43,131 @@ const useStyles = makeStyles(theme => ({
 * props.rank : 条目排名
 * props.chapter : 条目章节数 
 */
+
+
+const IconText = ({ type, text }) => (
+    <span>
+    <Icon type={type} style={{ marginRight: 8 }} />
+        {text}
+  </span>
+);
+
+const { Meta } = Card;
+
 class Listitem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ItemList:[
-                {
-                    item: {
-                        id:1,
-                        itemname:"ThreeBody",
-                        pubTime: "2010-3-1T00",
-                        mainAuthor:"liucixin",
-                        chapterNum:3,
-                    }
-                }
-            ]
+            ItemList:[],
+            modifiedItems:[],
         }
+        this.handlepagechange=this.handlepagechange.bind(this);
     }
     componentWillMount() {
-        this.setState({ItemList:this.props.ItemList})
+
+        var rows=[];
+        const items = this.props.ItemList;
+        if(items !== undefined)
+        {
+            for(var i=0; i<items.length; ++i) {
+                if (items[i].item.itemname.indexOf(this.props.search) !== -1) {
+                    rows.push(
+                        {
+                            href: "/itemdetail/"+items[i].item.id,
+                            title:items[i].item.itemname,
+                            author:items[i].item.mainAuthor,
+                            pubTime: items[i].item.pubTime.split('T')[0],
+                            score:items[i].rating.avgScore,
+                            rank:items[i].rating.rank
+                        }
+                    );
+                }
+            }
+            console.log(rows);
+        }
+        else console.log("no data");
+        rows.push(
+            {
+                href: "/itemdetail/1",
+                title:"three body",
+                author:"liu",
+                pubTime: "2010-7-1",
+                score:9.5,
+                rank:1
+            }
+        );
+        this.setState({
+            ItemList:items,
+            modifiedItems:rows,
+        })
+    }
+
+    handlepagechange(page){
+        this.props.handlepagechange(page);
     }
     componentWillReceiveProps(nextProps, nextContext) {
         this.setState({ItemList:nextProps.ItemList})
     }
+/*
+    {
+    href: "http://ant.design",
+    title: `ant design part ${i}`,
+    avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+    description:
+    "Ant Design, a design language for background applications, is refined by Ant UED Team.",
+    content:
+    "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently."
+    }
+
+ */
 
     render() {
+        const items=this.state.modifiedItems;
+        return(<List
+                grid={{gutter:6,column: 4 }}
+                itemLayout="horizontal"
+                size="large"
+                pagination={{
+                    onChange: page => {
+                        console.log(page);
+                        this.handlepagechange(page);
+                    },
+                    pageSize: 8
+                }}
+                dataSource={items}
+                renderItem={item => (
+                    <List.Item
+                        key={item.title}
 
-        var rows=[];
-        const item = this.state.ItemList;
-        if(item !== undefined)
-        {
-            for(var i=0; i<item.length; ++i) {
-                if (item[i].item.itemname.indexOf(this.props.search) !== -1) {
-                rows.push(
-                    /*
-                    <Card className={useStyle.card} style={{width:120}}>
-
-                        <CardActionArea onClick={this.showEditBar}>
-                            <CardMedia
-                                style={{height:120}}
-                                className={useStyle.media}
-                                image={"img/3.jpg"}
+                    >
+                        <Card
+                            size={"small"}
+                            style={{width:168}}
+                            cover={
+                                <img
+                                    height={120}
+                                    alt="defaultbook"
+                                    src="img/3.jpg"
+                                />
+                            }
+                            actions={[
+                                <IconText type="star-o" text="156" />,
+                                <IconText type="like-o" text="156" />,
+                                <IconText type="message" text="2" />
+                            ]}
+                        >
+                            <Meta
+                                style={{margin:0}}
+                                title=<Link to={item.href}>{item.title}</Link>
+                                description={"评分："+item.score+'\n'+"排名：" +item.rank +'\n'
+                                            +"This is description."}
                             />
-                            <CardContent >
-                                {this.state.itemname}
-
-                     */
-                    <Card className={useStyles.card} style={{width:120}}>
-                        <CardActionArea onClick={this.showEditBar}>
-                            <CardMedia
-                                style={{height:80}}
-                                className={useStyles.media}
-                                image={"img/3.jpg"}
-                            />
-                            <CardContent >
-                                <Typography component={Link} to={'/itemdetail/'+item[i].item.id} align="center">
-                                    {item[i].item.itemname}
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
-                    /*
-                                <br/>
-                                <Paper className={useStyles.paper}>
-                                    <Grid container spacing={1}>
-                                        <Grid item xs={4}>
-                                            <Typography component="p" align="center">
-                                                {item[i].item.pubTime.split("T")[0]}
-                                            </Typography>
-                                        </Grid>
-                                        <Grid item xs={4}>
-                                            <Typography component="p" align="center">
-                                                {item[i].item.mainAuthor}
-                                            </Typography>
-                                        </Grid>
-                                        <Grid item xs={4}>
-                                            <Typography component="p" align="center">
-                                                {item[i].item.chapterNum}
-                                            </Typography>
-                                        </Grid>
-                                        </Grid>
-                                </Paper>
-                                <br/>
-                                <Score id={item[i].item.id}/>
-                            </Grid>
-                            <Grid item xs={1}/>
-                            <Grid item xs={2}>
-                                <br/>
-                                <Collectform itemid={item[i].item.id}/>
-                            </Grid>
-                        </Grid>
-                    </Card>
-*/
-                )
-            }
-
-            }
-        }
-
-        return(
-            <div id={"mainlistitem"} >
-                {rows}
-            </div>
+                        </Card>
+                    </List.Item>
+                )}
+            />
         );
     }
-}
-
-class Score extends Component{
-    constructor(props){
-        super(props);
-        this.state = {data:[], isloaded:false}
-    }
-    componentWillMount() {
-        const _this=this;
-        axios.get("http://202.120.40.8:30741/rating/itemid/"+this.props.id)
-            .then(function (res) {
-                _this.setState({data: res.data, isloaded: true}
-                );
-            })
-            .catch(function (error) {
-            })
-    }
-
-    render(){
-        return(
-        <Grid container spacing={2}>
-            <Grid item xs={3}>
-                <Typography variant="h5" component="h3" align="center">
-                    评分
-                </Typography>
-            </Grid>
-            <Grid item xs={3}>
-                    <Typography variant="h5" component="h3" align="center">
-                        {this.state.data.avgScore}
-                    </Typography>
-            </Grid>
-            <Grid item xs={3}>
-                <Typography variant="h5" component="h3" align="center">
-                    排名
-                </Typography>
-            </Grid>
-            <Grid item xs={3}>
-                    <Typography variant="h5" component="h3" align="center">
-                        {this.state.data.rank}
-                    </Typography>
-            </Grid>
-        </Grid>
-        );
-    }
-
-
 }
 
 export default Listitem;
