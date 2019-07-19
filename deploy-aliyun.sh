@@ -9,10 +9,10 @@ cd ../registry
 nohup mvn clean spring-boot:run -Dspring.profiles.active=aliyun > bamdb.log &
 sleep 50
 echo 'registry deployed'
-cd ../user-service
+cd ../auth-service
 nohup mvn clean spring-boot:run -Dspring.profiles.active=aliyun > bamdb.log &
 sleep 5
-echo 'user-service deployed'
+echo 'auth-service deployed'
 cd ../item-service
 nohup mvn clean spring-boot:run -Dspring.profiles.active=aliyun > bamdb.log &
 sleep 5
