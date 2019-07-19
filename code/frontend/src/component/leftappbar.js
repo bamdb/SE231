@@ -224,7 +224,8 @@ export default function LeftAppBar(props) {
                 <IconButton
                 color={"inherit"}
                 aria-label="Open drawer"
-                edge="start">
+                edge="start"
+                onClick={logout}>
                 <Icon type="logout" />
             </IconButton>
             </div>
