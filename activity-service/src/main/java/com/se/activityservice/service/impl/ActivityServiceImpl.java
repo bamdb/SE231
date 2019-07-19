@@ -6,10 +6,9 @@ import com.se.activityservice.dao.MongoDao;
 import com.se.activityservice.dao.ReadDao;
 import com.se.activityservice.dao.WriteDao;
 import com.se.activityservice.entity.*;
-import com.se.activityservice.repository.ActivityRepository;
-import com.se.activityservice.repository.ProgressRepository;
 import com.se.activityservice.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

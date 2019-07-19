@@ -3,6 +3,7 @@ spring:
     config:
       discovery:
         enabled: false
+      enabled: false
 eureka:
   client:
     enabled: false
