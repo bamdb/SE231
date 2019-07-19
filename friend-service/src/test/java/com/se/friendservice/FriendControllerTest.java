@@ -63,10 +63,12 @@ public class FriendControllerTest {
             return new StaticServerList<>(new Server("localhost", wiremock.port()));
         }
     }
+
     @Test
     public void testApplication() {
         FriendServiceApplication.main(new String[]{});
     }
+
     @Test
     public void testController() throws Exception{
         MultiValueMap<String, String> mm = new LinkedMultiValueMap<>();

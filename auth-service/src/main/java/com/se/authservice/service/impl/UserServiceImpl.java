@@ -6,17 +6,12 @@ import com.se.authservice.dao.UserWriteDao;
 import com.se.authservice.entity.Authority;
 import com.se.authservice.entity.Role;
 import com.se.authservice.entity.User;
-import com.se.authservice.repository.AuthorityRepository;
-import com.se.authservice.repository.RoleRepository;
-import com.se.authservice.repository.UserRepository;
 import com.se.authservice.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -47,7 +42,8 @@ public class UserServiceImpl implements UserService {
         return userWriteDao.save(userDetail);
     }
 
-    public User changeRole(String username, String roleName, Character c) {
+
+    public User changeRole(String username, String roleName, String c) {
         User user = userReadDao.findByUsername(username).orElseThrow(()->new UsernameNotFoundException(username));
         Collection<Role> roles = user.getRoles();
         if (c.equals('+'))
@@ -61,7 +57,8 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public User changeRevokeAuthority(String username, String revokeAuthorityName, Character c) {
+
+    public User changeRevokeAuthority(String username, String revokeAuthorityName, String c) {
         User user = userReadDao.findByUsername(username).orElseThrow(()->new UsernameNotFoundException(username));
         Collection<Authority> revokeAuthorities = user.getRevokeAuthorities();
         if (c.equals('+')) authorityReadDao.findByName(revokeAuthorityName).ifPresent(

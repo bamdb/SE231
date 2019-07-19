@@ -5,8 +5,8 @@ import com.se.authservice.entity.User;
 
 public interface UserService {
     User create(User user);
-    User changeRole(String username, String roleName, Character c);
-    User changeRevokeAuthority(String username, String revokeAuthorityName, Character c);
+    User changeRole(String username, String roleName, String c);
+    User changeRevokeAuthority(String username, String revokeAuthorityName, String c);
     User disableUser(String username);
 
     User selectUserById(Long id);

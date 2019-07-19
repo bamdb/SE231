@@ -14,6 +14,7 @@ public class ResourceServer extends ResourceServerConfigurerAdapter {
         http    .authorizeRequests()
                 .anyRequest().permitAll();
     }
+
     @Override
     public void configure(ResourceServerSecurityConfigurer security) throws Exception {
         security.stateless(false);

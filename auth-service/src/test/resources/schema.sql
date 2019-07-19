@@ -9,7 +9,6 @@ CREATE TABLE `authority`  (
 );
 
 
-
 INSERT INTO `authority` VALUES (1, 'comment');
 
 DROP TABLE IF EXISTS `role`;

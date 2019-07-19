@@ -22,14 +22,14 @@ public class MessageController {
     }
 
     @GetMapping(value = "/content", produces ="application/json")
-    String selectBySenderIdAndReceiverIdAndSendTime(@RequestParam("senderId") Long senderId,
+    public String selectBySenderIdAndReceiverIdAndSendTime(@RequestParam("senderId") Long senderId,
                                                     @RequestParam("receiverId") Long receiverId,
                                                     @RequestParam("sendTime") Long send_time) {
         return messageService.selectBySenderIdAndReceiverIdAndSendTime(senderId, receiverId, send_time);
     }
 
     @DeleteMapping(value = "/delete/one", produces ="application/json")
-    ResponseEntity<?> deleteBySenderIdAndReceiverIdAndSendTime(@RequestParam("senderId") Long senderId,
+    public ResponseEntity<?> deleteBySenderIdAndReceiverIdAndSendTime(@RequestParam("senderId") Long senderId,
                                                                @RequestParam("receiverId") Long receiverId,
                                                                @RequestParam("sendTime") Long send_time) {
         messageService.deleteBySenderIdAndReceiverIdAndSendTime(senderId, receiverId, send_time);
@@ -37,7 +37,7 @@ public class MessageController {
     }
 
     @DeleteMapping(value = "/delete/all", produces ="application/json")
-    ResponseEntity<?> deleteAllBySenderIdAndReceiverId(@RequestParam("senderId") Long senderId,
+    public ResponseEntity<?> deleteAllBySenderIdAndReceiverId(@RequestParam("senderId") Long senderId,
                                                        @RequestParam("receiverId") Long receiverId) {
         /*delete messages sent from both sides*/
         messageService.deleteAllBySenderIdAndReceiverId(senderId, receiverId);
@@ -45,23 +45,23 @@ public class MessageController {
     }
 
     @GetMapping(value = "/all", produces ="application/json")
-    Iterable<Message> selectBySenderIdAndReceiverId(@RequestParam("senderId") Long senderId,
+    public Iterable<Message> selectBySenderIdAndReceiverId(@RequestParam("senderId") Long senderId,
                                                     @RequestParam("receiverId") Long receiverId) {
         return messageService.selectBySenderIdAndReceiverId(senderId, receiverId);
     }
 
     @GetMapping(value = "/senderid/{senderId}", produces ="application/json")
-    List<MessageOut> selectBySenderId(@PathVariable Long senderId) {
+    public List<MessageOut> selectBySenderId(@PathVariable Long senderId) {
         return messageService.selectBySenderId(senderId);
     }
 
     @GetMapping(value = "/receiverid/{receiverId}", produces ="application/json")
-    List<MessageOut> selectByReceiverId(@PathVariable Long receiverId) {
+    public List<MessageOut> selectByReceiverId(@PathVariable Long receiverId) {
         return messageService.selectByReceiverId(receiverId);
     }
 
     @PostMapping(value = "/add", produces ="application/json")
-    Message addMessage(@RequestBody Message message) {
+    public Message addMessage(@RequestBody Message message) {
         return messageService.addMessage(message);
     }
 }

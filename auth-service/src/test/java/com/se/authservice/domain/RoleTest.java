@@ -1,4 +1,4 @@
-package com.se.authservice.DomainTest;
+package com.se.authservice.domain;
 
 import com.se.authservice.entity.Authority;
 import com.se.authservice.entity.Role;
