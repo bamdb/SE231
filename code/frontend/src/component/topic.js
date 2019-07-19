@@ -4,18 +4,13 @@ import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import {Link} from "react-router-dom";
 import '../css/item.css'
-import List from '@material-ui/core/List';
+import Grid from '@material-ui/core/Grid/index'
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import {Button} from "@material-ui/core";
+import Typography from '@material-ui/core/Typography';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        width: '100%',
-        maxWidth: '360px',
-        backgroundColor: theme.palette.background.paper,
-    },
-}));
+
 
 
 /*
@@ -39,7 +34,6 @@ class Topic extends Component {
             replyTotal: 0,
             date: "2019-7-2"
         }
-
     }
 
     componentWillMount() {
@@ -50,7 +44,6 @@ class Topic extends Component {
         if(window.location.href.split("#")[1]!==undefined)
         {
             var x = window.location.href.split("#")[1].split("/")[1];
-
         }
         if(this.props.topicId!==undefined)
         {
@@ -59,21 +52,27 @@ class Topic extends Component {
         }
     }
     render(){
-        var url='/topicdetailpage/'+this.state.topicId;
         var content=this.state.content;
         return(
-            <List component={"nav"} className={useStyles.root} aria-label="Mailbox folders">
+            <div>
                 <Divider />
-
                 <ListItem >
-                    <Link to={'/topicdetail/'+this.state.topicId}>{content}</Link>
-                    <ListItemText primary={"   "} />
-                    <ListItemText primary={this.state.author} />
-                    <ListItemText primary={this.state.replyTotal+" replies"} />
-                    <ListItemText primary={this.state.date.split("T")[0]||""} />
+                    <Grid container  wrap={"nowrap"}>
+                        <Grid item xs={5} >
+                            <Link to={'/topicdetail/'+this.state.topicId}><Typography variant={"subtitle1"} color={"textPrimary"}> {content}</Typography></Link>
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Typography variant={"subtitle1"}  color={"textSecondary"}>{this.state.author}</Typography>
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Typography variant={"subtitle1"} color={"textSecondary"}>{this.state.replyTotal+" replies"}</Typography>
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Typography variant={"subtitle1"} color={"textSecondary"}>{this.state.date.split("T")[0]||""}</Typography>
+                        </Grid>
+                    </Grid>
                 </ListItem>
-                <Divider />
-            </List>
+            </div>
         );
     }
 }

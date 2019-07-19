@@ -9,7 +9,6 @@ import {
   HashRouter as Router,
   Route,
 } from "react-router-dom";
-import Userfavoritespage from "./page/userfavoritespage";
 import RegisterPage from "./page/registerpage";
 import Topicpage from "./page/topicpage";
 import Topicdetailpage from "./page/topicdetailpage";
@@ -63,10 +62,6 @@ function selectDrawer(isneeded) {
 }
 function App() {
     const classes=useStyles();
-    /*
-    var needDrawer=true;
-    if(window.location.href.split("#")[1]==='/login'||window.location.href.split("#")[1]==='/register') needDrawer=false;
-    */
     const [needDrawer, setneedDrawer]=useState(true);
     const [username]=useState("");
     const leftBar = needDrawer ? leftappbar({username:"hyy"}) : <div />
@@ -84,7 +79,6 @@ function App() {
                 <Route path={'/itembrowse'} component={Itembrowsepage}></Route>
                 <Route path={'/login'} component={LoginPage}></Route>
                 <Route exact path={'/'} component={UserHomepage}></Route>
-                <Route path={'/userfavoritepage'} component={Userfavoritespage}></Route>
                 <Route path={'/register'} component={RegisterPage}></Route>
                 <Route path={'/itemdetail/*'} component={Useriteminfopage}></Route>
                 <Route path={"/userinfo"} component={Userinfopage}></Route>
