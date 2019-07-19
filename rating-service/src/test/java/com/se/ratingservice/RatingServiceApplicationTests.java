@@ -4,6 +4,8 @@ import com.github.tomakehurst.wiremock.junit.WireMockClassRule;
 import com.netflix.loadbalancer.Server;
 import com.netflix.loadbalancer.ServerList;
 import com.se.ratingservice.client.ItemClient;
+import com.se.ratingservice.config.MethodSecurityConfig;
+import com.se.ratingservice.config.ResourceServer;
 import com.se.ratingservice.entity.Item;
 import com.se.ratingservice.service.RatingService;
 import org.junit.Assert;
@@ -16,9 +18,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.cloud.netflix.ribbon.StaticServerList;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -33,6 +38,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
+@WebAppConfiguration
+@Import({ResourceServer.class, MethodSecurityConfig.class})
+@ActiveProfiles("test")
 @SpringBootTest(properties = {
         "feign.hystrix.enabled=true"
 })
@@ -64,23 +72,6 @@ public class RatingServiceApplicationTests {
     public void testApplication() {
         RatingServiceApplication.main(new String[] {});
     }
-
-    /*
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-    @Column(name = "item_id", nullable = false)
-    private Long itemId;
-    @Column(name = "avg_score")
-    private float avgScore;
-    @Column(name = "rank")
-    private Integer rank;
-    @Column(name = "tot_score_num")
-    private Integer totScoreNum;
-    @Column(name = "type")
-    private Integer type;
-     */
 
     @Test
     public void controllerTest() throws Exception {

@@ -1,4 +1,4 @@
-package com.se.friendservice.config.ds.config;
+package com.se.friendservice.config;
 
 import feign.RequestInterceptor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
