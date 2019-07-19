@@ -39,3 +39,7 @@
 + auth config
 + unit test
 + in-memory database
+## 2019.07.19
++ api doc
++ unit tests with security, in-memory DB and master-slave DB integrated
++ fine-tune the configuration and allocate authorization
