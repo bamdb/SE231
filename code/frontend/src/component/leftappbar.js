@@ -1,5 +1,6 @@
 import React, { useState, useEffect , Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles/index';
+import Messagepage from '../page/messagepage'
 import Grid from '@material-ui/core/Grid/index'
 import Paper from '@material-ui/core/Paper/index';
 import Typography from '@material-ui/core/Typography';
@@ -112,12 +113,16 @@ const useStyles = makeStyles(theme=>({
         margin:10,
         width: 80,
         height: 80,
+    },
+    list: {
+        width:300,
     }
 }))
 
 export default function LeftAppBar(props) {
     const classes = useStyles();
     const [open, setopen] = useState(true);
+    const [openMess, setopenMess] =  useState(false);
     const [username,setusername]=useState("");
     var drawerbutton = open ? <ChevronLeftIcon />:<ChevronRightIcon />
     useEffect(() => {
@@ -148,6 +153,14 @@ export default function LeftAppBar(props) {
 
     function handleDrawerOpen(){
         setopen(true);
+    }
+
+    function handleMessOpen() {
+        setopenMess(true);
+    }
+
+    function handleMessClose() {
+        setopenMess(false);
     }
 
     return(
@@ -193,15 +206,14 @@ export default function LeftAppBar(props) {
                     <EmailIcon />
                 </IconButton>
                 </Link>
-                <Link to={'/message'}>
                 <IconButton
                     color={"inherit"}
                     aria-label="Open drawer"
                     edge="start"
+                    onClick={handleMessOpen}
                 >
                     <MessageIcon />
                 </IconButton>
-                </Link>
                 <IconButton
                 color={"inherit"}
                 aria-label="Open drawer"
@@ -296,7 +308,16 @@ export default function LeftAppBar(props) {
             </div>
 
         </Drawer>
+            <Drawer
+                anchor={"right"}
+                open={openMess}
+                onClose={handleMessClose}
+            >
 
+                <div className={classes.list}>
+                <Messagepage />
+                </div>
+            </Drawer>
         </div>
     /*
             <Grid container spacing={2} direction={"column"} justify={"flex-start"} wrap={"nowrap"} >

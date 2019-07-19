@@ -84,7 +84,6 @@ function App() {
                 <Route path={"/userinfo"} component={Userinfopage}></Route>
                 <Route path={"/activity"} component={Activitypage}></Route>
                 <Route path={'/resetpassword'} component={Resetpwdpage}></Route>
-                <Route path={'/message'} component={Messagepage}></Route>
                 <Route path={'/test'} component={Neweditor}></Route>
             </main>
         </div>

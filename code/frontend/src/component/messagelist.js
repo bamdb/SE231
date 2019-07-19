@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
+import { List, Avatar, Button, Divider } from 'antd';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import axios from 'axios';
@@ -12,9 +9,27 @@ class Messagelist extends Component{
     constructor(props)
     {
         super(props);
-        this.state={messages:[{message:{senderId:1,receiverId:1,content:"asdadadasd"},user:{username:"shenruien"}}],userid:1}
+        this.state={
+            messages:[
+                {
+                    message:
+                        {
+                            senderId:1,
+                            receiverId:1,
+                            content:"asdadadasd"
+                        },
+                    user:{username:"shenruien"}
+                }
+                ],
+            userid:1
+        }
         this.handleaddfriend=this.handleaddfriend.bind(this);
+        this.getButton = this.getButton.bind(this);
     }
+    getButton(type) {
+        return type ? <Button size={"small"}>同意</Button> : <div></div>
+    }
+
     handleaddfriend()
     {
 
@@ -54,36 +69,50 @@ class Messagelist extends Component{
         var rows=[];
         for(var i=0;i<messages.length;++i)
         {
-
                 if(messages[i].message.content!="加为好友")
                 {
                     rows.push(
-                        <Grid item xs={12}>
-                            <Message message={messages[i]} button={0}></Message>
-                        </Grid>
-                    )
+                        {
+                            avater: messages[i].user.imgurl,
+                            senderName: messages[i].user.username,
+                            content: messages[i].user.username+"请求加您为好友！",
+                            type:1
+                        }
+                    );
                 }
                 else
                 {
                     rows.push(
-                        <Grid item xs={12}>
-                            <Message message={messages[i]} button={1}></Message>
-                        </Grid>
-                    )
+                        {
+                            avater: messages[i].user.imgurl,
+                            senderName: messages[i].user.username,
+                            content: messages[i].message.content,
+                            type:0
+                        }
+                    );
                 }
-
-
-
-
         }
-        return(
-            <Paper>
-                <Grid container spacing={2}>
-                    {rows}
-                </Grid>
-            </Paper>
-        )
 
+
+        return(
+            <List
+                itemLayout="horizontal"
+                dataSource={rows}
+                renderItem={item => (
+                    <div style={{padding:20}} >
+                <List.Item
+                    extra= {this.getButton(item.type)}
+                >
+                    <List.Item.Meta
+                        avatar={<Avatar src={item.avater} />}
+                        title={item.senderName}
+                        description={item.content}
+                    />
+                </List.Item>
+                    </div>
+            )}
+            />
+        )
     }
 }
 export default Messagelist;

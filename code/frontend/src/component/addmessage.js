@@ -3,30 +3,34 @@
  */
 
 import React, {Component} from "react";
-import { Modal} from 'antd';
+import {List, notification, Card, Button} from 'antd';
 import "antd/dist/antd.css";
 import Grid from "@material-ui/core/Grid";
-import Radio from '@material-ui/core/Radio';
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import Tag from "./tag";
 import IconButton from "@material-ui/core/IconButton";
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import Icon from "@material-ui/core/Icon";
 import {Avatar} from "@material-ui/core";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import * as axios from "axios";
+import SpeedDial from '@material-ui/lab/SpeedDial';
+import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
+
+
+
+const openNotificationWithIcon = type => {
+    notification[type]({
+        message: "发送成功",
+        description:
+            "Your message has been sent successfully ",
+        duration:3,
+        placement:"topRight",
+        top: 80,
+    });
+};
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -62,8 +66,9 @@ class Addmessage extends Component {
         super(props);
         this.state = {
             text:"",
+            hidden:false,
             to:0,
-            visible:false,
+            visible:true,
             tolist:[]
         };
         this.showModal = this.showModal.bind(this);
@@ -74,13 +79,14 @@ class Addmessage extends Component {
     }
     handleOk()
     {
-        var date = Date.parse(new Date())
-
-        axios.post("http://202.120.40.8:30741/message/add",{senderId:1,receiverId:2,senTime:date,content:this.state.text});
+       // var date = Date.parse(new Date())
+       // axios.post("http://202.120.40.8:30741/message/add",{senderId:1,receiverId:2,senTime:date,content:this.state.text});
+        openNotificationWithIcon('success');
+        this.handleCancel();
     }
     handleCancel()
     {
-        this.setState({visible:false})
+        this.setState({visible:true,hidden:false})
     }
     handletextchange(e)
     {
@@ -93,7 +99,8 @@ class Addmessage extends Component {
 
     showModal(){
         this.setState({
-            visible: true
+            visible: false,
+            hidden:true
         })
     }
     componentWillMount() {
@@ -114,40 +121,53 @@ class Addmessage extends Component {
         }
         return (
             <div>
-                <IconButton aria-label="Add to favorites" onClick={this.showModal}>
-                    添加
-                    <Avatar src={"/img/add.svg"}/>
-                </IconButton>
-                <Modal title="发送私信" visible={this.state.visible}
-                       onOk={this.handleOk} onCancel={this.handleCancel}
-                >
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <InputLabel shrink htmlFor="age-label-placeholder">
-                                to
-                            </InputLabel>
-                            <Select
-                                value={this.state.to}
-                                onChange={this.handlechange}
-                                input={<Input name="age" id="age-label-placeholder" />}
-
-                                name="age"
-                            >
-
-                                {rows}
-                            </Select>
+                <SpeedDial
+                    ariaLabel="SpeedDial example"
+                    hidden={this.state.hidden}
+                    icon={<SpeedDialIcon />}
+                    onClick={this.showModal}
+                    direction={"up"}
+                />
+                <List.Item hidden={this.state.visible}>
+                    <Card>
+                    <Grid container style={{padding:20}}>
+                        <Grid item xs={3}>
+                        <InputLabel shrink htmlFor="age-label-placeholder">
+                        to
+                        </InputLabel>
                         </Grid>
-                        <Grid item xs={12}>
-                            <InputLabel shrink htmlFor="age-label-placeholder">
-                                内容
-                            </InputLabel>
-                            <TextField value={this.state.text} onChange={this.handletextchange} >
-
-                            </TextField>
+                        <Grid item xs={9}>
+                        <Select
+                            value={this.state.to}
+                            onChange={this.handlechange}
+                            input={<Input name="age" id="age-label-placeholder" />}
+                            name="age"
+                        >
+                        {rows}
+                    </Select>
                         </Grid>
-
+                        <br/>
+                        <br/>
+                        <Grid item xs={3}>
+                    <InputLabel shrink htmlFor="age-label-placeholder">
+                        内容
+                    </InputLabel>
+                        </Grid>
+                        <Grid item xs={9}>
+                    <TextField value={this.state.text} onChange={this.handletextchange} >
+                    </TextField>
                     </Grid>
-                </Modal>
+                        <br/>
+                        <br/>
+                        <Grid item xs={6} alignContent={"center"} justify={"center"}>
+                            <Button onClick={this.handleOk}>发送</Button>
+                        </Grid>
+                        <Grid item xs={6} alignContent={"center"} justify={"center"}>
+                            <Button onClick={this.handleCancel}>取消</Button>
+                        </Grid>
+                    </Grid>
+                    </Card>
+                </List.Item>
             </div>
         )
     }
