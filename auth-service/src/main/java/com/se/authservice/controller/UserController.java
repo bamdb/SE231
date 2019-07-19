@@ -12,7 +12,7 @@ public class UserController {
     @Resource(name="userServiceImpl")
     private UserService userService;
 
-
+    @PreAuthorize("#oauth2.hasScope('server')")
     @GetMapping(value ="/id/{id}", produces ="application/json")
     public User getUser(@PathVariable("id") Long id) {
         User user = userService.selectUserById(id);
@@ -29,6 +29,7 @@ public class UserController {
         return it;
     }
 
+    @PreAuthorize("#oauth2.hasScope('server')")
     @GetMapping(value="/username/{username}", produces="application/json")
     public User selectByUsername(@PathVariable("username") String username) {
         User user = userService.selectByUsername(username);
@@ -52,7 +53,7 @@ public class UserController {
         return userService.truncate( userService.updateUser(user) );
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or principal.username == #username")
     @DeleteMapping(value="/delete/username/{username}")
     public void deleteUserByUsername(
             @PathVariable("username") String username) {
