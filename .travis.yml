@@ -4,7 +4,6 @@ addons:
   ssh_known_hosts: 202.120.40.8:30740
 services:
 - mongodb
-- mysql
 dist: xenial
 jdk:
 - openjdk11
