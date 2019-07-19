@@ -5,6 +5,7 @@ import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,12 +28,14 @@ public class ImageController {
         else return null;
     }
 
+    @PreAuthorize("hasRole('EDITOR')")
     @DeleteMapping("/delete/id/{imageId}")
     public ResponseEntity<?> deleteByID(@PathVariable Long imageId){
         imageRepository.deleteByImageId(imageId);
         return ResponseEntity.ok().body("delete item successfully!");
     }
 
+    @PreAuthorize("hasRole('EDITOR')")
     @PostMapping("/update")
     public Image updateImageById(@RequestParam("imageId") Long imageId, @RequestParam("image") MultipartFile file) throws IOException {
         Image image = imageRepository.findByImageId(imageId).orElse(new Image(imageId, new Binary(file.getBytes())));
@@ -40,6 +43,7 @@ public class ImageController {
         return imageRepository.save(image);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/insert")
     public Image insertImageById(@RequestParam("imageId") Long imageId, @RequestParam("image") MultipartFile file) throws IOException {
         Image image = new Image(imageId, new Binary(file.getBytes()));

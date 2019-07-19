@@ -5,6 +5,7 @@ import com.se.commentservice.entity.Comment;
 import com.se.commentservice.entity.CommentOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,6 +36,8 @@ public class CommentController {
         return commentService.selectCommentByItemId(itemId);
     }
 
+
+    @PreAuthorize("hasRole('EDITOR') or  principal.username == userClient.getUserById(#userId).getUsername()")
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteCommentByID(@RequestParam("itemId") Long itemId,
                                                @RequestParam("userId") Long userId) {
@@ -42,6 +45,7 @@ public class CommentController {
         return ResponseEntity.ok().body("Delete item successfully!");
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/insert")
     public Comment insertComment(@RequestBody Comment comment) {
         return commentService.insertComment(comment);
