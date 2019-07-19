@@ -5,6 +5,8 @@ spring:
         service-id: config
         enabled: true
       name: image, mongo, uniconfig
+  main:
+    allow-bean-definition-overriding: true
 eureka:
   client:
     serviceUrl:
