@@ -5,6 +5,8 @@ import com.github.tomakehurst.wiremock.junit.WireMockClassRule;
 import com.netflix.loadbalancer.Server;
 import com.netflix.loadbalancer.ServerList;
 import com.se.friendservice.client.UserClient;
+import com.se.friendservice.config.MethodSecurityConfig;
+import com.se.friendservice.config.ResourceServer;
 import com.se.friendservice.entity.Friend;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -15,9 +17,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.cloud.netflix.ribbon.StaticServerList;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -35,11 +40,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
+@WebAppConfiguration
+@Import({ResourceServer.class, MethodSecurityConfig.class})
+@ActiveProfiles("test")
 @SpringBootTest(properties = {
         "feign.hystrix.enabled=true"
 })
 @ContextConfiguration(classes = {FriendControllerTest.LocalRibbonClientConfiguration.class})
-
 public class FriendControllerTest {
     @Autowired
     private WebApplicationContext context;

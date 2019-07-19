@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 
 @FeignClient(value = "friend"
         ,fallback = FriendClientFallBack.class
-//        ,primary = false
 )
 @Primary
 public interface FriendClient {

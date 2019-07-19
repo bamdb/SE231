@@ -1,6 +1,5 @@
 package com.se.messageservice.client;
 
-import com.se.messageservice.client.FriendClient;
 import org.springframework.stereotype.Component;
 
 @Component
