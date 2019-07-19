@@ -1,15 +1,10 @@
 spring:
-  application:
-    name: image
-  data:
-    mongodb:
-      uri: mongodb://202.120.40.8:30746/bamdb?connectTimeoutMS=20000&heartbeatFrequencyMS=5000&localThresholdMS=3000&maxIdleTimeMS=5000&serverSelectionTimeoutMS=15000&socketTimeoutMS=7500
-      options:
-        connectTimeoutMS: 20000
-        heartbeatFrequencyMS: 5000
-        localThresholdMS: 3000
-        maxIdleTimeMS: 5000
-        serverSelectionTimeoutMS: 15000
-        socketTimeoutMS: 7500
-server:
-  port: 3232
+  cloud:
+    config:
+      discovery:
+        enabled: false
+      enabled: false
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://bamdb:bamdb@localhost:8761/eureka/

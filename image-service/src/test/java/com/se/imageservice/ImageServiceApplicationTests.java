@@ -1,7 +1,6 @@
 package com.se.imageservice;
 
-import org.bson.types.Binary;
-import org.junit.Before;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

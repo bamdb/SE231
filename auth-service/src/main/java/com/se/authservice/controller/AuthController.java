@@ -36,6 +36,7 @@ public class AuthController {
         return u;
     }
 
+    @PreAuthorize("hasRole('USER')")
     @Transactional
     @DeleteMapping(value = "/exit", produces = "application/json")
     public ResponseEntity<?> revokeToken(@RequestParam("access_token") String accessToken) {

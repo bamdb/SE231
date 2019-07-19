@@ -18,6 +18,7 @@ public class CommentController {
         this.commentService = commentService;
     }
 
+
     @GetMapping(value="/", produces="application/json")
     public Comment getCommentById(@RequestParam("itemId") Long itemId,
                                   @RequestParam("userId") Long userId) {

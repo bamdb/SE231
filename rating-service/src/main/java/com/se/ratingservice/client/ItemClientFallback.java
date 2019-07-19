@@ -33,6 +33,7 @@ public class ItemClientFallback implements ItemClient{
 
     @Override
     public Item postItem(Item item) {
+        if (itemList.size() > 0)
         for (Item itemIter : itemList) {
             if (item.getId().equals(itemIter.getId())) {
                 return item;
