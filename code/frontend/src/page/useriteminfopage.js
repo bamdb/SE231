@@ -23,7 +23,7 @@ class Useriteminfopage extends Component {
     constructor(props)
     {
         super(props);
-        this.state={data:{},rating:{},totgrade:[],comments:[],id:0,readstat:[],tags:[{tagname:"哈哈哈"}]};
+        this.state={data:{},rating:{},totgrade:[],comments:[],id:1,userid:1,readstat:[],tags:[{tagname:"哈哈哈"}]};
         this.handletagchange=this.handletagchange.bind(this);
         this.handleSearch=this.handleSearch.bind(this);
 
@@ -51,6 +51,13 @@ class Useriteminfopage extends Component {
     componentWillMount() {
         var uri=window.location.href;
         var id=uri.split('#')[1].split('/')[2];
+        if(localStorage.getItem("userid")==null)
+        {
+
+        }
+        else {
+            this.setState({userid:localStorage.getItem("userid")})
+        }
         this.setState({id:id})
         var url="http://202.120.40.8:30741/item/id/"+id;
         var url1="http://202.120.40.8:30741/rating/itemid/"+id;
@@ -116,7 +123,7 @@ class Useriteminfopage extends Component {
                             <Commentlist comments={this.state.comments}/>
                         </Grid>
                         <Grid  item xs={3} >
-                            <Collect totGrade={this.state.totgrade} avgGrade={this.state.rating.avgScore} rank={this.state.rating.rank} itemid={this.state.id}/>
+                            <Collect totGrade={this.state.totgrade} avgGrade={this.state.rating.avgScore} rank={this.state.rating.rank} itemid={this.state.id} userid={this.state.userid}/>
                             <Relateditem />
 
                         </Grid>

@@ -26,12 +26,19 @@ class Editorpage extends Component{
         this.handlechange=this.handlechange.bind(this);
         this.handlesubmit=this.handlesubmit.bind(this);
     }
+    componentWillMount() {
+        if(localStorage.getItem("userid")==null)
+        {
+            window.location.href="/#/login";
+        }
+    }
+
     handlesubmit()
     {
         axios.post("http://202.120.40.8:30741/item/add",{itemname:this.state.itemname,pubTime:this.state.pubtime,chapterNum:this.state.chapternum,mainauthor:this.state.author,imgurl:this.state.imgurl,type:this.state.type}).then(
             function(response){
-                alert("success");
-            }
+                this.props.setid(response.data.id);
+            }.bind(this)
         )
     }
     handlechange(e)
@@ -56,14 +63,12 @@ class Editorpage extends Component{
     render(){
         return(
             <Grid container spacing={10}>
-                <Grid item xs={12}>
-                    <Navigation />
-                </Grid>
+
                 <Paper>
                     <Grid container>
                         <Grid item xs={2}></Grid>
                         <Grid item xs={10}>
-                            <Uploadavatar/>
+
                             <FormControl margin="normal" required fullWidth>
 
                                 <InputLabel htmlFor="id">itemname</InputLabel>

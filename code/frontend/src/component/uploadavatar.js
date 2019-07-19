@@ -51,7 +51,7 @@ class Uploadavatar extends Component {
 
             <Upload
                 name="image"
-                data={{imageId: 1}}
+                data={{imageId: this.props.imageid}}
                 listType="picture-card"
                 className="avatar-uploader"
                 showUploadList={false}

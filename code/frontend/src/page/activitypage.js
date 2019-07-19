@@ -25,6 +25,10 @@ class Activitypage extends Component{
     }
 
     componentWillMount() {
+        if(localStorage.getItem("userid")==null)
+        {
+            window.location.href="/#/login";
+        }
         const _this=this;
         axios.get("http://202.120.40.8:30741/activity/userid/"+this.state.userid)
             .then(function (res) {

@@ -178,7 +178,7 @@ class Userinfo extends Component {
                                 </Grid>
                                 <Grid item xs={4}/>
                                 <Grid item xs={8}>
-                                <Uploadavatar></Uploadavatar>
+                                <Uploadavatar imageid={this.state.id+"0"}></Uploadavatar>
                                 </Grid>
                             </Grid>
 

@@ -92,6 +92,10 @@ class Addtopic extends Component {
     }
 
     showModal(){
+        if(localStorage.getItem("userid")==null)
+        {
+            window.location.href="/#/login";
+        }
         this.setState({
             visible: true
         })
