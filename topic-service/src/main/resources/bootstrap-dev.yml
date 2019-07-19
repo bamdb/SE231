@@ -1,31 +1,10 @@
 spring:
-  application:
-    name: topic
-  datasource:
-    master:
-      jdbcUrl: jdbc:mysql://202.120.40.8:30745/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
-      username: bamdb
-      password: bamdb
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      testWhileIdle: true
-      validationQuery: SELECT 1
-    slave:
-      jdbcUrl: jdbc:mysql://47.102.207.87:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
-      username: bamdb
-      password: bamdb
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      testWhileIdle: true
-      validationQuery: SELECT 1
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
-        enable_lazy_load_no_trans: true
-  data:
-    mongodb:
-      uri: mongodb://202.120.40.8:30746/bamdb?connectTimeoutMS=20000&heartbeatFrequencyMS=5000&localThresholdMS=3000&maxIdleTimeMS=5000&serverSelectionTimeoutMS=15000&socketTimeoutMS=7500
-server:
-  port: 3131
+  cloud:
+    config:
+      discovery:
+        enabled: false
+      enabled: false
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://bamdb:bamdb@localhost:8761/eureka/

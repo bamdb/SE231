@@ -4,6 +4,8 @@ import com.github.tomakehurst.wiremock.junit.WireMockClassRule;
 import com.netflix.loadbalancer.Server;
 import com.netflix.loadbalancer.ServerList;
 import com.se.topicservice.client.UserClient;
+import com.se.topicservice.config.MethodSecurityConfig;
+import com.se.topicservice.config.ResourceServer;
 import com.se.topicservice.dao.WriteDao;
 import com.se.topicservice.entity.Topic;
 import com.se.topicservice.entity.User;
@@ -18,9 +20,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.cloud.netflix.ribbon.StaticServerList;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -35,6 +40,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
+@WebAppConfiguration
+@Import({ResourceServer.class, MethodSecurityConfig.class})
+@ActiveProfiles("test")
 @SpringBootTest(properties = {
         "feign.hystrix.enabled=true"
 })

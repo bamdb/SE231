@@ -3,4 +3,4 @@ spring:
     name: message
   data:
     mongodb:
-      uri: mongodb://localhost:27017/bamdb
+      uri: mongodb://localhost:27017/test
