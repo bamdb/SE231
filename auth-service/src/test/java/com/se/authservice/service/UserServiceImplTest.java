@@ -1,6 +1,6 @@
 package com.se.authservice.service;
 
-import com.se.authservice.domain.User;
+import com.se.authservice.entity.User;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

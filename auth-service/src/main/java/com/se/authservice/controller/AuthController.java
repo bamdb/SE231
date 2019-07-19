@@ -1,6 +1,6 @@
 package com.se.authservice.controller;
 
-import com.se.authservice.domain.User;
+import com.se.authservice.entity.User;
 import com.se.authservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

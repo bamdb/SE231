@@ -1,6 +1,6 @@
 package com.se.authservice.controller;
 
-import com.se.authservice.domain.User;
+import com.se.authservice.entity.User;
 import com.se.authservice.service.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
