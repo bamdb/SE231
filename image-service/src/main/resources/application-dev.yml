@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: image
+  data:
+    mongodb:
+      uri: mongodb://202.120.40.8:30746/bamdb?connectTimeoutMS=20000&heartbeatFrequencyMS=5000&localThresholdMS=3000&maxIdleTimeMS=5000&serverSelectionTimeoutMS=15000&socketTimeoutMS=7500
+      options:
+        connectTimeoutMS: 20000
+        heartbeatFrequencyMS: 5000
+        localThresholdMS: 3000
+        maxIdleTimeMS: 5000
+        serverSelectionTimeoutMS: 15000
+        socketTimeoutMS: 7500
+server:
+  port: 3232
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    lease-expiration-duration-in-seconds: 10
+    lease-renewal-interval-in-seconds: 10
+
+security:
+  oauth2:
+    client:
+      clientId: image-service
+      clientSecret: image-service
+      accessTokenUri: http://localhost:8000/auth/oauth/token
+      grant-type: client_credentials
+      scope: server
+    resource:
+      user-info-uri: http://localhost:8000/auth/user
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

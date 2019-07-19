@@ -1,4 +1,4 @@
-package com.se.commentservice.config.mongo.config;
+package com.se.commentservice.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;

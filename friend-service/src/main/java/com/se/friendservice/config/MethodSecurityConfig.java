@@ -1,4 +1,4 @@
-package com.se.friendservice.config.ds.config;
+package com.se.friendservice.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;

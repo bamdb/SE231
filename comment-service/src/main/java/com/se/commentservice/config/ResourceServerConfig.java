@@ -1,4 +1,4 @@
-package com.se.commentservice.config.mongo.config;
+package com.se.commentservice.config;
 
 import feign.RequestInterceptor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
