@@ -1,7 +1,6 @@
 package com.se.itemservice;
 
 import com.se.itemservice.entity.Item;
-import com.se.itemservice.service.ItemService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +35,7 @@ public class ItemControllerTest {
     }
 
     @Resource(name="itemServiceImpl")
-    ItemService itemService;
+    com.se.itemservice.ItemService itemService;
 
     @Test
     public void updateTest() throws Exception {
