@@ -24,7 +24,7 @@ spring:
         enable_lazy_load_no_trans: true
   data:
     mongodb:
-      uri: mongodb://localhost:27017/bamdb
+      uri: mongodb://localhost:27017/test
 eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}

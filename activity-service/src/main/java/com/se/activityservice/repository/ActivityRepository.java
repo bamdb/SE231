@@ -3,10 +3,12 @@ package com.se.activityservice.repository;
 import com.se.activityservice.entity.Activity;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@Repository
 public interface ActivityRepository extends CrudRepository<Activity, Long> {
     Iterable<Activity> findAllByUserId(Long userId);
 

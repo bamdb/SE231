@@ -1,6 +1,7 @@
 package com.se.activityservice.dao;
 
 import com.se.activityservice.entity.Activity;
+import org.springframework.stereotype.Component;
 
 public interface ReadDao {
 

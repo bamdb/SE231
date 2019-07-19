@@ -1,4 +1,4 @@
-package com.se.activityservice.dao.Impl;
+package com.se.activityservice.dao.impl;
 
 import com.se.activityservice.config.ds.DataSource;
 import com.se.activityservice.dao.WriteDao;

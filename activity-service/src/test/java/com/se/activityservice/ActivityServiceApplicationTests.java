@@ -1,5 +1,4 @@
 package com.se.activityservice;
-
 import com.github.tomakehurst.wiremock.junit.WireMockClassRule;
 import com.netflix.loadbalancer.Server;
 import com.netflix.loadbalancer.ServerList;
@@ -7,14 +6,13 @@ import com.se.activityservice.client.ItemClient;
 import com.se.activityservice.client.UserClient;
 import com.se.activityservice.config.MethodSecurityConfig;
 import com.se.activityservice.config.ResourceServer;
-import com.se.activityservice.service.ActivityService;
+import com.se.activityservice.service.impl.ActivityServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.cloud.netflix.ribbon.StaticServerList;
@@ -23,7 +21,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -37,29 +34,27 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 @RunWith(SpringRunner.class)
-@SpringBootTest(properties = {
-        "feign.hystrix.enabled=true"
-})
 @WebAppConfiguration
 @Import({ResourceServer.class, MethodSecurityConfig.class})
 @ActiveProfiles("test")
 @ContextConfiguration(classes = {ActivityServiceApplicationTests.LocalRibbonClientConfiguration.class})
-@DataMongoTest
+@SpringBootTest(properties = {
+        "feign.hystrix.enabled=true"
+})
 public class ActivityServiceApplicationTests {
     @Autowired
     private WebApplicationContext context;
-
     private MockMvc mvc;
 
     @Before
-    public void setup(){
+    public void setup() {
         mvc = MockMvcBuilders.webAppContextSetup(context)
                 .apply(springSecurity())
                 .build();
     }
 
     @Resource(name="activityServiceImpl")
-    ActivityService activityService;
+    ActivityServiceImpl activityService;
 
     @ClassRule
     public static WireMockClassRule wiremock = new WireMockClassRule(
