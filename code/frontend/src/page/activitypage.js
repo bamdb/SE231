@@ -20,25 +20,47 @@ class Activitypage extends Component{
             activities: [],
             search:"",
             isloaded: false,
+            friends:[]
         }
         this.handleSearch = this.handleSearch.bind(this);
+        this.finduser=this.finduser.bind(this);
+        this.findfriends=this.findfriends.bind(this);
     }
 
     componentWillMount() {
+        this.finduser();
+        this.findfriends();
+        const _this=this;
+        this.state.friends.map(friend=>{
+            axios.get("http://202.120.40.8:30741/activity/userid/"+friend.id)
+                .then(function (res) {
+                    _this.setState({
+                        activities: _this.state.activities+res.data,
+                        isloaded: true,
+                    });
+                })
+                .catch(function (error) {
+                })
+        })
+
+    }
+    async findfriends()
+    {
+        await axios.get('http://202.120.40.8:30741/friend/all/userid/'+this.state.userid).then(
+            function(response){
+                this.setState({friends:response.data})
+            }.bind(this)
+        )
+    }
+    async finduser()
+    {
         if(localStorage.getItem("userid")==null)
         {
             window.location.href="/#/login";
         }
-        const _this=this;
-        axios.get("http://202.120.40.8:30741/activity/userid/"+this.state.userid)
-            .then(function (res) {
-                _this.setState({
-                    activities: res.data,
-                    isloaded: true,
-                });
-            })
-            .catch(function (error) {
-            })
+        else {
+          await  this.setState({userid:localStorage.getItem("userid")})
+        }
     }
 
     handleSearch(value){

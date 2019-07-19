@@ -121,7 +121,7 @@ export default function LeftAppBar(props) {
     var drawerbutton = open ? <ChevronLeftIcon />:<ChevronRightIcon />
     useEffect(() => {
 
-        setusername(localStorage.getItem("id"))
+        setusername(localStorage.getItem("userid"))
     });
 
     /*
