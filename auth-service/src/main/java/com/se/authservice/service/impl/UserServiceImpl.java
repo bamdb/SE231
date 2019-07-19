@@ -6,17 +6,12 @@ import com.se.authservice.dao.UserWriteDao;
 import com.se.authservice.entity.Authority;
 import com.se.authservice.entity.Role;
 import com.se.authservice.entity.User;
-import com.se.authservice.repository.AuthorityRepository;
-import com.se.authservice.repository.RoleRepository;
-import com.se.authservice.repository.UserRepository;
 import com.se.authservice.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -47,17 +42,8 @@ public class UserServiceImpl implements UserService {
         return userWriteDao.save(userDetail);
     }
 
-<<<<<<< HEAD
+
     public User changeRole(String username, String roleName, String c) {
-        User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException(username));
-        Collection<Role> roles = user.getRoles();
-        if (c.equals("+"))
-            roleRepository.findByName(roleName).ifPresent(
-                    role -> {if (!roles.contains(role)) roles.add(role);});
-        if (c.equals("-"))
-            roleRepository.findByName(roleName).ifPresent(
-=======
-    public User changeRole(String username, String roleName, Character c) {
         User user = userReadDao.findByUsername(username).orElseThrow(()->new UsernameNotFoundException(username));
         Collection<Role> roles = user.getRoles();
         if (c.equals('+'))
@@ -65,28 +51,19 @@ public class UserServiceImpl implements UserService {
                     role -> {if (!roles.contains(role)) roles.add(role);});
         if (c.equals('-'))
             roleReadDao.findByName(roleName).ifPresent(
->>>>>>> fdc6b1cd6ad8f33a169c0907076000b846fa9086
                     roles::remove);
         user.setRoles(roles);
         return userWriteDao.save(user);
     }
 
 
-<<<<<<< HEAD
+
     public User changeRevokeAuthority(String username, String revokeAuthorityName, String c) {
-        User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException(username));
-        Collection<Authority> revokeAuthorities = user.getRevokeAuthorities();
-        if (c.equals("+")) authorityRepository.findByName(revokeAuthorityName).ifPresent(
-                authority -> {if (!revokeAuthorities.contains(authority)) revokeAuthorities.add(authority);});
-        else if (c.equals("-")) authorityRepository.findByName(revokeAuthorityName).ifPresent(
-=======
-    public User changeRevokeAuthority(String username, String revokeAuthorityName, Character c) {
         User user = userReadDao.findByUsername(username).orElseThrow(()->new UsernameNotFoundException(username));
         Collection<Authority> revokeAuthorities = user.getRevokeAuthorities();
         if (c.equals('+')) authorityReadDao.findByName(revokeAuthorityName).ifPresent(
                 authority -> {if (!revokeAuthorities.contains(authority)) revokeAuthorities.add(authority);});
         else if (c.equals('-')) authorityReadDao.findByName(revokeAuthorityName).ifPresent(
->>>>>>> fdc6b1cd6ad8f33a169c0907076000b846fa9086
                 revokeAuthorities::remove);
         user.setRevokeAuthorities(revokeAuthorities);
         return user;

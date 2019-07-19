@@ -30,5 +30,5 @@ spring:
         web-allow-others: false
   data:
     mongodb:
-#      port: 0
-      uri: mongodb://localhost:27017/bamdb
+      port: 0
+#      uri: mongodb://localhost:27017/bamdb
