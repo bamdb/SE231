@@ -43,7 +43,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @ContextConfiguration(classes = {ActivityServiceApplicationTests.LocalRibbonClientConfiguration.class})
 public class ActivityServiceApplicationTests {
-
     @Autowired
     private WebApplicationContext context;
 
@@ -68,12 +67,6 @@ public class ActivityServiceApplicationTests {
 
     @Autowired
     ItemClient itemClient;
-
-    @Test
-    public void testApplication() {
-        ActivityServiceApplication.main(new String[] {});
-    }
-
     @Test
     public void controllerTest() throws Exception {
         mvc.perform(post("/add")
@@ -186,4 +179,11 @@ public class ActivityServiceApplicationTests {
             return new StaticServerList<>(new Server("localhost", wiremock.port()));
         }
     }
+
+
+    @Test
+    public void testApplication() {
+        ActivityServiceApplication.main(new String[] {});
+    }
+
 }

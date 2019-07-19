@@ -1,0 +1,58 @@
+spring:
+  application:
+    name: gateway
+server:
+  port: 8000
+eureka:
+  client:
+    registry-fetch-interval-seconds: 5
+    register-with-eureka: false
+    fetch-registry: true
+zuul:
+  routes:
+    fromimage:
+      path: /image/**
+      service-id: image
+      sensitiveHeaders:
+    fromuser:
+      path: /user/**
+      service-id: user
+      sensitiveHeaders:
+    fromitem:
+      path: /item/**
+      service-id: item
+      sensitiveHeaders:
+    fromactivity:
+      path: /activity/**
+      service-id: activity
+      sensitiveHeaders:
+    fromrating:
+      path: /rating/**
+      service-id: rating
+      sensitiveHeaders:
+    fromtopic:
+      path: /topic/**
+      service-id: topic
+      sensitiveHeaders:
+    fromfriend:
+      path: /friend/**
+      service-id: friend
+      sensitiveHeaders:
+    frommessage:
+      path: /message/**
+      service-id: message
+      sensitiveHeaders:
+    fromcomment:
+      path: /comment/**
+      service-id: comment
+      sensitiveHeaders:
+    fromauth:
+      path: /auth/**
+      service-id: auth
+      sensitiveHeaders:
+  retryable: true
+  semaphore:
+    max-semaphores: 100
+  ignored-services: "*"
+ribbon:
+  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.AvailabilityFilteringRule

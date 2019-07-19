@@ -31,7 +31,7 @@ public class AuthController {
         } catch (IllegalArgumentException e){
             return null;
         } finally {
-            userService.changeRole(u.getUsername(), "ROLE_USER", '+');
+            userService.changeRole(u.getUsername(), "ROLE_USER", "+");
         }
         return u;
     }
@@ -47,10 +47,10 @@ public class AuthController {
     @PostMapping(value = "/grant/role/{role}", produces = "application/json")
     public ResponseEntity<?> grantRole(@PathVariable("role") String roleName,
                                        @RequestParam("username") String username,
-                                       @RequestParam("operation") Character c) {
+                                       @RequestParam("operation") String c) {
         User user = userService.selectByUsername(username);
         if (user == null) return ResponseEntity.status(666).body("No User Found!");
-        if (c != '+' && c != '-') return ResponseEntity.status(666).body("Operation '+' or '-' Is Required!");
+        if (!"+".equals(c) && !"-".equals(c)) return ResponseEntity.status(666).body("Operation '+' or '-' Is Required!");
         userService.changeRole(username, roleName, c);
         return ResponseEntity.ok().body("Good For You!");
     }
@@ -59,10 +59,10 @@ public class AuthController {
     @PostMapping(value = "/revoke/authority/{authority}", produces = "application/json")
     public ResponseEntity<?> revokeAuthority(@PathVariable("authority") String authorityName,
                                        @RequestParam("username") String username,
-                                       @RequestParam("operation") Character c) {
+                                       @RequestParam("operation") String c) {
         User user = userService.selectByUsername(username);
         if (user == null) return ResponseEntity.status(777).body("No User Found!");
-        if (c != '+' && c != '-') return ResponseEntity.status(777).body("Operation '+' or '-' Is Required!");
+        if (!"+".equals(c) && !"-".equals(c)) return ResponseEntity.status(777).body("Operation '+' or '-' Is Required!");
         userService.changeRevokeAuthority(username, authorityName, c);
         return ResponseEntity.ok().body("Good For You!");
     }

@@ -41,13 +41,13 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(userDetail);
     }
 
-    public User changeRole(String username, String roleName, Character c) {
+    public User changeRole(String username, String roleName, String c) {
         User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException(username));
         Collection<Role> roles = user.getRoles();
-        if (c.equals('+'))
+        if (c.equals("+"))
             roleRepository.findByName(roleName).ifPresent(
                     role -> {if (!roles.contains(role)) roles.add(role);});
-        if (c.equals('-'))
+        if (c.equals("-"))
             roleRepository.findByName(roleName).ifPresent(
                     roles::remove);
         user.setRoles(roles);
@@ -55,12 +55,12 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public User changeRevokeAuthority(String username, String revokeAuthorityName, Character c) {
+    public User changeRevokeAuthority(String username, String revokeAuthorityName, String c) {
         User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException(username));
         Collection<Authority> revokeAuthorities = user.getRevokeAuthorities();
-        if (c.equals('+')) authorityRepository.findByName(revokeAuthorityName).ifPresent(
+        if (c.equals("+")) authorityRepository.findByName(revokeAuthorityName).ifPresent(
                 authority -> {if (!revokeAuthorities.contains(authority)) revokeAuthorities.add(authority);});
-        else if (c.equals('-')) authorityRepository.findByName(revokeAuthorityName).ifPresent(
+        else if (c.equals("-")) authorityRepository.findByName(revokeAuthorityName).ifPresent(
                 revokeAuthorities::remove);
         user.setRevokeAuthorities(revokeAuthorities);
         return user;

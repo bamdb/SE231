@@ -1,9 +1,8 @@
-package com.se.authservice.ControllerTest;
+package com.se.authservice.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.se.authservice.config.MethodSecurityConfig;
 import com.se.authservice.config.ResourceServer;
-import com.se.authservice.controller.AuthController;
 import com.se.authservice.domain.User;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package com.se.authservice.ControllerTest;
+package com.se.authservice.controller;
 
 import com.se.authservice.config.MethodSecurityConfig;
 import com.se.authservice.config.ResourceServer;
