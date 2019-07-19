@@ -1,4 +1,4 @@
-package com.se.activityservice.dao.Impl;
+package com.se.activityservice.dao.impl;
 
 import com.se.activityservice.entity.Progress;
 import com.se.activityservice.repository.ProgressRepository;

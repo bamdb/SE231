@@ -5,6 +5,7 @@ spring:
         service-id: config
         enabled: true
       name: activity, mysql, mongo, uniconfig
+
 eureka:
   client:
     serviceUrl:
