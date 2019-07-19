@@ -1,7 +1,6 @@
 package com.se.topicservice.service.impl;
 
 import com.se.topicservice.client.UserClient;
-import com.se.topicservice.config.ds.DataSource;
 import com.se.topicservice.dao.MongoDao;
 import com.se.topicservice.dao.ReadDao;
 import com.se.topicservice.dao.WriteDao;
@@ -50,8 +49,6 @@ public class TopicServiceImpl implements TopicService {
         return returnTopic;
     }
 
-    @Override
-    @DataSource("slave")
     public Iterable<Topic> selectAll() {
         return readDao.findAll();
     }
