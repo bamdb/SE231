@@ -5,13 +5,10 @@ server:
   port: 8000
 eureka:
   client:
-    registry-fetch-interval-seconds: 5
-    registerWithEureka: false
-    fetchRegistry: true
-
+    registry-fetch-interval-seconds: 60
+    register-with-eureka: false
+    fetch-registry: true
 zuul:
-#  host:
-#    connect-timeout-millis: 3000
   routes:
     fromimage:
       path: /image/**
@@ -48,6 +45,10 @@ zuul:
     fromcomment:
       path: /comment/**
       service-id: comment
+      sensitiveHeaders:
+    fromauth:
+      path: /auth/**
+      service-id: auth
       sensitiveHeaders:
   retryable: true
   semaphore:

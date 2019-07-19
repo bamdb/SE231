@@ -4,7 +4,7 @@ spring:
       discovery:
         service-id: config
         enabled: true
-      name: message, mongo
+      name: message, mongo, uniconfig
 eureka:
   client:
     serviceUrl:

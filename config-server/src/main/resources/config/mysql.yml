@@ -12,14 +12,12 @@ spring:
       username: bamdb
       password: bamdb
       driver-class-name: com.mysql.cj.jdbc.Driver
-      testWhileIdle: true
-      validationQuery: SELECT 1
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
-      nameing-strategy: org.hibernate.cfg.ImprovedNamingStrategy
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
         enable_lazy_load_no_trans: true
+

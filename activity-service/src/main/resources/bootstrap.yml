@@ -4,7 +4,7 @@ spring:
       discovery:
         service-id: config
         enabled: true
-      name: activity, mysql, mongo
+      name: activity, mysql, mongo, uniconfig
 eureka:
   client:
     serviceUrl:

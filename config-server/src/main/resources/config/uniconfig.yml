@@ -1,0 +1,11 @@
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    lease-expiration-duration-in-seconds: 60
+    lease-renewal-interval-in-seconds: 60
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
