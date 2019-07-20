@@ -58,7 +58,7 @@ class Login extends Component{
                 username:this.state.name,
                 password:this.state.password,
                 client_id:"browser",
-                client_secret:null
+                client_secret:""
             },{headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 }})
@@ -67,6 +67,7 @@ class Login extends Component{
                     islogin: res.data,
 
                 })
+                console.log(res.data.access_token)
                 window.location.href="/#/";
                 /*localStorage.setItem("access_token",res.data.access_token);
                 localStorage.setItem("username",_this.state.name);
