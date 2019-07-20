@@ -59,7 +59,6 @@ class Login extends Component{
                 password:this.state.password,
                 client_id:"browser",
                 client_secret:null
-
             },{headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 }})
