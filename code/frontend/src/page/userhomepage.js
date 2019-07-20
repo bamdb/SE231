@@ -29,12 +29,7 @@ class Userhomepage extends Component{
             "Authorization": "123456",
 
         };
-        if(localStorage.getItem("userid")==null)
-        {
-            window.location.href="/#/login";
-        }
-        else this.setState({userid:localStorage.getItem("userid")})
-        */
+
     }
 
     handleSearch(value){
