@@ -4,13 +4,7 @@ import Login from "../component/login"
 import Messagelist from "../component/messagelist";
 import Addmessage from "../component/addmessage";
 import { Tabs } from 'antd';
-/*
-if(localStorage.getItem("userid")==null)
-{
-    window.location.href="/#/login";
-}
 
- */
 const { TabPane } = Tabs;
 class Messagepage extends Component{
     constructor(props){
@@ -21,8 +15,12 @@ class Messagepage extends Component{
         };
     }
     componentWillMount() {
-            this.setState({userid:localStorage.getItem("userid")})
 
+        if(localStorage.getItem("userid")==null)
+        {
+            window.location.href="/#/login";
+        }
+        else this.setState({userid:localStorage.getItem("userid")})
     }
 
     render(){

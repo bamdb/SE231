@@ -32,15 +32,16 @@ class Progressmanage extends Component {
             downpage:0,
             data:[],
             book:[],
-            movie:[]
+            movie:[],
+            userid:this.props.userid,
         }
         this.handleChange=this.handleChange.bind(this);
         this.upleft=this.upleft.bind(this);
         this.downleft=this.downleft.bind(this);
         this.upright=this.upright.bind(this);
         this.downright=this.downright.bind(this);
-
     }
+
     upleft()
     {
         if(this.state.uppage>0)
@@ -64,19 +65,16 @@ class Progressmanage extends Component {
     }
     downright()
     {
-
             if(this.state.downpage*4+4<this.state.movie.length)
             {
                 this.setState({downpage:this.state.downpage+1});
             }
-
-
-
     }
     handleChange(event, newValue) {
         console.log(newValue);
         this.setState({value : newValue});
     }
+
     componentWillMount() {
         axios.get("http://202.120.40.8:30741/activity/userid/1").then(
             function(response)
@@ -99,22 +97,7 @@ class Progressmanage extends Component {
         )
     }
 
-    componentDidMount() {
-    }
-
     render() {
-        /*var item=[];
-
-        var items=this.state.items;
-        for(var i=0;i<items.length;++i) {
-            item.push(
-                <Grid item xs={3}>
-                    <Grid container >
-                    <Scheduletable readstat={items[i].readstat} itemname={items[i].itemname} />
-                    </Grid>
-                </Grid>
-            )
-        }*/
         var items1=[];
         var items2=[];
         for(var i=this.state.uppage*4;(i<this.state.uppage*4+4)&&i<this.state.book.length;++i)
@@ -122,7 +105,7 @@ class Progressmanage extends Component {
             items1.push(
                 <Grid item xs={3}>
                     <Grid container >
-                        <Scheduletable readstat={[]} itemname={this.state.book[i].itemname} />
+                        <Scheduletable userid={this.state.userid} itemid={this.state.book[i].id} itemname={this.state.book[i].itemname} />
                     </Grid>
                 </Grid>
             )
@@ -132,7 +115,7 @@ class Progressmanage extends Component {
             items1.push(
                 <Grid item xs={3}>
                     <Grid container >
-                        <Scheduletable readstat={[]} itemname={this.state.movie[i].itemname} />
+                        <Scheduletable userid={this.state.userid} itemid={this.state.book[i].id} itemname={this.state.book[i].itemname}/>
                     </Grid>
                 </Grid>
             )

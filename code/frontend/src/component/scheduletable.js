@@ -20,6 +20,7 @@ import Typography from '@material-ui/core/Typography';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { TreeSelect } from "antd";
 import { Modal, Button } from 'antd';
+import axios from "axios";
 
 const useStyle = makeStyles({
     img:{
@@ -35,7 +36,7 @@ class Scheduletable extends Component {
     constructor(props) {
         super(props);
         this.state={
-            readstat:[0,1,0,1,1,0],
+            data:[],
             show:false,
             treeData:[],
             completed:35,
@@ -48,6 +49,7 @@ class Scheduletable extends Component {
         this.showEditBar = this.showEditBar.bind(this);
         this.transform = this.transform.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
     showEditBar(){
@@ -61,16 +63,16 @@ class Scheduletable extends Component {
             show:false,
         })
     }
+
     transform(tree, readdata, parentTitle,parentValue, value){
 
         const length=readdata.length;
         console.log(length);
         for (var i=0;i<length;++i){
-
             console.log("child",readdata[i].length)
-            if(readdata[i].length===undefined) //下面没有子章节了
+            if(readdata[i].sections.length===0) //下面没有子章节了
             {
-                if(readdata[i]===1) {
+                if(readdata[i].finish===1) {
                     tree.push({
                         title: "Node"+ parentTitle +'-'+ (i + 1).toString(),
                         value: parentValue + '-' + i.toString(),
@@ -90,38 +92,121 @@ class Scheduletable extends Component {
                 const parenttitle = parentTitle +'-'+ (i + 1).toString()
                 const parentvalue=parentValue+'-'+i.toString()
                 var children=[];
-                this.transform(children,readdata[i], parenttitle, parentvalue, value);
+                var read=true;
+                const sections=readdata[i].sections;
+                for(var j=0;j<sections.length;j++)
+                    if(sections[j]==1) {
+                        children.push({
+                            title: "Node"+ parenttitle +'-'+ (j + 1).toString(),
+                            value: parentvalue + '-' + j.toString(),
+                            done: true
+                        });
+                        value.push(parentvalue + '-' + j.toString());
+                    }
+                    else {
+                        children.push({
+                            title: "Node" + parenttitle + '-' + (j + 1).toString(),
+                            value: parentvalue + '-' + j.toString(),
+                            done: false
+                        });
+                        read = false;
+                    }
+                //this.transform(children,readdata[i], parenttitle, parentvalue, value);
                 tree.push({
                     title:  "Node"+ parentTitle +'-'+ (i + 1).toString(),
-                    value: parentvalue,
-                    done: false,
+                    value:parentValue + '-' + i.toString(),
+                    done:read,
                     children:children
                 });
             }
-
         }
     }
+
+    submit(){
+        axios.put("http://202.120.40.8:30741/activity/update/progress",{params:{
+            body:this.state.data
+            }})
+        this.setState({show:false});
+    }
     componentWillMount() {
+        var data=[];
+        axios.get("http://202.120.40.8:30741/activity/progress", {params:{
+                    userId:this.props.userid,
+                    itemId:this.props.itemid
+                }}).then(
+            function(response)
+            {
+                data=response.data;
+            })
+        data={
+            "userId": 1,
+            "itemId": 1,
+            "chapters": [
+                {
+                    "chapterNum": 1,
+                    "finish": 1,
+                    "sections": [
+                        0,
+                        1,
+                        0
+                    ]
+                }
+            ]
+        };
         var treeData = [];
         var value=[];
-        const data=this.props.readstat;
-        this.transform(treeData,data,'','0',value);
+        this.transform(treeData,data.chapters,'','0',value);
+        console.log(treeData);
         this.setState({
+            data: data,
             treeData:treeData,
             value:value
         })
     }
 
     onChange = value => {
-        console.log(value);
+
+        let oldset = new Set(this.state.value);
+        let newset = new Set(value);
+
+        let intersectionSet = new Set([...oldset].filter(x => newset.has(x)));
+
+        let a = new Set([...oldset].filter(x => !intersectionSet.has(x)));
+        var node = this.state.data;
+        for (let item of a.values()) {
+            if(item.split('-')[2]===undefined) {
+                const length=node.chapters[item.split('-')[1]].sections.length;
+                for(var i=0; i<length; i++)
+                    node.chapters[item.split('-')[1]].sections[i]=0;
+                node.chapters[item.split('-')[1]].finish=0;
+            }
+            else {
+                node.chapters[item.split('-')[1]].sections[item.split('-')[2]] = 0;
+            }
+        }
+
+        let b = new Set([...newset].filter(x => !intersectionSet.has(x)));
+        for (let item of b.values()) {
+            if(item.split('-')[2]===undefined) {
+                const length=node.chapters[item.split('-')[1]].sections.length;
+                for(var i=0; i<length; i++)
+                    node.chapters[item.split('-')[1]].sections[i]=1;
+                node.chapters[item.split('-')[1]].finish=1;
+            }
+            else {
+                node.chapters[item.split('-')[1]].sections[item.split('-')[2]] = 1;
+            }
+        }
         this.setState({
-            value:value });
+            data:node,
+            value:value
+        })
     };
 
     componentDidMount() {
-        if(this.props.readstat!==null)
+        if(this.props.itemname!==null)
         {
-            this.setState({readstat:this.props.readstat,itemname:this.props.itemname})
+            this.setState({itemname:this.props.itemname})
         }
     }
 
@@ -141,7 +226,6 @@ class Scheduletable extends Component {
         };
         return (
             <Card className={useStyle.card} style={{width:150}}>
-
                 <CardActionArea onClick={this.showEditBar}>
                 <CardMedia
                     style={{height:120}}
@@ -156,7 +240,7 @@ class Scheduletable extends Component {
                 <Modal
                     title="进度编辑"
                     visible={this.state.show}
-                    onOk={this.handleClose}
+                    onOk={this.submit}
                     onCancel={this.handleClose}
                 >
                     <Typography>
@@ -164,120 +248,8 @@ class Scheduletable extends Component {
                     </Typography>
                     <TreeSelect {...tProps} />
                 </Modal>
-
             </Card>
         )
-
-        /*
-        if(!this.state.show){
-            return(
-                <div >
-                    <Paper id={"tagmain"}>
-                        {item}
-                    </Paper>
-                </div>
-            )
-        }
-
-        else if(!readstat[this.state.current].length>0){
-            var style={"position":"absolute"};
-            style["top"]=this.state.y;
-            style["left"]=this.state.x;
-            return(
-                <div >
-                    <Paper id={"tagmain"}>
-                        {item}
-                        <div style={style}>
-                            <Paper id={"detail"}>
-                                <Typography paragraph>
-                                    small introduction
-                                </Typography>
-                                <Button onClick={this.handleclickhas}>
-                                    看过
-                                </Button>
-                                <Button onClick={this.handleclickhasnot}>
-                                    没看过
-                                </Button>
-                            </Paper>
-                        </div>
-                    </Paper>
-                </div>
-            )
-        }
-        else
-        {
-            var style={"position":"absolute"};
-            style["top"]=this.state.y;
-            style["left"]=this.state.x;
-            var items1=[];
-            for(var i=0;i<readstat[this.state.current].length;++i)
-            {
-                if(readstat[this.state.current][i]==0) {
-
-                    items1.push(
-                        <button  id={i} class="type1" onClick={this.handleclick1}>{i}</button>
-                    );
-
-                }
-                else{
-                    items1.push(
-                        <button  id={i} class="type2" onClick={this.handleclick1}>{i}</button>
-                    );
-                }
-            }
-            if(!this.state.show1 ) {
-                return(
-                    <div >
-                        <Paper id={"tagmain"}>
-                            {item}
-                            <div style={style}>
-                                <Paper id={"detail"}>
-                                    <Grid>
-                                        {items1}
-                                    </Grid>
-                                </Paper>
-                            </div>
-                        </Paper>
-                    </div>
-                )
-            }
-            else{
-                var style1={"position":"absolute"};
-                style1["top"]=this.state.y1;
-                style1["left"]=this.state.x1;
-                return(
-                    <div >
-                        <Paper id={"tagmain"}>
-                            {item}
-                            <div style={style}>
-                                <Paper id={"detail"}>
-                                    <Grid>
-                                        {items1}
-                                    </Grid>
-                                </Paper>
-
-                            </div>
-                        </Paper>
-                        <div style={style1}>
-                            <Paper id={"detail"}>
-                                <Typography paragraph>
-                                    small introduction
-                                </Typography>
-                                <Button onClick={this.handleclickhas1}>
-                                    看过
-                                </Button>
-                                <Button onClick={this.handleclickhasnot1}>
-                                    没看过
-                                </Button>
-                            </Paper>
-                        </div>
-                    </div>
-                )
-            }
-        }
-         */
-
-
     }
 }
 export default Scheduletable;

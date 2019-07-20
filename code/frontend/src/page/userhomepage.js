@@ -19,7 +19,7 @@ class Userhomepage extends Component{
 
     constructor(props){
         super(props);
-        this.state={rankitem:[]}
+        this.state={rankitem:[], userid:1}
 
         this.handleSearch=this.handleSearch.bind(this);
     }
@@ -29,10 +29,7 @@ class Userhomepage extends Component{
             "Authorization": "123456",
 
         };
-        if(localStorage.getItem("userid")==null)
-        {
-            window.location.href="/#/login";
-        }
+
     }
 
     handleSearch(value){
@@ -63,7 +60,7 @@ class Userhomepage extends Component{
                     />
                     <Grid container spacing={2} alignContent={"center"}>
                         <Grid item xs={12}>
-                            <Progressmanage />
+                            <Progressmanage userid={this.state.userid} />
                         </Grid>
                     </Grid>
                 </Grid>
