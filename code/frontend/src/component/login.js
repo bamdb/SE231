@@ -59,20 +59,24 @@ class Login extends Component{
                 password:this.state.password,
                 client_id:"browser",
                 client_secret:null
-            })
+
+            },{headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                }})
             .then(function (res) {
                 _this.setState({
                     islogin: res.data,
 
                 })
-                localStorage.setItem("access_token",res.data.access_token);
+                window.location.href="/#/";
+                /*localStorage.setItem("access_token",res.data.access_token);
                 localStorage.setItem("username",_this.state.name);
                 axios.get("http://202.120.40.8:30741/auth/username"+_this.state.name).then(
                     function(res)
                     {
                         localStorage.setItem("userid",res.data.id);
                     }.bind(this)
-                )
+                )*/
             })
             .catch(function (error) {
                 _this.setState({
@@ -80,7 +84,7 @@ class Login extends Component{
                 })
             });
 
-        window.location.href="/#/";
+
 
     }
 
