@@ -50,5 +50,6 @@
   },
   "devDependencies": {
     "react-test-renderer": "^16.8.6"
-  }
+  },
+  "proxy": "http://202.120.40.8:30741"
 }

@@ -1,113 +1,111 @@
-import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles/index';
-import Grid from '@material-ui/core/Grid/index'
-import Paper from '@material-ui/core/Paper/index'
-import Navigation from "../component/navigation";
-import TopItemList from "../component/topitemlist";
-import Browserlist from "../component/browserlist";
-import Tag from "../component/tag";
-import Userinfo from "../component/userinfo";
-import Commentlist from "../component/commentlist";
-import Listitem from '../component/listitem'
-import Progressmanage from "../component/progressmanage";
-import Login from "../component/login"
-import InputLabel from "@material-ui/core/InputLabel";
-import Input from "@material-ui/core/Input";
-import FormControl from "@material-ui/core/FormControl";
-import * as axios from "axios";
-import Button from "@material-ui/core/Button";
+import { Steps, Button, message } from 'antd';
+import React,{Component} from 'react'
+import Edititem from "../component/edititem";
 import Uploadavatar from "../component/uploadavatar";
+import Typography from "@material-ui/core/Typography";
+import * as axios from "axios";
+const { Step } = Steps;
+const steps = [
+    {
+        title: 'First',
+        content: "",
+    },
+    {
+        title: 'Second',
+        content: "",
+    },
+    {
+        title: 'Last',
+        content: 'Last-content',
+    },
+];
 
-class Editorpage extends Component{
-    constructor(props){
+
+class Editorpage extends React.Component {
+    constructor(props) {
         super(props);
-        this.state={itemname:"",pubtime:"",chapternum:"",author:"",imgurl:"",type:""};
-        this.handleSearch=this.handleSearch.bind(this);
-        this.handlechange=this.handlechange.bind(this);
-        this.handlesubmit=this.handlesubmit.bind(this);
+        this.state = {
+            current: 0,
+            item:null
+        };
+        this.getid=this.getid.bind(this);
     }
-    componentWillMount() {
-        if(localStorage.getItem("userid")==null)
+    getid(item)
+    {
+        this.setState({item:item});
+    }
+    next() {
+        if(this.state.item!=null)
         {
-            window.location.href="/#/login";
+            const current = this.state.current + 1;
+            this.setState({ current });
+            if(current==1)
+            {
+
+                var item =this.state.item;
+                item.imgurl="http://202.120.40.8/image"+item.id+"0";
+                axios.post("http://202.120.40.8:30741/item/add",{item}).then(
+                    function(response){
+                        this.props.setid(response.data.id);
+                    }.bind(this)
+                )
+            }
+
+        }
+        else{
+            alert("please finish the formerstep")
         }
     }
 
-    handlesubmit()
-    {
-        axios.post("http://202.120.40.8:30741/item/add",{itemname:this.state.itemname,pubTime:this.state.pubtime,chapterNum:this.state.chapternum,mainauthor:this.state.author,imgurl:this.state.imgurl,type:this.state.type}).then(
-            function(response){
-                this.props.setid(response.data.id);
-            }.bind(this)
-        )
+    prev() {
+        const current = this.state.current - 1;
+        this.setState({ current });
     }
-    handlechange(e)
-    {
-        var id=e.target.id;
-        switch(id)
+
+    render() {
+        const { current } = this.state;
+        var rows=[];
+        switch(current)
         {
-            case "itemname":this.setState({itemname:e.target.value});break;
-            case "pubtime":this.setState({pubtime:e.target.value});break;
-            case "chapternum":this.setState({chapternum:e.target.value});break;
-            case "author":this.setState({author:e.target.value});break;
-            case "imgurl":this.setState({imgurl:e.target.value});break;
-            case "type":this.setState({type:e.target.value});break;
+            case 0:rows.push(<Edititem getid={this.getid}></Edititem>);break;
+            case 1:rows.push(<Uploadavatar imageid={""+this.state.id+"1"}></Uploadavatar>);break;
+            case 2:rows.push(<Typography>finish</Typography>)
         }
+        return (
+            <div>
+                <Steps current={current}>
+                    {steps.map(item => (
+                        <Step key={item.title} title={item.title} />
+                    ))}
+                </Steps>
+                <br/>
+                <br/>
+                <br/>
 
-    }
 
-    handleSearch(value){
 
-    }
-
-    render(){
-        return(
-            <Grid container spacing={10}>
-
-                <Paper>
-                    <Grid container>
-                        <Grid item xs={2}></Grid>
-                        <Grid item xs={10}>
-
-                            <FormControl margin="normal" required fullWidth>
-
-                                <InputLabel htmlFor="id">itemname</InputLabel>
-                                <Input type="text" id="itemname" value={this.state.itemname} onChange={this.handlechange}></Input>
-                            </FormControl>
-                            <FormControl margin="normal" required fullWidth>
-
-                                <InputLabel htmlFor="id">pubtime</InputLabel>
-                                <Input type="text" id="pubtime" value={this.state.pubtime} onChange={this.handlechange}></Input>
-                            </FormControl>
-                            <FormControl margin="normal" required fullWidth>
-
-                                <InputLabel htmlFor="id">chapternum</InputLabel>
-                                <Input type="text" id="chapternum" value={this.state.chapternum} onChange={this.handlechange}></Input>
-                            </FormControl>
-                            <FormControl margin="normal" required fullWidth>
-
-                                <InputLabel htmlFor="id">author</InputLabel>
-                                <Input type="text" id="author" value={this.state.author} onChange={this.handlechange}></Input>
-                            </FormControl>
-                            <FormControl margin="normal" required fullWidth>
-
-                                <InputLabel htmlFor="id">imgurl</InputLabel>
-                                <Input type="text" id="imgurl" value={this.state.imgurl} onChange={this.handlechange}></Input>
-                            </FormControl>
-                            <FormControl margin="normal" required fullWidth>
-
-                                <InputLabel htmlFor="id">type</InputLabel>
-                                <Input type="text" id="type" value={this.state.type} onChange={this.handlechange}></Input>
-                            </FormControl>
-                            <Button onClick={this.handlesubmit}variant={"contained"}color={"secondary"}>创建</Button>
-
-                        </Grid>
-                        <Grid item xs={2}></Grid>
-                    </Grid>
-                </Paper>
-            </Grid>
-        )
+                <div className="steps-content">{rows}</div>
+                <br/>
+                <br/>
+                <div className="steps-action">
+                    {current < steps.length - 1 && (
+                        <Button type="primary" onClick={() => this.next()}>
+                            Next
+                        </Button>
+                    )}
+                    {current === steps.length - 1 && (
+                        <Button type="primary" onClick={() => message.success('Processing complete!')}>
+                            Done
+                        </Button>
+                    )}
+                    {current > 0 && (
+                        <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
+                            success
+                        </Button>
+                    )}
+                </div>
+            </div>
+        );
     }
 }
-
-export  default Editorpage;
+export default Editorpage;

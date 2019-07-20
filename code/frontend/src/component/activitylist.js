@@ -37,11 +37,11 @@ class Activitylist extends Component {
                 rows.push(
                     <ListItem className={useStyles.listitem}>
                         <Activity
-                            userId={activities[i].userId}
+                            userId={activities[i].activity.userId}
                             username={this.props.username}
-                            date={activities[i].actTime}
-                            actType={activities[i].actType}
-                            itemId={activities[i].itemId}
+                            date={activities[i].activity.actTime}
+                            actType={activities[i].activity.actType}
+                            itemId={activities[i].item.itemname}
                         />
                     </ListItem>
                 )
