@@ -52,20 +52,35 @@ class Login extends Component{
             username: this.state.name,
             password: this.state.password,
         }
-        axios.post("http://202.120.40.8:30741/login",
-            {})
+        axios.post("http://202.120.40.8:30741/auth/oauth/token",
+            {
+                grant_type:"password",
+                username:this.state.name,
+                password:this.state.password,
+                client_id:"browser",
+                client_secret:null
+            })
             .then(function (res) {
                 _this.setState({
                     islogin: res.data,
+
                 })
+                localStorage.setItem("access_token",res.data.access_token);
+                localStorage.setItem("username",_this.state.name);
+                axios.get("http://202.120.40.8:30741/auth/username"+_this.state.name).then(
+                    function(res)
+                    {
+                        localStorage.setItem("userid",res.data.id);
+                    }.bind(this)
+                )
             })
             .catch(function (error) {
                 _this.setState({
                     islogin: 0,
                 })
-            })
-        localStorage.setItem("userid","1");
-        window.location.reload()
+            });
+
+        window.location.href="/#/";
 
     }
 
@@ -123,7 +138,7 @@ class Login extends Component{
                                     className={useStyles.button}
                                     name={"submit"}
                                     onClick={this.submit}
-                                ><Link to={"/"}>登录</Link>
+                                >登录
                                 </Button>
                                 <br/>
                             </Grid>

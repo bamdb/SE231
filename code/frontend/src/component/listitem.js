@@ -65,7 +65,7 @@ class Listitem extends Component {
     }
     componentWillMount() {
 
-        var rows=[];
+        /*var rows=[];
         const items = this.props.ItemList;
         if(items !== undefined)
         {
@@ -99,14 +99,50 @@ class Listitem extends Component {
         this.setState({
             ItemList:items,
             modifiedItems:rows,
-        })
+        })*/
     }
 
     handlepagechange(page){
         this.props.handlepagechange(page);
     }
     componentWillReceiveProps(nextProps, nextContext) {
-        this.setState({ItemList:nextProps.ItemList})
+        var rows=[];
+        const items = nextProps.ItemList;
+        if(items !== undefined)
+        {
+            for(var i=0; i<items.length; ++i) {
+                if (items[i].item.itemname.indexOf(this.props.search) !== -1) {
+                    rows.push(
+                        {
+                            href: "/itemdetail/"+items[i].item.id,
+                            title:items[i].item.itemname,
+                            author:items[i].item.mainAuthor,
+                            pubTime: items[i].item.pubTime.split('T')[0],
+                            score:items[i].rating.avgScore,
+                            rank:items[i].rating.rank
+                        }
+                    );
+                }
+            }
+            console.log(rows);
+        }
+        else {
+            console.log("no data");
+            rows.push(
+                {
+                    href: "/itemdetail/1",
+                    title: "three body",
+                    author: "liu",
+                    pubTime: "2010-7-1",
+                    score: 9.5,
+                    rank: 1
+                }
+            );
+        }
+        this.setState({
+            ItemList:items,
+            modifiedItems:rows,
+        })
     }
 /*
     {
@@ -158,7 +194,7 @@ class Listitem extends Component {
                         >
                             <Meta
                                 style={{margin:0}}
-                                title=<Link to={item.href}>{item.title}</Link>
+                                title={<Link to={item.href}>{item.title}</Link>}
                                 description={"评分："+item.score+'\n'+"排名：" +item.rank +'\n'
                                             +"This is description."}
                             />
