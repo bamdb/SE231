@@ -49,7 +49,6 @@ zuul:
       sensitiveHeaders:
     fromauth:
       path: /auth/**
-      url: forward:/
       service-id: auth
       sensitiveHeaders:
   retryable: true
