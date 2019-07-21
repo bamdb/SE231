@@ -52,20 +52,17 @@ class Login extends Component{
             username: this.state.name,
             password: this.state.password,
         }
-        axios.post("http://202.120.40.8:30741/auth/oauth/token",
-            {
-                grant_type:"password",
-                username:this.state.name,
-                password:this.state.password,
-                client_id:"browser",
-                client_secret:""
-            },
+        var params = new URLSearchParams();
+        params.append("grant_type", "password");
+        params.append("username", "admin");
+        params.append("password", "admin");
+        params.append("client_id", "browser");
+        params.append("client_secret", "");
+        axios.post("http://localhost:8000/auth/oauth/token", params,
             {headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-
-                },
-                withCredentials:true}
-                )
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            withCredentials:true})
             .then(function (res) {
                 _this.setState({
                     islogin: res.data,
