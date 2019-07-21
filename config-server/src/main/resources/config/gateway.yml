@@ -13,47 +13,38 @@ zuul:
   routes:
     fromimage:
       path: /image/**
-      url: forward:/
       service-id: image
       sensitiveHeaders:
     fromuser:
       path: /user/**
-      url: forward:/
       service-id: user
       sensitiveHeaders:
     fromitem:
       path: /item/**
-      url: forward:/
       service-id: item
       sensitiveHeaders:
     fromactivity:
       path: /activity/**
-      url: forward:/
       service-id: activity
       sensitiveHeaders:
     fromrating:
       path: /rating/**
-      url: forward:/
       service-id: rating
       sensitiveHeaders:
     fromtopic:
       path: /topic/**
-      url: forward:/
       service-id: topic
       sensitiveHeaders:
     fromfriend:
       path: /friend/**
-      url: forward:/
       service-id: friend
       sensitiveHeaders:
     frommessage:
       path: /message/**
-      url: forward:/
       service-id: message
       sensitiveHeaders:
     fromcomment:
       path: /comment/**
-      url: forward:/
       service-id: comment
       sensitiveHeaders:
     fromauth:
