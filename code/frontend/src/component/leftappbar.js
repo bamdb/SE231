@@ -42,7 +42,7 @@ import {blueGrey, grey, purple} from "@material-ui/core/colors";
 import Avatar from "@material-ui/core/Avatar";
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-
+import axios from 'axios'
 const drawerWidth=240;
 
 const theme = createMuiTheme({
@@ -129,7 +129,20 @@ export default function LeftAppBar(props) {
     var drawerbutton = open ? <ChevronLeftIcon />:<ChevronRightIcon />
     useEffect(() => {
 
-        setusername(localStorage.getItem("userid"))
+
+        if(localStorage.getItem("username")!=null)
+        {
+            setusername(localStorage.getItem("username"))
+            var url="/auth/username/"+localStorage.getItem("username");
+            axios.get(url,{params:{access_token:localStorage.getItem("access_token")}}).then(
+                function(res)
+                {
+                    localStorage.setItem("userid",res.data.id);
+                }
+
+            )
+        }
+
     });
 
     /*

@@ -52,14 +52,15 @@ class Login extends Component{
             username: this.state.name,
             password: this.state.password,
         }
-        axios.post("http://202.120.40.8:30741/auth/oauth/token",
-            {
-                grant_type:"password",
-                username:this.state.name,
-                password:this.state.password,
-                client_id:"browser",
-                client_secret:""
-            },
+        var params = new URLSearchParams();
+        params.append("grant_type", "password");
+        params.append("username", this.state.name);
+        params.append("password", this.state.password);
+        params.append("client_id", "browser");
+        params.append("client_secret", "");
+
+        axios.post("/auth/oauth/token",
+            params,
             {headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
 
@@ -72,15 +73,10 @@ class Login extends Component{
 
                 })
                 console.log(res.data.access_token)
-                window.location.href="/#/";
-                /*localStorage.setItem("access_token",res.data.access_token);
+                localStorage.setItem("access_token",res.data.access_token);
                 localStorage.setItem("username",_this.state.name);
-                axios.get("http://202.120.40.8:30741/auth/username"+_this.state.name).then(
-                    function(res)
-                    {
-                        localStorage.setItem("userid",res.data.id);
-                    }.bind(this)
-                )*/
+                window.location.href="/#/";
+
             })
             .catch(function (error) {
                 _this.setState({
