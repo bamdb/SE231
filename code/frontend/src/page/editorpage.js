@@ -43,8 +43,8 @@ class Editorpage extends React.Component {
             {
 
                 var item =this.state.item;
-                item.imgurl="http://202.120.40.8/image"+item.id+"0";
-                axios.post("http://202.120.40.8:30741/item/add",{item}).then(
+                item.imgurl="/image"+item.id+"0";
+                axios.post("/item/add",{item}).then(
                     function(response){
                         this.props.setid(response.data.id);
                     }.bind(this)

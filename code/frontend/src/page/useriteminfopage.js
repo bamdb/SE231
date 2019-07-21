@@ -59,11 +59,11 @@ class Useriteminfopage extends Component {
             this.setState({userid:localStorage.getItem("userid")})
         }
         this.setState({id:id})
-        var url="http://202.120.40.8:30741/item/id/"+id;
-        var url1="http://202.120.40.8:30741/rating/itemid/"+id;
-        var url3="http://202.120.40.8:30741/comment/itemid/"+id;
-        var url4="http://202.120.40.8:30741/activity/progress/"+id;
-        var url5="http://202.120.40.8:30741/item/tag/id/"+id
+        var url="/item/id/"+id;
+        var url1="/rating/itemid/"+id;
+        var url3="/comment/itemid/"+id;
+
+        var url5="/item/tag/id/"+id
 
         axios.get(url).then(
             function (response){
@@ -87,11 +87,11 @@ class Useriteminfopage extends Component {
                 this.setState({comments:response.data});
             }.bind(this)
         )
-        axios.get(url4,{params:{itemId:id,userId:1}}).then(
+        /*axios.get(url4,{params:{itemId:id,userId:1}}).then(
             function(response){
                 this.setState({readstat:response.datat.chapters})
             }.bind(this)
-        )
+        )*/
         axios.get(url5).then(
             function(response)
             {

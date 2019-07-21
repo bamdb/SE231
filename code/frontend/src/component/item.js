@@ -56,7 +56,7 @@ class Item extends Component {
 
                 <Grid item xs={12}>
                     <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >页数</Typography>
-                    <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.page}</Typography>
+                    <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.pages}</Typography>
                 </Grid>
                 <Grid item xs={12}>
                     <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >ISBN</Typography>

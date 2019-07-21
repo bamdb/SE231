@@ -24,11 +24,7 @@ class Userhomepage extends Component{
         this.handleSearch=this.handleSearch.bind(this);
     }
     componentWillMount() {
-        axios.defaults.headers.common = {
 
-            "Authorization": "123456",
-
-        };
 
     }
 
@@ -36,7 +32,7 @@ class Userhomepage extends Component{
 
     }
     componentDidMount() {
-        axios.get("http://202.120.40.8:30741/rating/browser",{params:{
+        axios.get("/rating/browser",{params:{
                 type:0,
                 page:0,
                 pageSize:10

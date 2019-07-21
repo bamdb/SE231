@@ -45,10 +45,10 @@ class Commentlist extends Component {
                 rows.push(
                     <Grid item xs={12}>
                         <Comment
-                            username = {comments[i].userId}
-                            date = {comments[i].pubTime}
+                            username = {comments[i].comment.userId}
+                            date = {comments[i].comment.pubTime}
                             grade = {8}
-                            comment = {comments[i].content}
+                            comment = {comments[i].comment.content}
                         />
                     </Grid>
                 )
