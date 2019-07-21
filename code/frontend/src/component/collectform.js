@@ -116,13 +116,13 @@ class Collectform extends Component {
     handleadd(e)
     {
         var yourtags=this.state.yourtags;
-        debugger;
+
         console.log(this.state.tags);
         console.log(this.state.yourtags);
         yourtags.push(this.state.text);
-        debugger;
+
         console.log(this.state.tags);
-        debugger;
+
         this.setState({yourtags:yourtags});
     }
     showModal(){
@@ -138,16 +138,19 @@ class Collectform extends Component {
 
 
         var date = Date.parse(new Date());
-        axios.post("http://202.120.40.8:30741/activity/add",{actTime:date,actType:this.state.status,userId:this.state.userid,itemId:this.props.itemid});
-        axios.post("http://202.120.40.8:30741/comment/insert",{itemId:this.props.itemid,userId:this.state.userid,content:this.state.content,pubTime:date});
-        axios.put("http://202.120.40.8:30741/rating/update","success",{params:{userId:this.state.userid,itemId:this.props.itemid,score:this.state.score}});
-        $.ajax({
-            url:"http://202.120.40.8/item/add/tag",
-            param:{userId:1,itemId:this.props.itemid},
+        var yourtags=this.state.yourtags;
+        axios.post("/activity/add?access_token="+localStorage.getItem("access_token"),{actTime:date,actType:this.state.status,userId:this.state.userid,itemId:this.props.itemid});
+        axios.post("/comment/insert?access_token="+localStorage.getItem("access_token"),{itemId:this.props.itemid,userId:this.state.userid,content:this.state.content,pubTime:date});
+        axios.put("/rating/update?access_token="+localStorage.getItem("access_token"),"success",{params:{userId:this.state.userid,itemId:this.props.itemid,score:this.state.score}});
+        axios.post("/item/add/tag?access_token="+localStorage.getItem("access_token")+"&userId="+localStorage.getItem("userid")+"&itemId="+this.props.itemid,yourtags)
+        /*$.ajax({
+            url:"/item/add/tag",
+            type:"POST",
+            params:{access_token:localStorage.getItem("access_token"),userId:localStorage.getItem("userid"),itemId:this.props.itemid},
             data:this.state.yourtags,
 
 
-        })
+        })*/
 
     }
     handleCancel() {

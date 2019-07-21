@@ -32,16 +32,23 @@ class Userhomepage extends Component{
 
     }
     componentDidMount() {
-        axios.get("/rating/browser",{params:{
-                type:0,
-                page:0,
-                pageSize:10
-            }}).then(
+        if(localStorage.getItem("access_token")!=null)
+        {
+            axios.get("/rating/browser",{params:{
+
+                    type:0,
+                    page:0,
+                    pageSize:10
+                }}).then(
                 function(response)
                 {
                     this.setState({rankitem:response.data});
                 }.bind(this)
-        )
+            )
+        }
+        else{
+            window.location.href="/#/login";
+        }
     }
 
     render(){

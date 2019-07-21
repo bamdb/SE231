@@ -84,18 +84,26 @@ class Progressmanage extends Component {
                 var movie=[];
                 for(var i=0;i<response.data.length;++i)
                 {
-                    if(response.data[i].item.type==0)
+                    var book=[];
+                    var movie=[];
+                    for(var i=0;i<response.data.length;++i)
                     {
-                        book.push(response.data[i].item);
+                        if(response.data[i].item.type==0)
+                        {
+                            book.push(response.data[i].item);
+                        }
+                        else
+                        {
+                            movie.push(response.data[i].item);
+                        }
                     }
-                    else
-                    {
-                        movie.push(response.data[i].item);
-                    }
-                }
-                this.setState({book:book,movie:movie});
-            }.bind(this)
-        )
+                    this.setState({book:book,movie:movie});
+                }.bind(this)
+            )
+        }
+        else {
+            window.location.href="/#/";
+        }
     }
 
     render() {
