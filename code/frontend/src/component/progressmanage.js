@@ -76,25 +76,31 @@ class Progressmanage extends Component {
     }
 
     componentWillMount() {
-        axios.get("http://202.120.40.8:30741/activity/userid/1").then(
-            function(response)
-            {
-                var book=[];
-                var movie=[];
-                for(var i=0;i<response.data.length;++i)
+        if(localStorage.getItem("access_token")!=null)
+        {
+            axios.get("/activity/userid/1?access_token="+localStorage.getItem("access_token")).then(
+                function(response)
                 {
-                    if(response.data[i].item.type==0)
+                    var book=[];
+                    var movie=[];
+                    for(var i=0;i<response.data.length;++i)
                     {
-                        book.push(response.data[i].item);
+                        if(response.data[i].item.type==0)
+                        {
+                            book.push(response.data[i].item);
+                        }
+                        else
+                        {
+                            movie.push(response.data[i].item);
+                        }
                     }
-                    else
-                    {
-                        movie.push(response.data[i].item);
-                    }
-                }
-                this.setState({book:book,movie:movie});
-            }.bind(this)
-        )
+                    this.setState({book:book,movie:movie});
+                }.bind(this)
+            )
+        }
+        else {
+            window.location.href="/#/";
+        }
     }
 
     render() {
