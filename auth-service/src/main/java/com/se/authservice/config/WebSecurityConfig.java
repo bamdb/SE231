@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring()
                 .antMatchers(HttpMethod.OPTIONS);
     }
-dd
+
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http    .httpBasic().disable()

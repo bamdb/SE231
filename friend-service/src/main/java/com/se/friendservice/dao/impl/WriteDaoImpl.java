@@ -1,4 +1,4 @@
-package com.se.friendservice.dao.Impl;
+package com.se.friendservice.dao.impl;
 
 import com.se.friendservice.config.ds.DataSource;
 import com.se.friendservice.dao.WriteDao;

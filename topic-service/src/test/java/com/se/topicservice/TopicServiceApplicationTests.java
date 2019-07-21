@@ -102,7 +102,7 @@ public class TopicServiceApplicationTests {
         topic1.setPubTime(Timestamp.valueOf("2019-07-01 08:00:00"));
         topic1.setUserId(1L);
         topic1.setTitle("mock");
-        writeDao.save(topic1);
+        topic1 = writeDao.save(topic1);
         mvc.perform(post("/add/reply?topicId="+topic1.getId()+"&userId=1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("A reply"))
@@ -170,8 +170,8 @@ public class TopicServiceApplicationTests {
         topic1.setPubTime(Timestamp.valueOf("2019-07-01 08:00:00"));
         topic1.setUserId(1L);
         topic1.setTitle("mock");
-        writeDao.save(topic1);
-        mvc.perform(delete("/delete/reply?topicId=1&replyId=10"))
+        topic1 = writeDao.save(topic1);
+        mvc.perform(delete("/delete/reply?topicId="+topic1.getId()+"&replyId=10"))
                 .andExpect(status().isOk());
 
         mvc.perform(post("/add")

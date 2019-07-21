@@ -19,14 +19,11 @@ public class DataSourceAspect {
 
         String methodName = point.getSignature().getName();
         Class[] argClass = ((MethodSignature)point.getSignature()).getParameterTypes();
-        String dataSource = DynamicDataSourceHolder.DEFAULT_DS;
 
         Method method = className.getMethod(methodName, argClass);
 
-        if (method.isAnnotationPresent(DataSource.class)) {
-            DataSource annotation = method.getAnnotation(DataSource.class);
-            dataSource = annotation.value();
-        }
+        DataSource annotation = method.getAnnotation(DataSource.class);
+        String dataSource = annotation.value();
 
         DynamicDataSourceHolder.putDataSource(dataSource);
     }
