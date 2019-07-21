@@ -81,6 +81,7 @@ public class TopicServiceImpl implements TopicService {
         TopicPage topicPage = mongoDao.findById(String.valueOf(topicId));
         if (topicPage == null) {
             topicPage = new TopicPage();
+            topicPage.setId(String.valueOf(topicId));
             topicPage.setReplyList(new ArrayList<>());
         }
         List<Reply> replyList = topicPage.getReplyList();

@@ -1,6 +1,5 @@
-package com.se.friendservice.dao.Impl;
+package com.se.friendservice.dao.impl;
 
-import com.se.friendservice.client.UserClient;
 import com.se.friendservice.config.ds.DataSource;
 import com.se.friendservice.dao.ReadDao;
 import com.se.friendservice.entity.Friend;
