@@ -62,11 +62,9 @@ class Login extends Component{
         axios.post("/auth/oauth/token",
             params,
             {headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-
-                },
-                withCredentials:true}
-                )
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            withCredentials:true})
             .then(function (res) {
                 _this.setState({
                     islogin: res.data,
