@@ -34,7 +34,7 @@ class Userinfo extends Component {
         if(localStorage.getItem("userid")==null)
         {
             var username=localStorage.getItem("username");
-            axios({url: '/auth/username/'+username+"?access_token="+localStorage.getItem("access_token"),method:'GET'})
+            axios({url: 'http://202.120.40.8:30741/auth/username/'+username+"?access_token="+localStorage.getItem("access_token"),method:'GET'})
                 .then(
                     function (response)
                     {
@@ -68,7 +68,7 @@ class Userinfo extends Component {
         }
         else {
 
-            var url='/auth/update/'+this.state.username+"?access_token="+localStorage.getItem("access_token");
+            var url='http://202.120.40.8:30741/auth/update/'+this.state.username+"?access_token="+localStorage.getItem("access_token");
             this.setState({edit:false});
             $.ajax({
                 url:url,

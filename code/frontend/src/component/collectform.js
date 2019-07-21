@@ -139,10 +139,10 @@ class Collectform extends Component {
 
         var date = Date.parse(new Date());
         var yourtags=this.state.yourtags;
-        axios.post("/activity/add?access_token="+localStorage.getItem("access_token"),{actTime:date,actType:this.state.status,userId:this.state.userid,itemId:this.props.itemid});
-        axios.post("/comment/insert?access_token="+localStorage.getItem("access_token"),{itemId:this.props.itemid,userId:this.state.userid,content:this.state.content,pubTime:date});
-        axios.put("/rating/update?access_token="+localStorage.getItem("access_token"),"success",{params:{userId:this.state.userid,itemId:this.props.itemid,score:this.state.score}});
-        axios.post("/item/add/tag?access_token="+localStorage.getItem("access_token")+"&userId="+localStorage.getItem("userid")+"&itemId="+this.props.itemid,yourtags)
+        axios.post("http://202.120.40.8:30741/activity/add?access_token="+localStorage.getItem("access_token"),{actTime:date,actType:this.state.status,userId:this.state.userid,itemId:this.props.itemid});
+        axios.post("http://202.120.40.8:30741/comment/insert?access_token="+localStorage.getItem("access_token"),{itemId:this.props.itemid,userId:this.state.userid,content:this.state.content,pubTime:date});
+        axios.put("http://202.120.40.8:30741/rating/update?access_token="+localStorage.getItem("access_token"),"success",{params:{userId:this.state.userid,itemId:this.props.itemid,score:this.state.score}});
+        axios.post("http://202.120.40.8:30741/item/add/tag?access_token="+localStorage.getItem("access_token")+"&userId="+localStorage.getItem("userid")+"&itemId="+this.props.itemid,yourtags)
         /*$.ajax({
             url:"/item/add/tag",
             type:"POST",

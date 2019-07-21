@@ -42,7 +42,7 @@ class Activitypage extends Component{
             this.setState({len:this.state.friends.length});
             const _this=this;
             this.state.friends.map(friend=>{
-                axios.get("/activity/userid/"+friend.id+"?access_token="+localStorage.getItem("access_token"))
+                axios.get("http://202.120.40.8:30741/activity/userid/"+friend.id+"?access_token="+localStorage.getItem("access_token"))
                     .then(function (res) {
 
                         _this.setState({
@@ -66,7 +66,7 @@ class Activitypage extends Component{
 
     async findfriends()
     {
-         axios.get('/friend/all/userid/'+this.state.userid+"?access_token="+localStorage.getItem("access_token")).then(
+         axios.get('http://202.120.40.8:30741/friend/all/userid/'+this.state.userid+"?access_token="+localStorage.getItem("access_token")).then(
             function(response){
                 this.setState({friends:response.data})
             }.bind(this)
