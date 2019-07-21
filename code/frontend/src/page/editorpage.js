@@ -30,7 +30,7 @@ class Editorpage extends React.Component {
         };
         this.getid=this.getid.bind(this);
     }
-    getid(item)
+    setid(item)
     {
         this.setState({item:item});
     }
@@ -44,11 +44,12 @@ class Editorpage extends React.Component {
 
                 var item =this.state.item;
                 item.imgurl="/image"+item.id+"0";
-                axios.post("/item/add",{item}).then(
+                axios.post("/item/update?access_token="+localStorage.getItem("access_token"),{item}).then(
                     function(response){
                         this.props.setid(response.data.id);
                     }.bind(this)
                 )
+                axios.post("/rating/add/itemid/"+item.id+"?access_token="+localStorage.getItem("access_token"))
             }
 
         }

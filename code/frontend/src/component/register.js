@@ -57,7 +57,10 @@ class Register extends Component {
             usernmae:this.state.name,
             password:this.state.password
 
-        }).then(
+        },
+            {
+                withCredentials:true
+            }).then(
             function(res)
             {
                 window.location.href='/#/login'

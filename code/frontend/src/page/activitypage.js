@@ -17,36 +17,56 @@ class Activitypage extends Component{
         this.state={
             username: "游客",
             userid:1,
-            activities: [{actTime:2019-7-1},{ctTime:2019-7-2}],
+            activities: [{activity:{userId:1,actTime:2019-7-1,actType:0},item:{itemname: "three body"}},
+                {activity:{userId:1,actTime:2019-7-2,actType:0},item:{itemname: "three body"}}],
             search:"",
             isloaded: false,
-            friends:[]
+            friends:[],
+            len:0
         }
         this.handleSearch = this.handleSearch.bind(this);
         this.finduser=this.finduser.bind(this);
         this.findfriends=this.findfriends.bind(this);
     }
 
-    componentWillMount() {
+    async componentWillMount() {
         this.finduser();
         this.findfriends();
         const _this=this;
-        this.state.friends.map(friend=>{
-            axios.get("/activity/userid/"+friend.id+"?access_token="+localStorage.getItem("access_token"))
-                .then(function (res) {
-                    _this.setState({
-                        activities: _this.state.activities+res.data,
-                        isloaded: true,
-                    });
-                })
-                .catch(function (error) {
-                })
-        })
+
 
     }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.state.len!==this.state.friends.length)
+        {
+            this.setState({len:this.state.friends.length});
+            const _this=this;
+            this.state.friends.map(friend=>{
+                axios.get("/activity/userid/"+friend.id+"?access_token="+localStorage.getItem("access_token"))
+                    .then(function (res) {
+
+                        _this.setState({
+                            activities: _this.state.activities.concat(res.data),
+                            isloaded: true,
+                        });
+                        console.log(_this.state.activities)
+                    })
+                    .catch(function (error) {
+                    })
+            });
+
+        }
+    }
+
+
+
+    componentDidMount() {
+
+    }
+
     async findfriends()
     {
-        await axios.get('/friend/all/userid/'+this.state.userid+"?access_token="+localStorage.getItem("access_token")).then(
+         axios.get('/friend/all/userid/'+this.state.userid+"?access_token="+localStorage.getItem("access_token")).then(
             function(response){
                 this.setState({friends:response.data})
             }.bind(this)
@@ -69,7 +89,7 @@ class Activitypage extends Component{
 
     render(){
         var activities=this.state.activities.sort((a,b)=>{
-            return a.actTime>b.actTime;
+            return a.activity.actTime>b.activity.actTime;
         });
         return(
             <Grid container direction={"column"} >
