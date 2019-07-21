@@ -19,6 +19,9 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableAuthorizationServer
@@ -118,6 +121,14 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
                 /*default: denyAll*/
                 .checkTokenAccess("permitAll()")
                 .allowFormAuthenticationForClients();
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.applyPermitDefaultValues();
+
+        // Maybe there's a way to use config from AuthorizationServerEndpointsConfigurer endpoints?
+        source.registerCorsConfiguration("/oauth/token", config);
+        CorsFilter filter = new CorsFilter(source);
+        oauthServer.addTokenEndpointAuthenticationFilter(filter);
 
     }
 
