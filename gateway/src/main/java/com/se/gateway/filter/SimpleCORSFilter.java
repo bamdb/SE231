@@ -1,4 +1,4 @@
-package com.se.authservice.config;
+package com.se.gateway.filter;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
