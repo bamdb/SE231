@@ -74,7 +74,7 @@ class Login extends Component{
                 localStorage.setItem("access_token",res.data.access_token);
                 localStorage.setItem("username",_this.state.name);
                 window.location.href="/#/";
-
+                window.location.reload();
             })
             .catch(function (error) {
                 _this.setState({

@@ -62,7 +62,7 @@ class Useriteminfopage extends Component {
         var url="/item/id/"+id;
         var url1="/rating/itemid/"+id;
         var url3="/comment/itemid/"+id;
-        var url4="/activity/progress/"+id;
+
         var url5="/item/tag/id/"+id
 
         axios.get(url).then(
@@ -87,11 +87,11 @@ class Useriteminfopage extends Component {
                 this.setState({comments:response.data});
             }.bind(this)
         )
-        axios.get(url4,{params:{itemId:id,userId:1}}).then(
+        /*axios.get(url4,{params:{itemId:id,userId:1}}).then(
             function(response){
                 this.setState({readstat:response.datat.chapters})
             }.bind(this)
-        )
+        )*/
         axios.get(url5).then(
             function(response)
             {

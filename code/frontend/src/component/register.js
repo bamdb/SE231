@@ -53,13 +53,18 @@ class Register extends Component {
     }
     submit()
     {
-        /*axios.post("http://202.120.40.8:30741/user/signup",{
+        axios.post("/auth/signup",{
             usernmae:this.state.name,
             password:this.state.password
 
-        })*/
-        $.ajax({
-            url:"http://202.120.40.8:30741/user/signup",
+        }).then(
+            function(res)
+            {
+                window.location.href='/#/login'
+            }
+        )
+        /*$.ajax({
+            url:"user/signup",
             type:"POST",
             contentType: "application/json",
             data:JSON.stringify({username:this.state.name,
@@ -70,7 +75,7 @@ class Register extends Component {
 
 
             }.bind(this)
-        })
+        })*/
     }
 
     handlePassword(){
