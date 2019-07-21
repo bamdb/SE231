@@ -52,15 +52,16 @@ class Userhomepage extends Component{
     }
 
     render(){
+        const search=<TextField
+            id="outlined-dense"
+            label="Search"
+            margin="dense"
+            variant="outlined"
+        />;
         return(
             <Grid container justify={"space-around"} alignContent={"center"}>
                 <Grid item xs={9}>
-                    <TextField
-                        id="outlined-dense"
-                        label="Search"
-                        margin="dense"
-                        variant="outlined"
-                    />
+
                     <Grid container spacing={2} alignContent={"center"}>
                         <Grid item xs={12}>
                             <Progressmanage userid={this.state.userid} />
