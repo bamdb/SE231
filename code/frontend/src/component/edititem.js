@@ -36,7 +36,7 @@ class Edititem extends Component{
     handlesubmit()
     {
         var pubtime=Date.parse(new Date(this.state.pubtime))
-        axios.post("/item/add?access_token="+localStorage.getItem("access_token"),{itemname:this.state.itemname,pubTime:pubtime,chapterNum:this.state.chapternum,imgurl:null,mainAuthor:this.state.author,type:this.state.type}).then(
+        axios.post("http://202.120.40.8:30741/item/add?access_token="+localStorage.getItem("access_token"),{itemname:this.state.itemname,pubTime:pubtime,chapterNum:this.state.chapternum,imgurl:null,mainAuthor:this.state.author,type:this.state.type}).then(
             function(response){
                 this.props.setid(response.data);
             }.bind(this)
