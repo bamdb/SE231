@@ -48,7 +48,7 @@ class Comment extends Component {
     handleOk()
     {
         var date=Date.parse(new Date());
-        axios.post("http://202.120.40.8:30741/message/add",{senderId:1,receiverId:1,sendTime:date,content:"加为好友"})
+        axios.post("/message/add?access_token="+localStorage.getItem("access_token"),{senderId:localStorage.getItem("userid"),receiverId:this.props.username,sendTime:date,content:"加为好友"})
         this.setState({visible:false});
     }
     handleCancel()

@@ -45,7 +45,7 @@ class Messagelist extends Component{
     }
 
     componentDidMount() {
-        var url="http://202.120.40.8:30741/message/"+this.props.type+"/"+this.state.userid;
+        var url="/message/"+this.props.type+"/"+localStorage.getItem("userid")+"?access_token="+localStorage.getItem("access_token");
         axios.get(url).then(
             function(response)
             {
@@ -54,7 +54,7 @@ class Messagelist extends Component{
         )
     }
     componentWillReceiveProps(nextProps, nextContext) {
-        var url="http://202.120.40.8:30741/message/"+nextProps.type+"/"+this.state.userid;
+        var url="/message/"+nextProps.type+"/"+localStorage.getItem("userid")+"?access_token="+localStorage.getItem("access_token");
         axios.get(url).then(
             function(response)
             {

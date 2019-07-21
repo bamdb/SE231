@@ -141,6 +141,7 @@ export default function LeftAppBar(props) {
                 }
 
             )
+
         }
 
     });
