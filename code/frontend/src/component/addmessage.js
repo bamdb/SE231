@@ -79,8 +79,8 @@ class Addmessage extends Component {
     }
     handleOk()
     {
-       // var date = Date.parse(new Date())
-       // axios.post("http://202.120.40.8:30741/message/add",{senderId:1,receiverId:2,senTime:date,content:this.state.text});
+        var date = Date.parse(new Date())
+        axios.post("http://202.120.40.8:30741/message/add",{senderId:1,receiverId:2,senTime:date,content:this.state.text});
         openNotificationWithIcon('success');
         this.handleCancel();
     }
