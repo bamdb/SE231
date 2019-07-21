@@ -17,7 +17,7 @@ class Activitypage extends Component{
         this.state={
             username: "游客",
             userid:1,
-            activities: [],
+            activities: [{actTime:2019-7-1},{ctTime:2019-7-2}],
             search:"",
             isloaded: false,
             friends:[]
@@ -68,7 +68,7 @@ class Activitypage extends Component{
     }
 
     render(){
-        var activities=this.state.activity.sort((a,b)=>{
+        var activities=this.state.activities.sort((a,b)=>{
             return a.actTime>b.actTime;
         });
         return(
