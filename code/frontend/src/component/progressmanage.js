@@ -76,7 +76,9 @@ class Progressmanage extends Component {
     }
 
     componentWillMount() {
-        axios.get("http://202.120.40.8:30741/activity/userid/1",{params:
+        if(localStorage.getItem("access_token")!=null)
+        {
+            axios.get("/activity/userid/"+localStorage.getItem("userid"),{params:
                 {access_token: localStorage.getItem("access_token")}}).then(
             function(response)
             {
@@ -98,11 +100,12 @@ class Progressmanage extends Component {
                         }
                     }
                     this.setState({book:book,movie:movie});
-                }.bind(this)
+                }
+            }.bind(this)
             )
         }
         else {
-            window.location.href="/#/";
+            window.location.href="/#/login";
         }
     }
 
