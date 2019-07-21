@@ -111,7 +111,6 @@ class Scheduletable extends Component {
                         });
                         read = false;
                     }
-                //this.transform(children,readdata[i], parenttitle, parentvalue, value);
                 tree.push({
                     title:  "Node"+ parentTitle +'-'+ (i + 1).toString(),
                     value:parentValue + '-' + i.toString(),
@@ -124,44 +123,86 @@ class Scheduletable extends Component {
 
     submit(){
         axios.put("http://202.120.40.8:30741/activity/update/progress",{params:{
+            access_token: localStorage.getItem("access_token"),
             body:this.state.data
             }})
         this.setState({show:false});
     }
     componentWillMount() {
         var data=[];
-        axios.get("http://202.120.40.8:30741/activity/progress", {params:{
-                    userId:this.props.userid,
-                    itemId:this.props.itemid
-                }}).then(
-            function(response)
-            {
-                data=response.data;
-            })
-        data={
-            "userId": 1,
-            "itemId": 1,
-            "chapters": [
-                {
-                    "chapterNum": 1,
-                    "finish": 1,
-                    "sections": [
-                        0,
-                        1,
-                        0
-                    ]
-                }
-            ]
-        };
         var treeData = [];
         var value=[];
-        this.transform(treeData,data.chapters,'','0',value);
-        console.log(treeData);
-        this.setState({
-            data: data,
-            treeData:treeData,
-            value:value
-        })
+        axios.get("http://202.120.40.8:30741/activity/progress", {params:{
+                    userId:this.props.userid,
+                    itemId:this.props.itemid,
+                    access_token: localStorage.getItem("access_token"),
+                }}).then(function(response)
+            {
+                console.log(response.data);
+                console.log(response.data.chapters);
+                //this.transform(treeData,response.data.chapters,'','0',value);
+                const readdata=response.data.chapters;
+                const length=readdata.length;
+
+                for (var i=0;i<length;++i){
+                    console.log("child",readdata[i].sections.length)
+                    if(readdata[i].sections.length===0) //下面没有子章节了
+                    {
+                        if(readdata[i].finish===1) {
+                            treeData.push({
+                                title: "Node" +'-'+ (i + 1).toString(),
+                                value: '0-' + i.toString(),
+                                done: true
+                            });
+                            value.push('0' + '-' + i.toString());
+                        }
+                        else
+                            treeData.push({
+                                title: "Node" +'-'+ (i + 1).toString(),
+                                value: '0'+'-'+i.toString(),
+                                done: false
+                            });
+
+                    }
+                    else {
+                        const parenttitle = '-'+ (i + 1).toString()
+                        const parentvalue='0'+'-'+i.toString()
+                        var children=[];
+                        var read=true;
+                        const sections=readdata[i].sections;
+                        for(var j=0;j<sections.length;j++)
+                            if(sections[j]==1) {
+                                children.push({
+                                    title: "Node"+ parenttitle +'-'+ (j + 1).toString(),
+                                    value: parentvalue + '-' + j.toString(),
+                                    done: true
+                                });
+                                value.push(parentvalue + '-' + j.toString());
+                            }
+                            else {
+                                children.push({
+                                    title: "Node" + parenttitle + '-' + (j + 1).toString(),
+                                    value: parentvalue + '-' + j.toString(),
+                                    done: false
+                                });
+                                read = false;
+                            }
+                        treeData.push({
+                            title:  "Node" +'-'+ (i + 1).toString(),
+                            value:'0' + '-' + i.toString(),
+                            done:read,
+                            children:children
+                        });
+                    }
+                }
+                console.log(treeData);
+                this.setState({
+                data: response.data,
+                treeData:treeData,
+                value:value
+            })
+            }.bind(this))
+
     }
 
     onChange = value => {

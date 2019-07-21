@@ -76,7 +76,8 @@ class Progressmanage extends Component {
     }
 
     componentWillMount() {
-        axios.get("http://202.120.40.8:30741/activity/userid/1").then(
+        axios.get("http://202.120.40.8:30741/activity/userid/1",{params:
+                {access_token: localStorage.getItem("access_token")}}).then(
             function(response)
             {
                 var book=[];
