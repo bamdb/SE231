@@ -3,3 +3,4 @@ spring:
     config:
       discovery:
         enabled: false
+      enabled: false

@@ -54,5 +54,6 @@ zuul:
   semaphore:
     max-semaphores: 100
   ignored-services: "*"
+  ignored-headers: Access-Control-Allow-Origin
 ribbon:
   NFLoadBalancerRuleClassName: com.netflix.loadbalancer.AvailabilityFilteringRule
