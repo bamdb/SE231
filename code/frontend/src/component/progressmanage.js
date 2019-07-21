@@ -76,10 +76,13 @@ class Progressmanage extends Component {
     }
 
     componentWillMount() {
-        if(localStorage.getItem("access_token")!=null)
-        {
-            axios.get("/activity/userid/1?access_token="+localStorage.getItem("access_token")).then(
-                function(response)
+        axios.get("http://202.120.40.8:30741/activity/userid/1",{params:
+                {access_token: localStorage.getItem("access_token")}}).then(
+            function(response)
+            {
+                var book=[];
+                var movie=[];
+                for(var i=0;i<response.data.length;++i)
                 {
                     var book=[];
                     var movie=[];
