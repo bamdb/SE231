@@ -1,4 +1,4 @@
-package com.se.authservice.config;
+package com.se.gateway.filter;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -11,9 +11,7 @@ import java.io.IOException;
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
-
 public class SimpleCORSFilter implements Filter {
-
     @Override
     public void init(FilterConfig fc) throws ServletException {
     }
