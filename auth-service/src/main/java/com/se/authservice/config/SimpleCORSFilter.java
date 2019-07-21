@@ -24,9 +24,14 @@ public class SimpleCORSFilter implements Filter {
                          FilterChain chain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) resp;
         HttpServletRequest request = (HttpServletRequest) req;
-        response.setHeader("Access-Control-Allow-Origin", "*");
+        String origin = request.getHeader("Origin");
+        if (response.getHeader("Access-Control-Allow-Origin") != null)
+        response.setHeader("Access-Control-Allow-Origin", origin);
+        if (response.getHeader("Access-Control-Allow-Methods") != null)
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        if (response.getHeader("Access-Control-Max-Age") != null)
         response.setHeader("Access-Control-Max-Age", "3600");
+        if (response.getHeader("Access-Control-Allow-Headers") != null)
         response.setHeader("Access-Control-Allow-Headers", "x-requested-with, authorization, Content-Type, Authorization, credential, X-XSRF-TOKEN");
 
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
