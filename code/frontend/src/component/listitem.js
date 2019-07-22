@@ -12,6 +12,7 @@ import {Modal} from "antd";
 import Collectform from "./collectform";
 import '../css/listitem.css'
 import axios from 'axios';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { List, Avatar, Icon, Card } from "antd";
 
 const useStyles = makeStyles(theme => ({
@@ -159,6 +160,21 @@ class Listitem extends Component {
 
     render() {
         const items=this.state.modifiedItems;
+        // show delete icon in editor page
+        const deleteIcon = localStorage.getItem("role") == "ROLE_EDITOR" ? (
+            [
+                <IconText type="star-o" text="156" />,
+                <IconText type="like-o" text="156" />,
+                <IconText type="message" text="2" />,
+                <DeleteIcon/>
+            ]
+        ) :(
+            [
+                <IconText type="star-o" text="156" />,
+                <IconText type="like-o" text="156" />,
+                <IconText type="message" text="2" />
+            ]
+        );
         return(<List
                 grid={{gutter:6,column: 5 }}
                 itemLayout="horizontal"
@@ -186,11 +202,7 @@ class Listitem extends Component {
                                     src="img/3.jpg"
                                 />
                             }
-                            actions={[
-                                <IconText type="star-o" text="156" />,
-                                <IconText type="like-o" text="156" />,
-                                <IconText type="message" text="2" />
-                            ]}
+                            actions={deleteIcon}
                         >
                             <Meta
                                 style={{margin:0}}
