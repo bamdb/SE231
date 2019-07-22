@@ -41,7 +41,10 @@
 * upgrade the frontend
 # 2019-7-16
 * modify homepage
-# 2019-7-16
-* modify frontendpage
 # 2019-7-17
+* modify frontendpage
+# 2019-7-18
 * modify frotend logic to fit the user auth
+# 2019-7-19
+* modify frotend logic to fit bakcend
+* test frontend
