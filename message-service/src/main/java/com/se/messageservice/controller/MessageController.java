@@ -23,7 +23,7 @@ public class MessageController {
         this.messageService = messageService;
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') and (#senderId == authentication.principal.id or #receiverId == authentication.principal.id)")
     @GetMapping(value = "/content", produces ="application/json")
     public String selectBySenderIdAndReceiverIdAndSendTime(@RequestParam("senderId") Long senderId,
                                                     @RequestParam("receiverId") Long receiverId,
@@ -31,7 +31,7 @@ public class MessageController {
         return messageService.selectBySenderIdAndReceiverIdAndSendTime(senderId, receiverId, send_time);
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') and (#senderId == authentication.principal.id or #receiverId == authentication.principal.id)")
     @DeleteMapping(value = "/delete/one", produces ="application/json")
     public ResponseEntity<?> deleteBySenderIdAndReceiverIdAndSendTime(@RequestParam("senderId") Long senderId,
                                                                @RequestParam("receiverId") Long receiverId,
@@ -40,7 +40,7 @@ public class MessageController {
         return ResponseEntity.ok().body("Delete message successfully!");
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') and (#senderId == authentication.principal.id or #receiverId == authentication.principal.id)")
     @DeleteMapping(value = "/delete/all", produces ="application/json")
     public ResponseEntity<?> deleteAllBySenderIdAndReceiverId(@RequestParam("senderId") Long senderId,
                                                        @RequestParam("receiverId") Long receiverId) {
@@ -49,26 +49,26 @@ public class MessageController {
         return ResponseEntity.ok().body("Delete messages successfully!");
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') and (#senderId == authentication.principal.id or #receiverId == authentication.principal.id)")
     @GetMapping(value = "/all", produces ="application/json")
     public Iterable<Message> selectBySenderIdAndReceiverId(@RequestParam("senderId") Long senderId,
                                                     @RequestParam("receiverId") Long receiverId) {
         return messageService.selectBySenderIdAndReceiverId(senderId, receiverId);
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') and #senderId == authentication.principal.id")
     @GetMapping(value = "/senderid/{senderId}", produces ="application/json")
     public List<MessageOut> selectBySenderId(@PathVariable Long senderId) {
         return messageService.selectBySenderId(senderId);
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') and #receiverId == authentication.principal.id")
     @GetMapping(value = "/receiverid/{receiverId}", produces ="application/json")
     public List<MessageOut> selectByReceiverId(@PathVariable Long receiverId) {
         return messageService.selectByReceiverId(receiverId);
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') and (#message.getSenderId() == authentication.principal.id or #message.getReceiverId() == authentication.principal.id)")
     @PostMapping(value = "/add", produces ="application/json")
     public Message addMessage(@RequestBody Message message, @RequestHeader("Authorization") String accessToken) {
         FeignRequestInterceptor.accessToken = accessToken;

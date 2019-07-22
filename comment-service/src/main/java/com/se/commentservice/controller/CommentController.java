@@ -40,7 +40,7 @@ public class CommentController {
     }
 
 
-    @PreAuthorize("hasRole('EDITOR') or  principal.username == userClient.getUserById(#userId).getUsername()")
+    @PreAuthorize("hasRole('EDITOR') or  #userId == authentication.principal.id")
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteCommentByID(@RequestParam("itemId") Long itemId,
                                                @RequestParam("userId") Long userId) {
@@ -48,7 +48,7 @@ public class CommentController {
         return ResponseEntity.ok().body("Delete item successfully!");
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') and #comment.getUserId == authentication.principal.id")
     @PostMapping("/insert")
     public Comment insertComment(@RequestBody Comment comment) {
         return commentService.insertComment(comment);

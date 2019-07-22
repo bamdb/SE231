@@ -18,12 +18,12 @@ import java.util.List;
 @RestController
 public class ActivityController {
     @Resource(name="activityServiceImpl")
-    private ActivityService activityService;
+    ActivityService activityService;
 
     @Autowired
     UserClient userClient;
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("#activity.getUserId() == authentication.principal.id and hasRole('USER')")
     @PostMapping(value="/add")
     public Activity postActivity(@RequestBody Activity activity,
                                  @RequestHeader("Authorization") String accessToken) {
@@ -31,7 +31,7 @@ public class ActivityController {
         return activityService.postActivity(activity);
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('ROLE')")
     @GetMapping(value ="/all", produces ="application/json")
     public Iterable<Activity> getAllActivities() {
         return activityService.selectAll();
@@ -39,7 +39,7 @@ public class ActivityController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping(value ="/id/{activityId}", produces ="application/json")
-    public Activity getAllActivities(@PathVariable("activityId") Long activityId) {
+    public Activity getActivityById(@PathVariable("activityId") Long activityId) {
         return activityService.selectById(activityId);
     }
 
@@ -68,7 +68,7 @@ public class ActivityController {
         return activityService.selectByUserIdAndItemId(userId, itemId);
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value="/progress")
     public Progress getProgress(@RequestParam("userId") Long userId,
                                 @RequestParam("itemId") Long itemId,
@@ -77,25 +77,26 @@ public class ActivityController {
         return activityService.selectProgress(userId, itemId);
     }
 
+    /*TO BE REVISED*/
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(value="/delete/id/{activityId}")
     public ResponseEntity<?> deleteActivityById(@PathVariable("activityId") Long activityId) {
         return activityService.deleteActivityById(activityId);
     }
 
-    @PreAuthorize("hasRole('ADMIN') or principal.username == userClient.getUserById(#userId).getUsername()")
+    @PreAuthorize("hasRole('EDITOR') or #userId == authentication.principal.id")
     @DeleteMapping(value="/delete/userid/{userId}")
     public ResponseEntity<?> deleteActivityByUserId(@PathVariable("userId") Long userId) {
         return activityService.deleteActivityByUserId(userId);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('EDITOR')")
     @DeleteMapping(value="/delete/itemid/{itemId}")
     public ResponseEntity<?> deleteActivityByItemId(@PathVariable("itemId") Long itemId) {
         return activityService.deleteActivityByItemId(itemId);
     }
 
-//    @PreAuthorize("#progress.userId == authentication.details.id")
+    @PreAuthorize("#progress.getUserId() == authentication.principal.id")
     @PutMapping(value="/update/progress")
     public Progress updateProgress(@RequestBody Progress progress) {
         return activityService.updateProgress(progress);

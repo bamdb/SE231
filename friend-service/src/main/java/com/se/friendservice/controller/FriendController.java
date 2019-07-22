@@ -28,13 +28,13 @@ public class FriendController {
         return friendService.isFriend(userId1, userId2);
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') and (#friend.getUserId1() == authentication.principal.id ||#friend.getUserId2() == authentication.principal.id )")
     @PostMapping(value = "/add", produces = "application/json")
     Friend addFriends(@RequestBody Friend friend) {
         return friendService.addFriends(friend);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER') and (#userId1 == authentication.principal.id ||#userId2 == authentication.principal.id ) ")
     @DeleteMapping(value = "/delete")
     ResponseEntity<?> rmFriends(@RequestParam("userId1") Long userId1,
                                 @RequestParam("userId2") Long userId2) {
@@ -42,7 +42,7 @@ public class FriendController {
         return ResponseEntity.ok().body("Delete successfully!");
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or userId == authentication.principal.id")
     @DeleteMapping("/delete/userid/{userId}")
     ResponseEntity<?> rmAllFriends(@PathVariable("userId") Long userId) {
         friendService.rmAllFriends(userId);

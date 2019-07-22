@@ -66,7 +66,7 @@ public class RatingController {
     }
 
     // 权限验证，通过token取出用户id
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') and #userId == authentication.principal.id")
     @PutMapping(value="/update")
     public ResponseEntity<?> updateRatingByUserId(@RequestParam("userId") Long userId,
                                                   @RequestParam("score") int score,
@@ -74,7 +74,7 @@ public class RatingController {
         return ratingService.updateRatingByUserId(userId, score, itemId);
     }
 
-    @PreAuthorize("hasRole('EDITOR')")
+    @PreAuthorize("hasRole('EDITOR') or #userId == authentication.principal.id")
     @DeleteMapping(value="/delete/score")
     public ResponseEntity<?> cancelRatingByUserId(@RequestParam("userId") Long userId, @RequestParam("itemId") Long itemId) {
         return ratingService.cancelRatingByUserId(userId, itemId);
