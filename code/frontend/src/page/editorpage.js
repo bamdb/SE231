@@ -28,7 +28,7 @@ class Editorpage extends React.Component {
             current: 0,
             item:null
         };
-        this.getid=this.getid.bind(this);
+        this.setid=this.setid.bind(this);
     }
     setid(item)
     {
@@ -44,7 +44,7 @@ class Editorpage extends React.Component {
 
                 var item =this.state.item;
                 item.imgurl="/image"+item.id+"0";
-                axios.post("http://202.120.40.8:30741/item/update?access_token="+localStorage.getItem("access_token"),{item}).then(
+                axios.put("http://202.120.40.8:30741/item/update?access_token="+localStorage.getItem("access_token"),{item}).then(
                     function(response){
                         this.props.setid(response.data.id);
                     }.bind(this)
@@ -68,7 +68,7 @@ class Editorpage extends React.Component {
         var rows=[];
         switch(current)
         {
-            case 0:rows.push(<Edititem getid={this.getid}></Edititem>);break;
+            case 0:rows.push(<Edititem setid={this.setid}></Edititem>);break;
             case 1:rows.push(<Uploadavatar imageid={""+this.state.id+"1"}></Uploadavatar>);break;
             case 2:rows.push(<Typography>finish</Typography>)
         }

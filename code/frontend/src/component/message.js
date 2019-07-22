@@ -15,7 +15,19 @@ class Message extends Component{
     }
     handleaddfriend()
     {
-        axios.post("http://202.120.40.8:30741/friend/add",{userId1:this.state.message.message.senderId,userId2:this.state.message.message.receiverId,status:0})
+        axios.get("http://202.120.40.8:30741/friend/isfriend?userId1="+this.state.message.message.senderId+"&userId2="+this.state.message.message.receiverId+"&access_token="+localStorage.getItem("access_token")).then(
+            function(res)
+            {
+                if(res.data==false)
+                {
+                    axios.post("http://202.120.40.8:30741/friend/add",{userId1:this.state.message.message.senderId,userId2:this.state.message.message.receiverId,status:0})
+                }
+                else {
+                    alert("you already have friend");
+                }
+            }
+        )
+
     }
     componentWillMount() {
         this.setState({message:this.props.message});
