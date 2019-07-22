@@ -60,3 +60,8 @@
 # 2019-07-19
 * deploy services
 * work on mongodb sharding in four servers 
+
+# 2019-07-22
+* config redis cluster
+* fix CORS bug
+* complete editor function in frontend
