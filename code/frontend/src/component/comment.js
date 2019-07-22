@@ -87,7 +87,7 @@ class Comment extends Component {
                     </Grid>
                     <Grid item xs={10} justify="center">
                         <Typography color="textSecondary" gutterBottom>
-                            收藏日期: {this.props.date}
+                            收藏日期: {this.props.date.split('T')[0]}
                         </Typography>
 
                         <Typography variant="h5" component="h2">

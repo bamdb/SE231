@@ -97,8 +97,6 @@ class Useriteminfopage extends Component {
                 this.setState({tags:response.data.tags})
             }.bind(this)
         )
-
-
     }
 
     render(){

@@ -24,27 +24,20 @@ import Grid from "@material-ui/core/Grid";
 class Briefitem extends Component {
     constructor(props){
         super(props);
-        this.state={
-            itemName: "三体",
-            briefIntro: "中国科幻小说里程碑",
-            fansTotal: 90,
-        }
-
     }
-
     render(){
         return(
             <Paper>
                 <Grid container  >
                     <Grid item xs={5}>
-                        <img src="img/3.jpg" id="itemimage" />
+                        <img src={this.props.imgurl} id="itemimage" />
                     </Grid>
                     <Grid item xs={7}>
                         <br/>
-                        <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >{this.state.itemName}</Typography>
-                        <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.briefIntro}</Typography>
+                        <Typography variant={"h6"}  color={"textPrimary"} >{this.props.itemName}</Typography>
+                        <Typography variant={"subtitle1"} color={"textSecondary"} >出版时间：{this.props.pubTime}</Typography>
                         <br/>
-                        <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.fansTotal}人关注</Typography>
+                        <Typography variant={"subtitle2"} color={"textSecondary"} >作者：{this.props.mainAuthor}</Typography>
                     </Grid>
                 </Grid>
             </Paper>
@@ -55,23 +48,26 @@ class Briefitem extends Component {
 class Briefitemlist extends Component {
     constructor(props){
         super(props);
-        this.state = {
-            brieflist: [],
-        }
     }
 
     render(){
+        const brieflist = this.props.data;
+        var rows=[];
+        if(brieflist===undefined) return <Typography color={"textSecondary"}>暂无</Typography>;
+        else {
+            for(var i=0;i<brieflist.length;i++)
+                rows.push(
+                    <Briefitem
+                        itemName={brieflist[i].itemname}
+                        author={brieflist[i].mainAuthor}
+                        imgurl={brieflist[i].imgurl}
+                        pubTime={brieflist[i].imgurl}
+                    />
+                    );
+        }
         return(
-            <Grid container >
-                <Grid item xs={12}>
-                <Briefitem />
-                </Grid>
-                <Grid item xs={12}>
-                    <Briefitem />
-                </Grid>
-                <Grid item xs={12}>
-                    <Briefitem />
-                </Grid>
+            <Grid container justify={"center"} alignContent={"center"}>
+                {rows}
             </Grid>
         );
     }
