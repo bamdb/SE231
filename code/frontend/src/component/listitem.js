@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from 'react';
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 import {makeStyles} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
@@ -62,6 +62,8 @@ class Listitem extends Component {
         this.state = {
             ItemList:[],
             modifiedItems:[],
+            content: "",        // 提示框内容
+            flush: false        // 用于删除条目后跳转页面
         }
         this.handlepagechange=this.handlepagechange.bind(this);
         this.handleAlert=this.handleAlert.bind(this);
@@ -167,14 +169,18 @@ class Listitem extends Component {
     }
 
     handleDelete(itemId) {
-        axios.delete("http://202.120.40.8:30741/item/delete/id"+itemId+"?access_token="+localStorage.getItem("access_token")).then(
+        axios.delete("http://202.120.40.8:30741/item/delete/id/"+itemId+"?access_token="+localStorage.getItem("access_token")).then(
             res => {
                 this.handleAlert(res.data);
+                this.setState({flush:true});
             }
         )
     }
 
     render() {
+        if (this.state.flush==true) {
+            return(<Redirect to={"/"}/>);
+        }
         const items=this.state.modifiedItems;
         return(<List
                 grid={{gutter:6,column: 5 }}
