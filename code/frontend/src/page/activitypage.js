@@ -41,19 +41,22 @@ class Activitypage extends Component{
         {
             this.setState({len:this.state.friends.length});
             const _this=this;
+            var activities=[];
             this.state.friends.map(friend=>{
                 axios.get("http://202.120.40.8:30741/activity/userid/"+friend.id+"?access_token="+localStorage.getItem("access_token"))
                     .then(function (res) {
-
-                        _this.setState({
-                            activities: _this.state.activities.concat(res.data),
+                        activities=activities.concat(res.data);
+                        console.log(activities);
+                        this.setState({
+                            activities:activities,
                             isloaded: true,
                         });
-                        console.log(_this.state.activities)
-                    })
+                    }.bind(this)
+                    )
                     .catch(function (error) {
                     })
             });
+
 
         }
     }
