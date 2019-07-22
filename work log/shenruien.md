@@ -48,3 +48,6 @@
 # 2019-7-19
 * modify frotend logic to fit bakcend
 * test frontend
+# 2019-7-22
+* fix bugs in frontend
+* modify frotend logic to fit bakcend
