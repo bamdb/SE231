@@ -70,15 +70,7 @@ class Userinfo extends Component {
 
             var url='http://202.120.40.8:30741/auth/update/'+this.state.username+"?access_token="+localStorage.getItem("access_token");
             this.setState({edit:false});
-            $.ajax({
-                url:url,
-                type:"PUT",
-                contentType: "application/json;charset=utf-8",
-                data:{mail:this.state.email},
-                success: function f(data) {
-                    console.log(data);
-                }.bind(this)
-            })
+            axios.put('http://202.120.40.8:30741/auth/update/'+this.state.username,{},{params:{access_token:localStorage.getItem("access_token"),mail:this.state.email}});
             /*axios.put(url,{mail:this.state.email}).then(
                 function (data)
                 {
