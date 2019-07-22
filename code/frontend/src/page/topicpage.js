@@ -30,7 +30,7 @@ class Topicpage extends Component{
 
     }
     componentWillMount() {
-        axios.get("http://202.120.40.8:30741/topic/all").then(
+        axios.get("/topic/all").then(
             function (response){
 
             this.setState({topics:response.data});

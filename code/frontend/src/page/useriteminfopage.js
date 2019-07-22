@@ -11,9 +11,9 @@ import Item from '../component/item';
 import Progressmanage from "../component/progressmanage";
 import Commentlist from "../component/commentlist";
 import Relateditem from "../component/relatedlist";
-
+import {Divider, Card} from 'antd';
 import Scheduletable from "../component/scheduletable";
-import Tag from "../component/tag"
+import Tags from "../component/tag"
 import axios from 'axios'
 import Rating from "../component/rating";
 import Collect from "../component/collect";
@@ -23,7 +23,7 @@ class Useriteminfopage extends Component {
     constructor(props)
     {
         super(props);
-        this.state={data:{},rating:{},totgrade:[],comments:[],id:1,userid:1,readstat:[],tags:[{tagname:"哈哈哈"}]};
+        this.state={data:{},rating:{},totgrade:[],comments:[],id:1,userid:1,readstat:[],tags:[{tagname:["科幻","刘慈欣"]}]};
         this.handletagchange=this.handletagchange.bind(this);
         this.handleSearch=this.handleSearch.bind(this);
 
@@ -62,7 +62,7 @@ class Useriteminfopage extends Component {
         var url="http://202.120.40.8:30741/item/id/"+id;
         var url1="http://202.120.40.8:30741/rating/itemid/"+id;
         var url3="http://202.120.40.8:30741/comment/itemid/"+id;
-        var url4="http://202.120.40.8:30741/activity/progress/"+id;
+
         var url5="http://202.120.40.8:30741/item/tag/id/"+id
 
         axios.get(url).then(
@@ -87,11 +87,11 @@ class Useriteminfopage extends Component {
                 this.setState({comments:response.data});
             }.bind(this)
         )
-        axios.get(url4,{params:{itemId:id,userId:1}}).then(
+        /*axios.get(url4,{params:{itemId:id,userId:1}}).then(
             function(response){
                 this.setState({readstat:response.datat.chapters})
             }.bind(this)
-        )
+        )*/
         axios.get(url5).then(
             function(response)
             {
@@ -107,19 +107,14 @@ class Useriteminfopage extends Component {
         var totgrade=[];
         totgrade.push(this.state.rating.score1,this.state.rating.score2,this.state.rating.score3,this.state.rating.score4,this.state.rating.score5,this.state.rating.score6,this.state.rating.score7,this.state.rating.score8,this.state.rating.score9,this.state.rating.score10)
         return(
-            <Grid container spacing={2}>
-
-                <Grid item xs={12}>
                     <Grid container spacing={2}>
-                        <Grid item xs={1}/>
-                        <Grid item xs={1} >
+                        <Grid item xs={2} >
                             <Item isbn={itemdata.id} date={itemdata.pubTime} name={itemdata.itemname} pages={itemdata.chapterNum} author={itemdata.mainAuthor}/>
                         </Grid>
+                        <Divider type={"vertical"} style={{height:400}}/>
                         <Grid  item xs={6} >
                             <Scheduletableold readstat={this.state.readstat}/>
-                            <Tag select={false} tagchange={this.handletagchange} tags={this.state.tags}></Tag>
-                            <br/>
-
+                            <Tags select={false} tagchange={this.handletagchange} tags={this.state.tags}></Tags>
                             <Commentlist comments={this.state.comments}/>
                         </Grid>
                         <Grid  item xs={3} >
@@ -129,8 +124,6 @@ class Useriteminfopage extends Component {
                         </Grid>
                         <Grid item xs={1}/>
                     </Grid>
-                </Grid>
-            </Grid>
         );
     }
 }

@@ -32,14 +32,14 @@ class Topicdetailpage extends Component{
             var url="http://202.120.40.8:30741/topic/id/"+id;
         }
 
-        axios.get("http://202.120.40.8:30741/topic/all")
+        /*axios.get("/topic/all")
             .then(function (res) {
                 this.setState({topic: res.data});
             }.bind(this)
-            )
+            )*/
 
 
-        axios.get("http://202.120.40.8:30741/topic/id/"+id)
+        axios.get("/topic/id/"+id)
             .then(function (res) {
                 this.setState({data: res.data});
             }.bind(this)

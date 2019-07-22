@@ -58,8 +58,8 @@ class Activity extends Component {
 
     componentDidMount() {
         /* 获得item中itemname */
-        const _this=this;
-        axios.get("http://202.120.40.8:30741/item/id/"+this.props.itemId)
+       /* const _this=this;
+        axios.get("/item/id/"+this.props.itemId)
             .then(function (res) {
                 _this.setState({
                     itemname: res.data.itemname,
@@ -67,10 +67,10 @@ class Activity extends Component {
                 })
             })
             .catch(function (error) {
-            })
+            })*/
 
         /* 获得grade */
-        axios.get("http://202.120.40.8:30741/rating/itemid/"+this.props.itemId)
+       /* axios.get("/rating/itemid/"+this.props.itemId)
             .then(function (res) {
                 _this.setState({
                     grade: res.data.avgScore,
@@ -79,7 +79,7 @@ class Activity extends Component {
             })
             .catch(function (error) {
 
-            })
+            })*/
         /* 获得comment */
         /*       axios.get("http://202.120.40.8:30741/comment/",
                            _this.state.itemid,
@@ -125,10 +125,10 @@ class Activity extends Component {
                 break;
         }
         var time="2019-7-1"
-        if(this.props.date!=undefined)
+       /* if(this.props.date!=undefined&&this.props.date!=null)
         {
             time=this.props.date.split("T")[0];
-        }
+        }*/
 
         return(
             <Container fixed className={useStyles.root}>

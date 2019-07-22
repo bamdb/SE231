@@ -30,7 +30,7 @@ class Editorpage extends React.Component {
         };
         this.getid=this.getid.bind(this);
     }
-    getid(item)
+    setid(item)
     {
         this.setState({item:item});
     }
@@ -43,12 +43,13 @@ class Editorpage extends React.Component {
             {
 
                 var item =this.state.item;
-                item.imgurl="http://202.120.40.8/image"+item.id+"0";
-                axios.post("http://202.120.40.8:30741/item/add",{item}).then(
+                item.imgurl="/image"+item.id+"0";
+                axios.post("http://202.120.40.8:30741/item/update?access_token="+localStorage.getItem("access_token"),{item}).then(
                     function(response){
                         this.props.setid(response.data.id);
                     }.bind(this)
                 )
+                axios.post("http://202.120.40.8:30741/rating/add/itemid/"+item.id+"?access_token="+localStorage.getItem("access_token"))
             }
 
         }
