@@ -14,28 +14,34 @@ import Login from "../component/login"
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import FormControl from "@material-ui/core/FormControl";
-import * as axios from "axios";
+import  axios from "axios";
 import Button from "@material-ui/core/Button";
 
 class Adminpage extends Component{
     constructor(props){
         super(props);
-        this.state={userid:1,username:"",password:"",email:""};
+        this.state={userid:1,username:"",password:"",email:"",imgurl:""};
         this.handlesearch=this.handlesearch.bind(this);
         this.handlechange=this.handlechange.bind(this);
+        this.submit=this.submit.bind(this);
 
-        this.handleidchange=this.handlechange.bind(this);
     }
-   handleidchange(e)
-   {
-       this.setState({userid:e.target.value})
-   }
+    submit()
+    {
+        axios.put("http://202.120.40.8:30741/auth/update/"+this.state.username,{},{params:{access_token:localStorage.getItem("access_token"),id:this.state.id,mail:this.state.email,password:this.state.password}}).then(
+            function(res)
+            {
+                alert("success");
+            }
+        )
+    }
+
     componentWillMount() {
-        axios.get("http:202.120.40.8/auth/id").then(
+        /*axios.get("http://202.120.40.8:30741/auth/id/"+this.state.userid+"?access_token="+localStorage.getItem("access_token")).then(
             function(res){
                 this.setState({userinfo:res.data});
             }.bind(this)
-        )
+        )*/
     }
 
     handlechange(e)
@@ -46,16 +52,18 @@ class Adminpage extends Component{
             case "username":this.setState({username:e.target.value});break;
             case "password":this.setState({password:e.target.value});break;
             case "email":this.setState({email:e.target.value});break;
-
+            case "imgurl":this.setState({imgurl:e.target.value});break;
+            case "userid":this.setState({userid:e.target.value});break;
+            case "role":this.setState({role:e.target.value});break;
         }
 
     }
 
     handlesearch(){
-        axios.get("http://202.120.40.8/auth/id"+this.state.userid).then(
+        axios.get("http://202.120.40.8:30741/auth/id/"+this.state.userid+"?access_token="+localStorage.getItem("access_token")).then(
             function(res)
             {
-                this.setState({username:res.data.username,password:res.data.password,email:res.data.mail});
+                this.setState({username:res.data.username,email:res.data.mail,imgurl:res.data.imgUrl});
             }.bind(this)
         )
     }
@@ -74,7 +82,7 @@ class Adminpage extends Component{
                     <br/>
                     <FormControl margin="normal" required fullWidth>
                         <InputLabel htmlFor="id">userid</InputLabel>
-                        <Input type="text" id="userid" value={this.state.userid} onChange={this.handleidchange}></Input>
+                        <Input type="text" id="userid" value={this.state.userid} onChange={this.handlechange}></Input>
                     </FormControl>
                 </Grid>
                 <Grid item xs={6}>
@@ -99,8 +107,19 @@ class Adminpage extends Component{
                 <Grid item xs={3}>
                     <FormControl margin="normal" required fullWidth>
                         <InputLabel htmlFor="id">email</InputLabel>
-                        <Input type="text" id="userid" value={this.state.email} onChange={this.handlechange}></Input>
+                        <Input type="text" id="email" value={this.state.email} onChange={this.handlechange}></Input>
                     </FormControl>
+                </Grid>
+                <Grid item xs={3}>
+                    <FormControl margin="normal" required fullWidth>
+                        <InputLabel htmlFor="id">role</InputLabel>
+                        <Input type="text" id="role" value={this.state.role} onChange={this.handlechange}></Input>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={12}>
+                    <Button onClick={this.submit}>
+                        提交
+                    </Button>
                 </Grid>
             </Grid>
         )

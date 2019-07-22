@@ -38,9 +38,11 @@ class Userinfopage extends Component{
 
     }
     componentWillMount() {
-        console.log(localStorage.getItem("username"));
-        if(localStorage.getItem("userid")===null)
+        if(localStorage.getItem("username")!=null)
         {
+
+        }
+        else {
             window.location.href="/#/login";
         }
     }

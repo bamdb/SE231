@@ -84,12 +84,14 @@ class Collectform extends Component {
         else {
             this.setState({userid:localStorage.getItem("userid")})
         }
-        var url5="/item/tag/id/"+this.props.itemid;
+        var url5="http://202.120.40.8/item/tag/id/"+this.props.itemid;
         axios.get(url5).then(
             function(response)
             {
                 var tagnames=[];
                 var yourtagnames=[];
+
+                console.log(response.data);
 
                 response.data.tags.map(tag=>{
                     tagnames.push(tag.tagname);

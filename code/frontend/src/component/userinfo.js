@@ -23,7 +23,7 @@ import Uploadavatar from "./uploadavatar";
 class Userinfo extends Component {
     constructor(props) {
         super(props);
-        this.state={edit:false,username:"shenruien",password:"123456",email:"123456@qq.com",id:"1",date:"2019-7-1",grade:"1"};
+        this.state={edit:false,username:"shenruien",password:"123456",email:"123456@qq.com",id:"1",date:"2019-7-1",grade:"1",imgurl:"/img/3.jpg"};
         this.handleedit=this.handleedit.bind(this);
         this.handlechange=this.handlechange.bind(this);
         this.handlesave=this.handlesave.bind(this);
@@ -31,7 +31,7 @@ class Userinfo extends Component {
     }
     componentDidMount() {
 
-        if(localStorage.getItem("userid")==null)
+        if(localStorage.getItem("userid")!=null)
         {
             var username=localStorage.getItem("username");
             axios({url: 'http://202.120.40.8:30741/auth/username/'+username+"?access_token="+localStorage.getItem("access_token"),method:'GET'})
@@ -39,7 +39,7 @@ class Userinfo extends Component {
                     function (response)
                     {
                         console.log(response.data);
-                        this.setState({username:response.data.username,password:response.data.password,email:response.data.mail})
+                        this.setState({username:response.data.username,password:response.data.password,email:response.data.mail,imgurl:response.data.imgUrl})
                     }.bind(this)
                 )
         }
@@ -70,18 +70,7 @@ class Userinfo extends Component {
 
             var url='http://202.120.40.8:30741/auth/update/'+this.state.username+"?access_token="+localStorage.getItem("access_token");
             this.setState({edit:false});
-            $.ajax({
-                url:url,
-                type:"PUT",
-                contentType: "application/json;charset=utf-8",
-                data:{mail:this.state.email},
-                success: function f(data) {
-
-                    console.log(data);
-
-
-                }.bind(this)
-            })
+            axios.put('http://202.120.40.8:30741/auth/update/'+this.state.username,{},{params:{access_token:localStorage.getItem("access_token"),mail:this.state.email}});
             /*axios.put(url,{mail:this.state.email}).then(
                 function (data)
                 {
@@ -96,7 +85,7 @@ class Userinfo extends Component {
     }
     handlechange(e){
         var kind=e.target.id;
-        var filedata=$("#userimage")[0].files[0];
+
         switch(kind){
             case"username":
                 this.setState({username:e.target.value});
@@ -122,7 +111,7 @@ class Userinfo extends Component {
                             <Grid item xs={3}>
 
                                     <Grid container justify="center" alignItems="center">
-                                        <Avatar alt="Remy Sharp" src="/img/3.jpg" id={"avatar"} />
+                                        <Avatar alt="Remy Sharp" src={this.state.imgurl} id={"avatar"} />
 
                                     </Grid>
 
@@ -182,7 +171,7 @@ class Userinfo extends Component {
                             <Grid container justify="center" alignItems="center">
                                 <Grid item xs={3}/>
                                 <Grid item xs={9}>
-                                <Avatar alt="Remy Sharp" src="/img/3.jpg" id={"avatar"} />
+                                <Avatar alt="Remy Sharp" src={this.state.imgurl} id={"avatar"} />
                                 </Grid>
                                 <Grid item xs={4}/>
                                 <Grid item xs={8}>
