@@ -70,13 +70,8 @@ class Userinfo extends Component {
 
             var url='http://202.120.40.8:30741/auth/update/'+this.state.username+"?access_token="+localStorage.getItem("access_token");
             this.setState({edit:false});
-            axios.put('http://202.120.40.8:30741/auth/update/'+this.state.username,{},{params:{access_token:localStorage.getItem("access_token"),mail:this.state.email}});
-            /*axios.put(url,{mail:this.state.email}).then(
-                function (data)
-                {
-                    alert("success");
-                }
-            )*/
+            axios.put('http://202.120.40.8:30741/auth/update/'+this.state.username,{},{params:{access_token:localStorage.getItem("access_token"),mail:this.state.email,imgUrl:"http://202.120.40.8:30741/image/id/"+this.state.id+"0"}});
+
         }
 
     }
@@ -85,7 +80,6 @@ class Userinfo extends Component {
     }
     handlechange(e){
         var kind=e.target.id;
-
         switch(kind){
             case"username":
                 this.setState({username:e.target.value});

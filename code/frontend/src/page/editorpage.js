@@ -3,7 +3,7 @@ import React,{Component} from 'react'
 import Edititem from "../component/edititem";
 import Uploadavatar from "../component/uploadavatar";
 import Typography from "@material-ui/core/Typography";
-import * as axios from "axios";
+import  axios from "axios";
 import Addrelation from "../component/addrelation";
 const { Step } = Steps;
 const steps = [
@@ -44,8 +44,8 @@ class Editorpage extends React.Component {
             {
 
                 var item =this.state.item;
-                item.imgurl="/image"+item.id+"0";
-                axios.put("http://202.120.40.8:30741/item/update?access_token="+localStorage.getItem("access_token"),{item}).then(
+                item.imgurl="http://202.120.40.8:30741/image/id/"+item.id+"1";
+                axios.put("http://202.120.40.8:30741/item/update?access_token="+localStorage.getItem("access_token"),item).then(
                     function(response){
                         this.props.setid(response.data.id);
                     }.bind(this)
@@ -70,7 +70,7 @@ class Editorpage extends React.Component {
         switch(current)
         {
             case 0:rows.push(<Edititem setid={this.setid}></Edititem>);break;
-            case 1:rows.push(<Uploadavatar imageid={""+this.state.id+"1"}></Uploadavatar>);break;
+            case 1:rows.push(<Uploadavatar imageid={this.state.item.id+"1"}></Uploadavatar>);break;
             case 2:rows.push(<Addrelation></Addrelation>)
         }
         return (
