@@ -43,3 +43,7 @@
 + api doc
 + unit tests with security, in-memory DB and master-slave DB integrated
 + fine-tune the configuration and allocate authorization
+## 2019.07.22
++ 写文档
++ 细化权限分配
++ 修改单元测试
