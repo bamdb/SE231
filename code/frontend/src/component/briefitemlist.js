@@ -53,19 +53,21 @@ class Briefitemlist extends Component {
     render(){
         const brieflist = this.props.data;
         var rows=[];
-        if(brieflist===undefined) return <Typography color={"textSecondary"}>暂无</Typography>;
-        else {
-            for(var i=0;i<brieflist.length;i++)
-                rows.push(
-                    <Briefitem
-                        itemName={brieflist[i].itemname}
-                        author={brieflist[i].mainAuthor}
-                        imgurl={brieflist[i].imgurl}
-                        pubTime={brieflist[i].imgurl}
-                    />
-                    );
+        var isempty=true;
+        if(brieflist!==undefined)
+        for(var i=0;i<brieflist.length;i++) {
+            rows.push(
+                <Briefitem
+                    itemName={brieflist[i].itemname}
+                    author={brieflist[i].mainAuthor}
+                    imgurl={brieflist[i].imgurl}
+                    pubTime={brieflist[i].imgurl}
+                />
+            );
+            isempty=false
         }
-        return(
+        if(isempty) return <Typography color={"textSecondary"}>暂无</Typography>;
+        else return(
             <Grid container justify={"center"} alignContent={"center"}>
                 {rows}
             </Grid>
