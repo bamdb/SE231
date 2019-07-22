@@ -4,6 +4,7 @@ import Edititem from "../component/edititem";
 import Uploadavatar from "../component/uploadavatar";
 import Typography from "@material-ui/core/Typography";
 import * as axios from "axios";
+import Addrelation from "../component/addrelation";
 const { Step } = Steps;
 const steps = [
     {
@@ -70,7 +71,7 @@ class Editorpage extends React.Component {
         {
             case 0:rows.push(<Edititem setid={this.setid}></Edititem>);break;
             case 1:rows.push(<Uploadavatar imageid={""+this.state.id+"1"}></Uploadavatar>);break;
-            case 2:rows.push(<Typography>finish</Typography>)
+            case 2:rows.push(<Addrelation></Addrelation>)
         }
         return (
             <div>

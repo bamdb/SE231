@@ -141,6 +141,23 @@ export default function LeftAppBar(props) {
                 }
 
             )
+            axios.get("http://202.120.40.8:30741/auth/oauth/check_token",{params:{token:localStorage.getItem("access_token")}}).then(
+                function(res)
+                {
+                    var auths=res.data.authorities;
+                    var role="";
+                    for(var auth in auths)
+                    {
+                        if(auth.indexOf("ROLE")!=-1)
+                        {
+                            role=auth;
+                            break;
+                        }
+                    }
+
+                    localStorage.setItem("role",role)
+                }
+            )
 
         }
 
