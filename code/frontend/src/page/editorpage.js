@@ -1,7 +1,9 @@
 import { Steps, Button, message } from 'antd';
 import React,{Component} from 'react'
+import Grid from '@material-ui/core/Grid';
 import Edititem from "../component/edititem";
 import Uploadavatar from "../component/uploadavatar";
+import '../css/editor.css';
 import Typography from "@material-ui/core/Typography";
 import * as axios from "axios";
 import Addrelation from "../component/addrelation";
@@ -74,22 +76,16 @@ class Editorpage extends React.Component {
             case 2:rows.push(<Addrelation></Addrelation>)
         }
         return (
+            <Grid container justify={"center"} alignContent={"center"}>
+                <Grid item xs={10} >
             <div>
                 <Steps current={current}>
                     {steps.map(item => (
                         <Step key={item.title} title={item.title} />
                     ))}
                 </Steps>
-                <br/>
-                <br/>
-                <br/>
-
-
-
                 <div className="steps-content">{rows}</div>
-                <br/>
-                <br/>
-                <div className="steps-action">
+                <div class="steps-action" >
                     {current < steps.length - 1 && (
                         <Button type="primary" onClick={() => this.next()}>
                             Next
@@ -107,6 +103,8 @@ class Editorpage extends React.Component {
                     )}
                 </div>
             </div>
+                </Grid>
+            </Grid>
         );
     }
 }

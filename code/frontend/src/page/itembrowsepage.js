@@ -61,7 +61,7 @@ class Itembrowsepage extends Component{
             "/rating/browser",{params:{
                     type:type,
                     page:currentpage,
-                    pageSize:8
+                    pageSize:10
                 }}
         )
         .then(function (response) {
@@ -84,7 +84,7 @@ class Itembrowsepage extends Component{
             <Grid container>
                 <Grid item xs={12} style={{padding:20}}>
                         <Tags select={true} tagchange={this.handletagchange} tags={["热血","王道","搞怪","不高兴","没头脑"]}/>
-                                <Listitem ItemList={this.state.ItemList} search={this.state.search} handlepagechange={this.handlepagechange}/>
+                        <Listitem ItemList={this.state.ItemList} search={this.state.search} handlepagechange={this.handlepagechange}/>
                 </Grid>
             </Grid>
         )

@@ -51,7 +51,6 @@ class Edititem extends Component{
             case "pubtime":this.setState({pubtime:e.target.value});break;
             case "chapternum":this.setState({chapternum:e.target.value});break;
             case "author":this.setState({author:e.target.value});break;
-
             case "type":this.setState({type:e.target.value});break;
         }
 
@@ -67,8 +66,8 @@ class Edititem extends Component{
 
                 <Paper>
                     <Grid container>
-                        <Grid item xs={2}></Grid>
-                        <Grid item xs={10}>
+                        <Grid item xs={1}></Grid>
+                        <Grid item xs={10} style={{padding:20}}>
 
                             <FormControl margin="normal" required fullWidth>
 
@@ -96,10 +95,10 @@ class Edititem extends Component{
                                 <InputLabel htmlFor="id">type</InputLabel>
                                 <Input type="text" id="type" value={this.state.type} onChange={this.handlechange}></Input>
                             </FormControl>
+                            <br/>
                             <Button onClick={this.handlesubmit}variant={"contained"}color={"secondary"}>创建</Button>
-
+                            <br/>
                         </Grid>
-                        <Grid item xs={2}></Grid>
                     </Grid>
                 </Paper>
             </Grid>

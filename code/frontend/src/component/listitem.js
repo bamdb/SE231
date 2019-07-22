@@ -183,7 +183,7 @@ class Listitem extends Component {
         }
         const items=this.state.modifiedItems;
         return(<List
-                grid={{gutter:6,column: 5 }}
+                grid={{gutter:16,column: 4 }}
                 itemLayout="horizontal"
                 size="large"
                 pagination={{

@@ -26,13 +26,24 @@ class Messagelist extends Component{
         this.handleaddfriend=this.handleaddfriend.bind(this);
         this.getButton = this.getButton.bind(this);
     }
-    getButton(type) {
-        return type ? <Button size={"small"}>同意</Button> : <div></div>
+    getButton(type,senderId, receiverId) {
+        return type ? <Button size={"small"} onClick={this.handleaddfriend(senderId,receiverId)}>同意</Button> : <div></div>
     }
 
-    handleaddfriend()
+    handleaddfriend(senderId,receiverId)
     {
-
+        axios.get("http://202.120.40.8:30741/friend/isfriend?userId1="+senderId+"&userId2="+receiverId+"&access_token="+localStorage.getItem("access_token")).then(
+            function(res)
+            {
+                if(res.data==false)
+                {
+                    axios.post("http://202.120.40.8:30741/friend/add",{userId1:senderId,userId2:receiverId,status:0})
+                }
+                else {
+                    alert("you already have friend");
+                }
+            }
+        )
     }
     componentWillMount() {
         if(localStorage.getItem("userid")==null)
@@ -69,10 +80,12 @@ class Messagelist extends Component{
         var rows=[];
         for(var i=0;i<messages.length;++i)
         {
-                if(messages[i].message.content!="加为好友")
+                if(messages[i].message.content=="加为好友"&&this.props.type==1)
                 {
                     rows.push(
                         {
+                            senderId:messages[i].message.senderId,
+                            receiverId:messages[i].message.receiverId,
                             avater: messages[i].user.imgurl,
                             senderName: messages[i].user.username,
                             content: messages[i].user.username+"请求加您为好友！",
@@ -84,6 +97,8 @@ class Messagelist extends Component{
                 {
                     rows.push(
                         {
+                            senderId:messages[i].message.senderId,
+                            receiverId:messages[i].message.receiverId,
                             avater: messages[i].user.imgurl,
                             senderName: messages[i].user.username,
                             content: messages[i].message.content,
@@ -101,7 +116,7 @@ class Messagelist extends Component{
                 renderItem={item => (
                     <div style={{padding:20}} >
                 <List.Item
-                    extra= {this.getButton(item.type)}
+                    extra= {this.getButton(item.type,item.senderId,item.receiverId) }
                 >
                     <List.Item.Meta
                         avatar={<Avatar src={item.avater} />}
