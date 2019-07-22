@@ -62,8 +62,7 @@ class Useriteminfopage extends Component {
         var url="http://202.120.40.8:30741/item/id/"+id;
         var url1="http://202.120.40.8:30741/rating/itemid/"+id;
         var url3="http://202.120.40.8:30741/comment/itemid/"+id;
-
-        var url5="http://202.120.40.8:30741/item/tag/id/"+id;
+        var url5="http://202.120.40.8:30741/item/tag/id/"+id
 
         axios.get(url).then(
             function (response){
@@ -98,8 +97,6 @@ class Useriteminfopage extends Component {
                 this.setState({tags:response.data.tags})
             }.bind(this)
         )
-
-
     }
 
     render(){
@@ -119,8 +116,7 @@ class Useriteminfopage extends Component {
                         </Grid>
                         <Grid  item xs={3} >
                             <Collect totGrade={this.state.totgrade} avgGrade={this.state.rating.avgScore} rank={this.state.rating.rank} itemid={this.state.id} userid={this.state.userid}/>
-                            <Relateditem itemid={this.state.id}/>
-
+                            <Relateditem prior={itemdata.relationPrior} subsequent={itemdata.relationSubsequent} normal={itemdata.relationNormal}/>
                         </Grid>
                         <Grid item xs={1}/>
                     </Grid>

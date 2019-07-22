@@ -9,15 +9,6 @@ import Browserlist from "./browserlist";
 import Briefitemlist from "./briefitemlist";
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
-const useStyles = makeStyles(theme => ({
-    root: {
-        width: '100%',
-    },
-    heading: {
-        fontSize: theme.typography.pxToRem(15),
-        fontWeight: theme.typography.fontWeightRegular,
-    },
-}));
 
 class Relateditem extends Component {
     constructor(props) {
@@ -37,7 +28,7 @@ class Relateditem extends Component {
                         <Typography >前作</Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
-                        <Briefitemlist/>
+                        <Briefitemlist data={this.props.prior}/>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
                 </Grid>
@@ -51,12 +42,12 @@ class Relateditem extends Component {
                         <Typography >续集</Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
-                        <Briefitemlist/>
+                        <Briefitemlist data={this.props.subsequent}/>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
                 </Grid>
                 <Grid item xs={12}>
-                <ExpansionPanel disabled>
+                <ExpansionPanel>
                     <ExpansionPanelSummary
                         expandIcon={<ExpandMoreIcon/>}
                         aria-controls="panel3a-content"
@@ -65,7 +56,7 @@ class Relateditem extends Component {
                         <Typography >相关作品</Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
-                        <Briefitemlist/>
+                        <Briefitemlist data={this.props.normal}/>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
                 </Grid>
