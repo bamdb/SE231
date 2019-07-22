@@ -45,7 +45,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Bean
     public ResourceServerTokenServices tokenServices() {
         UserInfoTokenServices userInfoTokenServices = new UserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
-        System.out.println(userInfoTokenServices);
         userInfoTokenServices.setClientId("friend-service");
         userInfoTokenServices.setClientSecret("friend-service");
         userInfoTokenServices.setCheckTokenEndpointUrl("http://localhost:8000/auth/oauth/check_token");
