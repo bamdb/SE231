@@ -28,7 +28,7 @@ class Editorpage extends React.Component {
             current: 0,
             item:null
         };
-        this.getid=this.getid.bind(this);
+        this.setid=this.setid.bind(this);
     }
     setid(item)
     {
