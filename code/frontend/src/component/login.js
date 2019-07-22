@@ -58,7 +58,7 @@ class Login extends Component{
         params.append("password", "admin");
         params.append("client_id", "browser");
         params.append("client_secret", "");
-        axios.post("http://localhost:8000/auth/oauth/token", params,
+        axios.post("http://202.120.40.8:30741/auth/oauth/token", params,
             {headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },

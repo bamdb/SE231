@@ -59,7 +59,7 @@ class Register extends Component {
 
         })*/
         $.ajax({
-            url:"http://202.120.40.8:30741/user/signup",
+            url:"http://localhost:8000/user/signup",
             type:"POST",
             contentType: "application/json",
             data:JSON.stringify({username:this.state.name,
