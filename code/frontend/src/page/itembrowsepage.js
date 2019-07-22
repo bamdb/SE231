@@ -80,24 +80,13 @@ class Itembrowsepage extends Component{
     }
 
     render(){
-        const ItemList= this.state.ItemList;
         return(
-            <Grid container direction={"column"}>
-                <Grid item xs={12}>
-                <Grid container direction={"column"} >
-                    <Grid item xs={12}>
+            <Grid container>
+                <Grid item xs={12} style={{padding:20}}>
                         <Tags select={true} tagchange={this.handletagchange} tags={["热血","王道","搞怪","不高兴","没头脑"]}/>
-                    </Grid>
-                    <Grid item xs={12} style={{padding:20}}>
-                        <Grid container spacing={2}>
                                 <Listitem ItemList={this.state.ItemList} search={this.state.search} handlepagechange={this.handlepagechange}/>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid item xs={1} />
                 </Grid>
-                </Grid>
-
+            </Grid>
         )
     }
 }

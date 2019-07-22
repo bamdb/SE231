@@ -23,15 +23,23 @@ class Adminpage extends Component{
         this.state={userid:1,username:"",password:"",email:""};
         this.handlesearch=this.handlesearch.bind(this);
         this.handlechange=this.handlechange.bind(this);
-
+        this.submit=this.submit.bind(this);
         this.handleidchange=this.handlechange.bind(this);
     }
-   handleidchange(e)
-   {
+    submit()
+    {
+        axios.put("http://202.120.40.8:30741/auth/update/"+this.state.username+"?access_token="+localStorage.getItem("access_token")+"").then(
+            function(res)
+            {
+                alert("success");
+            }
+        )
+    }
+   handleidchange(e)   {
        this.setState({userid:e.target.value})
    }
     componentWillMount() {
-        axios.get("http:202.120.40.8/auth/id").then(
+        axios.get("http://202.120.40.8:30741/auth/id/"+this.state.userid+"?access_token="+localStorage.getItem("access_token")).then(
             function(res){
                 this.setState({userinfo:res.data});
             }.bind(this)
@@ -52,10 +60,10 @@ class Adminpage extends Component{
     }
 
     handlesearch(){
-        axios.get("http://202.120.40.8/auth/id"+this.state.userid).then(
+        axios.get("http://202.120.40.8:30741/auth/id/"+this.state.userid+"?access_token="+localStorage.getItem("access_token")).then(
             function(res)
             {
-                this.setState({username:res.data.username,password:res.data.password,email:res.data.mail});
+                this.setState({username:res.data.username});
             }.bind(this)
         )
     }
@@ -101,6 +109,11 @@ class Adminpage extends Component{
                         <InputLabel htmlFor="id">email</InputLabel>
                         <Input type="text" id="userid" value={this.state.email} onChange={this.handlechange}></Input>
                     </FormControl>
+                </Grid>
+                <Grid item xs={12}>
+                    <Button onClick={this.submit}>
+                        提交
+                    </Button>
                 </Grid>
             </Grid>
         )

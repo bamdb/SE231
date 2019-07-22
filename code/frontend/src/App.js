@@ -34,6 +34,7 @@ import Neweditor from "./page/editorpage";
 import Adminpage from "./page/adminpage";
 import Editorpage from './page/editorpage'
 import axios from "axios";
+import Itemmanagepage from "./page/itemmanage";
 
 
 const useStyles = makeStyles(theme => ({
@@ -89,6 +90,7 @@ function App() {
                 <Route path={'/message'} component={Messagepage}></Route>
                 <Route path={'/editor'} component={Editorpage}></Route>
                 <Route path={'/admin'} component={Adminpage}></Route>
+                <Route path={'/test'} component={Itemmanagepage}></Route>
             </main>
         </div>
       </Router>
