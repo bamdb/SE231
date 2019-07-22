@@ -182,6 +182,22 @@
   * work on mongodb sharding in four servers
 * huangyuyang:
   * 完成浏览页面ui、私信ui及进度前端接口
+# 2019-7-22
+* shenruien:
+  * fix bugs in frontend
+  * modify frotend logic to fit bakcend
+* huangyuayng:
+  * edit progress and message to fit backend
+* wangzulai:  
+  * config redis cluster
+  * fix CORS bug
+  * complete editor function in frontend
+* yuayjie:
+  * 写文档
+  * 细化权限分配
+  * 修改单元测试
+
+
 
 
 
