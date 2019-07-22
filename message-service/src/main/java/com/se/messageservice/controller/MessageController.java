@@ -1,6 +1,7 @@
 package com.se.messageservice.controller;
 
 
+import com.se.messageservice.config.intercepter.FeignRequestInterceptor;
 import com.se.messageservice.service.MessageService;
 import com.se.messageservice.entity.Message;
 import com.se.messageservice.entity.MessageOut;
@@ -69,7 +70,8 @@ public class MessageController {
 
     @PreAuthorize("hasRole('USER')")
     @PostMapping(value = "/add", produces ="application/json")
-    public Message addMessage(@RequestBody Message message) {
+    public Message addMessage(@RequestBody Message message, @RequestHeader("Authorization") String accessToken) {
+        FeignRequestInterceptor.accessToken = accessToken;
         return messageService.addMessage(message);
     }
 }

@@ -50,7 +50,7 @@ public class FriendServiceImpl implements FriendService {
         readDao.findAllByUserId1(userId).forEach((friend)-> ids.add(friend.getUserId2()));
         readDao.findAllByUserId2(userId).forEach((friend)-> ids.add(friend.getUserId1()));
         List<User> users = new ArrayList<>();
-        ids.forEach((id)->users.add(userClient.getUserById(userId)));
+        ids.forEach((id)->users.add(userClient.getUserById(id)));
         return users;
     }
 }
