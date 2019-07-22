@@ -14,7 +14,7 @@ import Login from "../component/login"
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import FormControl from "@material-ui/core/FormControl";
-import * as axios from "axios";
+import  axios from "axios";
 import Button from "@material-ui/core/Button";
 
 class Adminpage extends Component{
@@ -28,7 +28,7 @@ class Adminpage extends Component{
     }
     submit()
     {
-        axios.put("http://202.120.40.8:30741/auth/update/"+this.state.username+"?access_token="+localStorage.getItem("access_token")+"").then(
+        axios.put("http://202.120.40.8:30741/auth/update/"+this.state.username,{},{params:{access_token:localStorage.getItem("access_token"),id:this.state.id,mail:this.state.email,password:this.state.password}}).then(
             function(res)
             {
                 alert("success");
@@ -110,7 +110,7 @@ class Adminpage extends Component{
                         <Input type="text" id="email" value={this.state.email} onChange={this.handlechange}></Input>
                     </FormControl>
                 </Grid>
-                <Grid>
+                <Grid item xs={3}>
                     <FormControl margin="normal" required fullWidth>
                         <InputLabel htmlFor="id">role</InputLabel>
                         <Input type="text" id="role" value={this.state.role} onChange={this.handlechange}></Input>

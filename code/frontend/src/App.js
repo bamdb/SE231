@@ -68,7 +68,9 @@ function App() {
     const [needDrawer, setneedDrawer]=useState(true);
     const [username]=useState("");
     const leftBar = needDrawer ? leftappbar({username:"hyy"}) : <div />
-
+    /*window.onunload=function(){
+        localStorage.clear();
+    }*/
 
   return (
       <Router >
