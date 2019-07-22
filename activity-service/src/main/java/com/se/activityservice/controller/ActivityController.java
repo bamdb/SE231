@@ -2,14 +2,13 @@ package com.se.activityservice.controller;
 
 import com.se.activityservice.client.UserClient;
 import com.se.activityservice.config.intercepter.FeignRequestInterceptor;
+import com.se.activityservice.entity.*;
 import com.se.activityservice.service.ActivityService;
-import com.se.activityservice.entity.Activity;
-import com.se.activityservice.entity.ActivityItemOut;
-import com.se.activityservice.entity.ActivityUserOut;
-import com.se.activityservice.entity.Progress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -31,7 +30,7 @@ public class ActivityController {
         return activityService.postActivity(activity);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     @GetMapping(value ="/all", produces ="application/json")
     public Iterable<Activity> getAllActivities() {
         return activityService.selectAll();
@@ -78,10 +77,15 @@ public class ActivityController {
     }
 
     /*TO BE REVISED*/
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     @DeleteMapping(value="/delete/id/{activityId}")
-    public ResponseEntity<?> deleteActivityById(@PathVariable("activityId") Long activityId) {
+    public ResponseEntity<?> deleteActivityById(@PathVariable("activityId") Long activityId, Authentication authentication) {
+        /*An alternative to deal with the tricky case involved a path variable*/
+        MyPrincipal myPrincipal = (MyPrincipal)authentication.getPrincipal();
+        if (myPrincipal.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN")) ||
+            myPrincipal.getId().equals( activityService.selectById(activityId).getUserId()) )
         return activityService.deleteActivityById(activityId);
+        else return ResponseEntity.badRequest().body("No Authority!");
     }
 
     @PreAuthorize("hasRole('EDITOR') or #userId == authentication.principal.id")

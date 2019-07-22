@@ -17,15 +17,12 @@ import org.springframework.security.oauth2.provider.OAuth2Request;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 
 import java.security.Principal;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 public class UserInfoTokenServices extends RemoteTokenServices {
 
-    private static final String[] PRINCIPAL_KEYS = new String[] {"username", "id"};
+    private static final String[] PRINCIPAL_KEYS = new String[] {"username", "id", "authorities", "scope"};
 
     private final String userInfoEndpointUrl;
 
@@ -72,7 +69,7 @@ public class UserInfoTokenServices extends RemoteTokenServices {
         Principal principal = getPrincipal(map);
         OAuth2Request request = new OAuth2Request(null, this.clientId, null, true, null,
                 null, null, null, null);
-
+        System.out.println(((MyPrincipal) principal).getAuthorities());
         List<GrantedAuthority> authorities = this.authoritiesExtractor
                 .extractAuthorities(map);
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
@@ -83,14 +80,14 @@ public class UserInfoTokenServices extends RemoteTokenServices {
 
     private MyPrincipal getPrincipal(Map<String, Object> map) {
         Map<String, Object> m = new LinkedHashMap<>();
-
+        System.out.println(map);
         MyPrincipal myPrincipal = new MyPrincipal();
         if (map.containsKey("username"))
-//            m.put("username", map.get("username"));
             myPrincipal.setUsername((String) map.get("username"));
         if (map.containsKey("id"))
-//            m.put("id", map.get("id"));
                 myPrincipal.setId((Integer)map.get("id"));
+        if (map.containsKey("authorities"))
+            myPrincipal.setAuthorities((Collection<? extends GrantedAuthority>) map.get("authorities"));
         return myPrincipal;
     }
 
@@ -129,6 +126,24 @@ public class UserInfoTokenServices extends RemoteTokenServices {
     private class MyPrincipal implements Principal {
         public Integer id;
         public String username;
+        public Collection<? extends GrantedAuthority> authorities = new HashSet<>(0);
+        public Collection<String> scope = new HashSet<>(0);
+
+        public Collection<String> getScope() {
+            return scope;
+        }
+
+        public void setScope(Collection<String> scope) {
+            this.scope = scope;
+        }
+
+        public Collection<? extends GrantedAuthority> getAuthorities() {
+            return authorities;
+        }
+
+        public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+            this.authorities = authorities;
+        }
 
         public Integer getId() {
             return id;
