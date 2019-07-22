@@ -179,12 +179,8 @@ class Userinfo extends Component {
 
                                     <Grid item xs={6}>
                                 <List >
-                                    <ListItem>
-                                        <FormControl margin="normal" required fullWidth>
-
-                                            <InputLabel htmlFor="id">username</InputLabel>
-                                            <Input type="text" id="username" value={this.state.username} onChange={this.handlechange}></Input>
-                                        </FormControl>
+                                    <ListItem id={"li"}>
+                                        <ListItemText primary="用户名" secondary={this.state.username} />
                                     </ListItem>
                                     <ListItem>
                                         <ListItemText primary="ID" secondary="1" />

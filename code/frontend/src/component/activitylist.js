@@ -38,7 +38,7 @@ class Activitylist extends Component {
                     <ListItem className={useStyles.listitem}>
                         <Activity
                             userId={activities[i].activity.userId}
-                            username={this.props.username}
+                            username={activities[i].activity.userId}
                             date={activities[i].activity.actTime}
                             actType={activities[i].activity.actType}
                             itemId={activities[i].item.itemname}
