@@ -51,7 +51,6 @@ class Edititem extends Component{
             case "pubtime":this.setState({pubtime:e.target.value});break;
             case "chapternum":this.setState({chapternum:e.target.value});break;
             case "author":this.setState({author:e.target.value});break;
-
             case "type":this.setState({type:e.target.value});break;
         }
 

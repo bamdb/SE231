@@ -31,6 +31,10 @@ class Editorpage extends React.Component {
         };
         this.setid=this.setid.bind(this);
     }
+    componentWillMount() {
+
+    }
+
     setid(item)
     {
         this.setState({item:item});
@@ -71,7 +75,7 @@ class Editorpage extends React.Component {
         {
             case 0:rows.push(<Edititem setid={this.setid}></Edititem>);break;
             case 1:rows.push(<Uploadavatar imageid={this.state.item.id+"1"}></Uploadavatar>);break;
-            case 2:rows.push(<Addrelation></Addrelation>)
+            case 2:rows.push(<Addrelation itemid={this.state.item.id}></Addrelation>)
         }
         return (
             <div>

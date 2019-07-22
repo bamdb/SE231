@@ -14,7 +14,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import * as axios from "axios";
+import axios from "axios";
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 
@@ -80,7 +80,7 @@ class Addmessage extends Component {
     handleOk()
     {
         var date = Date.parse(new Date())
-        axios.post("http://202.120.40.8:30741/message/add",{senderId:1,receiverId:2,senTime:date,content:this.state.text});
+        axios.post("http://202.120.40.8:30741/message/add",{senderId:localStorage.getItem("userid"),receiverId:this.state.to,senTime:date,content:this.state.text},{params:{access_token:localStorage.getItem("access_token")}});
         openNotificationWithIcon('success');
         this.handleCancel();
     }
@@ -104,7 +104,7 @@ class Addmessage extends Component {
         })
     }
     componentWillMount() {
-        axios.get('http://202.120.40.8:30741/friend/all/userid/1').then(
+        axios.get('http://202.120.40.8:30741/friend/all/userid/1',{params:{access_token:localStorage.getItem("access_token")}}).then(
             function(response){
                 this.setState({tolist:response.data})
             }.bind(this)

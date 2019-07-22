@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
-import * as axios from "axios";
+import  axios from "axios";
 
 class Addrelation extends Component
 {
@@ -18,7 +18,7 @@ class Addrelation extends Component
     }
     handlesubmit()
     {
-        axios.post("http://202.120.40.8/item/add/relation?access_token="+localStorage.getItem("access_token")).then(
+        axios.post("http://202.120.40.8:30741/item/add/relation",{},{params:{access_token:localStorage.getItem("access_token"),priorId:this.props.itemid,subsequentId:this.state.id,relateType:this.state.type}}).then(
             function(res)
             {
                 alert("success");
