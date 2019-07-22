@@ -146,7 +146,7 @@
 * huangyuyang:
   * beautify the frontend
   * redisign the frontend
-# 2019-7-16
+# 2019-7-17
 * shenruien:
   * modify frontendpage
 * huangyuyang：
@@ -159,7 +159,7 @@
   * fix bug in image upload
   * configure replication in three mysql database server
   * configure read write splitting in backend
-# 2019-7-17
+# 2019-7-18
 * shenruien:
   * modify frotend logic to fit the user auth
 * wangzulai:
@@ -169,6 +169,21 @@
   * rewrite the component to fit the backend
 * yuyajie:
   * dealong with auth problem in micro service deploy
+# 2019-7-19
+* shenruien:
+  * modify frotend logic to fit bakcend
+  * test frontend
+* yuyajie:
+  * api doc
+  * unit tests with security, in-memory DB and master-slave DB integrated
+  * fine-tune the configuration and allocate authorization
+* wangzulai:
+  * deploy services
+  * work on mongodb sharding in four servers
+* huangyuyang:
+  * 完成浏览页面ui、私信ui及进度前端接口
+
+
 
 
 
