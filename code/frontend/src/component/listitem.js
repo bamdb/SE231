@@ -13,6 +13,7 @@ import Collectform from "./collectform";
 import '../css/listitem.css'
 import axios from 'axios';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Alert from './alert';
 import { List, Avatar, Icon, Card } from "antd";
 
 const useStyles = makeStyles(theme => ({
@@ -63,6 +64,8 @@ class Listitem extends Component {
             modifiedItems:[],
         }
         this.handlepagechange=this.handlepagechange.bind(this);
+        this.handleAlert=this.handleAlert.bind(this);
+        this.handleDelete=this.handleDelete.bind(this);
     }
     componentWillMount() {
 
@@ -116,6 +119,7 @@ class Listitem extends Component {
                     rows.push(
                         {
                             href: "/itemdetail/"+items[i].item.id,
+                            id: items[i].item.id,
                             title:items[i].item.itemname,
                             author:items[i].item.mainAuthor,
                             pubTime: items[i].item.pubTime.split('T')[0],
@@ -158,23 +162,20 @@ class Listitem extends Component {
 
  */
 
+    handleAlert(content) {
+        this.setState({content : content})
+    }
+
+    handleDelete(itemId) {
+        axios.delete("http://202.120.40.8:30741/item/delete/id"+itemId+"?access_token="+localStorage.getItem("access_token")).then(
+            res => {
+                this.handleAlert(res.data);
+            }
+        )
+    }
+
     render() {
         const items=this.state.modifiedItems;
-        // show delete icon in editor page
-        const deleteIcon = localStorage.getItem("role") == "ROLE_EDITOR" ? (
-            [
-                <IconText type="star-o" text="156" />,
-                <IconText type="like-o" text="156" />,
-                <IconText type="message" text="2" />,
-                <DeleteIcon/>
-            ]
-        ) :(
-            [
-                <IconText type="star-o" text="156" />,
-                <IconText type="like-o" text="156" />,
-                <IconText type="message" text="2" />
-            ]
-        );
         return(<List
                 grid={{gutter:6,column: 5 }}
                 itemLayout="horizontal"
@@ -202,7 +203,24 @@ class Listitem extends Component {
                                     src="img/3.jpg"
                                 />
                             }
-                            actions={deleteIcon}
+                            actions={        // show delete icon in editor page
+                                localStorage.getItem("role") == "ROLE_EDITOR" ? (
+                                [
+                                    <IconText type="star-o" text="156" />,
+                                    <IconText type="like-o" text="156" />,
+                                    <IconText type="message" text="2" />,
+                                    <div>
+                                        <Alert content={this.state.content} cancelAlert={this.handleAlert} confirmAlert={this.handleDelete.bind(this,item.id)}/>
+                                        <DeleteIcon onClick={this.handleAlert.bind(this, "确认删除该条目？")}/>
+                                    </div>
+                                ]
+                                ) : (
+                                    [
+                                        <IconText type="star-o" text="156" />,
+                                        <IconText type="like-o" text="156" />,
+                                        <IconText type="message" text="2" />
+                                    ]
+                                )}
                         >
                             <Meta
                                 style={{margin:0}}

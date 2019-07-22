@@ -24,6 +24,9 @@ class Alert extends Component {
         if(this.props.cancelAlert){
             this.props.cancelAlert("");
         }
+        if(this.props.confirmAlert){
+            this.props.confirmAlert();
+        }
         this.setState({
             visible: false,
             content: ""
