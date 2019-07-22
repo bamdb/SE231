@@ -82,8 +82,6 @@ class Progressmanage extends Component {
                 {access_token: localStorage.getItem("access_token")}}).then(
             function(response)
             {
-                var book=[];
-                var movie=[];
                 for(var i=0;i<response.data.length;++i)
                 {
                     var book=[];

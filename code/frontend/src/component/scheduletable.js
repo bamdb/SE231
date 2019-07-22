@@ -122,10 +122,16 @@ class Scheduletable extends Component {
     }
 
     submit(){
-        axios.put("http://202.120.40.8:30741/activity/update/progress",{params:{
-            access_token: localStorage.getItem("access_token"),
-            body:this.state.data
-            }})
+        var rows=[];
+        rows={
+            "itemId":this.props.itemid,
+            "userId":this.props.userid,
+            "chapters":this.state.data
+        }
+        axios.put("http://202.120.40.8:30741/activity/update/progress",rows,{
+            params:{access_token: localStorage.getItem("access_token")},
+            headers:{"Content-Type":'application/json'}
+        })
         this.setState({show:false});
     }
     componentWillMount() {
@@ -197,7 +203,7 @@ class Scheduletable extends Component {
                 }
                 console.log(treeData);
                 this.setState({
-                data: response.data,
+                data: readdata,
                 treeData:treeData,
                 value:value
             })
@@ -216,26 +222,26 @@ class Scheduletable extends Component {
         var node = this.state.data;
         for (let item of a.values()) {
             if(item.split('-')[2]===undefined) {
-                const length=node.chapters[item.split('-')[1]].sections.length;
+                const length=node[item.split('-')[1]].sections.length;
                 for(var i=0; i<length; i++)
-                    node.chapters[item.split('-')[1]].sections[i]=0;
-                node.chapters[item.split('-')[1]].finish=0;
+                    node[item.split('-')[1]].sections[i]=0;
+                node[item.split('-')[1]].finish=0;
             }
             else {
-                node.chapters[item.split('-')[1]].sections[item.split('-')[2]] = 0;
+                node[item.split('-')[1]].sections[item.split('-')[2]] = 0;
             }
         }
 
         let b = new Set([...newset].filter(x => !intersectionSet.has(x)));
         for (let item of b.values()) {
             if(item.split('-')[2]===undefined) {
-                const length=node.chapters[item.split('-')[1]].sections.length;
+                const length=node[item.split('-')[1]].sections.length;
                 for(var i=0; i<length; i++)
-                    node.chapters[item.split('-')[1]].sections[i]=1;
-                node.chapters[item.split('-')[1]].finish=1;
+                    node[item.split('-')[1]].sections[i]=1;
+                node[item.split('-')[1]].finish=1;
             }
             else {
-                node.chapters[item.split('-')[1]].sections[item.split('-')[2]] = 1;
+                node[item.split('-')[1]].sections[item.split('-')[2]] = 1;
             }
         }
         this.setState({
