@@ -1,6 +1,7 @@
 package com.se.friendservice.controller;
 
 import com.se.friendservice.client.UserClient;
+import com.se.friendservice.config.intercepter.FeignRequestInterceptor;
 import com.se.friendservice.service.FriendService;
 import com.se.friendservice.entity.Friend;
 import com.se.friendservice.entity.User;
@@ -50,7 +51,9 @@ public class FriendController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping(value = "/all/userid/{userId}", produces = "application/json")
-    Iterable<User> getFriends(@PathVariable("userId") Long userId) {
+    Iterable<User> getFriends(@PathVariable("userId") Long userId,
+                              @RequestHeader("Authorization") String accessToken) {
+        FeignRequestInterceptor.accessToken = accessToken;
         return friendService.getFriends(userId);
     }
 }

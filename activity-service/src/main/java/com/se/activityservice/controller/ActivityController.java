@@ -1,6 +1,7 @@
 package com.se.activityservice.controller;
 
 import com.se.activityservice.client.UserClient;
+import com.se.activityservice.config.intercepter.FeignRequestInterceptor;
 import com.se.activityservice.service.ActivityService;
 import com.se.activityservice.entity.Activity;
 import com.se.activityservice.entity.ActivityItemOut;
@@ -24,7 +25,9 @@ public class ActivityController {
 
     @PreAuthorize("hasRole('USER')")
     @PostMapping(value="/add")
-    public Activity postActivity(@RequestBody Activity activity) {
+    public Activity postActivity(@RequestBody Activity activity,
+                                 @RequestHeader("Authorization") String accessToken) {
+        FeignRequestInterceptor.accessToken = accessToken;
         return activityService.postActivity(activity);
     }
 
@@ -42,25 +45,35 @@ public class ActivityController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping(value="/userid/{userId}", produces="application/json")
-    public List<ActivityItemOut> getActivityByUserId(@PathVariable("userId") Long userId) {
+    public List<ActivityItemOut> getActivityByUserId(@PathVariable("userId") Long userId,
+                                                     @RequestHeader("Authorization") String accessToken) {
+        FeignRequestInterceptor.accessToken = accessToken;
         return activityService.selectByUserId(userId);
     }
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping(value="/itemid/{itemId}", produces="application/json")
-    public Iterable<Activity> getActivityByItemId(@PathVariable("itemId") Long itemId) {
+    public Iterable<Activity> getActivityByItemId(@PathVariable("itemId") Long itemId,
+                                                  @RequestHeader("Authorization") String accessToken) {
+        FeignRequestInterceptor.accessToken = accessToken;
         return activityService.selectByItemId(itemId);
     }
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping(value="/collect", produces="application/json")
-    public ActivityUserOut getActivityByItemIdAndUserId(@RequestParam("userId") Long userId, @RequestParam("itemId") Long itemId) {
+    public ActivityUserOut getActivityByItemIdAndUserId(@RequestParam("userId") Long userId,
+                                                        @RequestParam("itemId") Long itemId,
+                                                        @RequestHeader("Authorization") String accessToken) {
+        FeignRequestInterceptor.accessToken = accessToken;
         return activityService.selectByUserIdAndItemId(userId, itemId);
     }
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping(value="/progress")
-    public Progress getProgress(@RequestParam("userId") Long userId, @RequestParam("itemId") Long itemId) {
+    public Progress getProgress(@RequestParam("userId") Long userId,
+                                @RequestParam("itemId") Long itemId,
+                                @RequestHeader("Authorization") String accessToken) {
+        FeignRequestInterceptor.accessToken = accessToken;
         return activityService.selectProgress(userId, itemId);
     }
 
@@ -82,7 +95,7 @@ public class ActivityController {
         return activityService.deleteActivityByItemId(itemId);
     }
 
-    @PreAuthorize("#progress.userId == authentication.details.id")
+//    @PreAuthorize("#progress.userId == authentication.details.id")
     @PutMapping(value="/update/progress")
     public Progress updateProgress(@RequestBody Progress progress) {
         return activityService.updateProgress(progress);

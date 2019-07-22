@@ -1,5 +1,6 @@
 package com.se.ratingservice.controller;
 
+import com.se.ratingservice.config.intercepter.FeignRequestInterceptor;
 import com.se.ratingservice.service.RatingService;
 import com.se.ratingservice.entity.Rating;
 import com.se.ratingservice.entity.RatingOut;
@@ -18,7 +19,9 @@ public class RatingController {
 
     @PreAuthorize("hasRole('USER')")
     @PostMapping(value="/add/itemid/{itemId}", produces="application/json")
-    public Rating postRating(@PathVariable("itemId") Long itemId) {
+    public Rating postRating(@PathVariable("itemId") Long itemId,
+                             @RequestHeader("Authorization") String accessToken ) {
+        FeignRequestInterceptor.accessToken = accessToken;
         return ratingService.postRating(itemId);
     }
 
@@ -34,12 +37,17 @@ public class RatingController {
     }
 
     @GetMapping(value="/itemid/{itemId}", produces="application/json")
-    public Rating getRatingByItemId(@PathVariable("itemId") Long itemId) {
+    public Rating getRatingByItemId(@PathVariable("itemId") Long itemId,
+                                    @RequestHeader("Authorization") String accessToken ) {
+        FeignRequestInterceptor.accessToken = accessToken;
         return ratingService.selectByItemId(itemId);
     }
 
     @GetMapping(value="/score", produces = "application/json")
-    public Score getScoreByUserId(@RequestParam("userId") Long userId, @RequestParam("itemId") Long itemId) {
+    public Score getScoreByUserId(@RequestParam("userId") Long userId,
+                                  @RequestParam("itemId") Long itemId,
+                                  @RequestHeader("Authorization") String accessToken) {
+        FeignRequestInterceptor.accessToken = accessToken;
         return ratingService.selectScoreByUserId(userId, itemId);
     }
 
@@ -52,14 +60,16 @@ public class RatingController {
     @PreAuthorize("hasRole('USER')")
     // input an integer array of size 10.Each integer shows the increase number of corresponding score，just for test
     @PutMapping(value="/update/itemid/{itemId}", produces="application/json")
-    public ResponseEntity<?> updateRating(@PathVariable("itemId") Long itemId, @RequestBody List<Integer> ratingList) {
+    public ResponseEntity<?> updateRating(@PathVariable("itemId") Long itemId,
+                                          @RequestBody List<Integer> ratingList) {
         return ratingService.updateRating(itemId, ratingList);
     }
 
     // 权限验证，通过token取出用户id
     @PreAuthorize("hasRole('USER')")
     @PutMapping(value="/update")
-    public ResponseEntity<?> updateRatingByUserId(@RequestParam("userId") Long userId, @RequestParam("score") int score,
+    public ResponseEntity<?> updateRatingByUserId(@RequestParam("userId") Long userId,
+                                                  @RequestParam("score") int score,
                                                   @RequestParam("itemId") Long itemId) {
         return ratingService.updateRatingByUserId(userId, score, itemId);
     }

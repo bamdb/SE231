@@ -50,10 +50,12 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         userInfoTokenServices.setCheckTokenEndpointUrl("http://localhost:8000/auth/oauth/check_token");
         return userInfoTokenServices;
     }
+
     @Override
     public void configure(ResourceServerSecurityConfigurer config) {
         config.tokenServices(tokenServices());
     }
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()

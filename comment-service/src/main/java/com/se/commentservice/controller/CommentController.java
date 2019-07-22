@@ -1,5 +1,6 @@
 package com.se.commentservice.controller;
 
+import com.se.commentservice.config.intercepter.FeignRequestInterceptor;
 import com.se.commentservice.service.CommentService;
 import com.se.commentservice.entity.Comment;
 import com.se.commentservice.entity.CommentOut;
@@ -32,7 +33,9 @@ public class CommentController {
     }
 
     @GetMapping(value="/itemid/{itemId}", produces="application/json")
-    public List<CommentOut> getCommentByItemId(@PathVariable("itemId") Long itemId) {
+    public List<CommentOut> getCommentByItemId(@PathVariable("itemId") Long itemId,
+                                               @RequestHeader("Authorization") String accessToken) {
+        FeignRequestInterceptor.accessToken = accessToken;
         return commentService.selectCommentByItemId(itemId);
     }
 

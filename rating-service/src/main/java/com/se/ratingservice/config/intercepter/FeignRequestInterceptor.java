@@ -1,9 +1,10 @@
-package com.se.messageservice.config.intercepter;
+package com.se.ratingservice.config.intercepter;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+
 import javax.servlet.http.HttpServletRequest;
 
 @Configuration
