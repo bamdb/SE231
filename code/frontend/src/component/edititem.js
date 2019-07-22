@@ -129,8 +129,8 @@ class Edititem extends Component{
 
                 <Paper>
                     <Grid container>
-                        <Grid item xs={2}></Grid>
-                        <Grid item xs={10}>
+                        <Grid item xs={1}></Grid>
+                        <Grid item xs={10} style={{padding:20}}>
 
                             <FormControl margin="normal" required fullWidth>
 
@@ -158,7 +158,6 @@ class Edititem extends Component{
                                 <InputLabel htmlFor="id">type</InputLabel>
                                 <Input type="text" id="type" value={this.state.type} onChange={this.handlechange}></Input>
                             </FormControl>
-
                         </Grid>
                     </Grid>
                     {buttonarea}

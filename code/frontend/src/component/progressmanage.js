@@ -110,6 +110,7 @@ class Progressmanage extends Component {
     render() {
         var items1=[];
         var items2=[];
+        console.log("book amount",this.state.book.length);
         for(var i=this.state.uppage*4;(i<this.state.uppage*4+4)&&i<this.state.book.length;++i)
         {
             items1.push(
@@ -120,12 +121,14 @@ class Progressmanage extends Component {
                 </Grid>
             )
         }
+
+        console.log("movie amount",this.state.movie.length);
         for(var i=this.state.downpage*4;i<(this.state.downpage*4+4)&&i<this.state.movie.length;++i)
         {
-            items1.push(
+            items2.push(
                 <Grid item xs={3}>
                     <Grid container >
-                        <Scheduletable userid={this.state.userid} itemid={this.state.book[i].id} itemname={this.state.book[i].itemname}/>
+                        <Scheduletable userid={this.state.userid} itemid={this.state.movie[i].id} itemname={this.state.movie[i].itemname}/>
                     </Grid>
                 </Grid>
             )

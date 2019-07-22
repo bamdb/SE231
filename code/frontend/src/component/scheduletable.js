@@ -144,12 +144,11 @@ class Scheduletable extends Component {
                     access_token: localStorage.getItem("access_token"),
                 }}).then(function(response)
             {
-                console.log(response.data);
+                console.log(this.props.itemid);
                 console.log(response.data.chapters);
                 //this.transform(treeData,response.data.chapters,'','0',value);
                 const readdata=response.data.chapters;
                 const length=readdata.length;
-
                 for (var i=0;i<length;++i){
                     console.log("child",readdata[i].sections.length)
                     if(readdata[i].sections.length===0) //下面没有子章节了
