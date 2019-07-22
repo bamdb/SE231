@@ -17,6 +17,12 @@ public class ActivityController {
     @Resource(name="activityServiceImpl")
     private ActivityService activityService;
 
+    @PreAuthorize("1 == authentication.principal.id ")
+    @GetMapping(value="/test")
+    public String postActivity() {
+        return "Congrats!";
+    }
+
     @PreAuthorize("hasRole('USER')")
     @PostMapping(value="/add")
     public Activity postActivity(@RequestBody Activity activity) {

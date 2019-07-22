@@ -3,6 +3,8 @@ package com.se.authservice.controller;
 import com.se.authservice.entity.User;
 import com.se.authservice.service.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreFilter;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -20,6 +22,13 @@ public class UserController {
         else return null;
     }
 
+    @PreAuthorize("#oauth2.hasScope('server')")
+    @GetMapping(value ="/user", produces ="application/json")
+    public User getUser(Authentication authentication) {
+        User user = userService.selectByUsername(authentication.getName());
+        if (user == null) return null;
+        return userService.truncate(user);
+    }
 
     @PreAuthorize("#oauth2.hasScope('server')")
     @GetMapping(value ="/all", produces ="application/json")
