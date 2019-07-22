@@ -160,7 +160,7 @@ class Listitem extends Component {
     render() {
         const items=this.state.modifiedItems;
         return(<List
-                grid={{gutter:6,column: 4 }}
+                grid={{gutter:6,column: 5 }}
                 itemLayout="horizontal"
                 size="large"
                 pagination={{
@@ -178,7 +178,7 @@ class Listitem extends Component {
                     >
                         <Card
                             size={"small"}
-                            style={{width:168}}
+                            style={{minWidth:144}}
                             cover={
                                 <img
                                     height={120}

@@ -176,7 +176,6 @@ class Collectform extends Component {
         return (
             <div>
                     <IconButton aria-label="Add to favorites" onClick={this.showModal}>
-                        收藏
                         <FavoriteIcon />
                     </IconButton>
                 <Modal title="修改收藏状态" visible={this.state.visible}

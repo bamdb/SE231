@@ -152,26 +152,23 @@ class Collect extends Component {
                 />
                 <hr className={useStyles.board} color="#C7C7C7"/>
                 <CardContent>
-                    <Grid container spacing={2}>
-                        <Grid item xs={2}>
-                            <Typography variant="subtitle1" color="textPrimary" component="p">
-                                我的评分
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Paper className={useStyles.paper}>
-                                <Typography variant="h5" component="h3" align="center">
-                                    {this.state.score}
-                                </Typography>
-                            </Paper>
-                        </Grid>
+                    <Grid container spacing={2} direction={"row"} justify={"space-around"} alignContent={"center"}>
+                        <Typography variant="subtitle1" color="textPrimary">
+                            我的评分
+                        </Typography>
+                        <Typography variant="h5"  >
+                            {this.state.score}
+                        </Typography>
                     </Grid>
+                    <br/>
+                    <Grid container spacing={2} direction={"row"} justify={"space-around"} alignContent={"center"}>
                     <Typography variant="subtitle1" color="textPrimary" component="p">
                         我的评论
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
                         {this.state.comment.content}
                     </Typography>
+                    </Grid>
                 </CardContent>
                 <hr className={useStyles.board} color="#C7C7C7"/>
                 <CardContent>
@@ -185,43 +182,33 @@ class Collect extends Component {
                     <Typography variant="subtitle1" color="textPrimary" component="p">
                         评分与排名
                     </Typography>
-                    <Grid container spacing={2}>
-                        <Grid item xs={2}>
-                            <Typography variant="subtitle1" color="textPrimary" component="p">
+                    <Grid container spacing={2} direction={"row"} justify={"space-around"} alignContent={"center"}>
+                            <Typography variant="subtitle1" color="textPrimary" >
                                 评分
                             </Typography>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Paper className={useStyles.paper}>
-                                <Typography variant="h5" component="h3" align="center">
+                                <Typography variant="subtitle1" >
                                     {this.props.avgGrade}
                                 </Typography>
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={2}/>
-                        <Grid item xs={2}>
-                            <Typography variant="subtitle1" color="textPrimary" component="p">
+                    </Grid>
+                    <br/>
+                    <Grid container spacing={2} direction={"row"} justify={"space-around"} alignContent={"center"}>
+                            <Typography variant="subtitle1" color="textPrimary">
                                 排名
                             </Typography>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Paper className={useStyles.paper}>
-                                <Typography variant="h5" component="h3" align="center">
+                                <Typography variant="subtitle1" >
                                     {this.props.rank}
                                 </Typography>
-                            </Paper>
-                        </Grid>
                     </Grid>
-                    <Typography variant="subtitle1" color="textPrimary" component="p">
+                    <Typography variant="subtitle1" color="textPrimary" >
                         评分人数分布
                     </Typography>
 
-                    <BarChart data={data} options={options} width="600" height="250" />
+                    <BarChart data={data} options={options} width="600" height="200" />
                 </CardContent>
                 <CardActions disableSpacing>
+                    <Grid container justify={"space-around"} alignContent={"center"}>
                     <Collectform itemid={this.props.itemid}/>
                     <IconButton aria-label="Share">
-                        分享
                         <ShareIcon />
                     </IconButton>
                     <IconButton
@@ -232,9 +219,9 @@ class Collect extends Component {
                         aria-expanded={this.state.expanded}
                         aria-label="Show more"
                     >
-                        更多功能
                         <ExpandMoreIcon />
                     </IconButton>
+                    </Grid>
                 </CardActions>
                 <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                     <CardContent>

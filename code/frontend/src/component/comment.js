@@ -11,7 +11,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import Input from "@material-ui/core/Input";
 import TextField from "@material-ui/core/TextField";
-import {Modal} from "antd";
+import {Modal, Divider} from "antd";
 import  axios from "axios";
  
 const useStyles = makeStyles({
@@ -71,18 +71,16 @@ class Comment extends Component {
 
     render() {
         return(
-            <Card>
             <Container >
+                <Divider />
                 <Grid container spacing={2}>
                     <Grid item xs={2} justify="center">
-                        <br/>
                         <Avatar alt="Remy Sharp" src="img/3.jpg" className={useStyles.avatar} onClick={this.handlevisible}/>
                         <Modal title="加为好友" visible={this.state.visible}
                                onOk={this.handleOk} onCancel={this.handleCancel}
                         >
 
                         </Modal>
-                        <br/>
                         <Typography variant="h5" component="h2">
                             {this.props.username}
                         </Typography>
@@ -101,7 +99,6 @@ class Comment extends Component {
                     </Grid>
                 </Grid>
             </Container>
-            </Card>
         );
     }
 

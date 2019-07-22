@@ -12,6 +12,8 @@ import ListItem from '@material-ui/core/ListItem';
 import Comment from "./comment";
 import Grid from '@material-ui/core/Grid'
 import Typography from "@material-ui/core/Typography";
+import {Divider} from "antd";
+import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -56,6 +58,7 @@ class Commentlist extends Component {
             return(
                 <Grid container spacing={1}>
                     {rows}
+                    <Divider />
                 </Grid>
             )
         }
