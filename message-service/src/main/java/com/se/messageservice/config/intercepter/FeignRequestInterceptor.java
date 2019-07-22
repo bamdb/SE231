@@ -1,0 +1,25 @@
+package com.se.messageservice.config.intercepter;
+
+import feign.RequestInterceptor;
+import feign.RequestTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+
+@Configuration
+public class FeignRequestInterceptor implements RequestInterceptor {
+    @Autowired
+    HttpServletRequest httpServletRequest;
+
+    public static String accessToken;
+
+    public FeignRequestInterceptor() {
+    }
+
+    public void apply(RequestTemplate requestTemplate) {
+        requestTemplate.header("Authorization", accessToken);
+    }
+}
