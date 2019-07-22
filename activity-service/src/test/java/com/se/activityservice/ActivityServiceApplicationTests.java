@@ -68,75 +68,102 @@ public class ActivityServiceApplicationTests {
     @Test
     public void controllerTest() throws Exception {
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"actTime\":\"1562294429\", \"actType\":0, \"userId\":1, \"itemId\":1}"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"actTime\":\"1562294429\", \"actType\":0, \"userId\":2, \"itemId\":2}"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"actTime\":\"1562294429\", \"actType\":1, \"userId\":0, \"itemId\":2}"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"actTime\":\"1562294429\", \"actType\":1, \"userId\":null, \"itemId\":2}"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"actTime\":\"1562294429\", \"actType\":2, \"userId\":2, \"itemId\":0}"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"actTime\":\"1562294429\", \"actType\":2, \"userId\":2, \"itemId\":null}"))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/all").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/all")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/id/1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/id/1")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/userid/1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/userid/1")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/itemid/1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/itemid/1")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/collect?userId=1&itemId=1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/collect?userId=1&itemId=1")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/userid/0").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/userid/0")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/itemid/0").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/itemid/0")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         userClient.deleteUserById(1L);
         itemClient.deleteItemById(2L);
-        mvc.perform(get("/userid/1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/userid/1")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/itemid/2").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/itemid/2")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void deleteTest() throws Exception {
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"actTime\":\"1562294429\", \"actType\":0, \"userId\":2, \"itemId\":2}"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"actTime\":\"1562294429\", \"actType\":0, \"userId\":3, \"itemId\":3}"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"actTime\":\"1562294429\", \"actType\":0, \"userId\":2, \"itemId\":4}"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"actTime\":\"1562294429\", \"actType\":0, \"userId\":5, \"itemId\":3}"))
                 .andExpect(status().isOk());
@@ -170,7 +197,9 @@ public class ActivityServiceApplicationTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"itemId\":1, \"userId\":2, \"chapters\":[{\"chapterNum\":1,\"finish\":1,\"sections\":[1,1,1]}]}"))
                 .andExpect(status().isOk());
-        mvc.perform(get("/progress?itemId=1&userId=2"))
+        mvc.perform(get("/progress?itemId=1&userId=2")
+                .header("Authorization", "0"))
+
                 .andExpect(status().isOk());
     }
 

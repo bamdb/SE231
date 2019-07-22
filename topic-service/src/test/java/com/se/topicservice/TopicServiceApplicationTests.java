@@ -76,11 +76,13 @@ public class TopicServiceApplicationTests {
     @Test
     public void controllerTest() throws Exception {
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"topic\":{\"userId\":0, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}, " +
                         "\"topicContent\":\"This is the first topic in bamdb\"}"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"topic\":{\"userId\":null, \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}, " +
                         "\"topicContent\":\"This is the first topic in bamdb\"}"))
@@ -93,6 +95,7 @@ public class TopicServiceApplicationTests {
         user.setImgUrl(null);
         userClient.postUser(user);
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"topic\":{\"userId\":"+user.getId()+", \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}, " +
                         "\"topicContent\":\"This is the first topic in bamdb\"}"))
@@ -139,6 +142,7 @@ public class TopicServiceApplicationTests {
         userClient.postUser(user);
 
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"topic\":{\"userId\":"+user.getId()+", \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}, " +
                         "\"topicContent\":\"This is the first topic in bamdb\"}"))
@@ -175,6 +179,7 @@ public class TopicServiceApplicationTests {
                 .andExpect(status().isOk());
 
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"topic\":{\"userId\":"+user.getId()+", \"title\":\"hello bamdb\", \"pubTime\":\"1562294429\"}, " +
                         "\"topicContent\":\"This is the first topic in bamdb\"}"))
@@ -185,14 +190,17 @@ public class TopicServiceApplicationTests {
         mvc.perform(delete("/delete/reply?topicId="+topic.getId()+"&replyId=10"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add/reply?topicId="+topic.getId()+"&userId="+topic.getUserId())
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("A reply"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add/reply?topicId="+topic.getId()+"&userId="+topic.getUserId())
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("A reply"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add/reply?topicId="+topic.getId()+"&userId="+topic.getUserId())
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("A reply"))
                 .andExpect(status().isOk());
