@@ -107,20 +107,24 @@ public class TopicServiceApplicationTests {
         topic1.setTitle("mock");
         topic1 = writeDao.save(topic1);
         mvc.perform(post("/add/reply?topicId="+topic1.getId()+"&userId=1")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("A reply"))
                 .andExpect(status().isOk());
 
         Topic topic = topicService.selectAll().iterator().next();
         mvc.perform(post("/add/reply?topicId="+topic.getId()+"&userId=0")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("A reply"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add/reply?topicId=0&userId="+topic.getUserId())
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("A reply"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add/reply?topicId="+topic.getId()+"&userId="+topic.getUserId())
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("A reply"))
                 .andExpect(status().isOk());

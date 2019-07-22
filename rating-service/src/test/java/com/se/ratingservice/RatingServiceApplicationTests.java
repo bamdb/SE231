@@ -148,7 +148,7 @@ public class RatingServiceApplicationTests {
         mvc.perform(get("/browser?type=0&page=0&pageSize=5").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/score?userId=1&itemId=1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/score?userId=1&itemId=1").contentType(MediaType.APPLICATION_JSON).header("Authorization", "0"))
                 .andExpect(status().isOk());
 
     }
