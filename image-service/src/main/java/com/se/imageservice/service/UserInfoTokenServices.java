@@ -1,4 +1,4 @@
-package com.se.activityservice.service;
+package com.se.imageservice.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.AuthoritiesExtractor;
@@ -17,7 +17,11 @@ import org.springframework.security.oauth2.provider.OAuth2Request;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 
 import java.security.Principal;
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 @Slf4j
 public class UserInfoTokenServices extends RemoteTokenServices {
 

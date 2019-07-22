@@ -41,25 +41,14 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         return new OAuth2RestTemplate(clientCredentialsResourceDetails());
     }
     private final ResourceServerProperties sso;
-//
-//    @Bean
-//    public ResourceServerTokenServices myUserInfoTokenServices() {
-//        return new MyUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
-//    }
+
     @Bean
     public ResourceServerTokenServices tokenServices() {
-//        RemoteTokenServices tokenServices = new RemoteTokenServices();
-//        tokenServices.setClientId("activity-service");
-//        tokenServices.setClientSecret("activity-service");
-//        tokenServices.setCheckTokenEndpointUrl("http://localhost:8000/auth/oauth/check_token");
-//        return tokenServices;
         UserInfoTokenServices userInfoTokenServices = new UserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
         System.out.println(userInfoTokenServices);
         userInfoTokenServices.setClientId("activity-service");
         userInfoTokenServices.setClientSecret("activity-service");
         userInfoTokenServices.setCheckTokenEndpointUrl("http://localhost:8000/auth/oauth/check_token");
-//        System.out.println(sso.getClientSecret());
-//        System.out.println(sso.getUserInfoUri());
         return userInfoTokenServices;
     }
     @Override

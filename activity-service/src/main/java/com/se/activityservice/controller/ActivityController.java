@@ -1,10 +1,12 @@
 package com.se.activityservice.controller;
 
+import com.se.activityservice.client.UserClient;
 import com.se.activityservice.service.ActivityService;
 import com.se.activityservice.entity.Activity;
 import com.se.activityservice.entity.ActivityItemOut;
 import com.se.activityservice.entity.ActivityUserOut;
 import com.se.activityservice.entity.Progress;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -17,11 +19,8 @@ public class ActivityController {
     @Resource(name="activityServiceImpl")
     private ActivityService activityService;
 
-    @PreAuthorize("1 == authentication.principal.id ")
-    @GetMapping(value="/test")
-    public String postActivity() {
-        return "Congrats!";
-    }
+    @Autowired
+    UserClient userClient;
 
     @PreAuthorize("hasRole('USER')")
     @PostMapping(value="/add")
@@ -83,7 +82,7 @@ public class ActivityController {
         return activityService.deleteActivityByItemId(itemId);
     }
 
-    @PreAuthorize("hasRole('ADMIN') or userClient.getUserById(#progress.getUserId()).getUsername() == principal.username")
+    @PreAuthorize("#progress.userId == authentication.details.id")
     @PutMapping(value="/update/progress")
     public Progress updateProgress(@RequestBody Progress progress) {
         return activityService.updateProgress(progress);
