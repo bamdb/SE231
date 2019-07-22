@@ -54,7 +54,7 @@ class Register extends Component {
     submit()
     {
         axios.post("http://202.120.40.8:30741/auth/signup",{
-            usernmae:this.state.name,
+            username:this.state.name,
             password:this.state.password
 
         },
@@ -67,7 +67,7 @@ class Register extends Component {
             }
         )
         /*$.ajax({
-            url:"user/signup",
+            url:"http://202.120.40.8:30741/auth/signup",
             type:"POST",
             contentType: "application/json",
             data:JSON.stringify({username:this.state.name,
