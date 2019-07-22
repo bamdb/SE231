@@ -31,7 +31,7 @@ public class ActivityController {
         return activityService.postActivity(activity);
     }
 
-    @PreAuthorize("hasRole('ROLE')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value ="/all", produces ="application/json")
     public Iterable<Activity> getAllActivities() {
         return activityService.selectAll();
