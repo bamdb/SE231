@@ -53,5 +53,7 @@
         <module>topic-service</module>
         <module>message-service</module>
         <module>friend-service</module>
+        <module>zipkin</module>
+        <module>auth-service</module>
     </modules>
 </project>
