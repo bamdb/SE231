@@ -33,11 +33,8 @@ class LoginPage extends Component{
     render(){
         return(
             <div id={"login"} >
-                <Grid container className={useStyles.root} >
-                    <Grid item xs={6}>
-                    </Grid>
-                    <Grid item xs={5}>
-                        <br/><br/><br/>
+                <Grid container className={useStyles.root} justify={"center"} alignContent={"center"}>
+                    <Grid item xs={8}>
                         <br/><br/><br/>
                         <Login></Login>
                     </Grid>
