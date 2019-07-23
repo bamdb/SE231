@@ -47,3 +47,15 @@ Sprint 1 (July.1-July.10)
     
   July.19
     完成浏览页面ui、私信ui及进度前端接口
+    
+  July.20-21
+    完成relateditem逻辑
+    
+  July.22
+    测试前端进度接口，对前端进行手动测试，查看是否有错误
+    
+  July.23
+    学习antd theme，初步构思。
+    修改前端页面
+    
+    
