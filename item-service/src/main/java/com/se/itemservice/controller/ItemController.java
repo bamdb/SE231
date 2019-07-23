@@ -30,7 +30,6 @@ public class ItemController {
         return itemService.findItemtag(itemId);
     }
 
-    @PreAuthorize("hasRole('USER')")
     @GetMapping(value = "/tag")
     public List<String> getUserTag(@RequestParam("itemId") Long itemId, @RequestParam("userId") Long userId) {
         return itemService.findUsertag(itemId, userId);
