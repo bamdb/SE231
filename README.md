@@ -21,24 +21,63 @@ code for summer project
 
 * 项目名：bamdb = book and movie database
 
-简介
+### 简介
 
-===
 
 * 通过作品的评价进行作品的个性化推荐
 * 分析所有用户日常观看作品和评价，定量的对作品价值进行分析。
 * 当学生手头同时在观看/阅读多个作品的时候，便于学生进行学习进度、观看进度的管理，以防遗忘。
 
-开发思路
+### 访问
+<http://www.bamdb.cn>
 
----
 
-* 前端 react
-* 后端 spring
-* 数据库 mysql
-* 微服务架构、监控
-* spring security
-* 前后端交互的api格式参考: https://github.com/bangumi/api/blob/master/open-api/api.yml
+### 集群信息
+* ubuntularge: 4 vCPU | 8 GiB | Ubuntu 18.04
+* bamdb: 4 vCPU | 8 GiB | Ubuntu 18.04
+* bamdb1:  4 vCPU | 8 GiB | Ubuntu 18.04
+* bamdb2:  4 vCPU | 8 GiB | Ubuntu 18.04
+* aliyun1:  1 vCPU | 2 GiB | Ubuntu 18.04
+* aliyun2:   1 vCPU | 2 GiB | Ubuntu 18.04
+* bandwagon:   1 vCPU | 2 GiB | Centos 7
+
+
+### 技术栈
+
+* frontend: React React-Native
+* backend: Spring
+* database: Mysql 8.0 | Redis 5.0 | MongoDB 3.6
+* OAuth2 | Spring Security
+* Mysql 读写分离
+    * master: ubuntularge 4 vCPU | 8 GiB
+    * slave: aliyun1 1 vCPU | 2 GiB
+* MongoDB
+    * ubuntularge: 4 vCPU | 8 GiB | Ubuntu 18.04
+* Redis集群
+    * Store token for OAuth2
+    * master
+        * bamdb: 4 vCPU | 8 GiB | Ubuntu 18.04
+        * bamdb1:  4 vCPU | 8 GiB | Ubuntu 18.04
+        * bamdb2:  4 vCPU | 8 GiB | Ubuntu 18.04
+    * slave
+        * ubuntularge: 4 vCPU | 8 GiB | Ubuntu 18.04
+        * aliyun1:  1 vCPU | 2 GiB | Ubuntu 18.04
+        * aliyun2:   1 vCPU | 2 GiB | Ubuntu 18.04
+* 微服务架构
+    * 12 microservices
+    * in three servers
+        * bamdb: 4 vCPU | 8 GiB | Ubuntu 18.04
+        * bamdb1:  4 vCPU | 8 GiB | Ubuntu 18.04
+        * bamdb2:  4 vCPU | 8 GiB | Ubuntu 18.04
+* Nginx
+    * 反向代理
+    * 负载均衡
+* 监控
+* RESTful
+    * Open API
+        * [openapi.yml](https://app.swaggerhub.com/apis/ba818/open-api/1.0.0 "swaggerhub")
+* 性能测试
+    * Locust
 
 
 ## 实体
@@ -66,9 +105,6 @@ code for summer project
 >### 条目
  
 * 分类：电影、课外书、教科书、电视剧、动漫……
-* 数据获取：[bgm.api](http://api.bgm.tv/subject/16261 "bgm.api")
-	* 需要把16进制码转换为汉字
-	* json中包含：条目信息、条目简介、标签、关联条目、评分、评语。
 * 条目之间可以添加关联，如在第三部作品的条目下可以看到第一部、第二部的链接
 	* 进阶：通过图分析判断系列作品。
 * 可对条目进行收藏和进度管理
