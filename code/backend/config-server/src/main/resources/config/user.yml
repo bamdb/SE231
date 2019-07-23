@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: user
+server:
+  port: ${PORT:0}
+security:
+  oauth2:
+    client:
+      clientId: user-service
+      clientSecret: user-service
+      accessTokenUri: http://localhost:8000/auth/oauth/token
+      grant-type: client_credentials
+      scope: server
+    resource:
+      user-info-uri: http://localhost:8000/auth/all
