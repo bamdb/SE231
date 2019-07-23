@@ -41,7 +41,8 @@ class Activitylist extends Component {
                             username={activities[i].activity.userId}
                             date={activities[i].activity.actTime}
                             actType={activities[i].activity.actType}
-                            itemId={activities[i].item.itemname}
+                            itemname={activities[i].item.itemname}
+                            itemid={activities[i].item.id}
                         />
                     </ListItem>
                 )

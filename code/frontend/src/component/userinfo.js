@@ -39,7 +39,7 @@ class Userinfo extends Component {
                     function (response)
                     {
                         console.log(response.data);
-                        this.setState({username:response.data.username,password:response.data.password,email:response.data.mail,imgurl:response.data.imgUrl})
+                        this.setState({username:response.data.username,password:response.data.password,email:response.data.mail,imgurl:response.data.imgUrl,id:localStorage.getItem("userid")})
                     }.bind(this)
                 )
         }

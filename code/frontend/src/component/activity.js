@@ -135,7 +135,7 @@ class Activity extends Component {
                 <Grid container spacing={2}>
                     <Grid item xs={2} justify="center">
                         <br/>
-                        <Avatar alt="Remy Sharp" src="img/3.jpg" className={useStyles.avatar} />
+                        <Avatar alt="暂无图片" src={"http://202.120.40.8:30741/image/id/"+this.props.userId+"0"} className={useStyles.avatar} />
                         <br/>
                         <Typography variant="h5" component="h2">
                             {this.props.username}
@@ -151,8 +151,8 @@ class Activity extends Component {
                                         </Typography>
                                         <Grid container >
                                             <Grid item xs={6}>
-                                                <Typography variant="h6" color={"textPrimary"} component={Link} to={"/useriteminfopage/"+this.props.itemId}>
-                                                    {this.state.itemname + " " }
+                                                <Typography variant="h6" color={"textPrimary"} component={Link} to={"/itemdetail/"+this.props.itemid}>
+                                                    {this.props.itemname + " " }
                                                 </Typography>
                                             </Grid>
                                             <Grid item xs={6}>
@@ -186,7 +186,7 @@ class Activity extends Component {
                                 </Grid>
                                 <Grid item xs={3} justify="center">
                                     <br/><br/>
-                                    <img src="img/3.jpg" alt="暂无图片" className={useStyles.image} height="120px" width="96px"/>
+                                    <img src={"http://202.120.40.8:30741/image/id/"+this.props.itemid+"1"} alt="暂无图片" className={useStyles.image} height="120px" width="96px"/>
                                 </Grid>
                             </Grid>
                         </Card>
