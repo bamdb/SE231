@@ -18,6 +18,7 @@ class Rating extends Component{
     }
     handleChange(e) {
         this.setState({selectedValue:e.target.value})
+        this.props.handlescorechange(e.target.value);
     }
     render(){
         return(
@@ -123,9 +124,7 @@ class Rating extends Component{
                     />
                 </Grid>
 
-                <Grid item xs={1}>
-                    <Button onClick={this.handleclick}>提交评分</Button>
-                </Grid>
+
             </Grid>
 
         )

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
-
+import Grid from "@material-ui/core/Grid";
 import '../css/item.css'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -36,34 +36,31 @@ class TopItem extends Component {
         }
     }
     componentWillMount() {
-        
-    }
-    componentDidMount() {
         this.setState({rank:this.props.rank,name:this.props.name,avgScore:this.props.avgScore,itemId:this.props.itemId})
-    }
-    componentWillReceiveProps(nextProps, nextContext) {
-        this.setState({rank:nextProps.rank,name:nextProps.name,avgScore:nextProps.avgScore,itemId:nextProps.itemId})
     }
 
     render() {
         var url='/useriteminfopage/'+this.state.itemId;
         return(
-            <Card className={useStyles.card}>
                 <div className={useStyles.details}>
-                    <CardContent className={useStyles.content}>
+                    <Grid container justify={"center"} alignContent={"flex-start"}  spacing={2} >
+                        <Grid item xs={1}>
+                            {this.state.rank}
+                        </Grid>
+                        <Grid item xs={8} wrap={"nowrap"}>
                         <Link to={url}>
-                            {this.state.name}
+                            <Typography variant={"h6"} color={"textPrimary"}> {this.state.name} </Typography>
                         </Link>
+                        </Grid>
+                        <Grid item xs={3} wrap={"nowrap"} >
+                            <Grid container justify={"flex-end"} alignContent={"flex-end"}>
                         <Typography variant="subtitle1" color="textSecondary">
                             {this.state.avgScore}分
                         </Typography>
-                    </CardContent>
+                            </Grid>
+                        </Grid>
+                    </Grid>
                 </div>
-                <CardMedia
-                    className={useStyles.cover}
-                    img={""} //图片
-                />
-            </Card>
         )
     }
 }

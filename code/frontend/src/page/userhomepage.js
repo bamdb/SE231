@@ -4,72 +4,80 @@ import Grid from '@material-ui/core/Grid/index'
 import Paper from '@material-ui/core/Paper/index'
 import Navigation from "../component/navigation";
 import TopItemList from "../component/topitemlist";
-import Progressmanage from '../component/progressmanage'
-import Listitem from '../component/listitem'
-import axios from 'axios'
-import PropTypes from "prop-types"
-/*
-class TopPart extends Component{
-    constructor(props){
-        super(props);
+import Progressmanage from '../component/progressmanage';
+import LeftAppBar from '../component/leftappbar';
+import axios from 'axios';
+import TextField from '@material-ui/core/TextField';
 
-    }
-
-    render(){
-        return(
-            <Grid container className={useStyles.root} >
-                <Grid item xs={12}>
-                    <Navigation />
-                </Grid>
-            </Grid>
-        )
-    }
-}
- */
+const useStyles=makeStyles({
+    root: {
+        display: 'flex',
+    },
+})
 
 class Userhomepage extends Component{
 
     constructor(props){
         super(props);
-        this.state={rankitem:[]}
+        this.state={rankitem:[], userid:1}
 
         this.handleSearch=this.handleSearch.bind(this);
+    }
+    componentWillMount() {
+
+
     }
 
     handleSearch(value){
 
     }
     componentDidMount() {
-        axios.get("http://202.120.40.8:30741/rating/browser",{params:{
-                type:0,
-                page:0,
-                pageSize:3
-            }}).then(
+        if(localStorage.getItem("access_token")!=null)
+        {
+            axios.get("http://202.120.40.8:30741/rating/browser",{params:{
+
+                    type:0,
+                    page:0,
+                    pageSize:10
+                }}).then(
                 function(response)
                 {
-
                     this.setState({rankitem:response.data});
                 }.bind(this)
-        )
+            )
+        }
+        else{
+            window.location.href="/#/login";
+        }
     }
 
     render(){
+        const search=<TextField
+            id="outlined-dense"
+            label="Search"
+            margin="dense"
+            variant="outlined"
+        />;
         return(
-            <Grid container spacing={10}>
-                <Grid item xs={12}><Navigation/></Grid>
-                <Grid item xs={12}>
-                <Grid container spacing={3} >
-                    <Grid item xs={2}>
-                    </Grid>
-                    <Grid item xs={8}>
-                        <Progressmanage />
-                    </Grid>
-                    <Grid item xs={2}>
-                        <TopItemList itemList={this.state.rankitem}/>
+            <Grid container justify={"space-around"} alignContent={"center"}>
+                <Grid item xs={9}>
+
+                    <Grid container spacing={2} alignContent={"center"}>
+                        <Grid item xs={12}>
+                            <Progressmanage userid={this.state.userid} />
+                        </Grid>
                     </Grid>
                 </Grid>
+                <Grid item xs={3} >
+
+                    <Grid container spacing={2} alignContent={"center"} >
+                        <Grid item xs={12}>
+                            <TopItemList itemList={this.state.rankitem}/>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
+
         )
     }
 }

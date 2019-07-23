@@ -12,20 +12,57 @@ import ListItem from '@material-ui/core/ListItem';
 import Comment from "./comment";
 import Grid from '@material-ui/core/Grid'
 import Typography from "@material-ui/core/Typography";
+import {Divider} from "antd";
+import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
         backgroundColor: theme.palette.background.paper,
+
     },
 }));
 
 class Commentlist extends Component {
     constructor(props) {
         super(props);
+        this.state={comments:[]};
     }
- 
+    componentWillMount() {
+        this.setState({comments:this.props.comments||[]});
+    }
+    componentWillReceiveProps(nextProps, nextContext) {
+        this.setState({comments:nextProps.comments||[]});
+    }
+
+
+
     render() {
+        var comments=this.state.comments;
+        if(comments.length>0)
+        {
+            var rows=[];
+            for(var i=0;i<comments.length;++i)
+            {
+                rows.push(
+                    <Grid item xs={12}>
+                        <Comment
+                            username = {comments[i].comment.userId}
+                            date = {comments[i].comment.pubTime}
+                            grade = {8}
+                            comment = {comments[i].comment.content}
+                        />
+                    </Grid>
+                )
+            }
+            return(
+                <Grid container spacing={1}>
+                    {rows}
+                    <Divider />
+                </Grid>
+            )
+        }
+
         return (
             <Grid container spacing={1} >
                 <Grid item xs={12}>

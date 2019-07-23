@@ -7,6 +7,12 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import Input from "@material-ui/core/Input";
+import TextField from "@material-ui/core/TextField";
+import {Modal, Divider} from "antd";
+import  axios from "axios";
  
 const useStyles = makeStyles({
     root: {
@@ -34,6 +40,26 @@ const useStyles = makeStyles({
 class Comment extends Component {
     constructor(props) {
         super(props);
+        this.state={visible:false};
+        this.handlevisible=this.handlevisible.bind(this);
+        this.handleOk=this.handleOk.bind(this);
+        this.handleCancel=this.handleCancel.bind(this);
+    }
+    handleOk()
+    {
+        var date=Date.parse(new Date());
+        axios.post("http://202.120.40.8:30741/message/add?access_token="+localStorage.getItem("access_token"),{senderId:localStorage.getItem("userid"),receiverId:this.props.username,sendTime:date,content:"加为好友"})
+        this.setState({visible:false});
+    }
+    handleCancel()
+    {
+        this.setState({visible:false});
+
+    }
+
+    handlevisible()
+    {
+        this.setState({visible:true});
     }
 
     static defaultProps = {
@@ -45,33 +71,34 @@ class Comment extends Component {
 
     render() {
         return(
-            <Card>
             <Container >
+                <Divider />
                 <Grid container spacing={2}>
                     <Grid item xs={2} justify="center">
-                        <br/>
-                        <Avatar alt="Remy Sharp" src="img/3.jpg" className={useStyles.avatar} />
-                        <br/>
+                        <Avatar alt="Remy Sharp" src="img/3.jpg" className={useStyles.avatar} onClick={this.handlevisible}/>
+                        <Modal title="加为好友" visible={this.state.visible}
+                               onOk={this.handleOk} onCancel={this.handleCancel}
+                        >
+
+                        </Modal>
                         <Typography variant="h5" component="h2">
                             {this.props.username}
                         </Typography>
                     </Grid>
                     <Grid item xs={10} justify="center">
                         <Typography color="textSecondary" gutterBottom>
-                            收藏日期: {this.props.date}
+                            收藏日期: {this.props.date.split('T')[0]}
                         </Typography>
 
                         <Typography variant="h5" component="h2">
                             评分： {this.props.grade}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                            across all continents except Antarctica
+                            {this.state.comment}
                         </Typography>
                     </Grid>
                 </Grid>
             </Container>
-    </Card>
         );
     }
 

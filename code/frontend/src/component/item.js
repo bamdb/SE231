@@ -36,33 +36,18 @@ class Item extends Component {
 
     render() {
         return(
-            <Grid container alignItems={"center"} direction={"column"} >
-                <Paper>
-                <Grid item xs={12}>
+            <Grid container alignItems={"center"} justify={"center"} direction={"column"}>
                     <img src="img/3.jpg" id="itemimage" />
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >名称</Typography>
+                    <Typography variant={"subtitle1"}  color={"textPrimary"} >名称</Typography>
                     <Typography variant={"p"} component={Link} to={"/useriteminfopage/"+this.state.name} color={"textSecondary"} >{this.state.name}</Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >发行日期</Typography>
-                    <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.date.split("T")[0]}</Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >作者</Typography>
-                    <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.author}</Typography>
-                </Grid>
-
-                <Grid item xs={12}>
-                    <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >页数</Typography>
-                    <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.page}</Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography variant={"h6"} component={"h6"} color={"textPrimary"} >ISBN</Typography>
-                    <Typography variant={"p"} component={"p"} color={"textSecondary"} >{this.state.isbn}</Typography>
-                </Grid>
-                </Paper>
+                    <Typography variant={"subtitle1"} color={"textPrimary"} >发行日期</Typography>
+                    <Typography variant={"p"} color={"textSecondary"} >{this.state.date.split("T")[0]}</Typography>
+                    <Typography variant={"subtitle1"} color={"textPrimary"} >作者</Typography>
+                    <Typography variant={"p"} color={"textSecondary"} >{this.state.author}</Typography>
+                    <Typography variant={"subtitle1"} color={"textPrimary"} >页数</Typography>
+                    <Typography variant={"p"} color={"textSecondary"} >{this.state.pages}</Typography>
+                    <Typography variant={"subtitle1"}  color={"textPrimary"} >ISBN</Typography>
+                    <Typography variant={"p"} color={"textSecondary"} >{this.state.isbn}</Typography>
             </Grid>
         )
     }

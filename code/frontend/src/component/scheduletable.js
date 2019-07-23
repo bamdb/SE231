@@ -1,196 +1,301 @@
 import React, { Component } from 'react';
 
 import Paper from '@material-ui/core/Paper';
-
-import '../css/scheduletable.css'
-import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from "@material-ui/core/Card";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid'
+import LinearProgress from '@material-ui/core/LinearProgress';
+import { TreeSelect } from "antd";
+import { Modal, Button } from 'antd';
+import axios from "axios";
 
+const useStyle = makeStyles({
+    img:{
+        width:100,
+    },
+    card: {
+        maxWidth: 345,
+        height:100
+    },
+})
 
 class Scheduletable extends Component {
     constructor(props) {
         super(props);
-        this.state={readstat:[0,[1,0,1,0],0,1,1,0],x:0,y:0,show:false,current:0,current1:-1,x1:0,x2:0,show1:false};
-        this.handleclick=this.handleclick.bind(this);
-        this.handleclickhas=this.handleclickhas.bind(this);
-        this.handleclickhasnot=this.handleclickhasnot.bind(this);
-        this.handleclick1=this.handleclick1.bind(this);
-        this.handleclickhas1=this.handleclickhas1.bind(this);
-        this.handleclickhasnot1=this.handleclickhasnot1.bind(this);
+        this.state={
+            data:[],
+            show:false,
+            treeData:[],
+            completed:35,
+            current:0,
+            current1:-1,
+            value: [],
+            show1:false,
+            itemname: ""};
+        this.handleClose = this.handleClose.bind(this);
+        this.showEditBar = this.showEditBar.bind(this);
+        this.transform = this.transform.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.submit = this.submit.bind(this);
     }
-    handleclickhas1()
-    {
-        var readstat=this.state.readstat;
-        readstat[this.state.current][this.state.current1]=1;
-        this.setState({readstat:readstat,show1:false,current1:-1})
-    }
-    handleclickhasnot1()
-    {
-        var readstat=this.state.readstat;
-        readstat[this.state.current][this.state.current1]=0;
-        this.setState({readstat:readstat,show1:false,current1:-1})
-    }
-    handleclick1(e)
-    {
-        this.setState({x1:e.clientX,y1:e.clientY,show:true,current1:e.target.id,show1:true})
-    }
-    handleclick(e) {
 
-
-        this.setState({x:e.clientX,y:e.clientY,show:true,current:e.target.id})
-
+    showEditBar(){
+        this.setState({
+            show:true,
+        })
     }
-    handleclickhas()
-    {
-        var readstat=this.state.readstat;
-        readstat[this.state.current]=1;
-        this.setState({readstat:readstat,show:false,show1:false})
+
+    handleClose(){
+        this.setState({
+            show:false,
+        })
     }
-    handleclickhasnot()
-    {
-        var readstat=this.state.readstat;
-        readstat[this.state.current]=0;
-        this.setState({readstat:readstat,show:false,show1:false})
+
+    transform(tree, readdata, parentTitle,parentValue, value){
+
+        const length=readdata.length;
+        console.log(length);
+        for (var i=0;i<length;++i){
+            console.log("child",readdata[i].length)
+            if(readdata[i].sections.length===0) //下面没有子章节了
+            {
+                if(readdata[i].finish===1) {
+                    tree.push({
+                        title: "Node"+ parentTitle +'-'+ (i + 1).toString(),
+                        value: parentValue + '-' + i.toString(),
+                        done: true
+                    });
+                    value.push(parentValue + '-' + i.toString());
+                }
+                else
+                    tree.push({
+                        title: "Node"+ parentTitle +'-'+ (i + 1).toString(),
+                        value: parentValue+'-'+i.toString(),
+                        done: false
+                    });
+
+            }
+            else {
+                const parenttitle = parentTitle +'-'+ (i + 1).toString()
+                const parentvalue=parentValue+'-'+i.toString()
+                var children=[];
+                var read=true;
+                const sections=readdata[i].sections;
+                for(var j=0;j<sections.length;j++)
+                    if(sections[j]==1) {
+                        children.push({
+                            title: "Node"+ parenttitle +'-'+ (j + 1).toString(),
+                            value: parentvalue + '-' + j.toString(),
+                            done: true
+                        });
+                        value.push(parentvalue + '-' + j.toString());
+                    }
+                    else {
+                        children.push({
+                            title: "Node" + parenttitle + '-' + (j + 1).toString(),
+                            value: parentvalue + '-' + j.toString(),
+                            done: false
+                        });
+                        read = false;
+                    }
+                tree.push({
+                    title:  "Node"+ parentTitle +'-'+ (i + 1).toString(),
+                    value:parentValue + '-' + i.toString(),
+                    done:read,
+                    children:children
+                });
+            }
+        }
+    }
+
+    submit(){
+        var rows=[];
+        rows={
+            "itemId":this.props.itemid,
+            "userId":this.props.userid,
+            "chapters":this.state.data
+        }
+        axios.put("http://202.120.40.8:30741/activity/update/progress",rows,{
+            params:{access_token: localStorage.getItem("access_token")},
+            headers:{"Content-Type":'application/json'}
+        })
+        this.setState({show:false});
     }
     componentWillMount() {
+        var data=[];
+        var treeData = [];
+        var value=[];
+        axios.get("http://202.120.40.8:30741/activity/progress", {params:{
+                    userId:this.props.userid,
+                    itemId:this.props.itemid,
+                    access_token: localStorage.getItem("access_token"),
+                }}).then(function(response)
+            {
+                console.log(this.props.itemid);
+                console.log(response.data.chapters);
+                //this.transform(treeData,response.data.chapters,'','0',value);
+                const readdata=response.data.chapters;
+                const length=readdata.length;
+                for (var i=0;i<length;++i){
+                    console.log("child",readdata[i].sections.length)
+                    if(readdata[i].sections.length===0) //下面没有子章节了
+                    {
+                        if(readdata[i].finish===1) {
+                            treeData.push({
+                                title: "Node" +'-'+ (i + 1).toString(),
+                                value: '0-' + i.toString(),
+                                done: true
+                            });
+                            value.push('0' + '-' + i.toString());
+                        }
+                        else
+                            treeData.push({
+                                title: "Node" +'-'+ (i + 1).toString(),
+                                value: '0'+'-'+i.toString(),
+                                done: false
+                            });
+
+                    }
+                    else {
+                        const parenttitle = '-'+ (i + 1).toString()
+                        const parentvalue='0'+'-'+i.toString()
+                        var children=[];
+                        var read=true;
+                        const sections=readdata[i].sections;
+                        for(var j=0;j<sections.length;j++)
+                            if(sections[j]==1) {
+                                children.push({
+                                    title: "Node"+ parenttitle +'-'+ (j + 1).toString(),
+                                    value: parentvalue + '-' + j.toString(),
+                                    done: true
+                                });
+                                value.push(parentvalue + '-' + j.toString());
+                            }
+                            else {
+                                children.push({
+                                    title: "Node" + parenttitle + '-' + (j + 1).toString(),
+                                    value: parentvalue + '-' + j.toString(),
+                                    done: false
+                                });
+                                read = false;
+                            }
+                        treeData.push({
+                            title:  "Node" +'-'+ (i + 1).toString(),
+                            value:'0' + '-' + i.toString(),
+                            done:read,
+                            children:children
+                        });
+                    }
+                }
+                console.log(treeData);
+                this.setState({
+                data: readdata,
+                treeData:treeData,
+                value:value
+            })
+            }.bind(this))
 
     }
+
+    onChange = value => {
+
+        let oldset = new Set(this.state.value);
+        let newset = new Set(value);
+
+        let intersectionSet = new Set([...oldset].filter(x => newset.has(x)));
+
+        let a = new Set([...oldset].filter(x => !intersectionSet.has(x)));
+        var node = this.state.data;
+        for (let item of a.values()) {
+            if(item.split('-')[2]===undefined) {
+                const length=node[item.split('-')[1]].sections.length;
+                for(var i=0; i<length; i++)
+                    node[item.split('-')[1]].sections[i]=0;
+                node[item.split('-')[1]].finish=0;
+            }
+            else {
+                node[item.split('-')[1]].sections[item.split('-')[2]] = 0;
+            }
+        }
+
+        let b = new Set([...newset].filter(x => !intersectionSet.has(x)));
+        for (let item of b.values()) {
+            if(item.split('-')[2]===undefined) {
+                const length=node[item.split('-')[1]].sections.length;
+                for(var i=0; i<length; i++)
+                    node[item.split('-')[1]].sections[i]=1;
+                node[item.split('-')[1]].finish=1;
+            }
+            else {
+                node[item.split('-')[1]].sections[item.split('-')[2]] = 1;
+            }
+        }
+        this.setState({
+            data:node,
+            value:value
+        })
+    };
+
     componentDidMount() {
-        if(this.props.readstat!=null)
+        if(this.props.itemname!==null)
         {
-            this.setState({readstat:this.props.readstat,total:this.props.total})
+            this.setState({itemname:this.props.itemname})
         }
     }
 
     render() {
-        var readstat=this.state.readstat;
-        var item=[];
-
-        for(var i=0;i<readstat.length;++i) {
-
-            if(readstat[i]==0) {
-
-                item.push(
-                    <button  id={i} class="type1" onClick={this.handleclick}>{i}</button>
-                );
-
+        const treeData = this.state.treeData;
+        const { SHOW_PARENT } = TreeSelect;
+        const tProps = {
+            treeData,
+            value: this.state.value,
+            onChange: this.onChange,
+            treeCheckable: true,
+            showCheckedStrategy: SHOW_PARENT,
+            searchPlaceholder: "Please select",
+            style: {
+                width: 300
             }
-            else{
-                item.push(
-                    <button  id={i} class="type2" onClick={this.handleclick}>{i}</button>
-                );
-            }
-
-        }
-        if(!this.state.show){
-            return(
-                <div >
-                    <Paper id={"tagmain"}>
-                        {item}
-                    </Paper>
-                </div>
-            )
-        }
-
-        else if(!readstat[this.state.current].length>0){
-            var style={"position":"absolute"};
-            style["top"]=this.state.y;
-            style["left"]=this.state.x;
-            return(
-                <div >
-                    <Paper id={"tagmain"}>
-                        {item}
-                        <div style={style}>
-                            <Paper id={"detail"}>
-                                <Typography paragraph>
-                                    small introduction
-                                </Typography>
-                                <Button onClick={this.handleclickhas}>
-                                    看过
-                                </Button>
-                                <Button onClick={this.handleclickhasnot}>
-                                    没看过
-                                </Button>
-                            </Paper>
-                        </div>
-                    </Paper>
-                </div>
-            )
-        }
-        else
-        {
-            var style={"position":"absolute"};
-            style["top"]=this.state.y;
-            style["left"]=this.state.x;
-            var items1=[];
-            for(var i=0;i<readstat[this.state.current].length;++i)
-            {
-                if(readstat[this.state.current][i]==0) {
-
-                    items1.push(
-                        <button  id={i} class="type1" onClick={this.handleclick1}>{i}</button>
-                    );
-
-                }
-                else{
-                    items1.push(
-                        <button  id={i} class="type2" onClick={this.handleclick1}>{i}</button>
-                    );
-                }
-            }
-            if(!this.state.show1 ) {
-                return(
-                    <div >
-                        <Paper id={"tagmain"}>
-                            {item}
-                            <div style={style}>
-                                <Paper id={"detail"}>
-                                    <Grid>
-                                        {items1}
-                                    </Grid>
-                                </Paper>
-                            </div>
-                        </Paper>
-                    </div>
-                )
-            }
-            else{
-                var style1={"position":"absolute"};
-                style1["top"]=this.state.y1;
-                style1["left"]=this.state.x1;
-                return(
-                    <div >
-                        <Paper id={"tagmain"}>
-                            {item}
-                            <div style={style}>
-                                <Paper id={"detail"}>
-                                    <Grid>
-                                        {items1}
-                                    </Grid>
-                                </Paper>
-
-                            </div>
-                        </Paper>
-                        <div style={style1}>
-                            <Paper id={"detail"}>
-                                <Typography paragraph>
-                                    small introduction
-                                </Typography>
-                                <Button onClick={this.handleclickhas1}>
-                                    看过
-                                </Button>
-                                <Button onClick={this.handleclickhasnot1}>
-                                    没看过
-                                </Button>
-                            </Paper>
-                        </div>
-                    </div>
-                )
-            }
-
-        }
-
+        };
+        return (
+            <Card className={useStyle.card} style={{width:150}}>
+                <CardActionArea onClick={this.showEditBar}>
+                <CardMedia
+                    style={{height:120}}
+                    className={useStyle.media}
+                    image={"img/3.jpg"}
+                />
+                <CardContent >
+                        {this.state.itemname}
+                    <LinearProgress variant="determinate" value={this.state.completed} />
+                </CardContent>
+                </CardActionArea>
+                <Modal
+                    title="进度编辑"
+                    visible={this.state.show}
+                    onOk={this.submit}
+                    onCancel={this.handleClose}
+                >
+                    <Typography>
+                            点击下方按钮修改当前进度
+                    </Typography>
+                    <TreeSelect {...tProps} />
+                </Modal>
+            </Card>
+        )
     }
 }
 export default Scheduletable;

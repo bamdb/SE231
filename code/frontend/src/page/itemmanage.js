@@ -13,14 +13,9 @@ import Listitem from '../component/listitem'
 import Progressmanage from "../component/progressmanage";
 import Login from "../component/login"
 
-const useStyles = makeStyles({
-    root: {
-        height: '100vh',
-        backgroundImage: 'url(/img/3.jpg)',
-    },
-})
 
-class LoginPage extends Component{
+
+class Itemmanagepage extends Component{
     constructor(props){
         super(props);
         this.handleSearch=this.handleSearch.bind(this);
@@ -33,13 +28,13 @@ class LoginPage extends Component{
     render(){
         return(
             <div id={"login"} >
-                <Grid container className={useStyles.root} >
+                <Grid container  >
                     <Grid item xs={6}>
                     </Grid>
                     <Grid item xs={5}>
                         <br/><br/><br/>
                         <br/><br/><br/>
-                        <Login></Login>
+
                     </Grid>
                 </Grid>
             </div>
@@ -47,4 +42,4 @@ class LoginPage extends Component{
     }
 }
 
-export  default LoginPage;
+export  default Itemmanagepage;

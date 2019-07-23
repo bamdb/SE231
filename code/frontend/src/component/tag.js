@@ -5,80 +5,116 @@ import Paper from '@material-ui/core/Paper';
 import '../css/tag.css';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
-import Grid from '@material-ui/core/Grid'
+import Grid from '@material-ui/core/Grid';
+import { Divider } from 'antd';
+import { Tag } from 'antd';
+import axios from "axios";
 
-
+const { CheckableTag } = Tag;
 /*
  信息保存在state中，可以自行添加props或ajax
 */
 
-class Tag extends Component {
+class Tags extends Component {
     constructor(props) {
         super(props);
-        this.state={tags:["搞笑","热血","王道"],select:false,currenttags:[]};
+        this.state={tags:[],select:false,selectedtags:[]};
         this.handletagchange=this.handletagchange.bind(this);
         this.handleclick=this.handleclick.bind(this);
     }
 
-    handleclick(e){
-        var tags=this.state.currenttags;
-        console.log(tags);
-        console.log(e.target.innerText)
+    handleclick(tag,checked) {
+        const selectedTags = this.state.selectedtags;
+        const nextSelectedTags = checked ? [...selectedTags, tag] : selectedTags.filter(t => t !== tag);
 
-        for(var i=0;i<tags.length;++i)
-        {
-            if(e.target.innerText==tags[i])
-            {
-                tags.splice(i,1);
-                this.setState({currenttags:tags})
-
-                return;
-            }
-        }
-        tags.push(e.target.innerText);
-
-        this.setState({currenttags:tags})
+        console.log('You are interested in: ', nextSelectedTags);
+        this.setState({ selectedtags: nextSelectedTags });
         this.handletagchange();
-
-        return;
     }
+
     handletagchange(){
-        this.props.tagchange(this.state.currenttags)
+        this.props.tagchange(this.state.selectedtags)
     }
     componentWillMount() {
         if(this.props.tags!=null)
         {
-            this.setState({tags:this.props.tags})
+            var tags=this.props.tags;
+            var tagnames=[];
+            tags.map(tag=>{
+                tagnames.push(tag.tagname||tag);
+            })
+            this.setState({tags:tagnames})
         }
         if(this.props.select!=false){
             this.setState({select:this.props.select})
         }
+
     }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        if(nextProps.tags!=null)
+        {
+            var tags=nextProps.tags;
+            var tagnames=[];
+            tags.map(tag=>{
+                tagnames.push(tag.tagname||tag);
+            })
+            this.setState({tags:tagnames})
+        }
+        if(nextProps.select!=false){
+            this.setState({select:nextProps.select})
+        }
+    }
+
     componentDidMount() {
 
     }
 
     render() {
+        const selectedTags = this.state.selectedtags;
+        const rows=[];
+        this.state.tags.map(tag => {
+            rows.push(
+                <CheckableTag
+                    key={tag}
+                    checked={selectedTags.indexOf(tag) > -1}
 
+                >
+                    {tag}
+                </CheckableTag>
+                /*<CheckableTag
+            key={tag}
+            checked={selectedTags.indexOf(tag) > -1}
+            onChange={checked => this.handleclick(tag, checked)}
+        >
+            {tag}
+        </CheckableTag>*/
+            );
+            rows.push(<Divider type="vertical" />);
+        })
+        if(rows.length >= 1) rows.pop();
+        return(
+            <div>
+            {rows}
+            </div>
+        )
+    }
+    /*
         if(!this.state.select){
             var tags=this.state.tags;
             var item=[];
 
             for(var i=0;i<tags.length;++i) {
                 item.push(
-                    <Grid item xs={'auto'}>
-                        <Chip  id="chip" label={tags[i]} clickable color="secondary" />
-                    </Grid>
+                    <Chip  id="chip" label={tags[i].tagname} clickable color="secondary" />
                 );
+                item.push(<Divider type={"vertical"}/> )
             }
+            if(tags.length!==0) item.pop();
             return(
 
                 <div>
-                    <Paper id={"tagmain"}>
-                        <Grid container spacing={2} >
-                            {item}
-                        </Grid>
-                    </Paper>
+                    {item}
                 </div>
             )
         }
@@ -99,34 +135,29 @@ class Tag extends Component {
                 if(!flag)
                 {
                     item.push(
-                        <Grid item xs={'auto'}>
-                            <Chip  id="chip" label={tags[i]} clickable onClick={this.handleclick} />
-                        </Grid>
+                            <CheckableTag  id="chip" label={tags[i]} clickable onClick={this.handleclick} />
                     );
+                    item.push(<Divider type={"vertical"}/>);
                 }
                 else
                 {
                     item.push(
-                        <Grid item xs={'auto'}>
-                            <Chip  id="chip" label={tags[i]} clickable color="secondary" onClick={this.handleclick}/>
-                        </Grid>
+                            <CheckableTag onClick={this.handleclick}>tags[i]</
                     );
+                    item.push(<Divider type={"vertical"} />);
                 }
-
             }
             return(
 
                 <div>
-                    <Paper id={"tagmain"}>
-                        <Grid container spacing={2} >
-                            {item}
-                        </Grid>
-                    </Paper>
+                    {item}
                 </div>
             )
 
         }
 
     }
+
+     */
 }
-export default Tag;
+export default Tags;

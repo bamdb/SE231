@@ -16,7 +16,6 @@ class Topicdetailpage extends Component{
     constructor(props){
         super(props);
         this.state = {topic:[],data:[],search:""}
-
         this.handleSearch=this.handleSearch.bind(this);
     }
 
@@ -33,11 +32,11 @@ class Topicdetailpage extends Component{
             var url="http://202.120.40.8:30741/topic/id/"+id;
         }
 
-        axios.get("http://202.120.40.8:30741/topic/all")
+        /*axios.get("/topic/all")
             .then(function (res) {
                 this.setState({topic: res.data});
             }.bind(this)
-            )
+            )*/
 
 
         axios.get("http://202.120.40.8:30741/topic/id/"+id)
@@ -52,15 +51,11 @@ class Topicdetailpage extends Component{
         const data = this.state.data;
         return(
           <Grid container spacing={10}>
-              <Grid item xs={12}>
-                  <Navigation />
-              </Grid>
+
               <Grid item xs={1}>
               </Grid>
               <Grid item xs={8}>
-                  <Grid>
-                      <TopicList  search={this.state.search} topics={topic} />
-                  </Grid>
+
                   <Grid>
                       <Discuss replies={data.replyList}/>
                   </Grid>
@@ -70,7 +65,6 @@ class Topicdetailpage extends Component{
                   </Grid>
               </Grid>
               <Grid item xs={3}>
-
                   <Relateditem />
               </Grid>
           </Grid>

@@ -5,7 +5,7 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import TopicList from "../component/topiclist";
-import Tag from "../component/tag";
+import Tags from "../component/tag";
 import Typography from "@material-ui/core/Typography";
 import Navigation from "../component/navigation";
 import axios from "axios";
@@ -41,20 +41,16 @@ class Topicpage extends Component{
     render(){
         return(
             <Grid container direction={"row"} spacing={4} >
-                <Grid item xs={12} spacing={3} ><Navigation /> </Grid>
-
-                <Grid item xs={2} ><br/> <Tag select={true} tagchange={this.handletagchange}/></Grid>
-                <Grid item xs={9} >
-                    <Grid item>
-                        <Typography variant={"h6"} component={"h6"} align={"left"} >讨论版</Typography>
-                    </Grid>
-                    <Grid container spacing={1}>
+                <Grid item xs={2} >
+                    <br/>
+                    <Tags select={true} tagchange={this.handletagchange} /></Grid>
+                <Grid item xs={8} >
+                    <Typography variant={"h6"} component={"h6"} align={"left"} >讨论版</Typography>
+                    <Grid container spacing={0}>
                     <TopicList  search={this.state.search} topics={this.state.topics}/>
                     </Grid>
                 </Grid>
-                <Grid item xs={1}><Addtopic></Addtopic></Grid>
-
-
+                <Grid item xs={2}><Addtopic /></Grid>
             </Grid>
         );
     }

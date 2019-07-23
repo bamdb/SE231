@@ -37,11 +37,20 @@ class Userinfopage extends Component{
     handleSearch(value){
 
     }
+    componentWillMount() {
+        if(localStorage.getItem("username")!=null)
+        {
+
+        }
+        else {
+            window.location.href="/#/login";
+        }
+    }
 
     render(){
         return(
             <Grid container spacing={10}>
-                <Grid item xs={12}><Navigation/></Grid>
+
                 <Grid item xs={12}>
                     <Grid container spacing={3} >
                         <Grid item xs={2}>

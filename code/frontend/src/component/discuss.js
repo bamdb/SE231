@@ -17,6 +17,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Paper from "@material-ui/core/Paper";
 import axios from "axios";
+import {Modal} from "antd";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -39,13 +40,31 @@ const useStyles = makeStyles(theme => ({
 class DiscussBody extends Component{
     constructor(props){
         super(props);
-        this.state = {username: "",discuss:this.props.data.replyContent,date:"2019-01-01T1234"}
+        this.state = {username: "",discuss:this.props.data.replyContent,date:"2019-01-01T1234",visible:false}
+        this.handlevisible=this.handlevisible.bind(this);
+        this.handleOk=this.handleOk.bind(this);
+        this.handleCancel=this.handleCancel.bind(this);
+    }
+    handleOk()
+    {
+        var date=Date.parse(new Date());
+        axios.post("http://202.120.40.8:30741/message/add?access_token="+localStorage.getItem("access_token"),{senderId:localStorage.getItem("userid"),receiverId:this.props.username,sendTime:date,content:"加为好友"})
+        this.setState({visible:false});
+    }
+    handleCancel()
+    {
+        this.setState({visible:false});
+
     }
 
+    handlevisible()
+    {
+        this.setState({visible:true});
+    }
     componentDidMount() {
         const id = this.props.data.user.id;
        // this.state.data.replyContent;
-        axios.get("http://202.120.40.8:30741/user/id/"+id).then(
+        axios.get("http://202.120.40.8:30741/user/id/"+id+"?access_token="+localStorage.getItem("access_token")).then(
             function (response){
                 this.setState({username:response.data.username});
             }.bind(this)
@@ -57,11 +76,16 @@ class DiscussBody extends Component{
         return(
             <Grid container >
                 <Grid item xs={1}>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg"/>
+                    <Avatar alt="Remy Sharp" src={"http://202.120.40.8:30741/image/id/"+this.props.data.user.id+"0"} onClick={this.handlevisible}/>
+                    <Modal title="加为好友" visible={this.state.visible}
+                           onOk={this.handleOk} onCancel={this.handleCancel}
+                    >
+
+                    </Modal>
                 </Grid>
                 <Grid item xs={11}>
                     <Typography variant={"h6"} component={"h6"}
-                                color={"textPrimary"}>{this.state.username}</Typography>
+                                color={"textPrimary"} >{this.state.username}</Typography>
                     <Typography
                         component="p"
                         variant="subtitle1"
@@ -93,6 +117,7 @@ class Discuss extends Component {
         if(replies !== undefined) {
             for (var i=0; i<replies.length;++i) {
                 rows.push(
+
                     <DiscussBody data={replies[i]} floor={i} />
                 )
                 rows.push(<Divider variant="inset"/>);

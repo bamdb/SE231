@@ -20,6 +20,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {LinearProgress} from "@material-ui/core";
 import Collectform from "./collectform";
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -69,11 +70,45 @@ class Collect extends Component {
         super(props);
         this.state = {
             expanded: false,
-            completed: 0
+            completed: 0,
+            comment:{},
+            score:0,
+            userid:1
         };
 
         this.handleExpandClick = this.handleExpandClick.bind(this);
     }
+    componentWillMount() {
+
+        axios.get("http://202.120.40.8:30741/comment",{params:{itemId:this.props.itemid,userId:this.props.userid}}).then(
+            function(response)
+            {
+                this.setState({comment:response.data});
+            }.bind(this)
+        )
+        axios.get("http://202.120.40.8:30741/rating/score",{params:{itemId:this.props.itemid,userId:this.props.userid}}).then(
+            function(response)
+            {
+                this.setState({score:response.data.score});
+            }.bind(this)
+        )
+
+    }
+    componentWillReceiveProps(nextProps, nextContext) {
+        axios.get("http://202.120.40.8:30741/comment",{params:{itemId:this.props.itemid,userId:nextProps.userid}}).then(
+            function(response)
+            {
+                this.setState({comment:response.data});
+            }.bind(this)
+        )
+        axios.get("http://202.120.40.8:30741/rating/score",{params:{itemId:this.props.itemid,userId:nextProps.userid}}).then(
+            function(response)
+            {
+                this.setState({score:response.data.score});
+            }.bind(this)
+        )
+    }
+
 
     static defaultProps = {
         status : "未收藏",
@@ -117,26 +152,23 @@ class Collect extends Component {
                 />
                 <hr className={useStyles.board} color="#C7C7C7"/>
                 <CardContent>
-                    <Grid container spacing={2}>
-                        <Grid item xs={2}>
-                            <Typography variant="subtitle1" color="textPrimary" component="p">
-                                我的评分
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Paper className={useStyles.paper}>
-                                <Typography variant="h5" component="h3" align="center">
-                                    {this.props.grade}
-                                </Typography>
-                            </Paper>
-                        </Grid>
+                    <Grid container spacing={2} direction={"row"} justify={"space-around"} alignContent={"center"}>
+                        <Typography variant="subtitle1" color="textPrimary">
+                            我的评分
+                        </Typography>
+                        <Typography variant="h5"  >
+                            {this.state.score}
+                        </Typography>
                     </Grid>
+                    <br/>
+                    <Grid container spacing={2} direction={"row"} justify={"space-around"} alignContent={"center"}>
                     <Typography variant="subtitle1" color="textPrimary" component="p">
                         我的评论
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        {this.props.comment}
+                        {this.state.comment.content}
                     </Typography>
+                    </Grid>
                 </CardContent>
                 <hr className={useStyles.board} color="#C7C7C7"/>
                 <CardContent>
@@ -150,43 +182,33 @@ class Collect extends Component {
                     <Typography variant="subtitle1" color="textPrimary" component="p">
                         评分与排名
                     </Typography>
-                    <Grid container spacing={2}>
-                        <Grid item xs={2}>
-                            <Typography variant="subtitle1" color="textPrimary" component="p">
+                    <Grid container spacing={2} direction={"row"} justify={"space-around"} alignContent={"center"}>
+                            <Typography variant="subtitle1" color="textPrimary" >
                                 评分
                             </Typography>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Paper className={useStyles.paper}>
-                                <Typography variant="h5" component="h3" align="center">
+                                <Typography variant="subtitle1" >
                                     {this.props.avgGrade}
                                 </Typography>
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={2}/>
-                        <Grid item xs={2}>
-                            <Typography variant="subtitle1" color="textPrimary" component="p">
+                    </Grid>
+                    <br/>
+                    <Grid container spacing={2} direction={"row"} justify={"space-around"} alignContent={"center"}>
+                            <Typography variant="subtitle1" color="textPrimary">
                                 排名
                             </Typography>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Paper className={useStyles.paper}>
-                                <Typography variant="h5" component="h3" align="center">
+                                <Typography variant="subtitle1" >
                                     {this.props.rank}
                                 </Typography>
-                            </Paper>
-                        </Grid>
                     </Grid>
-                    <Typography variant="subtitle1" color="textPrimary" component="p">
+                    <Typography variant="subtitle1" color="textPrimary" >
                         评分人数分布
                     </Typography>
 
-                    <BarChart data={data} options={options} width="600" height="250" />
+                    <BarChart data={data} options={options} width="600" height="200" />
                 </CardContent>
                 <CardActions disableSpacing>
-                    <Collectform/>
+                    <Grid container justify={"space-around"} alignContent={"center"}>
+                    <Collectform itemid={this.props.itemid}/>
                     <IconButton aria-label="Share">
-                        分享
                         <ShareIcon />
                     </IconButton>
                     <IconButton
@@ -197,9 +219,9 @@ class Collect extends Component {
                         aria-expanded={this.state.expanded}
                         aria-label="Show more"
                     >
-                        更多功能
                         <ExpandMoreIcon />
                     </IconButton>
+                    </Grid>
                 </CardActions>
                 <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                     <CardContent>

@@ -13,6 +13,7 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from '@material-ui/core/InputLabel';
 import axios from 'axios'
 import $ from'jquery'
+import Uploadavatar from "./uploadavatar";
 /*
 信息保存在state中，可以自行添加props或ajax
 */
@@ -22,7 +23,7 @@ import $ from'jquery'
 class Userinfo extends Component {
     constructor(props) {
         super(props);
-        this.state={edit:false,username:"shenruien",password:"123456",email:"123456@qq.com",id:"1",date:"2019-7-1",grade:"1"};
+        this.state={edit:false,username:"shenruien",password:"123456",email:"123456@qq.com",id:"1",date:"2019-7-1",grade:"1",imgurl:"/img/3.jpg"};
         this.handleedit=this.handleedit.bind(this);
         this.handlechange=this.handlechange.bind(this);
         this.handlesave=this.handlesave.bind(this);
@@ -30,14 +31,22 @@ class Userinfo extends Component {
     }
     componentDidMount() {
 
-        axios({url: 'http://202.120.40.8:30741/user/id/1',method:'GET'})
-            .then(
-            function (response)
-            {
-                console.log(response.data);
-                this.setState({username:response.data.username,password:response.data.password,email:response.data.mail})
-            }.bind(this)
-        )
+        if(localStorage.getItem("userid")!=null)
+        {
+            var username=localStorage.getItem("username");
+            axios({url: 'http://202.120.40.8:30741/auth/username/'+username+"?access_token="+localStorage.getItem("access_token"),method:'GET'})
+                .then(
+                    function (response)
+                    {
+                        console.log(response.data);
+                        this.setState({username:response.data.username,password:response.data.password,email:response.data.mail,imgurl:response.data.imgUrl,id:localStorage.getItem("userid")})
+                    }.bind(this)
+                )
+        }
+        else{
+            window.location.href='/#/login'
+        }
+
     }
 
 
@@ -59,26 +68,10 @@ class Userinfo extends Component {
         }
         else {
 
-            var url='http://202.120.40.8:30741/user/update/'+this.state.username;
+            var url='http://202.120.40.8:30741/auth/update/'+this.state.username+"?access_token="+localStorage.getItem("access_token");
             this.setState({edit:false});
-            $.ajax({
-                url:url,
-                type:"PUT",
-                params:{"contentType": "application/json;charset=utf-8"},
-                data:{mail:this.state.email},
-                success: function f(data) {
+            axios.put('http://202.120.40.8:30741/auth/update/'+this.state.username,{},{params:{access_token:localStorage.getItem("access_token"),mail:this.state.email,imgUrl:"http://202.120.40.8:30741/image/id/"+this.state.id+"0"}});
 
-                    console.log(data);
-
-
-                }.bind(this)
-            })
-            /*axios.put(url,{mail:this.state.email}).then(
-                function (data)
-                {
-                    alert("success");
-                }
-            )*/
         }
 
     }
@@ -108,12 +101,11 @@ class Userinfo extends Component {
             return(
 
                     <Paper >
-
                         <Grid container >
                             <Grid item xs={3}>
 
                                     <Grid container justify="center" alignItems="center">
-                                        <Avatar alt="Remy Sharp" src="/img/3.jpg" id={"avatar"} />
+                                        <Avatar alt="Remy Sharp" src={this.state.imgurl} id={"avatar"} />
 
                                     </Grid>
 
@@ -171,22 +163,24 @@ class Userinfo extends Component {
                         <Grid container >
                             <Grid item xs={3}>
                             <Grid container justify="center" alignItems="center">
-                                <Avatar alt="Remy Sharp" src="/img/3.jpg" id={"avatar"} />
-
+                                <Grid item xs={3}/>
+                                <Grid item xs={9}>
+                                <Avatar alt="Remy Sharp" src={this.state.imgurl} id={"avatar"} />
+                                </Grid>
+                                <Grid item xs={4}/>
+                                <Grid item xs={8}>
+                                <Uploadavatar imageid={this.state.id+"0"}></Uploadavatar>
+                                </Grid>
                             </Grid>
-                            <Input type={"file"}/>
+
                             </Grid>
                             <Grid item xs={9}>
                                 <Grid container>
 
                                     <Grid item xs={6}>
                                 <List >
-                                    <ListItem>
-                                        <FormControl margin="normal" required fullWidth>
-
-                                            <InputLabel htmlFor="id">username</InputLabel>
-                                            <Input type="text" id="username" value={this.state.username} onChange={this.handlechange}></Input>
-                                        </FormControl>
+                                    <ListItem id={"li"}>
+                                        <ListItemText primary="用户名" secondary={this.state.username} />
                                     </ListItem>
                                     <ListItem>
                                         <ListItemText primary="ID" secondary="1" />
@@ -208,13 +202,7 @@ class Userinfo extends Component {
                                     <ListItem>
                                         <ListItemText primary="注册日期" secondary={this.state.date}></ListItemText>
                                     </ListItem>
-                                    <ListItem>
-                                        <FormControl margin="normal" required fullWidth>
 
-                                            <InputLabel htmlFor="id">password</InputLabel>
-                                            <Input type="text" id="password" value={this.state.password} onChange={this.handlechange}></Input>
-                                        </FormControl>
-                                    </ListItem>
                                 </List>
                                     </Grid>
                                 </Grid>
