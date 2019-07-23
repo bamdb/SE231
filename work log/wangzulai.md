@@ -65,3 +65,6 @@
 * config redis cluster
 * fix CORS bug
 * complete editor function in frontend
+
+# 2019-07-23
+* work on docker image
