@@ -1,5 +1,6 @@
 package com.se.commentservice.controller;
 
+import com.se.commentservice.config.intercepter.FeignRequestInterceptor;
 import com.se.commentservice.service.CommentService;
 import com.se.commentservice.entity.Comment;
 import com.se.commentservice.entity.CommentOut;
@@ -32,12 +33,14 @@ public class CommentController {
     }
 
     @GetMapping(value="/itemid/{itemId}", produces="application/json")
-    public List<CommentOut> getCommentByItemId(@PathVariable("itemId") Long itemId) {
+    public List<CommentOut> getCommentByItemId(@PathVariable("itemId") Long itemId,
+                                               @RequestHeader("Authorization") String accessToken) {
+        FeignRequestInterceptor.accessToken = accessToken;
         return commentService.selectCommentByItemId(itemId);
     }
 
 
-    @PreAuthorize("hasRole('EDITOR') or  principal.username == userClient.getUserById(#userId).getUsername()")
+    @PreAuthorize("hasRole('EDITOR') or  #userId == authentication.principal.id")
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteCommentByID(@RequestParam("itemId") Long itemId,
                                                @RequestParam("userId") Long userId) {
@@ -45,7 +48,7 @@ public class CommentController {
         return ResponseEntity.ok().body("Delete item successfully!");
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') and #comment.getUserId == authentication.principal.id")
     @PostMapping("/insert")
     public Comment insertComment(@RequestBody Comment comment) {
         return commentService.insertComment(comment);

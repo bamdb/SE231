@@ -1,11 +1,15 @@
 package com.se.authservice.controller;
 
+import com.se.authservice.entity.MyPrincipal;
 import com.se.authservice.entity.User;
 import com.se.authservice.service.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreFilter;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.security.Principal;
 
 @RestController
 public class UserController {
@@ -20,6 +24,16 @@ public class UserController {
         else return null;
     }
 
+    @PreAuthorize("#oauth2.hasScope('server')")
+    @GetMapping(value ="/user", produces ="application/json")
+    public Principal getUser(Authentication authentication) {
+        User user = userService.selectByUsername(authentication.getName());
+        MyPrincipal myPrincipal = new MyPrincipal();
+        myPrincipal.setUsername(user.getUsername());
+        myPrincipal.setAuthorities(user.getAuthorities());
+        myPrincipal.setId(user.getId());
+        return myPrincipal;
+    }
 
     @PreAuthorize("#oauth2.hasScope('server')")
     @GetMapping(value ="/all", produces ="application/json")

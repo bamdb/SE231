@@ -96,15 +96,19 @@ public class RatingServiceApplicationTests {
         itemClient.postItem(item1);
 
         mvc.perform(post("/add/itemid/1")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
         mvc.perform(post("/add/itemid/2")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
         mvc.perform(post("/add/itemid/1")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
         mvc.perform(post("/add/itemid/0")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
@@ -114,20 +118,27 @@ public class RatingServiceApplicationTests {
         mvc.perform(get("/id/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/itemid/1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/itemid/1")
+                .header("Authorization", "0").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
 
-        mvc.perform(get("/itemid/0").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/itemid/0")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         itemClient.deleteItemById(2L);
-        mvc.perform(get("/itemid/2").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/itemid/2")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         item.setType(2);
         itemClient.updateItemById(item);
-        mvc.perform(get("/itemid/1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/itemid/1")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         mvc.perform(get("/browser?type=0&page=0&pageSize=5").contentType(MediaType.APPLICATION_JSON))
@@ -137,7 +148,7 @@ public class RatingServiceApplicationTests {
         mvc.perform(get("/browser?type=0&page=0&pageSize=5").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/score?userId=1&itemId=1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/score?userId=1&itemId=1").contentType(MediaType.APPLICATION_JSON).header("Authorization", "0"))
                 .andExpect(status().isOk());
 
     }
@@ -153,22 +164,32 @@ public class RatingServiceApplicationTests {
         item.setPubTime(Timestamp.valueOf("2019-07-01 08:00:00.0"));
         item.setType(0);
         itemClient.postItem(item);
-        mvc.perform(post("/add/itemid/1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(post("/add/itemid/1")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(put("/update/itemid/1").contentType(MediaType.APPLICATION_JSON)
+        mvc.perform(put("/update/itemid/1")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON)
                 .content("[100, 0, 0, 0, 0, 0, 0, 0, 0]"))
                 .andExpect(status().isOk());
 
-        mvc.perform(put("/update/itemid/0").contentType(MediaType.APPLICATION_JSON)
+        mvc.perform(put("/update/itemid/0")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON)
                 .content("[0, 100, 0, 0, 0, 0, 0, 0, 0, 0]"))
                 .andExpect(status().isOk());
 
-        mvc.perform(put("/update/itemid/1").contentType(MediaType.APPLICATION_JSON)
+        mvc.perform(put("/update/itemid/1")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON)
                 .content("[0, 100, 0, 0, 0, 0, 0, 0, 0, 0]"))
                 .andExpect(status().isOk());
 
-        mvc.perform(put("/update/itemid/1").contentType(MediaType.APPLICATION_JSON)
+        mvc.perform(put("/update/itemid/1")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON)
                 .content("[0, 0, 0, 0, 0, 0, 0, 0, 0, 100]"))
                 .andExpect(status().isOk());
 
@@ -227,9 +248,11 @@ public class RatingServiceApplicationTests {
         item1.setType(0);
         itemClient.postItem(item1);
         mvc.perform(post("/add/itemid/1")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
         mvc.perform(post("/add/itemid/2")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 

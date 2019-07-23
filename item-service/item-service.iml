@@ -26,16 +26,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: org.springframework.security.oauth:spring-security-oauth2:2.3.6.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.9.13" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.13" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-starter-oauth2:2.1.2.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-starter-security:2.1.2.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-security:2.1.2.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.1.2.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-core:2.3.0.1" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-impl:2.3.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-jwt:1.0.9.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-starter-openfeign:2.1.1.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-starter:2.1.1.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-context:2.1.1.RELEASE" level="project" />
@@ -225,5 +215,6 @@
     <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-async:3.8.2" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-reactivestreams:1.9.2" level="project" />
     <orderEntry type="library" name="Maven: io.projectreactor:reactor-core:3.2.10.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.8" level="project" />
   </component>
 </module>

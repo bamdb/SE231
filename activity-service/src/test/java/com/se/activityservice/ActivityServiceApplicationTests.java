@@ -6,6 +6,7 @@ import com.se.activityservice.client.ItemClient;
 import com.se.activityservice.client.UserClient;
 import com.se.activityservice.config.MethodSecurityConfig;
 import com.se.activityservice.config.ResourceServer;
+import com.se.activityservice.entity.MyPrincipal;
 import com.se.activityservice.service.impl.ActivityServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
@@ -19,6 +20,11 @@ import org.springframework.cloud.netflix.ribbon.StaticServerList;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -28,6 +34,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Collection;
+
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -46,8 +55,19 @@ public class ActivityServiceApplicationTests {
     private WebApplicationContext context;
     private MockMvc mvc;
 
+    public Authentication authentication() {
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        MyPrincipal myPrincipal = new MyPrincipal();
+        myPrincipal.setAuthorities(authorities);
+        myPrincipal.setUsername("custom");
+        myPrincipal.setId(1L);
+        return new UsernamePasswordAuthenticationToken(myPrincipal, "customPassword", authorities);
+    }
+
     @Before
     public void setup() {
+        SecurityContextHolder.getContext().setAuthentication(authentication());
         mvc = MockMvcBuilders.webAppContextSetup(context)
                 .apply(springSecurity())
                 .build();
@@ -68,75 +88,102 @@ public class ActivityServiceApplicationTests {
     @Test
     public void controllerTest() throws Exception {
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"actTime\":\"1562294429\", \"actType\":0, \"userId\":1, \"itemId\":1}"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"actTime\":\"1562294429\", \"actType\":0, \"userId\":2, \"itemId\":2}"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"actTime\":\"1562294429\", \"actType\":1, \"userId\":0, \"itemId\":2}"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"actTime\":\"1562294429\", \"actType\":1, \"userId\":null, \"itemId\":2}"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"actTime\":\"1562294429\", \"actType\":2, \"userId\":2, \"itemId\":0}"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"actTime\":\"1562294429\", \"actType\":2, \"userId\":2, \"itemId\":null}"))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/all").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/all")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/id/1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/id/1")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/userid/1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/userid/1")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/itemid/1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/itemid/1")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/collect?userId=1&itemId=1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/collect?userId=1&itemId=1")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/userid/0").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/userid/0")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/itemid/0").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/itemid/0")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         userClient.deleteUserById(1L);
         itemClient.deleteItemById(2L);
-        mvc.perform(get("/userid/1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/userid/1")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/itemid/2").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/itemid/2")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void deleteTest() throws Exception {
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"actTime\":\"1562294429\", \"actType\":0, \"userId\":2, \"itemId\":2}"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"actTime\":\"1562294429\", \"actType\":0, \"userId\":3, \"itemId\":3}"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"actTime\":\"1562294429\", \"actType\":0, \"userId\":2, \"itemId\":4}"))
                 .andExpect(status().isOk());
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"actTime\":\"1562294429\", \"actType\":0, \"userId\":5, \"itemId\":3}"))
                 .andExpect(status().isOk());
@@ -170,7 +217,8 @@ public class ActivityServiceApplicationTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"itemId\":1, \"userId\":2, \"chapters\":[{\"chapterNum\":1,\"finish\":1,\"sections\":[1,1,1]}]}"))
                 .andExpect(status().isOk());
-        mvc.perform(get("/progress?itemId=1&userId=2"))
+        mvc.perform(get("/progress?itemId=1&userId=2")
+                .header("Authorization", "0"))
                 .andExpect(status().isOk());
     }
 

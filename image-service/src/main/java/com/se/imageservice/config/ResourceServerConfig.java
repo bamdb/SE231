@@ -1,6 +1,9 @@
 package com.se.imageservice.config;
 
+import com.se.imageservice.service.UserInfoTokenServices;
 import feign.RequestInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.security.oauth2.client.feign.OAuth2FeignRequestInterceptor;
 import org.springframework.context.annotation.Bean;
@@ -33,15 +36,21 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public OAuth2RestTemplate clientCredentialsRestTemplate() {
         return new OAuth2RestTemplate(clientCredentialsResourceDetails());
     }
-    @Bean
-    public ResourceServerTokenServices tokenServices() {
-        RemoteTokenServices tokenServices = new RemoteTokenServices();
-        tokenServices.setClientId("image-service");
-        tokenServices.setClientSecret("image-service");
-        tokenServices.setCheckTokenEndpointUrl("http://localhost:8000/auth/oauth/check_token");
-        return tokenServices;
+
+    private final ResourceServerProperties sso;
+    @Autowired
+    public ResourceServerConfig(ResourceServerProperties sso) {
+        this.sso = sso;
     }
 
+    @Bean
+    public ResourceServerTokenServices tokenServices() {
+        UserInfoTokenServices userInfoTokenServices = new UserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
+        userInfoTokenServices.setClientId("image-service");
+        userInfoTokenServices.setClientSecret("image-service");
+        userInfoTokenServices.setCheckTokenEndpointUrl("http://localhost:8000/auth/oauth/check_token");
+        return userInfoTokenServices;
+    }
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()

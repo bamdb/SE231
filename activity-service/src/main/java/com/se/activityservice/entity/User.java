@@ -1,5 +1,6 @@
 package com.se.activityservice.entity;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class User {

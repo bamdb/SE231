@@ -5,9 +5,9 @@ import com.se.activityservice.entity.ActivityItemOut;
 import com.se.activityservice.entity.ActivityUserOut;
 import com.se.activityservice.entity.Progress;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
 public interface ActivityService {
     Activity postActivity(Activity Activity);
 

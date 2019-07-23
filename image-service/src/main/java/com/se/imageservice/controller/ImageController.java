@@ -21,6 +21,7 @@ public class ImageController {
         this.imageRepository = imageRepository;
     }
 
+
     @GetMapping(value="/id/{imageId}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
     public byte[] getImageById(@PathVariable Long imageId){
         if (imageRepository.existsByImageId(imageId))
@@ -35,7 +36,8 @@ public class ImageController {
         return ResponseEntity.ok().body("delete item successfully!");
     }
 
-    @PreAuthorize("hasRole('EDITOR')")
+    /*TO BE REVISED*/
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/update")
     public Image updateImageById(@RequestParam("imageId") Long imageId, @RequestParam("image") MultipartFile file) throws IOException {
         Image image = imageRepository.findByImageId(imageId).orElse(new Image(imageId, new Binary(file.getBytes())));
@@ -43,6 +45,7 @@ public class ImageController {
         return imageRepository.save(image);
     }
 
+    /*TO BE REVISED*/
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/insert")
     public Image insertImageById(@RequestParam("imageId") Long imageId, @RequestParam("image") MultipartFile file) throws IOException {

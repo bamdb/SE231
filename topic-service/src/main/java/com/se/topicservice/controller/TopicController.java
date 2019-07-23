@@ -1,5 +1,6 @@
 package com.se.topicservice.controller;
 
+import com.se.topicservice.config.intercepter.FeignRequestInterceptor;
 import com.se.topicservice.entity.*;
 import com.se.topicservice.service.TopicService;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +16,18 @@ public class TopicController {
 
     @PreAuthorize("hasRole('USER')")
     @PostMapping(value="/add", produces="application/json")
-    public Topic postTopic(@RequestBody TopicIn topicIn) {
+    public Topic postTopic(@RequestBody TopicIn topicIn, @RequestHeader("Authorization") String accessToken) {
+        FeignRequestInterceptor.accessToken = accessToken;
         return topicService.postTopic(topicIn);
     }
 
     @PreAuthorize("hasRole('USER')")
     @PostMapping(value="/add/reply", produces="application/json")
     public TopicPage postReply(@RequestParam("topicId") Long topicId,
-                               @RequestParam("userId") Long userId, @RequestBody String topicContent) {
+                               @RequestParam("userId") Long userId,
+                               @RequestBody String topicContent,
+                               @RequestHeader("Authorization") String accessToken) {
+        FeignRequestInterceptor.accessToken = accessToken;
         return topicService.postReply(topicId, userId, topicContent);
     }
 

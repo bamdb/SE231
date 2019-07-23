@@ -105,7 +105,8 @@ public class FriendControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("true"));
-        mvc.perform(get("/all/userid/11"))
+        mvc.perform(get("/all/userid/11")
+                .header("Authorization", "0"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
         mvc.perform(delete("/delete/userid/22"))
