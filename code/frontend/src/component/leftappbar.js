@@ -351,7 +351,7 @@ export default function LeftAppBar(props) {
                 <br/><br/>
                 <ListItem>
                     <Grid container justify="space-around" alignItems="center" spacing={2}>
-                    <Avatar alt="Remy Sharp" src="/img/3.jpg" className={useStyles.avater}/>
+                    <Avatar alt="暂无用户" src={"http://202.120.40.8:30741/image/id/"+localStorage.getItem("userid")+"0"} className={useStyles.avater}/>
                     <Typography color={"textSecondary"}>{username}</Typography>
                     </Grid>
                 </ListItem>
