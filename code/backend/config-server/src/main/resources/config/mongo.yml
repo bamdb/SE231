@@ -1,0 +1,11 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://202.120.40.8:30746/bamdb?connectTimeoutMS=20000&heartbeatFrequencyMS=5000&localThresholdMS=3000&maxIdleTimeMS=5000&serverSelectionTimeoutMS=15000&socketTimeoutMS=7500
+      options:
+        connectTimeoutMS: 20000
+        heartbeatFrequencyMS: 5000
+        localThresholdMS: 3000
+        maxIdleTimeMS: 5000
+        serverSelectionTimeoutMS: 15000
+        socketTimeoutMS: 7500

@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    config:
+      discovery:
+        enabled: false
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://bamdb:bamdb@localhost:8761/eureka/
+
