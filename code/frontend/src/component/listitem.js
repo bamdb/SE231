@@ -201,7 +201,7 @@ class Listitem extends Component {
                     >
                         <Card
                             size={"small"}
-                            style={{minWidth:144}}
+                            style={{maxWidth:200}}
                             cover={
                                 <img
                                     height={120}
