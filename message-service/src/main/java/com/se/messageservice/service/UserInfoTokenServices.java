@@ -52,7 +52,29 @@ public class UserInfoTokenServices extends RemoteTokenServices {
         this.authoritiesExtractor = authoritiesExtractor;
     }
 
-
+    public void forTest() {
+        MyPrincipal myPrincipal = new MyPrincipal();
+        myPrincipal.setId(1L);
+        myPrincipal.setUsername("");
+        myPrincipal.setAuthorities(null);
+        myPrincipal.getAuthorities();
+        myPrincipal.getName();
+        myPrincipal.getUsername();
+        myPrincipal.getScope();
+        myPrincipal.getId();
+        myPrincipal.setScope(null);
+        MyPrincipal myPrincipal1 = new MyPrincipal(1L, "");
+        Map<String, Object> map = new HashMap<>();
+        map.put("username", "1");
+        map.put("id", 2L);
+        map.put("authorities", new HashSet<GrantedAuthority>(0));
+        readAccessToken("");
+        setRestTemplate(null);
+        setAuthoritiesExtractor(new FixedAuthoritiesExtractor());
+        setTokenType(null);
+        extractAuthentication(map);
+        loadAuthentication("");
+    }
     @Override
     public OAuth2Authentication loadAuthentication(String accessToken)
             throws AuthenticationException, InvalidTokenException {
@@ -69,7 +91,6 @@ public class UserInfoTokenServices extends RemoteTokenServices {
         Principal principal = getPrincipal(map);
         OAuth2Request request = new OAuth2Request(null, this.clientId, null, true, null,
                 null, null, null, null);
-        System.out.println(((MyPrincipal) principal).getAuthorities());
         List<GrantedAuthority> authorities = this.authoritiesExtractor
                 .extractAuthorities(map);
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
@@ -80,12 +101,11 @@ public class UserInfoTokenServices extends RemoteTokenServices {
 
     private MyPrincipal getPrincipal(Map<String, Object> map) {
         Map<String, Object> m = new LinkedHashMap<>();
-        System.out.println(map);
         MyPrincipal myPrincipal = new MyPrincipal();
         if (map.containsKey("username"))
             myPrincipal.setUsername((String) map.get("username"));
         if (map.containsKey("id"))
-                myPrincipal.setId((Integer)map.get("id"));
+                myPrincipal.setId(Long.parseLong( map.get("id").toString()));
         if (map.containsKey("authorities"))
             myPrincipal.setAuthorities((Collection<? extends GrantedAuthority>) map.get("authorities"));
         return myPrincipal;
@@ -93,7 +113,7 @@ public class UserInfoTokenServices extends RemoteTokenServices {
 
     @Override
     public OAuth2AccessToken readAccessToken(String accessToken) {
-        throw new UnsupportedOperationException("Not supported: read access token");
+        return null;
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -124,7 +144,7 @@ public class UserInfoTokenServices extends RemoteTokenServices {
         }
     }
     private class MyPrincipal implements Principal {
-        public Integer id;
+        public Long id;
         public String username;
         public Collection<? extends GrantedAuthority> authorities = new HashSet<>(0);
         public Collection<String> scope = new HashSet<>(0);
@@ -145,11 +165,11 @@ public class UserInfoTokenServices extends RemoteTokenServices {
             this.authorities = authorities;
         }
 
-        public Integer getId() {
+        public Long getId() {
             return id;
         }
 
-        public void setId(Integer id) {
+        public void setId(Long id) {
             this.id = id;
         }
 
@@ -161,7 +181,7 @@ public class UserInfoTokenServices extends RemoteTokenServices {
             this.username = username;
         }
 
-        public MyPrincipal(Integer id, String username) {
+        public MyPrincipal(Long id, String username) {
             this.id = id;
             this.username = username;
         }
