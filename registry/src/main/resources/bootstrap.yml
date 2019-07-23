@@ -1,5 +1,0 @@
-spring:
-  cloud:
-    config:
-      name: registry
-      uri: http://localhost:8888
