@@ -101,12 +101,12 @@ class Register extends Component {
                             <Grid item xs={2}/>
                             <Grid item xs={8}>
                                 <Typography variant={"h4"} component="h4" >注册成为Bamdb会员</Typography> <br/>
-                                <Typography component="p">你的email地址</Typography><br/>
-                                <TextField className={useStyles.textField} margin={"normal"} name={"email"} type={"text"} value={this.state.email} onChange={this.handleInforChange} /><br/>
-                                <Typography component="p">你的用户名</Typography><br/>
-                                <TextField className={useStyles.textField} margin={"normal"} name={"name"} type={"text"} value={this.state.name} onChange={this.handleInforChange} /><br/>
-                                <Typography component="p">输入密码</Typography><br/>
-                                <TextField className={useStyles.textField} margin={"normal"} name={"password"} type={"password"} value={this.state.password} onChange={this.handleInforChange} /><br/>
+                                <Typography variant={"subtitle1"}>你的email地址</Typography>
+                                <TextField className={useStyles.textField} margin={"dense"} name={"email"} type={"text"} value={this.state.email} onChange={this.handleInforChange} /><br/>
+                                <Typography variant={"subtitle1"}>你的用户名</Typography>
+                                <TextField className={useStyles.textField} margin={"dense"} name={"name"} type={"text"} value={this.state.name} onChange={this.handleInforChange} /><br/>
+                                <Typography variant={"subtitle1"}>输入密码</Typography>
+                                <TextField className={useStyles.textField} margin={"dense"} name={"password"} type={"password"} value={this.state.password} onChange={this.handleInforChange} /><br/>
                                 <Button
                                     variant="outlined"
                                     color="primary"
@@ -123,7 +123,7 @@ class Register extends Component {
                 </Grid>
 
                 <Grid item xs={6}>
-                    <Paper className={useStyles.paper} >
+                    <Paper >
                         <Grid container spacing={1}>
                             <Grid item xs={4} />
                             <Grid item xs={6} >
