@@ -1,55 +1,35 @@
 version: '2'
 
 services:
-  config:
-    image: bamdb/config-server
-    hostname: config
-    restart: always
   registry:
     image: bamdb/registry
     hostname: registry
-    restart: always
-    depends_on:
-      - config
+    restart: unless-stopped
   auth:
     image: bamdb/auth-service
     hostname: auth
-    restart: always
-    depends_on:
-      - config
+    restart: unless-stopped
   item:
     image: bamdb/item-service
     hostname: auth
-    restart: always
-    depends_on:
-      - config
+    restart: unless-stopped
   comment:
     image: bamdb/comment-service
     hostname: comment
-    restart: always
-    depends_on:
-      - config
+    restart: unless-stopped
   friend:
     image: bamdb/friend-service
     hostname: friend
-    restart: always
-    depends_on:
-      - config
+    restart: unless-stopped
   image:
     image: bamdb/image-service
     hostname: image
-    restart: always
-    depends_on:
-      - config
+    restart: unless-stopped
   message:
-    image: bamdb/message-sercie
+    image: bamdb/message-service
     hostname: message
-    restart: always
-    depends_on:
-      - config
+    restart: unless-stopped
   gateway:
     image: bamdb/gateway
     hostname: gateway
-    restart: always
-    depends_on:
-      - config
+    restart: unless-stopped
