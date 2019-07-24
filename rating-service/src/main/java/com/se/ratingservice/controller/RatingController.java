@@ -52,8 +52,11 @@ public class RatingController {
     }
 
     @GetMapping(value="/browser", produces="application/json")
-    public List<RatingOut> getRatingPageByType(@RequestParam("type") Integer type, @RequestParam("page") int pageNum,
-                                               @RequestParam("pageSize") int pageSize) {
+    public List<RatingOut> getRatingPageByType(@RequestParam("type") Integer type,
+                                               @RequestParam("page") int pageNum,
+                                               @RequestParam("pageSize") int pageSize,
+                                               @RequestHeader("Authorization") String accessToken) {
+        FeignRequestInterceptor.accessToken = accessToken;
         return ratingService.selectPageByType(type, pageNum, pageSize);
     }
 

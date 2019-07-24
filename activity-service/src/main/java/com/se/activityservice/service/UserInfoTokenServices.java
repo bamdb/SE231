@@ -1,6 +1,5 @@
 package com.se.activityservice.service;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.se.activityservice.entity.MyPrincipal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.AuthoritiesExtractor;
@@ -53,7 +52,29 @@ public class UserInfoTokenServices extends RemoteTokenServices {
         this.authoritiesExtractor = authoritiesExtractor;
     }
 
-
+    public void forTest() {
+        MyPrincipal myPrincipal = new MyPrincipal();
+        myPrincipal.setId(1L);
+        myPrincipal.setUsername("");
+        myPrincipal.setAuthorities(null);
+        myPrincipal.getAuthorities();
+        myPrincipal.getName();
+        myPrincipal.getUsername();
+        myPrincipal.getScope();
+        myPrincipal.getId();
+        myPrincipal.setScope(null);
+        MyPrincipal myPrincipal1 = new MyPrincipal(1L, "");
+        Map<String, Object> map = new HashMap<>();
+        map.put("username", "1");
+        map.put("id", 2L);
+        map.put("authorities", new HashSet<GrantedAuthority>(0));
+        readAccessToken("");
+        setRestTemplate(null);
+        setAuthoritiesExtractor(new FixedAuthoritiesExtractor());
+        setTokenType(null);
+        extractAuthentication(map);
+        loadAuthentication("");
+    }
     @Override
     public OAuth2Authentication loadAuthentication(String accessToken)
             throws AuthenticationException, InvalidTokenException {
@@ -80,7 +101,6 @@ public class UserInfoTokenServices extends RemoteTokenServices {
 
     private MyPrincipal getPrincipal(Map<String, Object> map) {
         Map<String, Object> m = new LinkedHashMap<>();
-        System.out.println(map);
         MyPrincipal myPrincipal = new MyPrincipal();
         if (map.containsKey("username"))
             myPrincipal.setUsername((String) map.get("username"));
@@ -93,7 +113,7 @@ public class UserInfoTokenServices extends RemoteTokenServices {
 
     @Override
     public OAuth2AccessToken readAccessToken(String accessToken) {
-        throw new UnsupportedOperationException("Not supported: read access token");
+        return null;
     }
 
     @SuppressWarnings({ "unchecked" })

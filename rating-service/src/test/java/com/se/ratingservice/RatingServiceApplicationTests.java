@@ -141,14 +141,20 @@ public class RatingServiceApplicationTests {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/browser?type=0&page=0&pageSize=5").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/browser?type=0&page=0&pageSize=5")
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", "0"))
                 .andExpect(status().isOk());
 
         itemClient.deleteItemById(1L);
-        mvc.perform(get("/browser?type=0&page=0&pageSize=5").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/browser?type=0&page=0&pageSize=5")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mvc.perform(get("/score?userId=1&itemId=1").contentType(MediaType.APPLICATION_JSON).header("Authorization", "0"))
+        mvc.perform(get("/score?userId=1&itemId=1")
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON).header("Authorization", "0"))
                 .andExpect(status().isOk());
 
     }
