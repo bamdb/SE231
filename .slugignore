@@ -1,0 +1,17 @@
+*.rar
+*.zip
+*.jar
+*.war
+*.tar.gz
+*.class
+
+.idea/
+node_modules/
+
+*/target
+*/bamdb.log
+*/bin
+.settings
+.project
+*.sh
+*.md
