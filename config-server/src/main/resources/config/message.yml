@@ -2,7 +2,7 @@ spring:
   application:
     name: message
 server:
-  port: 8090
+  port: 8095
 security:
   oauth2:
     client:

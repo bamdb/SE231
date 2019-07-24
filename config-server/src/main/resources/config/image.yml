@@ -3,7 +3,7 @@ spring:
     name: image
 
 server:
-  port: 8090
+  port: 8093
 security:
   oauth2:
     client:

@@ -2,7 +2,7 @@ spring:
   application:
     name: rating
 server:
-  port: 8090
+  port: 8096
 security:
   oauth2:
     client:
