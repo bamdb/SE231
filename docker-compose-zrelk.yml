@@ -1,0 +1,51 @@
+version: '2'
+
+services:
+  storage:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.0.0
+    container_name: elasticsearch
+    network_mode: host
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - 9200:9200
+
+  zipkin:
+    image: openzipkin/zipkin
+    environment:
+      - STORAGE_TYPE=elasticsearch
+      - ES_HOSTS=http://localhost:9200
+    ports:
+      - 9411:9411
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.0.0
+    network_mode: host
+    links:
+      - elasticsearch
+    ports:
+      - 5601:5601
+    environment:
+      - ELASTICSEARCH_URL=http://localhost:9200
+  rabbitmq:
+    image: rabbitmq
+    network_mode: host
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+#      - elasticsearch.username=elastic
+#      - elasticsearch.password=password
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.0.0
+    network_mode: host
+    links:
+      - elasticsearch
+      - rabbitmq
+    volumes:
+      - ./logstash/pipeline:/usr/share/logstash/pipeline/
+    environment:
+      - xpack.monitoring.elasticsearch.url=http://localhost:9200
+#      - xpack.monitoring.elasticsearch.username=elastic
+#      - xpack.monitoring.elasticsearch.password=password
