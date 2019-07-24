@@ -58,10 +58,10 @@ Sprint 1 (July.1-July.10)
     学习antd theme，初步构思。<br/>
     修改前端页面
     
-  July.24
-  添加progress/update,并修改部分逻辑，见frontend design  <br/>
-	在用户主页面做出走马灯效果<br/>
-	所有界面跳转放在page里
+July.24<br/>  
+>添加progress/update,并修改部分逻辑，见frontend design  <br/>
+>在用户主页面做出走马灯效果<br/>
+>所有界面跳转放在page里
   
 
     
