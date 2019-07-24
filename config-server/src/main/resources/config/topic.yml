@@ -2,7 +2,7 @@ spring:
   application:
     name: topic
 server:
-  port: 8090
+  port: 8097
 security:
   oauth2:
     client:
