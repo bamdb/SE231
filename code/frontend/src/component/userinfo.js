@@ -93,134 +93,66 @@ class Userinfo extends Component {
     }
 
 
-    render(){
-        if(!this.state.edit){
-            return(
+    render() {
 
-                    <Paper >
-                        <Grid container >
-                            <Grid item xs={3}>
+        const upload = this.state.edit ? <Uploadavatar imageid={this.state.id + "0"}/> : <div/>;
+        const email = this.state.edit ? <FormControl>
+            <InputLabel htmlFor="id">email</InputLabel>
+            <Input type="text" id="email" value={this.state.email} onChange={this.handlechange}></Input>
+        </FormControl> :<ListItemText primary="邮箱" secondary={this.state.email}/>
+            ;
 
-                                    <Grid container justify="center" alignItems="center">
-                                        <Avatar alt="Remy Sharp" src={this.state.imgurl} id={"avatar"} />
+        const button= this.state.edit ?  <div>
+            <Button id="button" onClick={this.handlesave} variant="contained" color="primary">save</Button>
+            <Button id="button" onClick={this.handlecancel}variant="contained" color="primary">cancel</Button>
+            </div> :
+            <div><Button id="button" onClick={this.handleedit} variant="contained" color="primary">edit user
+            information</Button></div>;
 
-                                    </Grid>
-
-                            </Grid>
-                            <Grid item xs={9}>
-                                <Grid container>
-
-                                   <Grid item xs={6}>
-                                        <List >
-                                            <ListItem id={"li"}>
-                                                <ListItemText primary="用户名" secondary={this.state.username} />
-                                            </ListItem>
-                                            <ListItem id={"li"}>
-                                                <ListItemText primary="ID" secondary={this.state.id} />
-                                            </ListItem>
-                                            <ListItem id={"li"}>
-                                                <ListItemText primary="邮箱" secondary={this.state.email} />
-                                            </ListItem>
-                                        </List>
-                                   </Grid>
-                                    <Grid item xs={6}>
-                                    <div id={"right-part"}>
-                                        <List>
-                                            <ListItem id={"li"}>
-                                                <ListItemText primary="等级" secondary={this.state.grade}></ListItemText>
-                                            </ListItem>
-                                            <ListItem id={"li"}>
-                                                <ListItemText primary="注册日期" secondary={this.state.date}></ListItemText>
-                                            </ListItem>
-
-                                        </List>
-                                    </div>
-                                    </Grid>
-
-                                </Grid>
-                            </Grid>
+        return (
+            <Grid container id="userinfo">
+                <Grid item xs={3}>
+                    <Grid container justify={"center"}>
+                    <Avatar alt="Remy Sharp" src={this.state.imgurl} id={"avatar"}/>
+                        <div id="upload">{upload}</div>
+                    </Grid>
+                </Grid>
+                <Grid item xs={9}>
+                    <Grid container justify="center" alignItems="center">
+                        <Grid item xs={6}>
+                            <List>
+                                <ListItem id={"li"}>
+                                    <ListItemText primary="用户名" secondary={this.state.username}/>
+                                </ListItem>
+                                <ListItem id={"li"}>
+                                    <ListItemText primary="ID" secondary={this.state.id}/>
+                                </ListItem>
+                                <ListItem id={"li"}>
+                                    {email}
+                                </ListItem>
+                            </List>
                         </Grid>
-                        <br/>
-                        <Grid container>
-                            <Grid item xs={3}>
-                            </Grid>
-                            <Grid item xs={9}>
-                            <Button id="button" onClick={this.handleedit} variant="contained" color="primary">edit user information</Button>
-                                <br/>
-                            </Grid>
+                        <Grid item xs={6}>
+                            <List>
+                                <ListItem id={"li"}>
+                                    <ListItemText primary="等级" secondary={this.state.grade}></ListItemText>
+                                </ListItem>
+                                <ListItem id={"li"}>
+                                    <ListItemText primary="注册日期" secondary={this.state.date}></ListItemText>
+                                </ListItem>
+
+                            </List>
                         </Grid>
-                    </Paper>
-
-            )
-        }
-        else{
-            return(
-
-                    <Paper >
-                        <Grid container >
-                            <Grid item xs={3}>
-                            <Grid container justify="center" alignItems="center">
-                                <Grid item xs={3}/>
-                                <Grid item xs={9}>
-                                <Avatar alt="Remy Sharp" src={this.state.imgurl} id={"avatar"} />
-                                </Grid>
-                                <Grid item xs={4}/>
-                                <Grid item xs={8}>
-                                <Uploadavatar imageid={this.state.id+"0"}></Uploadavatar>
-                                </Grid>
-                            </Grid>
-
-                            </Grid>
-                            <Grid item xs={9}>
-                                <Grid container>
-
-                                    <Grid item xs={6}>
-                                <List >
-                                    <ListItem id={"li"}>
-                                        <ListItemText primary="用户名" secondary={this.state.username} />
-                                    </ListItem>
-                                    <ListItem>
-                                        <ListItemText primary="ID" secondary="1" />
-                                    </ListItem>
-                                    <ListItem>
-                                        <FormControl margin="normal" required fullWidth>
-
-                                            <InputLabel htmlFor="id">email</InputLabel>
-                                            <Input type="text" id="email" value={this.state.email} onChange={this.handlechange}></Input>
-                                        </FormControl>
-                                    </ListItem>
-                                </List>
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                <List>
-                                    <ListItem>
-                                        <ListItemText primary="等级" secondary={this.state.grade}></ListItemText>
-                                    </ListItem>
-                                    <ListItem>
-                                        <ListItemText primary="注册日期" secondary={this.state.date}></ListItemText>
-                                    </ListItem>
-
-                                </List>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-
-                        <Grid container>
-                            <Grid item xs={3}>
-                            </Grid>
-                            <Grid item xs={9}>
-                            <Button id="button" onClick={this.handlesave} variant="contained" color="primary">save</Button>
-                            <Button id="button" onClick={this.handlecancel}variant="contained" color="primary">cancel</Button>
-                            </Grid>
-                            <br/>
-                        </Grid>
-                    </Paper>
-
-
-            )
-        }
-
-   }
+                    </Grid>
+                </Grid>
+                <Grid item xs={3}>
+                </Grid>
+                <Grid item xs={9}>
+                    {button}
+                    <br/>
+                </Grid>
+            </Grid>
+        )
+    }
 }
 export default Userinfo;
