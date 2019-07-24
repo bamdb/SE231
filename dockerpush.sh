@@ -1,0 +1,12 @@
+docker push bamdb/activity-service
+docker push bamdb/auth-service
+docker push bamdb/comment-service
+docker push bamdb/config-server
+docker push bamdb/friend-service
+docker push bamdb/gateway
+docker push bamdb/image-service
+docker push bamdb/item-service
+docker push bamdb/message-service
+docker push bamdb/rating-service
+docker push bamdb/registry
+docker push bamdb/topic-service

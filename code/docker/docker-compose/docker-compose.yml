@@ -1,0 +1,55 @@
+version: '2'
+
+services:
+  config:
+    image: bamdb/config-server
+    hostname: config
+    restart: always
+  registry:
+    image: bamdb/registry
+    hostname: registry
+    restart: always
+    depends_on:
+      - config
+  auth:
+    image: bamdb/auth-service
+    hostname: auth
+    restart: always
+    depends_on:
+      - config
+  item:
+    image: bamdb/item-service
+    hostname: auth
+    restart: always
+    depends_on:
+      - config
+  comment:
+    image: bamdb/comment-service
+    hostname: comment
+    restart: always
+    depends_on:
+      - config
+  friend:
+    image: bamdb/friend-service
+    hostname: friend
+    restart: always
+    depends_on:
+      - config
+  image:
+    image: bamdb/image-service
+    hostname: image
+    restart: always
+    depends_on:
+      - config
+  message:
+    image: bamdb/message-sercie
+    hostname: message
+    restart: always
+    depends_on:
+      - config
+  gateway:
+    image: bamdb/gateway
+    hostname: gateway
+    restart: always
+    depends_on:
+      - config
