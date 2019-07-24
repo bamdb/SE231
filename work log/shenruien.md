@@ -51,3 +51,6 @@
 # 2019-7-22
 * fix bugs in frontend
 * modify frotend logic to fit bakcend
+# 2019-7-23
+* finishing sprint2
+* finishing basic frontend
