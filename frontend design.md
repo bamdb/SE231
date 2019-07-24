@@ -34,14 +34,36 @@ UserHomePage
 
 ItemBrowserPage
 
-    页面内容：条目浏览，分为图书、电影，用户可以收藏/跳转详细页面，editor可delete
+    页面内容：条目浏览，分为图书、电影，用户可以收藏/跳转详细页面，编辑员可delete一个条目
     url:/itembrowse/book or /itembrowse/movie
     ajax：
         1. /rating/browser 获取排行榜数据，同上
+		
 		2. .Tags 需要获取热门/推荐tag，现在只有虚假数据
-        3. .Itemlist: /activity/update/progress 新建进度项，根据用户收藏状态，“想看”“在看”为全false，“看过”为全true，“搁置”与“抛弃”不可创建新的progress。 
+		
+        3. .Itemlist: 
+		
+			3.1 /activity/update/progress 
+			新建进度项，根据用户收藏状态，“想看”“在看”为全false，“看过”为全true，“搁置”与“抛弃”不可创建新的progress。 
         
-        PS “在看”的初始值不应为全空，此外想看、在看、看过、抛弃、搁置互相之间的转化应有规则限制。
-        
-        
+			3.2 /item/delete/id/{id} editor有权限删除item
+		
+		4. .Itemlist.Collectform
+		
+			4.1 /item/tag/id/{id} 获取item的tag信息
+			4.2 /activity/add
+			4.3 /comment/insert
+			4.4 /rating/update
+			4.5 /item/add/tag
+			
+        PS  “在看”的初始值不应为全空，
+			想看、在看、看过、抛弃、搁置互相之间的转化应有规则限制。
+			
+
+Topicpage
+		
+    页面内容：显示热门条目
+    
+    
+UserInfo
     
