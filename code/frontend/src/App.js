@@ -81,7 +81,8 @@ function App() {
                 <div className={classes.toolbar} />
                 <Route path={'/topic'} component={Topicpage}></Route>
                 <Route path={'/topicdetail/*'} component={Topicdetailpage}></Route>
-                <Route path={'/itembrowse/*'} component={Itembrowsepage}></Route>
+                <Route path={'/itembrowse/movie'} component={Itembrowsepage}></Route>
+                <Route path={'/itembrowse/book'} component={Itembrowsepage}></Route>
                 <Route path={'/login'} component={LoginPage}></Route>
                 <Route exact path={'/'} component={UserHomepage}></Route>
                 <Route path={'/register'} component={RegisterPage}></Route>

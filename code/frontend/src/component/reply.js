@@ -57,7 +57,7 @@ class Reply extends Component {
         var text=this.state.text;
         /*axios.post("http://202.120.40.8:30741/topic/add/reply?topicId=1&userId=1",text).then();*/
         $.ajax({
-            url:"/topic/add/reply?topicId="+this.state.topicid+"&userId="+localStorage.getItem("userid")+"&access_token="+localStorage.getItem("access_token"),
+            url:"http://202.120.40.8:30741/topic/add/reply?topicId="+this.state.topicid+"&userId="+localStorage.getItem("userid")+"&access_token="+localStorage.getItem("access_token"),
             type:"POST",
             contentType:"application/json",
             data:text,

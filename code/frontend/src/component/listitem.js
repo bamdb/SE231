@@ -126,7 +126,8 @@ class Listitem extends Component {
                             author:items[i].item.mainAuthor,
                             pubTime: items[i].item.pubTime.split('T')[0],
                             score:items[i].rating.avgScore,
-                            rank:items[i].rating.rank
+                            rank:items[i].rating.rank,
+                            imgurl:items[i].item.imgurl
                         }
                     );
                 }
@@ -206,7 +207,7 @@ class Listitem extends Component {
                                 <img
                                     height={120}
                                     alt="defaultbook"
-                                    src="img/3.jpg"
+                                    src={item.imgurl}
                                 />
                             }
                             actions={        // show delete icon in editor page

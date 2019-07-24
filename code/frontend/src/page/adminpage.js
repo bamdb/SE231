@@ -20,7 +20,7 @@ import Button from "@material-ui/core/Button";
 class Adminpage extends Component{
     constructor(props){
         super(props);
-        this.state={userid:1,username:"",password:"",email:"",imgurl:""};
+        this.state={userid:1,username:"",password:"",email:"",imgurl:"",role:""};
         this.handlesearch=this.handlesearch.bind(this);
         this.handlechange=this.handlechange.bind(this);
         this.submit=this.submit.bind(this);
@@ -34,6 +34,10 @@ class Adminpage extends Component{
                 alert("success");
             }
         )
+        if(this.state.role!="")
+        {
+            axios.post("http://202.120.40.8:30741/auth/grant/role/"+this.state.role,{},{params:{access_token:localStorage.getItem("access_token"),username:this.state.username,operation:"+"}});
+        }
     }
 
     componentWillMount() {
@@ -63,7 +67,7 @@ class Adminpage extends Component{
         axios.get("http://202.120.40.8:30741/auth/id/"+this.state.userid+"?access_token="+localStorage.getItem("access_token")).then(
             function(res)
             {
-                this.setState({username:res.data.username,email:res.data.mail,imgurl:res.data.imgUrl});
+                this.setState({username:res.data.username||"",email:res.data.mail||"",imgurl:res.data.imgUrl||""});
             }.bind(this)
         )
     }

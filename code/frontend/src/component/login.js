@@ -73,8 +73,35 @@ class Login extends Component{
                 console.log(res.data.access_token)
                 localStorage.setItem("access_token",res.data.access_token);
                 localStorage.setItem("username",_this.state.name);
-                window.location.href="/#/";
-                window.location.reload();
+
+                axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+                var url="http://202.120.40.8:30741/auth/username/"+localStorage.getItem("username");
+                axios.get(url,{params:{access_token:localStorage.getItem("access_token")}}).then(
+                    function(res)
+                    {
+                        localStorage.setItem("userid",res.data.id);
+                        window.location.href="/#/";
+                        window.location.reload();
+                    }
+
+                )
+                axios.get("http://202.120.40.8:30741/auth/oauth/check_token",{params:{token:localStorage.getItem("access_token")}}).then(
+                    function(res)
+                    {
+                        var auths=res.data.authorities;
+                        var role="";
+                        auths.map(auth=>{
+                            if(role==""&&auth.indexOf("ROLE")!=-1)
+                            {
+                                role=auth;
+                            }
+                        })
+
+                        localStorage.setItem("role",role);
+
+                    }
+                )
+
             })
             .catch(function (error) {
                 _this.setState({

@@ -133,7 +133,8 @@ export default function LeftAppBar(props) {
         if(localStorage.getItem("username")!=null)
         {
             setusername(localStorage.getItem("username"))
-
+            /*setusername(localStorage.getItem("username"))
+            axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
             var url="http://202.120.40.8:30741/auth/username/"+localStorage.getItem("username");
             axios.get(url,{params:{access_token:localStorage.getItem("access_token")}}).then(
                 function(res)
@@ -156,7 +157,7 @@ export default function LeftAppBar(props) {
 
                     localStorage.setItem("role",role)
                 }
-            )
+            )*/
 
         }
 
@@ -320,7 +321,7 @@ export default function LeftAppBar(props) {
                 <br/><br/>
                 <ListItem>
                     <Grid container justify="space-around" alignItems="center" spacing={2}>
-                    <Avatar alt="Remy Sharp" src="/img/3.jpg" className={useStyles.avater}/>
+                    <Avatar alt="暂无用户" src={"http://202.120.40.8:30741/image/id/"+localStorage.getItem("userid")+"0"} className={useStyles.avater}/>
                     <Typography color={"textSecondary"}>{username}</Typography>
                     </Grid>
                 </ListItem>

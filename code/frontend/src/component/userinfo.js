@@ -39,7 +39,7 @@ class Userinfo extends Component {
                     function (response)
                     {
                         console.log(response.data);
-                        this.setState({username:response.data.username,password:response.data.password,email:response.data.mail,imgurl:response.data.imgUrl})
+                        this.setState({username:response.data.username,password:response.data.password,email:response.data.mail,imgurl:response.data.imgUrl,id:localStorage.getItem("userid")})
                     }.bind(this)
                 )
         }
@@ -70,13 +70,8 @@ class Userinfo extends Component {
 
             var url='http://202.120.40.8:30741/auth/update/'+this.state.username+"?access_token="+localStorage.getItem("access_token");
             this.setState({edit:false});
-            axios.put('http://202.120.40.8:30741/auth/update/'+this.state.username,{},{params:{access_token:localStorage.getItem("access_token"),mail:this.state.email}});
-            /*axios.put(url,{mail:this.state.email}).then(
-                function (data)
-                {
-                    alert("success");
-                }
-            )*/
+            axios.put('http://202.120.40.8:30741/auth/update/'+this.state.username,{},{params:{access_token:localStorage.getItem("access_token"),mail:this.state.email,imgUrl:"http://202.120.40.8:30741/image/id/"+this.state.id+"0"}});
+
         }
 
     }
@@ -85,7 +80,6 @@ class Userinfo extends Component {
     }
     handlechange(e){
         var kind=e.target.id;
-
         switch(kind){
             case"username":
                 this.setState({username:e.target.value});
@@ -185,12 +179,8 @@ class Userinfo extends Component {
 
                                     <Grid item xs={6}>
                                 <List >
-                                    <ListItem>
-                                        <FormControl margin="normal" required fullWidth>
-
-                                            <InputLabel htmlFor="id">username</InputLabel>
-                                            <Input type="text" id="username" value={this.state.username} onChange={this.handlechange}></Input>
-                                        </FormControl>
+                                    <ListItem id={"li"}>
+                                        <ListItemText primary="用户名" secondary={this.state.username} />
                                     </ListItem>
                                     <ListItem>
                                         <ListItemText primary="ID" secondary="1" />

@@ -69,7 +69,7 @@ class Activitypage extends Component{
 
     async findfriends()
     {
-         axios.get('http://202.120.40.8:30741/friend/all/userid/'+this.state.userid+"?access_token="+localStorage.getItem("access_token")).then(
+         axios.get('http://202.120.40.8:30741/friend/all/userid/'+localStorage.getItem("userid")+"?access_token="+localStorage.getItem("access_token")).then(
             function(response){
                 this.setState({friends:response.data})
             }.bind(this)

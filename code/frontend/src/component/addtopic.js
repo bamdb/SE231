@@ -64,19 +64,25 @@ class Addtopic extends Component {
            text:"",
             to:0,
             visible:false,
-            tolist:[]
+            tolist:[],
+            content:""
         };
         this.showModal = this.showModal.bind(this);
         this.handletextchange=this.handletextchange.bind(this);
         this.handleOk=this.handleOk.bind(this);
         this.handleCancel=this.handleCancel.bind(this);
         this.handlechange=this.handlechange.bind(this);
+        this.handlecontentchange=this.handlecontentchange.bind(this);
+    }
+    handlecontentchange(e)
+    {
+        this.setState({content:e.target.value});
     }
     handleOk()
     {
         var date = Date.parse(new Date())
 
-        axios.post("http://202.120.40.8:30741/topic/add",{userId:1,title:this.state.text ,pubTime:date,});
+        axios.post("http://202.120.40.8:30741/topic/add",{topic:{userId:localStorage.getItem("userid"),title:this.state.text ,pubTime:date},topicContent:this.state.content},{params:{access_token:localStorage.getItem("access_token")}});
     }
     handleCancel()
     {
@@ -101,21 +107,11 @@ class Addtopic extends Component {
         })
     }
     componentWillMount() {
-        axios.get('http://202.120.40.8:30741/friend/all/userid/1').then(
-            function(response){
-                this.setState({tolist:response.data})
-            }.bind(this)
-        )
+
     }
 
     render() {
-        var rows=[];
-        for(var i=0;i<this.state.tolist.length;++i)
-        {
-            rows.push(
-                <MenuItem value={this.state.tolist[i].id}>{this.state.tolist[i].username}</MenuItem>
-            )
-        }
+
         return (
             <div>
                 <IconButton aria-label="Add to favorites" onClick={this.showModal}>
@@ -132,6 +128,14 @@ class Addtopic extends Component {
                                 标题
                             </InputLabel>
                             <TextField value={this.state.text} onChange={this.handletextchange} >
+
+                            </TextField>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <InputLabel shrink htmlFor="age-label-placeholder">
+                                内容
+                            </InputLabel>
+                            <TextField value={this.state.content} onChange={this.handlecontentchange} >
 
                             </TextField>
                         </Grid>
