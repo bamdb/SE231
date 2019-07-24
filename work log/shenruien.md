@@ -54,3 +54,6 @@
 # 2019-7-23
 * finishing sprint2
 * finishing basic frontend
+# 2019-7-24
+* build the architecture of android
+* finish navigate and login
