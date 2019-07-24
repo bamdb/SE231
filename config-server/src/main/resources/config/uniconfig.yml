@@ -9,3 +9,14 @@ management:
     web:
       exposure:
         include: '*'
+spring:
+  zipkin:
+    base-url: http://202.120.40.8:30743
+    sender:
+      type: web
+    enabled: true
+    discovery-client-enabled: true
+
+  sleuth:
+    sampler:
+      probability: 1

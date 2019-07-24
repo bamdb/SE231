@@ -5,6 +5,7 @@ addons:
 services:
 - mongodb
 - redis
+- docker
 dist: xenial
 jdk:
 - openjdk11
@@ -12,9 +13,83 @@ env:
   global:
   - secure: jjXILnC4Jbh73vofJiEDJpdJBx5U+rarI2Itto2a0BO09pRkMSej3dt8TLQqnq/2FErW5Yzzx6hgyrLNleWRXUZ5WW8H7Poh+kkhZOMbCE2ppvunSH1xaz0yMbv55AZhkmYRKmMhcG+jaKHKXzcHKZqr46zHqqy1moLB9U7IeBCB2RpZBLEiXX1K9KJpLvdQzU39pifoG0CSW0oXt8iN2JKJv94hi6ticl58/JP24L2HCuiFpbGjWQwgPc7bdMntlUbHJb1ZIYakny7gLNSk4LNF3si6swJ7dF+VcZApZ64ZqeQgxPFQ7FJFK8GhMQlUI3ksuPtn2OEEz07+t4v3y/sPH0+9ouE71+AvY2JBLKHn1TcY3CGw6K0GsG1GDESKr7qv1JWa56K6yb/qqSlWbEsR2K52sQhp9a+1+5IWyYtauord3Jg6b0Vr5KUDJbpBk7+MfXFar1nxXT9ZFevxxABKcCAqEplrE/2ae1p0vvQHNPd8pXxLCtWDmwXUAh8f47Cht/y/nn+TJKzhTU+dHxQ2tlJnHIejCE9B6Sv1l08UrjDptQ0CNP6IsfOKqKPOcrOLDmYnr80S+WKsSiqj5nI5nJ6Ty8IEsyzgeFBcFJWywmoubDxzo6ei4JGqhQ0MAFd3xxKrMzpt8Kclmpivh0YJyyy14eo+iI6Mr0XD+7w=
   - secure: M4ObbJMiHYcBgejRzf4Gp90N7E1QOOyEPEaMuuvym1mwumDRY0G0IjVBzhWXa5HcgSlxgG1XuIfBI8MELAvA5Dv3Er3RFhcN2kP8jhRHdJ65ZvCbzeDCw3+ZQKi3orc9xQsemxCWIEtJsH9KUewS+aMAUPAFAri73Ivtlrlxq1uo6ukyr6xNJx1zh8X5vFrQCvGw5XpAgI1c9fnrR1BOSfkQe3RfJ8Xt8T5t0eiHNr2+4iFiO5xLS6hHEWl0bttSmgLKkYOKcqJwUOo4xKqxpVd6RJEqrmkfAfOv15q9R/ip3hmADteytn2LzibM71K42YyahSBXtCumXHKSEF9TX4fBWTcLtVdDMfxHOBIHmczNvu+rfhNEjd+9YSN/7CDzqph8/TxWHQlzOsnL2AMWqzhS1B5DMHGffsjeArIZZ6CH4zFVKQHb5ykX0dFxmKkz4OUyEvunZr4792uZxJd8Vq6sR22dCy2Ydsa7qo9nclITfLL5b9/NgyEUU1t49wLWaNQWSxgCHpTm160Tl+FhUyy1TTUC9KBXjDtWGdROqjsVpoEix0ciYMwRixQrWhTWhSASXnTht7cH+5R4/+AWWbgB4DEduAGPFox6PFc1iWHSad8AVlu7fbuYFweN02l0KA3x5Yj2SNW6pcZhq0zN8AgQeUoKEgC+vhKYoSGfka8=
+  - COMMIT=${TRAVIS_COMMIT::7}
 script:
 - "./mvnw clean install -B"
 before_install:
 - chmod a+x ./mvnw
 after_success:
 - bash <(curl -s https://codecov.io/bash)
+- docker login -u $DOCKER_USER -p $DOCKER_PASS
+
+# CONFIG SERVICE
+- export CONFIG=bamdb/config-server
+- docker build -t $CONFIG:$COMMIT ./config-server
+- docker tag $CONFIG:$COMMIT $CONFIG
+- docker push $CONFIG
+
+# ACTIVITY SERVICE
+- export ACTIVITY=bamdb/activity-service
+- docker build -t $ACTIVITY:$COMMIT ./activity-service
+- docker tag $ACTIVITY:$COMMIT $ACTIVITY
+- docker push $ACTIVITY
+
+# AUTH SERVICE
+- export AUTH=bamdb/auth-service
+- docker build -t $AUTH:$COMMIT ./auth-service
+- docker tag $AUTH:$COMMIT $AUTH
+- docker push $AUTH
+
+# COMMENT SERVICE
+- export COMMENT=bamdb/comment-service
+- docker build -t $COMMENT:$COMMIT ./comment-service
+- docker tag $COMMENT:$COMMIT $COMMENT
+- docker push $COMMENT
+
+# FRIEND SERVICE
+- export FRIEND=bamdb/friend-service
+- docker build -t $FRIEND:$COMMIT ./friend-service
+- docker tag $FRIEND:$COMMIT $FRIEND
+- docker push $FRIEND
+
+# GATEWAY SERVICE
+- export GATEWAY=bamdb/gateway
+- docker build -t $GATEWAY:$COMMIT ./gateway
+- docker tag $GATEWAY:$COMMIT $GATEWAY
+- docker push $GATEWAY
+
+# IMAGE SERVICE
+- export IMAGE=bamdb/image-service
+- docker build -t $IMAGE:$COMMIT ./image-service
+- docker tag $IMAGE:$COMMIT $IMAGE
+- docker push $IMAGE
+
+# ITEM SERVICE
+- export ITEM=bamdb/item-service
+- docker build -t $ITEM:$COMMIT ./item-service
+- docker tag $ITEM:$COMMIT $ITEM
+- docker push $ITEM
+
+# MESSAGE SERVICE
+- export MESSAGE=bamdb/message-service
+- docker build -t $MESSAGE:$COMMIT ./message-service
+- docker tag $MESSAGE:$COMMIT $MESSAGE
+- docker push $MESSAGE
+
+# RATING SERVICE
+- export RATING=bamdb/rating-service
+- docker build -t $RATING:$COMMIT ./rating-service
+- docker tag $RATING:$COMMIT $RATING
+- docker push $RATING
+
+# REGISTRY SERVICE
+- export REGISTRY=bamdb/registry
+- docker build -t $REGISTRY:$COMMIT ./registry
+- docker tag $REGISTRY:$COMMIT $REGISTRY
+- docker push $REGISTRY
+
+# TOPIC SERVICE
+- export TOPIC=bamdb/topic-service
+- docker build -t $TOPIC:$COMMIT ./topic-service
+- docker tag $TOPIC:$COMMIT $TOPIC
+- docker push $TOPIC

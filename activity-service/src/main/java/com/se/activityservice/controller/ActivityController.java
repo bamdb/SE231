@@ -67,12 +67,11 @@ public class ActivityController {
         return activityService.selectByUserIdAndItemId(userId, itemId);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     @GetMapping(value="/progress")
     public Progress getProgress(@RequestParam("userId") Long userId,
-                                @RequestParam("itemId") Long itemId,
-                                @RequestHeader("Authorization") String accessToken) {
-        FeignRequestInterceptor.accessToken = accessToken;
+                                @RequestParam("itemId") Long itemId) {
+       // FeignRequestInterceptor.accessToken = accessToken;
         return activityService.selectProgress(userId, itemId);
     }
 
