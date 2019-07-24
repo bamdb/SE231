@@ -4,37 +4,14 @@
 
 import React, { Component } from 'react';
 import {Link, Redirect} from "react-router-dom";
-import Paper from "@material-ui/core/Paper";
 import {makeStyles} from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import {Modal} from "antd";
-import Collectform from "./collectform";
-import '../css/listitem.css'
-import axios from 'axios';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Collectform from "./collectform";
 import Alert from './alert';
 import { List, Avatar, Icon, Card } from "antd";
+import '../css/listitem.css'
+import axios from 'axios';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        padding: theme.spacing(3, 2),
-        minWidth: 800,
-        width: '100%',
-    },
-    paper: {
-        padding: theme.spacing(3, 2),
-        width: 200
-    },
-    image: {
-        height: 120,
-        width: 96,
-    },
-    card: {
-        maxWidth: 345,
-        height:100
-    },
-}));
 
 /*
 * 需要传入的props（包装成json后可以简化）
@@ -68,6 +45,7 @@ class Listitem extends Component {
         this.handlepagechange=this.handlepagechange.bind(this);
         this.handleAlert=this.handleAlert.bind(this);
         this.handleDelete=this.handleDelete.bind(this);
+        this.handleCollect=this.handleCollect.bind(this);
     }
     componentWillMount() {
 
@@ -108,6 +86,35 @@ class Listitem extends Component {
         })*/
     }
 
+    handleCollect(type,item){
+        var chapters=[];
+        switch (type) {
+            case 0: case 1:
+                for(var i=0;i<item.chapterNum;i++)
+                    chapters.push({
+                        chapterNum: i,
+                        finish:0,
+                        sections:[],
+                    });
+                break;
+            case 3:
+                for(var i=0;i<item.chapterNum;i++)
+                    chapters.push({
+                        chapterNum: i,
+                        finish:1,
+                        sections:[],
+                    });
+                break;
+            default:
+                break;
+        }
+
+        if(type<=3)
+        axios.put("http://202.120.40.8:30741/activity/update/progress",
+            {userId:localStorage.getItem("userid"),itemId:item.id,chapters:chapters},
+            {params:localStorage.getItem("access_token")}
+        );
+    }
     handlepagechange(page){
         this.props.handlepagechange(page);
     }
@@ -127,7 +134,8 @@ class Listitem extends Component {
                             pubTime: items[i].item.pubTime.split('T')[0],
                             score:items[i].rating.avgScore,
                             rank:items[i].rating.rank,
-                            imgurl:items[i].item.imgurl
+                            imgurl:items[i].item.imgurl,
+                            chapterNum:items[i].item.chapterNum,
                         }
                     );
                 }
@@ -152,18 +160,6 @@ class Listitem extends Component {
             modifiedItems:rows,
         })
     }
-/*
-    {
-    href: "http://ant.design",
-    title: `ant design part ${i}`,
-    avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-    description:
-    "Ant Design, a design language for background applications, is refined by Ant UED Team.",
-    content:
-    "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently."
-    }
-
- */
 
     handleAlert(content) {
         this.setState({content : content})
@@ -213,9 +209,9 @@ class Listitem extends Component {
                             actions={        // show delete icon in editor page
                                 localStorage.getItem("role") == "ROLE_EDITOR" ? (
                                 [
-                                    <IconText type="star-o" text="156" />,
+                                    <Collectform itemid={item.id} handleprogress={(type)=>this.handleCollect(type,item)}/>,
                                     <IconText type="like-o" text="156" />,
-                                    <IconText type="message" text="2" />,
+                                    <IconText type="delete" text="2" />,
                                     <div>
                                         <Alert content={this.state.content} cancelAlert={this.handleAlert} confirmAlert={this.handleDelete.bind(this,item.id)}/>
                                         <DeleteIcon onClick={this.handleAlert.bind(this, "确认删除该条目？")}/>
@@ -223,7 +219,7 @@ class Listitem extends Component {
                                 ]
                                 ) : (
                                     [
-                                        <IconText type="star-o" text="156" />,
+                                        <Collectform itemid={item.id} handleprogress={(type)=>this.handleCollect(type,item)}/>,
                                         <IconText type="like-o" text="156" />,
                                         <IconText type="message" text="2" />
                                     ]
