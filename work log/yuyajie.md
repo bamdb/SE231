@@ -48,4 +48,6 @@
 + 细化权限分配
 + 修改单元测试
 ## 2019.07.23
-+ 监控+
++ 监控+MQ
+## 2019.07.24
++ rabbitmq + elk + zipkin + hystrix turbine
