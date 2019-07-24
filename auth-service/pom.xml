@@ -21,7 +21,6 @@
         <docker.image.prefix>bamdb</docker.image.prefix>
     </properties>
     <dependencies>
-
         <dependency>
             <groupId>org.springframework.security.oauth</groupId>
             <artifactId>spring-security-oauth2</artifactId>
