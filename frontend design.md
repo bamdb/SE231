@@ -2,41 +2,46 @@ UserHomePage
 
 	我的主页：“我的图书（进度）” “我的电影（进度）” “条目排行榜”
     ajax请求：
-        1. 根据userid获取对应用户的“收藏图书”与“收藏电影”
-            params：
-                {userid:1, type:0/1, page:0..n, pageSize:4..n}
-            response：
-                封面
-                条目id
-                条目名
-                类别（book/movie）
-                作者/导演
-                具体章节进度（按照每一chapter是否看过传回数组）
-            eg. [
+        1. /rating/browser: 获取排行榜数据 
+            params:
                 {
-                封面（我不知道图片用什么格式。。）:???,
-                 itemid:1,
-                 itemname:"三体",
-                 type:0/1,
-                 author:"刘慈欣",
-                 进度:[1,1,[1,1,0,0],0,0]     //表示chap1-chap3.2已读，chap3.3-chap5未读，后端也可以再改，我只是给个例子
-                 },
-                 ]
-
-
-UserHomePage.Progressmanage.Scheduletable         
-    
-    页面内容：进度编辑
-    ajax：
-        1.将修改后进度传入后端
-            params：
-                {userid:1, itemid:1, readstat(进度):[1,1,[1,1,1,1],1,0]}
+                    type:0,
+                    page:0,
+                    pageSize:10
+                }
+            response:[{
+                        "item": { /* item信息 可删去"pubTime""chapterNum" 加一条“briefIntroduction" */ },
+                        "rating": { /* 排名信息，建议增加收藏人数 */}
+                      }]                
+       
+        2. .Progressmanage: /activity/userid/{userid} 根据userid获取对应用户的“收藏图书”与“收藏电影” 
+            
+            response：
+                [{
+                    item: /* item details */
+                    activity: /* activity details （按照chapter-section是否看过传回数组） */
+                },...]
+                
+                
+        3. .Progressmanage.Scheduletable: activity/update/progress 将修改后进度传入后端 
+            data:
+                {userid:1, itemid:1, chapters:{chpterNum:1, finish:0, sections:[0,0,0,0]}}
             response:
-                state:(int)
-                    0:特殊情况
-                    1:成功
-                    2:修改前后无差别
-                    3:（其他情况）
- 
+                state:
+                    null:出错
+                    原data: 正确
+                     
 
 ItemBrowserPage
+
+    页面内容：条目浏览，分为图书、电影，用户可以收藏/跳转详细页面，editor可delete
+    url:/itembrowse/book or /itembrowse/movie
+    ajax：
+        1. /rating/browser 获取排行榜数据，同上
+		2. .Tags 需要获取热门/推荐tag，现在只有虚假数据
+        3. .Itemlist: /activity/update/progress 新建进度项，根据用户收藏状态，“想看”“在看”为全false，“看过”为全true，“搁置”与“抛弃”不可创建新的progress。 
+        
+        PS “在看”的初始值不应为全空，此外想看、在看、看过、抛弃、搁置互相之间的转化应有规则限制。
+        
+        
+    
