@@ -1,11 +1,10 @@
 spring:
   application:
     name: turbine
+server:
+  port: 7777
 turbine:
   cluster-name-expression: default
   instanceUrlSuffix: actuator/hystrix.stream
   aggregator:
     cluster-config: default
-  app-config: activity
-server:
-  port: 7777

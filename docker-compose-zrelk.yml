@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  storage:
+  elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.0.0
     container_name: elasticsearch
     network_mode: host

@@ -8,7 +8,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: '/hystrix.stream'
 spring:
   zipkin:
     base-url: http://202.120.40.8:30743
