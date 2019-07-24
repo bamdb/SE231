@@ -43,9 +43,6 @@ class Userinfo extends Component {
                     }.bind(this)
                 )
         }
-        else{
-            window.location.href='/#/login'
-        }
 
     }
 

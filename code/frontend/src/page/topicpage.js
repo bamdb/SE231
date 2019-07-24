@@ -7,10 +7,10 @@ import Grid from '@material-ui/core/Grid';
 import TopicList from "../component/topiclist";
 import Tags from "../component/tag";
 import Typography from "@material-ui/core/Typography";
-import Navigation from "../component/navigation";
 import axios from "axios";
-import PropTypes from "prop-types";
 import Addtopic from "../component/addtopic";
+
+
 class Topicpage extends Component{
 
     constructor(props)

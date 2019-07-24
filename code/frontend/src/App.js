@@ -17,23 +17,12 @@ import Useriteminfopage from "./page/useriteminfopage"
 import Activitypage from "./page/activitypage";
 import Resetpwdpage from "./page/resetpwdpage";
 import Messagepage from "./page/messagepage";
-import Rating from "./component/rating";
-import Collect from "./component/collect";
-import Collectform from "./component/collectform";
-
-import Addmessage from "./component/addmessage";
-import Addtopic from "./component/addtopic";
-import Edititem from "./component/edititem";
-import Comment from './component/comment'
-import Scheduletableold from './component/scheduletableold'
 import leftappbar from "./component/leftappbar";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles/index';
-import Leftappbarnew from "./component/leftappbarnew";
-import Neweditor from "./page/editorpage";
+
 import Adminpage from "./page/adminpage";
 import Editorpage from './page/editorpage'
-import axios from "axios";
 import Itemmanagepage from "./page/itemmanage";
 
 

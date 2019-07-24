@@ -5,19 +5,13 @@
 import React, { Component } from 'react';
 
 import Grid from '@material-ui/core/Grid'
-
-import Navigation from '../component/navigation';
 import Item from '../component/item';
-import Progressmanage from "../component/progressmanage";
 import Commentlist from "../component/commentlist";
 import Relateditem from "../component/relatedlist";
 import {Divider, Card} from 'antd';
-import Scheduletable from "../component/scheduletable";
 import Tags from "../component/tag"
 import axios from 'axios'
-import Rating from "../component/rating";
 import Collect from "../component/collect";
-import $ from 'jquery'
 import Scheduletableold from "../component/scheduletableold";
 class Useriteminfopage extends Component {
     constructor(props)
