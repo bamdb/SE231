@@ -199,8 +199,6 @@ class Collectform extends Component {
                                     <FormControlLabel value={0} control={<Radio />} label="想看" />
                                     <FormControlLabel value={1} control={<Radio />} label="在看" />
                                     <FormControlLabel value={2} control={<Radio />} label="看过" />
-                                    <FormControlLabel value={3} control={<Radio />} label="抛弃" />
-                                    <FormControlLabel value={4} control={<Radio />} label="搁置" />
                                 </RadioGroup>
                             </FormControl>
                         </Grid>
@@ -212,7 +210,7 @@ class Collectform extends Component {
                                 id="outlined-multiline-static"
                                 label="简评"
                                 multiline
-                                rows="8"
+                                rows="5"
                                 fullWidth={true}
                                 className={useStyles.textField}
                                 margin="normal"
@@ -258,6 +256,9 @@ class Collectform extends Component {
                             </Button>
                         </Grid>
                         <Grid item xs={12}>
+                            <Typography variant="subtitle1" color="textPrimary" component="p">
+                                评分：
+                            </Typography>
                             <Rating handlescorechange={this.handlescorechange}></Rating>
                         </Grid>
                     </Grid>

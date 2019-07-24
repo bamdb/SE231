@@ -10,16 +10,16 @@ import Addrelation from "../component/addrelation";
 const { Step } = Steps;
 const steps = [
     {
-        title: 'First',
+        title: '上传条目信息',
         content: "",
     },
     {
-        title: 'Second',
+        title: '上传封面',
         content: "",
     },
     {
-        title: 'Last',
-        content: 'Last-content',
+        title: '上传关联条目',
+        content: '',
     },
 ];
 
@@ -34,7 +34,10 @@ class Editorpage extends React.Component {
         this.setid=this.setid.bind(this);
     }
     componentWillMount() {
-
+        if(localStorage.getItem("userid")==null)
+        {
+          //  window.location.href="/#/login";
+        }
     }
 
     setid(item)

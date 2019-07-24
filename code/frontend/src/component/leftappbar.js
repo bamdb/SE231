@@ -126,10 +126,11 @@ export default function LeftAppBar(props) {
     const [open, setopen] = useState(true);
     const [openMess, setopenMess] =  useState(false);
     const [username,setusername]=useState("");
+    const isUser = (localStorage.getItem("role")==='USER');
+    const isEditor = (localStorage.getItem("role")==='EDITOR');
     var drawerbutton = open ? <ChevronLeftIcon />:<ChevronRightIcon />
+
     useEffect(() => {
-
-
         if(localStorage.getItem("username")!=null)
         {
             setusername(localStorage.getItem("username"))
@@ -162,6 +163,8 @@ export default function LeftAppBar(props) {
         }
 
     });
+
+    const user=localStorage.getItem("userid");
     function handleDrawerClose(){
         setopen(false);
     }
@@ -304,18 +307,22 @@ export default function LeftAppBar(props) {
                     </ListItemIcon>
                     <ListItemText><Typography color={"textSecondary"}>个性推荐</Typography></ListItemText>
                 </ListItem>
-                <ListItem button component={Link} to={'/editor'}>
+                <div hidden={isUser} >
+                <ListItem button component={Link} to={'/editor'} >
                     <ListItemIcon>
                         <BuildOutlinedIcon />
                     </ListItemIcon>
                     <ListItemText><Typography color={"textSecondary"}>编辑</Typography></ListItemText>
                 </ListItem>
-                <ListItem button component={Link} to={'/admin'}>
+                </div>
+                <div hidden={isEditor}>
+                <ListItem button component={Link} to={'/admin'} >
                     <ListItemIcon>
                         <VpnKeyOutlinedIcon />
                     </ListItemIcon>
                     <ListItemText><Typography color={"textSecondary"}>admin</Typography></ListItemText>
                 </ListItem>
+                </div>
                 <br/><br/>
                 <Divider />
                 <br/><br/>
@@ -328,14 +335,12 @@ export default function LeftAppBar(props) {
 
                 <br/><br/>
             </div>
-
         </Drawer>
             <Drawer
                 anchor={"right"}
                 open={openMess}
                 onClose={handleMessClose}
             >
-
                 <div className={classes.list}>
                 <Messagepage />
                 </div>

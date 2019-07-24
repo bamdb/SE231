@@ -21,12 +21,7 @@ class Progressmanage extends Component {
         super(props);
         this.state={label:0};
         this.state={
-            items:[
-                {readstat:[0,[1,0,1,0],0,1],itemname:"book1",kind:"book"},
-                {readstat:[1,1,1],itemname:"book2",kind:"movie"},
-                {readstat:[1,1,1,1],itemname:"book3",kind:"movie"},
-                {readstat:[1,1,1,1],itemname:"book3",kind:"movie"}
-                ],
+            items:[],
             value:0,
             uppage:0,
             downpage:0,

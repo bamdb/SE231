@@ -2,15 +2,6 @@ import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles/index';
 import Grid from '@material-ui/core/Grid/index'
 import Paper from '@material-ui/core/Paper/index'
-import Navigation from "./navigation";
-import TopItemList from "./topitemlist";
-import Browserlist from "./browserlist";
-import Tag from "./tag";
-import Userinfo from "./userinfo";
-import Commentlist from "./commentlist";
-import Listitem from './listitem'
-import Progressmanage from "./progressmanage";
-import Login from "./login"
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import FormControl from "@material-ui/core/FormControl";
@@ -26,12 +17,6 @@ class Edititem extends Component{
         this.handlechange=this.handlechange.bind(this);
         this.handlesubmit=this.handlesubmit.bind(this);
         this.handlequery=this.handlequery.bind(this);
-    }
-    componentWillMount() {
-        if(localStorage.getItem("userid")==null)
-        {
-            window.location.href="/#/login";
-        }
     }
 
     handlesubmit(e)

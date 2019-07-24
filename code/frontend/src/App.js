@@ -44,23 +44,10 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-
-
-function selectDrawer(isneeded) {
-    if(!isneeded) var leftBar=<div/>;
-    else var leftBar=leftappbar({username:"hyy"});
-    console.log("login");
-    return leftBar;
-}
 function App() {
     const classes=useStyles();
     const [needDrawer, setneedDrawer]=useState(true);
-    const [username]=useState("");
-    const leftBar = needDrawer ? leftappbar({username:"hyy"}) : <div />
-    /*window.onunload=function(){
-        localStorage.clear();
-    }*/
-
+    const leftBar = needDrawer ? leftappbar() : <div />
   return (
       <Router >
         <div className={classes.root}>

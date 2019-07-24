@@ -11,7 +11,7 @@ class CarouselItem extends Component{
         return(
             <Carousel autoplay>
                 <div>
-                    <img src={require("../page/book1.jpg")} />
+                    <img src={require("../img/book1.jpg")} />
                 </div>
                 <div>
                     <img src={require("../img/book2.jpg")} />
