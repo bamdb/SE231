@@ -1,6 +1,11 @@
 spring:
   application:
     name: comment
+
+eureka:
+  instance:
+    hostname: comment
+
 server:
   port: 8091
 security:

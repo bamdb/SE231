@@ -2,6 +2,10 @@ spring:
   application:
     name: image
 
+eureka:
+  instance:
+    hostname: image
+
 server:
   port: 8093
 security:

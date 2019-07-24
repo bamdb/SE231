@@ -1,6 +1,10 @@
 spring:
   application:
     name: friend
+
+eureka:
+  instance:
+    hostname: friend
 server:
   port: 8092
 security:

@@ -1,6 +1,11 @@
 spring:
   application:
     name: topic
+
+eureka:
+  instance:
+    hostname: topic
+
 server:
   port: 8097
 security:
