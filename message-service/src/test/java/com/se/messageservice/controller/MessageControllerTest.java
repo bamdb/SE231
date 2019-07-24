@@ -88,11 +88,13 @@ public class MessageControllerTest {
         Message message = new Message(1L, 2L, t, "NOTHINHG HAPPENS BETWEEN US");
         Message message1 = new Message(0L,2L, t1, "NOTHINHG HAPPENS BETWEEN US");
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .content(JSON.toJSONString(message))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
         mvc.perform(post("/add")
+                .header("Authorization", "0")
                 .content(JSON.toJSONString(message1))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())

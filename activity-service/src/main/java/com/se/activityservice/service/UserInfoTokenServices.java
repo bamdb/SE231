@@ -1,5 +1,7 @@
 package com.se.activityservice.service;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.se.activityservice.entity.MyPrincipal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.AuthoritiesExtractor;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.FixedAuthoritiesExtractor;
@@ -21,7 +23,7 @@ import java.util.*;
 @Slf4j
 public class UserInfoTokenServices extends RemoteTokenServices {
 
-    private static final String[] PRINCIPAL_KEYS = new String[] {"username", "id"};
+    private static final String[] PRINCIPAL_KEYS = new String[] {"username", "id", "authorities", "scope"};
 
     private final String userInfoEndpointUrl;
 
@@ -68,7 +70,6 @@ public class UserInfoTokenServices extends RemoteTokenServices {
         Principal principal = getPrincipal(map);
         OAuth2Request request = new OAuth2Request(null, this.clientId, null, true, null,
                 null, null, null, null);
-
         List<GrantedAuthority> authorities = this.authoritiesExtractor
                 .extractAuthorities(map);
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
@@ -79,14 +80,14 @@ public class UserInfoTokenServices extends RemoteTokenServices {
 
     private MyPrincipal getPrincipal(Map<String, Object> map) {
         Map<String, Object> m = new LinkedHashMap<>();
-
+        System.out.println(map);
         MyPrincipal myPrincipal = new MyPrincipal();
         if (map.containsKey("username"))
-//            m.put("username", map.get("username"));
             myPrincipal.setUsername((String) map.get("username"));
         if (map.containsKey("id"))
-//            m.put("id", map.get("id"));
-                myPrincipal.setId((Integer)map.get("id"));
+                myPrincipal.setId(Long.parseLong( map.get("id").toString()));
+        if (map.containsKey("authorities"))
+            myPrincipal.setAuthorities((Collection<? extends GrantedAuthority>) map.get("authorities"));
         return myPrincipal;
     }
 
@@ -122,39 +123,57 @@ public class UserInfoTokenServices extends RemoteTokenServices {
                     "Could not fetch user details");
         }
     }
-    private class MyPrincipal implements Principal {
-        public Integer id;
-        public String username;
-
-        public Integer getId() {
-            return id;
-        }
-
-        public void setId(Integer id) {
-            this.id = id;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public MyPrincipal(Integer id, String username) {
-            this.id = id;
-            this.username = username;
-        }
-
-        public MyPrincipal() {
-        }
-
-        @Override
-        public String getName() {
-            return username;
-        }
-    }
+//    private class MyPrincipal implements Principal {
+//        public Integer id;
+//        public String username;
+//        public Collection<? extends GrantedAuthority> authorities = new HashSet<>(0);
+//        public Collection<String> scope = new HashSet<>(0);
+//
+//        public Collection<String> getScope() {
+//            return scope;
+//        }
+//
+//        public void setScope(Collection<String> scope) {
+//            this.scope = scope;
+//        }
+//
+//        public Collection<? extends GrantedAuthority> getAuthorities() {
+//            return authorities;
+//        }
+//
+//        public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+//            this.authorities = authorities;
+//        }
+//
+//        public Integer getId() {
+//            return id;
+//        }
+//
+//        public void setId(Integer id) {
+//            this.id = id;
+//        }
+//
+//        public String getUsername() {
+//            return username;
+//        }
+//
+//        public void setUsername(String username) {
+//            this.username = username;
+//        }
+//
+//        public MyPrincipal(Integer id, String username) {
+//            this.id = id;
+//            this.username = username;
+//        }
+//
+//        public MyPrincipal() {
+//        }
+//
+//        @Override
+//        public String getName() {
+//            return username;
+//        }
+//    }
 
 }
 
