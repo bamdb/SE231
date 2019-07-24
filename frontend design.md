@@ -43,8 +43,8 @@ ItemBrowserPage
 		
         3. .Itemlist: 
 		
-			3.1 /activity/update/progress 
-			新建进度项，根据用户收藏状态，“想看”“在看”为全false，“看过”为全true，“搁置”与“抛弃”不可创建新的progress。 
+			3.1 /activity/update/progress 新建进度项，根据用户收藏状态创建progress
+                “想看”“在看”为全false，“看过”为全true，“搁置”与“抛弃”不可创建新的progress。 
         
 			3.2 /item/delete/id/{id} editor有权限删除item
 		
@@ -55,6 +55,7 @@ ItemBrowserPage
 			4.3 /comment/insert
 			4.4 /rating/update
 			4.5 /item/add/tag
+            (4.2-4.5均为新建操作)
 			
         PS  “在看”的初始值不应为全空，
 			想看、在看、看过、抛弃、搁置互相之间的转化应有规则限制。
@@ -63,7 +64,12 @@ ItemBrowserPage
 Topicpage
 		
     页面内容：显示热门条目
+    (未完待续。。
     
-    
-UserInfo
+UserInfopage
+
+    用户个人信息
+    ajax：
+        1. /rating/browser 用于获取最热条目信息，制作流动图片
+        
     
