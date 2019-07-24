@@ -161,24 +161,6 @@ export default function LeftAppBar(props) {
         }
 
     });
-
-    /*
-    constructor(props){
-        super(props);
-        this.state={
-            username:"shenruien",
-            password:"123456",
-            email:"123456@qq.com",
-            id:"1",
-            date:"2019-7-1",
-            grade:"1",
-            open: true,
-        };
-        this.handleDrawerClose=this.handleDrawerClose.bind(this);
-    }
-
-     */
-
     function handleDrawerClose(){
         setopen(false);
     }
@@ -281,18 +263,6 @@ export default function LeftAppBar(props) {
                         <HomeOutlinedIcon/>
                     </ListItemIcon>
                     <ListItemText><Typography color={"textSecondary"}> HOME</Typography></ListItemText>
-                </ListItem>
-                <ListItem button  component={Link} to={'/userinfo'}>
-                    <ListItemIcon>
-                        <MovieOutlinedIcon  />
-                    </ListItemIcon>
-                    <ListItemText><Typography color={"textSecondary"}> MOVIE</Typography></ListItemText>
-                </ListItem>
-                <ListItem button component={Link} to={'/userinfo'}>
-                    <ListItemIcon>
-                        <BookOutlinedIcon  />
-                    </ListItemIcon>
-                    <ListItemText><Typography color={"textSecondary"}>BOOK</Typography></ListItemText>
                 </ListItem>
                 <ListItem button component={Link} to={'/userinfo'}>
                     <ListItemIcon>
