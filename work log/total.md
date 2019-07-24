@@ -196,6 +196,16 @@
   * 写文档
   * 细化权限分配
   * 修改单元测试
+# 2019-7-23
+* shenruien:
+  * finishing sprint2
+  * finishing basic frontend
+* huangyuyang:
+  * 学习antd theme，初步构思。 修改前端页面
+* wangzulai:
+  * work on docker image
+* yuyajie:
+  * 监控+
 
 
 
