@@ -9,6 +9,15 @@ export default class Topicpage extends React.Component{
     {
         super(props);
     }
+    componentDidMount()
+    {
+        axios.get("http://202.120.40.8:30741/topic/all").then(
+            function (response){
+
+            this.setState({topics:response.data});
+        }.bind(this)
+        )
+    }
     render()
     {
         return(

@@ -40,6 +40,7 @@ export default class HomeScreen extends React.Component {
                 alert("success");
                 global.access_token=res.data.access_token;
                 global.username=this.state.username;
+                axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
                 this.props.navigation.navigate('Browse');
                 
               }.bind(this)
@@ -61,7 +62,6 @@ export default class HomeScreen extends React.Component {
         <TextInput onChangeText={(text) => this.setState({password:text})} value={this.state.password} ></TextInput>
         <Button  onPress={this.handlesubmit}>login</Button>
         <Button  onPress={()=>this.props.navigation.navigate('Browse')}>next</Button>
-        
       </View>
     );
   }

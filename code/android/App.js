@@ -15,8 +15,21 @@ const AppNavigator = createStackNavigator(
     Detail: Itemdetail
   },
   {
-    initialRouteName: "Home"
-  }
+    initialRouteName: "Home",
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#f4511e',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
+    navigationOptions: {
+      tabBarLabel: 'Home!',
+    },
+  },
+  
 );
 
 export default createAppContainer(AppNavigator);
