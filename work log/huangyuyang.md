@@ -55,7 +55,14 @@ Sprint 1 (July.1-July.10)
     测试前端进度接口，对前端进行手动测试，查看是否有错误
     
   July.23
-    学习antd theme，初步构思。
+    学习antd theme，初步构思。<br/>
     修改前端页面
+    
+  July.24
+  添加progress/update,并修改部分逻辑，见frontend design  <br/>
+	在用户主页面做出走马灯效果<br/>
+	所有界面跳转放在page里
+  
+
     
     
