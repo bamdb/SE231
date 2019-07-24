@@ -9,27 +9,37 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.se</groupId>
-    <artifactId>bamdb</artifactId>
+    <artifactId>turbine</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>bamdb</name>
-    <description>SE project</description>
+    <name>turbine</name>
+    <description>Demo project for Spring Boot</description>
 
-    <packaging>pom</packaging>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
         <java.version>11</java.version>
+        <docker.image.prefix>bamdb</docker.image.prefix>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <finalName>turbine</finalName>
+                </configuration>
             </plugin>
+
         </plugins>
     </build>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -41,19 +51,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    <modules>
-        <module>config-server</module>
-        <module>registry</module>
-        <module>gateway</module>
-        <module>image-service</module>
-        <module>item-service</module>
-        <module>comment-service</module>
-        <module>activity-service</module>
-        <module>rating-service</module>
-        <module>topic-service</module>
-        <module>message-service</module>
-        <module>friend-service</module>
-        <module>auth-service</module>
-        <module>turbine</module>
-    </modules>
 </project>
