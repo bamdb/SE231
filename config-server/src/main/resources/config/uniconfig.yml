@@ -10,6 +10,13 @@ management:
       exposure:
         include: '*'
 spring:
+  zipkin:
+    base-url: http://202.120.40.8:30743
+    sender:
+      type: web
+    enabled: true
+    discovery-client-enabled: true
+
   sleuth:
     sampler:
-      percentage: 0.8
+      probability: 1

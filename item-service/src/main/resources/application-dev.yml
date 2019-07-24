@@ -25,6 +25,16 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/bamdb
+  zipkin:
+    base-url: http://202.120.40.8:30743
+    sender:
+      type: web
+    enabled: true
+    discovery-client-enabled: true
+
+  sleuth:
+    sampler:
+      probability: 1
 eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
