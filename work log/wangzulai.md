@@ -68,3 +68,7 @@
 
 # 2019-07-23
 * work on docker image
+
+# 2019-07-24
+* complete docker image
+* test run image on one node
