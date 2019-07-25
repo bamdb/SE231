@@ -1,13 +1,13 @@
 version: '2'
 
 services:
-  registry:
-    image: bamdb/registry
-    container_name: registry
-    hostname: registry
-    restart: unless-stopped
-    ports:
-      - 8761:8761
+        # registry:
+        #  image: bamdb/registry
+        # container_name: registry
+        #   hostname: registry
+        # restart: unless-stopped
+        #ports:
+        #- 8761:8761
   auth:
     image: bamdb/auth-service
     container_name: auth
