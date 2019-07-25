@@ -1,10 +1,16 @@
 version: '2'
 
 services:
+  config:
+    image: bamdb/config-server
+    hostname: config
+    restart: unless-stopped
   registry:
     image: bamdb/registry
     hostname: registry
     restart: unless-stopped
+    ports:
+      - 8761:8761
   auth:
     image: bamdb/auth-service
     hostname: auth
@@ -33,3 +39,5 @@ services:
     image: bamdb/gateway
     hostname: gateway
     restart: unless-stopped
+    ports:
+      - 8000:8000
