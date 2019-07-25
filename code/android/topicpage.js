@@ -1,10 +1,16 @@
 import React from "react";
-import { View, Text ,TextInput} from "react-native";
+import { View, Text ,TextInput,StyleSheet} from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import Button from '@ant-design/react-native/lib/button';
 import Storage from 'react-native-storage'
 import axios from 'axios'
+import Navigationbar from "./navigationbar";
 export default class Topicpage extends React.Component{
+    static navigationOptions = ({ navigation }) => {
+        return {
+            
+          };
+      }
     constructor(props)
     {
         super(props);
@@ -17,12 +23,12 @@ export default class Topicpage extends React.Component{
             this.setState({topics:response.data});
         }.bind(this)
         )
-    }
+    }    
     render()
     {
         return(
             <View>
-                
+                <Text>topic</Text>
             </View>
         )
     }

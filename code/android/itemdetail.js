@@ -4,10 +4,12 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import Button from '@ant-design/react-native/lib/button';
 import Storage from 'react-native-storage'
 import axios from 'axios'
+import Navigationbar from "./navigationbar";
 export default class Itemdetail extends React.Component{
-    static navigationOptions =({ navigation }) => {
+    static navigationOptions = ({ navigation }) => {
         return {
-            title: "detail "+navigation.getParam('itemid', '1'),
+            
+            
           };
       }
     constructor(props)
