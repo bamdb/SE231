@@ -1,0 +1,47 @@
+version: '2'
+
+services:
+  registry:
+    image: bamdb/registry
+    container_name: registry
+    hostname: registry
+    restart: unless-stopped
+    ports:
+      - 8761:8761
+  auth:
+    image: bamdb/auth-service
+    container_name: auth
+    hostname: auth
+    restart: unless-stopped
+  item:
+    image: bamdb/item-service
+    container_name: item
+    hostname: item
+    restart: unless-stopped
+  comment:
+    image: bamdb/comment-service
+    container_name: comment
+    hostname: comment
+    restart: unless-stopped
+  friend:
+    image: bamdb/friend-service
+    container_name: friend
+    hostname: friend
+    restart: unless-stopped
+  image:
+    image: bamdb/image-service
+    container_name: image
+    hostname: image
+    restart: unless-stopped
+  message:
+    image: bamdb/message-service
+    container_name: message
+    hostname: message
+    restart: unless-stopped
+  gateway:
+    image: bamdb/gateway
+    container_name: gateway
+    hostname: gateway
+    restart: unless-stopped
+    ports:
+      - 8000:8000
