@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  config:
+    image: bamdb/registry
+    container_name: registry
+    hostname: registry
+    restart: unless-stopped
+    ports:
+      - 8761:8761
