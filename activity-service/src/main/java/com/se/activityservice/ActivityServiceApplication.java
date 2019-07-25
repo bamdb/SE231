@@ -13,6 +13,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @EnableEurekaClient
 @EnableFeignClients
 @EnableOAuth2Client
+@EnableHystrix
 public class ActivityServiceApplication {
 
     public static void main(String[] args) {

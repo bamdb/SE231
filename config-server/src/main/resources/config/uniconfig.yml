@@ -18,7 +18,7 @@ spring:
     discovery-client-enabled: true
   sleuth:
     sampler:
-      probability:
+      probability: 1
   rabbitmq:
     host: 202.120.40.8
     port: 30744
