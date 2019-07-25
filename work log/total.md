@@ -217,6 +217,10 @@
   * test run image on one node
 * huangyuyang:
   * 添加progress/update,并修改部分逻辑，见frontend design 在用户主页面做出走马灯效果 所有界面跳转放在page里
+# 2019-7-25
+* all:
+  * preparing for the exam ≧０≦
+  * continueing former work
 
 
 
