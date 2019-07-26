@@ -1,0 +1,8 @@
+global:
+  scrape_interval:  5s
+  evaluation_interval: 5s
+scrape_configs:
+  - job_name: 'person-app'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['localhost:1919', 'localhost:5000']

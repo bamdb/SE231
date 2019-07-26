@@ -44,9 +44,7 @@ public class ActivityController {
 
 
     @GetMapping(value="/userid/{userId}", produces="application/json")
-    public List<ActivityItemOut> getActivityByUserId(@PathVariable("userId") Long userId,
-                                                     @RequestHeader("Authorization") String accessToken) {
-        FeignRequestInterceptor.accessToken = accessToken;
+    public List<ActivityItemOut> getActivityByUserId(@PathVariable("userId") Long userId) {
         return activityService.selectByUserId(userId);
     }
 
