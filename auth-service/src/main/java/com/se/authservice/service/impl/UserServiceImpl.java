@@ -1,8 +1,5 @@
 package com.se.authservice.service.impl;
-import com.se.authservice.dao.AuthorityReadDao;
-import com.se.authservice.dao.RoleReadDao;
-import com.se.authservice.dao.UserReadDao;
-import com.se.authservice.dao.UserWriteDao;
+import com.se.authservice.dao.*;
 import com.se.authservice.entity.Authority;
 import com.se.authservice.entity.Role;
 import com.se.authservice.entity.User;
@@ -12,7 +9,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,6 +30,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource(name="userWriteDaoImpl")
     private UserWriteDao userWriteDao;
+
+    @Resource(name="redisDaoImpl")
+    private RedisDao redisDao;
 
     @Override
     public User create(User user) {
@@ -116,8 +119,17 @@ public class UserServiceImpl implements UserService {
 
     public User verification(User user) {
         String username = user.getUsername();
-        String password = user.getPassword();
-        String mail = user.getMail();
+        Optional<User> existing = userReadDao.findByUsername(username);
+        existing.ifPresent(it-> {throw new IllegalArgumentException("userDetail already exists: " + it.getUsername());});
 
+        Long currentTime = System.currentTimeMillis();
+        int hashCode = currentTime.hashCode() + username.hashCode();
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassword(encoder.encode(user.getPassword()));
+        String detailValue = username + "," + user.getPassword() + "," + user.getMail();
+
+        redisDao.set(hashCode, detailValue);
+
+        return user;
     }
 }
