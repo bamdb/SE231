@@ -31,7 +31,6 @@ spring:
       type: web
     enabled: true
     discovery-client-enabled: true
-
   sleuth:
     sampler:
       probability: 1
@@ -57,4 +56,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: hystrix.stream
+        include: hystrix.stream, info, health
+feign:
+  hystrix:
+    enabled: true
