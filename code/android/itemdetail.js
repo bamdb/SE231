@@ -1,7 +1,7 @@
 import React from "react";
-import { View, Text ,TextInput,Image,StyleSheet} from "react-native";
+import { View, Text ,TextInput,Image,StyleSheet,ScrollView,FlatList} from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
-import Button from '@ant-design/react-native/lib/button';
+import {Button,List} from '@ant-design/react-native';
 import Storage from 'react-native-storage'
 import axios from 'axios'
 import Navigationbar from "./navigationbar";
@@ -24,16 +24,36 @@ export default class Itemdetail extends React.Component{
             {
                 this.setState({item:res.data});
             }.bind(this)
+        );
+        axios.get("http://202.120.40.8:30741/comment/itemid/"+this.props.navigation.getParam("itemid")).then(
+            function(res)
+            {
+                this.setState({comments:res.data});
+            }.bind(this)
         )
     }
     render()
     {
+        
         return(
             <View>
-                <Image src></Image>
-                <Text>
-                    {this.state.item.itemname}
-                </Text>
+                
+                <Image style={{width:100,height:100}}></Image>
+                <List>
+                    <List.Item>
+                        title:three body
+                    </List.Item>
+                    <List.Item>
+                        author:Liu Cixin
+                    </List.Item>
+                    <List.Item>
+                        pubtime:2000-01-01
+                    </List.Item>
+                    <List.Item>
+                        chapternum:10
+                    </List.Item>
+                </List>
+                
             </View>
         )
     }

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text ,TextInput,StyleSheet} from "react-native";
+import { View, Text ,TextInput,StyleSheet,FlatList,ScrollView} from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import {Button,Card }from '@ant-design/react-native';
 
@@ -15,7 +15,7 @@ export default class Topicpage extends React.Component{
     constructor(props)
     {
         super(props);
-        this.state={topics:[]};
+        this.state={topics:[{id:0,title:"networkerr",pubTime:"2000-01-01"}]};
     }
     componentDidMount()
     {
@@ -54,9 +54,32 @@ export default class Topicpage extends React.Component{
             )
         })
         return(
-            <View>
+            /*<View>
                 {rows}
-            </View>
+            </View>*/
+            <FlatList
+            data={this.state.topics}
+               renderItem={({item}) => 
+               <Card >
+               <Card.Header
+               title={item.title}
+               extra={item.id}
+               />
+               <Card.Body>
+               <View onPress={()=>this.props.navigation.navigate('Topicdetail',{topicid:item.id})} style={{ height: 10 }}>
+                   <Text onPress={()=>this.props.navigation.navigate('Topicdetail',{topicid:item.id})} style={{ marginLeft: 10 }}>detail</Text>
+               </View>
+               </Card.Body>
+               <Card.Footer
+               content={item.pubTime}
+               extra="powered by bamdb"
+               />
+           </Card>
+             
+             }
+            >
+ 
+            </FlatList>
         )
     }
 }

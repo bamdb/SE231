@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text ,TextInput,StyleSheet} from "react-native";
+import { View, Text ,TextInput,StyleSheet,ScrollView} from "react-native";
 import Button from '@ant-design/react-native/lib/button';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import Storage from 'react-native-storage'

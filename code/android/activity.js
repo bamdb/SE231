@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text ,TextInput,StyleSheet} from "react-native";
+import { View, Text ,TextInput,StyleSheet,FlatList} from "react-native";
 import {Button,Card }from '@ant-design/react-native';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import Storage from 'react-native-storage'
@@ -26,25 +26,35 @@ export default class Acticitypage extends React.Component {
     var activities=[];
     axios.get('http://202.120.40.8:30741/friend/all/userid/'+global.userid+"?access_token="+global.access_token).then(
             function(response){
+              alert("friend success")
                 response.data.map(
                   friend=>{
                     axios.get("http://202.120.40.8:30741/activity/userid/"+friend.id+"?access_token="+global.access_token).then(
                         function(res){
                           var newdata=[];
-                          res.data.map(activity=>
-                            {
-                              activity.set("username",friend.username);
-                              newdata.push(activity);
-                            })
-                          activities=activities.concat(newdata);                
-                          this.setState({
-                              activities:activities,                              
-                          });
-                        }
+                          for(var i=0;i<res.data.length;++i)
+                          {
+                            var tmpmap=res.data[i]
+                            tmpmap["username"]=friend.username;
+                            newdata.push(tmpmap);
+                          }
+                          this.setState({activities:this.state.activities.concat(newdata)})
+                        }.bind(this)
+                    ).catch(
+                      function(err)
+                      {
+                        alert(err);
+                      }
                     )
                   }
                 )
             }.bind(this)
+        ).catch(
+          function(err)
+          {
+            alert(err);
+            window.location.reload();
+          }
         )
   }
   render() {
@@ -62,7 +72,7 @@ export default class Acticitypage extends React.Component {
             />
             <Card.Body>
               <View  style={{ height: 10 }}>
-                <Image src={"http://202.120.40.8:30741/image/id/"+activity.activity.itemid+"1"}></Image>
+                
                 <Text>{activity.item.itemname}</Text>
               </View>
             </Card.Body>
@@ -75,9 +85,33 @@ export default class Acticitypage extends React.Component {
         )
       })
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        {rows}
-      </View>
+      <FlatList 
+        data={this.state.activities}
+        renderItem={({item}) =>
+        <Card >
+            <Card.Header
+              title={item.username}
+              thumbStyle={{ width: 30, height: 30 }}
+              thumb={"http://202.120.40.8:30741/image/id/"+item.activity.userid+"0"}
+              extra=""
+              
+            />
+            <Card.Body>
+              <View  style={{ height: 10 }}>
+                
+                <Text onPress={()=>this.props.navigation.navigate("Itemdetail",{itemid:item.item.id})}>{item.item.itemname}</Text>
+              </View>
+            </Card.Body>
+            <Card.Footer
+              content={"time:"+item.activity.actTime}
+              extra="footer extra content"
+            />
+          </Card>
+      }
+      
+      >
+        
+      </FlatList>
     );
   }
 }

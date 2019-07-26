@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text ,TextInput} from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
-import {Button,InputItem} from '@ant-design/react-native;
+import {Button,InputItem,Flex} from '@ant-design/react-native'
 import Storage from 'react-native-storage'
 import axios from 'axios'
 export default class HomeScreen extends React.Component {
@@ -37,31 +37,68 @@ export default class HomeScreen extends React.Component {
             withCredentials:true}).then(
               function(res)
               {
-                alert("success");
+                
                 global.access_token=res.data.access_token;
                 global.username=this.state.username;
-                axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
-                this.props.navigation.navigate('Browse');
+                axios.defaults.headers.common['Authorization'] = "Bearer "+res.data.access_token;
+                
+                axios.get("http://202.120.40.8:30741/auth/username/"+this.state.username).then(
+                    function(res)
+                    {
+                        alert("success");
+                        global.userid=res.data.id;                        
+                    }
+
+                ).catch(
+                  function(err)
+                  {
+                    alert(err);
+                  }
+                )
+                
                 
               }.bind(this)
             ).catch(
               function(err)
               {
                 
-                alert("fail");
+                alert(err);
                 
               }
             )
   }
   render() {
+    
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>username</Text>
-        <TextInput onChangeText={(text) => this.setState({username:text})} value={this.state.username} ></TextInput>
-        <Text>password</Text>
-        <TextInput onChangeText={(text) => this.setState({password:text})} value={this.state.password} ></TextInput>
-        <Button  onPress={this.handlesubmit}>login</Button>
-        <Button  onPress={()=>this.props.navigation.navigate('Browse')}>next</Button>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center",padding:30 }}>
+        
+        <InputItem
+            defaultValue=""
+            clear
+            value={this.state.username}
+            placeholder="username"
+            onChangeText={(text) => this.setState({username:text})}
+          >
+            用户名
+          </InputItem>
+          <InputItem
+            clear
+            type="password"
+            value={this.state.password}
+            onChangeText={(text) => this.setState({password:text})}
+            placeholder="password"
+          >
+            密码
+          </InputItem>
+          <Flex>
+            <Flex.Item>
+              <Button  type="primary" onPress={this.handlesubmit}>login</Button>
+            </Flex.Item>
+            
+          </Flex>
+        
+        
+        
       </View>
     );
   }
