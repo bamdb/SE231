@@ -76,3 +76,7 @@
 # 2019-07-24
 * complete docker compose
 * config bridge network
+
+# 2019-07-25
+* config docker swarm
+* work on mail verification
