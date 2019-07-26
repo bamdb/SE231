@@ -16,4 +16,4 @@ security:
       grant-type: client_credentials
       scope: server
     resource:
-      user-info-uri: http://gateway:8000/auth/all
+      user-info-uri: http://gateway:8000/auth/user

@@ -58,7 +58,6 @@ public class ActivityController {
         return activityService.selectByItemId(itemId);
     }
 
-
     @GetMapping(value="/collect", produces="application/json")
     public ActivityUserOut getActivityByItemIdAndUserId(@RequestParam("userId") Long userId,
                                                         @RequestParam("itemId") Long itemId,
