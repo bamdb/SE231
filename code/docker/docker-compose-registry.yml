@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  config:
+  registry:
     image: bamdb/registry
     container_name: registry
     hostname: registry

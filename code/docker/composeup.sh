@@ -8,11 +8,11 @@ docker-compose -f docker-compose-registry.yml rm -f
 docker-compose pull
 docker-compose -f docker-compose-config.yml pull
 docker-compose -f docker-compose-registry.yml pull
-docker-compose -f docker-compose-config.yml up -d
+docker-compose -p bamdb -f docker-compose-config.yml up -d
 sleep 50
 echo "config up"
-docker-compose -f docker-compose-registry.yml up -d
+docker-compose -p bamdb -f docker-compose-registry.yml up -d
 sleep 50
 echo "registry up"
-docker-compose up -d
+docker-compose -p bamdb up -d
 echo "done"
