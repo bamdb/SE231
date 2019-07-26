@@ -62,7 +62,10 @@ Sprint 1 (July.1-July.10)
 >添加progress/update,并修改部分逻辑，见frontend design  <br/>
 >在用户主页面做出走马灯效果<br/>
 >所有界面跳转放在page里
-  
+
+* July.25<br/>
+>修改activitypage逻辑
+>在前端添加注册验证的部分
 
     
     
