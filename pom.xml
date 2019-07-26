@@ -54,6 +54,5 @@
         <module>message-service</module>
         <module>friend-service</module>
         <module>auth-service</module>
-        <module>turbine</module>
     </modules>
 </project>
