@@ -1,7 +1,6 @@
 version: '2'
 
 services:
-
   zipkin:
     image: openzipkin/zipkin
     environment:
@@ -11,7 +10,7 @@ services:
       - 9411:9411
     networks:
       - elk
-
+    restart: unless-stopped
   rabbitmq:
     image: rabbitmq
     ports:
@@ -19,7 +18,7 @@ services:
       - "15672:15672"
     networks:
       - elk
-
+    restart: unless-stopped
   elasticsearch:
     build:
       context: elasticsearch/
@@ -35,7 +34,7 @@ services:
       ELASTIC_PASSWORD: bamdb
     networks:
       - elk
-
+    restart: unless-stopped
   logstash:
     build:
       context: logstash/
@@ -53,7 +52,7 @@ services:
       - elk
     depends_on:
       - elasticsearch
-
+    restart: unless-stopped
   kibana:
     build:
       context: kibana/
@@ -67,8 +66,8 @@ services:
       - elk
     depends_on:
       - elasticsearch
+    restart: unless-stopped
 
 networks:
-
   elk:
     driver: bridge
