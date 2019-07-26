@@ -1,4 +1,4 @@
-UserHomePage
+### UserHomePage
 
 	我的主页：“我的图书（进度）” “我的电影（进度）” “条目排行榜”
     ajax请求：
@@ -32,7 +32,7 @@ UserHomePage
                     原data: 正确
                      
 
-ItemBrowserPage
+### ItemBrowserPage
 
     页面内容：条目浏览，分为图书、电影，用户可以收藏/跳转详细页面，编辑员可delete一个条目
     url:/itembrowse/book or /itembrowse/movie
@@ -61,7 +61,7 @@ ItemBrowserPage
 			想看、在看、看过、抛弃、搁置互相之间的转化应有规则限制。
 			
 
-Topicpage
+### Topicpage
 		
     页面内容：显示热门条目
     (未完待续。。
