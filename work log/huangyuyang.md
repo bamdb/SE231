@@ -66,6 +66,6 @@ Sprint 1 (July.1-July.10)
 * July.25<br/>
 >修改activitypage逻辑
 >在前端添加注册验证的部分
-
+>配置android的部分
     
     
