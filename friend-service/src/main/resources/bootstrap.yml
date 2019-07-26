@@ -10,5 +10,5 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://bamdb:bamdb@localhost:8761/eureka/
+      defaultZone: http://bamdb:bamdb@registry:8761/eureka/
 
