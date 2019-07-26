@@ -21,7 +21,7 @@ services:
     restart: unless-stopped
   elasticsearch:
     build:
-      context: elasticsearch/
+      context: config/elasticsearch
       args:
         ELK_VERSION: $ELK_VERSION
     volumes:
@@ -37,7 +37,7 @@ services:
     restart: unless-stopped
   logstash:
     build:
-      context: logstash/
+      context: config/logstash
       args:
         ELK_VERSION: $ELK_VERSION
     volumes:
@@ -55,7 +55,7 @@ services:
     restart: unless-stopped
   kibana:
     build:
-      context: kibana/
+      context: config/kibana
       args:
         ELK_VERSION: $ELK_VERSION
     volumes:
