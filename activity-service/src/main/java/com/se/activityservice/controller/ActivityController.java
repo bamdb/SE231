@@ -44,9 +44,7 @@ public class ActivityController {
 
 
     @GetMapping(value="/userid/{userId}", produces="application/json")
-    public List<ActivityItemOut> getActivityByUserId(@PathVariable("userId") Long userId,
-                                                     @RequestHeader("Authorization") String accessToken) {
-        FeignRequestInterceptor.accessToken = accessToken;
+    public List<ActivityItemOut> getActivityByUserId(@PathVariable("userId") Long userId) {
         return activityService.selectByUserId(userId);
     }
 
@@ -57,7 +55,6 @@ public class ActivityController {
         FeignRequestInterceptor.accessToken = accessToken;
         return activityService.selectByItemId(itemId);
     }
-
 
     @GetMapping(value="/collect", produces="application/json")
     public ActivityUserOut getActivityByItemIdAndUserId(@RequestParam("userId") Long userId,

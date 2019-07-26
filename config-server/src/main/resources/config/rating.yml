@@ -1,6 +1,11 @@
 spring:
   application:
     name: rating
+
+eureka:
+  instance:
+    hostname: rating
+
 server:
   port: 8096
 security:
@@ -12,4 +17,4 @@ security:
       grant-type: client_credentials
       scope: server
     resource:
-      user-info-uri: http://gateway:8000/auth/all
+      user-info-uri: http://gateway:8000/auth/user

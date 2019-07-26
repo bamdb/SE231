@@ -45,9 +45,7 @@ public class RatingController {
 
     @GetMapping(value="/score", produces = "application/json")
     public Score getScoreByUserId(@RequestParam("userId") Long userId,
-                                  @RequestParam("itemId") Long itemId,
-                                  @RequestHeader("Authorization") String accessToken) {
-        FeignRequestInterceptor.accessToken = accessToken;
+                                  @RequestParam("itemId") Long itemId) {
         return ratingService.selectScoreByUserId(userId, itemId);
     }
 
