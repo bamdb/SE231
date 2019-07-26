@@ -12,7 +12,7 @@ eureka:
     registerWithEureka: false
     fetchRegistry: false
     service-url:
-      defaultZone: http://bamdb:bamdb@localhost:8761/eureka/
+      defaultZone:  http://bamdb:bamdb@47.103.107.39:8761/eureka/, http://bamdb:bamdb@47.103.104.210:8761/eureka/, http://bamdb:bamdb@47.103.98.30:8761/eureka/ # http://bamdb:bamdb@localhost:8761/eureka/
   server:
     eviction-interval-timer-in-ms: 5000
     enable-self-preservation: false

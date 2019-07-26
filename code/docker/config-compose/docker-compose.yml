@@ -1,7 +1,0 @@
-version: '2'
-
-services:
-  config:
-    image: bamdb/config-server
-    hostname: config
-    restart: unless-stopped

@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  registry:
+    image: bamdb/registry
+    # container_name: registry
+    hostname: registry
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - 8761:8761
