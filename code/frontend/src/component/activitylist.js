@@ -5,7 +5,7 @@
 
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
+import {List, Avatar, Icon, Divider} from 'antd';
 import ListItem from '@material-ui/core/ListItem';
 import Listitem from "./listitem";
 import Comment from "./comment";
@@ -29,31 +29,71 @@ class Activitylist extends Component {
 
     render() {
         var rows=[];
-        const activities=this.props.activities;
-        if(activities!==undefined)
+        const activitylist=[{
+            activities:
+                [{
+                    "activity": {
+                        "id": 1,
+                        "actTime": "1562293010",
+                        "actType": 0,
+                        "userId": 1,
+                        "itemId": 1
+                    },
+                    "item": {
+                        "id": 1,
+                        "itemname": "three body",
+                        "pubTime": "1562293000",
+                        "chapterNum": 12,
+                        "mainAuthor": "Cixin Liu",
+                        "imgurl": "https://lain.bgm.tv/pic/cover/c/13/6f/1937_6Q7MM.jpg",
+                        "type": 0
+                    }
+                }],
+                user:
+                    {
+                        "id": 1,
+                        "username": "bamdb",
+                        "mail": "string",
+                        "imgUrl": "/image/1",
+                        "role": 0
+                    },
+        }
+        ];
+        //this.props.activities;
+        if(activitylist!==undefined)
         {
-            for(var i=0;i<activities.length;++i)
-            {
-                rows.push(
-                    <ListItem className={useStyles.listitem}>
-                        <Activity
-                            userId={activities[i].activity.userId}
-                            username={activities[i].activity.userId}
-                            date={activities[i].activity.actTime}
-                            actType={activities[i].activity.actType}
-                            itemname={activities[i].item.itemname}
-                            itemid={activities[i].item.id}
-                        />
-                    </ListItem>
-                )
-
-            }
+            activitylist.map(act =>{
+                const user=act.user;
+                const activities = act.activities;
+                activities.map(activity=>{
+                    if(activity.activity.actType>=1||activity.activity.actType<=5) {
+                        rows.push(
+                            <ListItem className={useStyles.listitem}>
+                                <Activity
+                                    userId={user.id}
+                                    username={user.username}
+                                    date={activity.activity.actTime}
+                                    actType={activity.activity.actType}
+                                    itemname={activity.item.itemname}
+                                    itemid={activity.item.id}
+                                />
+                            </ListItem>
+                        )
+                        rows.push(<Divider />)
+                    }
+                })
+            })
         }
 
         return (
-            <List className={useStyles.root}>
+            <div>
+            <List
+                itemLayout="vertical"
+                size="large"
+                >
                 {rows}
             </List>
+            </div>
         );
     }
 }
