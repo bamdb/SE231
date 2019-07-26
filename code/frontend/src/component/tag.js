@@ -3,12 +3,8 @@ import React, { Component } from 'react';
 import Paper from '@material-ui/core/Paper';
 
 import '../css/tag.css';
-import Avatar from '@material-ui/core/Avatar';
-import Chip from '@material-ui/core/Chip';
-import Grid from '@material-ui/core/Grid';
 import { Divider } from 'antd';
 import { Tag } from 'antd';
-import axios from "axios";
 
 const { CheckableTag } = Tag;
 /*
@@ -66,10 +62,6 @@ class Tags extends Component {
         }
     }
 
-    componentDidMount() {
-
-    }
-
     render() {
         const selectedTags = this.state.selectedtags;
         const rows=[];
@@ -82,13 +74,6 @@ class Tags extends Component {
                 >
                     {tag}
                 </CheckableTag>
-                /*<CheckableTag
-            key={tag}
-            checked={selectedTags.indexOf(tag) > -1}
-            onChange={checked => this.handleclick(tag, checked)}
-        >
-            {tag}
-        </CheckableTag>*/
             );
             rows.push(<Divider type="vertical" />);
         })

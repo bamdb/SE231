@@ -38,20 +38,24 @@ class Scheduletable extends Component {
         this.state={
             data:[],
             show:false,
+            delete:false,
             treeData:[],
             completed:35,
             current:0,
             current1:-1,
             value: [],
-            show1:false,
             itemname: ""};
         this.handleClose = this.handleClose.bind(this);
         this.showEditBar = this.showEditBar.bind(this);
         this.transform = this.transform.bind(this);
         this.onChange = this.onChange.bind(this);
         this.submit = this.submit.bind(this);
+        this.delete = this.delete.bind(this);
     }
 
+    delete(){
+
+    }
     showEditBar(){
         this.setState({
             show:true,
@@ -61,6 +65,7 @@ class Scheduletable extends Component {
     handleClose(){
         this.setState({
             show:false,
+            delete:false
         })
     }
 
@@ -282,6 +287,7 @@ class Scheduletable extends Component {
                         {this.state.itemname}
                     <LinearProgress variant="determinate" value={this.state.completed} />
                 </CardContent>
+                    /* icon */
                 </CardActionArea>
                 <Modal
                     title="进度编辑"
@@ -293,6 +299,13 @@ class Scheduletable extends Component {
                             点击下方按钮修改当前进度
                     </Typography>
                     <TreeSelect {...tProps} />
+                </Modal>
+                <Modal
+                    visible={this.state.delete}
+                    onYes={this.delete}
+                    onCancel={this.handleClose}
+                >
+                    Are you sure delete this item ?
                 </Modal>
             </Card>
         )

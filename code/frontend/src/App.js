@@ -12,28 +12,18 @@ import {
 import RegisterPage from "./page/registerpage";
 import Topicpage from "./page/topicpage";
 import Topicdetailpage from "./page/topicdetailpage";
-import Userinfopage from "./page/userinfopage"
-import Useriteminfopage from "./page/useriteminfopage"
+import Userinfopage from "./page/userinfopage";
+import Useriteminfopage from "./page/useriteminfopage";
+import Recommendpage from "./page/recommendpage";
 import Activitypage from "./page/activitypage";
 import Resetpwdpage from "./page/resetpwdpage";
 import Messagepage from "./page/messagepage";
-import Rating from "./component/rating";
-import Collect from "./component/collect";
-import Collectform from "./component/collectform";
-
-import Addmessage from "./component/addmessage";
-import Addtopic from "./component/addtopic";
-import Edititem from "./component/edititem";
-import Comment from './component/comment'
-import Scheduletableold from './component/scheduletableold'
 import leftappbar from "./component/leftappbar";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles/index';
-import Leftappbarnew from "./component/leftappbarnew";
-import Neweditor from "./page/editorpage";
+
 import Adminpage from "./page/adminpage";
 import Editorpage from './page/editorpage'
-import axios from "axios";
 import Itemmanagepage from "./page/itemmanage";
 
 
@@ -55,23 +45,10 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-
-
-function selectDrawer(isneeded) {
-    if(!isneeded) var leftBar=<div/>;
-    else var leftBar=leftappbar({username:"hyy"});
-    console.log("login");
-    return leftBar;
-}
 function App() {
     const classes=useStyles();
     const [needDrawer, setneedDrawer]=useState(true);
-    const [username]=useState("");
-    const leftBar = needDrawer ? leftappbar({username:"hyy"}) : <div />
-    /*window.onunload=function(){
-        localStorage.clear();
-    }*/
-
+    const leftBar = needDrawer ? leftappbar() : <div />
   return (
       <Router >
         <div className={classes.root}>
@@ -93,7 +70,7 @@ function App() {
                 <Route path={'/message'} component={Messagepage}></Route>
                 <Route path={'/editor'} component={Editorpage}></Route>
                 <Route path={'/admin'} component={Adminpage}></Route>
-                <Route path={'/test'} component={Itemmanagepage}></Route>
+                <Route path={'/recommend'} component={Recommendpage}></Route>
             </main>
         </div>
       </Router>

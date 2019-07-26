@@ -126,11 +126,11 @@ export default function LeftAppBar(props) {
     const [open, setopen] = useState(true);
     const [openMess, setopenMess] =  useState(false);
     const [username,setusername]=useState("");
+    const isUser = (localStorage.getItem("role")==='USER');
+    const isEditor = (localStorage.getItem("role")==='EDITOR');
     var drawerbutton = open ? <ChevronLeftIcon />:<ChevronRightIcon />
+
     useEffect(() => {
-
-
-
         if(localStorage.getItem("username")!=null)
         {
             setusername(localStorage.getItem("username"))
@@ -165,23 +165,7 @@ export default function LeftAppBar(props) {
 
     });
 
-    /*
-    constructor(props){
-        super(props);
-        this.state={
-            username:"shenruien",
-            password:"123456",
-            email:"123456@qq.com",
-            id:"1",
-            date:"2019-7-1",
-            grade:"1",
-            open: true,
-        };
-        this.handleDrawerClose=this.handleDrawerClose.bind(this);
-    }
-
-     */
-
+    const user=localStorage.getItem("userid");
     function handleDrawerClose(){
         setopen(false);
     }
@@ -285,18 +269,6 @@ export default function LeftAppBar(props) {
                     </ListItemIcon>
                     <ListItemText><Typography color={"textSecondary"}> HOME</Typography></ListItemText>
                 </ListItem>
-                <ListItem button  component={Link} to={'/userinfo'}>
-                    <ListItemIcon>
-                        <MovieOutlinedIcon  />
-                    </ListItemIcon>
-                    <ListItemText><Typography color={"textSecondary"}> MOVIE</Typography></ListItemText>
-                </ListItem>
-                <ListItem button component={Link} to={'/userinfo'}>
-                    <ListItemIcon>
-                        <BookOutlinedIcon  />
-                    </ListItemIcon>
-                    <ListItemText><Typography color={"textSecondary"}>BOOK</Typography></ListItemText>
-                </ListItem>
                 <ListItem button component={Link} to={'/userinfo'}>
                     <ListItemIcon>
                         <FaceIcon  />
@@ -330,24 +302,28 @@ export default function LeftAppBar(props) {
                     </ListItemIcon>
                     <ListItemText><Typography color={"textSecondary"}>讨论区</Typography></ListItemText>
                 </ListItem>
-                <ListItem button>
+                <ListItem button component={Link} to={'/recommend'}>
                     <ListItemIcon>
                         <PaletteOutlinedIcon />
                     </ListItemIcon>
                     <ListItemText><Typography color={"textSecondary"}>个性推荐</Typography></ListItemText>
                 </ListItem>
-                <ListItem button component={Link} to={'/editor'}>
+                <div hidden={isUser} >
+                <ListItem button component={Link} to={'/editor'} >
                     <ListItemIcon>
                         <BuildOutlinedIcon />
                     </ListItemIcon>
                     <ListItemText><Typography color={"textSecondary"}>编辑</Typography></ListItemText>
                 </ListItem>
-                <ListItem button component={Link} to={'/admin'}>
+                </div>
+                <div hidden={isEditor}>
+                <ListItem button component={Link} to={'/admin'} >
                     <ListItemIcon>
                         <VpnKeyOutlinedIcon />
                     </ListItemIcon>
                     <ListItemText><Typography color={"textSecondary"}>admin</Typography></ListItemText>
                 </ListItem>
+                </div>
                 <br/><br/>
                 <Divider />
                 <br/><br/>
@@ -360,14 +336,12 @@ export default function LeftAppBar(props) {
 
                 <br/><br/>
             </div>
-
         </Drawer>
             <Drawer
                 anchor={"right"}
                 open={openMess}
                 onClose={handleMessClose}
             >
-
                 <div className={classes.list}>
                 <Messagepage />
                 </div>

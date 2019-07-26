@@ -24,17 +24,10 @@ class RegisterPage extends Component{
 
     render(){
         return(
-            <Grid container spacing={10}>
-                <Grid item xs={12}>
-                    <Navigation />
-                </Grid>
-                <Grid item xs={12}>
-                    <Grid container>
-                        <Grid item xs={3}></Grid>
-                        <Grid item xs={6}>
-                            <Register></Register>
-                        </Grid>
-                    </Grid>
+            <Grid container spacing={10} justify={"center"} alignContent={"center"}>
+                <br/><br/>
+                <Grid item xs={8}>
+                    <Register></Register>
                 </Grid>
             </Grid>
         )

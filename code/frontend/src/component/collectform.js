@@ -11,18 +11,17 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Tag from "./tag";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import  axios from "axios";
 import Rating from "./rating";
-import $ from 'jquery'
+
+
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
@@ -144,7 +143,10 @@ class Collectform extends Component {
         axios.post("http://202.120.40.8:30741/activity/add?access_token="+localStorage.getItem("access_token"),{actTime:date,actType:this.state.status,userId:this.state.userid,itemId:this.props.itemid});
         axios.post("http://202.120.40.8:30741/comment/insert?access_token="+localStorage.getItem("access_token"),{itemId:this.props.itemid,userId:this.state.userid,content:this.state.content,pubTime:date});
         axios.put("http://202.120.40.8:30741/rating/update?access_token="+localStorage.getItem("access_token"),"success",{params:{userId:this.state.userid,itemId:this.props.itemid,score:this.state.score}});
-        axios.post("http://202.120.40.8:30741/item/add/tag?access_token="+localStorage.getItem("access_token")+"&userId="+localStorage.getItem("userid")+"&itemId="+this.props.itemid,yourtags)
+        axios.post("http://202.120.40.8:30741/item/add/tag?access_token="+localStorage.getItem("access_token")+"&userId="+localStorage.getItem("userid")+"&itemId="+this.props.itemid,yourtags);
+
+        this.props.handleprogress(this.state.status);
+
         /*$.ajax({
             url:"/item/add/tag",
             type:"POST",
@@ -153,8 +155,8 @@ class Collectform extends Component {
 
 
         })*/
-
     }
+
     handleCancel() {
         this.setState({
             visible: false
@@ -197,8 +199,6 @@ class Collectform extends Component {
                                     <FormControlLabel value={0} control={<Radio />} label="想看" />
                                     <FormControlLabel value={1} control={<Radio />} label="在看" />
                                     <FormControlLabel value={2} control={<Radio />} label="看过" />
-                                    <FormControlLabel value={3} control={<Radio />} label="抛弃" />
-                                    <FormControlLabel value={4} control={<Radio />} label="搁置" />
                                 </RadioGroup>
                             </FormControl>
                         </Grid>
@@ -210,7 +210,7 @@ class Collectform extends Component {
                                 id="outlined-multiline-static"
                                 label="简评"
                                 multiline
-                                rows="8"
+                                rows="5"
                                 fullWidth={true}
                                 className={useStyles.textField}
                                 margin="normal"
@@ -256,6 +256,9 @@ class Collectform extends Component {
                             </Button>
                         </Grid>
                         <Grid item xs={12}>
+                            <Typography variant="subtitle1" color="textPrimary" component="p">
+                                评分：
+                            </Typography>
                             <Rating handlescorechange={this.handlescorechange}></Rating>
                         </Grid>
                     </Grid>

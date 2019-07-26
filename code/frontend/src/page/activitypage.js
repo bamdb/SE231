@@ -32,32 +32,32 @@ class Activitypage extends Component{
     async componentWillMount() {
         this.finduser();
         this.findfriends();
-        const _this=this;
-
-
     }
+
+
     componentDidUpdate(prevProps, prevState, snapshot) {
+        var temp=[];
         if(this.state.len!==this.state.friends.length)
         {
             this.setState({len:this.state.friends.length});
-            const _this=this;
             var activities=[];
             this.state.friends.map(friend=>{
                 axios.get("http://202.120.40.8:30741/activity/userid/"+friend.id+"?access_token="+localStorage.getItem("access_token"))
                     .then(function (res) {
-                        activities=activities.concat(res.data);
-                        console.log(activities);
-                        this.setState({
-                            activities:activities,
-                            isloaded: true,
-                        });
+                        temp.push({
+                            user: friend,
+                            activities: res.data,
+                        })
+                        console.log(temp);
+                        activities.push(temp);
                     }.bind(this)
                     )
                     .catch(function (error) {
                     })
             });
-
-
+            this.setState({
+                activities:activities,
+            })
         }
     }
 
@@ -79,7 +79,7 @@ class Activitypage extends Component{
     {
         if(localStorage.getItem("userid")==null)
         {
-            window.location.href="/#/login";
+            //window.location.href="/#/login";
         }
         else {
           await  this.setState({userid:localStorage.getItem("userid")})
@@ -104,8 +104,6 @@ class Activitypage extends Component{
                         <br/><br/>
                         <Activitylist
                             activities={activities}
-                            username={this.state.username}
-                            userid={this.state.userid}
                             />
                     </Grid>
                     <Grid item xs={2}></Grid>

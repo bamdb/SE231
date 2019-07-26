@@ -1,7 +1,30 @@
-div 
 .login{
     background-image: url("/src/background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
+
+#register
+{
+    justify-self: center;
+    align-content: space-around;
+    vertical-align: center;
+    padding: 64px;
+}
+
+#register-body
+{
+    width: 55%;
+    justify-self: flex-start;
+}
+
+#register-jump
+{
+    width: 40%;
+    align-self: flex-end;
+}
+
+
+
+
