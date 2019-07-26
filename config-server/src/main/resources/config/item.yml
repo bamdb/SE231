@@ -4,7 +4,7 @@ spring:
 
 eureka:
   instance:
-    hostname: item
+    hostname: bamdb_item
 
 server:
   port: 8094
@@ -13,8 +13,8 @@ security:
     client:
       clientId: item-service
       clientSecret: item-service
-      accessTokenUri: http://gateway:8000/auth/oauth/token
+      accessTokenUri: http://bamdb_gateway:8000/auth/oauth/token
       grant-type: client_credentials
       scope: server
     resource:
-      user-info-uri: http://gateway:8000/auth/user
+      user-info-uri: http://bamdb_gateway:8000/auth/user

@@ -2,4 +2,4 @@ spring:
   cloud:
     config:
       name: registry
-      uri: http://config:8888
+      uri: http://bamdb_config:8888
