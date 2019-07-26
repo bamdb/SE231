@@ -30,7 +30,8 @@ export default class Itemlist extends React.Component{
                 <Button onPress={()=>this.props.navigation.navigate('Detail',{itemid:item.item.id})}>{item.item.itemname}</Button>
                 <Image style={styles.image} source={{uri:"http://202.120.40.8:30741/image/id/"+item.item.id+"0"}}></Image>
             </View>*/
-            <Card onPress={()=>this.props.navigation.navigate('Detail',{itemid:item.item.id})}>
+            
+            <Card >
             <Card.Header
               title={item.item.itemname}
               thumbStyle={{ width: 30, height: 30 }}
@@ -39,8 +40,8 @@ export default class Itemlist extends React.Component{
               
             />
             <Card.Body>
-              <View  style={{ height: 10 }}>
-                <Text onPress={()=>this.props.navigation.navigate('Detail',{itemid:item.item.id})} style={{ marginLeft: 10 }}>detail</Text>
+              <View onPress={()=>this.props.navigation.navigate('Itemdetail',{itemid:item.item.id})} style={{ height: 10 }}>
+                <Text onPress={()=>this.props.navigation.navigate('Itemdetail',{itemid:item.item.id})} style={{ marginLeft: 10 }}>detail</Text>
               </View>
             </Card.Body>
             <Card.Footer
@@ -48,6 +49,7 @@ export default class Itemlist extends React.Component{
               extra="footer extra content"
             />
           </Card>
+          
             )
         })
         return(

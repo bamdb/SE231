@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Text ,Button,TextInput} from "react-native";
-import { createMaterialTopTabNavigator,createStackNavigator, createAppContainer } from "react-navigation";
+import { createMaterialToppTabNavigator,createStackNavigator, createAppContainer } from "react-navigation";
+import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
+import { Grid, Icon } from '@ant-design/react-native';
 import Storage from 'react-native-storage'
 import axios from 'axios'
 import HomeScreen from './loginpage'
@@ -8,27 +10,50 @@ import DetailsScreen from './browsepage'
 import Itemdetail from './itemdetail'
 import Topicpage from './topicpage'
 import Activitypage from './activity'
-const AppNavigator = createMaterialTopTabNavigator(
+import Topicdetail from './topicdetail'
+
+const AppNavigator = createMaterialBottomTabNavigator(
   {
-    Home:  HomeScreen,
-    Browse: DetailsScreen,
-    Topic: Topicpage,
-    Activity: Activitypage
+    Home: {
+      screen: HomeScreen,
+      navigationOptions: {
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name='login' color={tintColor} size={24} />
+        )
+      },
+    },
+    Browse: {
+      screen:DetailsScreen,
+      navigationOptions:{
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name='table' color={tintColor} size={24} />
+        )
+      }
+    },
+    Topic: {
+      screen:Topicpage,
+      navigationOptions:{
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name='menu' color={tintColor} size={24} />
+        )
+      }
+    },
+    Activity:{
+      screen:Activitypage,
+      navigationOptions:{
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name='bell' color={tintColor} size={24} />
+        )
+      }
+    }
+        
   },
   {
-    initialRouteName: "Home",
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: '#f4511e',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    },
-    navigationOptions: {
-      tabBarLabel: 'Home!',
-    },
+    initialRouteName: 'Home',
+    shifting:false,
+    activeColor: 'purple',
+    inactiveColor: 'white',
+    barStyle: { backgroundColor: 'pink' },
   },
   
 );
@@ -36,7 +61,9 @@ const AppNavigator = createMaterialTopTabNavigator(
 const MainScreenNavigator = createStackNavigator({
   
   Home: { screen: createAppContainer(AppNavigator) },
-  Detail:{screen: Itemdetail},
+  
+  Itemdetail:{screen: Itemdetail},
+  Topicdetail:{screen: Topicdetail},
   
   
 },

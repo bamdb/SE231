@@ -15,13 +15,24 @@ export default class Itemdetail extends React.Component{
     constructor(props)
     {
         super(props)
+        this.state={item:{}}
+    }
+    componentDidMount()
+    {
+        axios.get("http://202.120.40.8:30741/item/id/"+this.props.navigation.getParam("itemid")).then(
+            function(res)
+            {
+                this.setState({item:res.data});
+            }.bind(this)
+        )
     }
     render()
     {
         return(
             <View>
+                <Image src></Image>
                 <Text>
-                    hello
+                    {this.state.item.itemname}
                 </Text>
             </View>
         )

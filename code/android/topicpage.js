@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Text ,TextInput,StyleSheet} from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
-import Button from '@ant-design/react-native/lib/button';
+import {Button,Card }from '@ant-design/react-native';
+
 import Storage from 'react-native-storage'
 import axios from 'axios'
 import Navigationbar from "./navigationbar";
@@ -14,6 +15,7 @@ export default class Topicpage extends React.Component{
     constructor(props)
     {
         super(props);
+        this.state={topics:[]};
     }
     componentDidMount()
     {
@@ -22,13 +24,38 @@ export default class Topicpage extends React.Component{
 
             this.setState({topics:response.data});
         }.bind(this)
+        ).catch(
+            function(err)
+            {
+                this.setState({topics:[{id:0,title:"networkerr",pubTime:"2000-01-01"}]})
+            }
         )
     }    
     render()
     {
+        var rows=[];
+        this.state.topics.map(topic=>{
+            rows.push(
+                <Card >
+                    <Card.Header
+                    title={topic.title}
+                    extra={topic.id}
+                    />
+                    <Card.Body>
+                    <View onPress={()=>this.props.navigation.navigate('Topicdetail',{topicid:topic.id})} style={{ height: 10 }}>
+                        <Text onPress={()=>this.props.navigation.navigate('Topicdetail',{topicid:topic.id})} style={{ marginLeft: 10 }}>detail</Text>
+                    </View>
+                    </Card.Body>
+                    <Card.Footer
+                    content={topic.pubTime}
+                    extra="powered by bamdb"
+                    />
+                </Card>
+            )
+        })
         return(
             <View>
-                <Text>topic</Text>
+                {rows}
             </View>
         )
     }

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text ,TextInput} from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
-import Button from '@ant-design/react-native/lib/button';
+import {Button,InputItem} from '@ant-design/react-native;
 import Storage from 'react-native-storage'
 import axios from 'axios'
 export default class HomeScreen extends React.Component {
