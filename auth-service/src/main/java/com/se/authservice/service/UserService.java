@@ -4,7 +4,7 @@ package com.se.authservice.service;
 import com.se.authservice.entity.User;
 
 public interface UserService {
-    User create(User user);
+    User create(int hashCode);
     User changeRole(String username, String roleName, String c);
     User changeRevokeAuthority(String username, String revokeAuthorityName, String c);
     User disableUser(String username);

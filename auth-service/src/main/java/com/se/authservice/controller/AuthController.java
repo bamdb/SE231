@@ -23,11 +23,16 @@ public class AuthController {
         this.defaultTokenServices = defaultTokenServices;
     }
 
+    @PostMapping(value = "/verify", produces = "application/json")
+    public User verify(@RequestBody User user) {
+        return userService.verification(user);
+    }
+
     @PostMapping(value = "/signup", produces = "application/json")
-    public User create(@RequestBody User user) {
+    public User create(@RequestParam int hashCode) {
         User u = new User();
         try {
-            u = userService.create(user);
+            u = userService.create(hashCode);
         } catch (IllegalArgumentException e){
             return null;
         } finally {

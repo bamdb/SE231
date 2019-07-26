@@ -35,13 +35,18 @@ public class UserServiceImpl implements UserService {
     private RedisDao redisDao;
 
     @Override
-    public User create(User user) {
-        Optional<User> existing = userReadDao.findByUsername(user.getUsername());
-        existing.ifPresent(it-> {throw new IllegalArgumentException("userDetail already exists: " + it.getUsername());});
+    public User create(int hashCode) {
+//        Optional<User> existing = userReadDao.findByUsername(user.getUsername());
+//        existing.ifPresent(it-> {throw new IllegalArgumentException("userDetail already exists: " + it.getUsername());});
+//        User userDetail = new User();
+//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String value = redisDao.get(hashCode);
+        String[] values = value.split(",");
+        String username = values[0];
+        String password = values[1];
         User userDetail = new User();
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        userDetail.setPassword(encoder.encode(user.getPassword()));
-        userDetail.setUsername(user.getUsername());
+        userDetail.setPassword(password);  //encoder.encode(user.getPassword()));
+        userDetail.setUsername(username);  //user.getUsername());
         return userWriteDao.save(userDetail);
     }
 
@@ -123,10 +128,10 @@ public class UserServiceImpl implements UserService {
         existing.ifPresent(it-> {throw new IllegalArgumentException("userDetail already exists: " + it.getUsername());});
 
         Long currentTime = System.currentTimeMillis();
-        int hashCode = currentTime.hashCode() + username.hashCode();
+        int hashCode = (username + currentTime.toString()).hashCode();
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
-        String detailValue = username + "," + user.getPassword() + "," + user.getMail();
+        String detailValue = username + "," + user.getPassword();
 
         redisDao.set(hashCode, detailValue);
 
