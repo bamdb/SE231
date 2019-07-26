@@ -1,7 +1,11 @@
 sudo: required
 language: java
 addons:
-  ssh_known_hosts: 202.120.40.8:30740
+  ssh_known_hosts:
+  - 202.120.40.8:30740
+  - 47.103.107.39
+  - 47.103.104.210
+  - 47.103.98.30
 services:
 - mongodb
 - redis
@@ -21,7 +25,6 @@ before_install:
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 - docker login -u $DOCKER_USER -p $DOCKER_PASS
-
 # CONFIG SERVICE
 - export CONFIG=bamdb/config-server
 - docker build -t $CONFIG:$COMMIT ./config-server
@@ -93,3 +96,5 @@ after_success:
 - docker build -t $TOPIC:$COMMIT ./topic-service
 - docker tag $TOPIC:$COMMIT $TOPIC
 - docker push $TOPIC
+- apt install sshpass
+- sshpass -p $SSHPASS ssh root@47.103.107.39 < "echo 'hello' > hello"
