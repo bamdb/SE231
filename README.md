@@ -73,6 +73,9 @@ code for summer project
     * 反向代理
     * 负载均衡
 * 监控
+    * zipkin 端口30743
+    * prometheus+Grafana 端口30744
+    * rabbitMQ+elk日志管理
 * RESTful
     * Open API
         * [openapi.yml](https://app.swaggerhub.com/apis/ba818/open-api/1.0.0 "swaggerhub")
