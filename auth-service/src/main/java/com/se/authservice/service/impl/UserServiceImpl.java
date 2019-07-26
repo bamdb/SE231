@@ -113,4 +113,11 @@ public class UserServiceImpl implements UserService {
         user.setRoles(null);
         return user;
     }
+
+    public User verification(User user) {
+        String username = user.getUsername();
+        String password = user.getPassword();
+        String mail = user.getMail();
+
+    }
 }
