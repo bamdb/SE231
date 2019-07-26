@@ -1,18 +1,19 @@
 #!/bin/sh
-docker-compose stop
-docker-compose -f docker-compose-config.yml stop
-docker-compose -f docker-compose-registry.yml stop
-docker-compose rm -f
-docker-compose -f docker-compose-config.yml rm -f
-docker-compose -f docker-compose-registry.yml rm -f
+# docker-compose stop
+# docker-compose -f docker-compose-config.yml stop
+# docker-compose -f docker-compose-registry.yml stop
+docker stack rm bamdb
+# docker-compose rm -f
+# docker-compose -f docker-compose-config.yml rm -f
+# docker-compose -f docker-compose-registry.yml rm -f
 docker-compose pull
 docker-compose -f docker-compose-config.yml pull
 docker-compose -f docker-compose-registry.yml pull
-docker-compose -p bamdb -f docker-compose-config.yml up -d
+docker stack deploy --compose-file=docker-compose-config.yml bamdb
 sleep 50
 echo "config up"
-docker-compose -p bamdb -f docker-compose-registry.yml up -d
+docker stack deploy --compose-file=docker-compose-registry.yml bamdb
 sleep 50
 echo "registry up"
-docker-compose -p bamdb up -d
+docker stack deploy --compose-file=docker-compose.yml bamdb
 echo "done"

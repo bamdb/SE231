@@ -1,55 +1,115 @@
-version: '2'
+version: '3'
 
 services:
   auth:
     image: bamdb/auth-service
     #  container_name: auth
     hostname: auth
-    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1024M
   activity:
     image: bamdb/activity-service
     #  container_name: activity
     hostname: activity
-    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1024M
   item:
     image: bamdb/item-service
     #  container_name: item
     hostname: item
-    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1024M
   comment:
     image: bamdb/comment-service
     #  container_name: comment
     hostname: comment
-    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1024M
   friend:
     image: bamdb/friend-service
     #  container_name: friend
     hostname: friend
-    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1024M
   image:
     image: bamdb/image-service
     # container_name: image
     hostname: image
-    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1024M
   message:
     image: bamdb/message-service
     # container_name: message
     hostname: message
-    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1024M
   rating:
     image: bamdb/rating-service
     # container_name: rating
     hostname: rating
-    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1024M
   topic:
     image: bamdb/topic-service
     #  container_name: topic
     hostname: topic
-    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1024M
   gateway:
     image: bamdb/gateway
     # container_name: gateway
     hostname: gateway
-    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1024M
     ports:
       - 8000:8000

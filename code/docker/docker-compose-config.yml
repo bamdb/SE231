@@ -1,8 +1,10 @@
-version: '2'
+version: '3'
 
 services:
   config:
     image: bamdb/config-server
     #  container_name: config
     hostname: config
-    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
