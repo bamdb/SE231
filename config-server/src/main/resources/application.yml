@@ -14,7 +14,7 @@ eureka:
   client:
     register-with-eureka: true
     serviceUrl:
-      defaultZone: http://bamdb:bamdb@bamdb_registry:8761/eureka/
+      defaultZone: http://bamdb:bamdb@registry:8761/eureka/
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
     lease-expiration-duration-in-seconds: 60

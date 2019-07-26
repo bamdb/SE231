@@ -4,7 +4,7 @@ spring:
 
 eureka:
   instance:
-    hostname: bamdb_auth
+    hostname: auth
 
 server:
   port: 5000
