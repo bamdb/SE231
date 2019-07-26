@@ -301,7 +301,7 @@ export default function LeftAppBar(props) {
                     </ListItemIcon>
                     <ListItemText><Typography color={"textSecondary"}>讨论区</Typography></ListItemText>
                 </ListItem>
-                <ListItem button>
+                <ListItem button component={Link} to={'/recommend'}>
                     <ListItemIcon>
                         <PaletteOutlinedIcon />
                     </ListItemIcon>

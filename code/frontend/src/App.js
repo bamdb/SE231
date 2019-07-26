@@ -12,8 +12,9 @@ import {
 import RegisterPage from "./page/registerpage";
 import Topicpage from "./page/topicpage";
 import Topicdetailpage from "./page/topicdetailpage";
-import Userinfopage from "./page/userinfopage"
-import Useriteminfopage from "./page/useriteminfopage"
+import Userinfopage from "./page/userinfopage";
+import Useriteminfopage from "./page/useriteminfopage";
+import Recommendpage from "./page/recommendpage";
 import Activitypage from "./page/activitypage";
 import Resetpwdpage from "./page/resetpwdpage";
 import Messagepage from "./page/messagepage";
@@ -69,7 +70,7 @@ function App() {
                 <Route path={'/message'} component={Messagepage}></Route>
                 <Route path={'/editor'} component={Editorpage}></Route>
                 <Route path={'/admin'} component={Adminpage}></Route>
-                <Route path={'/test'} component={Itemmanagepage}></Route>
+                <Route path={'/recommend'} component={Recommendpage}></Route>
             </main>
         </div>
       </Router>
