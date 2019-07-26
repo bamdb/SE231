@@ -11,6 +11,7 @@ import Itemdetail from './itemdetail'
 import Topicpage from './topicpage'
 import Activitypage from './activity'
 import Topicdetail from './topicdetail'
+import BasicTabBarExample from "./test";
 
 const AppNavigator = createMaterialBottomTabNavigator(
   {
@@ -45,7 +46,8 @@ const AppNavigator = createMaterialBottomTabNavigator(
           <Icon name='bell' color={tintColor} size={24} />
         )
       }
-    }
+    },
+    
         
   },
   {
