@@ -66,10 +66,15 @@ Topicpage
     页面内容：显示热门条目
     (未完待续。。
     
-UserInfopage
+### UserInfopage
 
     用户个人信息
     ajax：
-        1. /rating/browser 用于获取最热条目信息，制作流动图片
+    1. /rating/browser 用于获取最热条目信息，制作流动图片
+	2. .Userinfo: /auth/username/{username} 
+        用于获取用户信息
+    3. /auth/update/{username}
+        更新用户信息
+        
         
     
