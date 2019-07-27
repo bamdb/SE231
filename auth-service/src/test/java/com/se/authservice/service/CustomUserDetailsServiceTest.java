@@ -19,7 +19,7 @@ public class CustomUserDetailsServiceTest {
     UserService userService;
     @Test(expected = UsernameNotFoundException.class)
     public void testCustomUserDetailsService() {
-        userService.create(new User("john2", "0"));
+//        userService.create(new User("john2", "0"));
         Assert.assertNotNull( customUserDetailsService.loadUserByUsername("john2"));
         customUserDetailsService.loadUserByUsername("nhoj");
     }

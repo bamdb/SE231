@@ -4,16 +4,21 @@ import com.se.authservice.entity.Authority;
 import com.se.authservice.entity.Role;
 import com.se.authservice.entity.User;
 import com.se.authservice.service.UserService;
+import org.apache.commons.mail.HtmlEmail;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
 import javax.annotation.Resource;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -36,17 +41,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(int hashCode) {
-//        Optional<User> existing = userReadDao.findByUsername(user.getUsername());
-//        existing.ifPresent(it-> {throw new IllegalArgumentException("userDetail already exists: " + it.getUsername());});
-//        User userDetail = new User();
-//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String value = redisDao.get(hashCode);
+
+        // hash code expired
+        if (value == null) {
+            return null;
+        }
+
         String[] values = value.split(",");
         String username = values[0];
         String password = values[1];
+        String mail = values[2];
         User userDetail = new User();
-        userDetail.setPassword(password);  //encoder.encode(user.getPassword()));
-        userDetail.setUsername(username);  //user.getUsername());
+        userDetail.setPassword(password);
+        userDetail.setUsername(username);
+        userDetail.setMail(mail);
         return userWriteDao.save(userDetail);
     }
 
@@ -122,7 +131,7 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    public User verification(User user) {
+    public User verification(User user) throws Exception {
         String username = user.getUsername();
         Optional<User> existing = userReadDao.findByUsername(username);
         existing.ifPresent(it-> {throw new IllegalArgumentException("userDetail already exists: " + it.getUsername());});
@@ -131,9 +140,41 @@ public class UserServiceImpl implements UserService {
         int hashCode = (username + currentTime.toString()).hashCode();
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
-        String detailValue = username + "," + user.getPassword();
+        String detailValue = username + "," + user.getPassword() + "," + user.getMail();
 
         redisDao.set(hashCode, detailValue);
+
+
+        Properties props = new Properties();
+        props.setProperty("mail.debug", "true");
+        props.setProperty("mail.smtp.auth", "true");
+        props.setProperty("mail.host", "smtp.office365.com");
+        props.setProperty("mail.transport.protocol", "smtp");
+        props.setProperty("mail.smtp.port", "587");
+        props.put("mail.smtp.starttls.enable", "true");
+
+        Session session = Session.getInstance(props);
+        MimeMessage msg = new MimeMessage(session);
+
+        msg.setFrom(new InternetAddress("bamdb@outlook.com"));
+
+        msg.addRecipient(Message.RecipientType.TO, new InternetAddress("wzl574402791@outlook.com"));
+
+        msg.setSubject("欢迎注册Bamdb");
+
+        Multipart multipart = new MimeMultipart();
+
+        String url = "http://202.120.40.8:30741/auth/user/signup?hashCode="+hashCode;
+        MimeBodyPart htmlPart = new MimeBodyPart();
+        htmlPart.setContent("<h3>请点击以下链接，激活您的账号</h3><a href="+url+"><h3>点此激活</h3></a>", "text/html; charset=utf-8");
+        multipart.addBodyPart(htmlPart);
+
+        msg.setContent(multipart);
+
+        Transport transport = session.getTransport();
+        transport.connect("bamdb@outlook.com", "ABM@ndy4sVJ8W2J");
+        transport.sendMessage(msg, new Address[]{new InternetAddress("wzl574402791@outlook.com")});
+        transport.close();
 
         return user;
     }

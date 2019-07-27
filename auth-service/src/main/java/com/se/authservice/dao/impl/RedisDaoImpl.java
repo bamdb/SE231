@@ -14,7 +14,7 @@ public class RedisDaoImpl implements RedisDao {
     private RedisTemplate redisTemplate;
 
     public void set(int entry, String value) {
-        redisTemplate.opsForValue().set(entry, value, 180, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(entry, value, 600, TimeUnit.SECONDS);
     }
 
     public String get(int entry) {

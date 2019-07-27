@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
@@ -24,12 +25,12 @@ public class AuthController {
     }
 
     @PostMapping(value = "/verify", produces = "application/json")
-    public User verify(@RequestBody User user) {
+    public User verify(@RequestBody User user) throws Exception{
         return userService.verification(user);
     }
 
-    @PostMapping(value = "/signup", produces = "application/json")
-    public User create(@RequestParam int hashCode) {
+    @GetMapping(value = "/signup", produces = "application/json")
+    public RedirectView create(@RequestParam int hashCode) {
         User u = new User();
         try {
             u = userService.create(hashCode);
@@ -38,7 +39,7 @@ public class AuthController {
         } finally {
             userService.changeRole(u.getUsername(), "ROLE_USER", "+");
         }
-        return u;
+        return new RedirectView("http://www.bamdb.cn");
     }
 
     @PreAuthorize("hasRole('USER')")
