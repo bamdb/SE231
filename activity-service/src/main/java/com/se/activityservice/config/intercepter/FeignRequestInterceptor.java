@@ -16,7 +16,6 @@ public class FeignRequestInterceptor implements RequestInterceptor {
 
     public FeignRequestInterceptor() {
     }
-
     public void apply(RequestTemplate requestTemplate) {
         requestTemplate.header("Authorization", accessToken);
     }

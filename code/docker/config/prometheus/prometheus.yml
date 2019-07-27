@@ -1,0 +1,40 @@
+global:
+  scrape_interval:  5s
+  evaluation_interval: 5s
+scrape_configs:
+  - job_name: 'auth'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['auth:8090']
+  - job_name: 'activity'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['activity:8090']
+  - job_name: 'item'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['item:8090']
+  - job_name: 'comment'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['comment:8090']
+  - job_name: 'friend'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['friend:8090']
+  - job_name: 'image'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['image:8090']
+  - job_name: 'message'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'message:8090']
+  - job_name: 'rating'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['rating:8090']
+  - job_name: 'topic'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['topic:8090']

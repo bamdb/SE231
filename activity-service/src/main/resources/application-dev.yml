@@ -56,7 +56,16 @@ management:
   endpoints:
     web:
       exposure:
-        include: hystrix.stream, info, health
+        include: '*'
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
 feign:
   hystrix:
     enabled: true
