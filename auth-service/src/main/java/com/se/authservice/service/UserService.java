@@ -3,6 +3,8 @@ package com.se.authservice.service;
 
 import com.se.authservice.entity.User;
 
+import javax.security.auth.login.AccountExpiredException;
+
 public interface UserService {
     User create(int hashCode);
     User changeRole(String username, String roleName, String c);

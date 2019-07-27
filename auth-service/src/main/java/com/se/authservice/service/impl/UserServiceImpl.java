@@ -17,6 +17,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.security.auth.login.AccountExpiredException;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -40,12 +41,11 @@ public class UserServiceImpl implements UserService {
     private RedisDao redisDao;
 
     @Override
-    public User create(int hashCode) {
+    public User create(int hashCode){
         String value = redisDao.get(hashCode);
 
-        // hash code expired
         if (value == null) {
-            return null;
+            throw new IllegalArgumentException("hash code expired");
         }
 
         String[] values = value.split(",");

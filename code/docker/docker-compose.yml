@@ -8,10 +8,10 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 1024M
+#      resources:
+#        limits:
+#          cpus: '0.5'
+#          memory: 1024M
   activity:
     image: bamdb/activity-service
     #  container_name: activity
@@ -19,10 +19,10 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 1024M
+#      resources:
+#        limits:
+#          cpus: '0.5'
+#          memory: 1024M
   item:
     image: bamdb/item-service
     #  container_name: item
@@ -30,10 +30,10 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 1024M
+#      resources:
+#        limits:
+#          cpus: '0.5'
+#          memory: 1024M
   comment:
     image: bamdb/comment-service
     #  container_name: comment
@@ -41,10 +41,10 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 1024M
+#      resources:
+#        limits:
+#          cpus: '0.5'
+#          memory: 1024M
   friend:
     image: bamdb/friend-service
     #  container_name: friend
@@ -52,10 +52,10 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 1024M
+#      resources:
+#        limits:
+#          cpus: '0.5'
+#          memory: 1024M
   image:
     image: bamdb/image-service
     # container_name: image
@@ -63,10 +63,10 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 1024M
+#      resources:
+#        limits:
+#          cpus: '0.5'
+#          memory: 1024M
   message:
     image: bamdb/message-service
     # container_name: message
@@ -74,10 +74,10 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 1024M
+#      resources:
+#        limits:
+#          cpus: '0.5'
+#          memory: 1024M
   rating:
     image: bamdb/rating-service
     # container_name: rating
@@ -85,10 +85,10 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 1024M
+#      resources:
+#        limits:
+#          cpus: '0.5'
+#          memory: 1024M
   topic:
     image: bamdb/topic-service
     #  container_name: topic
@@ -96,10 +96,10 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 1024M
+#      resources:
+#        limits:
+#          cpus: '0.5'
+#          memory: 1024M
   gateway:
     image: bamdb/gateway
     # container_name: gateway
@@ -107,10 +107,10 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 1024M
+#      resources:
+#        limits:
+#          cpus: '0.5'
+#          memory: 1024M
     ports:
       - 8000:8000
   prometheus:
@@ -127,7 +127,7 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 1024M
+#      resources:
+#        limits:
+#          cpus: '0.5'
+#          memory: 1024M
