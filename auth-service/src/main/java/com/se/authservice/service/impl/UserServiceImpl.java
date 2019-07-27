@@ -52,6 +52,10 @@ public class UserServiceImpl implements UserService {
         String username = values[0];
         String password = values[1];
         String mail = values[2];
+
+        Optional<User> existing = userReadDao.findByUsername(username);
+        existing.ifPresent(it-> {throw new IllegalArgumentException("userDetail already exists: " + it.getUsername());});
+
         User userDetail = new User();
         userDetail.setPassword(password);
         userDetail.setUsername(username);
@@ -164,7 +168,7 @@ public class UserServiceImpl implements UserService {
 
         Multipart multipart = new MimeMultipart();
 
-        String url = "http://202.120.40.8:30741/auth/user/signup?hashCode="+hashCode;
+        String url = "http://202.120.40.8:30741/auth/signup?hashCode="+hashCode;
         MimeBodyPart htmlPart = new MimeBodyPart();
         htmlPart.setContent("<h3>请点击以下链接，激活您的账号</h3><a href="+url+"><h3>点此激活</h3></a>", "text/html; charset=utf-8");
         multipart.addBodyPart(htmlPart);
