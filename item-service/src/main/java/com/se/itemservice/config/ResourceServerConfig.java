@@ -58,6 +58,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers(HttpMethod.GET).permitAll()
                 .antMatchers("/actuator/**").permitAll()
                 .anyRequest()
-                .authenticated().and().csrf().disable();
+                .authenticated()
+                .and().csrf().disable();
     }
 }

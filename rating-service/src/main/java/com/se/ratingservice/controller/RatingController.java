@@ -25,7 +25,6 @@ public class RatingController {
         return ratingService.postRating(itemId);
     }
 
-
     @GetMapping(value ="/all", produces ="application/json")
     public Iterable<Rating> getAllRatings() {
         return ratingService.selectAll();
@@ -37,9 +36,7 @@ public class RatingController {
     }
 
     @GetMapping(value="/itemid/{itemId}", produces="application/json")
-    public Rating getRatingByItemId(@PathVariable("itemId") Long itemId,
-                                    @RequestHeader("Authorization") String accessToken ) {
-        FeignRequestInterceptor.accessToken = accessToken;
+    public Rating getRatingByItemId(@PathVariable("itemId") Long itemId ) {
         return ratingService.selectByItemId(itemId);
     }
 

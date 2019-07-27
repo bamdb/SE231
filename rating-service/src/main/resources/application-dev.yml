@@ -7,7 +7,6 @@ spring:
       type: web
     enabled: true
     discovery-client-enabled: true
-
   sleuth:
     sampler:
       probability: 1

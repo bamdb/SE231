@@ -79,7 +79,6 @@ public class UserInfoTokenServices extends RemoteTokenServices {
     public OAuth2Authentication loadAuthentication(String accessToken)
             throws AuthenticationException, InvalidTokenException {
         Map<String, Object> map = getMap(this.userInfoEndpointUrl, accessToken);
-
         if (map.containsKey("error")) {
             log.debug("userinfo returned error: " + map.get("error"));
             throw new InvalidTokenException(accessToken);
