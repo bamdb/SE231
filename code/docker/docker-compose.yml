@@ -1,5 +1,6 @@
 version: '3'
-
+volumes:
+    prometheus_data: {}
 services:
   auth:
     image: bamdb/auth-service
