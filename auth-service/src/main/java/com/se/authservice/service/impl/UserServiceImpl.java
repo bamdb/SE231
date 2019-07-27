@@ -42,12 +42,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User create(int hashCode) {
         String value = redisDao.get(hashCode);
-
         // hash code expired
         if (value == null) {
             return null;
         }
-
         String[] values = value.split(",");
         String username = values[0];
         String password = values[1];
