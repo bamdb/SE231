@@ -16,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -25,6 +26,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -52,14 +54,19 @@ public class AuthControllerTest {
     @Test
     public void testController() throws  Exception{
         MultiValueMap<String, String> mm = new LinkedMultiValueMap<>();
-        User user = new User("john", "123");
 
-        mvc.perform(post("/signup")
-                .content(JSON.toJSONString(user))
-                .contentType(MediaType.APPLICATION_JSON))
-                .andDo(MockMvcResultHandlers.print())
+
+        MvcResult mvcResult = mvc.perform(post("/verify")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\":\"john\", \"password\":\"123\", \"mail\":\"isalb@qq.com\", \"img_url\":null}"))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
+                .andReturn();
+
+        int result = Integer.valueOf(mvcResult.getResponse().getContentAsString());
+
+        mvc.perform(get("/signup?hashCode="+result))
+                .andExpect(status().isMovedTemporarily());
+
         authController.revokeToken("00");
         mm.add("username", "john");
         mm.add("operation", "-");

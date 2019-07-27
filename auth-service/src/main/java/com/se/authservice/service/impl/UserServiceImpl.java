@@ -161,7 +161,7 @@ public class UserServiceImpl implements UserService {
 
         msg.setFrom(new InternetAddress("bamdb@outlook.com"));
 
-        msg.addRecipient(Message.RecipientType.TO, new InternetAddress("wzl574402791@outlook.com"));
+        msg.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getMail()));
 
         msg.setSubject("欢迎注册Bamdb");
 
@@ -176,7 +176,7 @@ public class UserServiceImpl implements UserService {
 
         Transport transport = session.getTransport();
         transport.connect("bamdb@outlook.com", "ABM@ndy4sVJ8W2J");
-        transport.sendMessage(msg, new Address[]{new InternetAddress("wzl574402791@outlook.com")});
+        transport.sendMessage(msg, new Address[]{new InternetAddress(user.getMail())});
         transport.close();
 
         return hashCode;
