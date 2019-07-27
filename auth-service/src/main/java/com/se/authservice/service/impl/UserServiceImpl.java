@@ -1,24 +1,23 @@
 package com.se.authservice.service.impl;
+
 import com.se.authservice.dao.*;
 import com.se.authservice.entity.Authority;
 import com.se.authservice.entity.Role;
 import com.se.authservice.entity.User;
 import com.se.authservice.service.UserService;
-import org.apache.commons.mail.HtmlEmail;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.activation.DataHandler;
-import javax.activation.FileDataSource;
 import javax.annotation.Resource;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import java.sql.Timestamp;
-import java.util.*;
+import java.util.Collection;
+import java.util.Optional;
+import java.util.Properties;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -40,11 +39,10 @@ public class UserServiceImpl implements UserService {
     private RedisDao redisDao;
 
     @Override
-    public User create(int hashCode) {
+    public User create(int hashCode){
         String value = redisDao.get(hashCode);
-        // hash code expired
         if (value == null) {
-            return null;
+            throw new IllegalArgumentException("hash code expired");
         }
         String[] values = value.split(",");
         String username = values[0];
