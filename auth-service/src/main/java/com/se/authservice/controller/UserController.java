@@ -28,6 +28,7 @@ public class UserController {
     @GetMapping(value ="/user", produces ="application/json")
     public Principal getUser(Authentication authentication) {
         User user = userService.selectByUsername(authentication.getName());
+        if (user == null) return null;
         MyPrincipal myPrincipal = new MyPrincipal();
         myPrincipal.setUsername(user.getUsername());
         myPrincipal.setAuthorities(user.getAuthorities());

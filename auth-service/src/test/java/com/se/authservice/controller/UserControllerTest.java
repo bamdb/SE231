@@ -16,6 +16,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.LinkedMultiValueMap;
@@ -53,10 +55,16 @@ public class UserControllerTest {
     public void updateTest() throws Exception {
         mvc.perform(delete("/delete/username/root"))
                 .andExpect(status().isOk());
-        mvc.perform(post("/signup")
+
+        MvcResult mvcResult = mvc.perform(post("/verify")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null}"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andReturn();
+        int result = Integer.valueOf(mvcResult.getResponse().getContentAsString());
+        mvc.perform(get("/signup?hashCode="+result))
+                .andExpect(status().isMovedTemporarily());
+
         MultiValueMap<String, String> mm = new LinkedMultiValueMap<>();
 
         mvc.perform(put("/update/root").params(mm))
@@ -78,10 +86,16 @@ public class UserControllerTest {
         mvc.perform(delete("/delete/username/root"))
                 .andExpect(status().isOk());
         Assert.assertNull(userService.selectByUsername("root"));
-        mvc.perform(post("/signup")
+
+        MvcResult mvcResult = mvc.perform(post("/verify")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null, \"role\":0}"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andReturn();
+        int result = Integer.valueOf(mvcResult.getResponse().getContentAsString());
+        mvc.perform(get("/signup?hashCode="+result))
+                .andExpect(status().isMovedTemporarily());
+
         Long id = userService.selectAll().iterator().next().getId();
         mvc.perform(delete("/delete/id/" + id))
                 .andExpect(status().isOk());

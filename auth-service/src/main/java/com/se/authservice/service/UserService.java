@@ -3,8 +3,10 @@ package com.se.authservice.service;
 
 import com.se.authservice.entity.User;
 
+import javax.security.auth.login.AccountExpiredException;
+
 public interface UserService {
-    User create(User user);
+    User create(int hashCode);
     User changeRole(String username, String roleName, String c);
     User changeRevokeAuthority(String username, String revokeAuthorityName, String c);
     User disableUser(String username);
@@ -16,4 +18,5 @@ public interface UserService {
     void deleteUserByUsername(String username);
     void deleteUserById(Long id);
     User truncate(User user);
+    int verification(User user) throws Exception;
 }

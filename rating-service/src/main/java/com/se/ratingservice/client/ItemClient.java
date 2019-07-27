@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
         fallback = ItemClientFallback.class)
 @Primary
 public interface ItemClient {
-    @RequestMapping(value="/id/{id}", method= RequestMethod.GET)
+    @RequestMapping(value="/id/{id}", method = RequestMethod.GET)
     Item getItemById(@PathVariable("id") Long itemId);
 
     @RequestMapping(value="/delete/id/{id}", method = RequestMethod.DELETE)

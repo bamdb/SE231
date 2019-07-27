@@ -7,8 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.annotation.Resource;
+import javax.security.auth.login.AccountExpiredException;
 import javax.transaction.Transactional;
 
 @RestController
@@ -23,17 +25,22 @@ public class AuthController {
         this.defaultTokenServices = defaultTokenServices;
     }
 
-    @PostMapping(value = "/signup", produces = "application/json")
-    public User create(@RequestBody User user) {
+    @PostMapping(value = "/verify", produces = "application/json")
+    public int verify(@RequestBody User user) throws Exception{
+        return userService.verification(user);
+    }
+
+    @GetMapping(value = "/signup", produces = "application/json")
+    public RedirectView create(@RequestParam int hashCode) {
         User u = new User();
         try {
-            u = userService.create(user);
+            u = userService.create(hashCode);
         } catch (IllegalArgumentException e){
             return null;
         } finally {
             userService.changeRole(u.getUsername(), "ROLE_USER", "+");
         }
-        return u;
+        return new RedirectView("http://www.bamdb.cn");
     }
 
     @PreAuthorize("hasRole('USER')")
