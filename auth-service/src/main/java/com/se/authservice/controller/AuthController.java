@@ -25,7 +25,7 @@ public class AuthController {
     }
 
     @PostMapping(value = "/verify", produces = "application/json")
-    public User verify(@RequestBody User user) throws Exception{
+    public int verify(@RequestBody User user) throws Exception{
         return userService.verification(user);
     }
 

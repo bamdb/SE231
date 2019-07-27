@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static org.junit.Assert.fail;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CustomUserDetailsServiceTest {
@@ -19,7 +21,15 @@ public class CustomUserDetailsServiceTest {
     UserService userService;
     @Test(expected = UsernameNotFoundException.class)
     public void testCustomUserDetailsService() {
-//        userService.create(new User("john2", "0"));
+        User user = new User("john2", "0");
+        user.setMail("574402791@qq.com");
+        int hashCode = 0;
+        try {
+            hashCode = userService.verification(user);
+        }catch (Exception e) {
+            fail();
+        }
+        userService.create(hashCode);
         Assert.assertNotNull( customUserDetailsService.loadUserByUsername("john2"));
         customUserDetailsService.loadUserByUsername("nhoj");
     }

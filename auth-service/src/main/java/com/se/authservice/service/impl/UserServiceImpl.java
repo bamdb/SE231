@@ -135,7 +135,7 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    public User verification(User user) throws Exception {
+    public int verification(User user) throws Exception {
         String username = user.getUsername();
         Optional<User> existing = userReadDao.findByUsername(username);
         existing.ifPresent(it-> {throw new IllegalArgumentException("userDetail already exists: " + it.getUsername());});
@@ -147,7 +147,6 @@ public class UserServiceImpl implements UserService {
         String detailValue = username + "," + user.getPassword() + "," + user.getMail();
 
         redisDao.set(hashCode, detailValue);
-
 
         Properties props = new Properties();
         props.setProperty("mail.debug", "true");
@@ -180,6 +179,6 @@ public class UserServiceImpl implements UserService {
         transport.sendMessage(msg, new Address[]{new InternetAddress("wzl574402791@outlook.com")});
         transport.close();
 
-        return user;
+        return hashCode;
     }
 }

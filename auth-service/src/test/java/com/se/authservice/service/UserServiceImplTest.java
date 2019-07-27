@@ -17,19 +17,25 @@ public class UserServiceImplTest {
     UserService userService;
     @Test(expected = IllegalArgumentException.class)
     public void testUserService() {
-//        userService.create(new User("john1", "0"));
-//        Assert.assertNotNull(userService.disableUser("john1"));
-//        Assert.assertNull(userService.create(new User("john1", "0")));
-    }
-
-    @Test
-    public void testVerification() {
         User user = new User("john1", "0");
         user.setMail("574402791@qq.com");
+        int hashCode = 0;
+        int hashCode1 = 0;
         try {
-            userService.verification(user);
+            hashCode = userService.verification(user);
+            hashCode1 = userService.verification(user);
         }catch (Exception e) {
             fail();
         }
+        userService.create(hashCode);
+        try {
+            userService.verification(user);
+            fail();
+        }catch (Exception e) {
+
+        }
+        Assert.assertNotNull(userService.disableUser("john1"));
+        Assert.assertNull(userService.create(hashCode1));
+        Assert.assertNull(userService.create(1));
     }
 }

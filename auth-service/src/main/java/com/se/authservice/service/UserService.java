@@ -16,5 +16,5 @@ public interface UserService {
     void deleteUserByUsername(String username);
     void deleteUserById(Long id);
     User truncate(User user);
-    User verification(User user) throws Exception;
+    int verification(User user) throws Exception;
 }
