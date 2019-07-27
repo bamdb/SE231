@@ -64,6 +64,7 @@ export default class Topicpage extends React.Component{
                <Card.Header
                title={item.title}
                extra={item.id}
+               thumb={"http://202.120.40.8/image/id/"+item.id+"1"}
                />
                <Card.Body>
                <View onPress={()=>this.props.navigation.navigate('Topicdetail',{topicid:item.id})} style={{ height: 10 }}>

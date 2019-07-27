@@ -19,7 +19,13 @@ export default class DetailsScreen extends React.Component {
   {
     super(props);
   }
-  
+  componentWillMount()
+  {
+    if(global.access_token==null)
+    {
+      this.props.navigation.navigate("Home")
+    }
+  }
   componentDidMount()
   {
     /*const _this = this;   

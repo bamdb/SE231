@@ -5,13 +5,14 @@ import { createMaterialBottomTabNavigator } from "react-navigation-material-bott
 import { Grid, Icon } from '@ant-design/react-native';
 import Storage from 'react-native-storage'
 import axios from 'axios'
-import HomeScreen from './loginpage'
-import DetailsScreen from './browsepage'
-import Itemdetail from './itemdetail'
-import Topicpage from './topicpage'
-import Activitypage from './activity'
-import Topicdetail from './topicdetail'
+import HomeScreen from './src/loginpage'
+import DetailsScreen from './src/browsepage'
+import Itemdetail from './src/itemdetail'
+import Topicpage from './src/topicpage'
+import Activitypage from './src/activity'
+import Topicdetail from './src/topicdetail'
 import BasicTabBarExample from "./test";
+import Testcase from "./test";
 
 const AppNavigator = createMaterialBottomTabNavigator(
   {
@@ -46,9 +47,9 @@ const AppNavigator = createMaterialBottomTabNavigator(
           <Icon name='bell' color={tintColor} size={24} />
         )
       }
-    },
-    
-        
+    }
+
+
   },
   {
     initialRouteName: 'Home',
@@ -57,24 +58,24 @@ const AppNavigator = createMaterialBottomTabNavigator(
     inactiveColor: 'white',
     barStyle: { backgroundColor: 'pink' },
   },
-  
+
 );
 
 const MainScreenNavigator = createStackNavigator({
-  
+
   Home: { screen: createAppContainer(AppNavigator) },
-  
+
   Itemdetail:{screen: Itemdetail},
   Topicdetail:{screen: Topicdetail},
-  
-  
+
+
 },
 {
   initialRouteName: "Home",
     defaultNavigationOptions: {
-      
+
       header:null,
     },
-    
+
 });
 export default createAppContainer(MainScreenNavigator);

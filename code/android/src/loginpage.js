@@ -46,8 +46,9 @@ export default class HomeScreen extends React.Component {
                     function(res)
                     {
                         alert("success");
-                        global.userid=res.data.id;                        
-                    }
+                        global.userid=res.data.id;
+                        this.props.navigation.navigate("Browse")                        
+                    }.bind(this)
 
                 ).catch(
                   function(err)

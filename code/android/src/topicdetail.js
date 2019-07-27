@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text ,TextInput,Image,StyleSheet,ScrollView} from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
-import { List ,Button} from '@ant-design/react-native';
+import { List ,Button,Card,Flex} from '@ant-design/react-native';
 import Storage from 'react-native-storage'
 import axios from 'axios'
 import Navigationbar from "./navigationbar";
@@ -38,9 +38,21 @@ export default class Topicdetail extends React.Component{
         var rows=[];
         this.state.data.replyList.map(
             reply=>{
+                
                 rows.push(
                     <List.Item>
-                        {reply.replyContent}
+                        <Card>
+                        <Flex>
+                            <Flex.Item>
+                            <Image source={{uri:"http://202.120.40.8:30741/image/id/"+reply.user.id+"0"}} style={{width:30,height:30}}></Image>
+                            </Flex.Item>
+                            
+                            <Flex.Item>
+                            <Text >{reply.replyContent}</Text>
+                            </Flex.Item>
+                        </Flex>
+                        </Card>
+                        
                     </List.Item>
                 )
             }
