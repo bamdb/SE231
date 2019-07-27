@@ -30,26 +30,14 @@ spring:
         web-allow-others: false
   redis:
     database: 0
-    port: 30747
+    host: localhost
+    port: 6379
     password:
     jedis:
       pool:
-        max-active: 1000
-        max-idle: 1000
+        max-active: 8
+        max-idle: 8
         min-idle: 0
-    cluster:
-      nodes: 47.103.107.39:30747, 47.103.104.210:30747, 47.103.98.30:30747, 202.120.40.8:30747, 47.102.207.87:30747, 101.132.98.60:30747
-
-#  redis:
-#    database: 0
-#    host: localhost
-#    port: 6379
-#    password:
-#    jedis:
-#      pool:
-#        max-active: 8
-#        max-idle: 8
-#        min-idle: 0
 eureka:
   client:
     enabled: false
