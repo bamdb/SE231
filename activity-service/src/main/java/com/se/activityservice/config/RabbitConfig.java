@@ -12,6 +12,7 @@ public class RabbitConfig{
     public Queue newQueue() {
         return new Queue("activity");
     }
+
     @Bean
     DirectExchange exchange() {
         return new DirectExchange("bamdb");

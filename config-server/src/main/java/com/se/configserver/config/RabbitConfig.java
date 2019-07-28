@@ -8,7 +8,6 @@ import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-
 @Configuration
 @EnableRabbit
 public class RabbitConfig {
@@ -16,6 +15,7 @@ public class RabbitConfig {
     public Queue newQueue() {
         return new Queue("config");
     }
+
     @Bean
     DirectExchange exchange() {
         return new DirectExchange("bamdb");
