@@ -8,6 +8,11 @@ spring:
     active: native
   application:
     name: config
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
 server:
   port: 8888
 eureka:

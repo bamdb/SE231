@@ -30,24 +30,20 @@ public class ActivityController {
         return activityService.postActivity(activity);
     }
 
-
     @GetMapping(value ="/all", produces ="application/json")
     public Iterable<Activity> getAllActivities() {
         return activityService.selectAll();
     }
-
 
     @GetMapping(value ="/id/{activityId}", produces ="application/json")
     public Activity getActivityById(@PathVariable("activityId") Long activityId) {
         return activityService.selectById(activityId);
     }
 
-
     @GetMapping(value="/userid/{userId}", produces="application/json")
     public List<ActivityItemOut> getActivityByUserId(@PathVariable("userId") Long userId) {
         return activityService.selectByUserId(userId);
     }
-
 
     @GetMapping(value="/itemid/{itemId}", produces="application/json")
     public Iterable<Activity> getActivityByItemId(@PathVariable("itemId") Long itemId,
@@ -71,7 +67,6 @@ public class ActivityController {
        // FeignRequestInterceptor.accessToken = accessToken;
         return activityService.selectProgress(userId, itemId);
     }
-
     /*TO BE REVISED*/
     @PreAuthorize("hasRole('USER')")
     @DeleteMapping(value="/delete/id/{activityId}")

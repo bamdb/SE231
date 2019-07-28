@@ -1,31 +1,31 @@
 version: '2'
 
 services:
-  zipkin:
-    image: openzipkin/zipkin
-    environment:
-      - STORAGE_TYPE=elasticsearch
-      - ES_HOSTS=http://localhost:9200
-    ports:
-      - 9411:9411
-    networks:
-      - elk
-    restart: unless-stopped
-  rabbitmq:
-    image: rabbitmq
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    networks:
-      - elk
-    restart: unless-stopped
+#  zipkin:
+#    image: openzipkin/zipkin
+#    environment:
+#      - STORAGE_TYPE=elasticsearch
+#      - ES_HOSTS=http://localhost:9200
+#    ports:
+#      - 9411:9411
+#    networks:
+#      - elk
+#    restart: unless-stopped
+#  rabbitmq:
+#    image: rabbitmq
+#    ports:
+#      - "5672:5672"
+#      - "15672:15672"
+#    networks:
+#      - elk
+#    restart: unless-stopped
   elasticsearch:
     build:
       context: config/elasticsearch
       args:
-        ELK_VERSION: $ELK_VERSION
+        ELK_VERSION: 7.2.0
     volumes:
-      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - ./config/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -39,10 +39,10 @@ services:
     build:
       context: config/logstash
       args:
-        ELK_VERSION: $ELK_VERSION
+        ELK_VERSION: 7.2.0
     volumes:
-      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
-      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+      - ./config/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./config/logstash/:/usr/share/logstash/
     ports:
       - "5000:5000"
       - "9600:9600"
@@ -57,9 +57,9 @@ services:
     build:
       context: config/kibana
       args:
-        ELK_VERSION: $ELK_VERSION
+        ELK_VERSION: 7.2.0
     volumes:
-      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
+      - ./config/kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
     ports:
       - "5601:5601"
     networks:
