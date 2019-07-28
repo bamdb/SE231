@@ -221,6 +221,17 @@
 * all:
   * preparing for the exam ≧０≦
   * continueing former work
+# 2019-7-26
+* shenruien:
+  * finishing the android v1.0
+* huangyuyang:
+  * 修改activitypage逻辑 在前端添加注册验证的部分 配置android的部分
+* yuyajie:
+  * elk + prometheus + grafana
+* wangzulai:
+  * config docker swarm
+  * work on mail verification
+
 
 
 
