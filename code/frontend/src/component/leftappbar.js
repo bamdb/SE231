@@ -135,6 +135,7 @@ export default function LeftAppBar(props) {
         if(localStorage.getItem("username")!=null)
         {
             setusername(localStorage.getItem("username"))
+            axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
             /*setusername(localStorage.getItem("username"))
             axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
             var url="http://202.120.40.8:30741/auth/username/"+localStorage.getItem("username");

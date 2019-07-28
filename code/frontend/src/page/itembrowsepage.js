@@ -27,6 +27,7 @@ class Itembrowsepage extends Component{
             type:0,
 
         };
+
         this.handletagchange=this.handletagchange.bind(this);
         this.handleSearch=this.handleSearch.bind(this);
         this.handlepagechange=this.handlepagechange.bind(this);
