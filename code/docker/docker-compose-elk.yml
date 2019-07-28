@@ -34,7 +34,7 @@ services:
         ELK_VERSION: 7.2.0
     volumes:
       - ./config/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
-      - ./config/logstash/:/usr/share/logstash/
+      - ./config/logstash/pipeline/logstash.conf:/usr/share/logstash/config/logstash.conf
     ports:
       - "5000:5000"
       - "9600:9600"
