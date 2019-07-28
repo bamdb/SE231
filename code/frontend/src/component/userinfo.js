@@ -113,8 +113,9 @@ class Userinfo extends Component {
             <Grid container id="userinfo">
                 <Grid item xs={3}>
                     <Grid container justify={"center"}>
-                    <Avatar alt="Remy Sharp" src={this.state.imgurl} id={"avatar"}/>
-                        <div id="upload">{upload}</div>
+                    <Avatar alt="Remy Sharp" src={"http://202.120.40.8:30741/image/id/"+localStorage.getItem("userid")+"0"} id={"avatar"}/>
+                    <br/>
+                    <div id="upload">{upload}</div>
                     </Grid>
                 </Grid>
                 <Grid item xs={9}>

@@ -66,7 +66,6 @@ class Progressmanage extends Component {
             }
     }
     handleChange(event, newValue) {
-        console.log(newValue);
         this.setState({value : newValue});
     }
 
@@ -105,7 +104,6 @@ class Progressmanage extends Component {
     render() {
         var items1=[];
         var items2=[];
-        console.log("book amount",this.state.book.length);
         for(var i=this.state.uppage*4;(i<this.state.uppage*4+4)&&i<this.state.book.length;++i)
         {
             items1.push(
@@ -117,7 +115,6 @@ class Progressmanage extends Component {
             )
         }
 
-        console.log("movie amount",this.state.movie.length);
         for(var i=this.state.downpage*4;i<(this.state.downpage*4+4)&&i<this.state.movie.length;++i)
         {
             items2.push(

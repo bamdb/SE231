@@ -126,8 +126,9 @@ export default function LeftAppBar(props) {
     const [open, setopen] = useState(true);
     const [openMess, setopenMess] =  useState(false);
     const [username,setusername]=useState("");
-    const isUser = (localStorage.getItem("role")==='USER');
-    const isEditor = (localStorage.getItem("role")==='EDITOR');
+    const islogin = (localStorage.getItem("userid")!=null);
+    const isUser = (localStorage.getItem("role")=='ROLE_USER');
+    const isEditor = (localStorage.getItem("role")=='ROLE_EDITOR');
     var drawerbutton = open ? <ChevronLeftIcon />:<ChevronRightIcon />
 
     useEffect(() => {
@@ -213,6 +214,7 @@ export default function LeftAppBar(props) {
             </Typography>
 
             <div className={classes.toolbarIcon} >
+                <div hidden={islogin}>
                 <Link to={'/login'}>
                 <IconButton
                     color={"inherit"}
@@ -221,6 +223,7 @@ export default function LeftAppBar(props) {
                     <PersonOutlinedIcon />
                 </IconButton>
                 </Link>
+                </div>
                 <Link to={'/'}>
                 <IconButton
                     color={"inherit"}
@@ -237,6 +240,7 @@ export default function LeftAppBar(props) {
                 >
                     <MessageIcon />
                 </IconButton>
+                <div hidden={!islogin}>
                 <IconButton
                 color={"inherit"}
                 aria-label="Open drawer"
@@ -244,6 +248,7 @@ export default function LeftAppBar(props) {
                 onClick={logout}>
                 <Icon type="logout" />
             </IconButton>
+                </div>
             </div>
             </div>
         </AppBar>
@@ -266,13 +271,13 @@ export default function LeftAppBar(props) {
                     <ListItemIcon>
                         <HomeOutlinedIcon/>
                     </ListItemIcon>
-                    <ListItemText><Typography color={"textSecondary"}> HOME</Typography></ListItemText>
+                    <ListItemText><Typography color={"textSecondary"}>我的主页</Typography></ListItemText>
                 </ListItem>
                 <ListItem button component={Link} to={'/userinfo'}>
                     <ListItemIcon>
                         <FaceIcon  />
                     </ListItemIcon>
-                    <ListItemText><Typography color={"textSecondary"}>Me</Typography></ListItemText>
+                    <ListItemText><Typography color={"textSecondary"}>个人中心</Typography></ListItemText>
                 </ListItem>
                 <br/><br/><br/>
                 <Divider />
@@ -315,7 +320,7 @@ export default function LeftAppBar(props) {
                     <ListItemText><Typography color={"textSecondary"}>编辑</Typography></ListItemText>
                 </ListItem>
                 </div>
-                <div hidden={isEditor}>
+                <div hidden={isUser||isEditor}>
                 <ListItem button component={Link} to={'/admin'} >
                     <ListItemIcon>
                         <VpnKeyOutlinedIcon />
@@ -334,7 +339,6 @@ export default function LeftAppBar(props) {
                 </ListItem>
 
                 <br/><br/>
-
                 <br/><br/>
                 <br/><br/>
                 <br/><br/>

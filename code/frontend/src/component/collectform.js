@@ -64,51 +64,41 @@ class Collectform extends Component {
             yourtags:[],
             userid:1
         };
-        this.showModal = this.showModal.bind(this);
         this.handleOk = this.handleOk.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleadd=this.handleadd.bind(this);
         this.handletextchange=this.handletextchange.bind(this);
-        this.handlebuttonclick=this.handlebuttonclick.bind(this);
         this.handlescorechange=this.handlescorechange.bind(this);
         this.tagchange=this.tagchange.bind(this);
         this.handleAlert=this.handleAlert.bind(this);
     }
-    componentWillMount() {
-        if(localStorage.getItem("userid")==null)
-        {
 
-        }
-        else {
-            this.setState({userid:localStorage.getItem("userid")})
-        }
-        var url5="http://202.120.40.8/item/tag/id/"+this.props.itemid;
+    componentWillReceiveProps(nextProps, nextContext) {
+        var tagnames=[];
+        var yourtagnames=[];
+        var url5="http://202.120.40.8/item/tag/id/"+nextProps.itemid;
         axios.get(url5).then(
             function(response)
             {
-                var tagnames=[];
-                var yourtagnames=[];
-
                 console.log(response.data);
-
                 response.data.tags.map(tag=>{
                     tagnames.push(tag.tagname);
                     yourtagnames.push(tag.tagname);
                 })
-
-                this.setState({tags:tagnames,yourtags:yourtagnames})
             }.bind(this)
         )
+        this.setState({
+            tags:tagnames,
+            yourtags:yourtagnames,
+            userid:localStorage.getItem("userid"),
+            visible:nextProps.visible
+        })
     }
 
     handlescorechange(score)
     {
         this.setState({score:score});
-    }
-    handlebuttonclick()
-    {
-
     }
     handletextchange(e)
     {
@@ -126,11 +116,7 @@ class Collectform extends Component {
 
         this.setState({yourtags:yourtags});
     }
-    showModal(){
-        this.setState({
-            visible: true
-        })
-    }
+
     handleOk() {
         this.setState({
             visible: false
@@ -158,18 +144,13 @@ class Collectform extends Component {
     }
 
     handleCancel() {
-        this.setState({
-            visible: false
-        })
+        this.props.handleCancel();
     }
     tagchange(currenttags){
         this.setState({yourtags:currenttags})
     }
     handleChange(e) {
-
-
         this.setState({status : e.target.value})
-
     }
 
     handleAlert(e) {
@@ -178,92 +159,87 @@ class Collectform extends Component {
 
     render() {
         return (
-            <div>
-                    <IconButton aria-label="Add to favorites" onClick={this.showModal}>
-                        <FavoriteIcon />
-                    </IconButton>
-                <Modal title="修改收藏状态" visible={this.state.visible}
-                       onOk={this.handleOk} onCancel={this.handleCancel}
-                >
-                    <Grid container spacing={2}>
-                        <Grid item xs={4}>
-                            <FormControl component="fieldset" className={useStyles.formControl}>
-                                <FormLabel component="legend">收藏状态</FormLabel>
-                                <RadioGroup
-                                    aria-label="收藏状态"
-                                    name="status"
-                                    className={useStyles.group}
-                                    value={parseInt(this.state.status)}
-                                    onChange={this.handleChange}
-                                >
-                                    <FormControlLabel value={0} control={<Radio />} label="想看" />
-                                    <FormControlLabel value={1} control={<Radio />} label="在看" />
-                                    <FormControlLabel value={2} control={<Radio />} label="看过" />
-                                </RadioGroup>
-                            </FormControl>
-                        </Grid>
-                        <Grid item xs={8}>
-                            <Typography variant="subtitle1" color="textPrimary" component="p">
-                                简评(最多200字)
-                            </Typography>
-                            <TextField
-                                id="outlined-multiline-static"
-                                label="简评"
-                                multiline
-                                rows="5"
-                                fullWidth={true}
-                                className={useStyles.textField}
-                                margin="normal"
-                                variant="outlined"
-                                onChange={this.handleAlert}
-                            />
-                        </Grid>
+            <Modal title="修改收藏状态" visible={this.state.visible}
+                   onOk={this.handleOk} onCancel={this.handleCancel}
+            >
+                <Grid container spacing={2}>
+                    <Grid item xs={4}>
+                        <FormControl component="fieldset" className={useStyles.formControl}>
+                            <FormLabel component="legend">收藏状态</FormLabel>
+                            <RadioGroup
+                                aria-label="收藏状态"
+                                name="status"
+                                className={useStyles.group}
+                                value={parseInt(this.state.status)}
+                                onChange={this.handleChange}
+                            >
+                                <FormControlLabel value={0} control={<Radio />} label="想看" />
+                                <FormControlLabel value={1} control={<Radio />} label="在看" />
+                                <FormControlLabel value={2} control={<Radio />} label="看过" />
+                            </RadioGroup>
+                        </FormControl>
                     </Grid>
-                    <br/>
-                    <Typography variant="subtitle1" color="textPrimary" component="p">
-                        热门标签
-                    </Typography>
-                    <Tag tags={this.state.tags}/>
-                    <br/>
-                    <Typography variant="subtitle1" color="textPrimary" component="p">
-                        您的标签
-                    </Typography>
-                    <Tag tags={this.state.yourtags} />
-                    <br/>
-                    <Grid container spacing={2}>
-                        <Grid item xs={1}/>
-                        <Grid item xs={3.5}>
-                            <br/>
-                            <Typography variant="subtitle1" color="textPrimary" component="p">
-                                添加自定义标签：
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <TextField
-                                id="standard-search"
-                                label="Search field"
-                                type="search"
-                                className={useStyles.textField}
-                                margin="normal"
-                                onChange={this.handletextchange}
+                    <Grid item xs={8}>
+                        <Typography variant="subtitle1" color="textPrimary" component="p">
+                            简评(最多200字)
+                        </Typography>
+                        <TextField
+                            id="outlined-multiline-static"
+                            label="简评"
+                            multiline
+                            rows="5"
+                            fullWidth={true}
+                            className={useStyles.textField}
+                            margin="normal"
+                            variant="outlined"
+                            onChange={this.handleAlert}
+                        />
+                    </Grid>
+                </Grid>
+                <br/>
+                <Typography variant="subtitle1" color="textPrimary" component="p">
+                    热门标签
+                </Typography>
+                <Tag tags={this.state.tags}/>
+                <br/>
+                <Typography variant="subtitle1" color="textPrimary" component="p">
+                    您的标签
+                </Typography>
+                <Tag tags={this.state.yourtags} />
+                <br/>
+                <Grid container spacing={2}>
+                    <Grid item xs={1}/>
+                    <Grid item xs={3.5}>
+                        <br/>
+                        <Typography variant="subtitle1" color="textPrimary" component="p">
+                            添加自定义标签：
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <TextField
+                            id="standard-search"
+                            label="Search field"
+                            type="search"
+                            className={useStyles.textField}
+                            margin="normal"
+                            onChange={this.handletextchange}
 
-                            />
-                        </Grid>
-                        <Grid item xs={2}>
-                            <br/>
-                            <Button variant="contained" color="primary" onClick={this.handleadd} className={useStyles.button}>
-                                添加
-                            </Button>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Typography variant="subtitle1" color="textPrimary" component="p">
-                                评分：
-                            </Typography>
-                            <Rating handlescorechange={this.handlescorechange}></Rating>
-                        </Grid>
+                        />
                     </Grid>
-                </Modal>
-            </div>
+                    <Grid item xs={2}>
+                        <br/>
+                        <Button variant="contained" color="primary" onClick={this.handleadd} className={useStyles.button}>
+                            添加
+                        </Button>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography variant="subtitle1" color="textPrimary" component="p">
+                            评分：
+                        </Typography>
+                        <Rating handlescorechange={this.handlescorechange}></Rating>
+                    </Grid>
+                </Grid>
+            </Modal>
         )
     }
 }

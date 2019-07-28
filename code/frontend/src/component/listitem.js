@@ -24,8 +24,8 @@ import axios from 'axios';
 */
 
 
-const IconText = ({ type, text }) => (
-    <span>
+const IconText = ({ type, text, func}) => (
+    <span onClick={func}>
     <Icon type={type} style={{ marginRight: 8 }} />
         {text}
   </span>
@@ -39,51 +39,26 @@ class Listitem extends Component {
         this.state = {
             ItemList:[],
             modifiedItems:[],
+            deleteItem:[],      // 删除条目
             content: "",        // 提示框内容
+            collectItem:[],     // 收藏条目
+            visible:false,      // 显示收藏提示框
             flush: false        // 用于删除条目后跳转页面
         }
         this.handlepagechange=this.handlepagechange.bind(this);
         this.handleAlert=this.handleAlert.bind(this);
         this.handleDelete=this.handleDelete.bind(this);
         this.handleCollect=this.handleCollect.bind(this);
+        this.handlelike=this.handlelike.bind(this);
+        this.handleCancel=this.handleCancel.bind(this);
+        this.handleCancelAlert=this.handleCancelAlert.bind(this);
     }
-    componentWillMount() {
 
-        /*var rows=[];
-        const items = this.props.ItemList;
-        if(items !== undefined)
-        {
-            for(var i=0; i<items.length; ++i) {
-                if (items[i].item.itemname.indexOf(this.props.search) !== -1) {
-                    rows.push(
-                        {
-                            href: "/itemdetail/"+items[i].item.id,
-                            title:items[i].item.itemname,
-                            author:items[i].item.mainAuthor,
-                            pubTime: items[i].item.pubTime.split('T')[0],
-                            score:items[i].rating.avgScore,
-                            rank:items[i].rating.rank
-                        }
-                    );
-                }
-            }
-            console.log(rows);
-        }
-        else console.log("no data");
-        rows.push(
-            {
-                href: "/itemdetail/1",
-                title:"three body",
-                author:"liu",
-                pubTime: "2010-7-1",
-                score:9.5,
-                rank:1
-            }
-        );
+    handleCancel(){
         this.setState({
-            ItemList:items,
-            modifiedItems:rows,
-        })*/
+            visible: false,
+            collectItem:[]
+        })
     }
 
     handleCollect(type,item){
@@ -140,7 +115,6 @@ class Listitem extends Component {
                     );
                 }
             }
-            console.log(rows);
         }
         else {
             console.log("no data");
@@ -160,15 +134,19 @@ class Listitem extends Component {
             modifiedItems:rows,
         })
     }
-
-    handleAlert(content) {
-        this.setState({content : content})
+    handleCancelAlert(content){
+        this.setState({content : content, deleteItem:[]})
+    }
+    handleAlert(content,item) {
+        this.setState({content : content, deleteItem:item})
+    }
+    handlelike(item){
+        this.setState({visible:true,collectItem:item})
     }
 
     handleDelete(itemId) {
         axios.delete("http://202.120.40.8:30741/item/delete/id/"+itemId+"?access_token="+localStorage.getItem("access_token")).then(
             res => {
-                this.handleAlert(res.data);
                 this.setState({flush:true});
             }
         )
@@ -179,13 +157,16 @@ class Listitem extends Component {
             return(<Redirect to={"/"}/>);
         }
         const items=this.state.modifiedItems;
-        return(<List
+        return(
+            <div>
+            <Collectform itemid={this.state.collectItem.id} visible={this.state.visible} handleCancel={this.handleCancel} handleprogress={(type)=>this.handleCollect(type,this.state.collectItem)}/>
+            <Alert content={this.state.content} cancelAlert={this.handleCancelAlert} confirmAlert={this.handleDelete.bind(this,this.state.deleteItem.id)}/>
+            <List
                 grid={{gutter:16,column: 4 }}
                 itemLayout="horizontal"
                 size="large"
                 pagination={{
                     onChange: page => {
-                        console.log(page);
                         this.handlepagechange(page);
                     },
                     pageSize: 8
@@ -209,18 +190,14 @@ class Listitem extends Component {
                             actions={        // show delete icon in editor page
                                 localStorage.getItem("role") == "ROLE_EDITOR" ? (
                                 [
-                                    <Collectform itemid={item.id} handleprogress={(type)=>this.handleCollect(type,item)}/>,
-                                    <IconText type="like-o" text="156" />,
-                                    <IconText type="delete" text="2" />,
-                                    <div>
-                                        <Alert content={this.state.content} cancelAlert={this.handleAlert} confirmAlert={this.handleDelete.bind(this,item.id)}/>
-                                        <DeleteIcon onClick={this.handleAlert.bind(this, "确认删除该条目？")}/>
-                                    </div>
+                                    <IconText type="star" func={this.handlelike.bind(this,item)} />,
+                                    <IconText type="like-o" text="156"/>,
+                                    <IconText type="delete" text="2" func={this.handleAlert.bind(this, "确认删除该条目？",item)}/>
                                 ]
                                 ) : (
                                     [
-                                        <Collectform itemid={item.id} handleprogress={(type)=>this.handleCollect(type,item)}/>,
-                                        <IconText type="like-o" text="156" />,
+                                        <IconText type="like-o"func={this.handlelike.bind(this,item)} />,
+                                        <IconText type="like-o" text="156"/>,
                                         <IconText type="message" text="2" />
                                     ]
                                 )}
@@ -235,6 +212,7 @@ class Listitem extends Component {
                     </List.Item>
                 )}
             />
+            </div>
         );
     }
 }
