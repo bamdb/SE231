@@ -1,4 +1,4 @@
-package com.se.registry;
+package com.se.registry.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

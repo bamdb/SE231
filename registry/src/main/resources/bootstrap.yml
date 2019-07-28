@@ -1,5 +1,5 @@
 spring:
   cloud:
     config:
-      name: registry
+      name: registry, rabbitmq
       uri: http://config:8888
