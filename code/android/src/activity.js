@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Text ,TextInput,StyleSheet,FlatList} from "react-native";
-import {Button,Card }from '@ant-design/react-native';
+import { View, Text ,TextInput,StyleSheet,FlatList,Image} from "react-native";
+import {Button,Card,Flex }from '@ant-design/react-native';
 import { createStackNavigator, createAppContainer,withNavigation } from "react-navigation";
 import Storage from 'react-native-storage'
 import axios from 'axios'
@@ -32,6 +32,7 @@ export default class Acticitypage extends React.Component {
     const { navigation } = this.props;
     this.focusListener = navigation.addListener("didFocus", () => {
       var activities=[];
+      this.setState({activities:activities})
       axios.get('http://202.120.40.8:30741/friend/all/userid/'+global.userid+"?access_token="+global.access_token).then(
               function(response){
                 alert("get friend success")
@@ -73,21 +74,22 @@ export default class Acticitypage extends React.Component {
     this.focusListener.remove();
   }
   render() {
-    var rows=[];
+    /*var rows=[];
     this.state.activities.map(activity=>
       {
         rows.push(
           <Card >
+            
             <Card.Header
-              title={activity.username}
+              title="This is title"
               thumbStyle={{ width: 30, height: 30 }}
-              thumb={"http://202.120.40.8:30741/image/id/"+activity.activity.userid+"0"}
-              extra=""
-              
+              thumb="https://gw.alipayobjects.com/zos/rmsportal/MRhHctKOineMbKAZslML.jpg"
+              extra="this is extra"
             />
+            
             <Card.Body>
               <View  style={{ height: 10 }}>
-                <Image onPress={()=>this.props.navigation.navigate('Itemdetail',{itemid:activity.item.id})} source={{uri: 'http://202.120.40.8:30741/image/id/'+activity.item.id+"1"}} style={{width:30,height:30}}></Image>
+                
                 <Text>{activity.item.itemname}</Text>
               </View>
             </Card.Body>
@@ -98,7 +100,7 @@ export default class Acticitypage extends React.Component {
           </Card>
           
         )
-      })
+      })*/
     return (
       <FlatList 
         data={this.state.activities}
@@ -107,14 +109,22 @@ export default class Acticitypage extends React.Component {
             <Card.Header
               title={item.username}
               thumbStyle={{ width: 30, height: 30 }}
-              thumb={"http://202.120.40.8:30741/image/id/"+item.activity.userid+"0"}
+              thumb={"http://202.120.40.8:30741/image/id/"+item.activity.userId+"0"}
               extra=""
               
             />
             <Card.Body>
-              <View  style={{ height: 10 }}>
+              <View  style={{ height: 20 }}>
+                <Flex justify="start">
+                  <Flex.Item style={{flex:1}}>
+                  <Image source={{uri:"http://202.120.40.8:30741/image/id/10"}} style={{width:20,height:20}}></Image>
+                  </Flex.Item>
+                  <Flex.Item style={{flex:5}}>
+                  <Text onPress={()=>this.props.navigation.navigate("Itemdetail",{itemid:item.item.id})}>{item.item.itemname}</Text>
+                  </Flex.Item>
+                  
                 
-                <Text onPress={()=>this.props.navigation.navigate("Itemdetail",{itemid:item.item.id})}>{item.item.itemname}</Text>
+                </Flex>
               </View>
             </Card.Body>
             <Card.Footer

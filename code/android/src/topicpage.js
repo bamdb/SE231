@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text ,TextInput,StyleSheet,FlatList,ScrollView} from "react-native";
+import { View, Text ,TextInput,StyleSheet,FlatList,ScrollView,Image} from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import {Button,Card }from '@ant-design/react-native';
 
@@ -33,7 +33,7 @@ export default class Topicpage extends React.Component{
     }    
     render()
     {
-        var rows=[];
+        /*var rows=[];
         this.state.topics.map(topic=>{
             rows.push(
                 <Card >
@@ -52,7 +52,7 @@ export default class Topicpage extends React.Component{
                     />
                 </Card>
             )
-        })
+        })*/
         return(
             /*<View>
                 {rows}
@@ -64,7 +64,7 @@ export default class Topicpage extends React.Component{
                <Card.Header
                title={item.title}
                extra={item.id}
-               thumb={"http://202.120.40.8/image/id/"+item.id+"1"}
+               thumb={"http://202.120.40.8:30741/image/id/"+item.id+"1"}
                />
                <Card.Body>
                <View onPress={()=>this.props.navigation.navigate('Topicdetail',{topicid:item.id})} style={{ height: 10 }}>

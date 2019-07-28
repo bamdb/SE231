@@ -124,12 +124,12 @@ export default class Itemlist extends React.Component{
                         title="movie"
                         icon={<Icon name="ordered-list" />}
                         selected={this.state.selectedTab === 'movie'}
-                        onPress={() => this.changetab('book')}
+                        onPress={() => this.changetab('movie')}
                       >
                       </TabBar.Item>
                 </TabBar>
             </View>
-            <View >
+            <View style={{height:550}}>
               <FlatList
                   data={this.state.itemlist}
                   renderItem={
@@ -138,7 +138,7 @@ export default class Itemlist extends React.Component{
                         <Card.Header
                           title={item.item.itemname}
                           thumbStyle={{ width: 30, height: 30 }}
-                          thumb={"http://202.120.40.8:30741/image/id/"+item.item.id+"0"}
+                          thumb={"http://202.120.40.8:30741/image/id/"+item.item.id+"1"}
                           extra=""
                           
                         />

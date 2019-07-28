@@ -57,22 +57,23 @@ export default class Itemdetail extends React.Component{
                 </List.Item>
             )
         })
+        var item=this.state.item;
         return(
             <View>
                 
-                <Image style={{width:100,height:100}}></Image>
+                <Image style={{width:100,height:100}} source={{uri:"http:202.120.40.8:30741/image/id/"+item.id+"1"}}></Image>
                 <List>
                     <List.Item>
-                        title:three body
+                        {"title: "+item.itemname}
                     </List.Item>
                     <List.Item>
-                        author:Liu Cixin
+                        {"author: "+item.mainAuthor}
                     </List.Item>
                     <List.Item>
-                        pubtime:2000-01-01
+                        {"pubtime: "+item.pubTime}
                     </List.Item>
                     <List.Item>
-                        chapternum:10
+                        {"chapternum: "+item.chapterNum}
                     </List.Item>
                 </List>
                 <List>
