@@ -57,3 +57,7 @@
 # 2019-7-24
 * build the architecture of android
 * finish navigate and login
+# 2019-7-25
+* modify the navigation
+# 2019-7-26
+* build the front of android
