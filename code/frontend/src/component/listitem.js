@@ -196,7 +196,7 @@ class Listitem extends Component {
                                 ]
                                 ) : (
                                     [
-                                        <IconText type="like-o"func={this.handlelike.bind(this,item)} />,
+                                        <IconText type="star"func={this.handlelike.bind(this,item)} />,
                                         <IconText type="like-o" text="156"/>,
                                         <IconText type="message" text="2" />
                                     ]

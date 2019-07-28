@@ -291,9 +291,15 @@ export default function LeftAppBar(props) {
                 </ListItem>
                 <ListItem button component={Link} to={'/itembrowse/movie'}>
                     <ListItemIcon>
-                        <VideocanOutlinedIcon />
+                        <MovieOutlinedIcon />
                     </ListItemIcon>
                     <ListItemText><Typography color={"textSecondary"}>更多电影</Typography></ListItemText>
+                </ListItem>
+                <ListItem button component={Link} to={'/itembrowse/flash'}>
+                <ListItemIcon>
+                    <VideocanOutlinedIcon />
+                </ListItemIcon>
+                <ListItemText><Typography color={"textSecondary"}>更多动漫</Typography></ListItemText>
                 </ListItem>
                 <ListItem button component={Link} to={'/activity'}>
                     <ListItemIcon>

@@ -60,6 +60,7 @@ function App() {
                 <Route path={'/topicdetail/*'} component={Topicdetailpage}></Route>
                 <Route path={'/itembrowse/movie'} component={Itembrowsepage}></Route>
                 <Route path={'/itembrowse/book'} component={Itembrowsepage}></Route>
+                <Route path={'/itembrowse/flash'} component={Itembrowsepage}></Route>
                 <Route path={'/login'} component={LoginPage}></Route>
                 <Route exact path={'/'} component={UserHomepage}></Route>
                 <Route path={'/register'} component={RegisterPage}></Route>
