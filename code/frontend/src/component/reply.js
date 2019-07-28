@@ -56,7 +56,7 @@ class Reply extends Component {
     {
         var text=this.state.text;
         $.ajax({
-            url:"http://202.120.40.8:30741/topic/add/reply?topicId="+this.state.topicid+"&userId="+localStorage.getItem("userid")+"&access_token="+localStorage.getItem("access_token"),
+            url:"http://202.120.40.8:30741/topic/add/reply?topicId="+this.state.topicid+"&userId="+localStorage.getItem("userid"),
             type:"POST",
             contentType:"application/json",
             data:text,
@@ -71,7 +71,7 @@ class Reply extends Component {
         grade : "null",
         comment : "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
     };
- 
+
     render() {
         return(
                 <Paper className={useStyles.root} >

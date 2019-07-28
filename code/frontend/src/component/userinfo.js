@@ -34,7 +34,7 @@ class Userinfo extends Component {
         if(localStorage.getItem("userid")!=null)
         {
             var username=localStorage.getItem("username");
-            axios({url: 'http://202.120.40.8:30741/auth/username/'+username+"?access_token="+localStorage.getItem("access_token"),method:'GET'})
+            axios({url: 'http://202.120.40.8:30741/auth/username/'+username,method:'GET'})
                 .then(
                     function (response)
                     {
@@ -65,9 +65,9 @@ class Userinfo extends Component {
         }
         else {
 
-            var url='http://202.120.40.8:30741/auth/update/'+this.state.username+"?access_token="+localStorage.getItem("access_token");
+            var url='http://202.120.40.8:30741/auth/update/'+this.state.username;
             this.setState({edit:false});
-            axios.put('http://202.120.40.8:30741/auth/update/'+this.state.username,{},{params:{access_token:localStorage.getItem("access_token"),mail:this.state.email,imgUrl:"http://202.120.40.8:30741/image/id/"+this.state.id+"0"}});
+            axios.put('http://202.120.40.8:30741/auth/update/'+this.state.username,{},{params:{mail:this.state.email,imgUrl:"http://202.120.40.8:30741/image/id/"+this.state.id+"0"}});
 
         }
 

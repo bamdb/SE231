@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
         alignContent: "center"
     },
 }));
- 
+
 class Login extends Component{
     constructor(props){
         super(props);
@@ -76,7 +76,7 @@ class Login extends Component{
 
                 axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
                 var url="http://202.120.40.8:30741/auth/username/"+localStorage.getItem("username");
-                axios.get(url,{params:{access_token:localStorage.getItem("access_token")}}).then(
+                axios.get(url,{params:{}}).then(
                     function(res)
                     {
                         localStorage.setItem("userid",res.data.id);
