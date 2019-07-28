@@ -11,14 +11,6 @@ services:
 #    networks:
 #      - elk
 #    restart: unless-stopped
-#  rabbitmq:
-#    image: rabbitmq
-#    ports:
-#      - "5672:5672"
-#      - "15672:15672"
-#    networks:
-#      - elk
-#    restart: unless-stopped
   elasticsearch:
     build:
       context: config/elasticsearch
@@ -34,7 +26,7 @@ services:
       ELASTIC_PASSWORD: bamdb
     networks:
       - elk
-    restart: unless-stopped
+
   logstash:
     build:
       context: config/logstash
@@ -52,7 +44,7 @@ services:
       - elk
     depends_on:
       - elasticsearch
-    restart: unless-stopped
+
   kibana:
     build:
       context: config/kibana
@@ -66,7 +58,6 @@ services:
       - elk
     depends_on:
       - elasticsearch
-    restart: unless-stopped
 
 networks:
   elk:

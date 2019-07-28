@@ -130,7 +130,11 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-#      resources:
-#        limits:
-#          cpus: '0.5'
-#          memory: 1024M
+  rabbitmq:
+    image: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    deploy:
+      restart_policy:
+        condition: on-failure
