@@ -13,7 +13,7 @@ import Input from "@material-ui/core/Input";
 import TextField from "@material-ui/core/TextField";
 import {Modal, Divider} from "antd";
 import  axios from "axios";
- 
+
 const useStyles = makeStyles({
     root: {
         maxheight : 500,
@@ -48,7 +48,7 @@ class Comment extends Component {
     handleOk()
     {
         var date=Date.parse(new Date());
-        axios.post("http://202.120.40.8:30741/message/add?access_token="+localStorage.getItem("access_token"),{senderId:localStorage.getItem("userid"),receiverId:this.props.username,sendTime:date,content:"加为好友"})
+        axios.post("http://202.120.40.8:30741/message/add",{senderId:localStorage.getItem("userid"),receiverId:this.props.username,sendTime:date,content:"加为好友"})
         this.setState({visible:false});
     }
     handleCancel()

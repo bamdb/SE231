@@ -28,7 +28,7 @@ class Adminpage extends Component{
     }
     submit()
     {
-        axios.put("http://202.120.40.8:30741/auth/update/"+this.state.username,{},{params:{access_token:localStorage.getItem("access_token"),id:this.state.id,mail:this.state.email,password:this.state.password}}).then(
+        axios.put("http://202.120.40.8:30741/auth/update/"+this.state.username,{},{params:{id:this.state.id,mail:this.state.email,password:this.state.password}}).then(
             function(res)
             {
                 alert("success");
@@ -36,7 +36,7 @@ class Adminpage extends Component{
         )
         if(this.state.role!="")
         {
-            axios.post("http://202.120.40.8:30741/auth/grant/role/"+this.state.role,{},{params:{access_token:localStorage.getItem("access_token"),username:this.state.username,operation:"+"}});
+            axios.post("http://202.120.40.8:30741/auth/grant/role/"+this.state.role,{},{params:{username:this.state.username,operation:"+"}});
         }
     }
 
@@ -64,7 +64,7 @@ class Adminpage extends Component{
     }
 
     handlesearch(){
-        axios.get("http://202.120.40.8:30741/auth/id/"+this.state.userid+"?access_token="+localStorage.getItem("access_token")).then(
+        axios.get("http://202.120.40.8:30741/auth/id/"+this.state.userid).then(
             function(res)
             {
                 this.setState({username:res.data.username||"",email:res.data.mail||"",imgurl:res.data.imgUrl||""});

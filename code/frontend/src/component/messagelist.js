@@ -32,7 +32,7 @@ class Messagelist extends Component{
 
     handleaddfriend(senderId,receiverId)
     {
-        axios.get("http://202.120.40.8:30741/friend/isfriend?userId1="+senderId+"&userId2="+receiverId+"&access_token="+localStorage.getItem("access_token")).then(
+        axios.get("http://202.120.40.8:30741/friend/isfriend?userId1="+senderId+"&userId2="+receiverId).then(
             function(res)
             {
                 if(res.data==false)
@@ -56,7 +56,7 @@ class Messagelist extends Component{
     }
 
     componentDidMount() {
-        var url="http://202.120.40.8:30741/message/"+this.props.type+"/"+localStorage.getItem("userid")+"?access_token="+localStorage.getItem("access_token");
+        var url="http://202.120.40.8:30741/message/"+this.props.type+"/"+localStorage.getItem("userid");
         axios.get(url).then(
             function(response)
             {
@@ -65,7 +65,7 @@ class Messagelist extends Component{
         )
     }
     componentWillReceiveProps(nextProps, nextContext) {
-        var url="http://202.120.40.8:30741/message/"+nextProps.type+"/"+localStorage.getItem("userid")+"?access_token="+localStorage.getItem("access_token");
+        var url="http://202.120.40.8:30741/message/"+nextProps.type+"/"+localStorage.getItem("userid");
         axios.get(url).then(
             function(response)
             {

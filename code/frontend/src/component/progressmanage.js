@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
- 
+
 import Paper from '@material-ui/core/Paper';
 import { Button, Radio, Icon } from 'antd';
 import '../css/progressmanage.css';
@@ -73,7 +73,7 @@ class Progressmanage extends Component {
         if(localStorage.getItem("access_token")!=null)
         {
             axios.get("http://202.120.40.8:30741/activity/userid/"+localStorage.getItem("userid"),{params:
-                {access_token: localStorage.getItem("access_token")}}).then(
+                {}}).then(
             function(response)
             {
                 for(var i=0;i<response.data.length;++i)

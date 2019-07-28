@@ -18,7 +18,7 @@ class Addrelation extends Component
     }
     handlesubmit()
     {
-        axios.post("http://202.120.40.8:30741/item/add/relation",{},{params:{access_token:localStorage.getItem("access_token"),priorId:this.props.itemid,subsequentId:this.state.id,relateType:this.state.type}}).then(
+        axios.post("http://202.120.40.8:30741/item/add/relation",{},{params:{priorId:this.props.itemid,subsequentId:this.state.id,relateType:this.state.type}}).then(
             function(res)
             {
                 alert("success");
