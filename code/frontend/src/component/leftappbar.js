@@ -334,6 +334,20 @@ export default function LeftAppBar(props) {
                 </ListItem>
 
                 <br/><br/>
+
+                <br/><br/>
+                <br/><br/>
+                <br/><br/>
+                <Grid container justify="space-around" alignItems="center" spacing={2}>
+                    <h3>Bamdb访客数</h3>
+                </Grid>
+                <Grid container justify="space-around" alignItems="center" spacing={2}>
+                    <a href="https://www.easycounter.com/">
+                        <img src="https://www.easycounter.com/counter.php?bamdb"
+                             border="0" alt="Web Site Hit Counters"/>
+                    </a>
+                </Grid>
+
             </div>
         </Drawer>
             <Drawer
