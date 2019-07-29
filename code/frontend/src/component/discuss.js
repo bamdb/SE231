@@ -48,7 +48,7 @@ class DiscussBody extends Component{
     handleOk()
     {
         var date=Date.parse(new Date());
-        axios.post("http://202.120.40.8:30741/message/add",{senderId:localStorage.getItem("userid"),receiverId:this.props.username,sendTime:date,content:"加为好友"})
+        axios.post("http://202.120.40.8:30741/message/add",{senderId:localStorage.getItem("userid"),receiverId:this.props.data.user.id,sendTime:date,content:"加为好友"})
         this.setState({visible:false});
     }
     handleCancel()
