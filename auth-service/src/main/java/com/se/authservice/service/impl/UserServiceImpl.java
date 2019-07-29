@@ -4,7 +4,7 @@ import com.se.authservice.dao.*;
 import com.se.authservice.entity.Authority;
 import com.se.authservice.entity.Role;
 import com.se.authservice.entity.User;
-import com.se.authservice.entity.Image;
+import com.se.authservice.entity.Qrcode;
 import com.se.authservice.helper.QRCodeUtil;
 import com.se.authservice.repository.ImageRepository;
 import com.se.authservice.service.UserService;
@@ -21,7 +21,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.util.Collection;
@@ -201,10 +200,18 @@ public class UserServiceImpl implements UserService {
         BufferedImage image = QRCodeUtil.createImage(uuid, imgPath, true);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(image, "jpg", baos);
-        Image image1 = new Image(uuid, new Binary(baos.toByteArray()));
-        imageRepository.save(image1);
+        Qrcode qrcode1 = new Qrcode(uuid, new Binary(baos.toByteArray()));
+        imageRepository.save(qrcode1);
         redisDao.setUuid(uuid, "");
         return uuid;
+    }
+
+    public byte[] getQrcode(String uuid) {
+        Qrcode qrcode = imageRepository.findByImageId(uuid).orElse(null);
+        if (qrcode != null) {
+            return qrcode.getImage().getData();
+        }
+        return null;
     }
 
     public void saveToken(String uuid, String accessToken) {

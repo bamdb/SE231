@@ -27,8 +27,13 @@ public class AuthController {
     }
 
     @GetMapping(value = "/uuid")
-    public String qrcode() throws Exception {
+    public String uuid() throws Exception {
         return userService.qrencode();
+    }
+
+    @GetMapping(value = "/qrcode")
+    public byte[] qrcode(String uuid) {
+        return userService.getQrcode(uuid);
     }
 
     @GetMapping(value = "/settoken")

@@ -22,4 +22,5 @@ public interface UserService {
     String qrencode() throws Exception;
     void saveToken(String uuid, String accessToken);
     String getToken(String uuid);
+    byte[] getQrcode(String uuid);
 }

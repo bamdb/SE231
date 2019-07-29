@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.awt.image.BufferedImage;
 
 @Document
-public class Image {
+public class Qrcode {
     @Id
     private String id;
 
@@ -43,15 +43,15 @@ public class Image {
         this.image = image;
     }
 
-    public Image() {
+    public Qrcode() {
     }
 
-    public Image(String imageId, Binary image) {
+    public Qrcode(String imageId, Binary image) {
        setImageId(imageId);
        setImage(image);
     }
 
-    public Image(String id, String imageId, Binary image) {
+    public Qrcode(String id, String imageId, Binary image) {
         setId(id);
         setImage(image);
         setImageId(imageId);
