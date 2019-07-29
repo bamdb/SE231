@@ -79,4 +79,5 @@ Sprint 1 (July.1-July.10)
 >现有Alert部分统一样式<br/>
 >Registerpage：添加页面用户名，密码，确认密码，邮箱格式检查部分（正则表达式确认，并用Alert组件输出错误）<br/>
 >浏览页面分页逻辑完成<br/>
->register邮箱验证逻辑完成
+>register邮箱验证逻辑完成<br/>
+>登录页面扫码部分完成
