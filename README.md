@@ -37,6 +37,12 @@ code for summer project
 * bamdb: 4 vCPU | 8 GiB | Ubuntu 18.04
 * bamdb1:  4 vCPU | 8 GiB | Ubuntu 18.04
 * bamdb2:  4 vCPU | 8 GiB | Ubuntu 18.04
+* bamdb-worker1: 4 vCPU | 8 GiB | Ubuntu 18.04
+* bamdb-worker2: 4 vCPU | 8 GiB | Ubuntu 18.04
+* bamdb1-worker1: 4 vCPU | 8 GiB | Ubuntu 18.04
+* bamdb1-worker2: 4 vCPU | 8 GiB | Ubuntu 18.04
+* bamdb2-worker1: 4 vCPU | 8 GiB | Ubuntu 18.04
+* bamdb2-worker2: 4 vCPU | 8 GiB | Ubuntu 18.04
 * aliyun1:  1 vCPU | 2 GiB | Ubuntu 18.04
 * aliyun2:   1 vCPU | 2 GiB | Ubuntu 18.04
 * bandwagon:   1 vCPU | 2 GiB | Centos 7
@@ -46,7 +52,7 @@ code for summer project
 
 * frontend: React React-Native
 * backend: Spring
-* database: Mysql 8.0 | Redis 5.0 | MongoDB 3.6
+* database: Mysql 8.0 | Redis 5.0 | MongoDB 3.6 | H2
 * OAuth2 | Spring Security
 * Mysql 读写分离
     * master: ubuntularge 4 vCPU | 8 GiB
@@ -56,26 +62,30 @@ code for summer project
 * Redis集群
     * Store token for OAuth2
     * master
-        * bamdb: 4 vCPU | 8 GiB | Ubuntu 18.04
-        * bamdb1:  4 vCPU | 8 GiB | Ubuntu 18.04
-        * bamdb2:  4 vCPU | 8 GiB | Ubuntu 18.04
+        * bamdb | bamdb1 | bamdb2
     * slave
-        * ubuntularge: 4 vCPU | 8 GiB | Ubuntu 18.04
-        * aliyun1:  1 vCPU | 2 GiB | Ubuntu 18.04
-        * aliyun2:   1 vCPU | 2 GiB | Ubuntu 18.04
+        * ubuntularge | aliyun1 | aliyun2
 * 微服务架构
+	* spring cloud
+	* zuul
+	* eureka 端口8761
     * 12 microservices
-    * in three servers
-        * bamdb: 4 vCPU | 8 GiB | Ubuntu 18.04
-        * bamdb1:  4 vCPU | 8 GiB | Ubuntu 18.04
-        * bamdb2:  4 vCPU | 8 GiB | Ubuntu 18.04
+    * in nine servers | three clusters
+		* manager
+			* bamdb | bamdb1 | bamdb2
+		* worker
+			* bamdb-worker1 | bamdb-worker2 | bamdb1-worker1 | bamdb1-worker2 | bamdb2-worker1 | bamdb2-worker2
 * Nginx
     * 反向代理
     * 负载均衡
+* Docker Swarm
+	* 自动部署
+	* 物理资源调度
 * 监控
     * zipkin 端口30743
     * prometheus+Grafana 端口30744
     * rabbitMQ+elk日志管理
+	* aliyun
 * RESTful
     * Open API
         * [openapi.yml](https://app.swaggerhub.com/apis/ba818/open-api/1.0.0 "swaggerhub")
