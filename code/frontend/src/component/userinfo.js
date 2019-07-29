@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Paper from '@material-ui/core/Paper';
 import '../css/userinfo.css'
 import List from '@material-ui/core/List';
 import Button from '@material-ui/core/Button';
@@ -11,8 +10,8 @@ import Grid from '@material-ui/core/Grid';
 import Input from "@material-ui/core/Input";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from '@material-ui/core/InputLabel';
-import axios from 'axios'
-import $ from'jquery'
+import axios from 'axios';
+import Alert from '../component/alert';
 import Uploadavatar from "./uploadavatar";
 /*
 信息保存在state中，可以自行添加props或ajax
@@ -23,11 +22,12 @@ import Uploadavatar from "./uploadavatar";
 class Userinfo extends Component {
     constructor(props) {
         super(props);
-        this.state={edit:false,username:"shenruien",password:"123456",email:"123456@qq.com",id:"1",date:"2019-7-1",grade:"1",imgurl:"/img/3.jpg"};
+        this.state={edit:false,username:"shenruien",password:"123456",email:"123456@qq.com",id:"1",date:"2019-7-1",grade:"1",imgurl:"/img/3.jpg",content:""};
         this.handleedit=this.handleedit.bind(this);
         this.handlechange=this.handlechange.bind(this);
         this.handlesave=this.handlesave.bind(this);
         this.handlecancel=this.handlecancel.bind(this);
+        this.handleAlert=this.handleAlert.bind(this);
     }
     componentDidMount() {
 
@@ -58,10 +58,10 @@ class Userinfo extends Component {
         var email=this.state.email;
         var s=email.split("@");
         if(s.length!==2) {
-            alert("wrong format of email")
+            this.setState({content:"邮箱格式错误，请重新填写！"})
         }
         else if(s[1].split(".").length<2) {
-            alert("wrong format of email")
+            this.setState({content:"邮箱格式错误，请重新填写！"})
         }
         else {
 
@@ -72,6 +72,11 @@ class Userinfo extends Component {
         }
 
     }
+
+    handleAlert(){
+        this.setState({content:""})
+    }
+
     handlecancel(){
         this.setState({edit:false});
     }
@@ -111,6 +116,7 @@ class Userinfo extends Component {
 
         return (
             <Grid container id="userinfo">
+                <Alert content={this.state.content} confirmAlert={this.handleAlert} cancelAlert={this.handleAlert} />
                 <Grid item xs={3}>
                     <Grid container justify={"center"}>
                     <Avatar alt="Remy Sharp" src={"http://202.120.40.8:30741/image/id/"+localStorage.getItem("userid")+"0"} id={"avatar"}/>

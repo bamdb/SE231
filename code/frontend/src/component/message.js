@@ -6,16 +6,19 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import axios from 'axios';
+import Alert from "./alert";
 
 class Message extends Component{
     constructor(props)
     {
         super(props);
-        this.state={message:{message:{}}}
+        this.state={message:{message:{}},content:""}
         this.handleaddfriend=this.handleaddfriend.bind(this);
+        this.handleAlert=this.handleAlert.bind(this);
     }
     handleaddfriend()
     {
+        console.log("您和Ta已经是好友！");
         axios.get("http://202.120.40.8:30741/friend/isfriend?userId1="+this.state.message.message.senderId+"&userId2="+this.state.message.message.receiverId).then(
             function(res)
             {
@@ -24,7 +27,7 @@ class Message extends Component{
                     axios.post("http://202.120.40.8:30741/friend/add",{userId1:this.state.message.message.senderId,userId2:this.state.message.message.receiverId,status:0})
                 }
                 else {
-                    alert("you already have friend");
+                    this.setState({content:"您和Ta已经是好友！"})
                 }
             }
         )
@@ -38,6 +41,10 @@ class Message extends Component{
         this.setState({message:nextProps.message});
     }
 
+    handleAlert(){
+        this.setState({content:""})
+    }
+
     render()
     {
         var message=this.state.message;
@@ -45,6 +52,7 @@ class Message extends Component{
             {
                 return(
                     <Grid container>
+                        <Alert content={this.state.content} confirmAlert={this.handleAlert} cancelAlert={this.handleAlert}/>
                         <Grid item xs={3}>
                             <Typography>from:{message.user.username||1}</Typography>
                             <Typography>to:{message.message.receiverId||1}</Typography>

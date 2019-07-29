@@ -19,7 +19,7 @@ class Itembrowsepage extends Component{
     constructor(props){
         super(props);
         this.state={
-            currentpage:0,
+            currentpage:1,
             ItemList: [],
             tags: [],
             isloaded: false,
@@ -35,7 +35,6 @@ class Itembrowsepage extends Component{
 
     handlepagechange(currentpage)
     {
-        console.log(currentpage);
         this.setState({currentpage:currentpage});
     }
 

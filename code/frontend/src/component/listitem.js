@@ -101,13 +101,12 @@ class Listitem extends Component {
         axios.get(
             "http://202.120.40.8:30741/rating/browser",{params:{
                     type:nextProps.type,
-                    page:currentpage,
+                    page:currentpage-1,
                     pageSize:8
                 }}
         )
             .then(function (response) {
                 items=response.data;
-
                 if(items !== undefined)
                 {
                     for(var i=0; i<items.length; ++i) {
@@ -132,11 +131,6 @@ class Listitem extends Component {
                     modifiedItems:rows,
                 })
                 }
-                else {
-                    console.log("no data");
-                }
-
-
             }.bind(this))
     }
     handleCancelAlert(content){

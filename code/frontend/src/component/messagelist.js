@@ -43,7 +43,8 @@ class Messagelist extends Component{
                     axios.post("http://202.120.40.8:30741/friend/add",{userId1:senderId,userId2:receiverId,status:0})
                 }
                 else {
-                    this.setState({content:"you already have frined"})
+
+                    this.setState({content:"您和Ta已经是好友了！"})
                 }
             }.bind(this)
         )

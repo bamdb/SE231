@@ -8,16 +8,19 @@ import  axios from "axios";
 import Typography from "antd/es/typography/Typography";
 import {List} from "antd";
 import { Radio } from 'antd';
+import Alert from '../component/alert';
+
 class Addrelation extends Component
 {
     constructor(props)
     {
         super(props);
-        this.state={id:1,type:1,item:{},prev:[],normal:[],prior:[]}
+        this.state={id:1,type:1,item:{},prev:[],normal:[],prior:[],content:[]}
         this.handleidchange=this.handleidchange.bind(this);
         this.handletyepchange=this.handletyepchange.bind(this);
         this.handlesubmit=this.handlesubmit.bind(this);
         this.handledelete=this.handledelete.bind(this);
+        this.handleAlert=this.handleAlert.bind(this);
     }
     componentDidMount() {
         axios.get("http://202.120.40.8:30741/item/id/"+this.props.itemid).then(
@@ -26,6 +29,10 @@ class Addrelation extends Component
 
             }.bind(this)
         )
+    }
+
+    handleAlert(){
+        this.setState({content:""})
     }
     handledelete(id1,id2)
     {
@@ -43,21 +50,21 @@ class Addrelation extends Component
             case 1:axios.post("http://202.120.40.8:30741/item/add/relation",{},{params:{priorId:this.state.itemid,subsequentId:this.state.id,relateType:0}}).then(
                 function(res)
                 {
-                    alert("success");
+                   this.setState({content:"success!"})
                 }
             );
             break;
             case 2:axios.post("http://202.120.40.8:30741/item/add/relation",{},{params:{priorId:this.state.id,subsequentId:this.props.itemid,relateType:1}}).then(
                 function(res)
                 {
-                    alert("success");
+                    this.setState({content:"success!"})
                 }
             );
             break;
             case 3:axios.post("http://202.120.40.8:30741/item/add/relation",{},{params:{priorId:this.props.itemid,subsequentId:this.state.id,relateType:1}}).then(
                 function(res)
                 {
-                    alert("success");
+                    this.setState({content:"success!"})
                 }
             );
             break;
@@ -79,6 +86,7 @@ class Addrelation extends Component
 
         return(
             <Grid container>
+                <Alert content={this.state.content} confirmAlert={this.handleAlert} cancelAlert={this.handleAlert} />
                 <Grid item xs={12}>
                     <Typography>续作</Typography>
                     <List
