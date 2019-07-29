@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import axios from 'axios';
 import Message from "./message";
+import Alert from "./alert";
 class Messagelist extends Component{
     constructor(props)
     {
@@ -21,13 +22,15 @@ class Messagelist extends Component{
                     user:{username:"shenruien"}
                 }
                 ],
-            userid:1
+            userid:1,
+            content:""
         }
         this.handleaddfriend=this.handleaddfriend.bind(this);
         this.getButton = this.getButton.bind(this);
+        this.handleAlert=this.handleAlert.bind(this);
     }
     getButton(type,senderId, receiverId) {
-        return type ? <Button size={"small"} onClick={this.handleaddfriend(senderId,receiverId)}>同意</Button> : <div></div>
+        return type ? <Button size={"small"} onClick={()=>this.handleaddfriend(senderId,receiverId)}>同意</Button> : <div></div>
     }
 
     handleaddfriend(senderId,receiverId)
@@ -40,9 +43,9 @@ class Messagelist extends Component{
                     axios.post("http://202.120.40.8:30741/friend/add",{userId1:senderId,userId2:receiverId,status:0})
                 }
                 else {
-                    alert("you already have friend");
+                    this.setState({content:"you already have frined"})
                 }
-            }
+            }.bind(this)
         )
     }
     componentWillMount() {
@@ -73,6 +76,9 @@ class Messagelist extends Component{
             }.bind(this)
         )
     }
+    handleAlert(content) {
+        this.setState({content : content}) // 重新渲染 使得alert显示
+    }
 
     render()
     {
@@ -80,7 +86,7 @@ class Messagelist extends Component{
         var rows=[];
         for(var i=0;i<messages.length;++i)
         {
-                if(messages[i].message.content=="加为好友"&&this.props.type==1)
+                if(messages[i].message.content=="加为好友"&&this.props.type=="receiverid")
                 {
                     rows.push(
                         {
@@ -115,6 +121,7 @@ class Messagelist extends Component{
                 dataSource={rows}
                 renderItem={item => (
                     <div style={{padding:20}} >
+                        <Alert content={this.state.content} cancelAlert={this.handleAlert} />
                 <List.Item
                     extra= {this.getButton(item.type,item.senderId,item.receiverId) }
                 >

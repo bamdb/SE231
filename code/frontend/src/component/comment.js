@@ -54,7 +54,6 @@ class Comment extends Component {
     handleCancel()
     {
         this.setState({visible:false});
-
     }
 
     handlevisible()
