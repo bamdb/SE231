@@ -1,0 +1,64 @@
+version: '2'
+
+services:
+#  zipkin:
+#    image: openzipkin/zipkin
+#    environment:
+#      - STORAGE_TYPE=elasticsearch
+#      - ES_HOSTS=http://localhost:9200
+#    ports:
+#      - 9411:9411
+#    networks:
+#      - elk
+#    restart: unless-stopped
+  elasticsearch:
+    build:
+      context: config/elasticsearch
+      args:
+        ELK_VERSION: 7.2.0
+    volumes:
+      - ./config/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ELASTIC_PASSWORD: bamdb
+    networks:
+      - elk
+
+  logstash:
+    build:
+      context: config/logstash
+      args:
+        ELK_VERSION: 7.2.0
+    volumes:
+      - ./config/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./config/logstash/pipeline/logstash.conf:/usr/share/logstash/config/logstash.conf
+    ports:
+      - "5000:5000"
+      - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    build:
+      context: config/kibana
+      args:
+        ELK_VERSION: 7.2.0
+    volumes:
+      - ./config/kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
+    ports:
+      - "5601:5601"
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+
+networks:
+  elk:
+    driver: bridge

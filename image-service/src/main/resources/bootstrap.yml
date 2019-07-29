@@ -4,7 +4,7 @@ spring:
       discovery:
         service-id: config
         enabled: true
-      name: image, mongo, uniconfig
+      name: image, mongo, uniconfig, rabbitmq
   main:
     allow-bean-definition-overriding: true
 eureka:
