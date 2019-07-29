@@ -53,3 +53,5 @@
 + rabbitmq + elk + zipkin + hystrix turbine
 ## 2019.07.26
 + elk + prometheus + grafana
+## 2019.07.29
++ elk + filebeat
