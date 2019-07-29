@@ -80,3 +80,7 @@
 # 2019-07-25
 * config docker swarm
 * work on mail verification
+
+# 2019-07-29
+* scraping data from bangumi
+* complete QRcode login
