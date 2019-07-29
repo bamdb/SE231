@@ -105,7 +105,7 @@ class Useriteminfopage extends Component {
                         <Divider type={"vertical"} style={{height:400}}/>
                         <Grid  item xs={6} >
                             <Scheduletableold readstat={this.state.readstat}/>
-                            <Tags select={false} tagchange={this.handletagchange} tags={this.state.tags}></Tags>
+                            <Tags select={false} tagchange={this.handletagchange} tags={this.state.tags}/>
                             <Commentlist comments={this.state.comments}/>
                         </Grid>
                         <Grid  item xs={3} >
