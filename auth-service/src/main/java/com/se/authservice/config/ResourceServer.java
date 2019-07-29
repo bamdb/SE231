@@ -22,6 +22,10 @@ public class ResourceServer extends ResourceServerConfigurerAdapter {
                 .antMatchers("/actuator/**").permitAll()
                 .antMatchers("/signup").permitAll()
                 .antMatchers("/verify").permitAll()
+                .antMatchers("/uuid").permitAll()
+                .antMatchers("/qrcode").permitAll()
+                .antMatchers("/settoken").permitAll()
+                .antMatchers("/gettoken").permitAll()
                 .antMatchers("/oauth/**").permitAll()
                 .anyRequest().authenticated();
     }
