@@ -111,7 +111,7 @@ class Listitem extends Component {
                 if(items !== undefined)
                 {
                     for(var i=0; i<items.length; ++i) {
-                        if (items[i].item.itemname.indexOf(this.props.search) !== -1) {
+                        if (items[i].item.itemname.indexOf(nextProps.search) !== -1) {
                             rows.push(
                                 {
                                     href: "/itemdetail/"+items[i].item.id,
@@ -127,16 +127,17 @@ class Listitem extends Component {
                             );
                         }
                     }
+                    this.setState({
+                    ItemList:items,
+                    modifiedItems:rows,
+                })
                 }
                 else {
                     console.log("no data");
                 }
 
-                this.setState({
-                    ItemList:items,
-                    modifiedItems:rows,
-                })
-            })
+
+            }.bind(this))
     }
     handleCancelAlert(content){
         this.setState({content : content, deleteItem:[]})

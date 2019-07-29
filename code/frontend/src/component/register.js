@@ -15,11 +15,6 @@ const  usernameRegex = /^\w{3,15}$/;
 const passwordRegex = /^\w{6,18}$/;
 const emailRegex = /^\w+@\w+(\.\w+)+$/;
 
-var checkpassword2=<span/>;
-var checkpassword=<span/>;
-var checkname=<span/>;
-var checkemail=<span/>;
-
 class Register extends Component {
     constructor(props){
         super(props);
@@ -77,18 +72,9 @@ class Register extends Component {
 
         this.setState({verify:true});
     }
+
     submit()
     {
-        /*
-        axios.post("http://202.120.40.8:30741/auth/signup",{
-            username:this.state.name,
-            password:this.state.password
-        },
-            {
-                withCredentials:true
-            })
-
-         */
         this.setState({finish:true})
     }
 
@@ -103,29 +89,18 @@ class Register extends Component {
     }
  
     render() {
-        checkname = (this.state.name==="" ) ? <span /> :
-            (usernameRegex.test(this.state.name) ? <Icon type={"check"} id={"checkdone"} /> : <Icon type={"warning"} id={"checkfalse"} />);
+        var checkname = (this.state.name==="" ) ? <span /> : (usernameRegex.test(this.state.name) ? <Icon type={"check"} id={"checkdone"} /> : <Icon type={"warning"} id={"checkfalse"} />);
 
-        checkpassword = (this.state.password==="" ) ? <span /> :
-            (passwordRegex.test(this.state.password) ? <Icon type={"check"} id={"checkdone"} /> : <Icon type={"warning"} id={"checkfalse"} />);
+        var checkpassword = (this.state.password==="" ) ? <span /> : (passwordRegex.test(this.state.password) ? <Icon type={"check"} id={"checkdone"} /> : <Icon type={"warning"} id={"checkfalse"} />);
 
-        checkemail = (this.state.email==="" ) ? <span /> :
-            (emailRegex.test(this.state.email) ? <Icon type={"check"} id={"checkdone"} /> : <Icon type={"warning"} id={"checkfalse"} />);
+        var checkemail = (this.state.email==="" ) ? <span /> : (emailRegex.test(this.state.email) ? <Icon type={"check"} id={"checkdone"} /> : <Icon type={"warning"} id={"checkfalse"} />);
 
-        checkpassword2 = (this.state.password2==="" ) ? <span /> :
-            (this.state.password===this.state.password2 ? <Icon type={"check"} id={"checkdone"} /> : <Icon type={"warning"} id={"checkfalse"} />);
+        var checkpassword2 = (this.state.password2==="" ) ? <span /> : (this.state.password===this.state.password2 ? <Icon type={"check"} id={"checkdone"} /> : <Icon type={"warning"} id={"checkfalse"} />);
 
-        const button= this.state.verify ? <div></div>
-            : <Button
-                id={"button"}
-                variant="outlined"
-                color="primary"
-                name={"toverify"}
-                onClick={this.toverify}
-            >开始验证
-            </Button>;
+        const button= this.state.verify ? <div></div> : <Button id={"button"} variant="outlined" color="primary" name={"toverify"} onClick={this.toverify}>开始验证</Button>;
 
         const current = this.state.verify ? (this.state.finish ? 2 : 1):0;
+
         if(current == 1) return (
             <div>
                 <Steps progressDot current={current}>
@@ -158,6 +133,7 @@ class Register extends Component {
                 </div>
             </div>
         )
+
         return(
             <Grid container justify={"space-around"} alignContent={"center"}>
                 <Alert content={this.state.content} confirmAlert={this.handleAlert} cancelAlert={this.handleAlert} />
@@ -167,12 +143,10 @@ class Register extends Component {
                     <Step title="邮箱验证"  />
                     <Step title="注册完成"  />
                 </Steps>
-                        <div id={"register"}>
-                    <Typography variant={"h4"} component="h4" >注册成为Bamdb会员</Typography> <br/>
+                    <div id={"register"}>
+                        <Typography variant={"h4"} component="h4" >注册成为Bamdb会员</Typography> <br/>
                     </div>
-                </Grid>
-                <br/>
-                <Grid item xs={12} />
+                </Grid> <br/>
                 <Grid item xs={5}>
                     <div id={"register-body"}>
                     <Grid container spacing={1}>
