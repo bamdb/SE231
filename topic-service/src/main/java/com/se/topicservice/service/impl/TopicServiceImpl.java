@@ -34,7 +34,7 @@ public class TopicServiceImpl implements TopicService {
     public Topic postTopic(TopicIn topicIn) {
         // check if topic publisher exists in User table
         Topic topic = topicIn.getTopic();
-        if (topic.getUserId() == null || userClient.getUserById(topic.getUserId()) == null) {
+        if (topic.getUserId() == null) {
             return null;
         }
         Topic returnTopic = writeDao.save(topic);
@@ -110,19 +110,11 @@ public class TopicServiceImpl implements TopicService {
     }
 
     public TopicPage postReply(Long topicId, Long userId, String topicContent) {
-        User user = userClient.getUserById(userId);
-        // check if user exists
-        if (user == null) {
-            return null;
-        }
-
-        // check if topic exists
-        if (readDao.findById(topicId) == null) {
-            return null;
-        }
 
         TopicPage topicPage = mongoDao.findById(String.valueOf(topicId));
         Reply reply = new Reply();
+        User user = new User();
+        user.setId(userId);
         reply.setUser(user);
         reply.setReplyContent(topicContent);
         List<Reply> replyList;

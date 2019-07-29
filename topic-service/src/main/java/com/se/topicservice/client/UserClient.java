@@ -12,6 +12,6 @@ public interface UserClient {
     @RequestMapping(value="/id/{id}", method= RequestMethod.GET)
     User getUserById(@PathVariable("id") Long userId);
 
-    @RequestMapping(value="/signup", method = RequestMethod.POST)
+    // fallback function
     User postUser(@RequestBody User user);
 }
