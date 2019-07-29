@@ -35,7 +35,7 @@ public class ItemController {
         return itemService.findUsertag(itemId, userId);
     }
 
-//    @PreAuthorize("hasRole('EDITOR')")
+    @PreAuthorize("hasRole('EDITOR')")
     @PostMapping(value = "/add")
     public Item postItem(@RequestBody Item item) {
         return itemService.postItem(item);

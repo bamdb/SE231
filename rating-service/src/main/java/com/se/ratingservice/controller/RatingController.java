@@ -17,7 +17,7 @@ public class RatingController {
     @Resource(name="ratingServiceImpl")
     private RatingService ratingService;
 
-//    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     @PostMapping(value="/add/itemid/{itemId}", produces="application/json")
     public Rating postRating(@PathVariable("itemId") Long itemId,
                              @RequestHeader("Authorization") String accessToken ) {
