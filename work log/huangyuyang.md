@@ -68,10 +68,15 @@ Sprint 1 (July.1-July.10)
 >在前端添加注册验证的部分
 >配置android的部分
     
-* July.26-27<br/>
+* July.26-28<br/>
 >休息
 >Collectform与Alert组件在itembrowse的显示问题<br/>
 >登录后显示注销，非登陆只显示登录按钮、编辑、管理页面开放权限等细节问题<br/>
 >个人信息页面头像修改及样式调整<br/>
->初步添加动画浏览页面
+>初步添加flash动画浏览页面
     
+* July.29<br/>
+>现有Alert部分统一样式<br/>
+>Registerpage：添加页面用户名，密码，确认密码，邮箱格式检查部分（正则表达式确认，并用Alert组件输出错误）<br/>
+>浏览页面分页逻辑完成<br/>
+>register邮箱验证逻辑完成
