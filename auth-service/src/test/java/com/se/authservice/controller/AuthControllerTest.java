@@ -52,6 +52,11 @@ public class AuthControllerTest {
     }
 
     @Test
+    public void testQrcode() throws Exception {
+        mvc.perform(post("/qrcode"));
+    }
+
+    @Test
     public void testController() throws  Exception{
         MultiValueMap<String, String> mm = new LinkedMultiValueMap<>();
 

@@ -19,4 +19,7 @@ public interface UserService {
     void deleteUserById(Long id);
     User truncate(User user);
     int verification(User user) throws Exception;
+    void qrencode(String accessToken) throws Exception;
+    void saveToken(String uuid, String accessToken);
+    void getToken(String uuid);
 }

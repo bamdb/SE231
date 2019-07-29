@@ -4,6 +4,7 @@ import com.se.authservice.dao.*;
 import com.se.authservice.entity.Authority;
 import com.se.authservice.entity.Role;
 import com.se.authservice.entity.User;
+import com.se.authservice.helper.QRCodeUtil;
 import com.se.authservice.service.UserService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,6 +19,7 @@ import javax.mail.internet.MimeMultipart;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Properties;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -176,5 +178,21 @@ public class UserServiceImpl implements UserService {
         transport.close();
 
         return hashCode;
+    }
+
+    public void qrencode(String accessToken) throws Exception {
+        String uuid = UUID.randomUUID().toString();
+        String imgPath = "/Users/pro/qrcode/test.jpg";
+        String destPath = "/Users/pro/qrcode/output.jpg";
+        QRCodeUtil.encode(uuid, imgPath, destPath, true);
+        redisDao.setUuid(uuid, "");
+    }
+
+    public void saveToken(String uuid, String accessToken) {
+        redisDao.setUuid(uuid, accessToken);
+    }
+
+    public void getToken(String uuid) {
+        redisDao.getUuid(uuid);
     }
 }
