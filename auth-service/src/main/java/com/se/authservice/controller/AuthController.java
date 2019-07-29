@@ -36,8 +36,8 @@ public class AuthController {
         return userService.getQrcode(uuid);
     }
 
-    @GetMapping(value = "/settoken")
-    public void setToken(@RequestParam("uuid") String uuid,@RequestParam("token") String token) {
+    @PutMapping(value = "/settoken")
+    public void setToken(@RequestParam("uuid") String uuid, @RequestParam("token") String token) {
         userService.saveToken(uuid, token);
     }
 

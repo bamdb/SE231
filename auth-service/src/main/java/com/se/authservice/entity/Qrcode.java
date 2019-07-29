@@ -51,9 +51,4 @@ public class Qrcode {
        setImage(image);
     }
 
-    public Qrcode(String id, String imageId, Binary image) {
-        setId(id);
-        setImage(image);
-        setImageId(imageId);
-    }
 }
