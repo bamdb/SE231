@@ -26,9 +26,19 @@ public class AuthController {
         this.defaultTokenServices = defaultTokenServices;
     }
 
-    @PostMapping(value = "/qrcode")
-    public void qrcode(@RequestHeader("Authorization") String accessToken) throws Exception{
-        userService.qrencode(accessToken);
+    @GetMapping(value = "/uuid")
+    public String qrcode() throws Exception {
+        return userService.qrencode();
+    }
+
+    @GetMapping(value = "/settoken")
+    public void setToken(@RequestParam("uuid") String uuid,@RequestParam("token") String token) {
+        userService.saveToken(uuid, token);
+    }
+
+    @GetMapping(value = "/gettoken")
+    public String getToken(@RequestParam("uuid") String uuid) {
+        return userService.getToken(uuid);
     }
 
     @PostMapping(value = "/verify", produces = "application/json")

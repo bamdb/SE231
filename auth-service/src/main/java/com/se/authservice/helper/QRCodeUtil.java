@@ -4,11 +4,16 @@ import com.google.zxing.*;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import com.se.authservice.repository.ImageRepository;
+import org.bson.types.Binary;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.OutputStream;
 import java.util.Hashtable;
@@ -23,7 +28,7 @@ public class QRCodeUtil {
     // LOGO高度
     private static final int HEIGHT = 60;
 
-    private static BufferedImage createImage(String content, String imgPath, boolean needCompress) throws Exception {
+    public static BufferedImage createImage(String content, String imgPath, boolean needCompress) throws Exception {
         Hashtable hints = new Hashtable();
         hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
         hints.put(EncodeHintType.CHARACTER_SET, CHARSET);
@@ -80,68 +85,51 @@ public class QRCodeUtil {
         graph.dispose();
     }
 
-    public static void encode(String content, String imgPath, String destPath, boolean needCompress) throws Exception {
-        BufferedImage image = QRCodeUtil.createImage(content, imgPath, needCompress);
-        mkdirs(destPath);
-        // String file = new Random().nextInt(99999999)+".jpg";
-        // ImageIO.write(image, FORMAT_NAME, new File(destPath+"/"+file));
-        ImageIO.write(image, FORMAT_NAME, new File(destPath));
-    }
+//    public void encode(String content, String imgPath, String filename, boolean needCompress) throws Exception {
+//
+//        // ImageIO.write(image, FORMAT_NAME, new File(destPath));
+//    }
 
-    public static BufferedImage encode(String content, String imgPath, boolean needCompress) throws Exception {
-        BufferedImage image = QRCodeUtil.createImage(content, imgPath, needCompress);
-        return image;
-    }
-
-    public static void mkdirs(String destPath) {
-        File file = new File(destPath);
-        // 当文件夹不存在时，mkdirs会自动创建多层目录，区别于mkdir．(mkdir如果父目录不存在则会抛出异常)
-        if (!file.exists() && !file.isDirectory()) {
-            file.mkdirs();
-        }
-    }
-
-    public static void encode(String content, String imgPath, String destPath) throws Exception {
-        QRCodeUtil.encode(content, imgPath, destPath, false);
-    }
-    // 被注释的方法
-    /*
-     * public static void encode(String content, String destPath, boolean
-     * needCompress) throws Exception { QRCodeUtil.encode(content, null, destPath,
-     * needCompress); }
-     */
-
-    public static void encode(String content, String destPath) throws Exception {
-        QRCodeUtil.encode(content, null, destPath, false);
-    }
-
-    public static void encode(String content, String imgPath, OutputStream output, boolean needCompress)
-            throws Exception {
-        BufferedImage image = QRCodeUtil.createImage(content, imgPath, needCompress);
-        ImageIO.write(image, FORMAT_NAME, output);
-    }
-
-    public static void encode(String content, OutputStream output) throws Exception {
-        QRCodeUtil.encode(content, null, output, false);
-    }
-
-    public static String decode(File file) throws Exception {
-        BufferedImage image;
-        image = ImageIO.read(file);
-        if (image == null) {
-            return null;
-        }
-        BufferedImageLuminanceSource source = new BufferedImageLuminanceSource(image);
-        BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-        Result result;
-        Hashtable hints = new Hashtable();
-        hints.put(DecodeHintType.CHARACTER_SET, CHARSET);
-        result = new MultiFormatReader().decode(bitmap, hints);
-        String resultStr = result.getText();
-        return resultStr;
-    }
-
-    public static String decode(String path) throws Exception {
-        return QRCodeUtil.decode(new File(path));
-    }
+//    public BufferedImage encode(String content, String imgPath, boolean needCompress) throws Exception {
+//        BufferedImage image = QRCodeUtil.createImage(content, imgPath, needCompress);
+//        return image;
+//    }
+//
+//    public void encode(String content, String imgPath, String destPath) throws Exception {
+//        encode(content, imgPath, destPath, false);
+//    }
+//
+//    public void encode(String content, String destPath) throws Exception {
+//        encode(content, null, destPath, false);
+//    }
+//
+//    public static void encode(String content, String imgPath, OutputStream output, boolean needCompress)
+//            throws Exception {
+//        BufferedImage image = QRCodeUtil.createImage(content, imgPath, needCompress);
+//        ImageIO.write(image, FORMAT_NAME, output);
+//    }
+//
+//    public static void encode(String content, OutputStream output) throws Exception {
+//        QRCodeUtil.encode(content, null, output, false);
+//    }
+//
+//    public static String decode(File file) throws Exception {
+//        BufferedImage image;
+//        image = ImageIO.read(file);
+//        if (image == null) {
+//            return null;
+//        }
+//        BufferedImageLuminanceSource source = new BufferedImageLuminanceSource(image);
+//        BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+//        Result result;
+//        Hashtable hints = new Hashtable();
+//        hints.put(DecodeHintType.CHARACTER_SET, CHARSET);
+//        result = new MultiFormatReader().decode(bitmap, hints);
+//        String resultStr = result.getText();
+//        return resultStr;
+//    }
+//
+//    public static String decode(String path) throws Exception {
+//        return QRCodeUtil.decode(new File(path));
+//    }
 }
