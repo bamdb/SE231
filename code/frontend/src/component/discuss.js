@@ -48,7 +48,7 @@ class DiscussBody extends Component{
     handleOk()
     {
         var date=Date.parse(new Date());
-        axios.post("http://202.120.40.8:30741/message/add?access_token="+localStorage.getItem("access_token"),{senderId:localStorage.getItem("userid"),receiverId:this.props.username,sendTime:date,content:"加为好友"})
+        axios.post("http://202.120.40.8:30741/message/add",{senderId:localStorage.getItem("userid"),receiverId:this.props.username,sendTime:date,content:"加为好友"})
         this.setState({visible:false});
     }
     handleCancel()
@@ -64,7 +64,7 @@ class DiscussBody extends Component{
     componentDidMount() {
         const id = this.props.data.user.id;
        // this.state.data.replyContent;
-        axios.get("http://202.120.40.8:30741/user/id/"+id+"?access_token="+localStorage.getItem("access_token")).then(
+        axios.get("http://202.120.40.8:30741/user/id/"+id).then(
             function (response){
                 this.setState({username:response.data.username});
             }.bind(this)

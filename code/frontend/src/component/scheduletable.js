@@ -134,7 +134,7 @@ class Scheduletable extends Component {
             "chapters":this.state.data
         }
         axios.put("http://202.120.40.8:30741/activity/update/progress",rows,{
-            params:{access_token: localStorage.getItem("access_token")},
+            params:{},
             headers:{"Content-Type":'application/json'}
         })
         this.setState({show:false});
@@ -146,7 +146,7 @@ class Scheduletable extends Component {
         axios.get("http://202.120.40.8:30741/activity/progress", {params:{
                     userId:this.props.userid,
                     itemId:this.props.itemid,
-                    access_token: localStorage.getItem("access_token"),
+                    
                 }}).then(function(response)
             {
                 console.log(this.props.itemid);

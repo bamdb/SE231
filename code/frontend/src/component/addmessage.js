@@ -80,7 +80,7 @@ class Addmessage extends Component {
     handleOk()
     {
         var date = Date.parse(new Date())
-        axios.post("http://202.120.40.8:30741/message/add",{senderId:localStorage.getItem("userid"),receiverId:this.state.to,senTime:date,content:this.state.text},{params:{access_token:localStorage.getItem("access_token")}});
+        axios.post("http://202.120.40.8:30741/message/add",{senderId:localStorage.getItem("userid"),receiverId:this.state.to,senTime:date,content:this.state.text},{params:{}});
         openNotificationWithIcon('success');
         this.handleCancel();
     }
@@ -104,7 +104,7 @@ class Addmessage extends Component {
         })
     }
     componentWillMount() {
-        axios.get('http://202.120.40.8:30741/friend/all/userid/1',{params:{access_token:localStorage.getItem("access_token")}}).then(
+        axios.get('http://202.120.40.8:30741/friend/all/userid/1',{params:{}}).then(
             function(response){
                 this.setState({tolist:response.data})
             }.bind(this)
