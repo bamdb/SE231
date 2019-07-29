@@ -1,6 +1,6 @@
 package com.se.topicservice.service.impl;
 
-import com.se.topicservice.client.UserClient;
+//import com.se.topicservice.client.UserClient;
 import com.se.topicservice.dao.MongoDao;
 import com.se.topicservice.dao.ReadDao;
 import com.se.topicservice.dao.WriteDao;
@@ -28,13 +28,13 @@ public class TopicServiceImpl implements TopicService {
     @Resource(name="writeDaoImpl")
     private WriteDao writeDao;
 
-    @Autowired
-    public UserClient userClient;
+//    @Autowired
+//    public UserClient userClient;
 
     public Topic postTopic(TopicIn topicIn) {
         // check if topic publisher exists in User table
         Topic topic = topicIn.getTopic();
-        if (topic.getUserId() == null || userClient.getUserById(topic.getUserId()) == null) {
+        if (topic.getUserId() == null) {
             return null;
         }
         Topic returnTopic = writeDao.save(topic);
@@ -110,19 +110,11 @@ public class TopicServiceImpl implements TopicService {
     }
 
     public TopicPage postReply(Long topicId, Long userId, String topicContent) {
-        User user = userClient.getUserById(userId);
-        // check if user exists
-        if (user == null) {
-            return null;
-        }
-
-        // check if topic exists
-        if (readDao.findById(topicId) == null) {
-            return null;
-        }
 
         TopicPage topicPage = mongoDao.findById(String.valueOf(topicId));
         Reply reply = new Reply();
+        User user = new User();
+        user.setId(userId);
         reply.setUser(user);
         reply.setReplyContent(topicContent);
         List<Reply> replyList;
