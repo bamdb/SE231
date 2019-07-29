@@ -54,15 +54,17 @@ class Itembrowsepage extends Component{
         {
             case "book":type=0;break;
             case "movie": type=1;break;
+            case "flash": type=2;break;
         }
         this.setState({type:type})
 
+        console.log(type);
         var currentpage=this.state.currentpage;
         axios.get(
             "http://202.120.40.8:30741/rating/browser",{params:{
                     type:type,
                     page:currentpage,
-                    pageSize:10
+                    pageSize:8
                 }}
         )
         .then(function (response) {
