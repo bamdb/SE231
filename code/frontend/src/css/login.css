@@ -1,28 +1,22 @@
+
 .login{
     background-image: url("/src/background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
-
+div{}
 #register
 {
-    justify-self: center;
-    align-content: space-around;
-    vertical-align: center;
-    padding: 64px;
+    text-align: center;
+    padding-top: 64px;
+    padding-bottom: 32px;
+    min-width: 600px;
 }
 
 #register-body
 {
-    width: 55%;
-    justify-self: flex-start;
-}
-
-#register-jump
-{
-    width: 40%;
-    align-self: flex-end;
+    min-width: 300px;
 }
 
 
