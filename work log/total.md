@@ -231,7 +231,21 @@
 * wangzulai:
   * config docker swarm
   * work on mail verification
-
+# 2019-7-27
+* shenruien:
+  * rewrite the editor and add friend
+  * deal with data 
+* wangzulai:
+  * scraping data from bangumi
+  * complete QRcode login
+* huangyuyang:
+  * 现有Alert部分统一样式
+  * Registerpage：添加页面用户名，密码，确认密码，邮箱格式检查部分（正则表达式确认，并用Alert组件输出错误）
+  * 浏览页面分页逻辑完成
+  * register邮箱验证逻辑完成
+  * 登录页面扫码部分完成
+* yuyajie:
+  * elk + filebeat
 
 
 
