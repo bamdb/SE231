@@ -8,7 +8,7 @@ import {makeStyles} from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import Collectform from "./collectform";
 import Alert from './alert';
-import { List, Avatar, Icon, Card } from "antd";
+import { List, Avatar, Icon, Card, Pagination } from "antd";
 import '../css/listitem.css'
 import axios from 'axios';
 
@@ -90,49 +90,53 @@ class Listitem extends Component {
             {params:localStorage.getItem("access_token")}
         );
     }
-    handlepagechange(page){
-        this.props.handlepagechange(page);
+    handlepagechange(e){
+        this.props.handlepagechange(e);
     }
     componentWillReceiveProps(nextProps, nextContext) {
         var rows=[];
-        const items = nextProps.ItemList;
-        if(items !== undefined)
-        {
-            for(var i=0; i<items.length; ++i) {
-                if (items[i].item.itemname.indexOf(this.props.search) !== -1) {
-                    rows.push(
-                        {
-                            href: "/itemdetail/"+items[i].item.id,
-                            id: items[i].item.id,
-                            title:items[i].item.itemname,
-                            author:items[i].item.mainAuthor,
-                            pubTime: items[i].item.pubTime.split('T')[0],
-                            score:items[i].rating.avgScore,
-                            rank:items[i].rating.rank,
-                            imgurl:items[i].item.imgurl,
-                            chapterNum:items[i].item.chapterNum,
-                        }
-                    );
-                }
-            }
-        }
-        else {
-            console.log("no data");
-            rows.push(
+        var items=[];
+        var currentpage=nextProps.currentpage;
+
+        axios.get(
+            "http://202.120.40.8:30741/rating/browser",{params:{
+                    type:nextProps.type,
+                    page:currentpage,
+                    pageSize:8
+                }}
+        )
+            .then(function (response) {
+                items=response.data;
+
+                if(items !== undefined)
                 {
-                    href: "/itemdetail/1",
-                    title: "three body",
-                    author: "liu",
-                    pubTime: "2010-7-1",
-                    score: 9.5,
-                    rank: 1
+                    for(var i=0; i<items.length; ++i) {
+                        if (items[i].item.itemname.indexOf(this.props.search) !== -1) {
+                            rows.push(
+                                {
+                                    href: "/itemdetail/"+items[i].item.id,
+                                    id: items[i].item.id,
+                                    title:items[i].item.itemname,
+                                    author:items[i].item.mainAuthor,
+                                    pubTime: items[i].item.pubTime.split('T')[0],
+                                    score:items[i].rating.avgScore,
+                                    rank:items[i].rating.rank,
+                                    imgurl:items[i].item.imgurl,
+                                    chapterNum:items[i].item.chapterNum,
+                                }
+                            );
+                        }
+                    }
                 }
-            );
-        }
-        this.setState({
-            ItemList:items,
-            modifiedItems:rows,
-        })
+                else {
+                    console.log("no data");
+                }
+
+                this.setState({
+                    ItemList:items,
+                    modifiedItems:rows,
+                })
+            })
     }
     handleCancelAlert(content){
         this.setState({content : content, deleteItem:[]})
@@ -165,12 +169,6 @@ class Listitem extends Component {
                 grid={{gutter:16,column: 4 }}
                 itemLayout="horizontal"
                 size="large"
-                pagination={{
-                    onChange: page => {
-                        this.handlepagechange(page);
-                    },
-                    pageSize: 8
-                }}
                 dataSource={items}
                 renderItem={item => (
                     <List.Item
@@ -191,14 +189,11 @@ class Listitem extends Component {
                                 localStorage.getItem("role") == "ROLE_EDITOR" ? (
                                 [
                                     <IconText type="star" func={this.handlelike.bind(this,item)} />,
-                                    <IconText type="like-o" text="156"/>,
                                     <IconText type="delete" text="2" func={this.handleAlert.bind(this, "确认删除该条目？",item)}/>
                                 ]
                                 ) : (
                                     [
-                                        <IconText type="star"func={this.handlelike.bind(this,item)} />,
-                                        <IconText type="like-o" text="156"/>,
-                                        <IconText type="message" text="2" />
+                                        <IconText type="star"func={this.handlelike.bind(this,item)} />
                                     ]
                                 )}
                         >
@@ -212,6 +207,7 @@ class Listitem extends Component {
                     </List.Item>
                 )}
             />
+                <Pagination simple current={this.props.currentpage} total={100} onChange={current=>this.handlepagechange(current)}/>
             </div>
         );
     }

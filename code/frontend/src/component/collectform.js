@@ -77,23 +77,25 @@ class Collectform extends Component {
     componentWillReceiveProps(nextProps, nextContext) {
         var tagnames=[];
         var yourtagnames=[];
-        var url5="http://202.120.40.8/item/tag/id/"+nextProps.itemid;
-        axios.get(url5).then(
-            function(response)
-            {
-                console.log(response.data);
-                response.data.tags.map(tag=>{
-                    tagnames.push(tag.tagname);
-                    yourtagnames.push(tag.tagname);
-                })
-            }.bind(this)
-        )
-        this.setState({
-            tags:tagnames,
-            yourtags:yourtagnames,
-            userid:localStorage.getItem("userid"),
-            visible:nextProps.visible
-        })
+        if(nextProps.itemid!=undefined) {
+            var url5 = "http://202.120.40.8/item/tag/id/" + nextProps.itemid;
+            axios.get(url5).then(
+                function (response) {
+                    console.log(response.data);
+                    response.data.tags.map(tag => {
+                        tagnames.push(tag.tagname);
+                        yourtagnames.push(tag.tagname);
+                    })
+                }.bind(this)
+            )
+            this.setState({
+                tags: tagnames,
+                yourtags: yourtagnames,
+                userid: localStorage.getItem("userid"),
+                visible: nextProps.visible
+            })
+
+        }
     }
 
     handlescorechange(score)

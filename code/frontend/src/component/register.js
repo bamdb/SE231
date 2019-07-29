@@ -55,36 +55,30 @@ class Register extends Component {
     }
 
     toverify(){
+        const rows={
+            username: this.state.name,
+            password: this.state.password,
+            mail: this.state.email
+        }
         //开始验证
+        axios.post("http://202.120.40.8:30741/auth/verify",rows,{headers:{"Content-Type":'application/json'}})
 
         this.setState({verify:true});
-
     }
     submit()
     {
+        /*
         axios.post("http://202.120.40.8:30741/auth/signup",{
             username:this.state.name,
             password:this.state.password
-
         },
             {
                 withCredentials:true
             })
 
+
+         */
         this.setState({finish:true})
-        /*$.ajax({
-            url:"http://202.120.40.8:30741/auth/signup",
-            type:"POST",
-            contentType: "application/json",
-            data:JSON.stringify({username:this.state.name,
-                password:this.state.password}),
-            success: function f(data) {
-
-                console.log(data);
-
-
-            }.bind(this)
-        })*/
     }
 
     handlePassword(){
@@ -98,14 +92,7 @@ class Register extends Component {
     }
  
     render() {
-        const button= this.state.verify ? <Button
-            variant="outlined"
-            color="primary"
-            className={useStyles.button}
-            name={"submit"}
-            onClick={this.submit}
-        >注册
-        </Button>
+        const button= this.state.verify ? <div></div>
             : <Button
                 variant="outlined"
                 color="primary"
@@ -115,33 +102,59 @@ class Register extends Component {
             >开始验证
             </Button>;
 
-        const current = this.state.verify ? (this.state.finish ? 2:1):0;
-        if(current == 2) return (
-            <div id="register">
-                <Steps progressDot current={current}>
-                    <Step title="填写信息"/>
-                    <Step title="邮箱验证"/>
-                    <Step title="注册完成"/>
-                </Steps>
-                <h2>注册已完成！</h2>
-                <Button variant={"text"} ><Link to={'/'}>去登录</Link></Button>
-            </div>
-
-        )
-
-        return(
-            <div id="register" >
+        const current = this.state.verify ? (this.state.finish ? 2 : 1):0;
+        if(current == 1) return (
+            <div>
                 <Steps progressDot current={current}>
                     <Step title="填写信息" />
                     <Step title="邮箱验证"  />
                     <Step title="注册完成"  />
                 </Steps>
+            <div id="register">
+                <h2>邮件已发送！</h2><br/>
+                <h4>请前往注册邮箱进行确认，确认完成即可登录账号畅游Bamdb！<br/>
+                    <Button variant={"text"} color="primary" onClick={this.submit}>确定</Button><br/>
+                    未收到邮件？<Button variant={"text"} color="primary" onClick={this.toverify} >重新发送邮件</Button>
+                </h4>
+            </div>
+            </div>
+
+        )
+
+        if(current==2) return (
+            <div>
+                <Steps progressDot current={current}>
+                    <Step title="填写信息" />
+                    <Step title="邮箱验证"  />
+                    <Step title="注册完成"  />
+                </Steps>
+                <div id="register">
+                <h2>注册完成！</h2><br/>
+                <h4><Button variant={"text"} color="primary" ><Link to={"/login"}>前往登录</Link></Button><br/>
+                如有任何疑问欢迎联系Bamdb！</h4>
+                </div>
+            </div>
+        )
+        return(
+            <Grid container justify={"space-around"} alignContent={"center"}>
+                <Grid item xs={9}>
+
+                <Steps progressDot current={current}>
+                    <Step title="填写信息" />
+                    <Step title="邮箱验证"  />
+                    <Step title="注册完成"  />
+                </Steps>
+                        <div id={"register"}>
+                    <Typography variant={"h4"} component="h4" >注册成为Bamdb会员</Typography> <br/>
+                    </div>
+                </Grid>
                 <br/>
-                <div id={"register-body"} >
+                <Grid item xs={12} />
+                <Grid item xs={5}>
+                    <div id={"register-body"}>
                     <Grid container spacing={1}>
                         <Grid item xs={2}/>
                         <Grid item xs={10}>
-                            <Typography variant={"h4"} component="h4" >注册成为Bamdb会员</Typography> <br/>
                             <Typography variant={"subtitle1"}>你的用户名</Typography>
                             <TextField className={useStyles.textField} margin={"dense"} name={"name"} type={"text"} value={this.state.name} onChange={this.handleInforChange} /><br/>
                             <Typography variant={"subtitle1"}>输入密码</Typography>
@@ -153,13 +166,15 @@ class Register extends Component {
                         </Grid>
                         <br/>
                     </Grid>
-                </div>
-                <Divider type={"vertical"} />
-                <div id={"register-jump"}>
+                    </div>
+                </Grid>
+                <Grid item xs={1}>
+                    <Divider type={"vertical"} style={{height:240}}/>
+                </Grid>
+                <Grid item xs={4}>
+                    <div id={"register-body"}>
                     <Grid container spacing={1}>
-                        <Grid item xs={4} />
-                        <Grid item xs={6} >
-                            <br/><br/><br/><br/>
+                        <Grid item xs={8} >
                             <Typography variant={"subtitle1"} component="h4">已有账户？</Typography><br/>
                             <Link to={"/loginpage"}><Button variant="outlined" color="primary" className={useStyles.button}> 去登录</Button></Link><br/>
                             <br/><br/>
@@ -178,8 +193,9 @@ class Register extends Component {
                         <Grid item xs={2} />
                         <br/>
                     </Grid>
-                </div>
-            </div>
+                    </div>
+                </Grid>
+            </Grid>
         );
     }
 }

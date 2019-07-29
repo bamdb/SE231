@@ -70,7 +70,6 @@ class Login extends Component{
                     islogin: res.data,
 
                 })
-                console.log(res.data.access_token)
                 localStorage.setItem("access_token",res.data.access_token);
                 localStorage.setItem("username",_this.state.name);
 

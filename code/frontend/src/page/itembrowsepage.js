@@ -19,11 +19,11 @@ class Itembrowsepage extends Component{
     constructor(props){
         super(props);
         this.state={
+            currentpage:0,
             ItemList: [],
             tags: [],
             isloaded: false,
             search:"",
-            currentpage:0,
             type:0,
 
         };
@@ -35,6 +35,7 @@ class Itembrowsepage extends Component{
 
     handlepagechange(currentpage)
     {
+        console.log(currentpage);
         this.setState({currentpage:currentpage});
     }
 
@@ -47,7 +48,6 @@ class Itembrowsepage extends Component{
     }
 
     componentWillMount() {
-        const _this = this;
         var value=window.location.href.split("#")[1].split("/")[2];
         var type = 0;
         switch(value)
@@ -58,28 +58,6 @@ class Itembrowsepage extends Component{
         }
         this.setState({type:type})
 
-        console.log(type);
-        var currentpage=this.state.currentpage;
-        axios.get(
-            "http://202.120.40.8:30741/rating/browser",{params:{
-                    type:type,
-                    page:currentpage,
-                    pageSize:8
-                }}
-        )
-        .then(function (response) {
-            _this.setState(
-                {
-                    ItemList: response.data,
-                    isloaded: true,
-                }
-            );
-            console.log(response.data);
-        })
-        .catch(function (error) {
-            _this.setState({
-            })
-        })
     }
 
     render(){
@@ -87,7 +65,7 @@ class Itembrowsepage extends Component{
             <Grid container>
                 <Grid item xs={12} style={{padding:20}}>
                         <Tags select={true} tagchange={this.handletagchange} tags={["热血","王道","搞怪","不高兴","没头脑"]}/>
-                        <Listitem ItemList={this.state.ItemList} search={this.state.search} handlepagechange={this.handlepagechange}/>
+                        <Listitem currentpage={this.state.currentpage} type={this.state.type} search={this.state.search} handlepagechange={this.handlepagechange}/>
                 </Grid>
             </Grid>
         )
