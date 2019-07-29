@@ -149,7 +149,7 @@ class Listitem extends Component {
     }
 
     handleDelete(itemId) {
-        axios.delete("http://202.120.40.8:30741/item/delete/id/"+itemId+"?access_token="+localStorage.getItem("access_token")).then(
+        axios.delete("http://202.120.40.8:30741/item/delete/id/"+itemId).then(
             res => {
                 this.setState({flush:true});
             }

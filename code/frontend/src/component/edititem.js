@@ -24,7 +24,7 @@ class Edititem extends Component{
         if (this.state.update==false) {
             console.log("add")
             var pubtime = Date.parse(new Date(this.state.pubtime))
-            axios.post("http://202.120.40.8:30741/item/add?access_token=" + localStorage.getItem("access_token"), {
+            axios.post("http://202.120.40.8:30741/item/add", {
                 itemname: this.state.itemname,
                 pubTime: pubtime,
                 chapterNum: this.state.chapternum,
@@ -40,7 +40,7 @@ class Edititem extends Component{
         }else if (this.state.update==true) {
             console.log("update")
             var pubtime = Date.parse(new Date(this.state.pubtime))
-            axios.put("http://202.120.40.8:30741/item/update?access_token=" + localStorage.getItem("access_token"), {
+            axios.put("http://202.120.40.8:30741/item/update", {
                 id: this.state.itemid,
                 itemname: this.state.itemname,
                 pubTime: pubtime,
