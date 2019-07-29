@@ -43,9 +43,9 @@ public class QRCodeUtil {
                 image.setRGB(x, y, bitMatrix.get(x, y) ? 0xFF000000 : 0xFFFFFFFF);
             }
         }
-        if (imgPath == null || "".equals(imgPath)) {
-            return image;
-        }
+//        if (imgPath == null || "".equals(imgPath)) {
+//            return image;
+//        }
         // 插入图片
         QRCodeUtil.insertImage(image, imgPath, needCompress);
         return image;
@@ -57,32 +57,32 @@ public class QRCodeUtil {
             System.err.println("" + imgPath + "   该文件不存在！");
             return;
         }
-        Image src = ImageIO.read(new File(imgPath));
-        int width = src.getWidth(null);
-        int height = src.getHeight(null);
-        if (needCompress) { // 压缩LOGO
-            if (width > WIDTH) {
-                width = WIDTH;
-            }
-            if (height > HEIGHT) {
-                height = HEIGHT;
-            }
-            Image image = src.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-            BufferedImage tag = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-            Graphics g = tag.getGraphics();
-            g.drawImage(image, 0, 0, null); // 绘制缩小后的图
-            g.dispose();
-            src = image;
-        }
+//        Image src = ImageIO.read(new File(imgPath));
+//        int width = src.getWidth(null);
+//        int height = src.getHeight(null);
+//        if (needCompress) { // 压缩LOGO
+//            if (width > WIDTH) {
+//                width = WIDTH;
+//            }
+//            if (height > HEIGHT) {
+//                height = HEIGHT;
+//            }
+//            Image image = src.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+//            BufferedImage tag = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+//            Graphics g = tag.getGraphics();
+//            g.drawImage(image, 0, 0, null); // 绘制缩小后的图
+//            g.dispose();
+//            src = image;
+//        }
         // 插入LOGO
-        Graphics2D graph = source.createGraphics();
-        int x = (QRCODE_SIZE - width) / 2;
-        int y = (QRCODE_SIZE - height) / 2;
-        graph.drawImage(src, x, y, width, height, null);
-        Shape shape = new RoundRectangle2D.Float(x, y, width, width, 6, 6);
-        graph.setStroke(new BasicStroke(3f));
-        graph.draw(shape);
-        graph.dispose();
+//        Graphics2D graph = source.createGraphics();
+//        int x = (QRCODE_SIZE - width) / 2;
+//        int y = (QRCODE_SIZE - height) / 2;
+//        graph.drawImage(src, x, y, width, height, null);
+//        Shape shape = new RoundRectangle2D.Float(x, y, width, width, 6, 6);
+//        graph.setStroke(new BasicStroke(3f));
+//        graph.draw(shape);
+//        graph.dispose();
     }
 
 //    public void encode(String content, String imgPath, String filename, boolean needCompress) throws Exception {
