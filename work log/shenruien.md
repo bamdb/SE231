@@ -61,3 +61,6 @@
 * modify the navigation
 # 2019-7-26
 * build the front of android
+# 2019-7-27
+* rewrite the editor and add friend
+* deal with data 
