@@ -87,8 +87,9 @@ code for summer project
 * 监控
     * zipkin 端口30743
     * prometheus+Grafana 端口30744
-    * rabbitMQ+elk日志管理
+    * rabbitMQ日志管理和消息传递
 	* aliyun
+    * elk+filebeat 端口30749
 * RESTful
     * Open API
         * [openapi.yml](https://app.swaggerhub.com/apis/ba818/open-api/1.0.0 "swaggerhub")
