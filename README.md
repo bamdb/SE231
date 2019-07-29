@@ -70,7 +70,7 @@ code for summer project
 	* zuul
 	* eureka 端口8761
     * 12 microservices
-    * in nine servers | three clusters
+    * in 9 servers | 3 clusters
 		* manager
 			* bamdb | bamdb1 | bamdb2
 		* worker
@@ -78,6 +78,9 @@ code for summer project
 * Nginx
     * 反向代理
     * 负载均衡
+		* ubuntularge
+* Docker
+	* [bamdb's Profile - Docker Hub](https://hub.docker.com/u/bamdb "dockerhub")
 * Docker Swarm
 	* 自动部署
 	* 物理资源调度
