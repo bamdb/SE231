@@ -52,6 +52,10 @@ zuul:
       path: /auth/**
       service-id: auth
       sensitiveHeaders:
+    fromsearch:
+      path: /search/**
+      service-id: search
+      sensitiveHeaders:
   retryable: true
   semaphore:
     max-semaphores: 10000

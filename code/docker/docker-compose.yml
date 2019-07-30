@@ -114,6 +114,17 @@ services:
 #          memory: 1024M
     ports:
       - 8000:8000
+  search:
+    image: bamdb/search
+    # container_name: gateway
+    hostname: search
+    deploy:
+      restart_policy:
+        condition: on-failure
+    #      resources:
+    #        limits:
+    #          cpus: '0.5'
+    #          memory: 1024M
   prometheus:
     image: prom/prometheus:latest
     hostname: prometheus
