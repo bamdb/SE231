@@ -10,6 +10,7 @@ import com.se.messageservice.entity.User;
 import com.se.messageservice.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
@@ -29,6 +30,9 @@ public class MessageServiceImpl implements MessageService {
 
     @Autowired
     private  UserClient userClient;
+
+    @Autowired
+    RestTemplate restTemplate;
 
     public String selectBySenderIdAndReceiverIdAndSendTime(Long senderId, Long receiverId, Long send_time) {
         Message message = mongoDao.findBySenderIdAndReceiverIdAndSendTime(senderId, receiverId, new Timestamp( send_time));
@@ -83,6 +87,9 @@ public class MessageServiceImpl implements MessageService {
     public Message addMessage(Message message) {
         if (!friendClient.isFriend(message.getSenderId(), message.getReceiverId())) return null;
         else {
+            // notify receiver
+            restTemplate.getForObject("http://47.103.107.39:8080/websocket/{1}/{2}", void.class,
+                     "nouuid", message.getReceiverId());
             return mongoDao.save(message);
         }
     }
