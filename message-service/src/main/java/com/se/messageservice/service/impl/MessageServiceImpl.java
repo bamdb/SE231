@@ -8,6 +8,7 @@ import com.se.messageservice.entity.Message;
 import com.se.messageservice.entity.MessageOut;
 import com.se.messageservice.entity.User;
 import com.se.messageservice.service.MessageService;
+import com.se.messageservice.socket.WebSocket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,9 @@ public class MessageServiceImpl implements MessageService {
 
     @Autowired
     private  UserClient userClient;
+
+    @Autowired
+    private WebSocket webSocket;
 
     public String selectBySenderIdAndReceiverIdAndSendTime(Long senderId, Long receiverId, Long send_time) {
         Message message = mongoDao.findBySenderIdAndReceiverIdAndSendTime(senderId, receiverId, new Timestamp( send_time));
@@ -82,6 +86,9 @@ public class MessageServiceImpl implements MessageService {
 
     public Message addMessage(Message message) {
         if (!friendClient.isFriend(message.getSenderId(), message.getReceiverId())) return null;
-        else return mongoDao.save(message);
+        else {
+            webSocket.sendMessage("您有新的消息");
+            return mongoDao.save(message);
+        }
     }
 }
