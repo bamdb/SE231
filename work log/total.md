@@ -231,7 +231,7 @@
 * wangzulai:
   * config docker swarm
   * work on mail verification
-# 2019-7-27
+# 2019-7-29
 * shenruien:
   * rewrite the editor and add friend
   * deal with data 
@@ -246,7 +246,20 @@
   * 登录页面扫码部分完成
 * yuyajie:
   * elk + filebeat
-
+# 2019-7-30
+* shenruien:
+  * trainging the model
+  * modify android
+* wangzulai:
+  * insert bangumi data into database
+  * complete simple websocket
+* yuyajie:
+  * elasticsearch
+* huangyuyang:
+  * QRcode前端部分完成
+  * 添加websocket依赖
+  * 将leftbar与header部分重构为component
+  * 修改header中的message，可以提示“新收到消息”
 
 
 
