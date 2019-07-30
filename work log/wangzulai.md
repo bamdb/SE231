@@ -84,3 +84,7 @@
 # 2019-07-29
 * scraping data from bangumi
 * complete QRcode login
+
+# 2019-07-30
+* insert bangumi data into database
+* complete simple websocket
