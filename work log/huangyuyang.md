@@ -81,3 +81,9 @@ Sprint 1 (July.1-July.10)
 >浏览页面分页逻辑完成<br/>
 >register邮箱验证逻辑完成<br/>
 >登录页面扫码部分完成
+
+* July.30<br/>
+>QRcode前端部分完成<br/>
+>添加websocket依赖<br/>
+>将leftbar与header部分重构为component<br/>
+>修改header中的message，可以提示“新收到消息”<br/>
