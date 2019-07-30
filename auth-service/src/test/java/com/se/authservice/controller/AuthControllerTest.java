@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.se.authservice.config.MethodSecurityConfig;
 import com.se.authservice.config.ResourceServer;
 import com.se.authservice.entity.User;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,8 +27,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -49,6 +49,19 @@ public class AuthControllerTest {
                 .apply(springSecurity())
                 .build();
 
+    }
+
+    @Test
+    public void testQrcode() throws Exception {
+        MvcResult mvcResult = mvc.perform(get("/uuid"))
+                .andReturn();
+        String uuid = mvcResult.getResponse().getContentAsString();
+        mvc.perform(get("/qrcode"));
+        mvc.perform(put("/settoken?uuid="+uuid+"&token=tokentest"));
+        MvcResult mvcResult1 = mvc.perform(get("/gettoken?uuid="+uuid))
+                .andReturn();
+        String token = mvcResult1.getResponse().getContentAsString();
+        Assert.assertEquals(token, "tokentest");
     }
 
     @Test

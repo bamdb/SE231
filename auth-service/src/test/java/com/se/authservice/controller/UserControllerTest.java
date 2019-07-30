@@ -58,7 +58,7 @@ public class UserControllerTest {
 
         MvcResult mvcResult = mvc.perform(post("/verify")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null}"))
+                .content("{\"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"bamdb@outlook.com\", \"img_url\":null}"))
                 .andExpect(status().isOk())
                 .andReturn();
         int result = Integer.valueOf(mvcResult.getResponse().getContentAsString());
@@ -89,7 +89,7 @@ public class UserControllerTest {
 
         MvcResult mvcResult = mvc.perform(post("/verify")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"isalb@qq.com\", \"img_url\":null, \"role\":0}"))
+                .content("{\"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"bamdb@outlook.com\", \"img_url\":null, \"role\":0}"))
                 .andExpect(status().isOk())
                 .andReturn();
         int result = Integer.valueOf(mvcResult.getResponse().getContentAsString());

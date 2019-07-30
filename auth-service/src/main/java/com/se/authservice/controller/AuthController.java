@@ -1,6 +1,7 @@
 package com.se.authservice.controller;
 
 import com.se.authservice.entity.User;
+import com.se.authservice.helper.QRCodeUtil;
 import com.se.authservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,26 @@ public class AuthController {
     @Autowired
     public AuthController(DefaultTokenServices defaultTokenServices) {
         this.defaultTokenServices = defaultTokenServices;
+    }
+
+    @GetMapping(value = "/uuid")
+    public String uuid() throws Exception {
+        return userService.qrencode();
+    }
+
+    @GetMapping(value = "/qrcode")
+    public byte[] qrcode(String uuid) {
+        return userService.getQrcode(uuid);
+    }
+
+    @PutMapping(value = "/settoken")
+    public void setToken(@RequestParam("uuid") String uuid, @RequestParam("token") String token) {
+        userService.saveToken(uuid, token);
+    }
+
+    @GetMapping(value = "/gettoken")
+    public String getToken(@RequestParam("uuid") String uuid) {
+        return userService.getToken(uuid);
     }
 
     @PostMapping(value = "/verify", produces = "application/json")

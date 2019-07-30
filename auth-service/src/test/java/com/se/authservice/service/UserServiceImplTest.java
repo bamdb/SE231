@@ -8,6 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.imageio.ImageIO;
+import javax.validation.constraints.AssertTrue;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+
 import static org.junit.Assert.fail;
 
 @RunWith(SpringRunner.class)
@@ -32,10 +37,27 @@ public class UserServiceImplTest {
             userService.verification(user);
             fail();
         }catch (Exception e) {
-
+            Assert.assertTrue(true);
         }
         Assert.assertNotNull(userService.disableUser("john1"));
         Assert.assertNull(userService.create(hashCode1));
-        Assert.assertNull(userService.create(1));
+        try {
+            userService.create(1);
+            fail();
+        }catch (IllegalAccessError e) {
+            Assert.assertTrue(true);
+        }
+    }
+
+    @Test
+    public void testQrcode() throws Exception {
+        String uuid = userService.qrencode();
+        userService.getQrcode("000");
+        byte[] qrcode = userService.getQrcode(uuid);
+        ByteArrayInputStream in = new ByteArrayInputStream(qrcode);
+        BufferedImage image = ImageIO.read(in);
+        userService.saveToken(uuid , "token");
+        String token = userService.getToken(uuid);
+        Assert.assertEquals(token, "token");
     }
 }

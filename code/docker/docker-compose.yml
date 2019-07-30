@@ -130,11 +130,3 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-  rabbitmq:
-    image: rabbitmq
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    deploy:
-      restart_policy:
-        condition: on-failure

@@ -4,20 +4,29 @@ import com.se.authservice.dao.*;
 import com.se.authservice.entity.Authority;
 import com.se.authservice.entity.Role;
 import com.se.authservice.entity.User;
+import com.se.authservice.entity.Qrcode;
+import com.se.authservice.helper.QRCodeUtil;
+import com.se.authservice.repository.ImageRepository;
 import com.se.authservice.service.UserService;
+import org.bson.types.Binary;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Properties;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -37,6 +46,13 @@ public class UserServiceImpl implements UserService {
 
     @Resource(name="redisDaoImpl")
     private RedisDao redisDao;
+
+    private final ImageRepository imageRepository;
+
+    @Autowired
+    public UserServiceImpl(ImageRepository imageRepository) {
+        this.imageRepository = imageRepository;
+    }
 
     @Override
     public User create(int hashCode){
@@ -176,5 +192,33 @@ public class UserServiceImpl implements UserService {
         transport.close();
 
         return hashCode;
+    }
+
+    public String qrencode() throws Exception {
+        String uuid = UUID.randomUUID().toString();
+        String imgPath = "http://lain.bgm.tv/pic/user/m/icon.jpg";
+        BufferedImage image = QRCodeUtil.createImage(uuid, imgPath, true);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(image, "jpg", baos);
+        Qrcode qrcode1 = new Qrcode(uuid, new Binary(baos.toByteArray()));
+        imageRepository.save(qrcode1);
+        redisDao.setUuid(uuid, "");
+        return uuid;
+    }
+
+    public byte[] getQrcode(String uuid) {
+        Qrcode qrcode = imageRepository.findByImageId(uuid).orElse(null);
+        if (qrcode != null) {
+            return qrcode.getImage().getData();
+        }
+        return null;
+    }
+
+    public void saveToken(String uuid, String accessToken) {
+        redisDao.setUuid(uuid, accessToken);
+    }
+
+    public String getToken(String uuid) {
+        return redisDao.getUuid(uuid);
     }
 }
