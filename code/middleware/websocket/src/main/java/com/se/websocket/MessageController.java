@@ -11,7 +11,17 @@ public class MessageController {
     private WebSocket webSocket;
 
     @GetMapping(value = "/message")
-    public void testMessage() {
+    public void newMessage() {
         webSocket.sendMessage("您有新的消息");
+    }
+
+    @GetMapping(value = "/friend")
+    public void newFriend() {
+        webSocket.sendMessage("您有新的好友请求");
+    }
+
+    @GetMapping(value = "/qrcode")
+    public void passQrcode(@RequestParam("token") String token) {
+        webSocket.sendMessage(token);
     }
 }
