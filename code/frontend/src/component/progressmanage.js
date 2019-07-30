@@ -72,8 +72,7 @@ class Progressmanage extends Component {
     componentWillMount() {
         if(localStorage.getItem("access_token")!=null)
         {
-            axios.get("http://202.120.40.8:30741/activity/userid/"+localStorage.getItem("userid"),{params:
-                {}}).then(
+            axios.get("http://202.120.40.8:30741/activity/userid/"+localStorage.getItem("userid")).then(
             function(response)
             {
                 for(var i=0;i<response.data.length;++i)
@@ -82,13 +81,12 @@ class Progressmanage extends Component {
                     var movie=[];
                     for(var i=0;i<response.data.length;++i)
                     {
-                        if(response.data[i].item.type==0)
-                        {
-                            book.push(response.data[i].item);
-                        }
-                        else
-                        {
-                            movie.push(response.data[i].item);
+                        if(response.data[i].item!==null) {
+                            if (response.data[i].item.type == 0) {
+                                book.push(response.data[i].item);
+                            } else {
+                                movie.push(response.data[i].item);
+                            }
                         }
                     }
                     this.setState({book:book,movie:movie});

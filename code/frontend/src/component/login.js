@@ -2,36 +2,12 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
+import '../css/login.css';
 import axios from 'axios';
-import Divider from '@material-ui/core/Divider';
-
-
-const useStyles = makeStyles(theme => ({
-    button: {
-        margin: theme.spacing(1),
-        textAlign:"center"
-    },
-    textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        width: 200,
-        textAlign:"center"
-
-    },
-    paper: {
-        margin: "auto",
-        height: 500,
-        justifyContent: "center"
-    },
-    root:  {
-        alignItems:"center",
-        alignContent: "center"
-    },
-}));
+import Alert from './alert';
+import {Divider, Icon, Input, Tooltip} from "antd";
 
 class Login extends Component{
     constructor(props){
@@ -44,6 +20,25 @@ class Login extends Component{
         }
         this.handleInforChange = this.handleInforChange.bind(this);
         this.submit = this.submit.bind(this);
+        this.setQR = this.setQR.bind(this);
+        this.handleAlert = this.handleAlert.bind(this);
+    }
+
+    handleAlert(){
+        this.setState({content:""})
+        this.props.setQR(false);
+    }
+    setQR(){
+        axios.get("http://202.120.40.8:30741/auth/uuid")
+            .then(function (res) {
+                console.log(res.data);
+                this.props.setQR(true);
+            })
+            .catch(function (err) {
+                this.setState({
+                    content:"抱歉，您的账号无法使用微信登录，请使用账号密码登录。"
+                })
+            }.bind(this))
     }
 
     submit(){
@@ -114,7 +109,7 @@ class Login extends Component{
 
     handleInforChange(e){
         let o= {};
-        o[e.target.name]=e.target.value;
+        o[e.target.id]=e.target.value;
         this.setState(o);
     }
 
@@ -145,60 +140,57 @@ class Login extends Component{
             window.location.href("http://localhost:3000/#/");
         }
         return(
-            /* 导航栏 */
-            //登录部分
+            <Grid container alignContent={"center"} justify={"space-around"}>
+                <Alert content={this.state.content} cancelAlert={this.handleAlert} confirmAlert={this.handleAlert}/>
+                <Typography variant={"h4"} component="h4">登录至Bamdb</Typography>
+                <Grid item xs={12}>
+                    <Grid container alignContent={"center"} justify={"space-around"}>
+                        <Grid item xs={1}/>
+                <Grid item xs={5}>
+                    <Typography component="p">用户名</Typography>
+                    <Input id={"name"}
+                           allowClear={true}
+                           value={this.state.name}
+                           onChange={this.handleInforChange}
+                    /><br/>
+                    <Typography variant={"subtitle1"}>密码</Typography>
+                    <Input.Password id={"password"}
+                                    allowClear={true}
+                                    value={this.state.password}
+                                    onChange={this.handleInforChange}
+                    /><br/>
+                    <div id={"button"} >
+                    <Button
+                        variant="outlined"
+                        color="primary"
+                        name={"submit"}
+                        onClick={this.submit}
+                    >登录
+                    </Button>
+                    </div>
+                    <br/>
+                </Grid>
+                <Grid item xs={1}>
+                    <Divider type={"vertical"} id={"divider-login"}/>
+                </Grid>
+                <Grid item xs={5}>
 
-            <Paper className={useStyles.paper} >
-                <Grid container spacing={0} direction={"row"}>
-                    <Grid item xs={7} className={useStyles.root}>
-                        <br/>
-                        <Grid container >
-                            <Grid item xs={2} />
-                            <Grid item xs={9} >
-                                <Typography variant={"h4"} component="h4">登录至Bamdb</Typography> <br/>
-                                <Typography component="p">你的用户名/email地址</Typography>
-                                <TextField className={useStyles.textField} margin={"normal"} name={"name"} type={"text"} value={this.state.name} onChange={this.handleInforChange} /><br/>
-                                <Typography component="p">你的密码</Typography>
-                                <TextField className={useStyles.textField} margin={"normal"} name={"password"} type={"password"} value={this.state.password} onChange={this.handleInforChange} /><br/>
-                                <Button
-                                    variant="outlined"
-                                    color="primary"
-                                    className={useStyles.button}
-                                    name={"submit"}
-                                    onClick={this.submit}
-                                >登录
-                                </Button>
-                                <br/>
-                            </Grid>
-                            <Grid item xs={1} />
+                    <Grid container spacing={1} justify={"center"} alignContent={"center"}>
+                        <Grid item xs={12}>
+                            <br/>
+                            <Typography variant={"subtitle1"}>
+                                没有账户？<Button variant="text" color="primary" ><Link to={"/register"}>注册新用户</Link></Button></Typography><br/>
+                            <Typography variant={"subtitle1"} component="h4">
+                                忘记密码？<Button variant="text" color="primary" name={"resetPassword"} ><Link to={"/resetpassword"}>重置密码</Link></Button>
+                            </Typography>
+                            <Button variant="text" color="primary" name={"resetPassword"} onClick={this.setQR}>微信扫码登录</Button>
                         </Grid>
-                        <br/>
                     </Grid>
-                    <Grid item xs={5} className={useStyles.root}>
-                            <br/><br/><br/>
-                            <Grid container spacing={1}>
-                                <Grid item xs={2} />
-                                <Grid item xs={8} >
-                                    <Typography variant={"subtitle1"} component="h4">没有账户？</Typography><br/>
-                                    <Link to={"/register"}><Button variant="outlined" color="primary" className={useStyles.button} >注册新用户</Button></Link><br/>
-                                    <br/><br/>
-                                    <Typography variant={"subtitle1"} component="h4">忘记密码？</Typography><br/>
-                                    <Link to={"/resetpassword"}>
-                                        <Button
-                                            variant="outlined"
-                                            color="primary"
-                                            className={useStyles.button}
-                                            name={"resetPassword"} >
-                                            重置密码
-                                        </Button>
-                                    </Link>
-                                </Grid>
-                                <Grid item xs={2} />
-                            </Grid>
-                            <br/><br/><br/>
+                    <br/><br/><br/>
+                    </Grid>
                     </Grid>
                 </Grid>
-            </Paper>
+            </Grid>
         );
     }
 }
