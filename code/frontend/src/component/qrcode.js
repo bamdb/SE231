@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import '../css/login.css';
 import axios from 'axios';
+import Websocket from 'react-websocket';
 import {Divider, Icon, Input, Tooltip} from "antd";
 
 class QRcode extends Component{
@@ -20,40 +21,35 @@ class QRcode extends Component{
     componentDidMount() {
         if(this.props.uuid!==undefined)
         {
-            axios.get("http://202.120.40.8:30741/auth/qrcode",this.props.uuid)
+            axios.get("http://202.120.40.8:30741/auth/qrcode",{params:{uuid:this.props.uuid}})
                 .then(function (res) {
+                    console.log(res.data);
                     this.setState({qrcode:res.data, uuid:this.props.uuid})
                 }.bind(this))
         }
-
-        this.timer = setInterval(
-            () => {
-                axios.get("http://202.120.40.8:30741/auth/gettoken",{params:{uuid:this.props.uuid}})
-                    .then(function (res) {
-                        if(res.data.access_token!==undefined) {
-                            localStorage.setItem("access_token",res.data.access_token);
-                            window.location.href="/#/";
-                        }
-                        else console.log("wait");
-                    })
-            },
-            1000
-        );
+        else {
+            window.location.href = "/#/404";
+            window.location.reload();
+        }
     }
 
-    componentWillUnmount() {
-        this.timer && clearTimeout(this.timer);
+    handlesocket(data){
+        console.log("get message")
+        console.log(data);
+        localStorage.setItem("access_token",data);
     }
-
     render(){
+        const url="ws://47.103.107.39:8080/websocket/"+this.state.uuid+"/0";
         return(
             <Grid container alignContent={"center"} justify={"space-around"}>
+                <Websocket url={url}
+                           onMessage={this.handlesocket.bind(this)}/>
                 <Typography variant={"h4"} component="h4">登录至Bamdb</Typography>
                 <Grid item xs={12}>
                     <Grid container alignContent={"center"} justify={"space-around"}>
                         <Grid item xs={1}/>
                         <Grid item xs={5}>
-                            我也不知道二维码应该写什么
+                            <img src={"http://"+this.state.qrcode}/>
                         </Grid>
                         <Grid item xs={1}>
                             <Divider type={"vertical"} id={"divider-login"}/>
@@ -78,3 +74,4 @@ class QRcode extends Component{
     }
 }
 export default QRcode;
+

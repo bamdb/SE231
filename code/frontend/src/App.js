@@ -71,7 +71,7 @@ class App extends Component{
                       <Head />
                       </Header>
                       <Content style={{margin: '16px'}}>
-                          <div style={{padding: 24, background: '#fff', minHeight: 360}}>
+                          <div id={"content"}>
                               <Switch>
                                   <Route path={'/topic'} component={Topicpage}></Route>
                                   <Route path={'/topicdetail/*'} component={Topicdetailpage}></Route>

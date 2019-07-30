@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import IconButton from "@material-ui/core/IconButton";
-import PersonOutlinedIcon from "@material-ui/core/SvgIcon/SvgIcon";
-import { Icon, Button } from 'antd';
+import Websocket from 'react-websocket';
+import {Icon, Badge, Button} from 'antd';
 import Messagepage from "../page/messagepage";
 import Drawer from "@material-ui/core/Drawer";
 
@@ -13,7 +12,8 @@ class Head extends Component{
         super(props);
         this.state={
             islogin : (localStorage.getItem("userid") != null),
-            openMess:false
+            openMess:false,
+            messageCount:0
         }
         this.logout = this.logout.bind(this);
         this.handleMessClose = this.handleMessClose.bind(this);
@@ -25,42 +25,34 @@ class Head extends Component{
         window.location.reload();
     }
 
+    handlesocket(){
+        this.setState({messageCount:this.state.messageCount+1});
+    }
 
     handleMessOpen() {
-        this.setState({openMess:true})
+        this.setState({openMess:true,messageCount:0})
     }
 
     handleMessClose() {
         this.setState({openMess:false})
     }
     render(){
+        const url="";
         return(
             <div >
                 <Grid container>
-                    <Grid item xs={2} id={"header"}>
+                    <Grid item xs={3} id={"header"}>
                         <Typography variant="h6" noWrap color={"inherit"}>Bamdb</Typography>
                     </Grid>
                     <Grid item xs={3}>
-                        <IconButton
-                            color="textPrimary"
-                            size={"small"}
-                            hidden={this.state.islogin}>
-                            <Icon type="login" component={Link} to={'/login'}/>
-                        </IconButton>
-                        <IconButton
-                            color="textPrimary"
-                            size={"small"}
-                            hidden={!this.state.islogin}
-                            onClick={this.logout}>
-                            <Icon type="logout" />
-                        </IconButton>
-                        <IconButton
-                            color={"inherit"}
-                            type={"link"}
-                            size={"small"}
-                            onClick={this.handleMessOpen}>
-                            <Icon type="mail" />
-                        </IconButton>
+                    <Button type={"link"} >
+                        <Icon type="login" style={{fontSize:18,paddingLeft:8}}  hidden={this.state.islogin} component={Link} to={'/login'}/>
+                    </Button>
+                        <Icon type="logout" style={{fontSize:18,paddingLeft:8}}  hidden={!this.state.islogin}
+                              onClick={this.logout} />
+                        <Badge count={this.state.messageCount} overflowCount={99} offset={[8,0]} >
+                            <Icon type="message" style={{fontSize:18,paddingLeft:8}} onClick={this.handleMessOpen} />
+                        </Badge>
                     </Grid>
                 </Grid>
                 <Drawer
@@ -79,3 +71,9 @@ class Head extends Component{
 }
 
 export default Head;
+
+/*
+
+                <Websocket url={url}
+                           onMessage={this.handlesocket.bind(this)}/>
+ */

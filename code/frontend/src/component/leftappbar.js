@@ -452,7 +452,8 @@ class LeftBar extends Component {
                                  border="0" alt="Web Site Hit Counters"/>
                         </a>
                     </div>
-                    </Grid> </div>
+                    </Grid>
+                    </div>
                 </Menu>
         )
     }

@@ -15,7 +15,7 @@ code {
 .ant-carousel .slick-slide {
   align-content: center;
   height: 200px;
-  background: #f0f5ff;
+  background: #fff;
   overflow: hidden;
 }
 .ant-carousel .slick-slide img {
@@ -27,7 +27,13 @@ code {
   display: flex;
   position: relative;
 }
-
+#content{
+    padding: 24px;
+    background: #fff;
+    display: flex;
+    position: relative;
+    min-height: 125vh;
+}
 #sider{
   background: #f9f0ff;
 }
@@ -40,7 +46,6 @@ code {
 }
 
 #togglebutton{
-
   color: saddlebrown;
   margin-top: 16px;
   margin-left: 16px;

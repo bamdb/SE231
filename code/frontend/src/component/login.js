@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -118,7 +117,7 @@ class Login extends Component{
             window.location.href("http://localhost:3000/#/");
         }
         return(
-            <Grid container alignContent={"center"} justify={"space-around"}>
+            <Grid container  justify={"space-around"}>
                 <Alert content={this.state.content} cancelAlert={this.handleAlert} confirmAlert={this.handleAlert}/>
                 <Typography variant={"h4"} component="h4">登录至Bamdb</Typography>
                 <Grid item xs={12}>
