@@ -64,3 +64,6 @@
 # 2019-7-27
 * rewrite the editor and add friend
 * deal with data 
+# 2019-7-30
+* trainging the model
+* modify android
