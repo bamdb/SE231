@@ -23,24 +23,24 @@ public class WebSocket {
     public void onOpen(Session session) {
         this.session = session;
         webSockets.add(this);
-        log.info("【websocket消息】有新的连接, 总数:{}", webSockets.size());
+        log.info("[websocket info] new connection, total: {}", webSockets.size());
     }
 
 
     @OnClose
     public void onClose() {
         webSockets.remove(this);
-        log.info("【websocket消息】连接断开, 总数:{}", webSockets.size());
+        log.info("[websocket info] one connection disconnect, total: {}", webSockets.size());
     }
 
     @OnMessage
     public void onMessage(String message) {
-        log.info("【websocket消息】收到客户端发来的消息:{}", message);
+        log.info("[websocket info] receive message from client: {}", message);
     }
 
     public void sendMessage(String message){
         for (WebSocket webSocket: webSockets) {
-            log.info("【websocket消息】广播消息, message={}", message);
+            log.info("[websocket info]broadcast, message={}", message);
             try {
                 webSocket.session.getBasicRemote().sendText(message);
             } catch (Exception e) {

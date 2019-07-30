@@ -4,7 +4,7 @@ spring:
       discovery:
         service-id: config
         enabled: true
-      name: auth, redis, uniconfig, rabbitmq
+      name: auth, redis, uniconfig, rabbitmq, mongo
 eureka:
   client:
     serviceUrl:
