@@ -18,7 +18,6 @@ import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined'
 import MessageIcon from '@material-ui/icons/Message';
 import GraphicEqIcon from '@material-ui/icons/GraphicEq';
 import Drawer from '@material-ui/core/Drawer';
-import Divider from '@material-ui/core/Divider';
 import clsx from 'clsx';
 import {
     BrowserRouter as Router,
@@ -33,7 +32,6 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import EmailIcon from '@material-ui/icons/Email';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import PaletteOutlinedIcon from '@material-ui/icons/PaletteOutlined';
-import { Icon } from 'antd';
 import IconButton from '@material-ui/core/IconButton';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -43,6 +41,8 @@ import Avatar from "@material-ui/core/Avatar";
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import axios from 'axios'
+import { Menu, Icon, Button, Divider } from 'antd';
+
 const drawerWidth=240;
 
 const theme = createMuiTheme({
@@ -121,7 +121,7 @@ const useStyles = makeStyles(theme=>({
     }
 }))
 
-export default function LeftAppBar(props) {
+ function LeftAppBar(props) {
     const classes = useStyles();
     const [open, setopen] = useState(true);
     const [openMess, setopenMess] =  useState(false);
@@ -166,7 +166,6 @@ export default function LeftAppBar(props) {
 
     });
 
-    const user=localStorage.getItem("userid");
     function handleDrawerClose(){
         setopen(false);
     }
@@ -219,7 +218,6 @@ export default function LeftAppBar(props) {
                 <Link to={'/login'}>
                 <IconButton
                     color={"inherit"}
-                    aria-label="Open drawer"
                     edge="start">
                     <PersonOutlinedIcon />
                 </IconButton>
@@ -371,87 +369,93 @@ export default function LeftAppBar(props) {
                 </div>
             </Drawer>
         </div>
-    /*
-            <Grid container spacing={2} direction={"column"} justify={"flex-start"} wrap={"nowrap"} >
-                <br/>
-                <br/>
-                <Grid item style={{paddingLeft:80}}>
-                    <Grid container >
-                        <Grid item xs={3} >
-                            <HomeOutlinedIcon className={useStyles.icon} style={{color:theme.palette.secondary.main}} />
-                        </Grid>
-                        <Grid item xs={9}>
-                            <Typography style={{color:theme.palette.secondary.main}}>HOME</Typography>
-                        </Grid>
-                    </Grid>
-                </Grid>
-                <Grid item style={{paddingLeft:80}}>
-                    <Grid container >
-                        <Grid item xs={3}>
-                            <MovieOutlinedIcon className={useStyles.icon} style={{color:theme.palette.secondary.main}} />
-                        </Grid>
-                        <Grid item xs={9}>
-                            <Typography style={{color:theme.palette.secondary.main}}>MOVIE</Typography>
-                        </Grid>
-                    </Grid>
-                </Grid>
-
-                <Grid item style={{paddingLeft:80}}>
-                    <Grid container >
-                        <Grid item xs={3}>
-                            <BookOutlinedIcon className={useStyles.icon} style={{color:theme.palette.secondary.main}} />
-                        </Grid>
-                        <Grid item xs={9}>
-                            <Typography style={{color:theme.palette.secondary.main}}>BOOK</Typography>
-                        </Grid>
-                    </Grid>
-                </Grid>
-
-                <Grid item style={{paddingLeft:80}}>
-                    <Grid container >
-                        <Grid item xs={3}>
-                            <PersonOutlinedIcon className={useStyles.icon} style={{color:theme.palette.secondary.main}} />
-                        </Grid>
-                        <Grid item xs={9}>
-                            <Typography style={{color:theme.palette.secondary.main}}>HELP</Typography>
-                        </Grid>
-                    </Grid>
-                </Grid>
-
-                <Grid item style={{paddingLeft:60}}>
-                    <Grid container >
-                        <Grid item xs={3}>
-                            <GraphicEqIcon className={useStyles.icon} style={{color:theme.palette.secondary.dark}} />
-                        </Grid>
-                        <Grid item xs={9}>
-                            <Typography style={{color:theme.palette.secondary.dark}}>--------------</Typography>
-                        </Grid>
-                    </Grid>
-                </Grid>
-                <br/><br/>
-                <Grid item style={{paddingLeft:80}}>
-                    <Grid container >
-                        <Grid item xs={3}>
-                            <PersonOutlinedIcon className={useStyles.icon} style={{color:theme.palette.secondary.main}} />
-                        </Grid>
-                        <Grid item xs={9}>
-                            <Typography style={{color:theme.palette.secondary.main}}>HELP</Typography>
-                        </Grid>
-                    </Grid>
-                </Grid>
-
-            </Grid>
-            <Grid container spacing={2}  direction={"row"} >
-                <Grid item xs={3}  >
-                <Avatar src="..\img.jpg" className={useStyles.avatar} />
-                </Grid>
-                <Grid item  >
-                    <Typography variant={"subtitle1"} style={{color:theme.palette.secondary.main}} >{this.state.username}</Typography>
-                </Grid>
-            </Grid>
-        </Drawer>
-    </MuiThemeProvider>
-
-     */
     )
 }
+
+
+class LeftBar extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            hidden: false,
+            username:"尚未登录",
+        }
+    }
+
+    toggleCollapsed = () => {
+        this.props.toggleCollapesd();
+    };
+
+    componentDidMount() {
+        if(localStorage.getItem("username")!=null) {
+            this.setState({username:localStorage.getItem("username")})
+            axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("access_token");
+        }
+        else this.setState({username:"游客"})
+    }
+
+    render(){
+
+        const isUser = (localStorage.getItem("role")=='ROLE_USER');
+        const isEditor = (localStorage.getItem("role")=='ROLE_EDITOR');
+        return(
+
+                <Menu
+                    mode="inline"
+                >
+                    <Button id={"togglebutton"} type={"link"} onClick={this.toggleCollapsed}  >
+                        <Icon style={{fontSize:20}} type={this.props.collapsed ? 'right-circle' : "left-circle"} />
+                    </Button>
+                    <Menu.Item key="1">
+                        <Link to={'/'}><Icon type="home" /><span>我的主页</span></Link>
+                    </Menu.Item>
+                    <Menu.Item key="2">
+                        <Link to={'/userinfo'}><Icon type="user" /><span>个人中心</span></Link>
+                    </Menu.Item>
+
+                    <Divider />
+
+                    <Menu.Item key="3">
+                        <Link to={'/itembrowse/book'}><Icon type="book" /><span>发现书籍</span></Link>
+                    </Menu.Item>
+                    <Menu.Item key="4">
+                        <Link to={'/itembrowse/movie'}><Icon type="video-camera" /><span>精选电影</span></Link>
+                    </Menu.Item>
+                    <Menu.Item key="5">
+                        <Link to={'/itembrowse/flash'}><Icon type="play-square" /><span>更多动漫</span></Link>
+                    </Menu.Item>
+                    <Menu.Item key="6">
+                        <Link to={'/activity'}><Icon type="team" /><span>好友动态</span></Link>
+                    </Menu.Item>
+                    <Menu.Item key="7">
+                        <Link to={'/topic'}><Icon type="coffee" /><span>讨论区</span></Link>
+                    </Menu.Item>
+                    <Menu.Item key="8" hidden={isUser}>
+                        <Link to={'/editor'}><Icon type="edit" /><span>编辑</span></Link>
+                    </Menu.Item>
+                    <Menu.Item key="9" hidden={isUser||isEditor}>
+                        <Link to={'/admin'}><Icon type="profile" /><span>管理中心</span></Link>
+                    </Menu.Item>
+
+                    <Divider/>
+                    <div id={"leftbar-foot"}>
+                    <Grid container justify="space-around" alignItems="center" spacing={2}>
+
+                        <Avatar  src={"http://202.120.40.8:30741/image/id/"+localStorage.getItem("userid")+"0"} className={useStyles.avater}/>
+                        <Typography hidden={this.props.collapsed} color={"textSecondary"}>{this.state.username}</Typography>
+
+                    <Divider />
+                    <div id={"leftbar-foot"} hidden={this.props.collapsed}>
+                        <h3>Bamdb访客数</h3>
+                        <a href="https://www.easycounter.com/">
+                            <img src="https://www.easycounter.com/counter.php?bamdb"
+                                 border="0" alt="Web Site Hit Counters"/>
+                        </a>
+                    </div>
+                    </Grid> </div>
+                </Menu>
+        )
+    }
+}
+
+export default LeftBar;

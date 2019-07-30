@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -12,13 +11,38 @@ class QRcode extends Component{
     constructor(props){
         super(props);
         this.state={
-            uuid:0,
+            uuid:undefined,
             QRsrc:"",
-
+            qrcode:""
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
+        if(this.props.uuid!==undefined)
+        {
+            axios.get("http://202.120.40.8:30741/auth/qrcode",this.props.uuid)
+                .then(function (res) {
+                    this.setState({qrcode:res.data, uuid:this.props.uuid})
+                }.bind(this))
+        }
+
+        this.timer = setInterval(
+            () => {
+                axios.get("http://202.120.40.8:30741/auth/gettoken",{params:{uuid:this.props.uuid}})
+                    .then(function (res) {
+                        if(res.data.access_token!==undefined) {
+                            localStorage.setItem("access_token",res.data.access_token);
+                            window.location.href="/#/";
+                        }
+                        else console.log("wait");
+                    })
+            },
+            1000
+        );
+    }
+
+    componentWillUnmount() {
+        this.timer && clearTimeout(this.timer);
     }
 
     render(){

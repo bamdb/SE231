@@ -15,6 +15,7 @@ class Login extends Component{
         this.state={
             name:"",
             password:"",
+            content:"",
             islogin: 7,
             forgetPassword: false,
         }
@@ -26,17 +27,17 @@ class Login extends Component{
 
     handleAlert(){
         this.setState({content:""})
-        this.props.setQR(false);
+        this.props.setQR(false,undefined);
     }
     setQR(){
         axios.get("http://202.120.40.8:30741/auth/uuid")
             .then(function (res) {
                 console.log(res.data);
-                this.props.setQR(true);
-            })
+                this.props.setQR(true,res.data);
+            }.bind(this))
             .catch(function (err) {
                 this.setState({
-                    content:"抱歉，您的账号无法使用微信登录，请使用账号密码登录。"
+                    content:"抱歉，现在暂不支持微信扫码登录，请使用账号密码登录。"
                 })
             }.bind(this))
     }
@@ -63,7 +64,6 @@ class Login extends Component{
             .then(function (res) {
                 _this.setState({
                     islogin: res.data,
-
                 })
                 localStorage.setItem("access_token",res.data.access_token);
                 localStorage.setItem("username",_this.state.name);
@@ -114,28 +114,6 @@ class Login extends Component{
     }
 
     render(){
-
-        var status = "";
-        switch (this.state.islogin) {
-            case 0:
-                status="error";
-                break;
-            case 1:
-                status="登录成功";
-                break;
-            case 2:
-                status="密码错误";
-                break;
-            case 3:
-                status="用户名不存在";
-                break;
-            case 7:
-                status="";
-                break;
-        }
-        /*
-        如果登录，跳转个人主页
-         */
         if(this.state.islogin === 1) {
             window.location.href("http://localhost:3000/#/");
         }
@@ -144,6 +122,7 @@ class Login extends Component{
                 <Alert content={this.state.content} cancelAlert={this.handleAlert} confirmAlert={this.handleAlert}/>
                 <Typography variant={"h4"} component="h4">登录至Bamdb</Typography>
                 <Grid item xs={12}>
+                    <br/><br/>
                     <Grid container alignContent={"center"} justify={"space-around"}>
                         <Grid item xs={1}/>
                 <Grid item xs={5}>

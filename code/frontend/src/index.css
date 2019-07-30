@@ -23,3 +23,34 @@ code {
   height: 200px;
 }
 
+#leftbar{
+  display: flex;
+  position: relative;
+}
+
+#sider{
+  background: #f9f0ff;
+}
+#header{
+  padding: 10px;
+  flex-wrap: nowrap;
+}
+#bamdb{
+  width: 200px;
+}
+
+#togglebutton{
+
+  color: saddlebrown;
+  margin-top: 16px;
+  margin-left: 16px;
+}
+
+#leftbar-foot{
+  margin-top: 24px;
+  margin-bottom: 40px;
+}
+
+#message{
+  width:300px;
+}

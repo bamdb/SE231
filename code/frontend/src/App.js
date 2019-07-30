@@ -4,10 +4,10 @@ import './App.css';
 import UserHomepage from './page/userhomepage'
 import Itembrowsepage from './page/itembrowsepage'
 import LoginPage from './page/loginpage'
-
 import {
   HashRouter as Router,
   Route,
+  Switch,
 } from "react-router-dom";
 import RegisterPage from "./page/registerpage";
 import Topicpage from "./page/topicpage";
@@ -18,64 +18,85 @@ import Recommendpage from "./page/recommendpage";
 import Activitypage from "./page/activitypage";
 import Resetpwdpage from "./page/resetpwdpage";
 import Messagepage from "./page/messagepage";
-import leftappbar from "./component/leftappbar";
+import LeftBar from "./component/leftappbar";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles/index';
 
 import Adminpage from "./page/adminpage";
 import Editorpage from './page/editorpage'
 import Itemmanagepage from "./page/itemmanage";
+import Errorpage from "./page/404errorpage";
+import {Layout} from 'antd';
+import Head from "./component/header";
 
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        display: 'flex',
-    },
-    toolbar: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: '0 8px',
-        ...theme.mixins.toolbar,
-    },
-    content: {
-        flexGrow: 1,
-        height: '100vh',
-        overflow: 'auto',
-    },
-}))
+const { Header, Content, Footer, Sider } = Layout;
 
-function App() {
-    const classes=useStyles();
-    const [needDrawer, setneedDrawer]=useState(true);
-    const leftBar = needDrawer ? leftappbar() : <div />
-  return (
-      <Router >
-        <div className={classes.root}>
-            <CssBaseline />
-            {leftBar}
-            <main className={classes.content}>
-                <div className={classes.toolbar} />
-                <Route path={'/topic'} component={Topicpage}></Route>
-                <Route path={'/topicdetail/*'} component={Topicdetailpage}></Route>
-                <Route path={'/itembrowse/movie'} component={Itembrowsepage}></Route>
-                <Route path={'/itembrowse/book'} component={Itembrowsepage}></Route>
-                <Route path={'/itembrowse/flash'} component={Itembrowsepage}></Route>
-                <Route path={'/login'} component={LoginPage}></Route>
-                <Route exact path={'/'} component={UserHomepage}></Route>
-                <Route path={'/register'} component={RegisterPage}></Route>
-                <Route path={'/itemdetail/*'} component={Useriteminfopage}></Route>
-                <Route path={"/userinfo"} component={Userinfopage}></Route>
-                <Route path={"/activity"} component={Activitypage}></Route>
-                <Route path={'/resetpassword'} component={Resetpwdpage}></Route>
-                <Route path={'/message'} component={Messagepage}></Route>
-                <Route path={'/editor'} component={Editorpage}></Route>
-                <Route path={'/admin'} component={Adminpage}></Route>
-                <Route path={'/recommend'} component={Recommendpage}></Route>
-            </main>
-        </div>
-      </Router>
-  );
+
+class App extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            collapsed:false,
+            hidden:false,
+            page404:false
+        }
+        this.onCollapse=this.onCollapse.bind(this);
+    }
+    onCollapse() {
+        this.setState({collapsed:!this.state.collapsed})
+    }
+
+    componentWillMount() {
+        console.log(404)
+        if(window.location.href.split('#')[1]==='/404') {
+            this.setState({page404: true});
+        }
+    }
+    render() {
+        const hidden=this.state.hidden;
+        if(this.state.page404)
+        return (
+            <Errorpage />
+        )
+
+            return (
+          <Router>
+              <Layout style={{minHeight: '100vh'}}>
+                  <Sider collapsed={this.state.collapsed} id={"sider"} hidden={hidden}>
+                      <LeftBar collapsed={this.state.collapsed} toggleCollapesd={this.onCollapse} />
+                  </Sider>
+                  <Layout>
+                      <Header style={{background: '#fff', height: 50}}>
+                      <Head />
+                      </Header>
+                      <Content style={{margin: '16px'}}>
+                          <div style={{padding: 24, background: '#fff', minHeight: 360}}>
+                              <Switch>
+                                  <Route path={'/topic'} component={Topicpage}></Route>
+                                  <Route path={'/topicdetail/*'} component={Topicdetailpage}></Route>
+                                  <Route path={'/itembrowse/movie'} component={Itembrowsepage}></Route>
+                                  <Route path={'/itembrowse/book'} component={Itembrowsepage}></Route>
+                                  <Route path={'/itembrowse/flash'} component={Itembrowsepage}></Route>
+                                  <Route path={'/login'} component={LoginPage}></Route>
+                                  <Route exact path={'/'} component={UserHomepage}></Route>
+                                  <Route path={'/register'} component={RegisterPage}></Route>
+                                  <Route path={'/itemdetail/*'} component={Useriteminfopage}></Route>
+                                  <Route path={"/userinfo"} component={Userinfopage}></Route>
+                                  <Route path={"/activity"} component={Activitypage}></Route>
+                                  <Route path={'/resetpassword'} component={Resetpwdpage}></Route>
+                                  <Route path={'/message'} component={Messagepage}></Route>
+                                  <Route path={'/editor'} component={Editorpage}></Route>
+                                  <Route path={'/admin'} component={Adminpage}></Route>
+                                  <Route path={'/recommend'} component={Recommendpage}></Route>
+                              </Switch>
+                          </div>
+                      </Content>
+                  </Layout>
+              </Layout>
+          </Router>
+      )
+  }
 }
 
 export default App;

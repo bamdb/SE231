@@ -17,12 +17,13 @@ class LoginPage extends Component{
         super(props);
         this.state={
             useQR:false,
+            uuid:undefined
         }
         this.handleSearch=this.handleSearch.bind(this);
     }
 
-    setQR(e){
-        this.setState({useQR:e})
+    setQR(state,e){
+        this.setState({useQR:state,uuid:e})
     }
 
     handleSearch(value){
@@ -30,7 +31,7 @@ class LoginPage extends Component{
     }
 
     render(){
-        const body = this.state.useQR ? <QRcode/> : <Login setQR={result=>this.setQR(result)}/>;
+        const body = this.state.useQR ? <QRcode uuid={this.state.uuid}/> : <Login setQR={(state,result)=>this.setQR(state,result)}/>;
         return(
                 <Grid container className={useStyles.root} justify={"center"} alignContent={"center"}>
                     <Grid item xs={8}>
