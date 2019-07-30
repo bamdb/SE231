@@ -55,7 +55,7 @@ public class WebSocket {
 
     public void sendMessage(String message, Long userId){
         for (WebSocket webSocket: webSockets) {
-            if (webSocket.userId == userId) {
+            if (webSocket.userId.equals(userId)) {
                 log.info("[websocket info]broadcast, message={}, receiverId={}", message, userId);
                 try {
                     webSocket.session.getBasicRemote().sendText(message);
@@ -69,7 +69,7 @@ public class WebSocket {
 
     public void sendQRToken(String token, String uuid) {
         for (WebSocket webSocket: webSockets) {
-            if (webSocket.uuid == uuid) {
+            if (webSocket.uuid.equals(uuid)) {
                 log.info("[websocket info]broadcast, message={}, receiverId={}", token, userId);
                 try {
                     webSocket.session.getBasicRemote().sendText(token);
