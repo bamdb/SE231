@@ -22,15 +22,16 @@ export default class Acticitypage extends React.Component {
   }
   componentWillMount()
   {
-    if(global.access_token==null)
-    {
-      this.props.navigation.navigate("Home");
-    }
+    
   }
   componentDidMount()
   {
     const { navigation } = this.props;
     this.focusListener = navigation.addListener("didFocus", () => {
+      if(global.access_token==null)
+      {
+        this.props.navigation.navigate("Home");
+      }
       var activities=[];
       this.setState({activities:activities})
       axios.get('http://202.120.40.8:30741/friend/all/userid/'+global.userid+"?access_token="+global.access_token).then(
@@ -70,37 +71,10 @@ export default class Acticitypage extends React.Component {
     
   }
   componentWillUnmount() {
-    // Remove the event listener
-    this.focusListener.remove();
+    
   }
   render() {
-    /*var rows=[];
-    this.state.activities.map(activity=>
-      {
-        rows.push(
-          <Card >
-            
-            <Card.Header
-              title="This is title"
-              thumbStyle={{ width: 30, height: 30 }}
-              thumb="https://gw.alipayobjects.com/zos/rmsportal/MRhHctKOineMbKAZslML.jpg"
-              extra="this is extra"
-            />
-            
-            <Card.Body>
-              <View  style={{ height: 10 }}>
-                
-                <Text>{activity.item.itemname}</Text>
-              </View>
-            </Card.Body>
-            <Card.Footer
-              content={activity.activity.actTime}
-              extra="footer extra content"
-            />
-          </Card>
-          
-        )
-      })*/
+    
     return (
       <FlatList 
         data={this.state.activities}

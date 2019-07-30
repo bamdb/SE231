@@ -27,10 +27,11 @@ import Activitypage from './src/activity'
 import Topicdetail from './src/topicdetail'
 import BasicTabBarExample from "./test";
 import Testcase from "./test";
+import userinfo from "./src/userinfo";
 
 const AppNavigator = createMaterialBottomTabNavigator({
-    Home: {
-      screen: HomeScreen,
+    Userinfo: {
+      screen: userinfo,
       navigationOptions: {
         tabBarIcon: ({
           tintColor
@@ -100,7 +101,7 @@ const AppNavigator = createMaterialBottomTabNavigator({
 
 
   }, {
-    initialRouteName: 'Home',
+    initialRouteName: 'Topic',
     shifting: false,
     activeColor: 'purple',
     inactiveColor: 'white',
@@ -113,6 +114,9 @@ const AppNavigator = createMaterialBottomTabNavigator({
 
 const MainScreenNavigator = createStackNavigator({
 
+  Login:{
+    screen: HomeScreen
+  },
   Home: {
     screen: createAppContainer(AppNavigator)
   },
@@ -126,7 +130,7 @@ const MainScreenNavigator = createStackNavigator({
 
 
 }, {
-  initialRouteName: "Home",
+  initialRouteName: "Login",
   defaultNavigationOptions: {
 
     header: null,

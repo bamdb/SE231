@@ -21,11 +21,22 @@ export default class Itemlist extends React.Component{
     }
     changetab(type)
     {
-          axios.get(
+        var tmptype=""
+        if(type=='book')
+        {
+          tmptype=0
+        }else if(type=='movie')
+        {
+          tmptype=1
+        }
+        else{
+          tmptype=2
+        }  
+        axios.get(
               "http://202.120.40.8:30741/rating/browser",{params:{
-                      type:type=='book'?0:1,
+                      type:tmptype,
                       page:0,
-                      pageSize:1000
+                      pageSize:10
                   }}
           )
           .then(
@@ -40,23 +51,30 @@ export default class Itemlist extends React.Component{
             }
           )
     }
-    componentWillMount()
+    componentDidMount()
     {
       const { navigation } = this.props;
       this.focusListener = navigation.addListener("didFocus", () => {
-      var type='book';
-      if(type!=this.state.selectedTab)
+      if(global.access_token==null)
       {
-        type=1;
+        this.props.navigation.navigate("Home");
+      }
+      var tmptype=0;
+      if(this.state.selectedTab=='book')
+      {
+        tmptype=0
+      }else if(this.state.selectedTab=='movie')
+      {
+        tmptype=1
       }
       else{
-        type=0
-      }
+        tmptype=2
+      }  
       axios.get(
             "http://202.120.40.8:30741/rating/browser",{params:{
-                    type:type,
+                    type:tmptype,
                     page:0,
-                    pageSize:1000
+                    pageSize:10
                 }}
         )
         .then(
@@ -79,32 +97,7 @@ export default class Itemlist extends React.Component{
     }
     render()
     {
-        /*var itemlist=this.props.itemlist
-        var rows=[];
-        itemlist.map(item=>{
-            rows.push(
-            
-            <Card >
-            <Card.Header
-              title={item.item.itemname}
-              thumbStyle={{ width: 30, height: 30 }}
-              thumb={"http://202.120.40.8:30741/image/id/"+item.item.id+"0"}
-              extra=""
-              
-            />
-            <Card.Body>
-              <View onPress={()=>this.props.navigation.navigate('Itemdetail',{itemid:item.item.id})} style={{ height: 10 }}>
-                <Text onPress={()=>this.props.navigation.navigate('Itemdetail',{itemid:item.item.id})} style={{ marginLeft: 10 }}>detail</Text>
-              </View>
-            </Card.Body>
-            <Card.Footer
-              content="hello"
-              extra="footer extra content"
-            />
-          </Card>
-          
-            )
-        })*/
+        
         return(
             <View>
             <View style={{height:50}}>
@@ -126,7 +119,17 @@ export default class Itemlist extends React.Component{
                         selected={this.state.selectedTab === 'movie'}
                         onPress={() => this.changetab('movie')}
                       >
+
                       </TabBar.Item>
+                        <TabBar.Item
+                        title="comic"
+                        icon={<Icon name="ordered-list" />}
+                        selected={this.state.selectedTab === 'comic'}
+                        onPress={() => this.changetab('comic')}
+                      >
+
+                      </TabBar.Item>
+                      
                 </TabBar>
             </View>
             <View style={{height:550}}>

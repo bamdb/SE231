@@ -41,13 +41,12 @@ export default class HomeScreen extends React.Component {
                 global.access_token=res.data.access_token;
                 global.username=this.state.username;
                 axios.defaults.headers.common['Authorization'] = "Bearer "+res.data.access_token;
-                
                 axios.get("http://202.120.40.8:30741/auth/username/"+this.state.username).then(
                     function(res)
                     {
                         alert("success");
                         global.userid=res.data.id;
-                        this.props.navigation.navigate("Browse")                        
+                        this.props.navigation.navigate("Home")                        
                     }.bind(this)
 
                 ).catch(
