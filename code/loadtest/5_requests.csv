@@ -1,5 +1,0 @@
-"Method","Name","# requests","# failures","Median response time","Average response time","Min response time","Max response time","Average Content Size","Requests/s"
-"GET","//www.baidu.com/item/all",1280,1280,4,4,1,17,0,307.93
-"GET","//www.baidu.com/user/all",891,891,4,4,1,17,0,214.35
-"GET","//www.baidu.com/user/id/1",890,890,4,4,1,10,0,214.11
-"None","Total",3061,3061,4,4,1,17,0,736.40
