@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: rating
+  zipkin:
+    base-url: http://202.120.40.8:30743
+    sender:
+      type: web
+    enabled: true
+    discovery-client-enabled: true
+  sleuth:
+    sampler:
+      probability: 1
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    lease-expiration-duration-in-seconds: 10
+    lease-renewal-interval-in-seconds: 10
+server:
+  port: ${PORT:0}
+security:
+  oauth2:
+    client:
+      clientId: search-service
+      clientSecret: search-service
+      accessTokenUri: http://localhost:8000/auth/oauth/token
+      grant-type: client_credentials
+      scope: server
+    resource:
+      user-info-uri: http://localhost:8000/auth/user
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

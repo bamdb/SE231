@@ -8,7 +8,7 @@
         <exchangeName>bamdb</exchangeName>
 <!--        <property name="fileName" value="file.log" />-->
 <!--        <property resource="application.properties" />-->
-        <host>rabbitmq</host>
+        <host>localhost</host>
         <port>5672</port>
         <username>guest</username>
         <password>guest</password>
