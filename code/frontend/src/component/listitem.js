@@ -177,7 +177,7 @@ class Listitem extends Component {
                                 <img
                                     height={120}
                                     alt="defaultbook"
-                                    src={item.imgurl}
+                                    src={"http://"+item.imgurl}
                                 />
                             }
                             actions={        // show delete icon in editor page
