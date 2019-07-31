@@ -200,7 +200,7 @@ public class UserServiceImpl implements UserService {
 
     public String qrencode() throws Exception {
         String uuid = UUID.randomUUID().toString();
-        String imgPath = "http://lain.bgm.tv/pic/user/m/icon.jpg";
+        String imgPath = "https://raw.githubusercontent.com/bamdb/SE231/master/code/frontend/public/bamdb.jpg";
         BufferedImage image = QRCodeUtil.createImage(uuid, imgPath);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(image, "jpg", baos);

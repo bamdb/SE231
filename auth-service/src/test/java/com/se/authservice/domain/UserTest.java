@@ -24,6 +24,6 @@ public class UserTest {
         User u = new User("1", "2", "3", "4");
         u.setRoles(Arrays.asList(new Role(3L, "ROLE_USER"),new Role(1L, "ROLE_ADMIN")));
         Assert.assertNotNull(u.getAuthorities());
-
+        Assert.assertTrue(u.isEnabled());
     }
 }
