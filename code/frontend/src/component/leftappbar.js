@@ -399,23 +399,22 @@ class LeftBar extends Component {
         const isUser = (localStorage.getItem("role")=='ROLE_USER');
         const isEditor = (localStorage.getItem("role")=='ROLE_EDITOR');
         return(
-
+            <div>
+                <Button id={"togglebutton"} type={"link"} onClick={this.toggleCollapsed}  >
+                    <Icon style={{fontSize:20}} type={this.props.collapsed ? 'right-circle' : "left-circle"} />
+                </Button>
                 <Menu
                     id={"sider"}
                     mode="inline"
                 >
-                    <Button id={"togglebutton"} type={"link"} onClick={this.toggleCollapsed}  >
-                        <Icon style={{fontSize:20}} type={this.props.collapsed ? 'right-circle' : "left-circle"} />
-                    </Button>
+
                     <Menu.Item key="1">
                         <Link to={'/'}><Icon type="home" /><span>我的主页</span></Link>
                     </Menu.Item>
                     <Menu.Item key="2">
                         <Link to={'/userinfo'}><Icon type="user" /><span>个人中心</span></Link>
                     </Menu.Item>
-
-                    <Divider />
-
+                    <Menu.Divider style={{margin:20}}/>
                     <Menu.Item key="3">
                         <Link to={'/itembrowse/book'}><Icon type="book" /><span>发现书籍</span></Link>
                     </Menu.Item>
@@ -437,9 +436,9 @@ class LeftBar extends Component {
                     <Menu.Item key="9" hidden={isUser||isEditor}>
                         <Link to={'/admin'}><Icon type="profile" /><span>管理中心</span></Link>
                     </Menu.Item>
-
-                    <Divider/>
-                    <div id={"leftbar-foot"}>
+                    <Menu.Divider style={{margin:20}}/>
+                </Menu>
+                <div id={"leftbar-foot"}>
                     <Grid container justify="space-around" alignItems="center" spacing={2}>
 
                         <Avatar  src={"http://202.120.40.8:30741/image/id/"+localStorage.getItem("userid")+"0"} className={useStyles.avater}/>
@@ -454,8 +453,8 @@ class LeftBar extends Component {
                         </a>
                     </div>
                     </Grid>
-                    </div>
-                </Menu>
+                </div>
+            </div>
         )
     }
 }

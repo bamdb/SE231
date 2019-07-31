@@ -48,7 +48,6 @@ class App extends Component{
     }
 
     componentWillMount() {
-        console.log(404)
         if(window.location.href.split('#')[1]==='/404') {
             this.setState({page404: true});
         }

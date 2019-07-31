@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../index.css'
 import axios from 'axios';
 
 import { Carousel } from 'antd';
@@ -10,16 +11,16 @@ class CarouselItem extends Component{
     render(){
         return(
             <Carousel autoplay>
-                <div>
+                <div id={"carousel"}>
                     <img src={require("../img/book1.jpg")} />
                 </div>
-                <div>
+                <div id={"carousel"}>
                     <img src={require("../img/book2.jpg")} />
                 </div>
-                <div>
+                <div id={"carousel"}>
                     <img src={require("../img/movie1.jpg")} />
                 </div>
-                <div>
+                <div id={"carousel"}>
                     <img src={require("../img/movie2.jpg")} />
                 </div>
             </Carousel>

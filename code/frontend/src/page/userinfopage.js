@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles/index';
 import Grid from '@material-ui/core/Grid/index'
 import axios from 'axios';
 import Userinfo from '../component/userinfo'
@@ -31,7 +30,7 @@ class Userinfopage extends Component{
                 })
             axios.get("http://202.120.40.8:30741/rating/browser", {
                 params: {
-                    type: 1,
+                    type: 2,
                     page: 0,
                     pageSize: 2
                 }
@@ -54,7 +53,7 @@ class Userinfopage extends Component{
 
     render(){
         return(
-            <Grid container spacing={10} justify={"center"} alignContent={"center"} direction={"column"}>
+            <Grid container spacing={10} justify={"center"} alignContent={"center"}>
                 <Grid item xs={8}>
                     <Userinfo></Userinfo>
                 </Grid>

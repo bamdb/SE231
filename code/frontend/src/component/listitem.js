@@ -84,8 +84,7 @@ class Listitem extends Component {
 
         if(type<=3)
         axios.put("http://202.120.40.8:30741/activity/update/progress",
-            {userId:localStorage.getItem("userid"),itemId:item.id,chapters:chapters},
-            {params:localStorage.getItem("access_token")}
+            {userId:localStorage.getItem("userid"),itemId:item.id,chapters:chapters}
         );
     }
     handlepagechange(e){
@@ -105,6 +104,7 @@ class Listitem extends Component {
         )
             .then(function (response) {
                 items=response.data;
+                console.log(response.data)
                 if(items !== undefined)
                 {
                     for(var i=0; i<items.length; ++i) {

@@ -44,7 +44,9 @@ code {
 }
 #header-icon{
   margin: 0;
-  padding: 0;
+  font-size:18px;
+  padding-left:8px;
+  color: #4a4a4a;
 }
 #bamdb{
   min-width: 144px;
@@ -83,7 +85,6 @@ code {
 
 #hot-item{
   min-width: 184px;
-  margin: 8px;
 }
 
 #home-body{
@@ -92,4 +93,8 @@ code {
 
 #home{
   min-width: 700px;
+}
+
+#carousel{
+  min-width: 600px;
 }

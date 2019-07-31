@@ -68,14 +68,13 @@ class Tags extends Component {
         this.state.tags.map(tag => {
             rows.push(
                 <CheckableTag
+                    style={{minWidth:50,textAlign:"center"}}
                     key={tag}
                     checked={selectedTags.indexOf(tag) > -1}
-
                 >
                     {tag}
                 </CheckableTag>
-            );
-            rows.push(<Divider type="vertical" />);
+            )
         })
         if(rows.length >= 1) rows.pop();
         return(

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from'react-router-dom'
+import '../index.css';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Websocket from 'react-websocket';
 import {Icon, Badge, Button} from 'antd';
 import Messagepage from "../page/messagepage";
 import Drawer from "@material-ui/core/Drawer";
+import Alert from "./alert";
 
 class Head extends Component{
     constructor(props) {
@@ -13,7 +15,8 @@ class Head extends Component{
         this.state={
             islogin : (localStorage.getItem("userid") != null),
             openMess:false,
-            messageCount:0
+            messageCount:0,
+            content:""
         }
         this.logout = this.logout.bind(this);
         this.handleMessClose = this.handleMessClose.bind(this);
@@ -29,8 +32,14 @@ class Head extends Component{
         this.setState({messageCount:this.state.messageCount+1});
     }
 
+    handleAlert(){
+        this.setState({content:""})
+    }
+
     handleMessOpen() {
+        if(localStorage.getItem("userid"))
         this.setState({openMess:true,messageCount:0})
+        else this.setState({content:'请先登录！'})
     }
 
     handleMessClose() {
@@ -40,19 +49,22 @@ class Head extends Component{
         const url="";
         return(
             <div >
+                <Alert content={this.state.content} cancelAlert={this.handleAlert.bind(this)} confirmAlert={this.handleAlert.bind(this)}/>
                 <div id={"header"}>
                 <Grid container justify={"space-between"}>
                     <Grid item xs={3} id={"bamdb"}>
                         <Typography variant="h6" noWrap color={"inherit"}>Bamdb</Typography>
                     </Grid>
-                    <Grid item  id={"header-icon"}>
-                    <Button type={"link"} >
-                        <Icon type="login" style={{fontSize:18,paddingLeft:8}}  hidden={this.state.islogin} component={Link} to={'/login'}/>
+                    <Grid item >
+                    <Button type={"link"}>
+                        <Link to={'/login'} >
+                        <Icon type="login" id={"header-icon"}  hidden={this.state.islogin} />
+                        </Link>
                     </Button>
-                        <Icon type="logout" style={{fontSize:18,paddingLeft:8}}  hidden={!this.state.islogin}
+                        <Icon type="logout" id={"header-icon"}  hidden={!this.state.islogin}
                               onClick={this.logout} />
                         <Badge count={this.state.messageCount} overflowCount={99} offset={[8,0]} >
-                            <Icon type="message" style={{fontSize:18,paddingLeft:8}} onClick={this.handleMessOpen} />
+                            <Icon type="message" id={"header-icon"} onClick={this.handleMessOpen} />
                         </Badge>
                     </Grid>
                 </Grid>
