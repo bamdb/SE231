@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Component
 public interface ItemRepository extends ElasticsearchRepository<Item, Long> {
 
-    Item findByItemname(String name);
-    @Query("{\"bool\": {\"must\": [{\"match\": {\"authors.name\": \"?0\"}}]}}")
-    Page<Item> findByAuthorsNameUsingCustomQuery(String name, Pageable pageable);
+//    Item findByItemname(String name);
+//    @Query("{\"bool\": {\"must\": [{\"match\": {\"authors.name\": \"?0\"}}]}}")
+//    Page<Item> findByAuthorsNameUsingCustomQuery(String name, Pageable pageable);
 }

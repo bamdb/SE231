@@ -1,7 +1,12 @@
 spring:
   application:
     name: search
-
+  data:
+    elasticsearch:
+      cluster-nodes: 202.120.40.8:30748
+      repositories:
+        enabled: true
+      cluster-name: bamdb
 eureka:
   instance:
     hostname: search

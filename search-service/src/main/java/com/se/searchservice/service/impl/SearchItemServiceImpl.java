@@ -5,16 +5,13 @@ import com.se.searchservice.repository.ItemRepository;
 import com.se.searchservice.service.SearchItemService;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.index.query.MatchQueryBuilder;
+import org.elasticsearch.index.query.MultiMatchQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.elasticsearch.search.sort.SortBuilders;
-import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 public class SearchItemServiceImpl implements SearchItemService {
@@ -26,10 +23,13 @@ public class SearchItemServiceImpl implements SearchItemService {
     }
 
     public Page<Item> searchItem(String keystring, Pageable pageable) {
-        NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
-        queryBuilder.withQuery(QueryBuilders.matchQuery("itemname", keystring));
-        queryBuilder.withPageable(pageable);
-        Page<Item> items = itemRepository.search(queryBuilder.build());
+        MultiMatchQueryBuilder queryBuilder =
+                new MultiMatchQueryBuilder(keystring, "itemname", "main_author");
+//        NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
+//        queryBuilder.withQuery(QueryBuilders.matchQuery("itemname", keystring));
+//        queryBuilder.withHighlightFields(new Flied);
+//        queryBuilder.withPageable(pageable);
+        Page<Item> items = itemRepository.search(queryBuilder, pageable);
         return items;
     }
 }

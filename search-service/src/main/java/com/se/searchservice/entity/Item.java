@@ -12,14 +12,24 @@ public class Item {
     private Long  id;
     @Field(type = FieldType.Text, analyzer = "ik_max_word")
     private String itemname;
-
-    public Item(Long id, String itemname) {
+    @Field(type = FieldType.Text, analyzer = "ik_max_word")
+    private String main_author;
+    public Item(Long id, String itemname, String main_author) {
         this.id = id;
+        this.main_author = main_author;
         this.itemname = itemname;
     }
 
     public Item() {
 
+    }
+
+    public void setMain_author(String main_author) {
+        this.main_author = main_author;
+    }
+
+    public String getMain_author() {
+        return main_author;
     }
 
     public Long getId() {

@@ -23,7 +23,7 @@ public class ItemSearchController {
     @Resource(name = "searchItemServiceImpl")
     SearchItemService searchItemService;
 
-    @GetMapping("/ik")
+    @GetMapping("/ik/item")
     public Page<Item> test(@RequestParam("keystring") String keystring,
                                @RequestParam("page") int page,
                                @RequestParam("size") int size) {
