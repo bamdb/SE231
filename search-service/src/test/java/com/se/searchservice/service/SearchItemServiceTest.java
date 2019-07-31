@@ -2,27 +2,19 @@ package com.se.searchservice.service;
 
 
 import com.se.searchservice.entity.Item;
-import com.se.searchservice.repository.ItemRepository;
-import org.elasticsearch.index.mapper.Mapping;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
-
-import java.net.http.HttpResponse;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import java.util.Map;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -35,26 +27,17 @@ public class SearchItemServiceTest {
     public void setup(){
         mvc = MockMvcBuilders.webAppContextSetup(context)
                 .build();
-        elasticsearchTemplate.deleteIndex(Item.class);
-        elasticsearchTemplate.createIndex(Item.class);
-        elasticsearchTemplate.putMapping(Item.class);
-        elasticsearchTemplate.refresh(Item.class);
     }
-    @Autowired
-    private ElasticsearchTemplate elasticsearchTemplate;
-    @Autowired
-    ItemRepository itemRepository;
+
     @Test
     public void testController() throws Exception {
-        Item item = new Item(0L, "我是高中生", "高中生");
-        itemRepository.save(item);
+        Item item = new Item(null, null, null);
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+        map.add("keystring", "高中生");
+        map.add("page", "0");
+        map.add("size", "1");
         mvc.perform(get("/ik/item")
-                .content("{\"keystring\": \"高中生\", \"page\": 0, \"size\": 1}")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers
-                        .jsonPath("$.content[0].itemname")
-                        .value("我是高中生"));
-
+                .params(map))
+                .andExpect(status().isOk());
     }
 }

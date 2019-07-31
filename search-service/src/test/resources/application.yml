@@ -1,7 +1,7 @@
 spring:
   data:
     elasticsearch:
-      cluster-nodes: localhost:9300
+      cluster-nodes: 202.120.40.8:30748
       repositories:
         enabled: true
       cluster-name: bamdb
