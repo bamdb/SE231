@@ -46,9 +46,13 @@ class Head extends Component{
         this.setState({openMess:false})
     }
     render(){
-        const url="";
+        const url="ws://47.103.107.89:8080/websocket/nouuid/"+localStorage.getItem("userid");
+        const web = (localStorage.getItem("userid")) ?
+            <Websocket url={url}
+                       onMessage={this.handlesocket.bind(this)}/>:<span/>;
         return(
             <div >
+                {web}
                 <Alert content={this.state.content} cancelAlert={this.handleAlert.bind(this)} confirmAlert={this.handleAlert.bind(this)}/>
                 <div id={"header"}>
                 <Grid container justify={"space-between"}>
@@ -85,9 +89,3 @@ class Head extends Component{
 }
 
 export default Head;
-
-/*
-
-                <Websocket url={url}
-                           onMessage={this.handlesocket.bind(this)}/>
- */

@@ -108,21 +108,19 @@ class Listitem extends Component {
                 if(items !== undefined)
                 {
                     for(var i=0; i<items.length; ++i) {
-                        if (items[i].item.itemname.indexOf(nextProps.search) !== -1) {
-                            rows.push(
-                                {
-                                    href: "/itemdetail/"+items[i].item.id,
-                                    id: items[i].item.id,
-                                    title:items[i].item.itemname,
-                                    author:items[i].item.mainAuthor,
-                                    pubTime: items[i].item.pubTime.split('T')[0],
-                                    score:items[i].rating.avgScore,
-                                    rank:items[i].rating.rank,
-                                    imgurl:items[i].item.imgurl,
-                                    chapterNum:items[i].item.chapterNum,
-                                }
-                            );
-                        }
+                        rows.push(
+                            {
+                                href: "/itemdetail/"+items[i].item.id,
+                                id: items[i].item.id,
+                                title:items[i].item.itemname,
+                                author:items[i].item.mainAuthor,
+                                pubTime: items[i].item.pubTime.split('T')[0],
+                                score:items[i].rating.avgScore,
+                                rank:items[i].rating.rank,
+                                imgurl:items[i].item.imgurl,
+                                chapterNum:items[i].item.chapterNum,
+                            }
+                        );
                     }
                     this.setState({
                     ItemList:items,
@@ -192,7 +190,7 @@ class Listitem extends Component {
                         >
                             <Meta
                                 style={{margin:0}}
-                                title={<Link to={item.href}>{item.title}</Link>}
+                                title={<Link to={item.href} target={'_blank'}>{item.title}</Link>}
                                 description={"评分："+item.score+'\n'+"排名：" +item.rank +'\n'
                                             +"This is description."}
                             />
@@ -200,7 +198,7 @@ class Listitem extends Component {
                     </List.Item>
                 )}
             />
-                <Pagination simple current={this.props.currentpage} total={100} onChange={current=>this.handlepagechange(current)}/>
+                <Pagination size="small"  total={100} current={this.props.currentpage} onChange={current=>this.handlepagechange(current)}/>
             </div>
         );
     }
