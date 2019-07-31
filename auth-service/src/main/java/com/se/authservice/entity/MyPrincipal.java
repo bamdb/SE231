@@ -38,28 +38,10 @@ public class MyPrincipal implements Principal {
     public MyPrincipal() {
     }
 
-    @Override
-    public boolean equals(Object another) {
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return null;
-    }
-
-    @Override
-    public int hashCode() {
-        return 0;
-    }
 
     @Override
     public String getName() {
         return null;
     }
 
-    @Override
-    public boolean implies(Subject subject) {
-        return false;
-    }
 }

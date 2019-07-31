@@ -50,7 +50,9 @@ public class ItemController {
 
     @PreAuthorize("hasRole('USER') and userId == authentication.principal.id || hasRole('EDITOR')")
     @PostMapping(value = "/add/tag")
-    public Itemtag postTag(@RequestParam("itemId") Long itemId, @RequestParam("userId") Long userId, @RequestBody List<String> tagList) {
+    public Itemtag postTag(@RequestParam("itemId") Long itemId,
+                           @RequestParam("userId") Long userId,
+                           @RequestBody List<String> tagList) {
         return itemService.postItemTag(itemId, userId, tagList);
     }
 
