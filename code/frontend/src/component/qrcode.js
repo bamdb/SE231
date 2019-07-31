@@ -49,7 +49,7 @@ class QRcode extends Component{
                     <Grid container alignContent={"center"} justify={"space-around"}>
                         <Grid item xs={1}/>
                         <Grid item xs={5}>
-                            <img src={"http://"+this.state.qrcode}/>
+                            <img src={"http://202.120.40.8:30741/auth/qrcode?uuid="+this.props.uuid}/>
                         </Grid>
                         <Grid item xs={1}>
                             <Divider type={"vertical"} id={"divider-login"}/>
