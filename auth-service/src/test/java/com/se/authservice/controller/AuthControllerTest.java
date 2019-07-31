@@ -84,8 +84,8 @@ public class AuthControllerTest {
         mm.add("operation", "-");
         mm1.add("username", "johnnull");
         mm1.add("operation", "-");
-        mm2.add("username", "johnnull");
-        mm2.add("operation", "-");
+        mm2.add("username", "john");
+        mm2.add("operation", "#");
 
         mvc.perform(post("/grant/role/ROLE_ADMIN")
                 .params(mm)
