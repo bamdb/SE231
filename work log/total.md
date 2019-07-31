@@ -260,6 +260,19 @@
   * 添加websocket依赖
   * 将leftbar与header部分重构为component
   * 修改header中的message，可以提示“新收到消息”
+# 2019-7-31
+* shenruien:
+  * add camera into android
+  * use java tensorflow
+* yuyajie:
+  * es集群
+  * 单元测试
+* wangzulai:
+  * insert staff data into database
+  * write test cases
+* huangyuyang:
+  * 添加search message提示，修改样式
+
 
 
 
