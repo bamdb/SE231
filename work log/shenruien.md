@@ -61,9 +61,12 @@
 * modify the navigation
 # 2019-7-26
 * build the front of android
-# 2019-7-27
+# 2019-7-29
 * rewrite the editor and add friend
 * deal with data 
 # 2019-7-30
 * trainging the model
 * modify android
+# 2019-7-31
+* add camera into android
+* use java tensorflow
