@@ -119,7 +119,8 @@ public class RatingServiceApplicationTests {
                 .andExpect(status().isOk());
 
         mvc.perform(get("/itemid/1")
-                .header("Authorization", "0").contentType(MediaType.APPLICATION_JSON))
+                .header("Authorization", "0")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
 
