@@ -15,7 +15,7 @@ export default class Itemlist extends React.Component{
     constructor(props)
     {
         super(props);
-        this.state={selectedTab:"book",itemlist:[{item:{id:5,itemname:"three body"}}]};
+        this.state={selectedTab:"book",itemlist:[{item:{id:5,itemname:"three body"},rating:{avgScore:10}}]};
         this.changetab=this.changetab.bind(this);
 
     }
@@ -63,8 +63,8 @@ export default class Itemlist extends React.Component{
       if(this.state.selectedTab=='book')
       {
         tmptype=0
-      }else if(this.state.selectedTab=='movie')
-      {
+      }
+      else if(this.state.selectedTab=='movie'){
         tmptype=1
       }
       else{
@@ -141,7 +141,7 @@ export default class Itemlist extends React.Component{
                         <Card.Header
                           title={item.item.itemname}
                           thumbStyle={{ width: 30, height: 30 }}
-                          thumb={"http://202.120.40.8:30741/image/id/"+item.item.id+"1"}
+                          thumb={"http://"+item.item.imgurl}
                           extra=""
                           
                         />
@@ -151,8 +151,8 @@ export default class Itemlist extends React.Component{
                           </View>
                         </Card.Body>
                         <Card.Footer
-                          content="hello"
-                          extra="footer extra content"
+                          content="分数"
+                          extra={item.rating.avgScore}
                         />
                       </Card>
                 }>

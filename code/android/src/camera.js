@@ -1,5 +1,5 @@
 import React,{ PureComponent } from "react";
-import { StyleSheet, View, Text , Animated,TextInput, Dimensions,} from "react-native";
+import { StyleSheet, View, Text , Animated,TextInput, Dimensions,Easing} from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import {Button,InputItem,Flex} from '@ant-design/react-native'
 import Storage from 'react-native-storage'
@@ -11,8 +11,35 @@ export default class camera2 extends React.Component{
     {
         super(props)
         this.barcodeReceived=this.barcodeReceived.bind(this);
-        this.state={code:""}
+        this.state={code:"",moveAnim: new Animated.Value(0),focusedScreen:false}
     }
+    componentDidMount()
+    {
+        const { navigation } = this.props;
+        navigation.addListener("willFocus", () =>
+        {
+            this.startAnimation();
+            this.setState({ focusedScreen: true })
+            
+        }
+        
+        );
+        navigation.addListener("willBlur", () =>
+        this.setState({ focusedScreen: false, showModal: false })
+        );
+
+    }
+    startAnimation = () => {
+        this.state.moveAnim.setValue(0);
+        Animated.timing(
+            this.state.moveAnim,
+            {
+                toValue: -300,
+                duration: 1500,
+                easing: Easing.linear
+            }
+        ).start(() => this.startAnimation());
+      };
     
     barcodeReceived(e)
     {
@@ -43,7 +70,7 @@ export default class camera2 extends React.Component{
         
         return(
             
-            <RNCamera
+            this.state.focusedScreen &&<RNCamera
                 style={{
                     flex: 1,
                     justifyContent: 'flex-end',
@@ -54,11 +81,39 @@ export default class camera2 extends React.Component{
                 flashMode={RNCamera.Constants.FlashMode.auto}
                 onBarCodeRead={(e) => this.barcodeReceived(e)}
             >
-           
-
+                <View style={styles.rectangleContainer}>
+                <View style={styles.rectangle}/>
+                <Animated.View
+                style={[styles.border,
+                { transform: [{ translateY:this.state.moveAnim }] }
+                ]}
+                />
+                </View>
             </RNCamera>
             
         )
     }
 }
-
+const styles= StyleSheet.create(
+    {
+        border:{
+            flex: 0,
+            width: 300,
+            height: 2,
+            backgroundColor: '#00FF00',
+        },
+        rectangleContainer: {
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: 'transparent'
+        },
+        rectangle: {
+            height: 300,
+            width: 300,
+            borderWidth: 1,
+            borderColor: '#00FF00',
+            backgroundColor: 'transparent'
+        },
+    }
+)
