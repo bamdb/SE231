@@ -66,6 +66,7 @@ public class UserControllerTest {
                 .andExpect(status().isMovedTemporarily());
 
         MultiValueMap<String, String> mm = new LinkedMultiValueMap<>();
+        MultiValueMap<String, String> mm1 = new LinkedMultiValueMap<>();
 
         mvc.perform(put("/update/root").params(mm))
                 .andExpect(status().isOk());
@@ -78,6 +79,14 @@ public class UserControllerTest {
         mm.add("imgUrl","nothing");
         mm.add("role", "0");
         mvc.perform(put("/update/root").params(mm))
+                .andExpect(status().isOk());
+
+        mm1.add("id", String.valueOf(userService.selectAll().iterator().next().getId()));
+        mm1.add("password","bamd");
+        mm1.add("mail", "isa@qq.com");
+        mm1.add("imgUrl","nothing");
+        mm1.add("role", "0");
+        mvc.perform(put("/update/rootnew").params(mm))
                 .andExpect(status().isOk());
     }
 
@@ -112,6 +121,8 @@ public class UserControllerTest {
                 .andExpect(status().isOk());
 
         mvc.perform(get("/id/1").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        mvc.perform(get("/id/0").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         mvc.perform(get("/username/root").contentType(MediaType.APPLICATION_JSON))

@@ -63,7 +63,8 @@ public class AuthControllerTest {
     @Test
     public void testController() throws  Exception{
         MultiValueMap<String, String> mm = new LinkedMultiValueMap<>();
-
+        MultiValueMap<String, String> mm1 = new LinkedMultiValueMap<>();
+        MultiValueMap<String, String> mm2 = new LinkedMultiValueMap<>();
 
         MvcResult mvcResult = mvc.perform(post("/verify")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -81,12 +82,26 @@ public class AuthControllerTest {
         authController.revokeToken("00");
         mm.add("username", "john");
         mm.add("operation", "-");
+        mm1.add("username", "johnnull");
+        mm1.add("operation", "-");
+        mm2.add("username", "johnnull");
+        mm2.add("operation", "-");
 
         mvc.perform(post("/grant/role/ROLE_ADMIN")
                 .params(mm)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
+        mvc.perform(post("/grant/role/ROLE_ADMIN")
+                .params(mm1)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is(666));
+        mvc.perform(post("/grant/role/ROLE_ADMIN")
+                .params(mm2)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is(666));
 
         mm.remove("operation");
         mm.add("operation", "+");
@@ -131,7 +146,15 @@ public class AuthControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
-
-
+        mvc.perform(post("/revoke/authority/comment").with(user("admin").roles("USER","ADMIN"))
+                .params(mm1)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is(777));
+        mvc.perform(post("/revoke/authority/comment").with(user("admin").roles("USER","ADMIN"))
+                .params(mm2)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is(777));
     }
 }
