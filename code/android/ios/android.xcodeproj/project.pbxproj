@@ -15,8 +15,8 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* androidTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* androidTests.m */; };
-		D1C6953776134CAA9FB0F7E7 /* antfill.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD7A94D3E98E4C8BA3F900BB /* antfill.ttf */; };
-		F0078D2360CF42C6920CBD5D /* antoutline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D12646CDCDA477781752F3E /* antoutline.ttf */; };
+		759FE3DA2C084FBD8B3435C4 /* antfill.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5368D9331624BF3B68531A4 /* antfill.ttf */; };
+		8FA65F1AD5E44EF2B8FDF094 /* antoutline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A6DAC7D6B4D4F8BA86E3BB5 /* antoutline.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,8 +52,8 @@
 		2D02E4901E0B4A5D006451C7 /* android-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "android-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		DD7A94D3E98E4C8BA3F900BB /* antfill.ttf */ = {isa = PBXFileReference; name = "antfill.ttf"; path = "../node_modules/@ant-design/icons-react-native/fonts/antfill.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		7D12646CDCDA477781752F3E /* antoutline.ttf */ = {isa = PBXFileReference; name = "antoutline.ttf"; path = "../node_modules/@ant-design/icons-react-native/fonts/antoutline.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E5368D9331624BF3B68531A4 /* antfill.ttf */ = {isa = PBXFileReference; name = "antfill.ttf"; path = "../node_modules/@ant-design/icons-react-native/fonts/antfill.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7A6DAC7D6B4D4F8BA86E3BB5 /* antoutline.ttf */ = {isa = PBXFileReference; name = "antoutline.ttf"; path = "../node_modules/@ant-design/icons-react-native/fonts/antoutline.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,7 +143,7 @@
 				00E356EF1AD99517003FC87E /* androidTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				3C8B80A73E154EDEB20EB6D5 /* Resources */,
+				0FB310E6D11D4CBC90C528A7 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -161,11 +161,11 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3C8B80A73E154EDEB20EB6D5 /* Resources */ = {
+		0FB310E6D11D4CBC90C528A7 /* Resources */ = {
 			isa = "PBXGroup";
 			children = (
-				DD7A94D3E98E4C8BA3F900BB /* antfill.ttf */,
-				7D12646CDCDA477781752F3E /* antoutline.ttf */,
+				E5368D9331624BF3B68531A4 /* antfill.ttf */,
+				7A6DAC7D6B4D4F8BA86E3BB5 /* antoutline.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -307,8 +307,8 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				D1C6953776134CAA9FB0F7E7 /* antfill.ttf in Resources */,
-				F0078D2360CF42C6920CBD5D /* antoutline.ttf in Resources */,
+				759FE3DA2C084FBD8B3435C4 /* antfill.ttf in Resources */,
+				8FA65F1AD5E44EF2B8FDF094 /* antoutline.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

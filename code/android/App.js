@@ -25,9 +25,9 @@ import Itemdetail from './src/itemdetail'
 import Topicpage from './src/topicpage'
 import Activitypage from './src/activity'
 import Topicdetail from './src/topicdetail'
-import BasicTabBarExample from "./test";
-import Testcase from "./test";
+
 import userinfo from "./src/userinfo";
+import camera2 from "./src/camera";
 
 const AppNavigator = createMaterialBottomTabNavigator({
     Userinfo: {
@@ -97,6 +97,9 @@ const AppNavigator = createMaterialBottomTabNavigator({
           />
         )
       }
+    },
+    Camera:{
+      screen:camera2
     }
 
 

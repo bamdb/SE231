@@ -1,9 +1,10 @@
-import React from "react";
+import React,{ PureComponent } from "react";
 import { View, Text ,TextInput} from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import {Button,InputItem,Flex} from '@ant-design/react-native'
 import Storage from 'react-native-storage'
 import axios from 'axios'
+import { RNCamera } from 'react-native-camera';
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Login',
@@ -93,6 +94,7 @@ export default class HomeScreen extends React.Component {
           <Flex>
             <Flex.Item>
               <Button  type="primary" onPress={this.handlesubmit}>login</Button>
+              <Button  type="primary" onPress={()=>{this.props.navigation.navigate("Home")}}>login</Button>
             </Flex.Item>
             
           </Flex>
