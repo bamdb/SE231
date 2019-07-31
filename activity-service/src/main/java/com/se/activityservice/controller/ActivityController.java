@@ -91,6 +91,7 @@ public class ActivityController {
         return activityService.deleteActivityByItemId(itemId);
     }
 
+
     @PreAuthorize("#progress.getUserId() == authentication.principal.id")
     @PutMapping(value="/update/progress")
     public Progress updateProgress(@RequestBody Progress progress) {
