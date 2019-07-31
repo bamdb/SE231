@@ -87,3 +87,6 @@ Sprint 1 (July.1-July.10)
 >添加websocket依赖<br/>
 >将leftbar与header部分重构为component<br/>
 >修改header中的message，可以提示“新收到消息”<br/>
+
+* July.31<br/>
+>添加search message提示，修改样式<br/>
