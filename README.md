@@ -90,11 +90,15 @@ code for summer project
     * rabbitMQ日志管理和消息传递
 	* aliyun
     * elk+filebeat 端口30749
+* 消息中间件
+	* WebSocket协议
 * RESTful
     * Open API
         * [openapi.yml](https://app.swaggerhub.com/apis/ba818/open-api/1.0.0 "swaggerhub")
 * 性能测试
     * Locust
+* 数据集
+	* [bgm镜像站](http://mirror.api.bgm.rin.cat)
 
 
 ## 实体
