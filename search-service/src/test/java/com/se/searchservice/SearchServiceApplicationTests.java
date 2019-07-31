@@ -25,24 +25,41 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SearchServiceApplicationTests {
+    private static final String HTTP_PORT = "9200";
+    private static final String HTTP_TRANSPORT_PORT = "9305";
+    private static final String ES_WORKING_DIR = "target/es";
 
-    @Autowired
-    ItemRepository itemRepository;
-    @Autowired
-    private ElasticsearchTemplate elasticsearchTemplate;
+    private static Node node;
 
+    @BeforeClass
+    public static void startElasticsearch() throws Exception {
+        removeOldDataDir(ES_WORKING_DIR + "/" + clusterName);
 
-    @Test
-    public void contextLoads() {
-        elasticsearchTemplate.putMapping(Item.class);
+        Settings settings = Settings.builder()
+                .put("path.home", ES_WORKING_DIR)
+                .put("path.conf", ES_WORKING_DIR)
+                .put("path.data", ES_WORKING_DIR)
+                .put("path.work", ES_WORKING_DIR)
+                .put("path.logs", ES_WORKING_DIR)
+                .put("http.port", HTTP_PORT)
+                .put("transport.tcp.port", HTTP_TRANSPORT_PORT)
+                .put("index.number_of_shards", "1")
+                .put("index.number_of_replicas", "0")
+                .put("discovery.zen.ping.multicast.enabled", "false")
+                .build();
+        node = nodeBuilder().settings(settings).clusterName("monkeys.elasticsearch").client(false).node();
+        node.start();
     }
-    @Test
-    public void search() {
-        NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
-        queryBuilder.withQuery(QueryBuilders.matchQuery("itemname", "我老婆 男"));
-        queryBuilder.withPageable(PageRequest.of(0, 160));
-        Page<Item> items = itemRepository.search(queryBuilder.build());
-        Gson gson = new Gson();
-        Assert.assertEquals("", gson.toJson(items));
+
+    @AfterClass
+    public static void stopElasticsearch() {
+        node.close();
+    }
+
+    private static void removeOldDataDir(String datadir) throws Exception {
+        File dataDir = new File(datadir);
+        if (dataDir.exists()) {
+            FileSystemUtils.deleteRecursively(dataDir);
+        }
     }
 }

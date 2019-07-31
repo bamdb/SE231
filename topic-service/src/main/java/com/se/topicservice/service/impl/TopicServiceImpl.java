@@ -28,8 +28,6 @@ public class TopicServiceImpl implements TopicService {
     @Resource(name="writeDaoImpl")
     private WriteDao writeDao;
 
-//    @Autowired
-//    public UserClient userClient;
 
     public Topic postTopic(TopicIn topicIn) {
         // check if topic publisher exists in User table

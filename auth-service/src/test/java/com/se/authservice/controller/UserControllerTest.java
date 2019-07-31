@@ -2,6 +2,7 @@ package com.se.authservice.controller;
 
 import com.se.authservice.config.MethodSecurityConfig;
 import com.se.authservice.config.ResourceServer;
+import com.se.authservice.entity.User;
 import com.se.authservice.service.UserService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,6 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.AuthenticatedPrincipal;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -63,7 +68,7 @@ public class UserControllerTest {
                 .andReturn();
         int result = Integer.valueOf(mvcResult.getResponse().getContentAsString());
         mvc.perform(get("/signup?hashCode="+result))
-                .andExpect(status().isMovedTemporarily());
+                .andExpect(status().is3xxRedirection());
 
         MultiValueMap<String, String> mm = new LinkedMultiValueMap<>();
         MultiValueMap<String, String> mm1 = new LinkedMultiValueMap<>();
@@ -103,7 +108,7 @@ public class UserControllerTest {
                 .andReturn();
         int result = Integer.valueOf(mvcResult.getResponse().getContentAsString());
         mvc.perform(get("/signup?hashCode="+result))
-                .andExpect(status().isMovedTemporarily());
+                .andExpect(status().is3xxRedirection());
 
         Long id = userService.selectAll().iterator().next().getId();
         mvc.perform(delete("/delete/id/" + id))
@@ -129,5 +134,31 @@ public class UserControllerTest {
                 .andExpect(status().isOk());
         mvc.perform(get("/username/no").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()).andExpect(MockMvcResultMatchers.content().string(""));
+    }
+
+    @Test
+    @WithMockUser(username = "root", password = "bamdb", roles = "USER")
+    public void userTest() throws Exception {
+//        UserController userController = new UserController();
+//        userController.getUser(new OAuth2Authentication(null, auth) );
+        mvc.perform(delete("/delete/username/root"))
+                .andExpect(status().isOk());
+        mvc.perform(get("/user")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string(""));
+        MvcResult mvcResult = mvc.perform(post("/verify")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"bamdb@outlook.com\", \"img_url\":null}"))
+                .andExpect(status().isOk())
+                .andReturn();
+        int result = Integer.valueOf(mvcResult.getResponse().getContentAsString());
+        mvc.perform(get("/signup?hashCode="+result))
+                .andExpect(status().is3xxRedirection());
+
+        mvc.perform(get("/user")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("root"));
     }
 }

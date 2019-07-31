@@ -194,7 +194,8 @@ public class ItemControllerTest {
                 .andExpect(status().isOk());
         mvc.perform(get("/tag?itemId="+item.getId()+"&userId=1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        mvc.perform(get("/tag?itemId="+item.getId()+"&userId=3").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/tag?itemId="+item.getId()+"&userId=3")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         mvc.perform(delete("/delete/tag?itemId="+item.getId()+"&userId=1")

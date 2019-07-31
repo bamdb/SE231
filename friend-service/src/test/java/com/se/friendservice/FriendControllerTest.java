@@ -86,6 +86,7 @@ public class FriendControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
         Friend friend = new Friend(11L, 22L);
+        Friend friend1 = new Friend(22L, 11L);
         mvc.perform(post("/add")
                 .content(JSON.toJSONString(friend))
                 .contentType(MediaType.APPLICATION_JSON))
@@ -105,6 +106,26 @@ public class FriendControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("true"));
+
+        mvc.perform(post("/add")
+                .content(JSON.toJSONString(friend1))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.userId1").value("22"));
+        mvc.perform(get("/isfriend")
+                .params(mm))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string("true"));
+        MultiValueMap<String, String> mm2 = new LinkedMultiValueMap<>();
+        mm2.add("userId1","111");
+        mm2.add("userId2", "222");
+        mvc.perform(get("/isfriend")
+                .params(mm2))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string("false"));
         mvc.perform(get("/all/userid/11")
                 .header("Authorization", "0"))
                 .andDo(MockMvcResultHandlers.print())
