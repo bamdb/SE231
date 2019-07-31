@@ -8,15 +8,17 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Document(indexName = "user", type = "doc")
 public class User {
     @Id
-    Long id;
+    private Long id;
     @Field(type = FieldType.Text, analyzer = "ik_max_word")
-    String username;
+    private String username;
 
     public User(Long id, String username) {
         this.id = id;
         this.username = username;
     }
+    public User() {
 
+    }
     public Long getId() {
         return id;
     }
