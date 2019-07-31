@@ -4,12 +4,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.data.elasticsearch.annotations.Mapping;
 
 @Document(indexName = "item", type = "doc")
 public class Item {
     @Id
     private Long  id;
-    @Field(type = FieldType.Text)
+    @Field(type = FieldType.Text, analyzer = "ik_max_word")
     private String itemname;
 
     public Item(Long id, String itemname) {
