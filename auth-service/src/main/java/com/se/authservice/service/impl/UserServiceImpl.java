@@ -223,8 +223,5 @@ public class UserServiceImpl implements UserService {
         restTemplate.getForObject("http://47.103.107.39:8080/qrcode?token={1}&uuid={2}", void.class,
                 accessToken, uuid);
     }
-//
-//    public String getToken(String uuid) {
-//        return redisDao.getUuid(uuid);
-//    }
+
 }
