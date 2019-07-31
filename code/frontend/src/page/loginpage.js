@@ -33,7 +33,7 @@ class LoginPage extends Component{
     render(){
         const body = this.state.useQR ? <QRcode uuid={this.state.uuid}/> : <Login setQR={(state,result)=>this.setQR(state,result)}/>;
         return(
-                <Grid container className={useStyles.root} justify={"center"} alignContent={"center"}>
+                <Grid container className={useStyles.root} justify={"center"} >
                     <Grid item xs={8}>
                         <br/><br/><br/>
                         {body}

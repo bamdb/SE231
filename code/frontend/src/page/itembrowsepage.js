@@ -61,7 +61,7 @@ class Itembrowsepage extends Component{
 
     render(){
         return(
-            <Grid container>
+            <Grid container id={"browser-item"}>
                 <Grid item xs={12} style={{padding:20}}>
                         <Tags select={true} tagchange={this.handletagchange} tags={["热血","王道","搞怪","不高兴","没头脑"]}/>
                         <Listitem currentpage={this.state.currentpage} type={this.state.type} search={this.state.search} handlepagechange={this.handlepagechange}/>

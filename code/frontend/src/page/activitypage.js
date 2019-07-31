@@ -97,9 +97,8 @@ class Activitypage extends Component{
         return(
             <Grid container direction={"column"} >
 
-                <Grid container direction={"row"} alignItems={"center"}>
+                <Grid container direction={"row"} >
                     <Grid item xs={2}></Grid>
-
                     <Grid item xs={8} >
                         <br/><br/>
                         <Activitylist

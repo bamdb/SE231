@@ -132,6 +132,7 @@ class Activity extends Component {
         }*/
 
         return(
+            <div id={"activity"}>
             <List.Item
                 key={"activity"}
                 actions={[
@@ -154,6 +155,8 @@ class Activity extends Component {
                 />
                 {this.state.comment}
             </List.Item>
+            <Divider id={"activity-divider"} />
+            </div>
         );
     }
 

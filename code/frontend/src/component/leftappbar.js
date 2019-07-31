@@ -401,6 +401,7 @@ class LeftBar extends Component {
         return(
 
                 <Menu
+                    id={"sider"}
                     mode="inline"
                 >
                     <Button id={"togglebutton"} type={"link"} onClick={this.toggleCollapsed}  >

@@ -1,19 +1,11 @@
 import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles/index';
+import '../index.css';
 import Grid from '@material-ui/core/Grid/index'
-import Paper from '@material-ui/core/Paper/index'
-import Navigation from "../component/navigation";
 import TopItemList from "../component/topitemlist";
 import Progressmanage from '../component/progressmanage';
-import LeftAppBar from '../component/leftappbar';
 import axios from 'axios';
 import TextField from '@material-ui/core/TextField';
 
-const useStyles=makeStyles({
-    root: {
-        display: 'flex',
-    },
-})
 
 class Userhomepage extends Component{
 
@@ -59,25 +51,14 @@ class Userhomepage extends Component{
             variant="outlined"
         />;
         return(
-            <Grid container justify={"space-around"} alignContent={"center"}>
+            <Grid container justify={"space-around"} >
                 <Grid item xs={9}>
-
-                    <Grid container spacing={2} alignContent={"center"}>
-                        <Grid item xs={12}>
-                            <Progressmanage userid={this.state.userid} />
-                        </Grid>
-                    </Grid>
+                    <Progressmanage userid={this.state.userid} />
                 </Grid>
                 <Grid item xs={3} >
-
-                    <Grid container spacing={2} alignContent={"center"} >
-                        <Grid item xs={12}>
-                            <TopItemList itemList={this.state.rankitem}/>
-                        </Grid>
-                    </Grid>
+                    <TopItemList itemList={this.state.rankitem}/>
                 </Grid>
             </Grid>
-
         )
     }
 }

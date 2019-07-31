@@ -4,12 +4,10 @@
 
 import React, { Component } from 'react';
 import {Link, Redirect} from "react-router-dom";
-import {makeStyles} from "@material-ui/core";
-import DeleteIcon from '@material-ui/icons/Delete';
 import Collectform from "./collectform";
 import Alert from './alert';
-import { List, Avatar, Icon, Card, Pagination } from "antd";
-import '../css/listitem.css'
+import { List, Icon, Card, Pagination } from "antd";
+import '../index.css'
 import axios from 'axios';
 
 

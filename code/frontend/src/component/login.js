@@ -117,8 +117,10 @@ class Login extends Component{
             window.location.href("http://localhost:3000/#/");
         }
         return(
-            <Grid container  justify={"space-around"}>
+            <div id={"login"}>
                 <Alert content={this.state.content} cancelAlert={this.handleAlert} confirmAlert={this.handleAlert}/>
+            <Grid container  justify={"space-around"}>
+
                 <Typography variant={"h4"} component="h4">登录至Bamdb</Typography>
                 <Grid item xs={12}>
                     <br/><br/>
@@ -169,6 +171,7 @@ class Login extends Component{
                     </Grid>
                 </Grid>
             </Grid>
+            </div>
         );
     }
 }

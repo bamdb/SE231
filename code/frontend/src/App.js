@@ -67,7 +67,7 @@ class App extends Component{
                       <LeftBar collapsed={this.state.collapsed} toggleCollapesd={this.onCollapse} />
                   </Sider>
                   <Layout>
-                      <Header style={{background: '#fff', height: 50}}>
+                      <Header id={"header"}>
                       <Head />
                       </Header>
                       <Content style={{margin: '16px'}}>

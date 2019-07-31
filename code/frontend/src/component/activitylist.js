@@ -68,7 +68,6 @@ class Activitylist extends Component {
                 activities.map(activity=>{
                     if(activity.activity.actType>=1||activity.activity.actType<=5) {
                         rows.push(
-                            <ListItem className={useStyles.listitem}>
                                 <Activity
                                     userId={user.id}
                                     username={user.username}
@@ -77,9 +76,7 @@ class Activitylist extends Component {
                                     itemname={activity.item.itemname}
                                     itemid={activity.item.id}
                                 />
-                            </ListItem>
                         )
-                        rows.push(<Divider />)
                     }
                 })
             })

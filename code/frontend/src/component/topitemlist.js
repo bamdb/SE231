@@ -44,7 +44,7 @@ class TopItemList extends Component {
 
         return(
             <div>
-                <Grid container spacing={2} alignContent={"center"} justify={"flex-end"} wrap={"nowrap"}>
+                <Grid container spacing={2} justify={"flex-end"} wrap={"nowrap"}>
                     <Grid item xs={11} >
                         <br/>
                         <Typography variant={"subtitle1"} color={"textSecondary"} >排行榜</Typography>

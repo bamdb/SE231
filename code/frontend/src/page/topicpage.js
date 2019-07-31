@@ -1,7 +1,3 @@
-/*
- * 讨论区，参考知乎微博热评榜
- */
-
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import TopicList from "../component/topiclist";
@@ -43,7 +39,7 @@ class Topicpage extends Component{
             <Grid container direction={"row"} spacing={4} >
                 <Grid item xs={2} >
                     <br/>
-                    <Tags select={true} tagchange={this.handletagchange} /></Grid>
+                    <Tags select={true} tagchange={this.handletagchange} tags={["热血","王道","搞怪","不高兴","没头脑"]} /></Grid>
                 <Grid item xs={8} >
                     <Typography variant={"h6"} component={"h6"} align={"left"} >讨论版</Typography>
                     <Grid container spacing={0}>

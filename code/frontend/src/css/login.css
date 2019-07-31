@@ -1,13 +1,3 @@
-#login-root{
-    width: 100%;
-    height: 100%;
-}
-#login{
-    min-width: 600px;
-    width: 67%;
-    align-self: center;
-    vertical-align: center;
-}
 #divider-login{
     height: 200px;
 }

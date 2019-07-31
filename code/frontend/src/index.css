@@ -35,14 +35,20 @@ code {
     min-height: 125vh;
 }
 #sider{
-  background: #f9f0ff;
+  background: #fafafa;
 }
 #header{
-  padding: 10px;
+  background: #fafafa;
+  height: 50px;
   flex-wrap: nowrap;
 }
+#header-icon{
+  margin: 0;
+  padding: 0;
+}
 #bamdb{
-  width: 200px;
+  min-width: 144px;
+  margin-top: 10px;
 }
 
 #togglebutton{
@@ -58,4 +64,32 @@ code {
 
 #message{
   width:300px;
+}
+
+#login{
+  min-width: 424px;
+}
+
+#activity{
+  min-width: 440px;
+}
+#activity-divider{
+  margin: 0px;
+}
+
+#browser-item{
+  min-width: 600px;
+}
+
+#hot-item{
+  min-width: 184px;
+  margin: 8px;
+}
+
+#home-body{
+  min-width: 416px;
+}
+
+#home{
+  min-width: 700px;
 }

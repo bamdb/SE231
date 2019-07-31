@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
-
-import Paper from '@material-ui/core/Paper';
-import { Button, Radio, Icon } from 'antd';
-import '../css/progressmanage.css';
+import { Button, Icon } from 'antd';
+import '../index.css';
 import Scheduletable from './scheduletable'
 import Divider from '@material-ui/core/Divider';
-import Chip from '@material-ui/core/Chip';
-import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
 import axios from "axios"
 /*
  信息保存在state中，可以自行添加props或ajax
@@ -125,7 +119,7 @@ class Progressmanage extends Component {
         }
 
         return(
-            <div>
+            <div id={"home-body"}>
                 <br/>
                 <Typography variant={"subtitle1"} color={"textSecondary"} >我的图书</Typography>
                 <Divider />

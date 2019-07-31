@@ -40,11 +40,12 @@ class Head extends Component{
         const url="";
         return(
             <div >
-                <Grid container>
-                    <Grid item xs={3} id={"header"}>
+                <div id={"header"}>
+                <Grid container justify={"space-between"}>
+                    <Grid item xs={3} id={"bamdb"}>
                         <Typography variant="h6" noWrap color={"inherit"}>Bamdb</Typography>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item  id={"header-icon"}>
                     <Button type={"link"} >
                         <Icon type="login" style={{fontSize:18,paddingLeft:8}}  hidden={this.state.islogin} component={Link} to={'/login'}/>
                     </Button>
@@ -55,6 +56,7 @@ class Head extends Component{
                         </Badge>
                     </Grid>
                 </Grid>
+                </div>
                 <Drawer
                     anchor={"right"}
                     open={this.state.openMess}
