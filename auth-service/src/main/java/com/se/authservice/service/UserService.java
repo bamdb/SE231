@@ -21,6 +21,6 @@ public interface UserService {
     int verification(User user) throws Exception;
     String qrencode() throws Exception;
     void saveToken(String uuid, String accessToken);
-    String getToken(String uuid);
+//    String getToken(String uuid);
     byte[] getQrcode(String uuid);
 }

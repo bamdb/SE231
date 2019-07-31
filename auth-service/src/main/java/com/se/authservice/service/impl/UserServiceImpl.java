@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
@@ -46,6 +47,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource(name="redisDaoImpl")
     private RedisDao redisDao;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     private final ImageRepository imageRepository;
 
@@ -196,13 +200,12 @@ public class UserServiceImpl implements UserService {
 
     public String qrencode() throws Exception {
         String uuid = UUID.randomUUID().toString();
-        String imgPath = "http://lain.bgm.tv/pic/user/m/icon.jpg";
-        BufferedImage image = QRCodeUtil.createImage(uuid, imgPath, true);
+        String imgPath = "https://raw.githubusercontent.com/bamdb/SE231/master/code/frontend/public/bamdb.jpg";
+        BufferedImage image = QRCodeUtil.createImage(uuid, imgPath);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(image, "jpg", baos);
         Qrcode qrcode1 = new Qrcode(uuid, new Binary(baos.toByteArray()));
         imageRepository.save(qrcode1);
-        redisDao.setUuid(uuid, "");
         return uuid;
     }
 
@@ -215,10 +218,9 @@ public class UserServiceImpl implements UserService {
     }
 
     public void saveToken(String uuid, String accessToken) {
-        redisDao.setUuid(uuid, accessToken);
+        // notify qrcode login page
+        restTemplate.getForObject("http://47.103.107.39:8080/qrcode?token={1}&uuid={2}", void.class,
+                accessToken, uuid);
     }
 
-    public String getToken(String uuid) {
-        return redisDao.getUuid(uuid);
-    }
 }

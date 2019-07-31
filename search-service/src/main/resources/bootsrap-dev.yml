@@ -4,6 +4,8 @@ spring:
       discovery:
         enabled: false
       enabled: false
+  main:
+    allow-bean-definition-overriding: true
 eureka:
   client:
     serviceUrl:

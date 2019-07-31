@@ -1,6 +1,8 @@
 spring:
   application:
-    name: rating
+    name: search
+  main:
+    allow-bean-definition-overriding: true
   zipkin:
     base-url: http://202.120.40.8:30743
     sender:
@@ -10,6 +12,13 @@ spring:
   sleuth:
     sampler:
       probability: 1
+  data:
+    elasticsearch:
+      cluster-nodes: 202.120.40.8:30748
+      repositories:
+        enabled: true
+      cluster-name: bamdb
+
 eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}

@@ -96,5 +96,10 @@ after_success:
 - docker build -t $TOPIC:$COMMIT ./topic-service
 - docker tag $TOPIC:$COMMIT $TOPIC
 - docker push $TOPIC
-- apt install sshpass
-- sshpass -p $SSHPASS ssh root@47.103.107.39 < "echo 'hello' > hello"
+
+
+# SEARCH SERVICE
+- export SEARCH=bamdb/search-service
+- docker build -t $SEARCH:$COMMIT ./search-service
+- docker tag $SEARCH:$COMMIT $SEARCH
+- docker push $SEARCH

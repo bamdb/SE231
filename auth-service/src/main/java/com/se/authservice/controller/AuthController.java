@@ -41,11 +41,6 @@ public class AuthController {
         userService.saveToken(uuid, token);
     }
 
-    @GetMapping(value = "/gettoken")
-    public String getToken(@RequestParam("uuid") String uuid) {
-        return userService.getToken(uuid);
-    }
-
     @PostMapping(value = "/verify", produces = "application/json")
     public int verify(@RequestBody User user) throws Exception{
         return userService.verification(user);

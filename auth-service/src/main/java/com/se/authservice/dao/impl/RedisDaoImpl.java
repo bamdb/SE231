@@ -17,15 +17,15 @@ public class RedisDaoImpl implements RedisDao {
         redisTemplate.opsForValue().set(entry, value, 600, TimeUnit.SECONDS);
     }
 
-    public void setUuid(String entry, String value) {
-        redisTemplate.opsForValue().set(entry, value, 600, TimeUnit.SECONDS);
-    }
+//    public void setUuid(String entry, String value) {
+//        redisTemplate.opsForValue().set(entry, value, 600, TimeUnit.SECONDS);
+//    }
 
     public String get(int entry) {
         return (String)redisTemplate.opsForValue().get(entry);
     }
 
-    public String getUuid(String entry) {
-        return (String)redisTemplate.opsForValue().get(entry);
-    }
+//    public String getUuid(String entry) {
+//        return (String)redisTemplate.opsForValue().get(entry);
+//    }
 }
