@@ -14,7 +14,7 @@ spring:
       probability: 1
   data:
     elasticsearch:
-      cluster-nodes: 202.120.40.8:30748
+      cluster-nodes: 202.120.40.8:30748, 47.103.107.39:9300, 47.103.104.210:9300, 47.103.98.30:9300
       repositories:
         enabled: true
       cluster-name: bamdb
