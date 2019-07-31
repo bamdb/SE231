@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.OutputStream;
+import java.net.URL;
 import java.util.Hashtable;
 
 public class QRCodeUtil {
@@ -28,7 +29,7 @@ public class QRCodeUtil {
     // LOGO高度
     private static final int HEIGHT = 60;
 
-    public static BufferedImage createImage(String content, String imgPath, boolean needCompress) throws Exception {
+    public static BufferedImage createImage(String content, String imgPath) throws Exception {
         Hashtable hints = new Hashtable();
         hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
         hints.put(EncodeHintType.CHARACTER_SET, CHARSET);
@@ -43,93 +44,32 @@ public class QRCodeUtil {
                 image.setRGB(x, y, bitMatrix.get(x, y) ? 0xFF000000 : 0xFFFFFFFF);
             }
         }
-//        if (imgPath == null || "".equals(imgPath)) {
-//            return image;
-//        }
-        // 插入图片
-        QRCodeUtil.insertImage(image, imgPath, needCompress);
+        QRCodeUtil.insertImage(image, imgPath);
         return image;
     }
 
-    private static void insertImage(BufferedImage source, String imgPath, boolean needCompress) throws Exception {
-        File file = new File(imgPath);
-        if (!file.exists()) {
-            System.err.println("" + imgPath + "   该文件不存在！");
-            return;
-        }
-//        Image src = ImageIO.read(new File(imgPath));
-//        int width = src.getWidth(null);
-//        int height = src.getHeight(null);
-//        if (needCompress) { // 压缩LOGO
-//            if (width > WIDTH) {
-//                width = WIDTH;
-//            }
-//            if (height > HEIGHT) {
-//                height = HEIGHT;
-//            }
-//            Image image = src.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-//            BufferedImage tag = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-//            Graphics g = tag.getGraphics();
-//            g.drawImage(image, 0, 0, null); // 绘制缩小后的图
-//            g.dispose();
-//            src = image;
-//        }
-        // 插入LOGO
-//        Graphics2D graph = source.createGraphics();
-//        int x = (QRCODE_SIZE - width) / 2;
-//        int y = (QRCODE_SIZE - height) / 2;
-//        graph.drawImage(src, x, y, width, height, null);
-//        Shape shape = new RoundRectangle2D.Float(x, y, width, width, 6, 6);
-//        graph.setStroke(new BasicStroke(3f));
-//        graph.draw(shape);
-//        graph.dispose();
+    private static void insertImage(BufferedImage source, String imgPath) throws Exception {
+        URL url = new URL(imgPath);
+        BufferedImage img = ImageIO.read(url);
+        File file = new File("icon.jpg");
+        ImageIO.write(img, "jpg", file);
+        Image src = ImageIO.read(file);
+        int width = WIDTH;
+        int height = HEIGHT;
+        Image image = src.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        BufferedImage tag = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        Graphics g = tag.getGraphics();
+        g.drawImage(image, 0, 0, null); // 绘制缩小后的图
+        g.dispose();
+        src = image;
+
+        Graphics2D graph = source.createGraphics();
+        int x = (QRCODE_SIZE - width) / 2;
+        int y = (QRCODE_SIZE - height) / 2;
+        graph.drawImage(src, x, y, width, height, null);
+        Shape shape = new RoundRectangle2D.Float(x, y, width, width, 6, 6);
+        graph.setStroke(new BasicStroke(3f));
+        graph.draw(shape);
+        graph.dispose();
     }
-
-//    public void encode(String content, String imgPath, String filename, boolean needCompress) throws Exception {
-//
-//        // ImageIO.write(image, FORMAT_NAME, new File(destPath));
-//    }
-
-//    public BufferedImage encode(String content, String imgPath, boolean needCompress) throws Exception {
-//        BufferedImage image = QRCodeUtil.createImage(content, imgPath, needCompress);
-//        return image;
-//    }
-//
-//    public void encode(String content, String imgPath, String destPath) throws Exception {
-//        encode(content, imgPath, destPath, false);
-//    }
-//
-//    public void encode(String content, String destPath) throws Exception {
-//        encode(content, null, destPath, false);
-//    }
-//
-//    public static void encode(String content, String imgPath, OutputStream output, boolean needCompress)
-//            throws Exception {
-//        BufferedImage image = QRCodeUtil.createImage(content, imgPath, needCompress);
-//        ImageIO.write(image, FORMAT_NAME, output);
-//    }
-//
-//    public static void encode(String content, OutputStream output) throws Exception {
-//        QRCodeUtil.encode(content, null, output, false);
-//    }
-//
-//    public static String decode(File file) throws Exception {
-//        BufferedImage image;
-//        image = ImageIO.read(file);
-//        if (image == null) {
-//            return null;
-//        }
-//        BufferedImageLuminanceSource source = new BufferedImageLuminanceSource(image);
-//        BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-//        Result result;
-//        Hashtable hints = new Hashtable();
-//        hints.put(DecodeHintType.CHARACTER_SET, CHARSET);
-//        result = new MultiFormatReader().decode(bitmap, hints);
-//        String resultStr = result.getText();
-//        return resultStr;
-//    }
-//
-//    public static String decode(String path) throws Exception {
-//        return QRCodeUtil.decode(new File(path));
-//    }
 }

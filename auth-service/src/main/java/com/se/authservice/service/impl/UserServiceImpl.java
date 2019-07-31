@@ -201,12 +201,11 @@ public class UserServiceImpl implements UserService {
     public String qrencode() throws Exception {
         String uuid = UUID.randomUUID().toString();
         String imgPath = "http://lain.bgm.tv/pic/user/m/icon.jpg";
-        BufferedImage image = QRCodeUtil.createImage(uuid, imgPath, true);
+        BufferedImage image = QRCodeUtil.createImage(uuid, imgPath);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(image, "jpg", baos);
         Qrcode qrcode1 = new Qrcode(uuid, new Binary(baos.toByteArray()));
         imageRepository.save(qrcode1);
-//        redisDao.setUuid(uuid, "");
         return uuid;
     }
 
