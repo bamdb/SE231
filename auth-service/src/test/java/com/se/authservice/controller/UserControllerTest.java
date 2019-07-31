@@ -101,6 +101,7 @@ public class UserControllerTest {
                 .andExpect(status().isOk());
         Assert.assertNull(userService.selectByUsername("root"));
 
+
         MvcResult mvcResult = mvc.perform(post("/verify")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"bamdb@outlook.com\", \"img_url\":null, \"role\":0}"))
