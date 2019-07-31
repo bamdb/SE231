@@ -53,7 +53,7 @@
         <module>topic-service</module>
         <module>message-service</module>
         <module>friend-service</module>
-        <module>search-service</module>
+<!--        <module>search-service</module>-->
         <module>auth-service</module>
     </modules>
 </project>
