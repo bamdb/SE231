@@ -36,7 +36,6 @@ after_success:
 - docker build -t $CONFIG:$COMMIT ./config-server
 - docker tag $CONFIG:$COMMIT $CONFIG
 - docker push $CONFIG
-
 # ACTIVITY SERVICE
 - export ACTIVITY=bamdb/activity-service
 - docker build -t $ACTIVITY:$COMMIT ./activity-service
