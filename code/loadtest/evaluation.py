@@ -111,7 +111,7 @@ class DataAnalyse:
         for col in headers[1:2]:  # 取消掉所有非int型的空格
             self.data[col] = self.data[col].apply(lambda x: x.strip())
         self.xdata = self.data['client']
-        self.ydata = self.data['Max response time']
+        self.ydata = self.data['# failures']
         # self.sorted_data = self.data.sort_values(by=['client'], ascending=[True])  # 对数据按照time和name进行降序排列
         # self.grouped_data = self.sorted_data.groupby('client')  # 对降序排列的数据，按名称分组
         # self.requests_counts = np.array([[key, len(group)] for key, group in self.grouped_data])  # 构建请求名和请求次数数组
@@ -143,7 +143,7 @@ class DataAnalyse:
 
         self.ax_plot = plt.axes(self.trend_scatter)  # 套用axes大小
         self.ax_plot.grid(True)  # 打开网格
-        self.ax_plot.set_ylabel('Max Response Time(ms)')  # 纵坐标标题
+        self.ax_plot.set_ylabel('failures/8000reqs')  # 纵坐标标题
         self.ax_plot.set_xlabel('Concurrent client amount')  # 横坐标标题
         # self.ax_plot.figure.set_size_inches(15, 8)  # 画板大小
         # self.ax_plot.xaxis.set_yscale('linear')
@@ -172,7 +172,7 @@ class DataAnalyse:
 
         plt.plot(self.xdata, self.ydata)
         plt.title("load-test")
-        plt.savefig(fname='.'.join(['./evaluation_max', 'png']))  # 保存趋势图
+        plt.savefig(fname='.'.join(['./evaluation_failure', 'png']))  # 保存趋势图
         # plt.show()  # 打印趋势图
 
 
