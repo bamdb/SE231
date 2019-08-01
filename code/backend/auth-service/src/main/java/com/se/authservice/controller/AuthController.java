@@ -1,14 +1,17 @@
 package com.se.authservice.controller;
 
 import com.se.authservice.entity.User;
+import com.se.authservice.helper.QRCodeUtil;
 import com.se.authservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.annotation.Resource;
+import javax.security.auth.login.AccountExpiredException;
 import javax.transaction.Transactional;
 
 @RestController
@@ -23,17 +26,37 @@ public class AuthController {
         this.defaultTokenServices = defaultTokenServices;
     }
 
-    @PostMapping(value = "/signup", produces = "application/json")
-    public User create(@RequestBody User user) {
+    @GetMapping(value = "/uuid")
+    public String uuid() throws Exception {
+        return userService.qrencode();
+    }
+
+    @GetMapping(value = "/qrcode")
+    public byte[] qrcode(String uuid) {
+        return userService.getQrcode(uuid);
+    }
+
+    @PutMapping(value = "/settoken")
+    public void setToken(@RequestParam("uuid") String uuid, @RequestParam("token") String token) {
+        userService.saveToken(uuid, token);
+    }
+
+    @PostMapping(value = "/verify", produces = "application/json")
+    public int verify(@RequestBody User user) throws Exception{
+        return userService.verification(user);
+    }
+
+    @GetMapping(value = "/signup", produces = "application/json")
+    public RedirectView create(@RequestParam int hashCode) {
         User u = new User();
         try {
-            u = userService.create(user);
+            u = userService.create(hashCode);
         } catch (IllegalArgumentException e){
             return null;
         } finally {
             userService.changeRole(u.getUsername(), "ROLE_USER", "+");
         }
-        return u;
+        return new RedirectView("http://www.bamdb.cn");
     }
 
     @PreAuthorize("hasRole('USER')")

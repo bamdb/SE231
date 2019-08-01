@@ -55,5 +55,6 @@ public class Progress {
         this.chapters = chapters;
     }
 
-
+    public Progress() {
+    }
 }

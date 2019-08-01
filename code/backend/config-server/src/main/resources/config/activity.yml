@@ -2,15 +2,19 @@ spring:
   application:
     name: activity
 server:
-  port: ${PORT:0}
+  port: 8090
+
+eureka:
+  instance:
+    hostname: activity
 
 security:
   oauth2:
     client:
       clientId: activity-service
       clientSecret: activity-service
-      accessTokenUri: http://localhost:8000/auth/oauth/token
+      accessTokenUri: http://gateway:8000/auth/oauth/token
       grant-type: client_credentials
       scope: server
     resource:
-      user-info-uri: http://localhost:8000/auth/all
+      user-info-uri: http://gateway:8000/auth/user

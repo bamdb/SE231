@@ -48,9 +48,11 @@ public class ItemController {
         itemService.postItemRelation(priorId, subsequentId, relateType);
     }
 
-    @PreAuthorize("hasRole('USER') and userId == authentication.principal.id || hasRole('EDITOR')")
+    @PreAuthorize("hasRole('USER') and #userId == authentication.principal.id or hasRole('EDITOR')")
     @PostMapping(value = "/add/tag")
-    public Itemtag postTag(@RequestParam("itemId") Long itemId, @RequestParam("userId") Long userId, @RequestBody List<String> tagList) {
+    public Itemtag postTag(@RequestParam("itemId") Long itemId,
+                           @RequestParam("userId") Long userId,
+                           @RequestBody List<String> tagList) {
         return itemService.postItemTag(itemId, userId, tagList);
     }
 
@@ -67,7 +69,7 @@ public class ItemController {
         itemService.deleteItemRelationById(itemId, relatedItemId);
     }
 
-    @PreAuthorize("hasRole('USER') and userId == authentication.principal.id || hasRole('EDITOR')")
+    @PreAuthorize("hasRole('USER') and #userId == authentication.principal.id or hasRole('EDITOR')")
     @DeleteMapping(value = "/delete/tag")
     public void deleteTag(@RequestParam("itemId") Long itemId, @RequestParam("userId") Long userId, @RequestBody List<String> tagList) {
         itemService.deleteItemTag(itemId, userId, tagList);

@@ -3,17 +3,28 @@ spring:
     name: activity
   datasource:
     master:
-      jdbcUrl: jdbc:mysql://localhost:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
-      username: root
-      password: 610878
+      jdbcUrl: jdbc:mysql://202.120.40.8:30745/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
+      username: bamdb
+      password: bamdb
       driver-class-name: com.mysql.cj.jdbc.Driver
-      testWhileIdle: true
-      validationQuery: SELECT 1
     slave:
-      jdbcUrl: jdbc:mysql://localhost:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
-      username: root
-      password: 610878
+      jdbcUrl: jdbc:mysql://47.102.207.87:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
+      username: bamdb
+      password: bamdb
       driver-class-name: com.mysql.cj.jdbc.Driver
+#  datasource:
+#    master:
+#      jdbcUrl: jdbc:mysql://localhost:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
+#      username: root
+#      password: 610878
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      testWhileIdle: true
+#      validationQuery: SELECT 1
+#    slave:
+#      jdbcUrl: jdbc:mysql://localhost:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
+#      username: root
+#      password: 610878
+#      driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
     hibernate:
@@ -22,9 +33,33 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
         enable_lazy_load_no_trans: true
+#  data:
+#    mongodb:
+#      uri: mongodb://localhost:27017/bamdb
   data:
     mongodb:
-      uri: mongodb://localhost:27017/bamdb
+      uri: mongodb://202.120.40.8:30746/bamdb?connectTimeoutMS=20000&heartbeatFrequencyMS=5000&localThresholdMS=3000&maxIdleTimeMS=5000&serverSelectionTimeoutMS=15000&socketTimeoutMS=7500
+      options:
+        connectTimeoutMS: 20000
+        heartbeatFrequencyMS: 5000
+        localThresholdMS: 3000
+        maxIdleTimeMS: 5000
+        serverSelectionTimeoutMS: 15000
+        socketTimeoutMS: 7500
+  zipkin:
+    base-url: http://localhost:9411
+    sender:
+      type: web
+    enabled: true
+    discovery-client-enabled: true
+  sleuth:
+    sampler:
+      probability: 1
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
@@ -38,13 +73,25 @@ security:
     client:
       clientId: activity-service
       clientSecret: activity-service
-      accessTokenUri: http://localhost:8000/auth/oauth/token
+      accessTokenUri: http://202.120.40.8:30741/auth/oauth/token
       grant-type: client_credentials
       scope: server
     resource:
-      user-info-uri: http://localhost:8000/auth/user
+      user-info-uri: http://202.120.40.8:30741/auth/user
 management:
   endpoints:
     web:
       exposure:
         include: '*'
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+feign:
+  hystrix:
+    enabled: true

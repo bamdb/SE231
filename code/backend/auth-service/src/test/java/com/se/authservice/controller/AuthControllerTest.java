@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.se.authservice.config.MethodSecurityConfig;
 import com.se.authservice.config.ResourceServer;
 import com.se.authservice.entity.User;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -25,7 +27,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -50,25 +52,56 @@ public class AuthControllerTest {
     }
 
     @Test
+    public void testQrcode() throws Exception {
+        MvcResult mvcResult = mvc.perform(get("/uuid"))
+                .andReturn();
+        String uuid = mvcResult.getResponse().getContentAsString();
+        mvc.perform(get("/qrcode"));
+        mvc.perform(put("/settoken?uuid="+uuid+"&token=tokentest"));
+    }
+
+    @Test
     public void testController() throws  Exception{
         MultiValueMap<String, String> mm = new LinkedMultiValueMap<>();
-        User user = new User("john", "123");
+        MultiValueMap<String, String> mm1 = new LinkedMultiValueMap<>();
+        MultiValueMap<String, String> mm2 = new LinkedMultiValueMap<>();
 
-        mvc.perform(post("/signup")
-                .content(JSON.toJSONString(user))
-                .contentType(MediaType.APPLICATION_JSON))
-                .andDo(MockMvcResultHandlers.print())
+        MvcResult mvcResult = mvc.perform(post("/verify")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\":\"john\", \"password\":\"123\", \"mail\":\"isalb@qq.com\", \"img_url\":null}"))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
+                .andReturn();
+
+        int result = Integer.valueOf(mvcResult.getResponse().getContentAsString());
+
+        mvc.perform(get("/signup?hashCode="+result))
+                .andExpect(status().isMovedTemporarily());
+        mvc.perform(get("/signup?hashCode=0"))
+                .andExpect(status().isUnauthorized());
+
         authController.revokeToken("00");
         mm.add("username", "john");
         mm.add("operation", "-");
+        mm1.add("username", "johnnull");
+        mm1.add("operation", "-");
+        mm2.add("username", "john");
+        mm2.add("operation", "#");
 
         mvc.perform(post("/grant/role/ROLE_ADMIN")
                 .params(mm)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
+        mvc.perform(post("/grant/role/ROLE_ADMIN")
+                .params(mm1)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is(666));
+        mvc.perform(post("/grant/role/ROLE_ADMIN")
+                .params(mm2)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is(666));
 
         mm.remove("operation");
         mm.add("operation", "+");
@@ -78,6 +111,14 @@ public class AuthControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
+        mm.remove("operation");
+        mm.add("operation", "#");
+        mvc.perform(post("/grant/role/ROLE_ADMIN")
+                .params(mm)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is(666));
+
         mm.remove("operation");
         mm.add("operation", "+");
 
@@ -101,7 +142,8 @@ public class AuthControllerTest {
                 .andExpect(status().isOk());
         mm.remove("operation");
         mm.add("operation", "-");
-        mvc.perform(post("/revoke/authority/comment").with(user("admin").roles("USER","ADMIN"))
+        mvc.perform(post("/revoke/authority/comment")
+                .with(user("admin").roles("USER","ADMIN"))
                 .params(mm)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
@@ -113,7 +155,15 @@ public class AuthControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
-
-
+        mvc.perform(post("/revoke/authority/comment").with(user("admin").roles("USER","ADMIN"))
+                .params(mm1)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is(777));
+        mvc.perform(post("/revoke/authority/comment").with(user("admin").roles("USER","ADMIN"))
+                .params(mm2)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is(777));
     }
 }

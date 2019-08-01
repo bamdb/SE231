@@ -55,6 +55,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/*").permitAll()
                 .antMatchers("/itemid/*").permitAll()
                 .antMatchers("/userid/*").permitAll()
+                .antMatchers("/actuator/**").permitAll()
                 .anyRequest()
                 .authenticated().and().csrf().disable();
     }

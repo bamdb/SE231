@@ -112,6 +112,11 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
                 .withClient("topic-service")
                 .secret(encoder.encode("topic-service"))
                 .authorizedGrantTypes("client_credentials", "refresh_token")
+                .scopes("server")
+                .and()
+                .withClient("search-service")
+                .secret(encoder.encode("search-service"))
+                .authorizedGrantTypes("client_credentials", "refresh_token")
                 .scopes("server");
     }
 

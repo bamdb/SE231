@@ -3,9 +3,10 @@ package com.se.topicservice;
 import com.github.tomakehurst.wiremock.junit.WireMockClassRule;
 import com.netflix.loadbalancer.Server;
 import com.netflix.loadbalancer.ServerList;
-import com.se.topicservice.client.UserClient;
+//import com.se.topicservice.client.UserClient;
 import com.se.topicservice.config.MethodSecurityConfig;
 import com.se.topicservice.config.ResourceServer;
+import com.se.topicservice.dao.MongoDao;
 import com.se.topicservice.dao.WriteDao;
 import com.se.topicservice.entity.Topic;
 import com.se.topicservice.entity.User;
@@ -70,8 +71,9 @@ public class TopicServiceApplicationTests {
     public static WireMockClassRule wiremock = new WireMockClassRule(
             wireMockConfig().dynamicPort());
 
-    @Autowired
-    UserClient userClient;
+    @Resource(name="mongoDaoImpl")
+    private MongoDao mongoDao;
+
 
     @Test
     public void controllerTest() throws Exception {
@@ -93,7 +95,6 @@ public class TopicServiceApplicationTests {
         user.setRole(1);
         user.setUsername("a");
         user.setImgUrl(null);
-        userClient.postUser(user);
         mvc.perform(post("/add")
                 .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -113,6 +114,7 @@ public class TopicServiceApplicationTests {
                 .andExpect(status().isOk());
 
         Topic topic = topicService.selectAll().iterator().next();
+
         mvc.perform(post("/add/reply?topicId="+topic.getId()+"&userId=0")
                 .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -123,6 +125,7 @@ public class TopicServiceApplicationTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("A reply"))
                 .andExpect(status().isOk());
+        mongoDao.deleteById(String.valueOf(topic.getId()));
         mvc.perform(post("/add/reply?topicId="+topic.getId()+"&userId="+topic.getUserId())
                 .header("Authorization", "0")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -143,7 +146,6 @@ public class TopicServiceApplicationTests {
         user.setRole(1);
         user.setUsername("a");
         user.setImgUrl(null);
-        userClient.postUser(user);
 
         mvc.perform(post("/add")
                 .header("Authorization", "0")
@@ -172,7 +174,6 @@ public class TopicServiceApplicationTests {
         user.setRole(1);
         user.setUsername("a");
         user.setImgUrl(null);
-        userClient.postUser(user);
 
         Topic topic1 = new Topic();
         topic1.setPubTime(Timestamp.valueOf("2019-07-01 08:00:00"));
@@ -224,6 +225,9 @@ public class TopicServiceApplicationTests {
                 .andExpect(status().isOk());
         mvc.perform(delete("/delete/reply?topicId="+topic.getId()+"&replyId=1"))
                 .andExpect(status().isOk());
+        mongoDao.deleteById(String.valueOf(topic.getId()));
+        mvc.perform(delete("/delete/reply?topicId="+topic.getId()+"&replyId=1"))
+                .andExpect(status().isOk());
 
         mvc.perform(delete("/delete/id/"+topic.getId()))
                 .andExpect(status().isOk());
@@ -236,23 +240,18 @@ public class TopicServiceApplicationTests {
         user.setRole(1);
         user.setUsername("a");
         user.setImgUrl(null);
-        userClient.postUser(user);
+
         User user1 = new User();
         user1.setId(1L);
         user1.setRole(1);
         user1.setUsername("a");
         user1.setImgUrl(null);
-        userClient.postUser(user1);
+
         User user2 = new User();
         user2.setId(1L);
         user2.setRole(1);
         user2.setUsername("a");
         user2.setImgUrl(null);
-        userClient.postUser(user2);
-
-        userClient.getUserById(0L);
-        userClient.getUserById(1L);
-        userClient.getUserById(100L);
     }
 
 

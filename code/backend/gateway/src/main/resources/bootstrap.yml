@@ -4,8 +4,8 @@ spring:
       discovery:
         service-id: config
         enabled: true
-      name: gateway, ribbon
+      name: gateway, ribbon, rabbitmq
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://bamdb:bamdb@localhost:8761/eureka/
+      defaultZone: http://bamdb:bamdb@registry:8761/eureka/

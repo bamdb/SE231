@@ -30,27 +30,21 @@ public class ActivityController {
         return activityService.postActivity(activity);
     }
 
-    @PreAuthorize("hasRole('USER')")
     @GetMapping(value ="/all", produces ="application/json")
     public Iterable<Activity> getAllActivities() {
         return activityService.selectAll();
     }
 
-    @PreAuthorize("hasRole('USER')")
     @GetMapping(value ="/id/{activityId}", produces ="application/json")
     public Activity getActivityById(@PathVariable("activityId") Long activityId) {
         return activityService.selectById(activityId);
     }
 
-    @PreAuthorize("hasRole('USER')")
     @GetMapping(value="/userid/{userId}", produces="application/json")
-    public List<ActivityItemOut> getActivityByUserId(@PathVariable("userId") Long userId,
-                                                     @RequestHeader("Authorization") String accessToken) {
-        FeignRequestInterceptor.accessToken = accessToken;
+    public List<ActivityItemOut> getActivityByUserId(@PathVariable("userId") Long userId) {
         return activityService.selectByUserId(userId);
     }
 
-    @PreAuthorize("hasRole('USER')")
     @GetMapping(value="/itemid/{itemId}", produces="application/json")
     public Iterable<Activity> getActivityByItemId(@PathVariable("itemId") Long itemId,
                                                   @RequestHeader("Authorization") String accessToken) {
@@ -58,7 +52,6 @@ public class ActivityController {
         return activityService.selectByItemId(itemId);
     }
 
-    @PreAuthorize("hasRole('USER')")
     @GetMapping(value="/collect", produces="application/json")
     public ActivityUserOut getActivityByItemIdAndUserId(@RequestParam("userId") Long userId,
                                                         @RequestParam("itemId") Long itemId,
@@ -67,15 +60,13 @@ public class ActivityController {
         return activityService.selectByUserIdAndItemId(userId, itemId);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     @GetMapping(value="/progress")
     public Progress getProgress(@RequestParam("userId") Long userId,
-                                @RequestParam("itemId") Long itemId,
-                                @RequestHeader("Authorization") String accessToken) {
-        FeignRequestInterceptor.accessToken = accessToken;
+                                @RequestParam("itemId") Long itemId) {
+       // FeignRequestInterceptor.accessToken = accessToken;
         return activityService.selectProgress(userId, itemId);
     }
-
     /*TO BE REVISED*/
     @PreAuthorize("hasRole('USER')")
     @DeleteMapping(value="/delete/id/{activityId}")
@@ -99,6 +90,7 @@ public class ActivityController {
     public ResponseEntity<?> deleteActivityByItemId(@PathVariable("itemId") Long itemId) {
         return activityService.deleteActivityByItemId(itemId);
     }
+
 
     @PreAuthorize("#progress.getUserId() == authentication.principal.id")
     @PutMapping(value="/update/progress")

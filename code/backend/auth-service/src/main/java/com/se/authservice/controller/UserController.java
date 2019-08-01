@@ -16,7 +16,6 @@ public class UserController {
     @Resource(name="userServiceImpl")
     private UserService userService;
 
-    @PreAuthorize("#oauth2.hasScope('server')")
     @GetMapping(value ="/id/{id}", produces ="application/json")
     public User getUser(@PathVariable("id") Long id) {
         User user = userService.selectUserById(id);
@@ -28,6 +27,7 @@ public class UserController {
     @GetMapping(value ="/user", produces ="application/json")
     public Principal getUser(Authentication authentication) {
         User user = userService.selectByUsername(authentication.getName());
+        if (user == null) return null;
         MyPrincipal myPrincipal = new MyPrincipal();
         myPrincipal.setUsername(user.getUsername());
         myPrincipal.setAuthorities(user.getAuthorities());

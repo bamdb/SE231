@@ -4,10 +4,10 @@ spring:
       discovery:
         service-id: config
         enabled: true
-      name: topic, mysql, mongo, uniconfig
+      name: topic, mysql, mongo, uniconfig, rabbitmq
   main:
     allow-bean-definition-overriding: true
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://bamdb:bamdb@localhost:8761/eureka/
+      defaultZone: http://bamdb:bamdb@registry:8761/eureka/
