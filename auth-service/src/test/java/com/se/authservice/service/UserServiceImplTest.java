@@ -47,6 +47,7 @@ public class UserServiceImplTest {
         }catch (IllegalAccessError e) {
             Assert.assertTrue(true);
         }
+
     }
 
     @Test
@@ -57,5 +58,10 @@ public class UserServiceImplTest {
         ByteArrayInputStream in = new ByteArrayInputStream(qrcode);
         BufferedImage image = ImageIO.read(in);
         userService.saveToken(uuid , "token");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void exceptionTest() {
+        userService.create(0);
     }
 }

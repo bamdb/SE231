@@ -48,7 +48,7 @@ public class CommentController {
         return ResponseEntity.ok().body("Delete item successfully!");
     }
 
-    @PreAuthorize("hasRole('USER') and #comment.getUserId == authentication.principal.id")
+    @PreAuthorize("hasRole('USER') and #comment.getUserId() == authentication.principal.id")
     @PostMapping("/insert")
     public Comment insertComment(@RequestBody Comment comment) {
         return commentService.insertComment(comment);
