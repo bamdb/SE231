@@ -45,6 +45,7 @@ code for summer project
 * bamdb2-worker2: 4 vCPU | 8 GiB | Ubuntu 18.04
 * aliyun1:  1 vCPU | 2 GiB | Ubuntu 18.04
 * aliyun2:   1 vCPU | 2 GiB | Ubuntu 18.04
+* bamdb-elastic 4vCPU | 16GiB | Ubuntu 18.04
 * bandwagon:   1 vCPU | 2 GiB | Centos 7
 
 
@@ -65,11 +66,16 @@ code for summer project
         * bamdb | bamdb1 | bamdb2
     * slave
         * ubuntularge | aliyun1 | aliyun2
+* ElasticSearch集群
+    * master
+    	* ubuntularge node.data=false
+    * slave
+    	* bamdb-elastic node.data=true
 * 微服务架构
 	* spring cloud
 	* zuul
 	* eureka 端口8761
-    * 12 microservices
+    * 13 microservices
     * in 9 servers | 3 clusters
 		* manager
 			* bamdb | bamdb1 | bamdb2
@@ -85,11 +91,11 @@ code for summer project
 	* 自动部署
 	* 物理资源调度
 * 监控
-    * zipkin 端口30743
-    * prometheus+Grafana 端口30744
+    * zipkin
+    * prometheus+Grafana
     * rabbitMQ日志管理和消息传递
-	* aliyun
-    * elk+filebeat 端口30749
+    * aliyun
+    * elk+filebeat
 * 消息中间件
 	* WebSocket协议
 * RESTful
