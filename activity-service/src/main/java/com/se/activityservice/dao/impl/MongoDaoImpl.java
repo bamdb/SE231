@@ -17,8 +17,8 @@ public class MongoDaoImpl implements MongoDao {
     }
 
     @Override
-    public Progress findByItemIdAndUserId(Long userId, Long itemId) {
-        return progressRepository.findByItemIdAndUserId(userId, itemId).orElse(null);
+    public Progress findByUserIdAndItemId(Long userId, Long itemId) {
+        return progressRepository.findByUserIdAndItemId(userId, itemId).orElse(null);
     }
 
     @Override

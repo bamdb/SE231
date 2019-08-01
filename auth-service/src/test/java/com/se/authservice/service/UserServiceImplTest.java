@@ -1,6 +1,7 @@
 package com.se.authservice.service;
 
 import com.se.authservice.entity.User;
+import com.se.authservice.helper.QRCodeUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,6 +53,7 @@ public class UserServiceImplTest {
 
     @Test
     public void testQrcode() throws Exception {
+        QRCodeUtil qrCodeUtil = new QRCodeUtil();
         String uuid = userService.qrencode();
         userService.getQrcode("000");
         byte[] qrcode = userService.getQrcode(uuid);
