@@ -168,9 +168,11 @@ class Listitem extends Component {
                                 title={<Link to={item.href} target={'_blank'}>{item.title}</Link>}
                                 description={
                                     <div>
-                                        <div style={{wrap:"nowrap"}}>评分：{item.score}  排名：{item.rank}</div>
-                                        <div>作者：{item.author}</div>
-                                    </div>}
+                                        <p>评分：{item.score}</p>
+                                        <p>排名：{item.rank}</p>
+                                        <p>作者：{item.author}</p>
+                                    </div>
+                                }
                             />
                         </Card>
                     </List.Item>

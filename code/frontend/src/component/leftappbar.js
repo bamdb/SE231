@@ -399,6 +399,7 @@ class LeftBar extends Component {
         const isUser = (localStorage.getItem("role")=='ROLE_USER');
         const isEditor = (localStorage.getItem("role")=='ROLE_EDITOR');
         const imgurl = localStorage.getItem("userid") ? "http://202.120.40.8:30741/image/id/"+localStorage.getItem("userid")+"0" : require("../default_avater.jpg");
+        const notLogin = (this.state.username == "游客")
         return(
             <div>
                 <Button id={"togglebutton"} type={"link"} onClick={this.toggleCollapsed}  >
@@ -431,10 +432,10 @@ class LeftBar extends Component {
                     <Menu.Item key="7">
                         <Link to={'/topic'}><Icon type="coffee" /><span>讨论区</span></Link>
                     </Menu.Item>
-                    <Menu.Item key="8" hidden={isUser}>
+                    <Menu.Item key="8" hidden={notLogin||isUser}>
                         <Link to={'/editor'}><Icon type="edit" /><span>编辑</span></Link>
                     </Menu.Item>
-                    <Menu.Item key="9" hidden={isUser||isEditor}>
+                    <Menu.Item key="9" hidden={notLogin||isUser||isEditor}>
                         <Link to={'/admin'}><Icon type="profile" /><span>管理中心</span></Link>
                     </Menu.Item>
                     <Menu.Divider style={{margin:20}}/>
