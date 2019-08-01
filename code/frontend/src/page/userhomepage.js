@@ -39,17 +39,12 @@ class Userhomepage extends Component{
             )
         }
         else{
-            window.location.href="/#/login";
+            //window.location.href="/#/login";
         }
     }
 
     render(){
-        const search=<TextField
-            id="outlined-dense"
-            label="Search"
-            margin="dense"
-            variant="outlined"
-        />;
+
         return(
             <Grid container justify={"space-around"} >
                 <Grid item xs={9}>
