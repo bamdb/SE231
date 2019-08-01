@@ -1,8 +1,0 @@
-"Method","Name","# requests","# failures","Median response time","Average response time","Min response time","Max response time","Average Content Size","Requests/s"
-"GET","//item/all",12608,2,340,475,14,8049,416,197.75
-"GET","//item/id/1",4218,0,370,425,20,5668,137,66.16
-"GET","//item/id/2",4220,0,370,425,21,7578,138,66.19
-"GET","//item/id/3",4100,0,360,417,16,8106,138,64.31
-"GET","//user/all",8396,1,330,453,11,7527,153,131.69
-"GET","//user/id/1",8340,0,350,402,13,7783,152,130.81
-"None","Total",41882,3,340,440,11,8106,227,656.90
