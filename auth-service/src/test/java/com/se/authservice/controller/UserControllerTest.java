@@ -73,10 +73,12 @@ public class UserControllerTest {
         MultiValueMap<String, String> mm = new LinkedMultiValueMap<>();
         MultiValueMap<String, String> mm1 = new LinkedMultiValueMap<>();
 
-        mvc.perform(put("/update/root").params(mm))
+        mvc.perform(put("/update/root")
+                .params(mm))
                 .andExpect(status().isOk());
 
-        mvc.perform(put("/update/notroot").params(mm))
+        mvc.perform(put("/update/notroot")
+                .params(mm))
                 .andExpect(status().isOk());
 
         mm.add("password","bamd");
@@ -101,6 +103,7 @@ public class UserControllerTest {
                 .andExpect(status().isOk());
         Assert.assertNull(userService.selectByUsername("root"));
 
+
         MvcResult mvcResult = mvc.perform(post("/verify")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"username\":\"root\", \"password\":\"bamdb\", \"mail\":\"bamdb@outlook.com\", \"img_url\":null, \"role\":0}"))
@@ -111,6 +114,8 @@ public class UserControllerTest {
                 .andExpect(status().is3xxRedirection());
 
         Long id = userService.selectAll().iterator().next().getId();
+        mvc.perform(get("/id/" + id).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
         mvc.perform(delete("/delete/id/" + id))
                 .andExpect(status().isOk());
         Assert.assertNull(userService.selectUserById(id));
@@ -122,16 +127,13 @@ public class UserControllerTest {
     @Test
     public void controllerTest() throws  Exception{
 
-        mvc.perform(get("/all").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/all")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         mvc.perform(get("/id/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        mvc.perform(get("/id/0").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
 
-        mvc.perform(get("/username/root").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
         mvc.perform(get("/username/no").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()).andExpect(MockMvcResultMatchers.content().string(""));
     }
@@ -155,10 +157,19 @@ public class UserControllerTest {
         int result = Integer.valueOf(mvcResult.getResponse().getContentAsString());
         mvc.perform(get("/signup?hashCode="+result))
                 .andExpect(status().is3xxRedirection());
-
+        mvc.perform(get("/username/root").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
         mvc.perform(get("/user")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("root"));
     }
+    @Test
+    @WithMockUser(username = "no", password = "bamdb", roles = "USER")
+    public void addTest() throws Exception{
+        mvc.perform(get("/user")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
 }

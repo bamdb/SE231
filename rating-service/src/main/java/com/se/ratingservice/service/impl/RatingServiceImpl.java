@@ -104,6 +104,7 @@ public class RatingServiceImpl implements RatingService {
         Sort sort = new Sort(Sort.Direction.DESC, "avgScore");
         PageRequest pageRequest = PageRequest.of(pageNum, pageSize, sort);
         Page<Rating> ratingPage = ratingReadDao.findAllByType(type, pageRequest);
+        Integer totalPage = ratingPage.getTotalPages();
         List<Rating> ratingList = ratingPage.getContent();
         List<RatingOut> ratingOuts = new ArrayList<>();
         for (Rating rating : ratingList) {
@@ -116,6 +117,7 @@ public class RatingServiceImpl implements RatingService {
                 Integer rank = 1 + ratingReadDao.findRankByTypeAndItemId(rating.getType(), rating.getAvgScore());
                 rating.setRank(rank);
                 ratingOut.setItem(item);
+                ratingOut.setTotalPage(totalPage);
                 ratingOuts.add(ratingOut);
             }
         }

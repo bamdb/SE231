@@ -5,6 +5,7 @@ import com.se.authservice.entity.User;
 import com.se.authservice.service.UserService;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,5 +26,8 @@ public class UserTest {
         u.setRoles(Arrays.asList(new Role(3L, "ROLE_USER"),new Role(1L, "ROLE_ADMIN")));
         Assert.assertNotNull(u.getAuthorities());
         Assert.assertTrue(u.isEnabled());
+        u.setRoles(null);
+        Assert.assertEquals(0, u.getAuthorities().size());
     }
+
 }

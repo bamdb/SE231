@@ -84,8 +84,8 @@ public class AuthControllerTest {
         mm.add("operation", "-");
         mm1.add("username", "johnnull");
         mm1.add("operation", "-");
-        mm2.add("username", "johnnull");
-        mm2.add("operation", "-");
+        mm2.add("username", "john");
+        mm2.add("operation", "#");
 
         mvc.perform(post("/grant/role/ROLE_ADMIN")
                 .params(mm)
@@ -112,6 +112,14 @@ public class AuthControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
         mm.remove("operation");
+        mm.add("operation", "#");
+        mvc.perform(post("/grant/role/ROLE_ADMIN")
+                .params(mm)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is(666));
+
+        mm.remove("operation");
         mm.add("operation", "+");
 
 
@@ -134,7 +142,8 @@ public class AuthControllerTest {
                 .andExpect(status().isOk());
         mm.remove("operation");
         mm.add("operation", "-");
-        mvc.perform(post("/revoke/authority/comment").with(user("admin").roles("USER","ADMIN"))
+        mvc.perform(post("/revoke/authority/comment")
+                .with(user("admin").roles("USER","ADMIN"))
                 .params(mm)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
