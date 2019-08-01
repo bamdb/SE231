@@ -191,8 +191,13 @@ class Listitem extends Component {
                             <Meta
                                 style={{margin:0}}
                                 title={<Link to={item.href} target={'_blank'}>{item.title}</Link>}
-                                description={"评分："+item.score+'\n'+"排名：" +item.rank +'\n'
-                                            +"This is description."}
+                                description={
+                                    <div>
+                                        <p>评分：{item.score}</p>
+                                        <p>排名：{item.rank}</p>
+                                        <p>作者：{item.author}</p>
+                                    </div>
+                                }
                             />
                         </Card>
                     </List.Item>
