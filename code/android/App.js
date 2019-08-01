@@ -25,7 +25,7 @@ import Itemdetail from './src/itemdetail'
 import Topicpage from './src/topicpage'
 import Activitypage from './src/activity'
 import Topicdetail from './src/topicdetail'
-
+import Collect from './src/collect'
 import userinfo from "./src/userinfo";
 import camera2 from "./src/camera";
 
@@ -98,8 +98,39 @@ const AppNavigator = createMaterialBottomTabNavigator({
         )
       }
     },
-    Camera:{
-      screen:camera2
+    Collect: {
+      screen: Collect,
+      navigationOptions: {
+        tabBarIcon: ({
+          tintColor
+        }) => ( <
+          Icon name = 'bell'
+          color = {
+            tintColor
+          }
+          size = {
+            24
+          }
+          />
+        )
+      }
+    },
+    scanning:{
+      screen:camera2,
+      navigationOptions: {
+        tabBarIcon: ({
+          tintColor
+        }) => ( <
+          Icon name = 'scan'
+          color = {
+            tintColor
+          }
+          size = {
+            24
+          }
+          />
+        )
+      }
     }
 
 

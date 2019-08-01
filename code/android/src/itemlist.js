@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text ,TextInput,Image,StyleSheet,ScrollView,FlatList} from "react-native";
+import { View, Text ,TextInput,Image,StyleSheet,ScrollView,FlatList,SectionList} from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import {Icon,Button,Card,Pagination,TabBar}from '@ant-design/react-native';
 import Storage from 'react-native-storage';
@@ -15,9 +15,44 @@ export default class Itemlist extends React.Component{
     constructor(props)
     {
         super(props);
-        this.state={selectedTab:"book",itemlist:[{item:{id:5,itemname:"three body"},rating:{avgScore:10}}]};
+        this.state={selectedTab:"book",itemlist:[{item:{id:5,itemname:"three body"},rating:{avgScore:10}}],current:0};
         this.changetab=this.changetab.bind(this);
+        this.handlebottom=this.handlebottom.bind(this)
 
+    }
+    handlebottom()
+    {
+        var type=this.state.selectedTab
+        var tmptype=""
+        if(type=='book')
+        {
+          tmptype=0
+        }else if(type=='movie')
+        {
+          tmptype=1
+        }
+        else{
+          tmptype=2
+        }  
+        var current=this.state.current+1;
+        axios.get(
+              "http://202.120.40.8:30741/rating/browser",{params:{
+                      type:tmptype,
+                      page:current,
+                      pageSize:10
+                  }}
+          )
+          .then(
+            function (response) {
+              this.setState({itemlist: this.state.itemlist.concat(response.data),selectedTab:type,current:current});
+              console.log(response.data);
+          }.bind(this)
+          ).catch(
+            function (err) 
+            {
+                alert(err);
+            }
+          )
     }
     changetab(type)
     {
@@ -41,7 +76,7 @@ export default class Itemlist extends React.Component{
           )
           .then(
             function (response) {
-              this.setState({itemlist: response.data,selectedTab:type});
+              this.setState({itemlist: response.data,selectedTab:type,current:0});
               console.log(response.data);
           }.bind(this)
           ).catch(
@@ -108,7 +143,7 @@ export default class Itemlist extends React.Component{
                 >
                       <TabBar.Item
                         title="book"
-                        icon={<Icon name="home" />}
+                        icon={<Icon name="ordered-list" />}
                         selected={this.state.selectedTab === 'book'}
                         onPress={() => this.changetab('book')}
                       >
@@ -155,7 +190,9 @@ export default class Itemlist extends React.Component{
                           extra={item.rating.avgScore}
                         />
                       </Card>
-                }>
+                }
+                onEndReached={()=>this.handlebottom()}
+                >
                     
               </FlatList>
           </View>

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text ,TextInput,StyleSheet,FlatList,Image} from "react-native";
+import { View, Text ,TextInput,StyleSheet,FlatList,Image,AsyncStorage} from "react-native";
 import {Button,Card,Flex, List }from '@ant-design/react-native';
 import { createStackNavigator, createAppContainer,withNavigation } from "react-navigation";
 import Storage from 'react-native-storage'
@@ -11,11 +11,16 @@ export default class userinfo extends React.Component{
         this.state={userinfo:{username:"test",id:"1",mail:"dasdada"}}
     }
     componentWillMount(){
-        axios.get("http://202.120.40.8:30741/auth/username/"+global.username).then(
+        
+        AsyncStorage.getItem("username",(error,result)=>
+        {
+            axios.get("http://202.120.40.8:30741/auth/username/"+result).then(
             function(res){
                 this.setState({userinfo:res.data})
             }.bind(this)
         )
+        })
+        
     }
     render()
     {
@@ -24,7 +29,9 @@ export default class userinfo extends React.Component{
                 <Flex justify="center">
                     
                     <Flex.Item >
-                    <Image source={{uri:"http://202.120.40.8:30741/image/id/10"}} style={{width:400,height:400}}></Image>
+                    <View style={{alignItems:"center"}}>
+                    <Image source={{uri:"http://202.120.40.8:30741/image/id/10"}} style={{width:350,height:350}}></Image>
+                    </View>
                     </Flex.Item>
                 </Flex>
                 <Flex>

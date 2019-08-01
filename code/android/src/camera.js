@@ -1,5 +1,5 @@
 import React,{ PureComponent } from "react";
-import { StyleSheet, View, Text , Animated,TextInput, Dimensions,Easing} from "react-native";
+import { StyleSheet, View, Text , Animated,TextInput, Dimensions,Easing,AsyncStorage} from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import {Button,InputItem,Flex} from '@ant-design/react-native'
 import Storage from 'react-native-storage'
@@ -47,18 +47,24 @@ export default class camera2 extends React.Component{
         {
             
             this.setState({code:e.data})
-            axios.put("http://202.120.40.8:30741/auth/settoken",{uuid:e.data,token:global.access_token}).then(
+            
+            AsyncStorage.getItem("access_token",(error,result)=>{
+                alert(e.data+"    "+result)
+                axios.put("http://202.120.40.8:30741/auth/settoken",{},{params:{uuid:e.data,token:result}}).then(
                 function(res)
                 {
-                    alert("success:"+res,data);
-                }
+                    alert("success:"+res);
+                    this.props.navigation.navigate("Topic")
+                }.bind(this)
             ).catch(
                 function(err)
                 {
-                    alert("fail:"+err.data)
+                    alert("fail"+err);
                 }
             )
-            this.props.navigation.navigate("Topic")
+            
+            })
+            
         }
         else{
             alert("fail")

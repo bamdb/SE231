@@ -5,7 +5,7 @@ import { createStackNavigator, createAppContainer,withNavigation } from "react-n
 import Storage from 'react-native-storage'
 import axios from 'axios'
 import ItemList from './itemlist'
-
+import { AsyncStorage } from 'react-native';
 
 
 export default class Acticitypage extends React.Component {
@@ -26,6 +26,7 @@ export default class Acticitypage extends React.Component {
   }
   componentDidMount()
   {
+    
     const { navigation } = this.props;
     this.focusListener = navigation.addListener("didFocus", () => {
       if(global.access_token==null)
@@ -34,12 +35,13 @@ export default class Acticitypage extends React.Component {
       }
       var activities=[];
       this.setState({activities:activities})
-      axios.get('http://202.120.40.8:30741/friend/all/userid/'+global.userid+"?access_token="+global.access_token).then(
+      AsyncStorage.getItem("userid",(error,result)=>{
+        axios.get('http://202.120.40.8:30741/friend/all/userid/'+result).then(
               function(response){
-                alert("get friend success")
+                
                   response.data.map(
                     friend=>{
-                      axios.get("http://202.120.40.8:30741/activity/userid/"+friend.id+"?access_token="+global.access_token).then(
+                      axios.get("http://202.120.40.8:30741/activity/userid/"+friend.id).then(
                           function(res){
                             var newdata=[];
                             for(var i=0;i<res.data.length;++i)
@@ -63,10 +65,12 @@ export default class Acticitypage extends React.Component {
           ).catch(
             function(err)
             {
-              alert(err);
+              alert(result)
               window.location.reload();
             }
           )
+      })
+      
     });
     
   }
@@ -83,7 +87,7 @@ export default class Acticitypage extends React.Component {
             <Card.Header
               title={item.username}
               thumbStyle={{ width: 30, height: 30 }}
-              thumb={"http://202.120.40.8:30741/image/id/"+item.activity.userId+"0"}
+              thumb={"http://"+item.item.imgurl}
               extra=""
               
             />
@@ -91,7 +95,7 @@ export default class Acticitypage extends React.Component {
               <View  style={{ height: 20 }}>
                 <Flex justify="start">
                   <Flex.Item style={{flex:1}}>
-                  <Image source={{uri:"http://202.120.40.8:30741/image/id/10"}} style={{width:20,height:20}}></Image>
+                  <Image source={{uri:"http://"+item.item.imgurl}} style={{width:40,height:40}}></Image>
                   </Flex.Item>
                   <Flex.Item style={{flex:5}}>
                   <Text onPress={()=>this.props.navigation.navigate("Itemdetail",{itemid:item.item.id})}>{item.item.itemname}</Text>
@@ -103,7 +107,7 @@ export default class Acticitypage extends React.Component {
             </Card.Body>
             <Card.Footer
               content={"time:"+item.activity.actTime}
-              extra="footer extra content"
+              extra={"author: "+item.item.mainAuthor}
             />
           </Card>
       }

@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text ,TextInput,StyleSheet,FlatList,ScrollView,Image} from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import {Button,Card }from '@ant-design/react-native';
-
+import { AsyncStorage } from 'react-native';
 import Storage from 'react-native-storage'
 import axios from 'axios'
 import Navigationbar from "./navigationbar";
@@ -19,6 +19,7 @@ export default class Topicpage extends React.Component{
     }
     componentDidMount()
     {
+        
         axios.get("http://202.120.40.8:30741/topic/all").then(
             function (response){
 
