@@ -48,7 +48,7 @@ public class ItemController {
         itemService.postItemRelation(priorId, subsequentId, relateType);
     }
 
-    @PreAuthorize("hasRole('USER') and userId == authentication.principal.id || hasRole('EDITOR')")
+    @PreAuthorize("hasRole('USER') and #userId == authentication.principal.id ")
     @PostMapping(value = "/add/tag")
     public Itemtag postTag(@RequestParam("itemId") Long itemId,
                            @RequestParam("userId") Long userId,
