@@ -117,7 +117,7 @@ public class AuthControllerTest {
                 .params(mm)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk());
+                .andExpect(status().is(666));
 
         mm.remove("operation");
         mm.add("operation", "+");

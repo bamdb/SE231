@@ -33,9 +33,7 @@ public class CommentController {
     }
 
     @GetMapping(value="/itemid/{itemId}", produces="application/json")
-    public List<CommentOut> getCommentByItemId(@PathVariable("itemId") Long itemId,
-                                               @RequestHeader("Authorization") String accessToken) {
-        FeignRequestInterceptor.accessToken = accessToken;
+    public List<CommentOut> getCommentByItemId(@PathVariable("itemId") Long itemId) {
         return commentService.selectCommentByItemId(itemId);
     }
 

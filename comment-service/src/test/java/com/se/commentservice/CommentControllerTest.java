@@ -88,8 +88,7 @@ public class CommentControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[0].itemId").doesNotExist());
-        mvc.perform(get("/itemid/11")
-                .header("Authorization", "0"))
+        mvc.perform(get("/itemid/11"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[0].itemId").doesNotExist());
@@ -106,8 +105,7 @@ public class CommentControllerTest {
         mvc.perform(get("/userid/22"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.[0].itemId").exists());
-        mvc.perform(get("/itemid/11")
-                .header("Authorization", "0"))
+        mvc.perform(get("/itemid/11"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.[0].comment.itemId").exists());
         mvc.perform(delete("/delete")
