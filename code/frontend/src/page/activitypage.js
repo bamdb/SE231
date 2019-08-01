@@ -63,15 +63,12 @@ class Activitypage extends Component{
 
 
 
-    componentDidMount() {
-
-    }
-
     async findfriends()
     {
          axios.get('http://202.120.40.8:30741/friend/all/userid/'+localStorage.getItem("userid")).then(
             function(response){
                 this.setState({friends:response.data})
+                console.log(response.data);
             }.bind(this)
         )
     }
@@ -79,7 +76,7 @@ class Activitypage extends Component{
     {
         if(localStorage.getItem("userid")==null)
         {
-            //window.location.href="/#/login";
+            window.location.href="/#/login";
         }
         else {
           await  this.setState({userid:localStorage.getItem("userid")})

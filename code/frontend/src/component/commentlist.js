@@ -15,27 +15,15 @@ import Typography from "@material-ui/core/Typography";
 import {Divider} from "antd";
 import Container from "@material-ui/core/Container";
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        width: '100%',
-        backgroundColor: theme.palette.background.paper,
-
-    },
-}));
-
 class Commentlist extends Component {
     constructor(props) {
         super(props);
         this.state={comments:[]};
     }
-    componentWillMount() {
-        this.setState({comments:this.props.comments||[]});
-    }
+
     componentWillReceiveProps(nextProps, nextContext) {
         this.setState({comments:nextProps.comments||[]});
     }
-
-
 
     render() {
         var comments=this.state.comments;
@@ -55,6 +43,7 @@ class Commentlist extends Component {
                     </Grid>
                 )
             }
+
             return(
                 <Grid container spacing={1}>
                     {rows}
@@ -62,38 +51,11 @@ class Commentlist extends Component {
                 </Grid>
             )
         }
-
         return (
-            <Grid container spacing={1} >
-                <Grid item xs={12}>
-                    <Comment
-                     username = {"abc"}
-                     date = {"2000-1-1"}
-                     grade = {8}
-                     comment = {"Lizards are a widespread group of squamate reptiles, with over 6,000 species, ran" +
-                     "gingacross all continents except Antarctica"}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <Comment
-                        username = {"abc"}
-                        date = {"2000-1-1"}
-                        grade = {8}
-                        comment = {"Lizards are a widespread group of squamate reptiles, with over 6,000 species, ran" +
-                        "gingacross all continents except Antarctica"}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <Comment
-                        username = {"abc"}
-                        date = {"2000-1-1"}
-                        grade = {8}
-                        comment = {"Lizards are a widespread group of squamate reptiles, with over 6,000 species, ran" +
-                        "gingacross all continents except Antarctica"}
-                    />
-                </Grid>
-            </Grid>
-        );
+            <span>
+                暂无评论
+            </span>
+        )
     }
 }
 

@@ -27,7 +27,7 @@ class Itembrowsepage extends Component{
             type:0,
             dataSource:[],
         };
-        this.Search = this.Search.bind(this)
+        this.Search = this.Search.bind(this);
         this.handletagchange=this.handletagchange.bind(this);
         this.handleSearch=this.handleSearch.bind(this);
         this.handlepagechange=this.handlepagechange.bind(this);
@@ -65,20 +65,16 @@ class Itembrowsepage extends Component{
         this.setState({tags:tags});
     }
 
-    componentWillMount() {
-        var value=window.location.href.split("#")[1].split("/")[2];
+    render(){
+        var value = window.location.href.split("#")[1].split("/")[2];
         var type = 0;
         switch(value)
         {
             case "book":type=0;break;
-            case "movie": type=1;break;
+            case "movie": type=3;break;
             case "flash": type=2;break;
         }
-        this.setState({type:type})
-
-    }
-
-    render(){
+        console.log(type);
         return(
             <Grid container id={"browser-item"}>
                 <Grid item xs={9} style={{padding:20}}>
@@ -95,7 +91,7 @@ class Itembrowsepage extends Component{
                     </AutoComplete>
                 </Grid>
                 <Grid item xs={12} style={{padding:20}}>
-                    <Listitem currentpage={this.state.currentpage} type={this.state.type} search={this.state.search} handlepagechange={this.handlepagechange}/>
+                    <Listitem currentpage={this.state.currentpage} type={type} search={this.state.search} handlepagechange={this.handlepagechange}/>
                 </Grid>
             </Grid>
         )

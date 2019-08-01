@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid/index';
 import axios from 'axios';
 import Tags from "../component/tag";
 import Listitem from '../component/listitem'
-import {AutoComplete, Card, Icon, Input, List, Pagination, Select} from 'antd';
+import {AutoComplete, Card, Icon, Input, List, Pagination, Select, Spin} from 'antd';
 import {Link} from "react-router-dom";
 
 const { Option } = Select;
@@ -32,6 +32,7 @@ class Searchpage extends Component {
             dataSourceId:[],
             items:[],
             currentpage:1,
+            loading:true
         }
         this.handleitem = this.handleitem.bind(this);
         this.handlepagechange = this.handlepagechange.bind(this);
@@ -81,6 +82,7 @@ class Searchpage extends Component {
                 })
                 console.log("finish search")
                 this.handleitem(id);
+                this.setState({loading:false});
             }.bind(this))
     }
 
@@ -165,9 +167,11 @@ class Searchpage extends Component {
                                 </Card>
                             </List.Item>
                         )}
-                    />
+                    >
+                        {this.state.loading ? <Spin/> : <span/>}
+                    </List>
                     <Grid container alignContent={"center"} justify={"center"}>
-                    <Pagination size="small"  total={100} current={this.props.currentpage} onChange={current=>this.handlepagechange(current)}/>
+                    <Pagination size="small"  total={1000} current={this.props.currentpage} onChange={current=>this.handlepagechange(current)}/>
                     </Grid>
                 </Grid>
             </Grid>
