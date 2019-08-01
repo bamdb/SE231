@@ -13,32 +13,62 @@ import Typography from "@material-ui/core/Typography";
 import Activity from "./activity";
 import Grid from "@material-ui/core/Grid";
 import Topic from "./topic";
+import axios from "axios";
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        width: '100%',
-        minWidth: 500,
-        backgroundColor: theme.palette.background.paper,
-    },
-    listitem: {
-        height: 500,
-    }
-}));
 
 class Activitylist extends Component {
 
+    constructor(props){
+        super(props);
+        this.state={
+            len:0,
+            activities: [],
+        }
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        const friends=nextProps.friends;
+        var temp=[];
+        console.log(friends.length)
+        if(this.state.len!==friends.length) {
+            this.setState({len: friends.length});
+            var activities = [];
+            friends.map(friend => {
+                axios.get("http://202.120.40.8:30741/activity/userid/" + friend.id)
+                    .then(function (res) {
+                            temp.push({
+                                user: friend,
+                                activities: res.data,
+                            })
+                            console.log(temp);
+                            activities.push(temp);
+                            this.setState({activities:activities})
+                        }.bind(this)
+                    )
+                    .catch(function (error) {
+                    })
+            });
+
+        }
+    }
+
     render() {
         var rows=[];
-        const activitylist=this.props.activities;
+        const activitylist=this.state.activities.sort((a,b)=>{
+            return a.activity.actTime>b.activity.actTime;
+        });
         if(activitylist!==undefined)
         {
+            console.log("start to activities")
             activitylist.map(act =>{
                 const user=act.user;
                 const activities = act.activities;
                 activities.map(activity=>{
+                    console.log("start to activity")
                     if(activity.activity.actType>=1||activity.activity.actType<=5) {
                         rows.push(
                                 <Activity
+                                    key={user.id}
                                     userId={user.id}
                                     username={user.username}
                                     date={activity.activity.actTime}

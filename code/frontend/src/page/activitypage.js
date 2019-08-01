@@ -17,16 +17,11 @@ class Activitypage extends Component{
         this.state={
             username: "游客",
             userid:1,
-            activities: [{activity:{userId:1,actTime:2019-7-1,actType:0},item:{itemname: "three body"}},
-                {activity:{userId:1,actTime:2019-7-2,actType:0},item:{itemname: "three body"}}],
             search:"",
             isloaded: false,
             friends:[],
-            len:0
         }
         this.handleSearch = this.handleSearch.bind(this);
-        this.finduser=this.finduser.bind(this);
-        this.findfriends=this.findfriends.bind(this);
     }
 
     async componentWillMount() {
@@ -45,53 +40,28 @@ class Activitypage extends Component{
                 friends = response.data;
                 console.log(response.data);
 
-        var temp=[];
-        if(this.state.len!==friends.length)
-        {
-            this.setState({len:friends.length});
-            var activities=[];
-            friends.map(friend=>{
-                axios.get("http://202.120.40.8:30741/activity/userid/"+friend.id)
-                    .then(function (res) {
-                            temp.push({
-                                user: friend,
-                                activities: res.data,
-                            })
-                            console.log(temp);
-                            activities.push(temp);
-                        }.bind(this)
-                    )
-                    .catch(function (error) {
-                    })
-            });
+
             this.setState({
-                activities:activities,
                 userid:userid,
                 friends:friends
             })
-        }
-            }
+            }.bind(this)
         )
     }
 
 
-    async findfriends()
-    {
-
-    }
-    async finduser()
-    {
-
-    }
 
     handleSearch(value){
         this.setState({search:value});
     }
 
     render(){
+        /*
         var activities=this.state.activities.sort((a,b)=>{
             return a.activity.actTime>b.activity.actTime;
         });
+
+         */
         return(
             <Grid container direction={"column"} >
 
@@ -100,7 +70,7 @@ class Activitypage extends Component{
                     <Grid item xs={8} >
                         <br/><br/>
                         <Activitylist
-                            activities={activities}
+                            friends={this.state.friends}
                             />
                     </Grid>
                     <Grid item xs={2}></Grid>
