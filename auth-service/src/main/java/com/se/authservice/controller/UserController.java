@@ -16,7 +16,6 @@ public class UserController {
     @Resource(name="userServiceImpl")
     private UserService userService;
 
-    @PreAuthorize("#oauth2.hasScope('server')")
     @GetMapping(value ="/id/{id}", produces ="application/json")
     public User getUser(@PathVariable("id") Long id) {
         User user = userService.selectUserById(id);
