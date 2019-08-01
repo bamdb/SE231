@@ -1,0 +1,6 @@
+"Method","Name","# requests","# failures","Median response time","Average response time","Min response time","Max response time","Average Content Size","Requests/s"
+"GET","/activity/all",2,0,53,62,53,71,784,2.00
+"GET","/auth/id/1",10,0,52,54,47,64,175,10.00
+"GET","/item/all",13,13,24,28,15,57,0,13.00
+"GET","/rating/all",11,11,27,28,15,49,0,11.00
+"None","Total",36,24,34,37,15,71,92,36.00

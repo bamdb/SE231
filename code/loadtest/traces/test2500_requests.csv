@@ -1,0 +1,17 @@
+"Method","Name","# requests","# failures","Median response time","Average response time","Min response time","Max response time","Average Content Size","Requests/s"
+"GET","/activity/all",235,0,820,893,36,4658,784,44.01
+"GET","/activity/id/10",17,0,670,795,135,1827,84,3.18
+"GET","/activity/id/11",15,0,950,820,56,1364,84,2.81
+"GET","/activity/id/12",19,0,880,871,193,1684,84,3.56
+"GET","/activity/id/13",24,0,770,828,54,4002,85,4.50
+"GET","/activity/id/14",22,0,610,728,59,1617,85,4.12
+"GET","/activity/id/15",20,0,450,578,39,1799,88,3.75
+"GET","/activity/id/16",16,0,480,697,65,1780,88,3.00
+"GET","/activity/id/17",23,0,780,759,91,1574,88,4.31
+"GET","/activity/id/18",17,0,820,851,108,1844,88,3.18
+"GET","/auth/id/1",525,0,71,168,39,1647,175,98.33
+"GET","/item/all",853,853,36,133,12,1611,0,159.76
+"GET","/rating/all",854,854,35,137,12,1622,0,159.95
+"GET","/topic/all",1,0,3000,3038,3038,3038,1916,0.19
+"GET","/topic/id/8",1,0,1200,1240,1240,1240,0,0.19
+"None","Total",2642,1707,52,252,12,4658,110,494.83

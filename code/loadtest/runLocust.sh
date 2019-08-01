@@ -43,7 +43,7 @@ do_exec() {
 
   # check if host is running
   STATUS=$(curl -s -o /dev/null -w "%{http_code}" ${TARGET_HOST})
-  if [ $STATUS -ne 200 ]&&[ $STATUS -ne 502 ]; then
+  if [ $STATUS -ne 200 ]&&[ $STATUS -ne 404 ]; then
       echo "${TARGET_HOST} is not accessible"
       exit 1
   fi

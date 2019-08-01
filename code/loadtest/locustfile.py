@@ -6,11 +6,9 @@ class WebTasks(TaskSet):
 
     @task(30)
     def item_task(self):
-        item = self.client.get("/item/all")
+        item_id = choice(range(20000, 200000))
+        item = self.client.get("/item/id/{}".format(item_id))
         if item is not None:
-            one_item = choice(item.json())
-            item_id = one_item["id"]
-            self.client.get("/item/id/{}".format(item_id))
             self.client.get("/rating/itemid/{}".format(item_id))
             self.client.get("/activity/itemid/{}".format(item_id))
             self.client.get("/comment/itemid/{}".format(item_id))
@@ -33,10 +31,9 @@ class WebTasks(TaskSet):
             
     @task(30)
     def rating_task(self):
-        rating = self.client.get("/rating/all")
+        rating_id = choice(range(1, 200000))
+        rating = self.client.get("/rating/id/{}".format(rating_id))
         if rating is not None:
-            one_rating = choice(rating.json())
-            rating_id = one_rating["id"]
             self.client.get("/rating/id/{}".format(rating_id))
             
     @task(20)
