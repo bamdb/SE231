@@ -65,20 +65,21 @@ class Activity extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps, nextContext) {
-        console.log(nextProps)
+    componentWillMount() {
+        console.log("username:",this.props.username)
         var status;
-        switch (Number(nextProps.actType)) {
+        switch (Number(this.props.actType)) {
+            case 0:
             case 1:
             case 2:
-                status="您的好友"+nextProps.username+"正在浏览"+nextProps.itemname;
+                status="您的好友"+this.props.username+"正在浏览"+this.props.itemname;
                 break;
             case 3:
-                status="您的好友"+nextProps.username+"看完了"+nextProps.itemname;
+                status="您的好友"+this.props.username+"看完了"+this.props.itemname;
                 break;
             case 4:
             case 5:
-                status="您的好友"+nextProps.username+"搁置了"+nextProps.itemname;
+                status="您的好友"+this.props.username+"搁置了"+this.props.itemname;
                 break;
             default:
                 status="Status出错";
@@ -86,11 +87,11 @@ class Activity extends Component {
         }
         this.setState({
             status:status,
-            userId:nextProps.userId,
-            username:nextProps.username,
-            date:nextProps.date,
-            itemname:nextProps.itemname,
-            itemid:nextProps.itemid
+            userId:this.props.userId,
+            username:this.props.username,
+            date:this.props.date.split('T')[0],
+            itemname:this.props.itemname,
+            itemid:this.props.itemid
         })
     }
     render() {

@@ -59,25 +59,29 @@ class Activitylist extends Component {
         });
         if(activitylist!==undefined)
         {
-            console.log("start to activities")
-            activitylist.map(act =>{
-                const user=act.user;
-                const activities = act.activities;
-                activities.map(activity=>{
-                    console.log("start to activity")
-                    if(activity.activity.actType>=1||activity.activity.actType<=5) {
-                        rows.push(
-                                <Activity
-                                    key={user.id}
-                                    userId={user.id}
-                                    username={user.username}
-                                    date={activity.activity.actTime}
-                                    actType={activity.activity.actType}
-                                    itemname={activity.item.itemname}
-                                    itemid={activity.item.id}
-                                />
-                        )
-                    }
+            console.log(activitylist);
+            activitylist.forEach(act =>{
+                act.forEach(act=> {
+                    const user = act.user;
+                    const activities = act.activities;
+                    console.log("act", act)
+                    if (activities !== undefined)
+                        activities.map(activity => {
+                            console.log("start to activity")
+                            if (activity.activity.actType >= 0 || activity.activity.actType <= 5) {
+                                rows.push(
+                                    <Activity
+                                        key={user.id}
+                                        userId={user.id}
+                                        username={user.username}
+                                        date={activity.activity.actTime}
+                                        actType={activity.activity.actType}
+                                        itemname={activity.item.itemname}
+                                        itemid={activity.item.id}
+                                    />
+                                )
+                            }
+                        })
                 })
             })
         }
