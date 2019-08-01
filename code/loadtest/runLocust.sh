@@ -56,13 +56,9 @@ do_exec() {
       CSVFILE="./traces/test${sum}"
       echo "Loadbalance test"
       echo "Will run $LOCUST_FILE against $TARGET_HOST. Spawning $CLIENTS clients and $REQUESTS hatch rate within $RUNTIME."
-      locust --host=http://$TARGET_HOST -f $LOCUST_FILE --csv=$CSVFILE --clients=$sum --hatch-rate=$REQUESTS --run-time=$RUNTIME --no-web
-      echo "done"
-      echo ${sum}
-      echo ${CLIENTS}
+      locust --host=$TARGET_HOST -f $LOCUST_FILE --csv=$CSVFILE --clients=$sum --hatch-rate=$REQUESTS --run-time=$RUNTIME --no-web
       let sum=sum+CLIENTS
       let i--
-      echo ${i}
   done
 }
 
