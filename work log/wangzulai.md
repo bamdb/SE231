@@ -92,3 +92,7 @@
 # 2019-07-31
 * insert staff data into database
 * write test cases
+
+# 2019-08-01
+* finish loadtest
+* fix api bugs
