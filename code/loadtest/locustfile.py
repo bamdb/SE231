@@ -4,12 +4,12 @@ from random import choice
 
 class WebTasks(TaskSet):
 
-    @task(20)
-    def user_test(self):
-        self.client.get("/user/all")
-        self.client.get("/user/id/1")
+    # @task(20)
+    # def user_test(self):
+    #     self.client.get("/user/all")
+    #     self.client.get("/user/id/1")
 
-    @task(30)
+    @task
     def item_task(self):
         item = self.client.get("/item/all")
         if item:

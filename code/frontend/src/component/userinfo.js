@@ -131,9 +131,6 @@ class Userinfo extends Component {
                                     <ListItemText primary="用户名" secondary={this.state.username}/>
                                 </ListItem>
                                 <ListItem id={"li"}>
-                                    <ListItemText primary="ID" secondary={this.state.id}/>
-                                </ListItem>
-                                <ListItem id={"li"}>
                                     {email}
                                 </ListItem>
                             </List>
@@ -141,7 +138,7 @@ class Userinfo extends Component {
                         <Grid item xs={6}>
                             <List>
                                 <ListItem id={"li"}>
-                                    <ListItemText primary="等级" secondary={this.state.grade}></ListItemText>
+                                    <ListItemText primary="ID" secondary={this.state.id}/>
                                 </ListItem>
                                 <ListItem id={"li"}>
                                     <ListItemText primary="注册日期" secondary={this.state.date}></ListItemText>

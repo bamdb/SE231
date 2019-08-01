@@ -37,8 +37,26 @@ class QRcode extends Component{
         console.log("get message")
         console.log(data);
         localStorage.setItem("access_token",data);
-        window.location.href='#/login';
-        window.location.reload();
+        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
+        axios.get("http://202.120.40.8:30741/auth/user").then(
+            function (res) {
+                localStorage.setItem("userid",res.data.id);
+                localStorage.setItem("username",res.data.username);
+                var auths=res.data.authorities;
+                var role="";
+                auths.map(auth=>{
+                    if(role==""&&auth.indexOf("ROLE")!=-1)
+                    {
+                        role=auth;
+                    }
+                })
+                localStorage.setItem("role",role);
+                window.location.href='#/login';
+                window.location.reload();
+            }
+        )
+
     }
     render(){
         const url="ws://47.103.107.39:8080/websocket/"+this.state.uuid+"/0";

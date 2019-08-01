@@ -89,9 +89,7 @@ class Login extends Component{
                                 role=auth;
                             }
                         })
-
                         localStorage.setItem("role",role);
-
                     }
                 )
 

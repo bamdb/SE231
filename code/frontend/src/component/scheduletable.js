@@ -150,10 +150,10 @@ class Scheduletable extends Component {
                 }}).then(function(response)
             {
                 console.log(this.props.itemid);
-                console.log(response.data.chapters);
+                console.log(response.data);
                 //this.transform(treeData,response.data.chapters,'','0',value);
                 const readdata=response.data.chapters;
-                const length=readdata.length;
+                const length = (readdata===undefined) ? 0 :readdata.length ;
                 for (var i=0;i<length;++i){
                     console.log("child",readdata[i].sections.length)
                     if(readdata[i].sections.length===0) //下面没有子章节了
@@ -281,13 +281,12 @@ class Scheduletable extends Component {
                 <CardMedia
                     style={{height:120}}
                     className={useStyle.media}
-                    image={"img/3.jpg"}
+                    image={"http://"+this.props.imgurl}
                 />
                 <CardContent >
                         {this.state.itemname}
                     <LinearProgress variant="determinate" value={this.state.completed} />
                 </CardContent>
-                    /* icon */
                 </CardActionArea>
                 <Modal
                     title="进度编辑"
