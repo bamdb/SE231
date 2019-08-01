@@ -111,7 +111,7 @@ class Useriteminfopage extends Component {
                         <Alert content={this.state.content} cancelAlert={this.handleCancel} confirmAlert={this.handleCancel}/>
                         <Collectform chapterNum={this.state.chapterNum} itemid={this.state.id} visible={this.state.visible} handleCancel={this.handleCancel} />
                         <Grid item xs={2} >
-                            <Item isbn={itemdata.id} date={itemdata.pubTime} name={itemdata.itemname} pages={itemdata.chapterNum} author={itemdata.mainAuthor}/>
+                            <Item imgurl={itemdata.imgurl} date={itemdata.pubTime} name={itemdata.itemname} pages={itemdata.chapterNum} author={itemdata.mainAuthor}/>
                             <Icon type={"star"} onClick={this.handleCollect}/>
                         </Grid>
                         <Divider type={"vertical"} style={{height:400}}/>

@@ -133,8 +133,15 @@ class Collectform extends Component {
 
         var date = Date.parse(new Date());
         //var yourtags=this.state.yourtags;
-        axios.post("http://202.120.40.8:30741/activity/add",{actTime:date,actType:this.state.status,userId:this.state.userid,itemId:this.props.itemid});
+        axios.post("http://202.120.40.8:30741/activity/add",{actTime:date,actType:this.state.status,userId:this.state.userid,itemId:this.props.itemid})
+            .then(function (res) {
+                console.log("add activity:",res.data)
+            })
+            .catch(function (err) {
+                console.log("add activity error!",err)
+            });
         axios.post("http://202.120.40.8:30741/comment/insert",{itemId:this.props.itemid,userId:localStorage.getItem("userid"),content:this.state.content,pubTime:date});
+
         axios.put("http://202.120.40.8:30741/rating/update","success",{params:{userId:localStorage.getItem("userid"),itemId:this.props.itemid,score:this.state.score}});
         //axios.post("http://202.120.40.8:30741/item/add/tag?"+"userId="+localStorage.getItem("userid")+"&itemId="+this.props.itemid,yourtags);
 
@@ -159,12 +166,15 @@ class Collectform extends Component {
             default:
                 break;
         }
-
+        console.log("chapters:", chapters);
         if(this.state.status<=3)
             axios.put("http://202.120.40.8:30741/activity/update/progress",
                 {userId:localStorage.getItem("userid"),itemId:this.props.itemid,chapters:chapters}
-            );
+            ).then(function (res) {
+                console.log("success:",res.data)
+            });
 
+        this.props.handleCancel();
         /*$.ajax({
             url:"/item/add/tag",
             type:"POST",

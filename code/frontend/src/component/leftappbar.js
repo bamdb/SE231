@@ -398,6 +398,7 @@ class LeftBar extends Component {
 
         const isUser = (localStorage.getItem("role")=='ROLE_USER');
         const isEditor = (localStorage.getItem("role")=='ROLE_EDITOR');
+        const imgurl = localStorage.getItem("userid") ? "http://202.120.40.8:30741/image/id/"+localStorage.getItem("userid")+"0" : require("../default_avater.jpg");
         return(
             <div>
                 <Button id={"togglebutton"} type={"link"} onClick={this.toggleCollapsed}  >
@@ -441,7 +442,7 @@ class LeftBar extends Component {
                 <div id={"leftbar-foot"}>
                     <Grid container justify="space-around" alignItems="center" spacing={2}>
 
-                        <Avatar  src={"http://202.120.40.8:30741/image/id/"+localStorage.getItem("userid")+"0"} className={useStyles.avater}/>
+                        <Avatar  src={imgurl} className={useStyles.avater}/>
                         <Typography hidden={this.props.collapsed} color={"textSecondary"}>{this.state.username}</Typography>
 
                     <Divider />

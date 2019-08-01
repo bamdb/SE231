@@ -30,57 +30,58 @@ class Activitypage extends Component{
     }
 
     async componentWillMount() {
-        this.finduser();
-        this.findfriends();
-    }
-
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        var temp=[];
-        if(this.state.len!==this.state.friends.length)
+        var userid;
+        var friends=[];
+        if(localStorage.getItem("userid")==null)
         {
-            this.setState({len:this.state.friends.length});
+            window.location.href="/#/login";
+        }
+        else {
+            userid=localStorage.getItem("userid");
+        }
+
+        axios.get('http://202.120.40.8:30741/friend/all/userid/'+userid).then(
+            function(response){
+                friends = response.data;
+                console.log(response.data);
+
+        var temp=[];
+        if(this.state.len!==friends.length)
+        {
+            this.setState({len:friends.length});
             var activities=[];
-            this.state.friends.map(friend=>{
+            friends.map(friend=>{
                 axios.get("http://202.120.40.8:30741/activity/userid/"+friend.id)
                     .then(function (res) {
-                        temp.push({
-                            user: friend,
-                            activities: res.data,
-                        })
-                        console.log(temp);
-                        activities.push(temp);
-                    }.bind(this)
+                            temp.push({
+                                user: friend,
+                                activities: res.data,
+                            })
+                            console.log(temp);
+                            activities.push(temp);
+                        }.bind(this)
                     )
                     .catch(function (error) {
                     })
             });
             this.setState({
                 activities:activities,
+                userid:userid,
+                friends:friends
             })
         }
+            }
+        )
     }
-
 
 
     async findfriends()
     {
-         axios.get('http://202.120.40.8:30741/friend/all/userid/'+localStorage.getItem("userid")).then(
-            function(response){
-                this.setState({friends:response.data})
-                console.log(response.data);
-            }.bind(this)
-        )
+
     }
     async finduser()
     {
-        if(localStorage.getItem("userid")==null)
-        {
-            window.location.href="/#/login";
-        }
-        else {
-          await  this.setState({userid:localStorage.getItem("userid")})
-        }
+
     }
 
     handleSearch(value){
