@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 class Item extends Component {
     constructor(props) {
         super(props);
-        this.state={name:"三体",date:"2000-1-1",author:"Liu Cixin",pages:"100",isbn:"123456"}
+        this.state={name:"三体",date:"2000-1-1",author:"Liu Cixin",pages:"100",isbn:"123456",imgurl:""}
     }
     componentDidMount() {
         if(this.props.name!=null)
