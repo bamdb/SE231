@@ -39,7 +39,6 @@ class Itembrowsepage extends Component{
     }
 
     Search(value){
-        console.log("喵喵喵？？")
         const win=window.open('about:blank');
         win.location.href='/#/search/'+value;
     }

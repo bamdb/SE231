@@ -15,6 +15,7 @@ import Collect from "../component/collect";
 import Scheduletableold from "../component/scheduletableold";
 import Collectform from "../component/collectform";
 import Alert from "../component/alert";
+import {switchCase} from "@babel/types";
 class Useriteminfopage extends Component {
     constructor(props)
     {
@@ -22,6 +23,7 @@ class Useriteminfopage extends Component {
         this.state={
             data:{},rating:{},totgrade:[],comments:[],id:1,userid:1,readstat:[],
             visible:false,
+            status:"",
             content:"",
         };
         this.handletagchange=this.handletagchange.bind(this);
@@ -65,6 +67,7 @@ class Useriteminfopage extends Component {
         this.setState({userid:localStorage.getItem("userid"),id:id})
         var url="http://202.120.40.8:30741/item/id/"+id;
         var url1="http://202.120.40.8:30741/rating/itemid/"+id;
+        var url2="http://202.120.40.8:30741/activity/itemid/"+id;
         var url3="http://202.120.40.8:30741/comment/itemid/"+id;
 
         axios.get(url).then(
@@ -82,6 +85,29 @@ class Useriteminfopage extends Component {
                 totgrade.push(response.data.score1,response.data.score2,response.data.score3,response.data.score4,response.data.score5,response.data.score6,response.data.score7,response.data.score8,response.data.score9,response.data.score10)
 
                 this.setState({rating:response.data,totgrade:totgrade})
+            }.bind(this)
+        )
+
+        axios.get(url2).then(
+            function (res) {
+                console.log(res.data);
+                if(res.data!==undefined)
+                {
+                    res.data.forEach(activity=>{
+                        if(activity.userId==localStorage.getItem("userid")) {
+                            var status;
+                            switch(activity.actType){
+                                case 0:case 1: case 2:
+                                    status="已收藏";
+                                    break;
+                                default:
+                                    status="未收藏"
+                                    break;
+                            }
+                            this.setState({status: status})
+                        }
+                    })
+                }
             }.bind(this)
         )
         axios.get(url3).then(
@@ -112,7 +138,9 @@ class Useriteminfopage extends Component {
                         <Collectform chapterNum={this.state.chapterNum} itemid={this.state.id} visible={this.state.visible} handleCancel={this.handleCancel} />
                         <Grid item xs={2} >
                             <Item imgurl={itemdata.imgurl} date={itemdata.pubTime} name={itemdata.itemname} pages={itemdata.chapterNum} author={itemdata.mainAuthor}/>
+                            <Grid container justify={"center"} alignContent={"center"}>
                             <Icon type={"star"} onClick={this.handleCollect}/>
+                            </Grid>
                         </Grid>
                         <Divider type={"vertical"} style={{height:400}}/>
                         <Grid  item xs={6} >
@@ -120,7 +148,7 @@ class Useriteminfopage extends Component {
                             <Commentlist comments={this.state.comments}/>
                         </Grid>
                         <Grid  item xs={3} >
-                            <Collect totGrade={this.state.totgrade} avgGrade={this.state.rating.avgScore} rank={this.state.rating.rank} itemid={this.state.id} userid={this.state.userid}/>
+                            <Collect status={this.state.status} totGrade={this.state.totgrade} avgGrade={this.state.rating.avgScore} rank={this.state.rating.rank} itemid={this.state.id} userid={this.state.userid}/>
                             <Relateditem prior={itemdata.relationPrior} subsequent={itemdata.relationSubsequent} normal={itemdata.relationNormal}/>
                         </Grid>
                         <Grid item xs={1}/>

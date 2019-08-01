@@ -37,10 +37,30 @@ class Searchpage extends Component {
         this.handleitem = this.handleitem.bind(this);
         this.handlepagechange = this.handlepagechange.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
+        this.handlelike = this.handlelike.bind(this);
     }
 
     handleSearch(value){
         this.setState({search: value})
+        var dataSource=[];
+        var id=[];
+        console.log("start search");
+        axios.get('http://202.120.40.8:30741/search/ik/item',{params:{keystring:value,page:0,size:8}})
+            .then(function (res) {
+                if(res.data.content!==undefined){
+                    res.data.content.forEach(item=>{
+                        dataSource.push(item.itemname);
+                        id.push(item.id);
+                    })
+                }
+                this.setState({
+                    dataSource:dataSource,
+                    dataSourceId:id,
+                })
+                console.log("finish search")
+                this.handleitem(id);
+                this.setState({loading:false});
+            }.bind(this))
     }
 
     handlepagechange(page){
@@ -94,24 +114,33 @@ class Searchpage extends Component {
             axios.get('http://202.120.40.8:30741/rating/itemid/'+id)
                 .then(function (res) {
                     if(res.data!==null){
-                        const item=res.data;
-                        items.push(
-                            {
-                                href: "/itemdetail/"+item.item.id,
-                                id: item.item.id,
-                                title:item.item.itemname,
-                                author:item.item.mainAuthor,
-                                pubTime: item.item.pubTime.split('T')[0],
-                                score:item.rating.avgScore,
-                                rank:item.rating.rank,
-                                imgurl:item.item.imgurl,
-                                chapterNum:item.item.chapterNum,
-                            }
-                        );
-                        this.setState({items:items})
+                        const rating=res.data;
+                        axios.get('http://202.120.40.8:30741/item/id/'+id)
+                            .then(function (response) {
+                                const item = response.data;
+                                items.push(
+                                    {
+                                        href: "/itemdetail/"+item.id,
+                                        id: rating.id,
+                                         title:item.itemname,
+                                         author:item.mainAuthor,
+                                         pubTime: item.pubTime.split('T')[0],
+                                        score:rating.avgScore,
+                                        rank:rating.rank,
+                                        imgurl:item.imgurl,
+                                        chapterNum:item.chapterNum,
+                                    }
+                                );
+                                this.setState({items:items})
+                            }.bind(this))
                     }
                 }.bind(this))
+
         })
+    }
+
+    handlelike(){
+
     }
 
     render(){
