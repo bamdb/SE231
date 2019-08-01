@@ -36,7 +36,8 @@ public class ActivityServiceImpl implements ActivityService {
     ItemClient itemClient;
 
     public Progress selectProgress(Long userId, Long itemId) {
-        return mongoDao.findByItemIdAndUserId(userId, itemId);
+        Progress progress = mongoDao.findByItemIdAndUserId(itemId, userId);
+        return mongoDao.findByItemIdAndUserId(itemId, userId);
     }
 
     public Progress updateProgress(Progress progress) {
