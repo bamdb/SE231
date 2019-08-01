@@ -161,7 +161,7 @@ class Login extends Component{
                             <Typography variant={"subtitle1"} component="h4">
                                 忘记密码？<Button variant="text" color="primary" name={"resetPassword"} ><Link to={"/resetpassword"}>重置密码</Link></Button>
                             </Typography>
-                            <Button variant="text" color="primary" name={"resetPassword"} onClick={this.setQR}>微信扫码登录</Button>
+                            <Button variant="text" color="primary" name={"resetPassword"} onClick={this.setQR}>手机扫码登录</Button>
                         </Grid>
                     </Grid>
                     <br/><br/><br/>
