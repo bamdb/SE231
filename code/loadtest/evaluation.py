@@ -100,7 +100,7 @@ class DataAnalyse:
             for file in files:
                 if os.path.join(root, file).split('/')[-1][-12:] == "requests.csv":
                     read_last_line(os.path.join(root, file), self.csvdata)
-        self.csvdata.sort(key=lambda innerdata: innerdata[0])
+        self.csvdata.sort(key=lambda innerdata: int(innerdata.split(',')[0]))
         open("./output.csv", "w").writelines(self.csvdata)
 
         headers = ['client', 'Method', 'Name', '# requests', '# failures', 'Median response time', 'Average response time',
@@ -177,6 +177,6 @@ class DataAnalyse:
 
 
 if __name__ == '__main__':
-    data = DataAnalyse('/home/wzl/sjtu/22/se/bamdb/SE231/code/loadtest/test.traces/')
+    data = DataAnalyse('/home/wzl/sjtu/22/se/bamdb/SE231/code/loadtest/traces/')
     # print(data.sorted_data.info())
     data.generate_trend()
