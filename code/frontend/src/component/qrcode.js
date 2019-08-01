@@ -46,20 +46,20 @@ class QRcode extends Component{
                 var auths=res.data.authorities;
                 var role="";
                 auths.map(auth=>{
-                    if(role==""&&auth.indexOf("ROLE")!=-1)
+                    if(role==""&&auth.authority.indexOf("ROLE")!=-1)
                     {
-                        role=auth;
+                        role=auth.authority;
                     }
                 })
                 localStorage.setItem("role",role);
-                window.location.href='#/login';
+                window.location.href="/#/";
                 window.location.reload();
             }
         )
 
     }
     render(){
-        const url="ws://47.103.112.0:8080/websocket/"+this.state.uuid+"/0";
+        const url="ws://47.103.112.0:8080/websocket/"+this.props.uuid+"/0";
         return(
             <div id={"login"}>
             <Websocket url={url}
