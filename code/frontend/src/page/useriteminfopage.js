@@ -100,7 +100,7 @@ class Useriteminfopage extends Component {
         return(
                     <Grid container spacing={2}>
                         <Grid item xs={2} >
-                            <Item isbn={itemdata.id} date={itemdata.pubTime} name={itemdata.itemname} pages={itemdata.chapterNum} author={itemdata.mainAuthor}/>
+                            <Item isbn={itemdata.id} date={itemdata.pubTime} name={itemdata.itemname} pages={itemdata.chapterNum} author={itemdata.mainAuthor} imgurl={itemdata.imgurl}/>
                         </Grid>
                         <Divider type={"vertical"} style={{height:400}}/>
                         <Grid  item xs={6} >

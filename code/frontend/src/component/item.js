@@ -19,14 +19,14 @@ class Item extends Component {
         if(this.props.name!=null)
         {
 
-            this.setState({name:this.props.name,date:this.props.date,pages:this.props.pages,isbn:this.props.isbn})
+            this.setState({name:this.props.name,date:this.props.date,pages:this.props.pages,isbn:this.props.isbn,imgurl:this.props.imgurl})
         }
 
     }
     componentWillReceiveProps(nextProps, nextContext) {
         if(nextProps.name!=null)
         {
-            this.setState({name:nextProps.name,date:nextProps.date,pages:nextProps.pages,isbn:nextProps.isbn})
+            this.setState({name:nextProps.name,date:nextProps.date,pages:nextProps.pages,isbn:nextProps.isbn,imgurl:nextProps.imgurl})
         }
     }
 
@@ -37,7 +37,7 @@ class Item extends Component {
     render() {
         return(
             <Grid container alignItems={"center"} justify={"center"} direction={"column"}>
-                    <img src="img/3.jpg" id="itemimage" />
+                    <img src={"http://"+this.state.imgurl} id="itemimage" />
                     <Typography variant={"subtitle1"}  color={"textPrimary"} >名称</Typography>
                     <Typography variant={"p"} component={Link} to={"/useriteminfopage/"+this.state.name} color={"textSecondary"} >{this.state.name}</Typography>
                     <Typography variant={"subtitle1"} color={"textPrimary"} >发行日期</Typography>
