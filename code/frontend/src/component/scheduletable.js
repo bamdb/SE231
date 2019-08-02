@@ -130,7 +130,7 @@ class Scheduletable extends Component {
         var rows=[];
         rows={
             "itemId":this.props.itemid,
-            "userId":this.props.userid,
+            "userId":localStorage.getItem("userid"),
             "chapters":this.state.data
         }
         axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
