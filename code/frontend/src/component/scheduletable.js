@@ -129,12 +129,12 @@ class Scheduletable extends Component {
     submit(){
         var rows=[];
         rows={
-            "itemId":this.props.itemid,
-            "userId":localStorage.getItem("userid"),
-            "chapters":this.state.data
+            itemId:this.props.itemid,
+            userId:localStorage.getItem("userid"),
+            chapters:this.state.data
         }
+        console.log(rows);
         axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
-
         axios.put("http://202.120.40.8:30741/activity/update/progress",rows,{
             params:{},
             headers:{"Content-Type":'application/json'}
@@ -231,11 +231,11 @@ class Scheduletable extends Component {
             if(item.split('-')[2]===undefined) {
                 const length=node[item.split('-')[1]].sections.length;
                 for(var i=0; i<length; i++)
-                    node[item.split('-')[1]].sections[i]=0;
-                node[item.split('-')[1]].finish=0;
+                    node[item.split('-')[1]].sections[i]=false;
+                node[item.split('-')[1]].finish=false;
             }
             else {
-                node[item.split('-')[1]].sections[item.split('-')[2]] = 0;
+                node[item.split('-')[1]].sections[item.split('-')[2]] = false;
             }
         }
 
@@ -244,13 +244,14 @@ class Scheduletable extends Component {
             if(item.split('-')[2]===undefined) {
                 const length=node[item.split('-')[1]].sections.length;
                 for(var i=0; i<length; i++)
-                    node[item.split('-')[1]].sections[i]=1;
-                node[item.split('-')[1]].finish=1;
+                    node[item.split('-')[1]].sections[i]=true;
+                node[item.split('-')[1]].finish=true;
             }
             else {
-                node[item.split('-')[1]].sections[item.split('-')[2]] = 1;
+                node[item.split('-')[1]].sections[item.split('-')[2]] = true;
             }
         }
+        console.log(node)
         this.setState({
             data:node,
             value:value
