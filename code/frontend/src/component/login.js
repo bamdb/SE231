@@ -36,7 +36,7 @@ class Login extends Component{
             }.bind(this))
             .catch(function (err) {
                 this.setState({
-                    content:"抱歉，现在暂不支持微信扫码登录，请使用账号密码登录。"
+                    content:"抱歉，现在暂不支持扫码登录，请使用账号密码登录。"
                 })
             }.bind(this))
     }

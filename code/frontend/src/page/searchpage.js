@@ -82,13 +82,24 @@ class Searchpage extends Component {
 
     componentWillMount() {
         const search = window.location.href.split('#')[1].split('/')[2];
+        console.log(decodeURI(search));
         this.setState({
-            search:search,
+            search:decodeURI(search),
         })
         var dataSource=[];
         var id=[];
         console.log("start search");
-        axios.get('http://202.120.40.8:30741/search/ik/item',{params:{keystring:search,page:0,size:8}})
+        axios.defaults.headers = {
+            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+        }
+        axios.defaults.transformRequest = [function (data) {
+            var newData = "";
+            for (var k in data) {
+                newData += encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) + '&'
+            }
+            return newData
+        }]
+        axios.get('http://202.120.40.8:30741/search/ik/item',{params:{keystring:decodeURI(search),page:0,size:8}})
             .then(function (res) {
                 if(res.data.content!==undefined){
                     res.data.content.forEach(item=>{
