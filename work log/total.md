@@ -272,6 +272,17 @@
   * write test cases
 * huangyuyang:
   * 添加search message提示，修改样式
+# 2019-8-1
+* shenruien:
+  * add collect to android
+  * fix network problem
+* yuyajie:
+  * es搜索
+* wangzulai:  
+  * finish loadtest
+  * fix api bugs
+* huangyuyang:
+  * fix bugs in frontend
 
 
 
