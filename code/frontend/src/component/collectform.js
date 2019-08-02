@@ -1,4 +1,4 @@
-/* 
+/*
  * 收藏
  */
 
@@ -129,8 +129,6 @@ class Collectform extends Component {
         this.setState({
             visible: false
         });
-
-
         var date = Date.parse(new Date());
         //var yourtags=this.state.yourtags;
         axios.post("http://202.120.40.8:30741/activity/add",{actTime:date,actType:this.state.status,userId:this.state.userid,itemId:this.props.itemid})
