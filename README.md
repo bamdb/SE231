@@ -91,7 +91,9 @@ code for summer project
 * Nginx
     * 反向代理
     * 负载均衡
-		* ubuntularge
+		* ubuntularge Nginx
+			* 前端负载均衡
+			* HTTP request在三个swarm间负载均衡
 * Docker
 	* [bamdb's Profile - Docker Hub](https://hub.docker.com/u/bamdb "dockerhub")
 * Docker Swarm
