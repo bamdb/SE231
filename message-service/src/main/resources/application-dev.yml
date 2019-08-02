@@ -36,11 +36,11 @@ security:
     client:
       clientId: message-service
       clientSecret: message-service
-      accessTokenUri: http://localhost:8000/auth/oauth/token
+      accessTokenUri: http://202.120.40.8:30741/auth/oauth/token
       grant-type: client_credentials
       scope: server
     resource:
-      user-info-uri: http://localhost:8000/auth/user
+      user-info-uri: http://202.120.40.8:30741/auth/user
 management:
   endpoints:
     web:
