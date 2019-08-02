@@ -70,3 +70,6 @@
 # 2019-7-31
 * add camera into android
 * use java tensorflow
+# 2019-8-1
+* add collect to android
+* fix network problem
