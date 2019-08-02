@@ -67,8 +67,8 @@ class Comment extends Component {
         grade : "null",
         comment : "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
     };
-    componentWillReceiveProps(nextProps, nextContext) {
-        axios.get("http://202.120.40.8:30741/rating/score",{params:{itemId:nextProps.itemid,userId:nextProps.userid}})
+    componentWillMount(){
+        axios.get("http://202.120.40.8:30741/rating/score",{params:{itemId:this.props.itemid,userId:this.props.userid}})
             .then(function (res) {
                 this.setState({grade:res.data.score})
             }.bind(this))
@@ -87,8 +87,8 @@ class Comment extends Component {
                         >
 
                         </Modal>
-                        <Typography variant="h5" component="h2">
-                            {this.props.username}
+                        <Typography variant={"subtitle1"}>
+                            {this.props.name}
                         </Typography>
                     </Grid>
                     <Grid item xs={10} justify="center">

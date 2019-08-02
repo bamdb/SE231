@@ -190,7 +190,7 @@ class Listitem extends Component {
                                 <img
                                     height={120}
                                     alt="defaultbook"
-                                    src={"http://"+item.imgurl}
+                                    src={item.imgurl.substring(0, 4) == "http"? item.imgurl : "http://"+item.imgurl}
                                 />
                             }
                             actions={        // show delete icon in editor page

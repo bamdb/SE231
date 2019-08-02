@@ -28,9 +28,10 @@ class Item extends Component {
 
 
     render() {
+        var imgurl = this.state.imgurl.substring(0, 4) == "http"? this.state.imgurl : "http://"+this.state.imgurl
         return(
             <Grid container alignItems={"center"} justify={"center"} direction={"column"}>
-                    <img src={"http://"+this.state.imgurl} id="itemimage" />
+                    <img src={imgurl} id="itemimage" />
                     <Typography variant={"subtitle1"}  color={"textPrimary"} >名称</Typography>
                     <Typography variant={"p"} color={"textSecondary"} >{this.state.name}</Typography>
                     <Typography variant={"subtitle1"} color={"textPrimary"} >发行日期</Typography>

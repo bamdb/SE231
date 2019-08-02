@@ -165,15 +165,16 @@ class Collectform extends Component {
             default:
                 break;
         }
-        console.log("chapters:", chapters);
-        if(this.state.status<=3)
+        if(this.state.status<=3) {
+            axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("access_token");
             axios.put("http://202.120.40.8:30741/activity/update/progress",
-                {userId:localStorage.getItem("userid"),itemId:this.props.itemid,chapters:chapters}
+                {userId: localStorage.getItem("userid"), itemId: this.props.itemid, chapters: chapters}
             ).then(function (res) {
-                console.log("success:",res.data)
-            });
+                console.log("success:", res.data);
+                this.props.handleCancel();
+            }.bind(this));
+        }
 
-        this.props.handleCancel();
         /*$.ajax({
             url:"/item/add/tag",
             type:"POST",

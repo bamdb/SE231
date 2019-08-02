@@ -130,9 +130,11 @@ class Scheduletable extends Component {
         var rows=[];
         rows={
             "itemId":this.props.itemid,
-            "userId":this.props.userid,
+            "userId":localStorage.getItem("userid"),
             "chapters":this.state.data
         }
+        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
         axios.put("http://202.120.40.8:30741/activity/update/progress",rows,{
             params:{},
             headers:{"Content-Type":'application/json'}
@@ -140,9 +142,10 @@ class Scheduletable extends Component {
         this.setState({show:false});
     }
     componentWillMount() {
-        var data=[];
         var treeData = [];
         var value=[];
+        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
         axios.get("http://202.120.40.8:30741/activity/progress", {params:{
                     userId:this.props.userid,
                     itemId:this.props.itemid,
@@ -281,7 +284,7 @@ class Scheduletable extends Component {
                 <CardMedia
                     style={{height:120}}
                     className={useStyle.media}
-                    image={"http://"+this.props.imgurl}
+                    image={this.props.imgurl.substring(0, 4) == "http"? this.props.imgurl : "http://"+this.props.imgurl}
                 />
                 <CardContent >
                         {this.state.itemname}
