@@ -92,9 +92,9 @@ class Useriteminfopage extends Component {
         axios.get(url2).then(
             function (res) {
                 console.log(res.data);
-                if(res.data!==undefined)
+                if(res.data!=null)
                 {
-                    res.data.forEach(activity=>{
+                    res.data.map(activity=>{
                         if(activity.userId==localStorage.getItem("userid")) {
                             var status;
                             switch(activity.actType){

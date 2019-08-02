@@ -11,7 +11,6 @@ import Reply from "../component/reply";
 import Relateditem from "../component/relatedlist";
 import axios from 'axios';
 import TopicList from "../component/topiclist";
-import {List} from "antd";
 
 class Topicdetailpage extends Component{
     constructor(props){
@@ -51,13 +50,13 @@ class Topicdetailpage extends Component{
     render(){
         const topic = this.state.topic;
         const data = this.state.data;
-        const discuss = (data.replyList!==undefined) ? <List dataSource={data} /> : <Discuss replies={data.replyList} />;
+
         return(
-          <Grid container spacing={10}>
+          <Grid container spacing={10} justify={"space-around"}>
 
               <Grid item xs={8}>
                   <Grid>
-                      {discuss}
+                      <Discuss replies={data.replyList}/>
                   </Grid>
                   <Grid>
                       <br/>

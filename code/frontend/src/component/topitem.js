@@ -21,7 +21,7 @@ class TopItem extends Component {
     }
 
     render() {
-        var url='/useriteminfopage/'+this.state.itemId;
+        var url='/itemdetail/'+this.state.itemId;
         return(
                 <div id={"hot-item"}>
                     <Grid container justify={"center"} alignContent={"flex-start"}  spacing={2}  wrap={"nowrap"}>
