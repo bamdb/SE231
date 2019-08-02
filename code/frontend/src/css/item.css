@@ -1,4 +1,4 @@
 #itemroot{}
-#itemimage{min-width: 120px;min-height: 90px;margin-left: 8px;margin-top: 10px;border:2px solid grey;border-radius:5%}
+#itemimage{width: 120px;height: 90px;margin-left: 8px;margin-top: 10px;border:2px solid grey;border-radius:5%}
 
 #li{list-style-type: none}

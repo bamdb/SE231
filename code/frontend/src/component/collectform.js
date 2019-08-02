@@ -131,6 +131,7 @@ class Collectform extends Component {
         });
         var date = Date.parse(new Date());
         //var yourtags=this.state.yourtags;
+        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
         axios.post("http://202.120.40.8:30741/activity/add",{actTime:date,actType:this.state.status,userId:this.state.userid,itemId:this.props.itemid})
             .then(function (res) {
                 console.log("add activity:",res.data)
