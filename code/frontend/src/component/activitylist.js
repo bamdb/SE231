@@ -25,6 +25,26 @@ class Activitylist extends Component {
             activities: [],
         }
     }
+    componentDidMount() {
+        var activities = [];
+        var temp=[];
+        const friends=this.props.friends;
+        friends.map(friend => {
+            axios.get("http://202.120.40.8:30741/activity/userid/" + friend.id)
+                .then(function (res) {
+                        temp.push({
+                            user: friend,
+                            activities: res.data,
+                        })
+                        console.log(temp);
+                        activities.push(temp);
+                        this.setState({activities:activities})
+                    }.bind(this)
+                )
+                .catch(function (error) {
+                })
+        });
+    }
 
     componentWillReceiveProps(nextProps, nextContext) {
         const friends=nextProps.friends;
