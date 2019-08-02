@@ -81,7 +81,7 @@ code for summer project
 * 微服务架构
 	* spring cloud
 	* zuul
-	* eureka 端口8761
+	* [eureka](http://47.103.107.39:8761/)
     * 13 microservices
     * in 9 servers | 3 clusters
 		* manager
@@ -100,9 +100,15 @@ code for summer project
 	* 自动部署
 	* 物理资源调度
 * 监控
-    * zipkin
+    * [zipkin](http://202.120.40.8:30743/zipkin/)
     * prometheus+Grafana
+    	* [bamdb](http://47.103.107.39:9090/)
+		* [bamdb1](http://47.103.104.210:9090/)
+		* [bamdb2](http://47.103.98.30:9090/)
     * rabbitMQ日志管理和消息传递
+    	* [bamdb](http://47.103.107.39:15672/)
+		* [bamdb1](http://47.103.104.210:15672/)
+		* [bamdb2](http://47.103.98.30:15672/)
     * aliyun
     * elk+filebeat
 * 消息中间件
