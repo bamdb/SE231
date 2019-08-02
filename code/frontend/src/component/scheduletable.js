@@ -284,7 +284,7 @@ class Scheduletable extends Component {
                 <CardMedia
                     style={{height:120}}
                     className={useStyle.media}
-                    image={"http://"+this.props.imgurl}
+                    image={this.props.imgurl.substring(0, 4) == "http"? this.props.imgurl : "http://"+this.props.imgurl}
                 />
                 <CardContent >
                         {this.state.itemname}
