@@ -397,7 +397,6 @@ class LeftBar extends Component {
     componentDidMount() {
         if(localStorage.getItem("username")!=null) {
             this.setState({username:localStorage.getItem("username")})
-            axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
 
         }
         else this.setState({username:"游客"})
