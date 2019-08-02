@@ -139,6 +139,7 @@ class Collectform extends Component {
             .catch(function (err) {
                 console.log("add activity error!",err)
             });
+        console.log(date)
         axios.post("http://202.120.40.8:30741/comment/insert",{itemId:this.props.itemid,userId:localStorage.getItem("userid"),content:this.state.content,pubTime:date});
 
         axios.put("http://202.120.40.8:30741/rating/update","success",{params:{userId:localStorage.getItem("userid"),itemId:this.props.itemid,score:this.state.score}});

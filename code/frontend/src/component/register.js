@@ -11,7 +11,7 @@ import { Steps, Divider, Input, Tooltip, Icon } from 'antd';
 
 const { Step } = Steps;
 
-const  usernameRegex = /^\w{3,15}$/;
+const  usernameRegex = /^[a-zA-Z0-9\u4E00-\u9FA5\uF900-\uFA2D]{3,15}$/;
 const passwordRegex = /^\w{6,18}$/;
 const emailRegex = /^\w+@\w+(\.\w+)+$/;
 
