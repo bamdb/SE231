@@ -5,6 +5,7 @@ import Tags from "../component/tag";
 import Listitem from '../component/listitem'
 import {AutoComplete, Card, Icon, Input, List, Pagination, Select, Spin} from 'antd';
 import {Link} from "react-router-dom";
+import Alert from "../component/alert";
 
 const { Option } = Select;
 
@@ -32,15 +33,19 @@ class Searchpage extends Component {
             dataSourceId:[],
             items:[],
             currentpage:1,
-            loading:true
+            loading:true,
+            content:""
         }
         this.handleitem = this.handleitem.bind(this);
         this.handlepagechange = this.handlepagechange.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.handlelike = this.handlelike.bind(this);
-
+        this.handleAlert = this.handleAlert.bind(this);
     }
 
+    handleAlert(e){
+        this.setState({content:e})
+    }
     handleSearch(value){
         this.setState({search: value})
         var dataSource=[];
@@ -158,6 +163,7 @@ class Searchpage extends Component {
     render(){
         return(
             <Grid container justify={"center"}>
+                <Alert content={this.state.content} cancelAlert={this.handleAlert.bind(this,"")} confirmAlert={this.handleAlert.bind(this,"")}/>
                 <Grid item xs={4}>
                     <AutoComplete
                         dataSource={this.state.dataSource}
