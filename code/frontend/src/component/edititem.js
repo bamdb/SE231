@@ -21,6 +21,7 @@ class Edititem extends Component{
 
     handlesubmit(e)
     {
+        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
         if (this.state.update==false) {
             console.log("add")
             var pubtime = Date.parse(new Date(this.state.pubtime))
