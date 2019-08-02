@@ -58,14 +58,6 @@ class Activitypage extends Component{
     }
 
     render(){
-
-        if(this.state.friends.length==0)
-            return (
-                <div>
-                    <List dataSource={this.state.friends}
-                          />
-                </div>
-            )
         /*
         var activities=this.state.activities.sort((a,b)=>{
             return a.activity.actTime>b.activity.actTime;

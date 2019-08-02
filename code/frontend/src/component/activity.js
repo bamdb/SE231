@@ -10,11 +10,7 @@
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {Card} from "@material-ui/core";
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Grid from "@material-ui/core/Grid";
-import {Link} from 'react-router-dom';
+import axios from 'axios';
 import {List, Avatar, Icon, Divider} from 'antd';
 
 const useStyles = makeStyles({
@@ -62,6 +58,7 @@ class Activity extends Component {
             date:"",
             itemname:"",
             itemid:"",
+            imgurl:""
         }
     }
 
@@ -93,9 +90,11 @@ class Activity extends Component {
             itemname:this.props.itemname,
             itemid:this.props.itemid
         })
+        axios.get("http://202.120.40.8:30741/item/id/"+this.props.itemid).then(function (res) {
+            this.setState({imgurl:res.data.imgurl})
+        }.bind(this))
     }
     render() {
-
 
         return(
             <div id={"activity"}>
@@ -110,7 +109,8 @@ class Activity extends Component {
                     <img
                         width={200}
                         alt="暂无图片"
-                        src={"http://202.120.40.8:30741/image/id/"+this.state.itemid+"1"}
+                        src={"http://"+this.state.imgurl}
+                        height={120}
                     />
                 }
             >
