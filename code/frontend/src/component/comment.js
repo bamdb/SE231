@@ -48,6 +48,7 @@ class Comment extends Component {
     handleOk()
     {
         var date=Date.parse(new Date());
+        axios.post("http://202.120.40.8:30741/friend/add",{userId1:localStorage.getItem("userid"),userId2:this.props.userid,status:0})
         axios.post("http://202.120.40.8:30741/message/add",{senderId:localStorage.getItem("userid"),receiverId:this.props.userid,sendTime:date,content:"加为好友"})
         this.setState({visible:false});
     }

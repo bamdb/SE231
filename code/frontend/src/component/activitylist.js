@@ -74,9 +74,10 @@ class Activitylist extends Component {
 
     render() {
         var rows=[];
-        const activitylist=this.state.activities.sort((a,b)=>{
+        const activitylist=this.state.activities
+            /*.sort((a,b)=>{
             return a.activity.actTime>b.activity.actTime;
-        });
+        });*/
         if(activitylist!==undefined)
         {
             console.log(activitylist);
