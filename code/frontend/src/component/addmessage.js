@@ -106,7 +106,7 @@ class Addmessage extends Component {
     }
     componentWillMount() {
         axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
-        axios.get('http://202.120.40.8:30741/friend/all/userid/1',{params:{}}).then(
+        axios.get('http://202.120.40.8:30741/friend/all/userid/'+localStorage.getItem("userid"),{params:{}}).then(
             function(response){
                 this.setState({tolist:response.data})
             }.bind(this)
