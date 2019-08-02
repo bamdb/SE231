@@ -34,6 +34,7 @@ code for summer project
 
 ### 集群信息
 * ubuntularge: 4 vCPU | 8 GiB | Ubuntu 18.04
+* bamdb-elastic: 4 vCPU | 16 GiB | Ubuntu 18.04
 * bamdb: 4 vCPU | 8 GiB | Ubuntu 18.04
 * bamdb1:  4 vCPU | 8 GiB | Ubuntu 18.04
 * bamdb2:  4 vCPU | 8 GiB | Ubuntu 18.04
@@ -71,6 +72,12 @@ code for summer project
     	* ubuntularge node.data=false
     * slave
     	* bamdb-elastic node.data=true
+* 智能推荐
+	* tensorflow
+	* 数据集
+		* [bgm镜像站](http://mirror.api.bgm.rin.cat)
+			* 11w 条目数据
+			* 48w 用户数据
 * 微服务架构
 	* spring cloud
 	* zuul
@@ -103,8 +110,6 @@ code for summer project
         * [openapi.yml](https://app.swaggerhub.com/apis/ba818/open-api/1.0.0 "swaggerhub")
 * 性能测试
     * Locust
-* 数据集
-	* [bgm镜像站](http://mirror.api.bgm.rin.cat)
 
 
 ## 实体
