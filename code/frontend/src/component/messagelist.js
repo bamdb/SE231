@@ -55,11 +55,13 @@ class Messagelist extends Component{
 
         }
         else {
+            axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
             this.setState({userid:localStorage.getItem("userid")})
         }
     }
 
     componentDidMount() {
+        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
         var url="http://202.120.40.8:30741/message/"+this.props.type+"/"+localStorage.getItem("userid");
         axios.get(url).then(
             function(response)
@@ -69,6 +71,7 @@ class Messagelist extends Component{
         )
     }
     componentWillReceiveProps(nextProps, nextContext) {
+        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
         var url="http://202.120.40.8:30741/message/"+nextProps.type+"/"+localStorage.getItem("userid");
         axios.get(url).then(
             function(response)

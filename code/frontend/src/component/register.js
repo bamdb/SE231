@@ -68,7 +68,7 @@ class Register extends Component {
             mail: this.state.email
         }
         //开始验证
-        axios.post("http://202.120.40.8:30741/auth/verify",rows,{headers:{"Content-Type":'application/json'}})
+        axios.post("http://202.120.40.8:30741/auth/verify",{rows},{headers:{"Content-Type":'application/json'}})
 
         this.setState({verify:true});
     }

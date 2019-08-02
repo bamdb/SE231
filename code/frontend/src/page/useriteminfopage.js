@@ -65,6 +65,7 @@ class Useriteminfopage extends Component {
         var uri=window.location.href;
         var id=uri.split('#')[1].split('/')[2];
         this.setState({userid:localStorage.getItem("userid"),id:id})
+        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
         var url="http://202.120.40.8:30741/item/id/"+id;
         var url1="http://202.120.40.8:30741/rating/itemid/"+id;
         var url2="http://202.120.40.8:30741/activity/itemid/"+id;

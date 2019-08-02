@@ -9,6 +9,7 @@ import Tag from "../component/tag";
 import Listitem from '../component/listitem'
 import Activitylist from "../component/activitylist";
 import axios from 'axios';
+import {List} from "antd";
 
 
 class Activitypage extends Component{
@@ -56,6 +57,14 @@ class Activitypage extends Component{
     }
 
     render(){
+
+        if(this.state.friends.length==0)
+            return (
+                <div>
+                    <List dataSource={this.state.friends}
+                          />
+                </div>
+            )
         /*
         var activities=this.state.activities.sort((a,b)=>{
             return a.activity.actTime>b.activity.actTime;

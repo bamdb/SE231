@@ -47,6 +47,7 @@ class Editorpage extends React.Component {
     next() {
         if(this.state.item!=null)
         {
+            axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
             const current = this.state.current + 1;
             this.setState({ current });
             if(current==1)
