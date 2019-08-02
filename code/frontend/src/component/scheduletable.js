@@ -129,12 +129,12 @@ class Scheduletable extends Component {
     submit(){
         var rows=[];
         rows={
-            "itemId":this.props.itemid,
-            "userId":localStorage.getItem("userid"),
-            "chapters":this.state.data
+            itemId:this.props.itemid,
+            userId:localStorage.getItem("userid"),
+            chapters:this.state.data
         }
+        console.log(rows);
         axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
-
         axios.put("http://202.120.40.8:30741/activity/update/progress",rows,{
             params:{},
             headers:{"Content-Type":'application/json'}
@@ -147,7 +147,7 @@ class Scheduletable extends Component {
         axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
 
         axios.get("http://202.120.40.8:30741/activity/progress", {params:{
-                    userId:this.props.userid,
+                    userId:localStorage.getItem("userid"),
                     itemId:this.props.itemid,
                     
                 }}).then(function(response)
@@ -159,9 +159,9 @@ class Scheduletable extends Component {
                 const length = (readdata===undefined) ? 0 :readdata.length ;
                 for (var i=0;i<length;++i){
                     console.log("child",readdata[i].sections.length)
-                    if(readdata[i].sections.length===0) //下面没有子章节了
+                    if(readdata[i].sections.length==0) //下面没有子章节了
                     {
-                        if(readdata[i].finish===1) {
+                        if(readdata[i].finish==true) {
                             treeData.push({
                                 title: "Node" +'-'+ (i + 1).toString(),
                                 value: '0-' + i.toString(),
@@ -184,7 +184,7 @@ class Scheduletable extends Component {
                         var read=true;
                         const sections=readdata[i].sections;
                         for(var j=0;j<sections.length;j++)
-                            if(sections[j]==1) {
+                            if(sections[j]==true) {
                                 children.push({
                                     title: "Node"+ parenttitle +'-'+ (j + 1).toString(),
                                     value: parentvalue + '-' + j.toString(),
@@ -231,11 +231,11 @@ class Scheduletable extends Component {
             if(item.split('-')[2]===undefined) {
                 const length=node[item.split('-')[1]].sections.length;
                 for(var i=0; i<length; i++)
-                    node[item.split('-')[1]].sections[i]=0;
-                node[item.split('-')[1]].finish=0;
+                    node[item.split('-')[1]].sections[i]=false;
+                node[item.split('-')[1]].finish=false;
             }
             else {
-                node[item.split('-')[1]].sections[item.split('-')[2]] = 0;
+                node[item.split('-')[1]].sections[item.split('-')[2]] = false;
             }
         }
 
@@ -244,13 +244,14 @@ class Scheduletable extends Component {
             if(item.split('-')[2]===undefined) {
                 const length=node[item.split('-')[1]].sections.length;
                 for(var i=0; i<length; i++)
-                    node[item.split('-')[1]].sections[i]=1;
-                node[item.split('-')[1]].finish=1;
+                    node[item.split('-')[1]].sections[i]=true;
+                node[item.split('-')[1]].finish=true;
             }
             else {
-                node[item.split('-')[1]].sections[item.split('-')[2]] = 1;
+                node[item.split('-')[1]].sections[item.split('-')[2]] = true;
             }
         }
+        console.log(node)
         this.setState({
             data:node,
             value:value
