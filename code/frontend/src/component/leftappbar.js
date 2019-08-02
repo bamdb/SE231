@@ -399,7 +399,6 @@ class LeftBar extends Component {
         if(localStorage.getItem("username")!=null) {
             this.setState({username:localStorage.getItem("username")})
 
-
         }
         else this.setState({username:"游客"})
     }
