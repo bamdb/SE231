@@ -80,10 +80,10 @@ class Reply extends Component {
                     <Grid item xs={1} />
                     <Grid item xs={1}>
                         <br/>
-                        <Avatar alt="Remy Sharp" src="img/3.jpg" className={useStyles.avatar} />
+                        <Avatar alt="暂无头像" src={"http://202.120.40.8:30741/image/"+localStorage.getItem("userid")+'0'} className={useStyles.avatar} />
                         <br/>
                         <Typography variant="h5" component="h2">
-                            {this.props.username}
+                            {localStorage.getItem("username")}
                         </Typography>
                     </Grid>
                     <Grid item xs={9}>

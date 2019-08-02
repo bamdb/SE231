@@ -89,28 +89,6 @@ class Useriteminfopage extends Component {
             }.bind(this)
         )
 
-        axios.get(url2).then(
-            function (res) {
-                console.log(res.data);
-                if(res.data!==undefined)
-                {
-                    res.data.forEach(activity=>{
-                        if(activity.userId==localStorage.getItem("userid")) {
-                            var status;
-                            switch(activity.actType){
-                                case 0:case 1: case 2:
-                                    status="已收藏";
-                                    break;
-                                default:
-                                    status="未收藏"
-                                    break;
-                            }
-                            this.setState({status: status})
-                        }
-                    })
-                }
-            }.bind(this)
-        )
         axios.get(url3).then(
             function(response){
                 this.setState({comments:response.data});
