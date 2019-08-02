@@ -5,7 +5,6 @@
 import pandas as pd
 from datetime import datetime
 import matplotlib.pyplot as plt
-import numpy as np
 import os
 from matplotlib import dates
 
@@ -172,11 +171,11 @@ class DataAnalyse:
 
         plt.plot(self.xdata, self.ydata)
         plt.title("load-test")
-        plt.savefig(fname='.'.join(['./evaluation_failure', 'png']))  # 保存趋势图
+        plt.savefig(fname='.'.join(['./evaluation_onenode_failure', 'png']))  # 保存趋势图
         # plt.show()  # 打印趋势图
 
 
 if __name__ == '__main__':
-    data = DataAnalyse('/home/wzl/sjtu/22/se/bamdb/SE231/code/loadtest/traces/')
+    data = DataAnalyse('/Users/pro/sjtu/22/se/bamdb/frontend/SE231/code/loadtest/traces/')
     # print(data.sorted_data.info())
     data.generate_trend()
