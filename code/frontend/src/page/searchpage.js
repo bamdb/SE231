@@ -38,6 +38,7 @@ class Searchpage extends Component {
         this.handlepagechange = this.handlepagechange.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.handlelike = this.handlelike.bind(this);
+
     }
 
     handleSearch(value){
