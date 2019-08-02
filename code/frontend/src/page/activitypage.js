@@ -35,6 +35,7 @@ class Activitypage extends Component{
         else {
             userid=localStorage.getItem("userid");
         }
+        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
 
         axios.get('http://202.120.40.8:30741/friend/all/userid/'+userid).then(
             function(response){
