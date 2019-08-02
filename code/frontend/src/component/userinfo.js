@@ -118,7 +118,7 @@ class Userinfo extends Component {
                 <Alert content={this.state.content} confirmAlert={this.handleAlert} cancelAlert={this.handleAlert} />
                 <Grid item xs={3}>
                     <Grid container justify={"center"}>
-                    <Avatar alt="Remy Sharp" src={"http://202.120.40.8:30741/image/id/"+localStorage.getItem("userid")+"0"} id={"avatar"}/>
+                    <Avatar alt="" src={"http://202.120.40.8:30741/image/id/"+localStorage.getItem("userid")+"0"} id={"avatar"}/>
                     <br/>
                     <div id="upload">{upload}</div>
                     </Grid>
