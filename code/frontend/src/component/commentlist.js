@@ -7,13 +7,10 @@
  */
 
 import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import ListItem from '@material-ui/core/ListItem';
 import Comment from "./comment";
 import Grid from '@material-ui/core/Grid'
-import Typography from "@material-ui/core/Typography";
 import {Divider} from "antd";
-import Container from "@material-ui/core/Container";
+import axios from 'axios';
 
 class Commentlist extends Component {
     constructor(props) {
@@ -35,10 +32,11 @@ class Commentlist extends Component {
                 rows.push(
                     <Grid item xs={12}>
                         <Comment
-                            username = {comments[i].comment.userId}
+                            userid = {comments[i].comment.userId}
                             date = {comments[i].comment.pubTime}
-                            grade = {8}
                             comment = {comments[i].comment.content}
+                            itemid = {comments[i].comment.itemId}
+                            username={comments[i].user.username}
                         />
                     </Grid>
                 )

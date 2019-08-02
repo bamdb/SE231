@@ -40,8 +40,9 @@ import {blueGrey, grey, purple} from "@material-ui/core/colors";
 import Avatar from "@material-ui/core/Avatar";
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import axios from 'axios'
+
 import { Menu, Icon, Button, Divider } from 'antd';
+import axios from "axios";
 
 const drawerWidth=240;
 
@@ -385,11 +386,19 @@ class LeftBar extends Component {
     toggleCollapsed = () => {
         this.props.toggleCollapesd();
     };
+    componentWillReceiveProps(nextProps, nextContext) {
+        if(localStorage.getItem("username")!=null) {
+            this.setState({username:localStorage.getItem("username")})
+            axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
+        }
+        else this.setState({username:"游客"})
+    }
 
     componentDidMount() {
         if(localStorage.getItem("username")!=null) {
             this.setState({username:localStorage.getItem("username")})
-            axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("access_token");
+
         }
         else this.setState({username:"游客"})
     }

@@ -5,6 +5,7 @@ import Tags from "../component/tag";
 import Listitem from '../component/listitem'
 import {AutoComplete, Card, Icon, Input, List, Pagination, Select, Spin} from 'antd';
 import {Link} from "react-router-dom";
+import Alert from "../component/alert";
 
 const { Option } = Select;
 
@@ -32,14 +33,19 @@ class Searchpage extends Component {
             dataSourceId:[],
             items:[],
             currentpage:1,
-            loading:true
+            loading:true,
+            content:""
         }
         this.handleitem = this.handleitem.bind(this);
         this.handlepagechange = this.handlepagechange.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.handlelike = this.handlelike.bind(this);
+        this.handleAlert = this.handleAlert.bind(this);
     }
 
+    handleAlert(e){
+        this.setState({content:e})
+    }
     handleSearch(value){
         this.setState({search: value})
         var dataSource=[];
@@ -82,13 +88,24 @@ class Searchpage extends Component {
 
     componentWillMount() {
         const search = window.location.href.split('#')[1].split('/')[2];
+        console.log(decodeURI(search));
         this.setState({
-            search:search,
+            search:decodeURI(search),
         })
         var dataSource=[];
         var id=[];
         console.log("start search");
-        axios.get('http://202.120.40.8:30741/search/ik/item',{params:{keystring:search,page:0,size:8}})
+        axios.defaults.headers = {
+            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+        }
+        axios.defaults.transformRequest = [function (data) {
+            var newData = "";
+            for (var k in data) {
+                newData += encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) + '&'
+            }
+            return newData
+        }]
+        axios.get('http://202.120.40.8:30741/search/ik/item',{params:{keystring:decodeURI(search),page:0,size:8}})
             .then(function (res) {
                 if(res.data.content!==undefined){
                     res.data.content.forEach(item=>{
@@ -146,6 +163,7 @@ class Searchpage extends Component {
     render(){
         return(
             <Grid container justify={"center"}>
+                <Alert content={this.state.content} cancelAlert={this.handleAlert.bind(this,"")} confirmAlert={this.handleAlert.bind(this,"")}/>
                 <Grid item xs={4}>
                     <AutoComplete
                         dataSource={this.state.dataSource}

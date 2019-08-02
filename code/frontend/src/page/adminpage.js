@@ -18,6 +18,7 @@ class Adminpage extends Component{
     }
     submit()
     {
+        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
         axios.put("http://202.120.40.8:30741/auth/update/"+this.state.username,{},{params:{id:this.state.id,mail:this.state.email,password:this.state.password}}).then(
             function(res)
             {

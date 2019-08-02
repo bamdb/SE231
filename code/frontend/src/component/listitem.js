@@ -18,7 +18,7 @@ import axios from 'axios';
 * props.author : 条目作者
 * props.score : 条目评分
 * props.rank : 条目排名
-* props.chapter : 条目章节数 
+* props.chapter : 条目章节数
 */
 
 
@@ -63,6 +63,48 @@ class Listitem extends Component {
     handlepagechange(e){
         this.props.handlepagechange(e);
     }
+    componentDidMount() {
+        var rows=[];
+        var items=[];
+        var currentpage=this.props.currentpage;
+
+        axios.get(
+            "http://202.120.40.8:30741/rating/browser",{params:{
+                    type:this.props.type,
+                    page:currentpage-1,
+                    pageSize:8
+                }}
+        )
+            .then(function (response) {
+                items=response.data;
+                if(items !== undefined)
+                {
+                    var totalpage=items[0].totalPage;
+                    for(var i=0; i<items.length; ++i) {
+                        rows.push(
+                            {
+                                href: "/itemdetail/"+items[i].item.id,
+                                id: items[i].item.id,
+                                title:items[i].item.itemname,
+                                author:items[i].item.mainAuthor,
+                                pubTime: items[i].item.pubTime.split('T')[0],
+                                score:items[i].rating.avgScore,
+                                rank:items[i].rating.rank,
+                                imgurl:items[i].item.imgurl,
+                                chapterNum:items[i].item.chapterNum,
+                            }
+                        );
+                    }
+                    this.setState({
+                        ItemList:items,
+                        modifiedItems:rows,
+                        loading:false,
+                        totalPage:totalpage
+                    })
+                }
+            }.bind(this))
+    }
+
     componentWillReceiveProps(nextProps, nextContext) {
         var rows=[];
         var items=[];
