@@ -24,6 +24,7 @@ class Commentlist extends Component {
 
     render() {
         var comments=this.state.comments;
+        console.log(comments)
         if(comments.length>0)
         {
             var rows=[];
@@ -32,10 +33,11 @@ class Commentlist extends Component {
                 rows.push(
                     <Grid item xs={12}>
                         <Comment
-                            userid = {comments[i].userId}
-                            date = {comments[i].pubTime}
-                            comment = {comments[i].content}
-                            itemid = {comments[i].itemId}
+                            userid = {comments[i].comment.userId}
+                            date = {comments[i].comment.pubTime}
+                            comment = {comments[i].comment.content}
+                            itemid = {comments[i].comment.itemId}
+                            name={comments[i].user.username}
                         />
                     </Grid>
                 )

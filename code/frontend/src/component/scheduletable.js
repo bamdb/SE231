@@ -133,6 +133,8 @@ class Scheduletable extends Component {
             "userId":this.props.userid,
             "chapters":this.state.data
         }
+        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
         axios.put("http://202.120.40.8:30741/activity/update/progress",rows,{
             params:{},
             headers:{"Content-Type":'application/json'}
@@ -140,9 +142,10 @@ class Scheduletable extends Component {
         this.setState({show:false});
     }
     componentWillMount() {
-        var data=[];
         var treeData = [];
         var value=[];
+        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
         axios.get("http://202.120.40.8:30741/activity/progress", {params:{
                     userId:this.props.userid,
                     itemId:this.props.itemid,
