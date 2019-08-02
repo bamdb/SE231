@@ -33,6 +33,7 @@ class Userinfo extends Component {
         if(localStorage.getItem("userid")!=null)
         {
             var username=localStorage.getItem("username");
+            axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
             axios({url: 'http://202.120.40.8:30741/auth/username/'+username,method:'GET'})
                 .then(
                     function (response)
@@ -63,9 +64,10 @@ class Userinfo extends Component {
             this.setState({content:"邮箱格式错误，请重新填写！"})
         }
         else {
-            axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
             var url='http://202.120.40.8:30741/auth/update/'+this.state.username;
             this.setState({edit:false});
+            axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
             axios.put('http://202.120.40.8:30741/auth/update/'+this.state.username,{},{params:{mail:this.state.email,imgUrl:"http://202.120.40.8:30741/image/id/"+this.state.id+"0"}});
 
         }
