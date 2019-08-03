@@ -75,6 +75,7 @@ class Itembrowsepage extends Component{
         }
         console.log(type);
         return(
+            <div>
             <Grid container id={"browser-item"}>
                 <Grid item xs={9} style={{padding:20}}>
                     <Tags select={true} tagchange={this.handletagchange} tags={["热血","王道","搞怪","不高兴","没头脑"]}/>
@@ -89,10 +90,9 @@ class Itembrowsepage extends Component{
                         <Input.Search addonBefore={selectBefore} onSearch={value=>this.Search(value)} />
                     </AutoComplete>
                 </Grid>
-                <Grid item xs={12} style={{padding:20}}>
-                    <Listitem currentpage={this.state.currentpage} type={type} search={this.state.search} handlepagechange={this.handlepagechange}/>
-                </Grid>
             </Grid>
+            <Listitem currentpage={this.state.currentpage} type={type} search={this.state.search} handlepagechange={this.handlepagechange}/>
+        </div>
         )
     }
 }
