@@ -96,3 +96,7 @@
 # 2019-08-01
 * finish loadtest
 * fix api bugs
+
+# 2019-08-02
+* finish iter3
+* fix api bugs
