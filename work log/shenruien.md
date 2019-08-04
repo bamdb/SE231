@@ -73,3 +73,5 @@
 # 2019-8-1
 * add collect to android
 * fix network problem
+# 2019-8-2
+* fix bugs and finish iter3
