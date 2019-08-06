@@ -5,7 +5,6 @@
 import pandas as pd
 from datetime import datetime
 import matplotlib.pyplot as plt
-import numpy as np
 import os
 from matplotlib import dates
 
@@ -100,7 +99,7 @@ class DataAnalyse:
             for file in files:
                 if os.path.join(root, file).split('/')[-1][-12:] == "requests.csv":
                     read_last_line(os.path.join(root, file), self.csvdata)
-        self.csvdata.sort(key=lambda innerdata: innerdata[0])
+        self.csvdata.sort(key=lambda innerdata: int(innerdata.split(',')[0]))
         open("./output.csv", "w").writelines(self.csvdata)
 
         headers = ['client', 'Method', 'Name', '# requests', '# failures', 'Median response time', 'Average response time',
@@ -111,7 +110,7 @@ class DataAnalyse:
         for col in headers[1:2]:  # 取消掉所有非int型的空格
             self.data[col] = self.data[col].apply(lambda x: x.strip())
         self.xdata = self.data['client']
-        self.ydata = self.data['Average response time']
+        self.ydata = self.data['# failures']
         # self.sorted_data = self.data.sort_values(by=['client'], ascending=[True])  # 对数据按照time和name进行降序排列
         # self.grouped_data = self.sorted_data.groupby('client')  # 对降序排列的数据，按名称分组
         # self.requests_counts = np.array([[key, len(group)] for key, group in self.grouped_data])  # 构建请求名和请求次数数组
@@ -143,7 +142,7 @@ class DataAnalyse:
 
         self.ax_plot = plt.axes(self.trend_scatter)  # 套用axes大小
         self.ax_plot.grid(True)  # 打开网格
-        self.ax_plot.set_ylabel('Average Response Time(ms)')  # 纵坐标标题
+        self.ax_plot.set_ylabel('failures/8000reqs')  # 纵坐标标题
         self.ax_plot.set_xlabel('Concurrent client amount')  # 横坐标标题
         # self.ax_plot.figure.set_size_inches(15, 8)  # 画板大小
         # self.ax_plot.xaxis.set_yscale('linear')
@@ -172,11 +171,11 @@ class DataAnalyse:
 
         plt.plot(self.xdata, self.ydata)
         plt.title("load-test")
-        plt.savefig(fname='.'.join(['./evaluation', 'png']))  # 保存趋势图
+        plt.savefig(fname='.'.join(['./evaluation_onenode_failure', 'png']))  # 保存趋势图
         # plt.show()  # 打印趋势图
 
 
 if __name__ == '__main__':
-    data = DataAnalyse('/home/wzl/sjtu/22/se/bamdb/SE231/code/loadtest/test.traces/')
+    data = DataAnalyse('/Users/pro/sjtu/22/se/bamdb/frontend/SE231/code/loadtest/traces/')
     # print(data.sorted_data.info())
     data.generate_trend()
