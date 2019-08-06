@@ -44,6 +44,7 @@ public class QRCodeUtil {
                 image.setRGB(x, y, bitMatrix.get(x, y) ? 0xFF000000 : 0xFFFFFFFF);
             }
         }
+<<<<<<< HEAD
         // QRCodeUtil.insertImage(image, imgPath);
         return image;
     }
@@ -72,4 +73,34 @@ public class QRCodeUtil {
 //        graph.draw(shape);
 //        graph.dispose();
 //    }
+=======
+        QRCodeUtil.insertImage(image, imgPath);
+        return image;
+    }
+
+    private static void insertImage(BufferedImage source, String imgPath) throws Exception {
+        URL url = new URL(imgPath);
+        BufferedImage img = ImageIO.read(url);
+        File file = new File("icon.jpg");
+        ImageIO.write(img, "jpg", file);
+        Image src = ImageIO.read(file);
+        int width = WIDTH;
+        int height = HEIGHT;
+        Image image = src.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        BufferedImage tag = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        Graphics g = tag.getGraphics();
+        g.drawImage(image, 0, 0, null); // 绘制缩小后的图
+        g.dispose();
+        src = image;
+
+        Graphics2D graph = source.createGraphics();
+        int x = (QRCODE_SIZE - width) / 2;
+        int y = (QRCODE_SIZE - height) / 2;
+        graph.drawImage(src, x, y, width, height, null);
+        Shape shape = new RoundRectangle2D.Float(x, y, width, width, 6, 6);
+        graph.setStroke(new BasicStroke(3f));
+        graph.draw(shape);
+        graph.dispose();
+    }
+>>>>>>> master
 }

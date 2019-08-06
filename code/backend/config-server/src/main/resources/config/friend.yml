@@ -1,3 +1,4 @@
+<<<<<<< HEAD:code/backend/config-server/src/main/resources/config/friend.yml
 spring:
   application:
     name: friend
@@ -17,4 +18,25 @@ security:
       grant-type: client_credentials
       scope: server
     resource:
+=======
+spring:
+  application:
+    name: friend
+
+eureka:
+  instance:
+    hostname: friend
+
+server:
+  port: 8092
+security:
+  oauth2:
+    client:
+      clientId: friend-service
+      clientSecret: friend-service
+      accessTokenUri: http://gateway:8000/auth/oauth/token
+      grant-type: client_credentials
+      scope: server
+    resource:
+>>>>>>> master:code/backend/config-server/src/main/resources/config/friend.yml
       user-info-uri: http://gateway:8000/auth/user

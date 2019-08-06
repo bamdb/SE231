@@ -13,12 +13,33 @@ spring:
     sampler:
       probability: 1
   data:
+<<<<<<< HEAD
+<<<<<<< HEAD:code/backend/search-service/src/main/resources/application-dev.yml
+=======
+>>>>>>> master
     elasticsearch:
       cluster-nodes: 202.120.40.8:30748, 47.103.123.5:9300
       repositories:
         enabled: true
       cluster-name: bamdb
 
+<<<<<<< HEAD
+=======
+    mongodb:
+      uri: mongodb://localhost:27017/bamdb
+  zipkin:
+    base-url: http://202.120.40.8:30743
+    sender:
+      type: web
+    enabled: true
+    discovery-client-enabled: true
+
+  sleuth:
+    sampler:
+      probability: 1
+>>>>>>> master:code/backend/message-service/src/main/resources/application-dev.yml
+=======
+>>>>>>> master
 eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}

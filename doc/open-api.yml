@@ -1,0 +1,1663 @@
+swagger: '2.0'
+info:
+  description: This is API doc for bamdb project
+  version: 1.0.0
+  title: Bamdb API
+  # put the contact info for your development or API team
+  contact:
+    email: wzl574402791@outlook.com
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# tags are used for organizing operations
+tags:
+- name: admins
+  description: Secured Admin-only calls
+- name: developers
+  description: Operations available to regular developers
+
+paths:
+  /item/all:
+    get:
+      tags:
+      - developers
+      summary: 获取所有条目信息
+      operationId: getAllItem
+      description: |
+        获取所有条目信息
+      produces:
+      - application/json
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Item'
+  /item/id/{itemId}:
+    get:
+      tags:
+      - developers
+      summary: 获取指定条目信息
+      operationId: getOneItem
+      description: |
+        传入一个item id，返回该id对应item的信息
+      produces:
+      - application/json
+      parameters:
+      - name: itemId
+        in: path
+        description: 需要查找的条目ID
+        required: true
+        type: integer
+      responses:
+        200:
+          $ref: '#/definitions/Item'
+  /item/add:
+    post:
+      tags:
+      - developers
+      summary: 添加一个条目
+      operationId: addOneItem
+      description: 传入一个包含条目除了id以外所有属性的json对象，后端处理存入数据库，并返回这个json对象。其中itemid由数据库自增生成，不需要前端指定。
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: 需要存储的item object
+        required: true
+        schema:
+          $ref: '#/definitions/ItemIn'
+      responses:
+        200:
+          $ref: '#/definitions/Item'
+  /item/delete/{itemId}:
+    delete:
+      tags:
+      - developers
+      summary: 删除一个条目
+      description: 传入一个需要删除的item ID，通过Response body返回处理结果
+      operationId: deleteOneItem
+      parameters:
+      - name: itemId
+        in: path
+        description: 需要删除的item ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 成功删除对应条目
+  /item/update:
+    put:
+      tags:
+      - developers
+      summary: 更新一个条目的信息
+      description: 传入一个完整的更新后的item json对象，成功则返回更新后的item对象，否则返回null
+      operationId: updateOneItem
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: 用于更新的item object，包括ID在内的所有属性都填入更新后的值
+        required: true
+        schema:
+          $ref: '#/definitions/Item'
+      responses:
+        200:
+          $ref: '#/definitions/Item'
+  /activity/all:
+    get:
+      tags:
+      - developers
+      summary: 获取所有条目信息
+      operationId: getAllActivity
+      description: 获取所有用户活动信息，即用户对条目的操作信息
+      produces:
+      - application/json
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Activity'
+  /activity/id/{activityId}:
+    get:
+      tags:
+      - developers
+      summary: 获取指定条目信息
+      operationId: getOneActivity
+      description: 传入一个activity ID，返回该ID对应的活动信息
+      produces:
+      - application/json
+      parameters:
+      - name: activityId
+        in: path
+        description: 用于查找的activity ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            $ref: '#/definitions/Activity'
+  /activity/userid/{userId}:
+    get:
+      tags:
+      - developers
+      summary: 获取用户的所有活动信息
+      operationId: getAllActivityByUserId
+      description: 传入一个user ID，返回该用户所有的活动信息
+      produces:
+      - application/json
+      parameters:
+      - name: userId
+        in: path
+        description: 用于查找的user ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Activity'
+  /activity/itemid/{itemId}:
+    get:
+      tags:
+      - developers
+      summary: 获取条目的所有用户活动信息
+      operationId: getAllActivityByItemId
+      description: 传入一个item ID，返回该条目所有的用户活动信息
+      produces:
+      - application/json
+      parameters:
+      - name: itemId
+        in: path
+        description: 用于查找的item ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Activity'
+  /activity/add:
+    post:
+      tags:
+      - developers
+      summary: 添加一个活动
+      operationId: addOneActivity
+      description: 传入一个包含除了id以外所有属性的活动json对象，后端处理存入数据库，并返回这个json对象。其中activity ID由数据库自增生成，不需要前端指定。
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: 需要存储的activity object
+        required: true
+        schema:
+          $ref: '#/definitions/ActivityIn'
+      responses:
+        200:
+          $ref: '#/definitions/Activity'
+  /activity/delete/id/{activityId}:
+    delete:
+      tags:
+      - developers
+      summary: 删除一个活动
+      description: 传入一个需要删除的activity ID，通过Response body返回处理结果
+      operationId: deleteOneActivity
+      parameters:
+      - name: activityId
+        in: path
+        description: 需要删除的activity ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 成功删除对应活动
+  /activity/delete/userid/{userId}:
+    delete:
+      tags:
+      - developers
+      summary: 删除指定用户的所有活动
+      description: 传入一个需要删除的user ID，通过Response body返回处理结果
+      operationId: deleteAllActivityByUserId
+      parameters:
+      - name: userId
+        in: path
+        description: 需要删除的user ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 成功删除对应所有活动
+  /activity/delete/itemid/{itemId}:
+    delete:
+      tags:
+      - developers
+      summary: 删除指定条目的所有活动
+      description: 传入一个需要删除的item ID，通过Response body返回处理结果
+      operationId: deleteAllActivityByItemId
+      parameters:
+      - name: itemId
+        in: path
+        description: 需要删除的item ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 成功删除对应所有活动
+  /rating/all:
+    get:
+      tags:
+      - developers
+      summary: 获取所有评分与排名信息
+      operationId: getAllRating
+      description: 获取所有条目的平均分以及排名
+      produces:
+      - application/json
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Rating'
+  /rating/id/{ratingId}:
+    get:
+      tags:
+      - developers
+      summary: 获取指定评分与排名信息
+      operationId: getOneRating
+      description: 传入一个rating ID，返回该id对应rating的信息
+      produces:
+      - application/json
+      parameters:
+      - name: ratingId
+        in: path
+        description: 用于查找的rating ID
+        required: true
+        type: integer
+      responses:
+        200:
+          $ref: '#/definitions/Rating'
+  /rating/itemid/{itemId}:
+    get:
+      tags:
+      - developers
+      summary: 获取指定条目的评分与排名信息
+      operationId: getOneRatingByItemId
+      description: 传入一个item ID，返回该id对应的评分与排名的信息
+      produces:
+      - application/json
+      parameters:
+      - name: itemId
+        in: path
+        description: 用于查找的item ID
+        required: true
+        type: integer
+      responses:
+        200:
+          $ref: '#/definitions/Rating'
+  /rating/browser:
+    get:
+      tags:
+      - developers
+      summary: 获取在某一页面大小下，根据某属性排名的某一页所有的条目评分与排名信息
+      description: 在GET请求的参数中指定需要显示的条目类型、显示的页面序号、一个页面显示多少对象，返回该页面的所有评分与排名信息。目前默认按照平均分在同类条目中进行排名
+      operationId: getRatingPage
+      produces:
+      - application/json
+      parameters:
+      - name: type
+        in: query
+        description: 用于排名的条目类型
+        required: true
+        type: integer
+      - name: page
+        in: query
+        description: 显示的页面序号
+        required: true
+        type: integer
+      - name: pageSize
+        in: query
+        description: 每个页面的对象数量
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Rating'
+  /rating/add/itemid/{itemId}:
+    post:
+      tags:
+      - developers
+      summary: 添加一个条目对应的评分与排名信息
+      operationId: addOneRatingByItemId
+      description: 传入一个需要新建评分与排名信息的条目ID，后端处理存入数据库，并返回这个评分与排名信息的json对象
+      produces:
+      - application/json
+      parameters:
+      - name: itemId
+        in: path
+        description: 需要新建评分与排名信息的item ID
+        required: true
+        type: integer
+      responses:
+        200:
+          $ref: '#/definitions/Rating'
+  /rating/delete/id/{ratingId}:
+    delete:
+      tags:
+      - developers
+      summary: 删除一个评分与排名信息
+      description: 传入一个评分与排名信息ID，通过Response body返回处理结果
+      operationId: deleteOneRating
+      parameters:
+      - name: ratingId
+        in: path
+        description: 需要删除的rating ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 成功删除对应条目
+  /rating/delete/itemid/{itemId}:
+    delete:
+      tags:
+      - developers
+      summary: 删除一个条目所对应的评分与排名信息
+      operationId: deleteOneRatingByItemId
+      description: 传入一个需要删除的item ID，通过Response body返回处理结果
+      parameters:
+      - name: itemId
+        in: path
+        description: 需要删除的item ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 成功删除对应条目
+  /rating/update/itemid/{itemId}:
+    put:
+      tags:
+      - developers
+      summary: 更新一个条目所对应的评分与排名信息
+      description: 传入需要更新评分与排名的条目ID以及评价10个分数新增人数的数组，通过Response body返回处理结果
+      operationId: updateOneRatingByItemId
+      produces:
+      - application/json
+      parameters:
+      - name: itemId
+        in: path
+        description: 需要更新评分的的item ID
+        required: true
+        type: integer
+      - name: array
+        in: body
+        description: 十个评分分别增加的评分数
+        required: true
+        schema:
+          $ref: '#/definitions/RatingArray'
+      responses:
+        200:
+          $ref: '#/definitions/Item'
+  /topic/all:
+    get:
+      tags:
+      - developers
+      summary: 获取所有话题信息
+      operationId: getAllTopic
+      description: 获取所有话题信息
+      produces:
+      - application/json
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Topic'
+  /topic/id/{topicId}:
+    get:
+      tags:
+      - developers
+      summary: 获取指定话题信息
+      operationId: getOneTopic
+      description: 传入一个topic ID，返回该ID对应topic的信息
+      produces:
+      - application/json
+      parameters:
+      - name: topicId
+        in: path
+        description: 需要查找的话题ID
+        required: true
+        type: integer
+      responses:
+        200:
+          $ref: '#/definitions/TopicPage'
+  /topic/add:
+    post:
+      tags:
+      - developers
+      summary: 添加一个话题
+      operationId: addOneTopic
+      description: 传入一个包含除了ID以外所有属性的topic json对象，后端处理存入数据库，并返回这个json对象。其中topic ID由数据库自增生成，不需要前端指定。
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: 需要存储的topic object
+        required: true
+        schema:
+          $ref: '#/definitions/TopicIn'
+      responses:
+        200:
+          $ref: '#/definitions/Topic'
+  /topic/add/reply:
+    post:
+      tags:
+      - developers
+      summary: 对指定话题添加回复
+      operationId: addOneReplyByTopicId
+      description: 传入topicID、回复话题的userID、回复的字符串内容，后端处理存入数据库，并返回这个当前话题页面的json对象
+      produces:
+      - application/json
+      parameters:
+      - name: topicId
+        in: query
+        description: 回复所属的话题ID
+        required: true
+        type: integer
+        format: int64
+      - name: userId
+        in: query
+        description: 发表回复的用户ID
+        required: true
+        type: integer
+        format: int64
+      - in: body
+        name: body
+        description: 回复的字符串内容
+        required: true
+        schema:
+            type: string
+            example: 'this is a reply'
+      responses:
+        200:
+          $ref: '#/definitions/Topic'
+  /topic/delete/id/{topicId}:
+    delete:
+      tags:
+      - developers
+      summary: 删除一个话题
+      description: 传入一个需要删除的topic ID，通过Response body返回处理结果
+      operationId: deleteOneTopic
+      parameters:
+      - name: topicId
+        in: path
+        description: 需要删除的topic ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 成功删除对应话题
+  /topic/delete/reply:
+    delete:
+      tags:
+      - developers
+      summary: 删除一个话题下的指定回复
+      description: 传入一个需要删除的reply ID已经对应的topic ID，通过Response body返回处理结果
+      operationId: deleteOneReply
+      parameters:
+      - name: topicId
+        in: query
+        description: 需要删除的回复所对应的topic ID
+        required: true
+        type: integer
+        format: int64
+      - name: replyId
+        in: query
+        description: 需要删除的回复ID（所在楼层数）
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: 成功删除对应回复
+  /topic/update:
+    put:
+      tags:
+      - developers
+      summary: 更新一个话题的信息
+      description: 传入一个完整的更新后的item json对象，成功则返回更新后的item对象，否则返回null
+      operationId: updateOneTopic
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: 用于更新的topic object，包括ID在内的所有属性都填入更新后的值
+        required: true
+        schema:
+          $ref: '#/definitions/Topic'
+      responses:
+        200:
+          $ref: '#/definitions/Topic'
+  /comment:
+    get:
+      tags:
+      - developers
+      summary: 获取某用户对某条目的评论
+      operationId: getOneComment
+      description: 传入条目ID和用户ID，找到评论则返回Comment，否则返回null
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: itemId
+        description: 条目ID
+        required: true
+        type: integer
+        format: int64
+      - in: query
+        name: userId
+        description: 用户ID
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          $ref: '#/definitions/Comment'
+  /comment/userid/{userId}:
+    get:
+      tags:
+      - developers
+      summary: 获取指定用户对所有条目的评论
+      operationId: getAllCommentByUser
+      description:
+        传入用户ID，返回用户对所有条目的评论
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: userId
+        description: 用户ID
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description:
+            请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Comment'
+  /comment/itemid/{itemId}:
+    get:
+      tags:
+      - developers
+      summary: 获取所有用户对指定条目的评论
+      operationId: getAllCommentByItem
+      description:
+        传入条目ID，返回所有用户对条目的评论
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: itemId
+        description: 条目ID
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description:
+            请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Comment'
+  /comment/delete:
+    delete:
+      tags:
+      - developers
+      summary: 删除指定用户对指定条目的评论
+      operationId: deleteOneComment
+      description:
+        传入用户ID和条目ID，删除对应评论，返回删除成功信息
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: itemId
+        description: 条目ID
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: 删除成功
+  /comment/insert:
+    post:
+      tags:
+      - developers
+      summary: 插入一条评论
+      operationId: insertOneComment
+      description:
+        传入评论类，插入评论并将其返回
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: 评论数据
+        required: true
+        schema:
+          $ref: '#/definitions/CommentIn' 
+      responses:
+        200:
+          description: 插入成功
+          schema:
+            $ref: '#/definitions/Comment'
+  /friend/isfriend:
+    get:
+      tags:
+      - developers
+      summary: 判断两个用户是否是好友
+      operationId: isFriend
+      description:
+        传入两个用户ID，返回布尔型表示是否是好友
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: userId1
+        description: 用户ID
+        required: true
+        type: integer
+        format: int64
+      - in: query
+        name: userId2
+        description: 用户ID
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            type: boolean
+  /friend/add:
+    post:
+      tags:
+      - developers
+      summary: 添加好友关系
+      operationId: insertFriend
+      description:
+        传入Friend类型，添加好友，并返回Friend
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/FriendIn'
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            $ref: '#/definitions/Friend'
+  /friend/delete:
+    delete:
+      tags:
+      - developers
+      summary: 删除好友关系
+      operationId: deleteOneFriend
+      description:
+        传入两个用户ID，删除好友关系
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: userId1
+        required: true
+        type: integer
+        format: int64
+      - in: query  
+        name: userId2
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: 删除成功
+  /friend/delete/userid/{userId}:
+    delete:
+      tags:
+      - developers
+      summary: 删除某一用户的所有好友
+      operationId: deleteAllFriend
+      description:
+        传入用户ID，删除所有好友
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: 删除成功
+  /friend/all/userid/{userId}:
+    get:
+      tags:
+      - developers
+      summary: 获得某一用户的所有好友
+      operationId: getAllFriend
+      description:
+        传入用户ID，获得所有好友，返回User数组
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+  /user/all:
+    get:
+      tags:
+      - developers
+      summary: 获取所有用户
+      operationId: getAllUser
+      description: 获取所有用户
+      produces:
+      - application/json
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+  /user/id/{id}:
+    get:
+      tags:
+      - developers
+      summary: 获取指定用户信息
+      operationId: getOneUser
+      description: 传入用户ID，返回User类
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            $ref: '#/definitions/User'
+  /user/signup:
+    post:
+      tags:
+      - developers
+      summary: 用户注册
+      operationId: insertOneUser
+      description: 传入用户信息并返回
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/UserIn'
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            $ref: '#/definitions/User'
+  /user/username/{username}:
+    get:
+      tags:
+      - developers
+      summary: 根据用户名获取用户信息
+      operationId: getOneUserByUsername
+      description: 传入用户名并返回用户
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            $ref: '#/definitions/User'
+  /user/update/{username}:
+    put:
+      tags:
+      - developers
+      summary: 根据用户名更新用户信息
+      operationId: updateOneUser
+      description: 传入用户名和其他信息，返回User
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: query
+        name: password
+        required: false
+        type: string
+      - in: query
+        name: mail
+        required: false
+        type: string
+      - in: query
+        name: imgUrl
+        required: false
+        type: string
+      - in: query
+        name: role
+        required: false
+        type: integer
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            $ref: '#/definitions/User'
+  /user/delete/id/{id}:
+    delete:
+      tags:
+      - developers
+      summary:  根据ID删除用户
+      operationId:  deleteOneUserById
+      description:  传入用户ID并删除用户
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: 删除成功
+  /user/delete/username/{username}:
+    delete:
+      tags:
+      - developers
+      summary:  根据用户名删除用户
+      operationId:  deleteOneUserByUsername
+      description:  传入用户名并删除用户
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      responses:
+        200:
+          description: 删除成功
+  /message/content:
+    get:
+      tags:
+      - developers
+      summary: 获取私信内容
+      operationId: getOneContent
+      description: 传入发送者和接收者的ID和发送时间，返回私信内容
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: senderId
+        required: true
+        type: integer
+        format: int64
+      - in: query
+        name: receiverId
+        required: true
+        type: integer
+        format: int64
+      - in: query
+        name: sendTime
+        required: true
+        type: string
+        format: timestamp
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            type: string
+  /message/delete/one:
+    delete:
+      tags:
+      - developers
+      summary: 删除一条私信
+      operationId: deleteOneMessage
+      description:
+        传入发送者和接收者的ID和发送时间，删除对应私信
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: senderId
+        required: true
+        type: integer
+        format: int64
+      - in: query
+        name: receiverId
+        required: true
+        type: integer
+        format: int64
+      - in: query
+        name: sendTime
+        required: true
+        type: string
+        format: timestamp
+      responses:
+        200:
+          description: 删除成功
+  /message/delete/all:
+    delete:
+      tags:
+      - developers
+      summary: 删除两用户间所有的私信
+      operationId: deleteAllMessage
+      description:         传入发送者和接收者的ID，删除对应所有私信
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: senderId
+        required: true
+        type: integer
+        format: int64
+      - in: query
+        name: receiverId
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: 删除成功
+  /message/all:
+    get:
+      tags:
+      - developers
+      summary: 获取两用户间所有私信
+      operationId: getAllMessage
+      description:         传入发送者和接收者的ID，获取对应所有私信
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: senderId
+        required: true
+        type: integer
+        format: int64
+      - in: query
+        name: receiverId
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Message'
+  /message/add:
+    post:
+      tags:
+      - developers
+      summary: 添加私信
+      operationId: insertOneMessage
+      description:
+        传入带有发送者和接收者ID以及私信内容和时间的Message，返回Message
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/MessageIn'
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            $ref: '#/definitions/Message'
+  /image/{imageId}:
+    get:
+      tags:
+      - developers
+      summary: 获取图片
+      operationId: getOneImage
+      description:
+        传入图像ID，返回图片二进制流
+      produces:
+      - image/png
+      - image/jpeg
+      parameters:
+      - in: path
+        name: imageId
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: 请求成功
+          schema:
+            type: string
+            format: binary
+  /image/delete/{imageId}:
+    delete:
+      tags:
+      - developers
+      summary: 删除图片
+      operationId: deleteOneImage
+      description: 传入图像ID，删除对应图片
+      parameters:
+      - in: path
+        name: imageId
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: 删除成功
+  /image/update/{imageId}:
+    put:
+      tags:
+      - developers
+      summary: 更新图片
+      operationId: updateOneImage
+      description: 传入图像ID和图片，更新图片
+      parameters:
+      - in: path
+        name: imageId
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: 更新成功
+          schema:
+            $ref: '#/definitions/Image'
+  /image/insert/{imageId}:
+    post:
+      tags:
+      - developers
+      summary: 插入图片
+      operationId: insertOneImage
+      description: 传入图片ID和图片，插入图片
+      parameters:
+      - in: path
+        name: imageId
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: 插入成功
+          schema:
+            $ref: '#/definitions/Image'
+definitions:
+  Item:
+    type: object
+    required:
+    - id
+    - itemname
+    - pubTime
+    - chapterNum
+    - mainAuthor
+    - imgurl
+    - type
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数
+        example: 1
+      itemname:
+        type: string
+        example: "three body"
+      pubTime:
+        type: string
+        format: Timestamp
+        description:  传入Timestamp的毫秒值，取Timestamp的fasttime值，即最后三位置0（最大精度为秒）
+        example: "1562293000"
+      chapterNum:
+        type: integer
+        example: 12
+      mainAuthor:
+        type: string
+        example: "Cixin Liu"
+      imgurl:
+        type: string
+        format: url
+        description: 没有图片时可传入null
+        example: "https://lain.bgm.tv/pic/cover/c/13/6f/1937_6Q7MM.jpg"
+      type:
+        type: integer
+        example: 0
+# Added by API Auto Mocking Plugin
+# host: 202.120.40.8:30741
+# basePath: /
+# schemes:
+#  - http
+# Added by API Auto Mocking Plugin
+# schemes:
+#  - http
+# Added by API Auto Mocking Plugin
+# schemes:
+#  - http
+# Added by API Auto Mocking Plugin
+  ItemIn:
+    type: object
+    required:
+    - itemname
+    - pubTime
+    - chapterNum
+    - mainAuthor
+    - imgurl
+    - type
+    properties:
+      itemname:
+        type: string
+        example: "three body"
+      pubTime:
+        type: string
+        format: Timestamp
+        description:  传入Timestamp的毫秒值，取Timestamp的fasttime值，即最后三位置0（最大精度为秒）
+        example: "1562293010"
+      chapterNum:
+        type: integer
+        example: 12
+      mainAuthor:
+        type: string
+        example: "Cixin Liu"
+      imgurl:
+        type: string
+        format: url
+        example: "https://lain.bgm.tv/pic/cover/c/13/6f/1937_6Q7MM.jpg"
+      type:
+        type: integer
+        example: 0
+  Activity:
+    type: object
+    required:
+    - id
+    - actTime
+    - actType
+    - userId
+    - itemId
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数
+        example: 1
+      actTime:
+        type: string
+        format: Timestamp
+        description:  传入Timestamp的毫秒值，取Timestamp的fasttime值，即最后三位置0（最大精度为秒）
+        example: "1562293010"
+      actType:
+        type: integer
+        description: 0-未收藏, 1-想看, 2-在看, 3-看过, 4-搁置, 5-抛弃
+        example: 0
+      userId:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数
+        example: 1
+      itemId:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数
+        example: 1
+  ActivityIn:
+    type: object
+    required:
+    - actTime
+    - actType
+    - userId
+    - itemId
+    properties:
+      actTime:
+        type: string
+        format: Timestamp
+        description:  传入Timestamp的毫秒值，取Timestamp的fasttime值，即最后三位置0（最大精度为秒）
+        example: "1562293010"
+      actType:
+        type: integer
+        description: 0-未收藏, 1-想看, 2-在看, 3-看过, 4-搁置, 5-抛弃
+        example: 0
+      userId:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数
+        example: 1
+      itemId:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数
+        example: 1
+  Rating:
+    type: object
+    required:
+    - id
+    - itemId
+    - avgScore
+    - rank
+    - totScoreNum
+    - type
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数
+        example: 1
+      itemId:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数
+        example: 1
+      avgScore:
+        type: number
+        format: float
+        description: 条目的平均分，保留小数点后4位
+        example: 9.2222
+      rank:
+        type: integer
+        description: 条目在同类条目中的平均分排名
+        example: 1
+      totScoreNum:
+        type: integer
+        description: 条目的总评分人数
+      type:
+        type: integer
+        description: 条目类型：0-图书，1-教程，2-电影，3-电视剧，4-动画
+  RatingArray:
+    type: array
+    items:
+      type: integer
+      default: 0
+    description: 十个分数段新增的评分人数，例为2分增加2人，10分增加一人
+    example: [0, 2, 0, 0, 0, 0, 0, 0, 0, 1]
+  Topic:
+    type: object
+    required:
+    - id
+    - userId
+    - title
+    - pubTime
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数
+        example: 1
+      userId:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数。发起话题的用户ID。
+        example: 1
+      title:
+        type: string
+        description: 话题的标题
+        example: "hello world"
+      pubTime:
+        type: string
+        format: Timestamp
+        description:  话题发表时间。传入Timestamp的毫秒值，取Timestamp的fasttime值，即最后三位置0（最大精度为秒）
+        example: "1562293010"
+  TopicIn:
+    type: object
+    required:
+    - userId
+    - title
+    - pubTime
+    properties:
+      userId:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数。发起话题的用户ID。
+        example: 1
+      title:
+        type: string
+        description: 话题的标题
+        example: "hello world"
+      pubTime:
+        type: string
+        description:  话题发表时间。传入Timestamp的毫秒值，取Timestamp的fasttime值，即最后三位置0（最大精度为秒）
+        example: "1562293010"
+  TopicPage:
+    type: object
+    required:
+    - id
+    - topicContent
+    - replyList
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数
+        example: 1
+      topicContent:
+        type: string
+        description: 楼主发起的话题内容
+        example: "This is the first topic in bamdb."
+      replyList:
+        type: array
+        items:
+          $ref: '#/definitions/Reply'
+  Reply:
+    type: object
+    required:
+    - id
+    - user
+    - replyContent
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: 大于0的Long型整数
+        example: 1
+      user:
+          $ref: '#/definitions/UserIn'
+      replyContent:
+        type: string
+        description: 回复的内容
+        example: "This is a reply."
+  Comment:
+    type: object
+    required:
+    - id
+    - itemId
+    - userId
+    - pubTime
+    - content
+    properties:
+      id:
+        type: string
+        description:
+          评论Id，mongodb自动生成
+      itemId:
+        type: integer
+        format: int64
+        description: 
+          大于0的Long型整数，用户ID。
+        example: 1
+      userId:
+        type: integer
+        format: int64
+        description: 
+          大于0的Long型整数，用户ID。
+        example: 1
+      content:
+        type: string
+        description: 评论内容，不定长的字符串
+        example: "hello world"
+      pubTime:
+        type: string
+        format: timestamp
+        description:  评论发表时间。
+        example: "1562293010"
+  CommentIn:
+    type: object
+    required:
+    - itemId
+    - userId
+    - pubTime
+    - content
+    properties:
+      itemId:
+        type: integer
+        format: int64
+        description: 
+          大于0的Long型整数，用户ID。
+        example: 1
+      userId:
+        type: integer
+        format: int64
+        description: 
+          大于0的Long型整数，用户ID。
+        example: 1
+      content:
+        type: string
+        description: 评论内容，不定长的字符串
+        example: "hello world"
+      pubTime:
+        type: string
+        format: timestamp
+        description:  评论发表时间。
+        example: "1562293010"
+  Friend:
+    type: object
+    required:
+    - id
+    - userId1
+    - userId2
+    - status
+    properties:
+      id: 
+        type: integer
+        format: int64
+        description: 自动生成的ID
+        example: 1
+      userId1:
+        type: integer
+        format: int64
+        description: 第一个用户ID
+        example: 1
+      userId2:
+        type: integer
+        format: int64
+        description: 第二个用户ID
+        example: 1
+      status:
+        type: integer
+        description: 关系状态
+        example: 0
+  FriendIn:
+    type: object
+    required:
+    - userId1
+    - userId2
+    properties:
+      userId1:
+        type: integer
+        format: int64
+        description: 第一个用户ID
+        example: 1
+      userId2:
+        type: integer
+        format: int64
+        description: 第二个用户ID
+        example: 1
+      status:
+        type: integer
+        description: 关系状态
+        example: 0
+  User:
+    type: object
+    required:
+    - id
+    - username
+    - password
+    - mail
+    - imgUrl
+    - role
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: 用户ID
+        example: 1
+      username:
+        type: string
+        description: 用户名
+        example: "bamdb"
+      imgUrl:
+        type: string
+        description: 图片地址
+        example: "/image/1"
+      role:
+        type: integer
+        description: 用户类型
+        example: 0
+  UserIn:
+    type: object
+    required:
+    - username
+    - password
+    - mail
+    - imgUrl
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: 用户ID
+        example: 1
+      username:
+        type: string
+        description: 用户名
+        example: "bamdb"
+      imgUrl:
+        type: string
+        description: 图片地址
+        example: "/image/1"
+  Message:
+    type: object
+    required:
+    - id
+    - senderId
+    - receiverId
+    - sendTime
+    - content
+    properties:
+      id:
+        type: string
+        description: mongodb自动生成
+      senderId:
+        type: integer
+        format: int64
+        description: 发送者用户ID
+        example: 1
+      receiverId:
+        type: integer
+        format: int64
+        description: 接收者ID
+        example: 2
+      sendTime:
+        type: string
+        format: timestamp
+        description: 发送时间
+        example: "0"
+      content:
+        type: string
+        description: 私信内容
+        example: "ello"
+  MessageIn:
+    type: object
+    required:
+    - senderId
+    - receiverId
+    - sendTime
+    - content
+    properties:
+      senderId:
+        type: integer
+        format: int64
+        description: 发送者用户ID
+        example: 1
+      receiverId:
+        type: integer
+        format: int64
+        description: 接收者ID
+        example: 2
+      sendTime:
+        type: string
+        format: timestamp
+        description: 发送时间
+        example: "0"
+      content:
+        type: string
+        description: 私信内容
+        example: "ello"
+  Image:
+    type: object
+    required:
+    - id
+    - imageId
+    - image
+    properties:
+      id:
+        type: string
+        description: mongodb自动生成
+      imageId:
+        type: integer
+        format: int64
+        description: 图片ID，第一位是类型(1开始)，后一位是对应类型的ID
+        example: 11
+      image:
+        type: string
+        format: binary
+        description: 图片二进制流
+schemes:
+ - https
+ - http
+# Added by API Auto Mocking Plugin
+# host: 202.120.40.8:30741
+# basePath: /
+# Added by API Auto Mocking Plugin
+# host: 202.120.40.8:30741
+# basePath: /
+# Added by API Auto Mocking Plugin
+# host: 202.120.40.8:30741
+# basePath: /
+# Added by API Auto Mocking Plugin
+# host: 202.120.40.8:30741
+# basePath: /
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /ba818/open-api/1.0.0

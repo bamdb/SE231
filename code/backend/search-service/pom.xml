@@ -12,7 +12,11 @@
     <artifactId>search-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>search-service</name>
+<<<<<<< HEAD
     <description>Demo project for Spring Boot</description>
+=======
+    <description>Search service for bamdb project</description>
+>>>>>>> master
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

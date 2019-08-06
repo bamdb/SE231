@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 spring:
   cloud:
     config:
@@ -6,4 +7,14 @@ spring:
       enabled: false
 eureka:
   client:
+=======
+spring:
+  cloud:
+    config:
+      discovery:
+        enabled: false
+      enabled: false
+eureka:
+  client:
+>>>>>>> master
     enabled: false
