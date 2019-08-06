@@ -36,7 +36,7 @@ class Login extends Component{
             }.bind(this))
             .catch(function (err) {
                 this.setState({
-                    content:"抱歉，现在暂不支持微信扫码登录，请使用账号密码登录。"
+                    content:"抱歉，现在暂不支持扫码登录，请使用账号密码登录。"
                 })
             }.bind(this))
     }
@@ -89,9 +89,7 @@ class Login extends Component{
                                 role=auth;
                             }
                         })
-
                         localStorage.setItem("role",role);
-
                     }
                 )
 
@@ -163,7 +161,7 @@ class Login extends Component{
                             <Typography variant={"subtitle1"} component="h4">
                                 忘记密码？<Button variant="text" color="primary" name={"resetPassword"} ><Link to={"/resetpassword"}>重置密码</Link></Button>
                             </Typography>
-                            <Button variant="text" color="primary" name={"resetPassword"} onClick={this.setQR}>微信扫码登录</Button>
+                            <Button variant="text" color="primary" name={"resetPassword"} onClick={this.setQR}>手机扫码登录</Button>
                         </Grid>
                     </Grid>
                     <br/><br/><br/>

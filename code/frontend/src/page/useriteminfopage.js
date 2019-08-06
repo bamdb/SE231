@@ -8,19 +8,28 @@ import Grid from '@material-ui/core/Grid'
 import Item from '../component/item';
 import Commentlist from "../component/commentlist";
 import Relateditem from "../component/relatedlist";
-import {Divider, Card} from 'antd';
+import {Divider, Card, Icon} from 'antd';
 import Tags from "../component/tag"
 import axios from 'axios'
 import Collect from "../component/collect";
 import Scheduletableold from "../component/scheduletableold";
+import Collectform from "../component/collectform";
+import Alert from "../component/alert";
+import {switchCase} from "@babel/types";
 class Useriteminfopage extends Component {
     constructor(props)
     {
         super(props);
-        this.state={data:{},rating:{},totgrade:[],comments:[],id:1,userid:1,readstat:[],tags:[{tagname:["科幻","刘慈欣"]}]};
+        this.state={
+            data:{},rating:{},totgrade:[],comments:[],id:1,userid:1,readstat:[],
+            visible:false,
+            status:"",
+            content:"",
+        };
         this.handletagchange=this.handletagchange.bind(this);
         this.handleSearch=this.handleSearch.bind(this);
-
+        this.handleCancel=this.handleCancel.bind(this);
+        this.handleCollect=this.handleCollect.bind(this);
     }
     /*handlebuttonclick()
     {
@@ -38,6 +47,16 @@ class Useriteminfopage extends Component {
             }.bind(this)
         })
     }*/
+
+    handleCancel(){
+        this.setState({visible:false,content:""})
+    }
+
+    handleCollect(){
+        if(localStorage.getItem("userid"))
+            this.setState({visible:true})
+        else this.setState({content:"请先登录"})
+    }
     handleSearch(value){}
     handletagchange(tags){
         this.setState({tags:tags});
@@ -45,23 +64,17 @@ class Useriteminfopage extends Component {
     componentWillMount() {
         var uri=window.location.href;
         var id=uri.split('#')[1].split('/')[2];
-        if(localStorage.getItem("userid")==null)
-        {
-
-        }
-        else {
-            this.setState({userid:localStorage.getItem("userid")})
-        }
-        this.setState({id:id})
+        this.setState({userid:localStorage.getItem("userid"),id:id})
+        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
         var url="http://202.120.40.8:30741/item/id/"+id;
         var url1="http://202.120.40.8:30741/rating/itemid/"+id;
+        var url2="http://202.120.40.8:30741/activity/itemid/"+id;
         var url3="http://202.120.40.8:30741/comment/itemid/"+id;
-        var url5="http://202.120.40.8:30741/item/tag/id/"+id
 
         axios.get(url).then(
             function (response){
                 console.log(response.data);
-                this.setState({data:response.data});
+                this.setState({data:response.data,chapterNum:response.data.chapterNum});
             }.bind(this)
         ).catch(function (error) {
             alert("error")
@@ -75,6 +88,7 @@ class Useriteminfopage extends Component {
                 this.setState({rating:response.data,totgrade:totgrade})
             }.bind(this)
         )
+
         axios.get(url3).then(
             function(response){
                 this.setState({comments:response.data});
@@ -84,13 +98,13 @@ class Useriteminfopage extends Component {
             function(response){
                 this.setState({readstat:response.datat.chapters})
             }.bind(this)
-        )*/
+        )
         axios.get(url5).then(
             function(response)
             {
                 this.setState({tags:response.data.tags})
             }.bind(this)
-        )
+        )*/
     }
 
     render(){
@@ -99,17 +113,21 @@ class Useriteminfopage extends Component {
         totgrade.push(this.state.rating.score1,this.state.rating.score2,this.state.rating.score3,this.state.rating.score4,this.state.rating.score5,this.state.rating.score6,this.state.rating.score7,this.state.rating.score8,this.state.rating.score9,this.state.rating.score10)
         return(
                     <Grid container spacing={2}>
+                        <Alert content={this.state.content} cancelAlert={this.handleCancel} confirmAlert={this.handleCancel}/>
+                        <Collectform chapterNum={this.state.chapterNum} itemid={this.state.id} visible={this.state.visible} handleCancel={this.handleCancel} />
                         <Grid item xs={2} >
-                            <Item isbn={itemdata.id} date={itemdata.pubTime} name={itemdata.itemname} pages={itemdata.chapterNum} author={itemdata.mainAuthor}/>
+                            <Item imgurl={itemdata.imgurl} date={itemdata.pubTime} name={itemdata.itemname} pages={itemdata.chapterNum} author={itemdata.mainAuthor}/>
+                            <Grid container justify={"center"} alignContent={"center"}>
+                            <Icon type={"star"} onClick={this.handleCollect}/>
+                            </Grid>
                         </Grid>
                         <Divider type={"vertical"} style={{height:400}}/>
                         <Grid  item xs={6} >
                             <Scheduletableold readstat={this.state.readstat}/>
-                            <Tags select={false} tagchange={this.handletagchange} tags={this.state.tags}/>
                             <Commentlist comments={this.state.comments}/>
                         </Grid>
                         <Grid  item xs={3} >
-                            <Collect totGrade={this.state.totgrade} avgGrade={this.state.rating.avgScore} rank={this.state.rating.rank} itemid={this.state.id} userid={this.state.userid}/>
+                            <Collect status={this.state.status} totGrade={this.state.totgrade} avgGrade={this.state.rating.avgScore} rank={this.state.rating.rank} itemid={this.state.id} userid={this.state.userid}/>
                             <Relateditem prior={itemdata.relationPrior} subsequent={itemdata.relationSubsequent} normal={itemdata.relationNormal}/>
                         </Grid>
                         <Grid item xs={1}/>
@@ -119,3 +137,7 @@ class Useriteminfopage extends Component {
 }
 
 export default Useriteminfopage;
+
+/*
+<Tags select={false} tagchange={this.handletagchange} tags={this.state.tags}/>
+ */

@@ -25,6 +25,7 @@ class Topicdetailpage extends Component{
 
 
     componentWillMount() {
+
         if(window.location.href.split("#")[1]!==undefined)
         {
             var id = window.location.href.split("#")[1].split("/")[2];
@@ -49,13 +50,11 @@ class Topicdetailpage extends Component{
     render(){
         const topic = this.state.topic;
         const data = this.state.data;
+
         return(
-          <Grid container spacing={10}>
+          <Grid container spacing={10} justify={"space-around"}>
 
-              <Grid item xs={1}>
-              </Grid>
               <Grid item xs={8}>
-
                   <Grid>
                       <Discuss replies={data.replyList}/>
                   </Grid>

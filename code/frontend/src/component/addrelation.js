@@ -45,9 +45,10 @@ class Addrelation extends Component
 
     handlesubmit()
     {
+        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
         switch(this.state.type)
         {
-            case 1:axios.post("http://202.120.40.8:30741/item/add/relation",{},{params:{priorId:this.state.itemid,subsequentId:this.state.id,relateType:0}}).then(
+            case 1:axios.post("http://202.120.40.8:30741/item/add/relation",{},{params:{priorId:this.props.itemid,subsequentId:this.state.id,relateType:0}}).then(
                 function(res)
                 {
                    this.setState({content:"success!"})
@@ -86,14 +87,14 @@ class Addrelation extends Component
 
         return(
             <Grid container>
-                <Alert content={this.state.content} confirmAlert={this.handleAlert} cancelAlert={this.handleAlert} />
+
                 <Grid item xs={12}>
                     <Typography>续作</Typography>
                     <List
                         itemLayout="horizontal"
                         dataSource={this.state.prev}
                         renderItem={item => (
-                            <List.Item extra= {<Button onClick={()=>this.handledelete(item.id,this.props.itemid)}>delete</Button> }>
+                            <List.Item  >
                                 <List.Item.Meta
 
                                     title={<Typography>{item.id+" "+item.itemname}</Typography>}
@@ -107,7 +108,7 @@ class Addrelation extends Component
                         itemLayout="horizontal"
                         dataSource={this.state.prior}
                         renderItem={item => (
-                            <List.Item extra= {<Button onClick={()=>this.handledelete(item.id,this.props.itemid)}>delete</Button> }>
+                            <List.Item >
                                 <List.Item.Meta
 
                                     title={<Typography>{item.id+" "+item.itemname}</Typography>}
@@ -121,7 +122,7 @@ class Addrelation extends Component
                         itemLayout="horizontal"
                         dataSource={this.state.normal}
                         renderItem={item => (
-                            <List.Item extra= {<Button onClick={()=>this.handledelete(item.id,this.props.itemid)}>delete</Button> }>
+                            <List.Item >
                                 <List.Item.Meta
 
                                     title={<Typography>{item.id+" "+item.itemname}</Typography>}

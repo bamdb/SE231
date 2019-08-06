@@ -37,9 +37,8 @@ class Topicpage extends Component{
     render(){
         return(
             <Grid container direction={"row"} spacing={4} >
-                <Grid item xs={2} >
+                <Grid item xs={2} />
                     <br/>
-                    <Tags select={true} tagchange={this.handletagchange} tags={["热血","王道","搞怪","不高兴","没头脑"]} /></Grid>
                 <Grid item xs={8} >
                     <Typography variant={"h6"} component={"h6"} align={"left"} >讨论版</Typography>
                     <Grid container spacing={0}>
@@ -53,3 +52,8 @@ class Topicpage extends Component{
 }
 
 export default Topicpage;
+
+            /*
+                                <Tags select={true} tagchange={this.handletagchange} tags={["热血","王道","搞怪","不高兴","没头脑"]} /></Grid>
+
+             */

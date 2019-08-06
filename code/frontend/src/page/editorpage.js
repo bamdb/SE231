@@ -47,6 +47,7 @@ class Editorpage extends React.Component {
     next() {
         if(this.state.item!=null)
         {
+            axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
             const current = this.state.current + 1;
             this.setState({ current });
             if(current==1)
@@ -56,7 +57,7 @@ class Editorpage extends React.Component {
                 item.imgurl="http://202.120.40.8:30741/image/id/"+item.id+"1";
                 axios.put("http://202.120.40.8:30741/item/update",item).then(
                     function(response){
-                        this.props.setid(response.data.id);
+
                     }.bind(this)
                 )
                 axios.post("http://202.120.40.8:30741/rating/add/itemid/"+item.id)

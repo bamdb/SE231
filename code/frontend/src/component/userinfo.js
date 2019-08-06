@@ -33,6 +33,7 @@ class Userinfo extends Component {
         if(localStorage.getItem("userid")!=null)
         {
             var username=localStorage.getItem("username");
+            axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
             axios({url: 'http://202.120.40.8:30741/auth/username/'+username,method:'GET'})
                 .then(
                     function (response)
@@ -66,6 +67,7 @@ class Userinfo extends Component {
 
             var url='http://202.120.40.8:30741/auth/update/'+this.state.username;
             this.setState({edit:false});
+            axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
             axios.put('http://202.120.40.8:30741/auth/update/'+this.state.username,{},{params:{mail:this.state.email,imgUrl:"http://202.120.40.8:30741/image/id/"+this.state.id+"0"}});
 
         }
@@ -118,7 +120,7 @@ class Userinfo extends Component {
                 <Alert content={this.state.content} confirmAlert={this.handleAlert} cancelAlert={this.handleAlert} />
                 <Grid item xs={3}>
                     <Grid container justify={"center"}>
-                    <Avatar alt="Remy Sharp" src={"http://202.120.40.8:30741/image/id/"+localStorage.getItem("userid")+"0"} id={"avatar"}/>
+                    <Avatar alt="" src={"http://202.120.40.8:30741/image/id/"+localStorage.getItem("userid")+"0"} id={"avatar"}/>
                     <br/>
                     <div id="upload">{upload}</div>
                     </Grid>
@@ -131,9 +133,6 @@ class Userinfo extends Component {
                                     <ListItemText primary="用户名" secondary={this.state.username}/>
                                 </ListItem>
                                 <ListItem id={"li"}>
-                                    <ListItemText primary="ID" secondary={this.state.id}/>
-                                </ListItem>
-                                <ListItem id={"li"}>
                                     {email}
                                 </ListItem>
                             </List>
@@ -141,7 +140,7 @@ class Userinfo extends Component {
                         <Grid item xs={6}>
                             <List>
                                 <ListItem id={"li"}>
-                                    <ListItemText primary="等级" secondary={this.state.grade}></ListItemText>
+                                    <ListItemText primary="ID" secondary={this.state.id}/>
                                 </ListItem>
                                 <ListItem id={"li"}>
                                     <ListItemText primary="注册日期" secondary={this.state.date}></ListItemText>

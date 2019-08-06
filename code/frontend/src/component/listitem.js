@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import {Link, Redirect} from "react-router-dom";
 import Collectform from "./collectform";
 import Alert from './alert';
-import { List, Icon, Card, Pagination } from "antd";
+import { List, Icon, Card, Pagination,Spin } from "antd";
 import '../index.css'
 import axios from 'axios';
 
@@ -18,7 +18,7 @@ import axios from 'axios';
 * props.author : 条目作者
 * props.score : 条目评分
 * props.rank : 条目排名
-* props.chapter : 条目章节数 
+* props.chapter : 条目章节数
 */
 
 
@@ -41,12 +41,13 @@ class Listitem extends Component {
             content: "",        // 提示框内容
             collectItem:[],     // 收藏条目
             visible:false,      // 显示收藏提示框
-            flush: false        // 用于删除条目后跳转页面
+            flush: false,        // 用于删除条目后跳转页面
+            loading:true,
+            totalPage:0,
         }
         this.handlepagechange=this.handlepagechange.bind(this);
         this.handleAlert=this.handleAlert.bind(this);
         this.handleDelete=this.handleDelete.bind(this);
-        this.handleCollect=this.handleCollect.bind(this);
         this.handlelike=this.handlelike.bind(this);
         this.handleCancel=this.handleCancel.bind(this);
         this.handleCancelAlert=this.handleCancelAlert.bind(this);
@@ -59,37 +60,51 @@ class Listitem extends Component {
         })
     }
 
-    handleCollect(type,item){
-        var chapters=[];
-        switch (type) {
-            case 0: case 1:
-                for(var i=0;i<item.chapterNum;i++)
-                    chapters.push({
-                        chapterNum: i,
-                        finish:0,
-                        sections:[],
-                    });
-                break;
-            case 3:
-                for(var i=0;i<item.chapterNum;i++)
-                    chapters.push({
-                        chapterNum: i,
-                        finish:1,
-                        sections:[],
-                    });
-                break;
-            default:
-                break;
-        }
-
-        if(type<=3)
-        axios.put("http://202.120.40.8:30741/activity/update/progress",
-            {userId:localStorage.getItem("userid"),itemId:item.id,chapters:chapters}
-        );
-    }
     handlepagechange(e){
         this.props.handlepagechange(e);
     }
+    componentDidMount() {
+        var rows=[];
+        var items=[];
+        var currentpage=this.props.currentpage;
+
+        axios.get(
+            "http://202.120.40.8:30741/rating/browser",{params:{
+                    type:this.props.type,
+                    page:currentpage-1,
+                    pageSize:8
+                }}
+        )
+            .then(function (response) {
+                items=response.data;
+                if(items !== undefined)
+                {
+                    var totalpage=items[0].totalPage;
+                    for(var i=0; i<items.length; ++i) {
+                        rows.push(
+                            {
+                                href: "/itemdetail/"+items[i].item.id,
+                                id: items[i].item.id,
+                                title:items[i].item.itemname,
+                                author:items[i].item.mainAuthor,
+                                pubTime: items[i].item.pubTime.split('T')[0],
+                                score:items[i].rating.avgScore,
+                                rank:items[i].rating.rank,
+                                imgurl:items[i].item.imgurl,
+                                chapterNum:items[i].item.chapterNum,
+                            }
+                        );
+                    }
+                    this.setState({
+                        ItemList:items,
+                        modifiedItems:rows,
+                        loading:false,
+                        totalPage:totalpage
+                    })
+                }
+            }.bind(this))
+    }
+
     componentWillReceiveProps(nextProps, nextContext) {
         var rows=[];
         var items=[];
@@ -104,9 +119,9 @@ class Listitem extends Component {
         )
             .then(function (response) {
                 items=response.data;
-                console.log(response.data)
                 if(items !== undefined)
                 {
+                    var totalpage=items[0].totalPage;
                     for(var i=0; i<items.length; ++i) {
                         rows.push(
                             {
@@ -125,6 +140,8 @@ class Listitem extends Component {
                     this.setState({
                     ItemList:items,
                     modifiedItems:rows,
+                    loading:false,
+                    totalPage:totalpage
                 })
                 }
             }.bind(this))
@@ -154,7 +171,7 @@ class Listitem extends Component {
         const items=this.state.modifiedItems;
         return(
             <div>
-            <Collectform itemid={this.state.collectItem.id} visible={this.state.visible} handleCancel={this.handleCancel} handleprogress={(type)=>this.handleCollect(type,this.state.collectItem)}/>
+            <Collectform chapterNum={this.state.collectItem.chapterNum} itemid={this.state.collectItem.id} visible={this.state.visible} handleCancel={this.handleCancel} />
             <Alert content={this.state.content} cancelAlert={this.handleCancelAlert} confirmAlert={this.handleDelete.bind(this,this.state.deleteItem.id)}/>
             <List
                 grid={{gutter:16,column: 4 }}
@@ -173,7 +190,7 @@ class Listitem extends Component {
                                 <img
                                     height={120}
                                     alt="defaultbook"
-                                    src={"http://"+item.imgurl}
+                                    src={item.imgurl.substring(0, 4) == "http"? item.imgurl : "http://"+item.imgurl}
                                 />
                             }
                             actions={        // show delete icon in editor page
@@ -191,14 +208,21 @@ class Listitem extends Component {
                             <Meta
                                 style={{margin:0}}
                                 title={<Link to={item.href} target={'_blank'}>{item.title}</Link>}
-                                description={"评分："+item.score+'\n'+"排名：" +item.rank +'\n'
-                                            +"This is description."}
+                                description={
+                                    <div>
+                                        <p>评分：{item.score}</p>
+                                        <p>排名：{item.rank}</p>
+                                        <p>作者：{item.author}</p>
+                                    </div>
+                                }
                             />
                         </Card>
                     </List.Item>
                 )}
-            />
-                <Pagination size="small"  total={100} current={this.props.currentpage} onChange={current=>this.handlepagechange(current)}/>
+            >
+                {this.state.loading ? <Spin/> : <span/>}
+            </List>
+                <Pagination size="small"  total={this.state.totalPage*10} current={this.props.currentpage} onChange={current=>this.handlepagechange(current)}/>
             </div>
         );
     }

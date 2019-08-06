@@ -1,4 +1,4 @@
-/* 
+/*
  * 收藏
  */
 
@@ -58,11 +58,11 @@ class Collectform extends Component {
             visible: false,
             status : 0,
             content: "",
-            tags:["233"],
+            tags:[],
             text:"",
             score:5,
             yourtags:[],
-            userid:1
+            userid:localStorage.getItem("userid")
         };
         this.handleOk = this.handleOk.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
@@ -78,6 +78,7 @@ class Collectform extends Component {
         var tagnames=[];
         var yourtagnames=[];
         if(nextProps.itemid!=undefined) {
+            /*
             var url5 = "http://202.120.40.8/item/tag/id/" + nextProps.itemid;
             axios.get(url5).then(
                 function (response) {
@@ -88,9 +89,14 @@ class Collectform extends Component {
                     })
                 }.bind(this)
             )
+
+             */
             this.setState({
+                /*
                 tags: tagnames,
                 yourtags: yourtagnames,
+
+                 */
                 userid: localStorage.getItem("userid"),
                 visible: nextProps.visible
             })
@@ -123,17 +129,52 @@ class Collectform extends Component {
         this.setState({
             visible: false
         });
-        var rank=[0,0,0,0,0,0,0,0,0,0];
-
-
         var date = Date.parse(new Date());
-        var yourtags=this.state.yourtags;
-        axios.post("http://202.120.40.8:30741/activity/add",{actTime:date,actType:this.state.status,userId:this.state.userid,itemId:this.props.itemid});
-        axios.post("http://202.120.40.8:30741/comment/insert",{itemId:this.props.itemid,userId:this.state.userid,content:this.state.content,pubTime:date});
-        axios.put("http://202.120.40.8:30741/rating/update","success",{params:{userId:this.state.userid,itemId:this.props.itemid,score:this.state.score}});
-        axios.post("http://202.120.40.8:30741/item/add/tag?"+"userId="+localStorage.getItem("userid")+"&itemId="+this.props.itemid,yourtags);
+        //var yourtags=this.state.yourtags;
+        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+        axios.post("http://202.120.40.8:30741/activity/add",{actTime:date,actType:this.state.status,userId:this.state.userid,itemId:this.props.itemid})
+            .then(function (res) {
+                console.log("add activity:",res.data)
+            })
+            .catch(function (err) {
+                console.log("add activity error!",err)
+            });
+        console.log(date)
+        axios.post("http://202.120.40.8:30741/comment/insert",{itemId:this.props.itemid,userId:localStorage.getItem("userid"),content:this.state.content,pubTime:date});
 
-        this.props.handleprogress(this.state.status);
+        axios.put("http://202.120.40.8:30741/rating/update","success",{params:{userId:localStorage.getItem("userid"),itemId:this.props.itemid,score:this.state.score}});
+        //axios.post("http://202.120.40.8:30741/item/add/tag?"+"userId="+localStorage.getItem("userid")+"&itemId="+this.props.itemid,yourtags);
+
+        var chapters=[];
+        switch (this.state.status) {
+            case 0: case 1:
+                for(var i=0;i<this.props.chapterNum;i++)
+                    chapters.push({
+                        chapterNum: i,
+                        finish:0,
+                        sections:[],
+                    });
+                break;
+            case 3:
+                for(var i=0;i<this.props.chapterNum;i++)
+                    chapters.push({
+                        chapterNum: i,
+                        finish:1,
+                        sections:[],
+                    });
+                break;
+            default:
+                break;
+        }
+        if(this.state.status<=3) {
+            axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("access_token");
+            axios.put("http://202.120.40.8:30741/activity/update/progress",
+                {userId: localStorage.getItem("userid"), itemId: this.props.itemid, chapters: chapters}
+            ).then(function (res) {
+                console.log("success:", res.data);
+                this.props.handleCancel();
+            }.bind(this));
+        }
 
         /*$.ajax({
             url:"/item/add/tag",
@@ -161,7 +202,7 @@ class Collectform extends Component {
 
     render() {
         return (
-            <Modal title="修改收藏状态" visible={this.state.visible}
+            <Modal title="修改收藏状态" visible={this.props.visible}
                    onOk={this.handleOk} onCancel={this.handleCancel}
             >
                 <Grid container spacing={2}>

@@ -27,7 +27,7 @@ class Itembrowsepage extends Component{
             type:0,
             dataSource:[],
         };
-        this.Search = this.Search.bind(this)
+        this.Search = this.Search.bind(this);
         this.handletagchange=this.handletagchange.bind(this);
         this.handleSearch=this.handleSearch.bind(this);
         this.handlepagechange=this.handlepagechange.bind(this);
@@ -39,7 +39,6 @@ class Itembrowsepage extends Component{
     }
 
     Search(value){
-        console.log("喵喵喵？？")
         const win=window.open('about:blank');
         win.location.href='/#/search/'+value;
     }
@@ -65,21 +64,18 @@ class Itembrowsepage extends Component{
         this.setState({tags:tags});
     }
 
-    componentWillMount() {
-        var value=window.location.href.split("#")[1].split("/")[2];
+    render(){
+        var value = window.location.href.split("#")[1].split("/")[2];
         var type = 0;
         switch(value)
         {
             case "book":type=0;break;
-            case "movie": type=1;break;
+            case "movie": type=3;break;
             case "flash": type=2;break;
         }
-        this.setState({type:type})
-
-    }
-
-    render(){
+        console.log(type);
         return(
+            <div>
             <Grid container id={"browser-item"}>
                 <Grid item xs={9} style={{padding:20}}>
                     <Tags select={true} tagchange={this.handletagchange} tags={["热血","王道","搞怪","不高兴","没头脑"]}/>
@@ -94,10 +90,9 @@ class Itembrowsepage extends Component{
                         <Input.Search addonBefore={selectBefore} onSearch={value=>this.Search(value)} />
                     </AutoComplete>
                 </Grid>
-                <Grid item xs={12} style={{padding:20}}>
-                    <Listitem currentpage={this.state.currentpage} type={this.state.type} search={this.state.search} handlepagechange={this.handlepagechange}/>
-                </Grid>
             </Grid>
+            <Listitem currentpage={this.state.currentpage} type={type} search={this.state.search} handlepagechange={this.handlepagechange}/>
+        </div>
         )
     }
 }

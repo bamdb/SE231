@@ -129,10 +129,12 @@ class Scheduletable extends Component {
     submit(){
         var rows=[];
         rows={
-            "itemId":this.props.itemid,
-            "userId":this.props.userid,
-            "chapters":this.state.data
+            itemId:this.props.itemid,
+            userId:localStorage.getItem("userid"),
+            chapters:this.state.data
         }
+        console.log(rows);
+        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
         axios.put("http://202.120.40.8:30741/activity/update/progress",rows,{
             params:{},
             headers:{"Content-Type":'application/json'}
@@ -140,25 +142,26 @@ class Scheduletable extends Component {
         this.setState({show:false});
     }
     componentWillMount() {
-        var data=[];
         var treeData = [];
         var value=[];
+        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
         axios.get("http://202.120.40.8:30741/activity/progress", {params:{
-                    userId:this.props.userid,
+                    userId:localStorage.getItem("userid"),
                     itemId:this.props.itemid,
                     
                 }}).then(function(response)
             {
                 console.log(this.props.itemid);
-                console.log(response.data.chapters);
+                console.log(response.data);
                 //this.transform(treeData,response.data.chapters,'','0',value);
                 const readdata=response.data.chapters;
-                const length=readdata.length;
+                const length = (readdata===undefined) ? 0 :readdata.length ;
                 for (var i=0;i<length;++i){
                     console.log("child",readdata[i].sections.length)
-                    if(readdata[i].sections.length===0) //下面没有子章节了
+                    if(readdata[i].sections.length==0) //下面没有子章节了
                     {
-                        if(readdata[i].finish===1) {
+                        if(readdata[i].finish==true) {
                             treeData.push({
                                 title: "Node" +'-'+ (i + 1).toString(),
                                 value: '0-' + i.toString(),
@@ -181,7 +184,7 @@ class Scheduletable extends Component {
                         var read=true;
                         const sections=readdata[i].sections;
                         for(var j=0;j<sections.length;j++)
-                            if(sections[j]==1) {
+                            if(sections[j]==true) {
                                 children.push({
                                     title: "Node"+ parenttitle +'-'+ (j + 1).toString(),
                                     value: parentvalue + '-' + j.toString(),
@@ -228,11 +231,11 @@ class Scheduletable extends Component {
             if(item.split('-')[2]===undefined) {
                 const length=node[item.split('-')[1]].sections.length;
                 for(var i=0; i<length; i++)
-                    node[item.split('-')[1]].sections[i]=0;
-                node[item.split('-')[1]].finish=0;
+                    node[item.split('-')[1]].sections[i]=false;
+                node[item.split('-')[1]].finish=false;
             }
             else {
-                node[item.split('-')[1]].sections[item.split('-')[2]] = 0;
+                node[item.split('-')[1]].sections[item.split('-')[2]] = false;
             }
         }
 
@@ -241,13 +244,14 @@ class Scheduletable extends Component {
             if(item.split('-')[2]===undefined) {
                 const length=node[item.split('-')[1]].sections.length;
                 for(var i=0; i<length; i++)
-                    node[item.split('-')[1]].sections[i]=1;
-                node[item.split('-')[1]].finish=1;
+                    node[item.split('-')[1]].sections[i]=true;
+                node[item.split('-')[1]].finish=true;
             }
             else {
-                node[item.split('-')[1]].sections[item.split('-')[2]] = 1;
+                node[item.split('-')[1]].sections[item.split('-')[2]] = true;
             }
         }
+        console.log(node)
         this.setState({
             data:node,
             value:value
@@ -281,13 +285,12 @@ class Scheduletable extends Component {
                 <CardMedia
                     style={{height:120}}
                     className={useStyle.media}
-                    image={"img/3.jpg"}
+                    image={this.props.imgurl.substring(0, 4) == "http"? this.props.imgurl : "http://"+this.props.imgurl}
                 />
                 <CardContent >
                         {this.state.itemname}
                     <LinearProgress variant="determinate" value={this.state.completed} />
                 </CardContent>
-                    /* icon */
                 </CardActionArea>
                 <Modal
                     title="进度编辑"

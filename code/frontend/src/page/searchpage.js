@@ -3,8 +3,9 @@ import Grid from '@material-ui/core/Grid/index';
 import axios from 'axios';
 import Tags from "../component/tag";
 import Listitem from '../component/listitem'
-import {AutoComplete, Card, Icon, Input, List, Pagination, Select} from 'antd';
+import {AutoComplete, Card, Icon, Input, List, Pagination, Select, Spin} from 'antd';
 import {Link} from "react-router-dom";
+import Alert from "../component/alert";
 
 const { Option } = Select;
 
@@ -32,14 +33,40 @@ class Searchpage extends Component {
             dataSourceId:[],
             items:[],
             currentpage:1,
+            loading:true,
+            content:""
         }
         this.handleitem = this.handleitem.bind(this);
         this.handlepagechange = this.handlepagechange.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
+        this.handlelike = this.handlelike.bind(this);
+        this.handleAlert = this.handleAlert.bind(this);
     }
 
+    handleAlert(e){
+        this.setState({content:e})
+    }
     handleSearch(value){
         this.setState({search: value})
+        var dataSource=[];
+        var id=[];
+        console.log("start search");
+        axios.get('http://202.120.40.8:30741/search/ik/item',{params:{keystring:value,page:0,size:8}})
+            .then(function (res) {
+                if(res.data.content!==undefined){
+                    res.data.content.forEach(item=>{
+                        dataSource.push(item.itemname);
+                        id.push(item.id);
+                    })
+                }
+                this.setState({
+                    dataSource:dataSource,
+                    dataSourceId:id,
+                })
+                console.log("finish search")
+                this.handleitem(id);
+                this.setState({loading:false});
+            }.bind(this))
     }
 
     handlepagechange(page){
@@ -61,13 +88,24 @@ class Searchpage extends Component {
 
     componentWillMount() {
         const search = window.location.href.split('#')[1].split('/')[2];
+        console.log(decodeURI(search));
         this.setState({
-            search:search,
+            search:decodeURI(search),
         })
         var dataSource=[];
         var id=[];
         console.log("start search");
-        axios.get('http://202.120.40.8:30741/search/ik/item',{params:{keystring:search,page:0,size:8}})
+        axios.defaults.headers = {
+            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+        }
+        axios.defaults.transformRequest = [function (data) {
+            var newData = "";
+            for (var k in data) {
+                newData += encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) + '&'
+            }
+            return newData
+        }]
+        axios.get('http://202.120.40.8:30741/search/ik/item',{params:{keystring:decodeURI(search),page:0,size:8}})
             .then(function (res) {
                 if(res.data.content!==undefined){
                     res.data.content.forEach(item=>{
@@ -81,6 +119,7 @@ class Searchpage extends Component {
                 })
                 console.log("finish search")
                 this.handleitem(id);
+                this.setState({loading:false});
             }.bind(this))
     }
 
@@ -92,29 +131,39 @@ class Searchpage extends Component {
             axios.get('http://202.120.40.8:30741/rating/itemid/'+id)
                 .then(function (res) {
                     if(res.data!==null){
-                        const item=res.data;
-                        items.push(
-                            {
-                                href: "/itemdetail/"+item.item.id,
-                                id: item.item.id,
-                                title:item.item.itemname,
-                                author:item.item.mainAuthor,
-                                pubTime: item.item.pubTime.split('T')[0],
-                                score:item.rating.avgScore,
-                                rank:item.rating.rank,
-                                imgurl:item.item.imgurl,
-                                chapterNum:item.item.chapterNum,
-                            }
-                        );
-                        this.setState({items:items})
+                        const rating=res.data;
+                        axios.get('http://202.120.40.8:30741/item/id/'+id)
+                            .then(function (response) {
+                                const item = response.data;
+                                items.push(
+                                    {
+                                        href: "/itemdetail/"+item.id,
+                                        id: rating.id,
+                                         title:item.itemname,
+                                         author:item.mainAuthor,
+                                         pubTime: item.pubTime.split('T')[0],
+                                        score:rating.avgScore,
+                                        rank:rating.rank,
+                                        imgurl:item.imgurl,
+                                        chapterNum:item.chapterNum,
+                                    }
+                                );
+                                this.setState({items:items})
+                            }.bind(this))
                     }
                 }.bind(this))
+
         })
+    }
+
+    handlelike(){
+
     }
 
     render(){
         return(
             <Grid container justify={"center"}>
+                <Alert content={this.state.content} cancelAlert={this.handleAlert.bind(this,"")} confirmAlert={this.handleAlert.bind(this,"")}/>
                 <Grid item xs={4}>
                     <AutoComplete
                         dataSource={this.state.dataSource}
@@ -142,7 +191,7 @@ class Searchpage extends Component {
                                         <img
                                             height={120}
                                             alt="defaultbook"
-                                            src={"http://"+item.imgurl}
+                                            src={item.imgurl.substring(0, 4) == "http"? item.imgurl : "http://"+item.imgurl}
                                         />
                                     }
                                     actions={        // show delete icon in editor page
@@ -165,9 +214,11 @@ class Searchpage extends Component {
                                 </Card>
                             </List.Item>
                         )}
-                    />
+                    >
+                        {this.state.loading ? <Spin/> : <span/>}
+                    </List>
                     <Grid container alignContent={"center"} justify={"center"}>
-                    <Pagination size="small"  total={100} current={this.props.currentpage} onChange={current=>this.handlepagechange(current)}/>
+                    <Pagination size="small"  total={1000} current={this.props.currentpage} onChange={current=>this.handlepagechange(current)}/>
                     </Grid>
                 </Grid>
             </Grid>

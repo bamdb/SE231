@@ -64,6 +64,7 @@ class Progressmanage extends Component {
     }
 
     componentWillMount() {
+
         if(localStorage.getItem("access_token")!=null)
         {
             axios.get("http://202.120.40.8:30741/activity/userid/"+localStorage.getItem("userid")).then(
@@ -83,6 +84,8 @@ class Progressmanage extends Component {
                             }
                         }
                     }
+                    console.log("book:",book);
+                    console.log("movie:",movie);
                     this.setState({book:book,movie:movie});
                 }
             }.bind(this)
@@ -98,7 +101,7 @@ class Progressmanage extends Component {
             items1.push(
                 <Grid item xs={3}>
                     <Grid container >
-                        <Scheduletable userid={this.state.userid} itemid={this.state.book[i].id} itemname={this.state.book[i].itemname} />
+                        <Scheduletable userid={this.state.userid} itemid={this.state.book[i].id} itemname={this.state.book[i].itemname} imgurl={this.state.book[i].imgurl}/>
                     </Grid>
                 </Grid>
             )
@@ -109,7 +112,7 @@ class Progressmanage extends Component {
             items2.push(
                 <Grid item xs={3}>
                     <Grid container >
-                        <Scheduletable userid={this.state.userid} itemid={this.state.movie[i].id} itemname={this.state.movie[i].itemname}/>
+                        <Scheduletable userid={this.state.userid} itemid={this.state.movie[i].id} itemname={this.state.movie[i].itemname} imgurl={this.state.movie[i].imgurl}/>
                     </Grid>
                 </Grid>
             )

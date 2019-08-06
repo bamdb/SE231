@@ -74,9 +74,9 @@ class DiscussBody extends Component{
 
     render(){
         return(
-            <Grid container >
+            <Grid container justify={"space-around"}  >
                 <Grid item xs={1}>
-                    <Avatar alt="Remy Sharp" src={"http://202.120.40.8:30741/image/id/"+this.props.data.user.id+"0"} onClick={this.handlevisible}/>
+                    <Avatar alt="" src={"http://202.120.40.8:30741/image/id/"+this.props.data.user.id+"0"} onClick={this.handlevisible}/>
                     <Modal title="加为好友" visible={this.state.visible}
                            onOk={this.handleOk} onCancel={this.handleCancel}
                     >

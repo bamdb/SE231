@@ -1,16 +1,6 @@
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles/index';
 import Grid from '@material-ui/core/Grid/index'
-import Paper from '@material-ui/core/Paper/index'
-import Navigation from "../component/navigation";
-import TopItemList from "../component/topitemlist";
-import Browserlist from "../component/browserlist";
-import Tag from "../component/tag";
-import Userinfo from "../component/userinfo";
-import Commentlist from "../component/commentlist";
-import Listitem from '../component/listitem'
-import Progressmanage from "../component/progressmanage";
-import Login from "../component/login"
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import FormControl from "@material-ui/core/FormControl";
@@ -28,6 +18,7 @@ class Adminpage extends Component{
     }
     submit()
     {
+        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
         axios.put("http://202.120.40.8:30741/auth/update/"+this.state.username,{},{params:{id:this.state.id,mail:this.state.email,password:this.state.password}}).then(
             function(res)
             {
