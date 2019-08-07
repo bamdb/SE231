@@ -100,3 +100,6 @@
 # 2019-08-02
 * finish iter3
 * fix api bugs
+
+# 2019-08-07
+* config mongo sharding in 9 servers, some problems with index.
