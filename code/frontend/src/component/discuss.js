@@ -48,7 +48,7 @@ class DiscussBody extends Component{
     handleOk()
     {
         var date=Date.parse(new Date());
-        axios.post("http://202.120.40.8:30741/message/add",{senderId:localStorage.getItem("userid"),receiverId:this.props.data.user.id,sendTime:date,content:"加为好友"})
+        axios.post("https://api.bamdb.cn/message/add",{senderId:localStorage.getItem("userid"),receiverId:this.props.data.user.id,sendTime:date,content:"加为好友"})
         this.setState({visible:false});
     }
     handleCancel()
@@ -64,7 +64,7 @@ class DiscussBody extends Component{
     componentDidMount() {
         const id = this.props.data.user.id;
        // this.state.data.replyContent;
-        axios.get("http://202.120.40.8:30741/user/id/"+id).then(
+        axios.get("https://api.bamdb.cn/user/id/"+id).then(
             function (response){
                 this.setState({username:response.data.username});
             }.bind(this)
@@ -76,7 +76,7 @@ class DiscussBody extends Component{
         return(
             <Grid container justify={"space-around"}  >
                 <Grid item xs={1}>
-                    <Avatar alt="" src={"http://202.120.40.8:30741/image/id/"+this.props.data.user.id+"0"} onClick={this.handlevisible}/>
+                    <Avatar alt="" src={"https://api.bamdb.cn/image/id/"+this.props.data.user.id+"0"} onClick={this.handlevisible}/>
                     <Modal title="加为好友" visible={this.state.visible}
                            onOk={this.handleOk} onCancel={this.handleCancel}
                     >
