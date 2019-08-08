@@ -35,6 +35,15 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
         enable_lazy_load_no_trans: true
+  mongodb:
+    uri: mongodb://47.103.123.5:20000/bamdb?connectTimeoutMS=20000&heartbeatFrequencyMS=5000&localThresholdMS=3000&maxIdleTimeMS=5000&serverSelectionTimeoutMS=15000&socketTimeoutMS=7500
+    options:
+      connectTimeoutMS: 20000
+      heartbeatFrequencyMS: 5000
+      localThresholdMS: 3000
+      maxIdleTimeMS: 5000
+      serverSelectionTimeoutMS: 15000
+      socketTimeoutMS: 7500
   redis:
     database: 0
     host: localhost
