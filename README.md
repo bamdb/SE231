@@ -35,33 +35,47 @@ code for summer project
 
 
 ### 集群信息
-* ubuntularge: 		202.120.40.8	4 vCPU | 8 GiB | Ubuntu 18.04
+* ubuntularge: 		202.120.40.8	
+	* 4 vCPU | 8 GiB | Ubuntu 18.04
 	* Nginx | Elastic master | Redis slave | MySQL master
-* bamdb-elastic: 	47.103.123.5	4 vCPU | 16 GiB | Ubuntu 18.04
+* bamdb-elastic: 	47.103.123.5	
+	* 4 vCPU | 16 GiB | Ubuntu 18.04
 	* Elastic master | MongoDB shard3 | Mongo router
-* bamdb: 			47.103.107.39	4 vCPU | 8 GiB | Ubuntu 18.04
+* bamdb: 47.103.107.39	
+	* 4 vCPU | 8 GiB | Ubuntu 18.04
 	* Docker Swarm manager1 | Redis master
-* bamdb1:  			47.103.104.210	4 vCPU | 8 GiB | Ubuntu 18.04
+* bamdb1: 47.103.104.210	
+	* 4 vCPU | 8 GiB | Ubuntu 18.04
 	* Docker Swarm manager2 | Redis master
-* bamdb2:  			47.103.98.30	4 vCPU | 8 GiB | Ubuntu 18.04
+* bamdb2: 47.103.98.30	
+	* 4 vCPU | 8 GiB | Ubuntu 18.04
 	* Docker Swarm manager3 | Redis master
-* bamdb-worker1: 	47.103.112.0	4 vCPU | 8 GiB | Ubuntu 18.04
+* bamdb-worker1: 47.103.112.0	
+	* 4 vCPU | 8 GiB | Ubuntu 18.04
 	* Docker Swarm worker1-1 | MongoDB shard1 | MongoDB config | WebSocket
-* bamdb-worker2: 	47.103.121.231	4 vCPU | 8 GiB | Ubuntu 18.04
+* bamdb-worker2: 47.103.121.231	
+	* 4 vCPU | 8 GiB | Ubuntu 18.04
 	* Docker Swarm worker1-2 | MongoDB shard2
-* bamdb1-worker1: 	47.103.121.51	4 vCPU | 8 GiB | Ubuntu 18.04
+* bamdb1-worker1: 47.103.121.51	
+	* 4 vCPU | 8 GiB | Ubuntu 18.04
 	* Docker Swarm worker2-1 | MongoDB shard1 | MongoDB config
-* bamdb1-worker2: 	47.103.115.65	4 vCPU | 8 GiB | Ubuntu 18.04
+* bamdb1-worker2: 47.103.115.65	
+	* 4 vCPU | 8 GiB | Ubuntu 18.04
 	* Docker Swarm worker2-2 | MongoDB shard2
-* bamdb2-worker1: 	47.103.123.233	4 vCPU | 8 GiB | Ubuntu 18.04
+* bamdb2-worker1: 47.103.123.233	
+	* 4 vCPU | 8 GiB | Ubuntu 18.04
 	* Docker Swarm worker3-1 | MongoDB shard1 | MongoDB config
-* bamdb2-worker2: 	47.103.126.156	4 vCPU | 8 GiB | Ubuntu 18.04
+* bamdb2-worker2: 47.103.126.156	
+	* 4 vCPU | 8 GiB | Ubuntu 18.04
 	* Docker Swarm worker3-2 | MongoDB shard2
-* aliyun: 			101.132.98.60	1 vCPU | 2 GiB | Ubuntu 18.04
+* aliyun: 101.132.98.60	
+	* 1 vCPU | 2 GiB | Ubuntu 18.04
 	* Redis slave | MongoDB shard3
-* pleiadesian: 		47.102.207.87 	1 vCPU | 2 GiB | Ubuntu 18.04
+* pleiadesian: 47.102.207.87 	
+	* 1 vCPU | 2 GiB | Ubuntu 18.04
 	* MySQL slave | Redis slave | MongoDB shard3
-* bandwagon: 		216.24.184.190	1 vCPU | 2 GiB | Centos 7
+* bandwagon: 216.24.184.190	
+	* 1 vCPU | 2 GiB | Centos 7
 	* Nginx
 
 
