@@ -69,7 +69,7 @@ class Listitem extends Component {
         var currentpage=this.props.currentpage;
 
         axios.get(
-            "https://api.bamdb.cn/rating/browser",{params:{
+            "http://202.120.40.8:30741/rating/browser",{params:{
                     type:this.props.type,
                     page:currentpage-1,
                     pageSize:8
@@ -111,7 +111,7 @@ class Listitem extends Component {
         var currentpage=nextProps.currentpage;
 
         axios.get(
-            "https://api.bamdb.cn/rating/browser",{params:{
+            "http://202.120.40.8:30741/rating/browser",{params:{
                     type:nextProps.type,
                     page:currentpage-1,
                     pageSize:8
@@ -157,7 +157,7 @@ class Listitem extends Component {
     }
 
     handleDelete(itemId) {
-        axios.delete("https://api.bamdb.cn/item/delete/id/"+itemId).then(
+        axios.delete("http://202.120.40.8:30741/item/delete/id/"+itemId).then(
             res => {
                 this.setState({flush:true});
             }

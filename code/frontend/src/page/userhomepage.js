@@ -26,7 +26,7 @@ class Userhomepage extends Component{
     componentDidMount() {
         if(localStorage.getItem("access_token")!=null)
         {
-            axios.get("https://api.bamdb.cn/rating/browser",{params:{
+            axios.get("http://202.120.40.8:30741/rating/browser",{params:{
 
                     type:0,
                     page:0,

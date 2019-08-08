@@ -55,9 +55,9 @@ class Reply extends Component {
     handleclick()
     {
         var text=this.state.text;
-        /*axios.post("https://api.bamdb.cn/topic/add/reply?topicId="+this.state.topicid+"&userId="+localStorage.getItem("userid"),text)*/
+        /*axios.post("http://202.120.40.8:30741/topic/add/reply?topicId="+this.state.topicid+"&userId="+localStorage.getItem("userid"),text)*/
         $.ajax({
-            url:"https://api.bamdb.cn/topic/add/reply?topicId="+this.state.topicid+"&userId="+localStorage.getItem("userid"),
+            url:"http://202.120.40.8:30741/topic/add/reply?topicId="+this.state.topicid+"&userId="+localStorage.getItem("userid"),
             type:"POST",
             headers: {
                 Authorization:"Bearer "+localStorage.getItem("access_token")
@@ -84,7 +84,7 @@ class Reply extends Component {
                     <Grid item xs={1} />
                     <Grid item xs={1}>
                         <br/>
-                        <Avatar alt="" src={"https://api.bamdb.cn/image/id/"+localStorage.getItem("userid")+'0'} className={useStyles.avatar} />
+                        <Avatar alt="" src={"http://202.120.40.8:30741/image/id/"+localStorage.getItem("userid")+'0'} className={useStyles.avatar} />
                         <br/>
                         <Typography variant="h5" component="h2">
                             {localStorage.getItem("username")}

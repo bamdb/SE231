@@ -135,7 +135,7 @@ class Scheduletable extends Component {
         }
         console.log(rows);
         axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
-        axios.put("https://api.bamdb.cn/activity/update/progress",rows,{
+        axios.put("http://202.120.40.8:30741/activity/update/progress",rows,{
             params:{},
             headers:{"Content-Type":'application/json'}
         })
@@ -146,7 +146,7 @@ class Scheduletable extends Component {
         var value=[];
         axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
 
-        axios.get("https://api.bamdb.cn/activity/progress", {params:{
+        axios.get("http://202.120.40.8:30741/activity/progress", {params:{
                     userId:localStorage.getItem("userid"),
                     itemId:this.props.itemid,
                     

@@ -30,7 +30,7 @@ class Activitylist extends Component {
         var temp=[];
         const friends=this.props.friends;
         friends.map(friend => {
-            axios.get("https://api.bamdb.cn/activity/userid/" + friend.id)
+            axios.get("http://202.120.40.8:30741/activity/userid/" + friend.id)
                 .then(function (res) {
                         temp.push({
                             user: friend,
@@ -54,7 +54,7 @@ class Activitylist extends Component {
             this.setState({len: friends.length});
             var activities = [];
             friends.map(friend => {
-                axios.get("https://api.bamdb.cn/activity/userid/" + friend.id)
+                axios.get("http://202.120.40.8:30741/activity/userid/" + friend.id)
                     .then(function (res) {
                             temp.push({
                                 user: friend,

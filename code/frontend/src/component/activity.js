@@ -90,7 +90,7 @@ class Activity extends Component {
             itemname:this.props.itemname,
             itemid:this.props.itemid
         })
-        axios.get("https://api.bamdb.cn/item/id/"+this.props.itemid).then(function (res) {
+        axios.get("http://202.120.40.8:30741/item/id/"+this.props.itemid).then(function (res) {
             this.setState({imgurl:res.data.imgurl})
         }.bind(this))
     }
@@ -115,7 +115,7 @@ class Activity extends Component {
                 }
             >
                 <List.Item.Meta
-                    avatar={<Avatar src={"https://api.bamdb.cn/image/id/"+this.state.userId+"0"} className={useStyles.avatar} />}
+                    avatar={<Avatar src={"http://202.120.40.8:30741/image/id/"+this.state.userId+"0"} className={useStyles.avatar} />}
                     title={this.state.username+"   "+this.state.date}
                     description={this.state.status}
                 />

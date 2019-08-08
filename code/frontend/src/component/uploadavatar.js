@@ -55,7 +55,7 @@ class Uploadavatar extends Component {
                 listType="picture-card"
                 className="avatar-uploader"
                 showUploadList={false}
-                action={"https://api.bamdb.cn/image/update?access_token="+localStorage.getItem("access_token")}
+                action={"http://202.120.40.8:30741/image/update?access_token="+localStorage.getItem("access_token")}
                 beforeUpload={beforeUpload}
                 onChange={this.handleChange}
             >

@@ -54,13 +54,13 @@ class Editorpage extends React.Component {
             {
 
                 var item =this.state.item;
-                item.imgurl="https://api.bamdb.cn/image/id/"+item.id+"1";
-                axios.put("https://api.bamdb.cn/item/update",item).then(
+                item.imgurl="http://202.120.40.8:30741/image/id/"+item.id+"1";
+                axios.put("http://202.120.40.8:30741/item/update",item).then(
                     function(response){
 
                     }.bind(this)
                 )
-                axios.post("https://api.bamdb.cn/rating/add/itemid/"+item.id)
+                axios.post("http://202.120.40.8:30741/rating/add/itemid/"+item.id)
             }
 
         }

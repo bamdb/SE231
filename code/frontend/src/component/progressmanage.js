@@ -67,7 +67,7 @@ class Progressmanage extends Component {
 
         if(localStorage.getItem("access_token")!=null)
         {
-            axios.get("https://api.bamdb.cn/activity/userid/"+localStorage.getItem("userid")).then(
+            axios.get("http://202.120.40.8:30741/activity/userid/"+localStorage.getItem("userid")).then(
             function(response)
             {
                 for(var i=0;i<response.data.length;++i)

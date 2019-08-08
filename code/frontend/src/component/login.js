@@ -29,7 +29,7 @@ class Login extends Component{
         this.props.setQR(false,undefined);
     }
     setQR(){
-        axios.get("https://api.bamdb.cn/auth/uuid")
+        axios.get("http://202.120.40.8:30741/auth/uuid")
             .then(function (res) {
                 console.log(res.data);
                 this.props.setQR(true,res.data);
@@ -54,7 +54,7 @@ class Login extends Component{
         params.append("client_id", "browser");
         params.append("client_secret", "");
 
-        axios.post("https://api.bamdb.cn/auth/oauth/token",
+        axios.post("http://202.120.40.8:30741/auth/oauth/token",
             params,
             {headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -68,7 +68,7 @@ class Login extends Component{
                 localStorage.setItem("username",_this.state.name);
 
                 axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
-                var url="https://api.bamdb.cn/auth/username/"+localStorage.getItem("username");
+                var url="http://202.120.40.8:30741/auth/username/"+localStorage.getItem("username");
                 axios.get(url,{params:{}}).then(
                     function(res)
                     {
@@ -78,7 +78,7 @@ class Login extends Component{
                     }
 
                 )
-                axios.get("https://api.bamdb.cn/auth/oauth/check_token",{params:{token:localStorage.getItem("access_token")}}).then(
+                axios.get("http://202.120.40.8:30741/auth/oauth/check_token",{params:{token:localStorage.getItem("access_token")}}).then(
                     function(res)
                     {
                         var auths=res.data.authorities;

@@ -81,7 +81,7 @@ class Addmessage extends Component {
     {
         var date = Date.parse(new Date())
         axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
-        axios.post("https://api.bamdb.cn/message/add",{senderId:localStorage.getItem("userid"),receiverId:this.state.to,senTime:date,content:this.state.text},{params:{}});
+        axios.post("http://202.120.40.8:30741/message/add",{senderId:localStorage.getItem("userid"),receiverId:this.state.to,senTime:date,content:this.state.text},{params:{}});
         openNotificationWithIcon('success');
         this.handleCancel();
     }
@@ -106,7 +106,7 @@ class Addmessage extends Component {
     }
     componentWillMount() {
         axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
-        axios.get('https://api.bamdb.cn/friend/all/userid/'+localStorage.getItem("userid"),{params:{}}).then(
+        axios.get('http://202.120.40.8:30741/friend/all/userid/'+localStorage.getItem("userid"),{params:{}}).then(
             function(response){
                 this.setState({tolist:response.data})
             }.bind(this)

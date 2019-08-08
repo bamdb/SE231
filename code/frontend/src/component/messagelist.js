@@ -35,12 +35,12 @@ class Messagelist extends Component{
 
     handleaddfriend(senderId,receiverId)
     {
-        axios.get("https://api.bamdb.cn/friend/isfriend?userId1="+senderId+"&userId2="+receiverId).then(
+        axios.get("http://202.120.40.8:30741/friend/isfriend?userId1="+senderId+"&userId2="+receiverId).then(
             function(res)
             {
                 if(res.data==false)
                 {
-                    axios.post("https://api.bamdb.cn/friend/add",{userId1:senderId,userId2:receiverId,status:0})
+                    axios.post("http://202.120.40.8:30741/friend/add",{userId1:senderId,userId2:receiverId,status:0})
                 }
                 else {
 
@@ -62,7 +62,7 @@ class Messagelist extends Component{
 
     componentDidMount() {
         axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
-        var url="https://api.bamdb.cn/message/"+this.props.type+"/"+localStorage.getItem("userid");
+        var url="http://202.120.40.8:30741/message/"+this.props.type+"/"+localStorage.getItem("userid");
         axios.get(url).then(
             function(response)
             {
@@ -72,7 +72,7 @@ class Messagelist extends Component{
     }
     componentWillReceiveProps(nextProps, nextContext) {
         axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
-        var url="https://api.bamdb.cn/message/"+nextProps.type+"/"+localStorage.getItem("userid");
+        var url="http://202.120.40.8:30741/message/"+nextProps.type+"/"+localStorage.getItem("userid");
         axios.get(url).then(
             function(response)
             {

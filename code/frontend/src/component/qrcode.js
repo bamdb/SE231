@@ -21,7 +21,7 @@ class QRcode extends Component{
     componentDidMount() {
         if(this.props.uuid!==undefined)
         {
-            axios.get("https://api.bamdb.cn/auth/qrcode",{params:{uuid:this.props.uuid}})
+            axios.get("http://202.120.40.8:30741/auth/qrcode",{params:{uuid:this.props.uuid}})
                 .then(function (res) {
                     console.log(res.data);
                     this.setState({qrcode:res.data, uuid:this.props.uuid})
@@ -39,7 +39,7 @@ class QRcode extends Component{
         localStorage.setItem("access_token",data);
         axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
 
-        axios.get("https://api.bamdb.cn/auth/user").then(
+        axios.get("http://202.120.40.8:30741/auth/user").then(
             function (res) {
                 localStorage.setItem("userid",res.data.id);
                 localStorage.setItem("username",res.data.username);
@@ -72,7 +72,7 @@ class QRcode extends Component{
                     <Grid container alignContent={"center"} justify={"space-around"}>
                         <Grid item xs={1}/>
                         <Grid item xs={5}>
-                            <img height={184} width={184} src={"https://api.bamdb.cn/auth/qrcode?uuid="+this.props.uuid}/>
+                            <img height={184} width={184} src={"http://202.120.40.8:30741/auth/qrcode?uuid="+this.props.uuid}/>
                         </Grid>
                         <Grid item xs={1}>
                             <Divider type={"vertical"} id={"divider-login"}/>

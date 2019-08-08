@@ -80,13 +80,13 @@ class Collect extends Component {
     }
     componentWillMount() {
 
-        axios.get("https://api.bamdb.cn/comment",{params:{itemId:this.props.itemid,userId:this.props.userid}}).then(
+        axios.get("http://202.120.40.8:30741/comment",{params:{itemId:this.props.itemid,userId:this.props.userid}}).then(
             function(response)
             {
                 this.setState({comment:response.data});
             }.bind(this)
         )
-        axios.get("https://api.bamdb.cn/rating/score",{params:{itemId:this.props.itemid,userId:this.props.userid}}).then(
+        axios.get("http://202.120.40.8:30741/rating/score",{params:{itemId:this.props.itemid,userId:this.props.userid}}).then(
             function(response)
             {
                 this.setState({score:response.data.score});
@@ -95,13 +95,13 @@ class Collect extends Component {
 
     }
     componentWillReceiveProps(nextProps, nextContext) {
-        axios.get("https://api.bamdb.cn/comment",{params:{itemId:this.props.itemid,userId:nextProps.userid}}).then(
+        axios.get("http://202.120.40.8:30741/comment",{params:{itemId:this.props.itemid,userId:nextProps.userid}}).then(
             function(response)
             {
                 this.setState({comment:response.data});
             }.bind(this)
         )
-        axios.get("https://api.bamdb.cn/rating/score",{params:{itemId:this.props.itemid,userId:nextProps.userid}}).then(
+        axios.get("http://202.120.40.8:30741/rating/score",{params:{itemId:this.props.itemid,userId:nextProps.userid}}).then(
             function(response)
             {
                 this.setState({score:response.data.score});

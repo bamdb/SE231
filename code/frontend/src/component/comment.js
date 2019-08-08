@@ -48,8 +48,8 @@ class Comment extends Component {
     handleOk()
     {
         var date=Date.parse(new Date());
-        axios.post("https://api.bamdb.cn/friend/add",{userId1:localStorage.getItem("userid"),userId2:this.props.userid,status:0})
-        axios.post("https://api.bamdb.cn/message/add",{senderId:localStorage.getItem("userid"),receiverId:this.props.userid,sendTime:date,content:"加为好友"})
+        axios.post("http://202.120.40.8:30741/friend/add",{userId1:localStorage.getItem("userid"),userId2:this.props.userid,status:0})
+        axios.post("http://202.120.40.8:30741/message/add",{senderId:localStorage.getItem("userid"),receiverId:this.props.userid,sendTime:date,content:"加为好友"})
         this.setState({visible:false});
     }
     handleCancel()
@@ -69,7 +69,7 @@ class Comment extends Component {
         comment : "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
     };
     componentWillMount(){
-        axios.get("https://api.bamdb.cn/rating/score",{params:{itemId:this.props.itemid,userId:this.props.userid}})
+        axios.get("http://202.120.40.8:30741/rating/score",{params:{itemId:this.props.itemid,userId:this.props.userid}})
             .then(function (res) {
                 this.setState({grade:res.data.score})
             }.bind(this))
@@ -82,7 +82,7 @@ class Comment extends Component {
                 <Divider />
                 <Grid container spacing={2}>
                     <Grid item xs={2} justify="center">
-                        <Avatar src={"https://api.bamdb.cn/image/"+this.props.userid+"0"} className={useStyles.avatar} onClick={this.handlevisible}/>
+                        <Avatar src={"http://202.120.40.8:30741/image/"+this.props.userid+"0"} className={useStyles.avatar} onClick={this.handlevisible}/>
                         <Modal title="加为好友" visible={this.state.visible}
                                onOk={this.handleOk} onCancel={this.handleCancel}
                         >

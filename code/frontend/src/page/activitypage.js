@@ -37,7 +37,7 @@ class Activitypage extends Component{
         }
         axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
 
-        axios.get('https://api.bamdb.cn/friend/all/userid/'+userid).then(
+        axios.get('http://202.120.40.8:30741/friend/all/userid/'+userid).then(
             function(response){
                 friends = response.data;
                 console.log(response.data);

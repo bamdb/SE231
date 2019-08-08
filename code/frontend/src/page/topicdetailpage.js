@@ -30,7 +30,7 @@ class Topicdetailpage extends Component{
         {
             var id = window.location.href.split("#")[1].split("/")[2];
             console.log(id);
-            var url="https://api.bamdb.cn/topic/id/"+id;
+            var url="http://202.120.40.8:30741/topic/id/"+id;
         }
 
         /*axios.get("/topic/all")
@@ -40,7 +40,7 @@ class Topicdetailpage extends Component{
             )*/
 
 
-        axios.get("https://api.bamdb.cn/topic/id/"+id)
+        axios.get("http://202.120.40.8:30741/topic/id/"+id)
             .then(function (res) {
                 this.setState({data: res.data});
             }.bind(this)
