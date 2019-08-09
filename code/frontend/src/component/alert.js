@@ -21,9 +21,6 @@ class Alert extends Component {
         }
     }
     handleOk() {
-        if(this.props.cancelAlert){
-            this.props.cancelAlert("");
-        }
         if(this.props.confirmAlert && this.state.content == "确认删除该条目？"){
             this.props.confirmAlert();
         }

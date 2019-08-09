@@ -53,7 +53,7 @@ class Messagepage extends Component{
  */
             <Tabs defaultActiveKey="receiverid" onChange={this.handleChange}>
                 <TabPane tab="收件箱" key="receiverid">
-                    <Messagelist type={1}/>
+                    <Messagelist type="receiverid"/>
                 </TabPane>
                 <TabPane tab="发件箱" key="senderid">
                     <Messagelist type="senderid"/>

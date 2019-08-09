@@ -10,16 +10,16 @@ import Addrelation from "../component/addrelation";
 const { Step } = Steps;
 const steps = [
     {
-        title: 'First',
+        title: '上传条目信息',
         content: "",
     },
     {
-        title: 'Second',
+        title: '上传封面',
         content: "",
     },
     {
-        title: 'Last',
-        content: 'Last-content',
+        title: '上传关联条目',
+        content: '',
     },
 ];
 
@@ -34,7 +34,10 @@ class Editorpage extends React.Component {
         this.setid=this.setid.bind(this);
     }
     componentWillMount() {
-
+        if(localStorage.getItem("userid")==null)
+        {
+          //  window.location.href="/#/login";
+        }
     }
 
     setid(item)
@@ -44,6 +47,7 @@ class Editorpage extends React.Component {
     next() {
         if(this.state.item!=null)
         {
+            axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
             const current = this.state.current + 1;
             this.setState({ current });
             if(current==1)
@@ -51,12 +55,12 @@ class Editorpage extends React.Component {
 
                 var item =this.state.item;
                 item.imgurl="http://202.120.40.8:30741/image/id/"+item.id+"1";
-                axios.put("http://202.120.40.8:30741/item/update?access_token="+localStorage.getItem("access_token"),item).then(
+                axios.put("http://202.120.40.8:30741/item/update",item).then(
                     function(response){
-                        this.props.setid(response.data.id);
+
                     }.bind(this)
                 )
-                axios.post("http://202.120.40.8:30741/rating/add/itemid/"+item.id+"?access_token="+localStorage.getItem("access_token"))
+                axios.post("http://202.120.40.8:30741/rating/add/itemid/"+item.id)
             }
 
         }

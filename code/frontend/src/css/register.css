@@ -1,0 +1,26 @@
+#checkdone{
+    color: #73d13d;
+}
+#checkfalse{
+    color: #ffd666;
+}
+#button{
+    margin-top: 24px;
+}
+#tooltip{
+    color: rgba(0,0,0,.45)
+}
+#register
+{
+    text-align: center;
+    padding-top: 64px;
+    padding-bottom: 32px;
+    min-width: 600px;
+}
+#register-body
+{
+    min-width: 300px;
+}
+#divider{
+    height:300px;
+}

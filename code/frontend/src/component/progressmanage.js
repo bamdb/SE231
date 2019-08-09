@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
- 
-import Paper from '@material-ui/core/Paper';
-import { Button, Radio, Icon } from 'antd';
-import '../css/progressmanage.css';
+import { Button, Icon } from 'antd';
+import '../index.css';
 import Scheduletable from './scheduletable'
 import Divider from '@material-ui/core/Divider';
-import Chip from '@material-ui/core/Chip';
-import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
 import axios from "axios"
 /*
  信息保存在state中，可以自行添加props或ajax
@@ -21,12 +15,7 @@ class Progressmanage extends Component {
         super(props);
         this.state={label:0};
         this.state={
-            items:[
-                {readstat:[0,[1,0,1,0],0,1],itemname:"book1",kind:"book"},
-                {readstat:[1,1,1],itemname:"book2",kind:"movie"},
-                {readstat:[1,1,1,1],itemname:"book3",kind:"movie"},
-                {readstat:[1,1,1,1],itemname:"book3",kind:"movie"}
-                ],
+            items:[],
             value:0,
             uppage:0,
             downpage:0,
@@ -71,15 +60,14 @@ class Progressmanage extends Component {
             }
     }
     handleChange(event, newValue) {
-        console.log(newValue);
         this.setState({value : newValue});
     }
 
     componentWillMount() {
+
         if(localStorage.getItem("access_token")!=null)
         {
-            axios.get("http://202.120.40.8:30741/activity/userid/"+localStorage.getItem("userid"),{params:
-                {access_token: localStorage.getItem("access_token")}}).then(
+            axios.get("http://202.120.40.8:30741/activity/userid/"+localStorage.getItem("userid")).then(
             function(response)
             {
                 for(var i=0;i<response.data.length;++i)
@@ -88,54 +76,50 @@ class Progressmanage extends Component {
                     var movie=[];
                     for(var i=0;i<response.data.length;++i)
                     {
-                        if(response.data[i].item.type==0)
-                        {
-                            book.push(response.data[i].item);
-                        }
-                        else
-                        {
-                            movie.push(response.data[i].item);
+                        if(response.data[i].item!==null) {
+                            if (response.data[i].item.type == 0) {
+                                book.push(response.data[i].item);
+                            } else {
+                                movie.push(response.data[i].item);
+                            }
                         }
                     }
+                    console.log("book:",book);
+                    console.log("movie:",movie);
                     this.setState({book:book,movie:movie});
                 }
             }.bind(this)
             )
-        }
-        else {
-            window.location.href="/#/login";
         }
     }
 
     render() {
         var items1=[];
         var items2=[];
-        console.log("book amount",this.state.book.length);
         for(var i=this.state.uppage*4;(i<this.state.uppage*4+4)&&i<this.state.book.length;++i)
         {
             items1.push(
                 <Grid item xs={3}>
                     <Grid container >
-                        <Scheduletable userid={this.state.userid} itemid={this.state.book[i].id} itemname={this.state.book[i].itemname} />
+                        <Scheduletable userid={this.state.userid} itemid={this.state.book[i].id} itemname={this.state.book[i].itemname} imgurl={this.state.book[i].imgurl}/>
                     </Grid>
                 </Grid>
             )
         }
 
-        console.log("movie amount",this.state.movie.length);
         for(var i=this.state.downpage*4;i<(this.state.downpage*4+4)&&i<this.state.movie.length;++i)
         {
             items2.push(
                 <Grid item xs={3}>
                     <Grid container >
-                        <Scheduletable userid={this.state.userid} itemid={this.state.movie[i].id} itemname={this.state.movie[i].itemname}/>
+                        <Scheduletable userid={this.state.userid} itemid={this.state.movie[i].id} itemname={this.state.movie[i].itemname} imgurl={this.state.movie[i].imgurl}/>
                     </Grid>
                 </Grid>
             )
         }
 
         return(
-            <div>
+            <div id={"home-body"}>
                 <br/>
                 <Typography variant={"subtitle1"} color={"textSecondary"} >我的图书</Typography>
                 <Divider />

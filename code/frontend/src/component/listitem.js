@@ -4,37 +4,12 @@
 
 import React, { Component } from 'react';
 import {Link, Redirect} from "react-router-dom";
-import Paper from "@material-ui/core/Paper";
-import {makeStyles} from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import {Modal} from "antd";
 import Collectform from "./collectform";
-import '../css/listitem.css'
-import axios from 'axios';
-import DeleteIcon from '@material-ui/icons/Delete';
 import Alert from './alert';
-import { List, Avatar, Icon, Card } from "antd";
+import { List, Icon, Card, Pagination,Spin } from "antd";
+import '../index.css'
+import axios from 'axios';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        padding: theme.spacing(3, 2),
-        minWidth: 800,
-        width: '100%',
-    },
-    paper: {
-        padding: theme.spacing(3, 2),
-        width: 200
-    },
-    image: {
-        height: 120,
-        width: 96,
-    },
-    card: {
-        maxWidth: 345,
-        height:100
-    },
-}));
 
 /*
 * 需要传入的props（包装成json后可以简化）
@@ -43,12 +18,12 @@ const useStyles = makeStyles(theme => ({
 * props.author : 条目作者
 * props.score : 条目评分
 * props.rank : 条目排名
-* props.chapter : 条目章节数 
+* props.chapter : 条目章节数
 */
 
 
-const IconText = ({ type, text }) => (
-    <span>
+const IconText = ({ type, text, func}) => (
+    <span onClick={func}>
     <Icon type={type} style={{ marginRight: 8 }} />
         {text}
   </span>
@@ -62,117 +37,128 @@ class Listitem extends Component {
         this.state = {
             ItemList:[],
             modifiedItems:[],
+            deleteItem:[],      // 删除条目
             content: "",        // 提示框内容
-            flush: false        // 用于删除条目后跳转页面
+            collectItem:[],     // 收藏条目
+            visible:false,      // 显示收藏提示框
+            flush: false,        // 用于删除条目后跳转页面
+            loading:true,
+            totalPage:0,
         }
         this.handlepagechange=this.handlepagechange.bind(this);
         this.handleAlert=this.handleAlert.bind(this);
         this.handleDelete=this.handleDelete.bind(this);
-    }
-    componentWillMount() {
-
-        /*var rows=[];
-        const items = this.props.ItemList;
-        if(items !== undefined)
-        {
-            for(var i=0; i<items.length; ++i) {
-                if (items[i].item.itemname.indexOf(this.props.search) !== -1) {
-                    rows.push(
-                        {
-                            href: "/itemdetail/"+items[i].item.id,
-                            title:items[i].item.itemname,
-                            author:items[i].item.mainAuthor,
-                            pubTime: items[i].item.pubTime.split('T')[0],
-                            score:items[i].rating.avgScore,
-                            rank:items[i].rating.rank
-                        }
-                    );
-                }
-            }
-            console.log(rows);
-        }
-        else console.log("no data");
-        rows.push(
-            {
-                href: "/itemdetail/1",
-                title:"three body",
-                author:"liu",
-                pubTime: "2010-7-1",
-                score:9.5,
-                rank:1
-            }
-        );
-        this.setState({
-            ItemList:items,
-            modifiedItems:rows,
-        })*/
+        this.handlelike=this.handlelike.bind(this);
+        this.handleCancel=this.handleCancel.bind(this);
+        this.handleCancelAlert=this.handleCancelAlert.bind(this);
     }
 
-    handlepagechange(page){
-        this.props.handlepagechange(page);
-    }
-    componentWillReceiveProps(nextProps, nextContext) {
-        var rows=[];
-        const items = nextProps.ItemList;
-        if(items !== undefined)
-        {
-            for(var i=0; i<items.length; ++i) {
-                if (items[i].item.itemname.indexOf(this.props.search) !== -1) {
-                    rows.push(
-                        {
-                            href: "/itemdetail/"+items[i].item.id,
-                            id: items[i].item.id,
-                            title:items[i].item.itemname,
-                            author:items[i].item.mainAuthor,
-                            pubTime: items[i].item.pubTime.split('T')[0],
-                            score:items[i].rating.avgScore,
-                            rank:items[i].rating.rank,
-                            imgurl:items[i].item.imgurl
-                        }
-                    );
-                }
-            }
-            console.log(rows);
-        }
-        else {
-            console.log("no data");
-            rows.push(
-                {
-                    href: "/itemdetail/1",
-                    title: "three body",
-                    author: "liu",
-                    pubTime: "2010-7-1",
-                    score: 9.5,
-                    rank: 1
-                }
-            );
-        }
+    handleCancel(){
         this.setState({
-            ItemList:items,
-            modifiedItems:rows,
+            visible: false,
+            collectItem:[]
         })
     }
-/*
-    {
-    href: "http://ant.design",
-    title: `ant design part ${i}`,
-    avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-    description:
-    "Ant Design, a design language for background applications, is refined by Ant UED Team.",
-    content:
-    "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently."
+
+    handlepagechange(e){
+        this.props.handlepagechange(e);
+    }
+    componentDidMount() {
+        var rows=[];
+        var items=[];
+        var currentpage=this.props.currentpage;
+
+        axios.get(
+            "http://202.120.40.8:30741/rating/browser",{params:{
+                    type:this.props.type,
+                    page:currentpage-1,
+                    pageSize:8
+                }}
+        )
+            .then(function (response) {
+                items=response.data;
+                if(items !== undefined)
+                {
+                    var totalpage=items[0].totalPage;
+                    for(var i=0; i<items.length; ++i) {
+                        rows.push(
+                            {
+                                href: "/itemdetail/"+items[i].item.id,
+                                id: items[i].item.id,
+                                title:items[i].item.itemname,
+                                author:items[i].item.mainAuthor,
+                                pubTime: items[i].item.pubTime.split('T')[0],
+                                score:items[i].rating.avgScore,
+                                rank:items[i].rating.rank,
+                                imgurl:items[i].item.imgurl,
+                                chapterNum:items[i].item.chapterNum,
+                            }
+                        );
+                    }
+                    this.setState({
+                        ItemList:items,
+                        modifiedItems:rows,
+                        loading:false,
+                        totalPage:totalpage
+                    })
+                }
+            }.bind(this))
     }
 
- */
+    componentWillReceiveProps(nextProps, nextContext) {
+        var rows=[];
+        var items=[];
+        var currentpage=nextProps.currentpage;
 
-    handleAlert(content) {
-        this.setState({content : content})
+        axios.get(
+            "http://202.120.40.8:30741/rating/browser",{params:{
+                    type:nextProps.type,
+                    page:currentpage-1,
+                    pageSize:8
+                }}
+        )
+            .then(function (response) {
+                items=response.data;
+                if(items !== undefined)
+                {
+                    var totalpage=items[0].totalPage;
+                    for(var i=0; i<items.length; ++i) {
+                        rows.push(
+                            {
+                                href: "/itemdetail/"+items[i].item.id,
+                                id: items[i].item.id,
+                                title:items[i].item.itemname,
+                                author:items[i].item.mainAuthor,
+                                pubTime: items[i].item.pubTime.split('T')[0],
+                                score:items[i].rating.avgScore,
+                                rank:items[i].rating.rank,
+                                imgurl:items[i].item.imgurl,
+                                chapterNum:items[i].item.chapterNum,
+                            }
+                        );
+                    }
+                    this.setState({
+                    ItemList:items,
+                    modifiedItems:rows,
+                    loading:false,
+                    totalPage:totalpage
+                })
+                }
+            }.bind(this))
+    }
+    handleCancelAlert(content){
+        this.setState({content : content, deleteItem:[]})
+    }
+    handleAlert(content,item) {
+        this.setState({content : content, deleteItem:item})
+    }
+    handlelike(item){
+        this.setState({visible:true,collectItem:item})
     }
 
     handleDelete(itemId) {
-        axios.delete("http://202.120.40.8:30741/item/delete/id/"+itemId+"?access_token="+localStorage.getItem("access_token")).then(
+        axios.delete("http://202.120.40.8:30741/item/delete/id/"+itemId).then(
             res => {
-                this.handleAlert(res.data);
                 this.setState({flush:true});
             }
         )
@@ -183,17 +169,14 @@ class Listitem extends Component {
             return(<Redirect to={"/"}/>);
         }
         const items=this.state.modifiedItems;
-        return(<List
+        return(
+            <div>
+            <Collectform chapterNum={this.state.collectItem.chapterNum} itemid={this.state.collectItem.id} visible={this.state.visible} handleCancel={this.handleCancel} />
+            <Alert content={this.state.content} cancelAlert={this.handleCancelAlert} confirmAlert={this.handleDelete.bind(this,this.state.deleteItem.id)}/>
+            <List
                 grid={{gutter:16,column: 4 }}
                 itemLayout="horizontal"
                 size="large"
-                pagination={{
-                    onChange: page => {
-                        console.log(page);
-                        this.handlepagechange(page);
-                    },
-                    pageSize: 8
-                }}
                 dataSource={items}
                 renderItem={item => (
                     <List.Item
@@ -202,43 +185,45 @@ class Listitem extends Component {
                     >
                         <Card
                             size={"small"}
-                            style={{minWidth:144}}
+                            style={{maxWidth:200}}
                             cover={
                                 <img
                                     height={120}
                                     alt="defaultbook"
-                                    src={item.imgurl}
+                                    src={item.imgurl.substring(0, 4) == "http"? item.imgurl : "http://"+item.imgurl}
                                 />
                             }
                             actions={        // show delete icon in editor page
                                 localStorage.getItem("role") == "ROLE_EDITOR" ? (
                                 [
-                                    <IconText type="star-o" text="156" />,
-                                    <IconText type="like-o" text="156" />,
-                                    <IconText type="message" text="2" />,
-                                    <div>
-                                        <Alert content={this.state.content} cancelAlert={this.handleAlert} confirmAlert={this.handleDelete.bind(this,item.id)}/>
-                                        <DeleteIcon onClick={this.handleAlert.bind(this, "确认删除该条目？")}/>
-                                    </div>
+                                    <IconText type="star" func={this.handlelike.bind(this,item)} />,
+                                    <IconText type="delete" text="2" func={this.handleAlert.bind(this, "确认删除该条目？",item)}/>
                                 ]
                                 ) : (
                                     [
-                                        <IconText type="star-o" text="156" />,
-                                        <IconText type="like-o" text="156" />,
-                                        <IconText type="message" text="2" />
+                                        <IconText type="star"func={this.handlelike.bind(this,item)} />
                                     ]
                                 )}
                         >
                             <Meta
                                 style={{margin:0}}
-                                title={<Link to={item.href}>{item.title}</Link>}
-                                description={"评分："+item.score+'\n'+"排名：" +item.rank +'\n'
-                                            +"This is description."}
+                                title={<Link to={item.href} target={'_blank'}>{item.title}</Link>}
+                                description={
+                                    <div>
+                                        <p>评分：{item.score}</p>
+                                        <p>排名：{item.rank}</p>
+                                        <p>作者：{item.author}</p>
+                                    </div>
+                                }
                             />
                         </Card>
                     </List.Item>
                 )}
-            />
+            >
+                {this.state.loading ? <Spin/> : <span/>}
+            </List>
+                <Pagination size="small"  total={this.state.totalPage*10} current={this.props.currentpage} onChange={current=>this.handlepagechange(current)}/>
+            </div>
         );
     }
 }

@@ -1,8 +1,6 @@
 # except the binary file
 *.rar
 *.zip
-*.jar
-*.war
 *.tar.gz
 *.class
 

@@ -13,7 +13,7 @@ import Input from "@material-ui/core/Input";
 import TextField from "@material-ui/core/TextField";
 import {Modal, Divider} from "antd";
 import  axios from "axios";
- 
+
 const useStyles = makeStyles({
     root: {
         maxheight : 500,
@@ -40,7 +40,7 @@ const useStyles = makeStyles({
 class Comment extends Component {
     constructor(props) {
         super(props);
-        this.state={visible:false};
+        this.state={visible:false,grade:""};
         this.handlevisible=this.handlevisible.bind(this);
         this.handleOk=this.handleOk.bind(this);
         this.handleCancel=this.handleCancel.bind(this);
@@ -48,13 +48,13 @@ class Comment extends Component {
     handleOk()
     {
         var date=Date.parse(new Date());
-        axios.post("http://202.120.40.8:30741/message/add?access_token="+localStorage.getItem("access_token"),{senderId:localStorage.getItem("userid"),receiverId:this.props.username,sendTime:date,content:"加为好友"})
+        axios.post("http://202.120.40.8:30741/friend/add",{userId1:localStorage.getItem("userid"),userId2:this.props.userid,status:0})
+        axios.post("http://202.120.40.8:30741/message/add",{senderId:localStorage.getItem("userid"),receiverId:this.props.userid,sendTime:date,content:"加为好友"})
         this.setState({visible:false});
     }
     handleCancel()
     {
         this.setState({visible:false});
-
     }
 
     handlevisible()
@@ -63,11 +63,18 @@ class Comment extends Component {
     }
 
     static defaultProps = {
-        username : "null",
+        username : "admin",
         date : "2000-1-1",
         grade : "null",
         comment : "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
     };
+    componentWillMount(){
+        axios.get("http://202.120.40.8:30741/rating/score",{params:{itemId:this.props.itemid,userId:this.props.userid}})
+            .then(function (res) {
+                this.setState({grade:res.data.score})
+            }.bind(this))
+
+    }
 
     render() {
         return(
@@ -75,14 +82,14 @@ class Comment extends Component {
                 <Divider />
                 <Grid container spacing={2}>
                     <Grid item xs={2} justify="center">
-                        <Avatar alt="Remy Sharp" src="img/3.jpg" className={useStyles.avatar} onClick={this.handlevisible}/>
+                        <Avatar src={"http://202.120.40.8:30741/image/"+this.props.userid+"0"} className={useStyles.avatar} onClick={this.handlevisible}/>
                         <Modal title="加为好友" visible={this.state.visible}
                                onOk={this.handleOk} onCancel={this.handleCancel}
                         >
 
                         </Modal>
-                        <Typography variant="h5" component="h2">
-                            {this.props.username}
+                        <Typography variant={"subtitle1"}>
+                            {this.props.name}
                         </Typography>
                     </Grid>
                     <Grid item xs={10} justify="center">
@@ -91,7 +98,7 @@ class Comment extends Component {
                         </Typography>
 
                         <Typography variant="h5" component="h2">
-                            评分： {this.props.grade}
+                            评分： {this.state.grade}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
                             {this.state.comment}

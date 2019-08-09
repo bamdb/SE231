@@ -1,7 +1,10 @@
-div 
-.login{
-    background-image: url("/src/background.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+#divider-login{
+    height: 200px;
 }
+#button{
+    align-content: center;
+    margin-top: 64px;
+}
+
+
+

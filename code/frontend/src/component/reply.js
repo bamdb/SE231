@@ -41,7 +41,7 @@ class Reply extends Component {
         this.setState({text:e.target.value})
     }
     componentWillMount() {
-
+        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
         this.setState({topicid:window.location.href.split("#")[1].split("/")[2]})
         if(localStorage.getItem("userid")==null)
         {
@@ -55,10 +55,13 @@ class Reply extends Component {
     handleclick()
     {
         var text=this.state.text;
-        /*axios.post("http://202.120.40.8:30741/topic/add/reply?topicId=1&userId=1",text).then();*/
+        /*axios.post("http://202.120.40.8:30741/topic/add/reply?topicId="+this.state.topicid+"&userId="+localStorage.getItem("userid"),text)*/
         $.ajax({
-            url:"http://202.120.40.8:30741/topic/add/reply?topicId="+this.state.topicid+"&userId="+localStorage.getItem("userid")+"&access_token="+localStorage.getItem("access_token"),
+            url:"http://202.120.40.8:30741/topic/add/reply?topicId="+this.state.topicid+"&userId="+localStorage.getItem("userid"),
             type:"POST",
+            headers: {
+                Authorization:"Bearer "+localStorage.getItem("access_token")
+            },
             contentType:"application/json",
             data:text,
             success: function f(data) {
@@ -72,7 +75,7 @@ class Reply extends Component {
         grade : "null",
         comment : "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
     };
- 
+
     render() {
         return(
                 <Paper className={useStyles.root} >
@@ -81,10 +84,10 @@ class Reply extends Component {
                     <Grid item xs={1} />
                     <Grid item xs={1}>
                         <br/>
-                        <Avatar alt="Remy Sharp" src="img/3.jpg" className={useStyles.avatar} />
+                        <Avatar alt="" src={"http://202.120.40.8:30741/image/id/"+localStorage.getItem("userid")+'0'} className={useStyles.avatar} />
                         <br/>
                         <Typography variant="h5" component="h2">
-                            {this.props.username}
+                            {localStorage.getItem("username")}
                         </Typography>
                     </Grid>
                     <Grid item xs={9}>

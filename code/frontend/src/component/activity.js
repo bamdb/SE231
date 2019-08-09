@@ -10,18 +10,14 @@
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Avatar from "@material-ui/core/Avatar";
-import {Card} from "@material-ui/core";
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Grid from "@material-ui/core/Grid";
-import {Link} from 'react-router-dom';
 import axios from 'axios';
+import {List, Avatar, Icon, Divider} from 'antd';
 
 const useStyles = makeStyles({
     root: {
         minWidth : 300,
     },
+
     avatar: {
         marginTop : 20,
         margin: 10,
@@ -43,160 +39,93 @@ const useStyles = makeStyles({
 * props.itemId : 条目id
 *
 */
+
+const IconText = ({ type, text }) => (
+    <span>
+    <Icon type={type} style={{ marginRight: 8 }} />
+        {text}
+  </span>
+);
+
+
 class Activity extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            statues:"",
+            userId:"",
+            username:"",
+            date:"",
             itemname:"",
-            comment:this.props.comment,
-            grade:0,
-            loadItemName: false,
-            loadComment: false,
-            loadGrade: false,
+            itemid:"",
+            imgurl:""
         }
     }
 
-    componentDidMount() {
-        /* 获得item中itemname */
-       /* const _this=this;
-        axios.get("/item/id/"+this.props.itemId)
-            .then(function (res) {
-                _this.setState({
-                    itemname: res.data.itemname,
-                    loadItemName: true,
-                })
-            })
-            .catch(function (error) {
-            })*/
-
-        /* 获得grade */
-       /* axios.get("/rating/itemid/"+this.props.itemId)
-            .then(function (res) {
-                _this.setState({
-                    grade: res.data.avgScore,
-                    loadGrade: true,
-                })
-            })
-            .catch(function (error) {
-
-            })*/
-        /* 获得comment */
-        /*       axios.get("http://202.120.40.8:30741/comment/",
-                           _this.state.itemid,
-                           _this.state.userid
-                           )
-                   .then(function (res) {
-                       _this.setState({
-                           comment: res.data.content,
-                           loadComment: true,
-                       })
-                   })
-                   .catch(function (error) {
-
-                   })
-       */
-
-    }
-
-
-    render() {
+    componentWillMount() {
+        console.log("username:",this.props.username)
         var status;
         switch (Number(this.props.actType)) {
             case 0:
-                status="未收藏";
-                break;
             case 1:
-                status="想看";
-                break;
             case 2:
-                status="在看";
+                status="您的好友"+this.props.username+"正在浏览"+this.props.itemname;
                 break;
             case 3:
-                status="看过";
+                status="您的好友"+this.props.username+"看完了"+this.props.itemname;
                 break;
             case 4:
-                status="搁置";
-                break;
             case 5:
-                status="抛弃";
+                status="您的好友"+this.props.username+"搁置了"+this.props.itemname;
                 break;
             default:
                 status="Status出错";
                 break;
         }
-        var time="2019-7-1"
-       /* if(this.props.date!=undefined&&this.props.date!=null)
-        {
-            time=this.props.date.split("T")[0];
-        }*/
+        this.setState({
+            status:status,
+            userId:this.props.userId,
+            username:this.props.username,
+            date:this.props.date.split('T')[0],
+            itemname:this.props.itemname,
+            itemid:this.props.itemid
+        })
+        axios.get("http://202.120.40.8:30741/item/id/"+this.props.itemid).then(function (res) {
+            this.setState({imgurl:res.data.imgurl})
+        }.bind(this))
+    }
+    render() {
 
         return(
-            <Container fixed className={useStyles.root}>
-                <Grid container spacing={2}>
-                    <Grid item xs={2} justify="center">
-                        <br/>
-                        <Avatar alt="暂无图片" src={"http://202.120.40.8:30741/image/id/"+this.props.userId+"0"} className={useStyles.avatar} />
-                        <br/>
-                        <Typography variant="h5" component="h2">
-                            {this.props.username}
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={10} justify="center">
-                        <Card className={useStyles.card}>
-                            <Grid container >
-                                <Grid item xs={9} justify="center">
-                                    <CardContent>
-                                        <Typography color="textSecondary" gutterBottom>
-                                            在 {time}
-                                        </Typography>
-                                        <Grid container >
-                                            <Grid item xs={6}>
-                                                <Typography variant="h6" color={"textPrimary"} component={Link} to={"/itemdetail/"+this.props.itemid}>
-                                                    {this.props.itemname + " " }
-                                                </Typography>
-                                            </Grid>
-                                            <Grid item xs={6}>
-                                                <Typography variant="subtitle1" color={"textSecondary"}>
-                                                    {status}
-                                                </Typography>
-                                            </Grid>
-                                        </Grid>
-
-                                    </CardContent>
-                                    <CardContent>
-                                        <Grid container spacing={0}>
-                                            <Grid item xs={2}>
-                                                <Typography variant="subtitle1" color="textPrimary" component="p">
-                                                    评分
-                                                </Typography>
-                                            </Grid>
-                                            <Grid item xs={2}>
-                                                <Typography variant="h5" component="h3" align="center">
-                                                    {this.state.grade}
-                                                </Typography>
-                                            </Grid>
-                                        </Grid>
-                                        <Typography variant="subtitle1" color="textPrimary" component="p">
-                                            评论
-                                        </Typography>
-                                        <Typography variant="body2" color="textSecondary" component="p">
-                                            {this.state.comment}
-                                        </Typography>
-                                    </CardContent>
-                                </Grid>
-                                <Grid item xs={3} justify="center">
-                                    <br/><br/>
-                                    <img src={"http://202.120.40.8:30741/image/id/"+this.props.itemid+"1"} alt="暂无图片" className={useStyles.image} height="120px" width="96px"/>
-                                </Grid>
-                            </Grid>
-                        </Card>
-                    </Grid>
-
-                </Grid>
-            </Container>
+            <div id={"activity"}>
+            <List.Item
+                key={"activity"}
+                actions={[
+                    <IconText type="star-o" text="156" />,
+                    <IconText type="like-o" text="156" />,
+                    <IconText type="message" text="2" />,
+                ]}
+                extra={
+                    <img
+                        width={200}
+                        alt="暂无图片"
+                        src={"http://"+this.state.imgurl}
+                        height={120}
+                    />
+                }
+            >
+                <List.Item.Meta
+                    avatar={<Avatar src={"http://202.120.40.8:30741/image/id/"+this.state.userId+"0"} className={useStyles.avatar} />}
+                    title={this.state.username+"   "+this.state.date}
+                    description={this.state.status}
+                />
+            </List.Item>
+            <Divider id={"activity-divider"} />
+            </div>
         );
     }
 
 }
 
 export default Activity;
+

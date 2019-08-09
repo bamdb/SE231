@@ -2,15 +2,6 @@ import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles/index';
 import Grid from '@material-ui/core/Grid/index'
 import Paper from '@material-ui/core/Paper/index'
-import Navigation from "./navigation";
-import TopItemList from "./topitemlist";
-import Browserlist from "./browserlist";
-import Tag from "./tag";
-import Userinfo from "./userinfo";
-import Commentlist from "./commentlist";
-import Listitem from './listitem'
-import Progressmanage from "./progressmanage";
-import Login from "./login"
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import FormControl from "@material-ui/core/FormControl";
@@ -27,19 +18,14 @@ class Edititem extends Component{
         this.handlesubmit=this.handlesubmit.bind(this);
         this.handlequery=this.handlequery.bind(this);
     }
-    componentWillMount() {
-        if(localStorage.getItem("userid")==null)
-        {
-            window.location.href="/#/login";
-        }
-    }
 
     handlesubmit(e)
     {
+        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
         if (this.state.update==false) {
             console.log("add")
             var pubtime = Date.parse(new Date(this.state.pubtime))
-            axios.post("http://202.120.40.8:30741/item/add?access_token=" + localStorage.getItem("access_token"), {
+            axios.post("http://202.120.40.8:30741/item/add", {
                 itemname: this.state.itemname,
                 pubTime: pubtime,
                 chapterNum: this.state.chapternum,
@@ -55,7 +41,7 @@ class Edititem extends Component{
         }else if (this.state.update==true) {
             console.log("update")
             var pubtime = Date.parse(new Date(this.state.pubtime))
-            axios.put("http://202.120.40.8:30741/item/update?access_token=" + localStorage.getItem("access_token"), {
+            axios.put("http://202.120.40.8:30741/item/update", {
                 id: this.state.itemid,
                 itemname: this.state.itemname,
                 pubTime: pubtime,

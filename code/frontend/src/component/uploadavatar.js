@@ -7,15 +7,15 @@ function getBase64(img, callback) {
 }
 
 function beforeUpload(file) {
-    const isJPG = file.type === 'image/jpeg';
-    if (!isJPG) {
-        message.error('You can only upload JPG file!');
+    const isJPGorPng = file.type === 'image/jpeg'|| file.type === 'image/png';
+    if (!isJPGorPng) {
+        message.error('You can only upload JPG and PHG file!');
     }
     const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isLt2M) {
         message.error('Image must smaller than 2MB!');
     }
-    return isJPG && isLt2M;
+    return isJPGorPng && isLt2M;
 }
 
 class Uploadavatar extends Component {
@@ -59,7 +59,7 @@ class Uploadavatar extends Component {
                 beforeUpload={beforeUpload}
                 onChange={this.handleChange}
             >
-                {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
+                {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }}/> : uploadButton}
             </Upload>
 
         );

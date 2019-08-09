@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import Grid from "@material-ui/core/Grid";
 import '../css/item.css'
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import TopItem from './topitem';
 import Typography from "@material-ui/core/Typography";
 
@@ -26,25 +22,16 @@ class TopItemList extends Component {
 
         var rows=[];
         var items=this.state.items;
-        /*
-        topItemList.forEach((topItem) =>{
-            rank+=1;
-            rows.push(
-                <TopItem rank={rank} name={topItem.name} fansTotal={topItem.fansTotal} />
-            );
-        });
-    */
         for(var i=0;i<items.length;++i)
         {
             rows.push(
                 <TopItem key={i} name={items[i].item.itemname} rank={items[i].rating.rank} avgScore={items[i].rating.avgScore} itemId={items[i].item.id}/>
             );
-            rows.push(<Divider />);
         }
 
         return(
             <div>
-                <Grid container spacing={2} alignContent={"center"} justify={"flex-end"} wrap={"nowrap"}>
+                <Grid container spacing={2} justify={"flex-end"} wrap={"nowrap"}>
                     <Grid item xs={11} >
                         <br/>
                         <Typography variant={"subtitle1"} color={"textSecondary"} >排行榜</Typography>
