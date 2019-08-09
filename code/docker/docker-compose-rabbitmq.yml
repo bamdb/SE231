@@ -11,8 +11,8 @@ services:
       - "25672:25672"
       - "35197:35197"
     environment:
-      RABBITMQ_USE_LONGNAME: true
-      RABBITMQ_LOGS: /var/log/rabbitmq/rabbit.log
+      RABBITMQ_USE_LONGNAME: "true"
+      RABBITMQ_LOGS: "/var/log/rabbitmq/rabbit.log"
     deploy:
       restart_policy:
         condition: on-failure
