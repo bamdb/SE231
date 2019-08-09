@@ -5,8 +5,14 @@ services:
     image: rabbitmq:3.7.16-management
     hostname: rabbitmq
     ports:
+      - "4369:4369"
       - "5672:5672"
       - "15672:15672"
+      - "25672:25672"
+      - "35197:35197"
+    environment:
+      RABBITMQ_USE_LONGNAME: true
+      RABBITMQ_LOGS: /var/log/rabbitmq/rabbit.log
     deploy:
       restart_policy:
         condition: on-failure
