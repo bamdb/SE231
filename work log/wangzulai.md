@@ -103,3 +103,7 @@
 
 # 2019-08-07
 * config mongo sharding in 9 servers, some problems with index.
+
+# 2019-08-08
+* finish mongo sharding deployment
+* try ssl cert, some problems with nginx server
