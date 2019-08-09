@@ -88,7 +88,7 @@ public class MessageServiceImpl implements MessageService {
         if (!friendClient.isFriend(message.getSenderId(), message.getReceiverId())) return null;
         else {
             // notify receiver
-            restTemplate.getForObject("http://47.103.112.0:8080/message/{1}", void.class,
+            restTemplate.getForObject("http://47.103.123.5:8080/message/{1}", void.class,
                      message.getReceiverId());
             return mongoDao.save(message);
         }

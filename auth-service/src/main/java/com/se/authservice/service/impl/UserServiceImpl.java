@@ -219,7 +219,7 @@ public class UserServiceImpl implements UserService {
 
     public void saveToken(String uuid, String accessToken) {
         // notify qrcode login page
-        restTemplate.getForObject("http://47.103.112.0:8080/qrcode?token={1}&uuid={2}", void.class,
+        restTemplate.getForObject("http://47.103.123.5:8080/qrcode?token={1}&uuid={2}", void.class,
                 accessToken, uuid);
     }
 
