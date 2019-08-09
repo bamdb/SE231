@@ -13,6 +13,9 @@ services:
     environment:
             # RABBITMQ_USE_LONGNAME: "true"
       RABBITMQ_LOGS: "/var/log/rabbitmq/rabbit.log"
+    volumes:
+      - /data:/var/lib/rabbitmq
+      - /data/logs:/var/log/rabbitmq
     deploy:
       restart_policy:
         condition: on-failure
