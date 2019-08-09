@@ -59,7 +59,7 @@ class QRcode extends Component{
 
     }
     render(){
-        const url="ws://47.103.112.0:8080/websocket/"+this.props.uuid+"/0";
+        const url="ws://47.103.123.5:8080/websocket/"+this.props.uuid+"/0";
         return(
             <div id={"login"}>
             <Websocket url={url}

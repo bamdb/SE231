@@ -46,7 +46,7 @@ class Head extends Component{
         this.setState({openMess:false})
     }
     render(){
-        const url="ws://47.103.112.0:8080/websocket/nouuid/"+localStorage.getItem("userid");
+        const url="ws://47.103.123.5:8080/websocket/nouuid/"+localStorage.getItem("userid");
         const web = (localStorage.getItem("userid")) ?
             <Websocket url={url}
                        onMessage={this.handlesocket.bind(this)}/>:<span/>;
