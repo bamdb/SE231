@@ -66,9 +66,14 @@ export default class Itemdetail extends React.Component{
         )
         axios.get("http://202.120.40.8:30741/activity/progress",{params:{itemId:this.props.navigation.getParam("itemid"),userId:global.userid}}).then(
             function(res){
-                this.setState({showprogress:true,progress:res.data})
+                if(res.data)
+                {
+                    this.setState({showprogress:true,progress:res.data})
+                }
+                
             }.bind(this)
         )
+        
         
     }
     render()
@@ -94,10 +99,12 @@ export default class Itemdetail extends React.Component{
         if(this.state.showprogress)
         {
             var i=0;
-            rows1.push(
-                this.state.progress.chapters.map(
-                    chapter=>{
-                        var j=0
+           
+            this.state.progress.chapters.map(
+                chapter=>{
+                    var j=0
+                    if(chapter.sections.length>0)
+                    {
                         chapter.sections.map(section=>{
                             var tmpi=i;
                             var tmpj=j;
@@ -110,10 +117,22 @@ export default class Itemdetail extends React.Component{
                             )
                             j++
                         })
-
                     }
-                )
+                    else{
+                        rows1.push(
+                                
+                            <Button type={this.state.progress.chapters[i].sections[j]?"primary":"warning"} style={{width:80,felx:1}} onPress={()=>this.handlepress(tmpi,tmpj)}>
+                                {i+"."+j}
+                            </Button>
+                            
+                        )
+                    }
+                    
+                    i++
+                }
             )
+                
+            
         }
         var item=this.state.item;
         return(

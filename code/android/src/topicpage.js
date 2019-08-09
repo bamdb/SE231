@@ -19,18 +19,21 @@ export default class Topicpage extends React.Component{
     }
     componentDidMount()
     {
-        
-        axios.get("http://202.120.40.8:30741/topic/all").then(
-            function (response){
+        const {navigation}=this.props;
+        this.focusListener = navigation.addListener("didFocus", () => {
+            axios.get("http://202.120.40.8:30741/topic/all").then(
+                function (response){
 
-            this.setState({topics:response.data});
-        }.bind(this)
-        ).catch(
-            function(err)
-            {
-                this.setState({topics:[{id:0,title:"networkerr",pubTime:"2000-01-01"}]})
-            }
-        )
+                this.setState({topics:response.data});
+            }.bind(this)
+            ).catch(
+                function(err)
+                {
+                    this.setState({topics:[{id:0,title:"networkerr",pubTime:"2000-01-01"}]})
+                }
+            )
+        })
+        
     }    
     render()
     {

@@ -49,17 +49,17 @@ export default class camera2 extends React.Component{
             this.setState({code:e.data})
             
             AsyncStorage.getItem("access_token",(error,result)=>{
-                alert(e.data+"    "+result)
+                
                 axios.put("http://202.120.40.8:30741/auth/settoken",{},{params:{uuid:e.data,token:result}}).then(
                 function(res)
                 {
-                    alert("success:"+res);
+                    alert("success");
                     this.props.navigation.navigate("Topic")
                 }.bind(this)
             ).catch(
                 function(err)
                 {
-                    alert("fail"+err);
+                    alert("fail");
                 }
             )
             
