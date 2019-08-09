@@ -43,13 +43,13 @@ code for summer project
 	* Elastic master | MongoDB shard3 | Mongo router
 * bamdb: 47.103.107.39	
 	* 4 vCPU | 8 GiB | Ubuntu 18.04
-	* Docker Swarm manager1 | Redis master
+	* Docker Swarm manager1 | Redis master | RabbitMQ node
 * bamdb1: 47.103.104.210	
 	* 4 vCPU | 8 GiB | Ubuntu 18.04
-	* Docker Swarm manager2 | Redis master
+	* Docker Swarm manager2 | Redis master | RabbitMQ node
 * bamdb2: 47.103.98.30	
 	* 4 vCPU | 8 GiB | Ubuntu 18.04
-	* Docker Swarm manager3 | Redis master
+	* Docker Swarm manager3 | Redis master | RabbitMQ node
 * bamdb-worker1: 47.103.112.0	
 	* 4 vCPU | 8 GiB | Ubuntu 18.04
 	* Docker Swarm worker1-1 | MongoDB shard1 | MongoDB config | WebSocket
@@ -115,6 +115,11 @@ code for summer project
     	* ubuntularge node.data=false
     * slave
     	* bamdb-elastic node.data=true
+
+* 消息中间件
+	* WebSocket协议
+	* RabbitMQ 集群
+		* bamdb | bamdb1 | bamdb2
 * 智能推荐
 	* tensorflow
 	* 数据集
@@ -154,8 +159,6 @@ code for summer project
 		* [bamdb2](http://47.103.98.30:15672/)
     * aliyun
     * elk+filebeat
-* 消息中间件
-	* WebSocket协议
 * RESTful
     * Open API
         * [openapi.yml](https://app.swaggerhub.com/apis/ba818/open-api/1.0.0 "swaggerhub")
