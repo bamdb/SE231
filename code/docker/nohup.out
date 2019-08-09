@@ -1,0 +1,257 @@
+Nothing found in stack: bamdb
+Some services (rabbitmq) use the 'deploy' key, which will be ignored. Compose does not support 'deploy' configuration - use `docker stack deploy` to deploy to a swarm.
+Pulling rabbitmq (rabbitmq:3.7.16-management)...
+3.7.16-management: Pulling from library/rabbitmq
+Digest: sha256:0c7348631da356d980c8a358f67ca2f71074db81d925b40ef0860ddfb14f419e
+Status: Image is up to date for rabbitmq:3.7.16-management
+Some services (activity, auth, comment, friend, gateway, image, item, message, prometheus, rating, topic) use the 'deploy' key, which will be ignored. Compose does not support 'deploy' configuration - use `docker stack deploy` to deploy to a swarm.
+Pulling comment (bamdb/comment-service:latest)...
+latest: Pulling from bamdb/comment-service
+Digest: sha256:f69637a602e52005daef5125bfa5bb912aa33570c804ba19ad451809974dc538
+Status: Downloaded newer image for bamdb/comment-service:latest
+Pulling rating (bamdb/rating-service:latest)...
+latest: Pulling from bamdb/rating-service
+Digest: sha256:124f23a0dca7f56ca5f3934fcc58043a600c8c2cc9868753f1213032ff6eca87
+Status: Downloaded newer image for bamdb/rating-service:latest
+Pulling image (bamdb/image-service:latest)...
+latest: Pulling from bamdb/image-service
+Digest: sha256:65b130786be4f2b56f18fc9d73095eb1969a95d35ce3d19b98798ab4a220360f
+Status: Downloaded newer image for bamdb/image-service:latest
+Pulling auth (bamdb/auth-service:latest)...
+latest: Pulling from bamdb/auth-service
+Digest: sha256:7889acd83d07fdd1ce483ca35ec4c6d0b7c2eda75be01f19c8c34a041c48b8b2
+Status: Downloaded newer image for bamdb/auth-service:latest
+Pulling topic (bamdb/topic-service:latest)...
+latest: Pulling from bamdb/topic-service
+Digest: sha256:d790281010324f0c8c28a28ce423f71e985f7ceea5d773d7ad4a7c56a28f1931
+Status: Downloaded newer image for bamdb/topic-service:latest
+Pulling item (bamdb/item-service:latest)...
+latest: Pulling from bamdb/item-service
+Digest: sha256:2ea3789e35e7fade675b2ecc6c1b730a2fd9372a1e4ca34e88ee765aa14e755b
+Status: Downloaded newer image for bamdb/item-service:latest
+Pulling prometheus (prom/prometheus:latest)...
+latest: Pulling from prom/prometheus
+Digest: sha256:8f34c18cf2ccaf21e361afd18e92da2602d0fa23a8917f759f906219242d8572
+Status: Image is up to date for prom/prometheus:latest
+Pulling activity (bamdb/activity-service:latest)...
+latest: Pulling from bamdb/activity-service
+Digest: sha256:c3d207bb49adc0f0f783ce04ee3d3d804613acbd9db34f5297e0cc47420c8d73
+Status: Downloaded newer image for bamdb/activity-service:latest
+Pulling message (bamdb/message-service:latest)...
+latest: Pulling from bamdb/message-service
+Digest: sha256:84897504f878132983cdde1ca653ff53542712bf7fd06ce8a6c4b781311dcaa1
+Status: Downloaded newer image for bamdb/message-service:latest
+Pulling gateway (bamdb/gateway:latest)...
+latest: Pulling from bamdb/gateway
+Digest: sha256:a9bbf715cb567a11af8da99b10cc3f4dd1124bd05e64f03bda6edde32859d3c4
+Status: Downloaded newer image for bamdb/gateway:latest
+Pulling friend (bamdb/friend-service:latest)...
+latest: Pulling from bamdb/friend-service
+Digest: sha256:494341f25cee4a51a81fc6dc3ef7d9becc02b242d25a2c54df005b53ad3da83e
+Status: Downloaded newer image for bamdb/friend-service:latest
+Some services (config) use the 'deploy' key, which will be ignored. Compose does not support 'deploy' configuration - use `docker stack deploy` to deploy to a swarm.
+Pulling config (bamdb/config-server:latest)...
+latest: Pulling from bamdb/config-server
+Digest: sha256:055786cec59203291261340ab05185467d6244f3ac1cc62820cfd589eabe1e76
+Status: Downloaded newer image for bamdb/config-server:latest
+Some services (registry) use the 'deploy' key, which will be ignored. Compose does not support 'deploy' configuration - use `docker stack deploy` to deploy to a swarm.
+Pulling registry (bamdb/registry:latest)...
+latest: Pulling from bamdb/registry
+Digest: sha256:d04f41c02a6ab45c93abcbf9aa765d5d80f0d1f9d27b5e15acc830cd7d03f2b7
+Status: Downloaded newer image for bamdb/registry:latest
+Creating network bamdb_default
+Creating service bamdb_rabbitmq
+Creating service bamdb_config
+config up
+Creating service bamdb_registry
+registry up
+Creating service bamdb_activity
+Creating service bamdb_gateway
+Creating service bamdb_item
+Creating service bamdb_image
+Creating service bamdb_topic
+Creating service bamdb_rating
+Creating service bamdb_comment
+Creating service bamdb_auth
+Creating service bamdb_message
+Creating service bamdb_friend
+Creating service bamdb_prometheus
+done
+Removing service bamdb_rabbitmq
+Removing network bamdb_default
+Some services (rabbitmq) use the 'deploy' key, which will be ignored. Compose does not support 'deploy' configuration - use `docker stack deploy` to deploy to a swarm.
+Pulling rabbitmq (rabbitmq:3.7.16-management)...
+3.7.16-management: Pulling from library/rabbitmq
+Digest: sha256:0c7348631da356d980c8a358f67ca2f71074db81d925b40ef0860ddfb14f419e
+Status: Image is up to date for rabbitmq:3.7.16-management
+Some services (activity, auth, comment, friend, gateway, image, item, message, prometheus, rating, search, topic) use the 'deploy' key, which will be ignored. Compose does not support 'deploy' configuration - use `docker stack deploy` to deploy to a swarm.
+Pulling comment (bamdb/comment-service:latest)...
+latest: Pulling from bamdb/comment-service
+Digest: sha256:8c587a53d05f0d34cd00fa4879059f28c456babc14144c4f0010d45d04f3a073
+Status: Image is up to date for bamdb/comment-service:latest
+Pulling rating (bamdb/rating-service:latest)...
+latest: Pulling from bamdb/rating-service
+Digest: sha256:ae7fd7bc5e33e74cc6ffcb0fd5dd39c010fe754e965044af48415f2c34dadaac
+Status: Image is up to date for bamdb/rating-service:latest
+Pulling search (bamdb/search-service:latest)...
+latest: Pulling from bamdb/search-service
+Digest: sha256:a1d2bfea3bb6def52bdf737bedb6a3fd634ca13f582f404e2c5e075feec604d9
+Status: Downloaded newer image for bamdb/search-service:latest
+Pulling image (bamdb/image-service:latest)...
+latest: Pulling from bamdb/image-service
+Digest: sha256:686c37580f1d3ce2c5721ee26f47aace879afac52414fc2e6d0d87c6d859386d
+Status: Image is up to date for bamdb/image-service:latest
+Pulling auth (bamdb/auth-service:latest)...
+latest: Pulling from bamdb/auth-service
+Digest: sha256:2e60bddbd13999bd56be9d5a83d383e331cfd5a5c17c264ad72e7c7e8c8b4993
+Status: Image is up to date for bamdb/auth-service:latest
+Pulling topic (bamdb/topic-service:latest)...
+latest: Pulling from bamdb/topic-service
+Digest: sha256:5998b557211dfdaceaafe4fd83fa3bbac59e26830c67f0eeba1a0628d808c173
+Status: Image is up to date for bamdb/topic-service:latest
+Pulling item (bamdb/item-service:latest)...
+latest: Pulling from bamdb/item-service
+Digest: sha256:5821bd6b5e6c7aaa277e25cd05c6489166f9b044f7db16aae0861731dac74771
+Status: Image is up to date for bamdb/item-service:latest
+Pulling prometheus (prom/prometheus:latest)...
+latest: Pulling from prom/prometheus
+Digest: sha256:8f34c18cf2ccaf21e361afd18e92da2602d0fa23a8917f759f906219242d8572
+Status: Image is up to date for prom/prometheus:latest
+Pulling activity (bamdb/activity-service:latest)...
+latest: Pulling from bamdb/activity-service
+Digest: sha256:b341bc2447e0a5da3f424aa8a1f6cf2b4e67e19977f45e205b4f726d703b45c4
+Status: Image is up to date for bamdb/activity-service:latest
+Pulling message (bamdb/message-service:latest)...
+latest: Pulling from bamdb/message-service
+Digest: sha256:a61e9abde3ea9584172d615bc1deafb1601affc3c2c4af194dfc9329322ab7f5
+Status: Image is up to date for bamdb/message-service:latest
+Pulling gateway (bamdb/gateway:latest)...
+latest: Pulling from bamdb/gateway
+Digest: sha256:5744361782a8a31add305415abb4f233039563499d204556d5bf4a7b4fe522bf
+Status: Image is up to date for bamdb/gateway:latest
+Pulling friend (bamdb/friend-service:latest)...
+latest: Pulling from bamdb/friend-service
+Digest: sha256:e583fdaf2dd8ccc18b533031711230e881339eb7d4f0e47533b89cf8008bb3a0
+Status: Image is up to date for bamdb/friend-service:latest
+Some services (config) use the 'deploy' key, which will be ignored. Compose does not support 'deploy' configuration - use `docker stack deploy` to deploy to a swarm.
+Pulling config (bamdb/config-server:latest)...
+latest: Pulling from bamdb/config-server
+Digest: sha256:dbaa68eb2ba21928ba94fbc4bac35ff1d4460aedeaf7e644e2adb5e4a0693744
+Status: Image is up to date for bamdb/config-server:latest
+Some services (registry) use the 'deploy' key, which will be ignored. Compose does not support 'deploy' configuration - use `docker stack deploy` to deploy to a swarm.
+Pulling registry (bamdb/registry:latest)...
+latest: Pulling from bamdb/registry
+Digest: sha256:f821df6874c3cec318016138d6f684555ed55625fc12e7a4a59efddbd8e6730a
+Status: Image is up to date for bamdb/registry:latest
+Creating service bamdb_rabbitmq
+failed to create service bamdb_rabbitmq: Error response from daemon: rpc error: code = InvalidArgument desc = port '5672' is already in use by service 'bamdb_rabbitmq' (yzhojh8bqkmzve1q2ddh92b11) as an ingress port
+Updating service bamdb_config (id: 6800zhc7u94r8n7utt58cuf16)
+failed to update service bamdb_config: Error response from daemon: rpc error: code = Unknown desc = update out of sequence
+config up
+Updating service bamdb_registry (id: m2yr2ne0fr6scqrb1s3ktqe1r)
+failed to update service bamdb_registry: Error response from daemon: rpc error: code = Unknown desc = update out of sequence
+registry up
+Updating service bamdb_gateway (id: tn3l48w6n93vm4oz7utiix7tv)
+Updating service bamdb_auth (id: gvawtvyidnxucnsbrp7yj88k9)
+Updating service bamdb_activity (id: ly3vpdpr9idt82x11wmew9mm6)
+Updating service bamdb_rating (id: rtog0qpevh4jv104pvizyccg9)
+failed to update service bamdb_rating: Error response from daemon: rpc error: code = Unknown desc = update out of sequence
+done
+Removing service bamdb_activity
+Removing service bamdb_auth
+Removing service bamdb_comment
+Removing service bamdb_config
+Removing service bamdb_friend
+Removing service bamdb_gateway
+Removing service bamdb_image
+Removing service bamdb_item
+Removing service bamdb_message
+Removing service bamdb_prometheus
+Removing service bamdb_rabbitmq
+Removing service bamdb_rating
+Removing service bamdb_registry
+Removing service bamdb_topic
+Removing network bamdb_default
+Some services (rabbitmq) use the 'deploy' key, which will be ignored. Compose does not support 'deploy' configuration - use `docker stack deploy` to deploy to a swarm.
+Pulling rabbitmq (rabbitmq:3.7.16-management)...
+3.7.16-management: Pulling from library/rabbitmq
+Digest: sha256:0c7348631da356d980c8a358f67ca2f71074db81d925b40ef0860ddfb14f419e
+Status: Image is up to date for rabbitmq:3.7.16-management
+Some services (activity, auth, comment, friend, gateway, image, item, message, prometheus, rating, search, topic) use the 'deploy' key, which will be ignored. Compose does not support 'deploy' configuration - use `docker stack deploy` to deploy to a swarm.
+Pulling comment (bamdb/comment-service:latest)...
+latest: Pulling from bamdb/comment-service
+Digest: sha256:8c587a53d05f0d34cd00fa4879059f28c456babc14144c4f0010d45d04f3a073
+Status: Image is up to date for bamdb/comment-service:latest
+Pulling rating (bamdb/rating-service:latest)...
+latest: Pulling from bamdb/rating-service
+Digest: sha256:ae7fd7bc5e33e74cc6ffcb0fd5dd39c010fe754e965044af48415f2c34dadaac
+Status: Image is up to date for bamdb/rating-service:latest
+Pulling search (bamdb/search-service:latest)...
+latest: Pulling from bamdb/search-service
+Digest: sha256:a1d2bfea3bb6def52bdf737bedb6a3fd634ca13f582f404e2c5e075feec604d9
+Status: Image is up to date for bamdb/search-service:latest
+Pulling image (bamdb/image-service:latest)...
+latest: Pulling from bamdb/image-service
+Digest: sha256:686c37580f1d3ce2c5721ee26f47aace879afac52414fc2e6d0d87c6d859386d
+Status: Image is up to date for bamdb/image-service:latest
+Pulling auth (bamdb/auth-service:latest)...
+latest: Pulling from bamdb/auth-service
+Digest: sha256:2e60bddbd13999bd56be9d5a83d383e331cfd5a5c17c264ad72e7c7e8c8b4993
+Status: Image is up to date for bamdb/auth-service:latest
+Pulling topic (bamdb/topic-service:latest)...
+latest: Pulling from bamdb/topic-service
+Digest: sha256:5998b557211dfdaceaafe4fd83fa3bbac59e26830c67f0eeba1a0628d808c173
+Status: Image is up to date for bamdb/topic-service:latest
+Pulling item (bamdb/item-service:latest)...
+latest: Pulling from bamdb/item-service
+Digest: sha256:5821bd6b5e6c7aaa277e25cd05c6489166f9b044f7db16aae0861731dac74771
+Status: Image is up to date for bamdb/item-service:latest
+Pulling prometheus (prom/prometheus:latest)...
+latest: Pulling from prom/prometheus
+Digest: sha256:8f34c18cf2ccaf21e361afd18e92da2602d0fa23a8917f759f906219242d8572
+Status: Image is up to date for prom/prometheus:latest
+Pulling activity (bamdb/activity-service:latest)...
+latest: Pulling from bamdb/activity-service
+Digest: sha256:b341bc2447e0a5da3f424aa8a1f6cf2b4e67e19977f45e205b4f726d703b45c4
+Status: Image is up to date for bamdb/activity-service:latest
+Pulling message (bamdb/message-service:latest)...
+latest: Pulling from bamdb/message-service
+Digest: sha256:a61e9abde3ea9584172d615bc1deafb1601affc3c2c4af194dfc9329322ab7f5
+Status: Image is up to date for bamdb/message-service:latest
+Pulling gateway (bamdb/gateway:latest)...
+latest: Pulling from bamdb/gateway
+Digest: sha256:5744361782a8a31add305415abb4f233039563499d204556d5bf4a7b4fe522bf
+Status: Image is up to date for bamdb/gateway:latest
+Pulling friend (bamdb/friend-service:latest)...
+latest: Pulling from bamdb/friend-service
+Digest: sha256:e583fdaf2dd8ccc18b533031711230e881339eb7d4f0e47533b89cf8008bb3a0
+Status: Image is up to date for bamdb/friend-service:latest
+Some services (config) use the 'deploy' key, which will be ignored. Compose does not support 'deploy' configuration - use `docker stack deploy` to deploy to a swarm.
+Pulling config (bamdb/config-server:latest)...
+latest: Pulling from bamdb/config-server
+Digest: sha256:dbaa68eb2ba21928ba94fbc4bac35ff1d4460aedeaf7e644e2adb5e4a0693744
+Status: Image is up to date for bamdb/config-server:latest
+Some services (registry) use the 'deploy' key, which will be ignored. Compose does not support 'deploy' configuration - use `docker stack deploy` to deploy to a swarm.
+Pulling registry (bamdb/registry:latest)...
+latest: Pulling from bamdb/registry
+Digest: sha256:f821df6874c3cec318016138d6f684555ed55625fc12e7a4a59efddbd8e6730a
+Status: Image is up to date for bamdb/registry:latest
+Creating network bamdb_default
+Creating service bamdb_rabbitmq
+Creating service bamdb_config
+config up
+Creating service bamdb_registry
+registry up
+Creating service bamdb_friend
+Creating service bamdb_item
+Creating service bamdb_message
+Creating service bamdb_comment
+Creating service bamdb_image
+Creating service bamdb_rating
+Creating service bamdb_search
+Creating service bamdb_auth
+Creating service bamdb_prometheus
+Creating service bamdb_activity
+Creating service bamdb_topic
+Creating service bamdb_gateway
+done

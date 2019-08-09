@@ -6,11 +6,11 @@ docker stack rm bamdb
 # docker-compose rm -f
 # docker-compose -f docker-compose-config.yml rm -f
 # docker-compose -f docker-compose-registry.yml rm -f
-docker-compose -f docker-compose-rabbitmq.yml pull
+# docker-compose -f docker-compose-rabbitmq.yml pull
 docker-compose pull
 docker-compose -f docker-compose-config.yml pull
 docker-compose -f docker-compose-registry.yml pull
-docker stack deploy --compose-file=docker-compose-rabbitmq.yml bamdb
+# docker stack deploy --compose-file=docker-compose-rabbitmq.yml bamdb
 sleep 30
 docker stack deploy --compose-file=docker-compose-config.yml bamdb
 sleep 50
