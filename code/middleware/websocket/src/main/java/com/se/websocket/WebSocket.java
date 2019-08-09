@@ -1,6 +1,10 @@
 package com.se.websocket;
 
 
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.DeliverCallback;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +15,7 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 @Component
@@ -29,23 +34,31 @@ public class WebSocket {
 
     @OnOpen
     public void onOpen(@PathParam("uuid") String uuid, @PathParam("userId") Long userId, Session session) {
-        this.session = session;
-        if (userId == 0) {
-            this.uuid = uuid;
-            this.userId = 0L;
-        }else {
-            this.userId = userId;
-            this.uuid = "nouuid";
+        String queueName = String.valueOf(userId);
+        ConnectionFactory factory = new ConnectionFactory();
+        factory.setHost("47.103.107.39");
+        try {
+            Connection connection = factory.newConnection();
+            Channel channel = connection.createChannel();
+
+            channel.queueDeclare(queueName, false, false, false, null);
+            System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+                String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
+                System.out.println(" [x] Received '" + message + "'");
+                session.getBasicRemote().sendText(message);
+            };
+            channel.basicConsume(queueName, true, deliverCallback, consumerTag -> {
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        webSockets.add(this);
-        log.info("[websocket info] new connection, total: {}", webSockets.size());
     }
 
 
     @OnClose
     public void onClose() {
-        webSockets.remove(this);
-        log.info("[websocket info] one connection disconnect, total: {}", webSockets.size());
+        log.info("[websocket info] one connection disconnect");
     }
 
     @OnMessage
@@ -53,31 +66,24 @@ public class WebSocket {
         log.info("[websocket info] receive message from client: {}", message);
     }
 
-    public void sendMessage(String message, Long userId){
-        for (WebSocket webSocket: webSockets) {
-            if (webSocket.userId.equals(userId)) {
-                log.info("[websocket info]broadcast, message={}, receiverId={}", message, userId);
-                try {
-                    webSocket.session.getBasicRemote().sendText(message);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
-            }
+    public void sendMessage(String message, Long userId, String uuid) {
+        String queueName;
+        if (uuid.equals("nouuid")) {
+            queueName = "userid-" + userId;
+        } else {
+            queueName = "uuid-" + uuid;
         }
-    }
 
-    public void sendQRToken(String token, String uuid) {
-        for (WebSocket webSocket: webSockets) {
-            if (webSocket.uuid.equals(uuid)) {
-                log.info("[websocket info]broadcast, message={}, receiverId={}", token, userId);
-                try {
-                    webSocket.session.getBasicRemote().sendText(token);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
-            }
+        ConnectionFactory factory = new ConnectionFactory();
+        factory.setHost("47.103.107.39");
+        try {
+            Connection connection = factory.newConnection();
+            Channel channel = connection.createChannel();
+            channel.queueDeclare(queueName, false, false, false, null);
+            channel.basicPublish("", queueName, null, message.getBytes());
+            System.out.println(" [x] Sent '" + message + "'");
+        }catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
