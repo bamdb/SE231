@@ -23,23 +23,29 @@ import java.util.concurrent.CopyOnWriteArraySet;
 @Slf4j
 public class WebSocket {
     private Session session;
+    private Connection connection;
+    private Channel channel;
+
 
     private static CopyOnWriteArraySet<WebSocket> webSockets = new CopyOnWriteArraySet<>();
 
-    // used in message notification and friend notification, when user has logged in, and uuid should be "nouuid"
-    private Long userId;
-
-    // used in QRcode authentication, when user has not logged in, and userId should be 0.
-    private String uuid;
-
     @OnOpen
     public void onOpen(@PathParam("uuid") String uuid, @PathParam("userId") Long userId, Session session) {
-        String queueName = String.valueOf(userId);
+        this.session = session;
+
+        String queueName;
+        if (uuid.equals("nouuid")) {
+            queueName = "userid-" + userId;
+        } else {
+            queueName = "uuid-" + uuid;
+        }
+
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("47.103.107.39");
+
         try {
-            Connection connection = factory.newConnection();
-            Channel channel = connection.createChannel();
+            this.connection = factory.newConnection();
+            this.channel = connection.createChannel();
 
             channel.queueDeclare(queueName, false, false, false, null);
             System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
@@ -48,8 +54,8 @@ public class WebSocket {
                 System.out.println(" [x] Received '" + message + "'");
                 session.getBasicRemote().sendText(message);
             };
-            channel.basicConsume(queueName, true, deliverCallback, consumerTag -> {
-            });
+            channel.basicConsume(queueName, true, deliverCallback, consumerTag -> { });
+            webSockets.add(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -58,6 +64,14 @@ public class WebSocket {
 
     @OnClose
     public void onClose() {
+        try {
+            this.session.close();
+            this.channel.close();
+            this.connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        webSockets.remove(this);
         log.info("[websocket info] one connection disconnect");
     }
 
