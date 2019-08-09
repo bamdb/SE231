@@ -107,3 +107,7 @@
 # 2019-08-08
 * finish mongo sharding deployment
 * try ssl cert, some problems with nginx server
+
+# 2019-08-09
+* finish RabbitMQ cluster deployment
+* finish websocket app based on RabbitMQ
