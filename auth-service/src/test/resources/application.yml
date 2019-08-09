@@ -38,6 +38,9 @@ spring:
         max-active: 8
         max-idle: 8
         min-idle: 0
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/bamdb
 eureka:
   client:
     enabled: false

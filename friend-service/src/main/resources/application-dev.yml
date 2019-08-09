@@ -3,17 +3,28 @@ spring:
     name: friend
   datasource:
     master:
-      jdbcUrl: jdbc:mysql://localhost:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
-      username: root
-      password: 610878
+      jdbcUrl: jdbc:mysql://202.120.40.8:30745/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
+      username: bamdb
+      password: bamdb
       driver-class-name: com.mysql.cj.jdbc.Driver
-      testWhileIdle: true
-      validationQuery: SELECT 1
     slave:
       jdbcUrl: jdbc:mysql://47.102.207.87:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
-      username: root
-      password: 610878
+      username: bamdb
+      password: bamdb
       driver-class-name: com.mysql.cj.jdbc.Driver
+#  datasource:
+#    master:
+#      jdbcUrl: jdbc:mysql://localhost:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
+#      username: root
+#      password: 610878
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      testWhileIdle: true
+#      validationQuery: SELECT 1
+#    slave:
+#      jdbcUrl: jdbc:mysql://47.102.207.87:3306/bamdb?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
+#      username: root
+#      password: 610878
+#      driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
     hibernate:
@@ -45,11 +56,11 @@ security:
     client:
       clientId: friend-service
       clientSecret: friend-service
-      accessTokenUri: http://localhost:8000/auth/oauth/token
+      accessTokenUri: http://202.120.40.8:30741/auth/oauth/token
       grant-type: client_credentials
       scope: server
     resource:
-      user-info-uri: http://localhost:8000/auth/user
+      user-info-uri: http://202.120.40.8:30741/auth/user
 management:
   endpoints:
     web:

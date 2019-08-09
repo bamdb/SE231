@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://202.120.40.8:30746/bamdb?connectTimeoutMS=20000&heartbeatFrequencyMS=5000&localThresholdMS=3000&maxIdleTimeMS=5000&serverSelectionTimeoutMS=15000&socketTimeoutMS=7500
+      uri: mongodb://47.103.123.5:20000/bamdb?connectTimeoutMS=20000&heartbeatFrequencyMS=5000&localThresholdMS=3000&maxIdleTimeMS=5000&serverSelectionTimeoutMS=15000&socketTimeoutMS=7500
       options:
         connectTimeoutMS: 20000
         heartbeatFrequencyMS: 5000
@@ -9,3 +9,12 @@ spring:
         maxIdleTimeMS: 5000
         serverSelectionTimeoutMS: 15000
         socketTimeoutMS: 7500
+#    mongodb:
+#      uri: mongodb://202.120.40.8:30746/bamdb?connectTimeoutMS=20000&heartbeatFrequencyMS=5000&localThresholdMS=3000&maxIdleTimeMS=5000&serverSelectionTimeoutMS=15000&socketTimeoutMS=7500
+#      options:
+#        connectTimeoutMS: 20000
+#        heartbeatFrequencyMS: 5000
+#        localThresholdMS: 3000
+#        maxIdleTimeMS: 5000
+#        serverSelectionTimeoutMS: 15000
+#        socketTimeoutMS: 7500

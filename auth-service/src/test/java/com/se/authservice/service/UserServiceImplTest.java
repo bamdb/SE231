@@ -24,7 +24,7 @@ public class UserServiceImplTest {
     @Test(expected = IllegalArgumentException.class)
     public void testUserService() {
         User user = new User("john1", "0");
-        user.setMail("574402791@qq.com");
+        user.setMail("bamdb@outlook.com");
         int hashCode = 0;
         int hashCode1 = 0;
         try {
