@@ -1,0 +1,100 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/*html { overflow: scroll; }*/
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.ant-carousel .slick-slide {
+  align-content: center;
+  height: 200px;
+  background: #fff;
+  overflow: hidden;
+}
+.ant-carousel .slick-slide img {
+  width: 100%;
+  height: 200px;
+}
+
+#leftbar{
+  display: flex;
+  position: relative;
+}
+#content{
+    padding: 24px;
+    background: #fff;
+    display: flex;
+    position: relative;
+    min-height: 125vh;
+}
+#sider{
+  background: #fafafa;
+}
+#header{
+  background: #fafafa;
+  height: 50px;
+  flex-wrap: nowrap;
+}
+#header-icon{
+  margin: 0;
+  font-size:18px;
+  padding-left:8px;
+  color: #4a4a4a;
+}
+#bamdb{
+  min-width: 144px;
+  margin-top: 10px;
+}
+
+#togglebutton{
+  color: saddlebrown;
+  margin-top: 16px;
+  margin-left: 16px;
+}
+
+#leftbar-foot{
+  margin-top: 24px;
+  margin-bottom: 40px;
+}
+
+#message{
+  width:300px;
+}
+
+#login{
+  min-width: 424px;
+}
+
+#activity{
+  min-width: 440px;
+}
+#activity-divider{
+  margin: 0px;
+}
+
+#browser-item{
+  min-width: 600px;
+}
+
+#hot-item{
+  min-width: 184px;
+}
+
+#home-body{
+  min-width: 416px;
+}
+
+#home{
+  min-width: 700px;
+}
+
+#carousel{
+  min-width: 600px;
+}
