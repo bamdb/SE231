@@ -95,13 +95,13 @@ code for summer project
 		* bamdb-worker1 | bamdb1-worker1 | bamdb2-worker1
 		* 端口: 21000
 	* shard1 servers
-		* secondary: bamdb-worker1 | primary: bamdb1-worker1 | arbitrator: bamdb2-worker1
+		* secondary: bamdb-worker1 | primary: bamdb1-worker1 | arbiter: bamdb2-worker1
 		* 端口: 27001
 	* shard2 servers
-		* arbitrator: bamdb-worker2 | secondary: bamdb1-worker2 | primary: bamdb2-worker2
+		* arbiter: bamdb-worker2 | secondary: bamdb1-worker2 | primary: bamdb2-worker2
 		* 端口: 27002
 	* shard3 servers
-		* primary: bamdb-elastic | arbitrator: aliyun | secondary: pleiadesian
+		* primary: bamdb-elastic | arbiter: aliyun | secondary: pleiadesian
 		* 端口: 27003
 * Redis集群
     * Store token for OAuth2
