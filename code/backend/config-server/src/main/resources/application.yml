@@ -1,0 +1,32 @@
+spring:
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config
+  profiles:
+    active: native
+  application:
+    name: config
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
+server:
+  port: 8888
+eureka:
+  client:
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://bamdb:bamdb@registry:8761/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    lease-expiration-duration-in-seconds: 60
+    lease-renewal-interval-in-seconds: 60
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

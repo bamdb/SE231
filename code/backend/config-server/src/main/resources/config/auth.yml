@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: auth
+
+eureka:
+  instance:
+    hostname: auth
+
+server:
+  port: 5000
+

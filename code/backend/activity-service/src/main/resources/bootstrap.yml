@@ -1,0 +1,39 @@
+<<<<<<< HEAD
+<<<<<<< HEAD:code/backend/activity-service/src/main/resources/bootstrap.yml
+spring:
+  cloud:
+    config:
+      discovery:
+        service-id: config
+        enabled: true
+      name: activity, mysql, mongo, uniconfig, rabbitmq
+  main:
+    allow-bean-definition-overriding: true
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://bamdb:bamdb@registry:8761/eureka/
+=======
+=======
+>>>>>>> master
+spring:
+  cloud:
+    config:
+      discovery:
+        service-id: config
+        enabled: true
+<<<<<<< HEAD
+      name: topic, mysql, mongo, uniconfig, rabbitmq
+=======
+      name: activity, mysql, mongo, uniconfig, rabbitmq
+>>>>>>> master
+  main:
+    allow-bean-definition-overriding: true
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://bamdb:bamdb@registry:8761/eureka/
+<<<<<<< HEAD
+>>>>>>> master:code/backend/topic-service/src/main/resources/bootstrap.yml
+=======
+>>>>>>> master

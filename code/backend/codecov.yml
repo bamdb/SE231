@@ -1,0 +1,6 @@
+ignore:
+  - "**/UserInfoTokenServices.java"
+  - "**/MethodSecurityConfig.java"
+  - "**/ResourceServer.java"
+  - "**/SimpleCORSFilter.java"
+  - "**/FeignRequestInterceptor.java"

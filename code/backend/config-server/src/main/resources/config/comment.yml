@@ -1,0 +1,43 @@
+<<<<<<< HEAD:code/backend/config-server/src/main/resources/config/comment.yml
+spring:
+  application:
+    name: comment
+
+eureka:
+  instance:
+    hostname: comment
+
+server:
+  port: 8091
+security:
+  oauth2:
+    client:
+      clientId: comment-service
+      clientSecret: comment-service
+      accessTokenUri: http://gateway:8000/auth/oauth/token
+      grant-type: client_credentials
+      scope: server
+    resource:
+      user-info-uri: http://gateway:8000/auth/user
+=======
+spring:
+  application:
+    name: comment
+
+eureka:
+  instance:
+    hostname: comment
+
+server:
+  port: 8091
+security:
+  oauth2:
+    client:
+      clientId: comment-service
+      clientSecret: comment-service
+      accessTokenUri: http://gateway:8000/auth/oauth/token
+      grant-type: client_credentials
+      scope: server
+    resource:
+      user-info-uri: http://gateway:8000/auth/user
+>>>>>>> master:code/backend/config-server/src/main/resources/config/comment.yml
