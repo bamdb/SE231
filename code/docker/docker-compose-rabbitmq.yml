@@ -3,7 +3,7 @@ version: '3'
 services:
   rabbitmq:
     image: rabbitmq:3.7.16-management
-    hostname: bamdb
+    hostname: bamdb1
     ports:
       - "4369:4369"
       - "5672:5672"
@@ -14,13 +14,13 @@ services:
             # RABBITMQ_USE_LONGNAME: "true"
       RABBITMQ_LOGS: "/var/log/rabbitmq/rabbit.log"
       RABBITMQ_ERLANG_COOKIE: "rabbitmqcookie"
-    volumes:
-      - /data:/var/lib/rabbitmq
-      - /data/logs:/var/log/rabbitmq
+      #volumes:
+      # - /data:/var/lib/rabbitmq
+      # - /data/logs:/var/log/rabbitmq
     extra_hosts:
-      - bamdb: 47.103.107.39
-      - bamdb1: 47.103.104.210
-      - bamdb2: 47.103.98.30
+      - bamdb:47.103.107.39
+      - bamdb1:47.103.104.210
+      - bamdb2:47.103.98.30
     deploy:
       restart_policy:
         condition: on-failure
