@@ -3,7 +3,7 @@ version: '3'
 services:
   rabbitmq:
     image: rabbitmq:3.7.16-management
-    hostname: bamdb
+    hostname: bamdb2
     ports:
       - "4369:4369"
       - "5672:5672"
