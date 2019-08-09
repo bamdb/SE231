@@ -115,7 +115,6 @@ code for summer project
     	* ubuntularge node.data=false
     * slave
     	* bamdb-elastic node.data=true
-
 * 消息中间件
 	* WebSocket协议
 	* RabbitMQ 集群
