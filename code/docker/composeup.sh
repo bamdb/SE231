@@ -6,7 +6,7 @@ docker stack rm bamdb
 # docker-compose rm -f
 # docker-compose -f docker-compose-config.yml rm -f
 # docker-compose -f docker-compose-registry.yml rm -f
-docker-compose -f docker-compose-rabbitmq.yml pull
+# docker-compose -f docker-compose-rabbitmq.yml pull
 docker-compose pull
 docker-compose -f docker-compose-config.yml pull
 docker-compose -f docker-compose-registry.yml pull
