@@ -48,6 +48,7 @@ public class ChatWebSocket {
             DeliverCallback deliverCallback = (consumerTag, delivery) -> {
                 String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
                 System.out.println(" [x] Received '" + message + "'");
+                session.getBasicRemote().sendText(message);
             };
             channel.basicConsume(queueName, true, deliverCallback, consumerTag -> {
             });
@@ -75,8 +76,10 @@ public class ChatWebSocket {
         log.info("[websocket info] receive message from client: {}", message);
     }
 
-    public void pubMessage(String message, Long userId) {
+    // chat message form: "[userId] [content]"
+    public void pubMessage(String content, Long userId) {
         String exchangeName = "chatroom";
+        String message = userId + " " + content;
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("47.103.107.39");
         try {
