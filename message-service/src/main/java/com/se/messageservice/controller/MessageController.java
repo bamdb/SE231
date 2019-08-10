@@ -23,6 +23,13 @@ public class MessageController {
         this.messageService = messageService;
     }
 
+
+    @PreAuthorize("hasRole('USER') and (#userId == authentication.principal.id)")
+    @PutMapping(value = "/chat")
+    public void pubChat(@RequestParam("userId") Long userId, @RequestParam("content") String content) {
+        messageService.pubChat(userId, content);
+    }
+
     @PreAuthorize("hasRole('USER') and (#senderId == authentication.principal.id or #receiverId == authentication.principal.id)")
     @GetMapping(value = "/content", produces ="application/json")
     public String selectBySenderIdAndReceiverIdAndSendTime(@RequestParam("senderId") Long senderId,

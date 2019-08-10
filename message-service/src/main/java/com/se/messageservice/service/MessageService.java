@@ -13,4 +13,5 @@ public interface MessageService {
     List<MessageOut> selectByReceiverId(Long receiverId);
     List<MessageOut> selectBySenderId(Long senderId);
     Message addMessage(Message message);
+    void pubChat(Long userId, String content);
 }
