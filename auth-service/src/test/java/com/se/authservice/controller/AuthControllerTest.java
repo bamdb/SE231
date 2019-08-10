@@ -56,7 +56,7 @@ public class AuthControllerTest {
         MvcResult mvcResult = mvc.perform(get("/uuid"))
                 .andReturn();
         String uuid = mvcResult.getResponse().getContentAsString();
-        mvc.perform(get("/qrcode"));
+        mvc.perform(get("/qrcode?uuid="+uuid));
         mvc.perform(put("/settoken?uuid="+uuid+"&token=tokentest"));
     }
 
