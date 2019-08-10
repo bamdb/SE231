@@ -111,3 +111,10 @@
 # 2019-08-09
 * finish RabbitMQ cluster deployment
 * finish websocket app based on RabbitMQ
+
+# 2019-08-10
+* finish chatroom logic
+* learn react-native ios app
+* modify relation data stucture
+* learn d3js
+* complete test
