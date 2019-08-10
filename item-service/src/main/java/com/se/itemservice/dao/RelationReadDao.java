@@ -4,7 +4,7 @@ import com.se.itemservice.entity.Relation;
 
 public interface RelationReadDao {
 
-    Iterable<Relation> findAllByItemId1(Long itemId);
+    Iterable<Relation> findAllBySource(Long source);
 
-    Iterable<Relation> findAllByItemId2(Long itemId);
+    Iterable<Relation> findAllByTarget(Long target);
 }

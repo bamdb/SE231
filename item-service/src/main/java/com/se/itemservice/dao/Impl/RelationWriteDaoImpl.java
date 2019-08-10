@@ -18,8 +18,8 @@ public class RelationWriteDaoImpl implements RelationWriteDao {
     }
 
     @Override
-    public void deleteRelationByItemId1AndItemId2(Long itemId1, Long itemId2) {
-        relationRepository.deleteRelationByItemId1AndItemId2(itemId1, itemId2);
+    public void deleteRelationBySourceAndTarget(Long source, Long target) {
+        relationRepository.deleteRelationBySourceAndTarget(source, target);
     }
 
     @Override
@@ -30,15 +30,14 @@ public class RelationWriteDaoImpl implements RelationWriteDao {
 
     @Override
     @DataSource("master")
-    public void deleteAllByItemId1(Long itemId) {
-        relationRepository.deleteAllByItemId1(itemId);
+    public void deleteAllBySource(Long itemId) {
+        relationRepository.deleteAllBySource(itemId);
     }
 
     @Override
     @DataSource("master")
-    public void deleteAllByItemId2(Long itemId) {
-        relationRepository.deleteAllByItemId2(itemId);
+    public void deleteAllByTarget(Long itemId) {
+        relationRepository.deleteAllByTarget(itemId);
     }
-
 
 }

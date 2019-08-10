@@ -25,11 +25,7 @@ public class Item {
     private Integer type;
 
     @Transient
-    private List<Item> relationPrior;
-    @Transient
-    private List<Item> relationSubsequent;
-    @Transient
-    private List<Item> relationNormal;
+    private Iterable<Relation> relations;
 
     public Long getId() {return id;}
 
@@ -64,34 +60,12 @@ public class Item {
     public void setImgurl(String imgurl) {this.imgurl = imgurl;}
 
     @Transient
-    public List<Item> getRelationPrior() {
-        return relationPrior;
+    public Iterable<Relation> getRelations() {
+        return relations;
     }
 
     @Transient
-    public void setRelationPrior(List<Item> relationPrior) {
-        this.relationPrior = relationPrior;
+    public void setRelations(Iterable<Relation> relations) {
+        this.relations = relations;
     }
-
-    @Transient
-    public List<Item> getRelationSubsequent() {
-        return relationSubsequent;
-    }
-
-    @Transient
-    public void setRelationSubsequent(List<Item> relationSubsequent) {
-        this.relationSubsequent = relationSubsequent;
-    }
-
-    @Transient
-    public List<Item> getRelationNormal() {
-        return relationNormal;
-    }
-
-    @Transient
-    public void setRelationNormal(List<Item> relationNormal) {
-        this.relationNormal = relationNormal;
-    }
-
-
 }

@@ -4,11 +4,11 @@ import com.se.itemservice.entity.Relation;
 
 public interface RelationWriteDao {
 
-    void deleteRelationByItemId1AndItemId2(Long itemId1, Long itemId2);
+    void deleteRelationBySourceAndTarget(Long source, Long target);
 
     Relation save(Relation relation);
 
-    void deleteAllByItemId1(Long itemId);
+    void deleteAllBySource(Long source);
 
-    void deleteAllByItemId2(Long itemId);
+    void deleteAllByTarget(Long target);
 }

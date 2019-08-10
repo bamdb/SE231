@@ -10,37 +10,42 @@ public class Relation {
     @Column(name = "id")
     private Long id;
     @Column(name = "prior", nullable = false)
-    private Long itemId1;
-    @Column(name = "subsequent", nullable = false)
-    private Long itemId2;
+    private Long source;
+    @Column(name = "target", nullable = false)
+    private Long target;
     @Column(name = "relate_type", nullable = false)
-    private boolean relateType;
+    private String relateType;
 
     public Long getId() {
         return id;
     }
 
-    public Long getItemId1() {
-        return itemId1;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setItemId1(Long itemId1) {
-        this.itemId1 = itemId1;
+    public Long getSource() {
+        return source;
     }
 
-    public Long getItemId2() {
-        return itemId2;
+    public void setSource(Long source) {
+        this.source = source;
     }
 
-    public void setItemId2(Long itemId2) {
-        this.itemId2 = itemId2;
+    public Long getTarget() {
+        return target;
     }
 
-    public boolean isRelateType() {
+    public void setTarget(Long target) {
+        this.target = target;
+    }
+
+    public String getRelateType() {
         return relateType;
     }
 
-    public void setRelateType(boolean relateType) {
+    public void setRelateType(String relateType) {
         this.relateType = relateType;
     }
+
 }

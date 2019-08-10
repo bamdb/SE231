@@ -19,14 +19,14 @@ public class RelationReadDaoImpl implements RelationReadDao {
 
     @Override
     @DataSource("slave")
-    public Iterable<Relation> findAllByItemId1(Long itemId) {
-        return relationRepository.findAllByItemId1(itemId);
+    public Iterable<Relation> findAllBySource(Long source) {
+        return relationRepository.findAllBySource(source);
     }
 
     @Override
     @DataSource("slave")
-    public Iterable<Relation> findAllByItemId2(Long itemId) {
-        return relationRepository.findAllByItemId2(itemId);
+    public Iterable<Relation> findAllByTarget(Long target) {
+        return relationRepository.findAllByTarget(target);
     }
 
 }

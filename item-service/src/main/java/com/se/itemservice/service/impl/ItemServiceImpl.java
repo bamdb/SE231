@@ -1,6 +1,5 @@
 package com.se.itemservice.service.impl;
 
-import com.se.itemservice.ItemService;
 import com.se.itemservice.dao.*;
 import com.se.itemservice.dao.Impl.ItemReadDaoImpl;
 import com.se.itemservice.entity.Item;
@@ -10,6 +9,7 @@ import com.se.itemservice.entity.Tag;
 import com.se.itemservice.repository.ItemRepository;
 import com.se.itemservice.repository.ItemtagRepository;
 import com.se.itemservice.repository.RelationRepository;
+import com.se.itemservice.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -70,19 +70,19 @@ public class ItemServiceImpl implements ItemService {
     }
 
     public ResponseEntity<?> deleteItemRelationById(Long itemId, Long relatedItemId) {
-        relationWriteDao.deleteRelationByItemId1AndItemId2(itemId, relatedItemId);
-        relationWriteDao.deleteRelationByItemId1AndItemId2(relatedItemId, itemId);
+        relationWriteDao.deleteRelationBySourceAndTarget(itemId, relatedItemId);
+        relationWriteDao.deleteRelationBySourceAndTarget(relatedItemId, itemId);
         return ResponseEntity.ok().body("delete relation successfully!");
     }
 
-    public void postItemRelation(Long priorId, Long subsequentId, boolean relateType) {
-        if (itemReadDao.findById(priorId) == null
-                || itemReadDao.findById(subsequentId) == null) {
+    public void postItemRelation(Long source, Long target, String relateType) {
+        if (itemReadDao.findById(source) == null
+                || itemReadDao.findById(target) == null) {
             return;
         }
         Relation relation = new Relation();
-        relation.setItemId1(priorId);
-        relation.setItemId2(subsequentId);
+        relation.setSource(source);
+        relation.setTarget(target);
         relation.setRelateType(relateType);
         relationWriteDao.save(relation);
     }
@@ -152,48 +152,34 @@ public class ItemServiceImpl implements ItemService {
     public Item findItemById(Long id) {
         Item item = itemReadDao.findById(id);
         if (item != null) {
-            item.setRelationPrior(new ArrayList<>());
-            item.setRelationSubsequent(new ArrayList<>());
-            item.setRelationNormal(new ArrayList<>());
-            List<Item> itemList3 = item.getRelationNormal();
+            item.setRelations(new ArrayList<>());
+//            item.setRelationPrior(new ArrayList<>());
+//            item.setRelationSubsequent(new ArrayList<>());
+//            item.setRelationNormal(new ArrayList<>());
+//            List<Item> itemList3 = item.getRelationNormal();
 
-            Iterable<Relation> relationIterable1 = relationReadDao.findAllByItemId1(item.getId());
-            Iterator<Relation> relationIterator1 = relationIterable1.iterator();
-            List<Item> itemList1 = item.getRelationSubsequent();
-            while (relationIterator1.hasNext()) {
-                Relation relation = relationIterator1.next();
-                Item item1 = itemReadDao.findById(relation.getItemId2());
-                if (relation.isRelateType()) {
-                    itemList1.add(item1);
-                } else {
-                    itemList3.add(item1);
-                }
-            }
+            Iterable<Relation> relationIterable = relationReadDao.findAllBySource(item.getId());
+//            Iterator<Relation> relationIterator1 = relationIterable1.iterator();
+//            List<Item> itemList1 = item.getRelationSubsequent();
+//            while (relationIterator1.hasNext()) {
+//                Relation relation = relationIterator1.next();
+//                Item item1 = itemReadDao.findById(relation.getTarget());
+//                if (relation.isRelateType()) {
+//                    itemList1.add(item1);
+//                } else {
+//                    itemList3.add(item1);
+//                }
+//            }
 
-            Iterable<Relation> relationIterable2 = relationReadDao.findAllByItemId2(item.getId());
-            Iterator<Relation> relationIterator2 = relationIterable2.iterator();
-            List<Item> itemList2 = item.getRelationPrior();
-            while (relationIterator2.hasNext()) {
-                Relation relation = relationIterator2.next();
-                Item item1 = itemReadDao.findById(relation.getItemId1());
-                if (relation.isRelateType()) {
-                    itemList2.add(item1);
-                } else {
-                    itemList3.add(item1);
-                }
-            }
-
-            item.setRelationPrior(itemList1);
-            item.setRelationSubsequent(itemList2);
-            item.setRelationNormal(itemList3);
+            item.setRelations(relationIterable);
         }
         return item;
     }
 
     public ResponseEntity<?> deleteItemById(Long id) {
         itemWriteDao.deleteById(id);
-        relationWriteDao.deleteAllByItemId1(id);
-        relationWriteDao.deleteAllByItemId2(id);
+        relationWriteDao.deleteAllBySource(id);
+        relationWriteDao.deleteAllByTarget(id);
         return ResponseEntity.ok().body("delete item successfully!");
     }
 

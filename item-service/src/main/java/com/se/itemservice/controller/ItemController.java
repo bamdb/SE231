@@ -1,8 +1,8 @@
 package com.se.itemservice.controller;
 
-import com.se.itemservice.ItemService;
 import com.se.itemservice.entity.Item;
 import com.se.itemservice.entity.Itemtag;
+import com.se.itemservice.service.ItemService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -43,9 +43,9 @@ public class ItemController {
 
     @PreAuthorize("hasRole('EDITOR')")
     @PostMapping(value = "/add/relation")
-    public void postItemRelation(@RequestParam("priorId") Long priorId, @RequestParam("subsequentId") Long subsequentId,
-                                 @RequestParam("relateType") boolean relateType) {
-        itemService.postItemRelation(priorId, subsequentId, relateType);
+    public void postItemRelation(@RequestParam("source") Long source, @RequestParam("target") Long target,
+                                 @RequestParam("relateType") String relateType) {
+        itemService.postItemRelation(source, target, relateType);
     }
 
     @PreAuthorize("hasRole('USER') and #userId == authentication.principal.id or hasRole('EDITOR')")

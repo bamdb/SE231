@@ -7,12 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 public interface RelationRepository extends CrudRepository<Relation, Long> {
-    Iterable<Relation> findAllByItemId1(Long itemId1);
-    Iterable<Relation> findAllByItemId2(Long itemId2);
+    Iterable<Relation> findAllBySource(Long Source);
+    Iterable<Relation> findAllByTarget(Long target);
     @Transactional
-    void deleteRelationByItemId1AndItemId2(Long itemId1, Long itemId2);
+    void deleteRelationBySourceAndTarget(Long source, Long target);
     @Transactional
-    void deleteAllByItemId1(Long itemId1);
+    void deleteAllBySource(Long source);
     @Transactional
-    void deleteAllByItemId2(Long itemId2);
+    void deleteAllByTarget(Long target);
 }

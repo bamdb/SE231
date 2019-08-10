@@ -1,5 +1,4 @@
-package com.se.itemservice;
-
+package com.se.itemservice.service;
 
 import com.se.itemservice.entity.Item;
 import com.se.itemservice.entity.Itemtag;
@@ -9,7 +8,7 @@ import java.util.List;
 
 public interface ItemService {
     Item postItem(Item item);
-    void postItemRelation(Long priorId, Long subsequentId, boolean relateType);
+    void postItemRelation(Long source, Long target, String relateType);
     Itemtag postItemTag(Long itemId, Long userId, List<String> tagList);
     Iterable<Item> selectAll();
     Item findItemById(Long id);
