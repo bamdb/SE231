@@ -6,5 +6,4 @@ public interface RelationReadDao {
 
     Iterable<Relation> findAllBySource(Long source);
 
-    Iterable<Relation> findAllByTarget(Long target);
 }

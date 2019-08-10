@@ -3,6 +3,7 @@ package com.se.itemservice.controller;
 import com.se.itemservice.config.MethodSecurityConfig;
 import com.se.itemservice.config.ResourceServer;
 import com.se.itemservice.entity.Item;
+import com.se.itemservice.service.ItemService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,7 +45,7 @@ public class ItemControllerTest {
     }
 
     @Resource(name="itemServiceImpl")
-    com.se.itemservice.ItemService itemService;
+    ItemService itemService;
 
     @Test
     public void updateTest() throws Exception {
@@ -108,7 +109,7 @@ public class ItemControllerTest {
         Iterator<Item> itemIterator = itemService.selectAll().iterator();
         Item item = itemIterator.next();
         Item item1 = itemIterator.next();
-        mvc.perform(post("/add/relation?priorId="+item.getId()+"&subsequentId="+item1.getId()+"&relateType=0")
+        mvc.perform(post("/add/relation?source="+item.getId()+"&target="+item1.getId()+"&relateType=前作")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
         mvc.perform(delete("/delete/relation?itemId="+item.getId()+"&relatedItemId="+item1.getId()))
@@ -134,22 +135,22 @@ public class ItemControllerTest {
         Item item = itemIterator.next();
         Item item1 = itemIterator.next();
         Item item2 = itemIterator.next();
-        mvc.perform(post("/add/relation?priorId="+item.getId()+"&subsequentId="+item1.getId()+"&relateType=0")
+        mvc.perform(post("/add/relation?source="+item.getId()+"&target="+item1.getId()+"&relateType=前作")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        mvc.perform(post("/add/relation?priorId="+item.getId()+"&subsequentId="+item2.getId()+"&relateType=1")
+        mvc.perform(post("/add/relation?source="+item.getId()+"&target="+item2.getId()+"&relateType=续作")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        mvc.perform(post("/add/relation?priorId="+item1.getId()+"&subsequentId="+item.getId()+"&relateType=1")
+        mvc.perform(post("/add/relation?source="+item1.getId()+"&target="+item.getId()+"&relateType=续作")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        mvc.perform(post("/add/relation?priorId="+item2.getId()+"&subsequentId="+item.getId()+"&relateType=0")
+        mvc.perform(post("/add/relation?source="+item2.getId()+"&target="+item.getId()+"&relateType=前作")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        mvc.perform(post("/add/relation?priorId="+item.getId()+"&subsequentId=0&relateType=1")
+        mvc.perform(post("/add/relation?source="+item.getId()+"&target=0&relateType=续作")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        mvc.perform(post("/add/relation?priorId=0&subsequentId="+item2.getId()+"&relateType=1")
+        mvc.perform(post("/add/relation?source=0&target="+item2.getId()+"&relateType=续作")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 

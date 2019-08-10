@@ -23,10 +23,4 @@ public class RelationReadDaoImpl implements RelationReadDao {
         return relationRepository.findAllBySource(source);
     }
 
-    @Override
-    @DataSource("slave")
-    public Iterable<Relation> findAllByTarget(Long target) {
-        return relationRepository.findAllByTarget(target);
-    }
-
 }
