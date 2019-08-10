@@ -124,6 +124,13 @@ public class MessageControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(""));
+
+        MultiValueMap<String, String> mmChat = new LinkedMultiValueMap<>();
+        mmChat.add("userId", "1");
+        mmChat.add("content", "abc");
+        mvc.perform(put("/chat")
+                .params(mmChat))
+                .andExpect(status().isOk());
     }
 
 }

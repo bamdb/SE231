@@ -96,7 +96,7 @@ public class MessageServiceImpl implements MessageService {
 
     public void pubChat(Long userId, String content) {
         // notify receiver
-        restTemplate.getForObject("http://47.103.123.5:8080/chat?userId={1}&content={2}", void.class,
+        restTemplate.put("http://47.103.123.5:8080/chat?userId={1}&content={2}", void.class,
                 userId, content);
     }
 }
