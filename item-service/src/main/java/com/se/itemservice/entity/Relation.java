@@ -9,7 +9,7 @@ public class Relation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "prior", nullable = false)
+    @Column(name = "source", nullable = false)
     private Long source;
     @Column(name = "target", nullable = false)
     private Long target;
