@@ -32,7 +32,7 @@ public class AuthController {
     }
 
     @GetMapping(value = "/qrcode")
-    public byte[] qrcode(String uuid) {
+    public byte[] qrcode(@RequestParam("uuid") String uuid) {
         return userService.getQrcode(uuid);
     }
 
