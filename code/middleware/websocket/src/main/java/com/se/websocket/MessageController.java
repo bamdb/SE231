@@ -20,9 +20,9 @@ public class MessageController {
         webSocket.sendMessage("您有新的消息", userId, "nouuid");
     }
 
-    @GetMapping(value = "/friend/{userId}")
-    public void newFriend(@PathVariable("userId") Long userId) {
-        webSocket.sendMessage("您有新的好友请求", userId, "nouuid");
+    @GetMapping(value = "/friend")
+    public void newFriend(@RequestParam("userIdReq") Long userIdReq, @RequestParam("userIdRecv") Long userIdRecv) {
+        webSocket.sendMessage(userIdReq+" "+userIdRecv, userIdRecv, "nouuid");
     }
 
     @GetMapping(value = "/qrcode")
