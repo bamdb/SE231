@@ -164,6 +164,10 @@ public class ItemServiceImpl implements ItemService {
         return root;
     }
 
+    public void deleteItemGraph(Long itemId) {
+        mongoDao.deleteGraphByItemId(itemId);
+    }
+
     public Itemtag postItemTag(Long itemId, Long userId, List<String> tagList) {
         Itemtag itemtag = mongoDao.findItemtagByItemId(itemId);
         Item item = itemReadDao.findById(itemId);

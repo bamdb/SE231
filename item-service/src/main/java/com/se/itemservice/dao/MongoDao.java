@@ -14,6 +14,8 @@ public interface MongoDao {
     Root findRootByItemId(Long itemId);
 
     Root save(Root root);
+
+    void deleteGraphByItemId(Long itemId);
 //    Progress findByItemIdAndUserId(Long userId, Long itemId);
 //
 //    Progress save(Progress progress);

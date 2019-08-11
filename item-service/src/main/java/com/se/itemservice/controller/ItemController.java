@@ -42,6 +42,11 @@ public class ItemController {
         return itemService.findItemGraph(itemId);
     }
 
+    @DeleteMapping(value = "/delete/graph/id/{itemId}")
+    public void deleteItemGraph(@PathVariable Long itemId) {
+        itemService.deleteItemGraph(itemId);
+    }
+
     @PreAuthorize("hasRole('EDITOR')")
     @PostMapping(value = "/add")
     public Item postItem(@RequestBody Item item) {

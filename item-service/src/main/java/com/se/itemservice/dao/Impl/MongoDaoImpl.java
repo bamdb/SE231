@@ -45,4 +45,9 @@ public class MongoDaoImpl implements MongoDao {
     public Root save(Root root) {
         return rootRepository.save(root);
     }
+
+    @Override
+    public void deleteGraphByItemId(Long itemId) {
+        rootRepository.deleteByItemId(itemId);
+    }
 }
