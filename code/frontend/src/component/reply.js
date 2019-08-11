@@ -66,6 +66,7 @@ class Reply extends Component {
             data:text,
             success: function f(data) {
                 console.log(data);
+                window.location.reload();
             }.bind(this)
         })
     }

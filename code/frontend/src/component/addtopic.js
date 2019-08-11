@@ -82,7 +82,12 @@ class Addtopic extends Component {
     {
         var date = Date.parse(new Date())
 
-        axios.post("http://202.120.40.8:30741/topic/add",{topic:{userId:localStorage.getItem("userid"),title:this.state.text ,pubTime:date},topicContent:this.state.content},{params:{}});
+        axios.post("http://202.120.40.8:30741/topic/add",{topic:{userId:localStorage.getItem("userid"),title:this.state.text ,pubTime:date},topicContent:this.state.content},{params:{}}).then(
+            function(res){
+                this.setState({visible:false});
+                window.location.reload();
+            }.bind(this)
+        )
     }
     handleCancel()
     {

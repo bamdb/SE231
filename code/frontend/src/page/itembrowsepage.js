@@ -85,7 +85,7 @@ class Itembrowsepage extends Component{
                         dataSource={this.state.dataSource}
                         onChange={value=>this.handleSearch(value)}
                         backfill={true}
-                        defaultValue={"search..."}
+                        placeholder={"111111search"}
                     >
                         <Input.Search addonBefore={selectBefore} onSearch={value=>this.Search(value)} />
                     </AutoComplete>
