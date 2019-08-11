@@ -9,6 +9,7 @@ import com.se.friendservice.entity.User;
 import com.se.friendservice.service.FriendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -26,8 +27,17 @@ public class FriendServiceImpl implements FriendService {
     @Autowired
     UserClient userClient;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
     public Friend addFriends(Friend friend) {
         return writeDao.save(friend);
+    }
+
+    public void reqFriends(Long userId) {
+        // notify qrcode login page
+        restTemplate.getForObject("http://47.103.123.5:8080/friend/{1}", void.class,
+                userId);
     }
 
     public void rmFriends(Long userId1, Long userId2) {

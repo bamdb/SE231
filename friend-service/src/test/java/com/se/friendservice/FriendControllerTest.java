@@ -87,6 +87,8 @@ public class FriendControllerTest {
                 .andExpect(status().isOk());
         Friend friend = new Friend(11L, 22L);
         Friend friend1 = new Friend(22L, 11L);
+        mvc.perform(post("/addreq?userId=22"))
+                .andExpect(status().isOk());
         mvc.perform(post("/add")
                 .content(JSON.toJSONString(friend))
                 .contentType(MediaType.APPLICATION_JSON))

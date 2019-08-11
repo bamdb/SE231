@@ -29,6 +29,12 @@ public class FriendController {
     }
 
     @PreAuthorize("hasRole('USER') and (#friend.getUserId1() == authentication.principal.id ||#friend.getUserId2() == authentication.principal.id )")
+    @PostMapping(value = "/addreq", produces = "application/json")
+    void reqFriends(@RequestParam("userId") Long userId) {
+        friendService.reqFriends(userId);
+    }
+
+    @PreAuthorize("hasRole('USER') and (#friend.getUserId1() == authentication.principal.id ||#friend.getUserId2() == authentication.principal.id )")
     @PostMapping(value = "/add", produces = "application/json")
     Friend addFriends(@RequestBody Friend friend) {
         return friendService.addFriends(friend);
