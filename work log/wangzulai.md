@@ -118,3 +118,7 @@
 * modify relation data stucture
 * learn d3js
 * complete test
+
+# 2019-08-11
+* finish item relation graph calculation
+* finish visualization of relation
