@@ -1,17 +1,17 @@
 package com.se.itemservice.entity.graph;
 
 public class Node {
-    private Integer id;
+    private Long id;
     private String image;
     private String name;
     private String name_cn;
     private Long subject_id;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -44,6 +44,14 @@ public class Node {
     }
 
     public void setSubject_id(Long subject_id) {
+        this.subject_id = subject_id;
+    }
+
+    public Node(Long id, String image, String name, String name_cn, Long subject_id) {
+        this.id = id;
+        this.image = image;
+        this.name = name;
+        this.name_cn = name_cn;
         this.subject_id = subject_id;
     }
 }

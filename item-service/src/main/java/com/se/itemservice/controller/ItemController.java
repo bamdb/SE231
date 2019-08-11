@@ -2,12 +2,14 @@ package com.se.itemservice.controller;
 
 import com.se.itemservice.entity.Item;
 import com.se.itemservice.entity.Itemtag;
+import com.se.itemservice.entity.graph.Root;
 import com.se.itemservice.service.ItemService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.websocket.server.PathParam;
 import java.security.Principal;
 import java.util.List;
 
@@ -33,6 +35,11 @@ public class ItemController {
     @GetMapping(value = "/tag")
     public List<String> getUserTag(@RequestParam("itemId") Long itemId, @RequestParam("userId") Long userId) {
         return itemService.findUsertag(itemId, userId);
+    }
+
+    @GetMapping(value = "/graph/id/{itemId}")
+    public Root getItemGraph(@PathVariable Long itemId) {
+
     }
 
     @PreAuthorize("hasRole('EDITOR')")

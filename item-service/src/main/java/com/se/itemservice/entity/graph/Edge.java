@@ -4,9 +4,8 @@ public class Edge {
     private String id;
     private String relation;
     private boolean removed;
-    private Integer source;
-    private Integer target;
-
+    private Long source;
+    private Long target;
 
     public String getId() {
         return id;
@@ -32,19 +31,27 @@ public class Edge {
         this.removed = removed;
     }
 
-    public Integer getSource() {
+    public Long getSource() {
         return source;
     }
 
-    public void setSource(Integer source) {
+    public void setSource(Long source) {
         this.source = source;
     }
 
-    public Integer getTarget() {
+    public Long getTarget() {
         return target;
     }
 
-    public void setTarget(Integer target) {
+    public void setTarget(Long target) {
+        this.target = target;
+    }
+
+    public Edge(String id, String relation, boolean removed, Long source, Long target) {
+        this.id = id;
+        this.relation = relation;
+        this.removed = removed;
+        this.source = source;
         this.target = target;
     }
 }

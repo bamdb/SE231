@@ -6,6 +6,9 @@ import com.se.itemservice.entity.Item;
 import com.se.itemservice.entity.Itemtag;
 import com.se.itemservice.entity.Relation;
 import com.se.itemservice.entity.Tag;
+import com.se.itemservice.entity.graph.Edge;
+import com.se.itemservice.entity.graph.Node;
+import com.se.itemservice.entity.graph.Root;
 import com.se.itemservice.repository.ItemRepository;
 import com.se.itemservice.repository.ItemtagRepository;
 import com.se.itemservice.repository.RelationRepository;
@@ -18,6 +21,8 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -104,6 +109,54 @@ public class ItemServiceImpl implements ItemService {
         return tagString;
     }
 
+    public Root findItemGraph(Long itemId) {
+        Item item = itemReadDao.findById(itemId);
+        if (item == null) {
+            return null;
+        }
+
+        Root root = new Root();
+        Long nodeId = 0L;
+        Long nextNodeId = 1L;
+        List<Edge> edges = new ArrayList<>();
+        List<Node> nodes = new ArrayList<>();
+        Node firstNode = new Node(nodeId, item.getImgurl(), item.getItemname(), item.getItemname(), item.getId());
+        nodes.add(firstNode);
+
+        do {
+            final Long currNodeId = nodeId;
+            Node node = nodes.stream().filter(node1 -> node1.getId().equals(currNodeId)).collect(Collectors.toList()).get(0);
+            Iterable<Relation> relationIterable = relationReadDao.findAllBySource(node.getSubject_id());
+            for (Relation relation : relationIterable) {
+                // find if target item exists in node
+                String edgeId = relation.getSource().toString() + "-" + relation.getTarget().toString();
+                List<Node> nodeList = nodes.stream().filter(node1 -> node1.getSubject_id().equals(relation.getTarget()))
+                        .collect(Collectors.toList());
+
+                // No item found, continue to next relation
+                Item targetItem = itemReadDao.findById(relation.getTarget());
+                if (targetItem == null) {
+                    continue;
+                }
+
+                // a new node should be added to nodes?
+                if (nodeList.size() == 0) {
+                    nodes.add(new Node(nextNodeId, targetItem.getImgurl(), targetItem.getItemname(),
+                            targetItem.getItemname(), targetItem.getId()));
+                    edges.add(new Edge(edgeId, relation.getRelateType(), false, currNodeId, nextNodeId));
+                    nextNodeId++;
+                } else {
+                    Node newNode = nodeList.get(0);
+                    edges.add(new Edge(edgeId, relation.getRelateType(), false, currNodeId, newNode.getId()));
+                }
+            }
+            nodeId++;
+        } while (nodeId < nodes.size());
+        root.setEdges(edges);
+        root.setNodes(nodes);
+        return root;
+    }
+
     public Itemtag postItemTag(Long itemId, Long userId, List<String> tagList) {
         Itemtag itemtag = mongoDao.findByItemId(itemId);
         Item item = itemReadDao.findById(itemId);
@@ -153,24 +206,7 @@ public class ItemServiceImpl implements ItemService {
         Item item = itemReadDao.findById(id);
         if (item != null) {
             item.setRelations(new ArrayList<>());
-//            item.setRelationPrior(new ArrayList<>());
-//            item.setRelationSubsequent(new ArrayList<>());
-//            item.setRelationNormal(new ArrayList<>());
-//            List<Item> itemList3 = item.getRelationNormal();
-
             Iterable<Relation> relationIterable = relationReadDao.findAllBySource(item.getId());
-//            Iterator<Relation> relationIterator1 = relationIterable1.iterator();
-//            List<Item> itemList1 = item.getRelationSubsequent();
-//            while (relationIterator1.hasNext()) {
-//                Relation relation = relationIterator1.next();
-//                Item item1 = itemReadDao.findById(relation.getTarget());
-//                if (relation.isRelateType()) {
-//                    itemList1.add(item1);
-//                } else {
-//                    itemList3.add(item1);
-//                }
-//            }
-
             item.setRelations(relationIterable);
         }
         return item;
