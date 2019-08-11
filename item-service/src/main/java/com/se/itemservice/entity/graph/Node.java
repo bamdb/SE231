@@ -54,4 +54,6 @@ public class Node {
         this.name_cn = name_cn;
         this.subject_id = subject_id;
     }
+
+    public Node() {}
 }

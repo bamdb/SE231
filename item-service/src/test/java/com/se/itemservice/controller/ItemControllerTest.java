@@ -2,6 +2,7 @@ package com.se.itemservice.controller;
 
 import com.se.itemservice.config.MethodSecurityConfig;
 import com.se.itemservice.config.ResourceServer;
+import com.se.itemservice.dao.ItemWriteDao;
 import com.se.itemservice.entity.Item;
 import com.se.itemservice.service.ItemService;
 import org.junit.Assert;
@@ -46,6 +47,9 @@ public class ItemControllerTest {
 
     @Resource(name="itemServiceImpl")
     ItemService itemService;
+
+    @Resource(name="itemWriteDaoImpl")
+    ItemWriteDao itemWriteDao;
 
     @Test
     public void updateTest() throws Exception {
@@ -160,6 +164,39 @@ public class ItemControllerTest {
         mvc.perform(get("/id/"+item.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
         mvc.perform(get("/id/0").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void graphTest() throws Exception {
+        mvc.perform(post("/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"itemname\":\"three body\", \"pubTime\":\"1562294429\", \"chapterNum\":12, \"mainAuthor\":\"Cixin Liu\", \"imgurl\":null, \"type\":0}"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"itemname\":\"three body\", \"pubTime\":\"1562294429\", \"chapterNum\":12, \"mainAuthor\":\"Cixin Liu\", \"imgurl\":null, \"type\":0}"))
+                .andExpect(status().isOk());
+        Iterator<Item> itemIterator = itemService.selectAll().iterator();
+        Item item = itemIterator.next();
+        Item item1 = itemIterator.next();
+        mvc.perform(get("/graph/id/0"))
+                .andExpect(status().isOk());
+        mvc.perform(get("/graph/id/"+item.getId()))
+                .andExpect(status().isOk());
+
+        mvc.perform(post("/add/relation?source="+item.getId()+"&target="+item1.getId()+"&relateType=前作")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        mvc.perform(get("/graph/id/"+item.getId()))
+                .andExpect(status().isOk());
+        mvc.perform(post("/add/relation?source="+item1.getId()+"&target="+item.getId()+"&relateType=续作")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        mvc.perform(get("/graph/id/"+item.getId()))
+                .andExpect(status().isOk());
+        itemWriteDao.deleteById(item1.getId());
+        mvc.perform(get("/graph/id/"+item.getId()))
                 .andExpect(status().isOk());
     }
 

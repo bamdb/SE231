@@ -37,7 +37,7 @@ public class ItemController {
         return itemService.findUsertag(itemId, userId);
     }
 
-    @GetMapping(value = "/graph/id/{itemId}")
+    @GetMapping(value = "/graph/id/{itemId}", produces = "application/json")
     public Root getItemGraph(@PathVariable Long itemId) {
         return itemService.findItemGraph(itemId);
     }

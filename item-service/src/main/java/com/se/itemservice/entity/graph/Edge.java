@@ -54,4 +54,6 @@ public class Edge {
         this.source = source;
         this.target = target;
     }
+
+    public Edge() {}
 }
