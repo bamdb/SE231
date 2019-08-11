@@ -51,7 +51,7 @@ export default class userinfo extends React.Component{
                 </Flex>
                 <Flex justify="center">
                     <Flex.Item>
-                    <Button onPress={()=>{this.props.navigation.navigate("Login")}}>logout</Button>
+                    <Button onPress={()=>{AsyncStorage.removeItem("refresh_token");this.props.navigation.navigate("Login")}}>logout</Button>
                     </Flex.Item>
                 </Flex>
             </View>
