@@ -39,7 +39,7 @@ public class ItemController {
 
     @GetMapping(value = "/graph/id/{itemId}")
     public Root getItemGraph(@PathVariable Long itemId) {
-
+        return itemService.findItemGraph(itemId);
     }
 
     @PreAuthorize("hasRole('EDITOR')")
