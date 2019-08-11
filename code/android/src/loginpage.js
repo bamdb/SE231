@@ -154,7 +154,7 @@ export default class HomeScreen extends React.Component {
           <Flex>
             <Flex.Item>
               <Button  type="primary" onPress={this.handlesubmit}>login</Button>
-              <Button  type="primary" onPress={()=>{this.props.navigation.navigate("Home")}}>login</Button>
+              
             </Flex.Item>
             
           </Flex>
