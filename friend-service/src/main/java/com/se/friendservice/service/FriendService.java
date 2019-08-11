@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 
 public interface FriendService {
     Friend addFriends(Friend friend);
-    void reqFriends(Long userId);
+    void reqFriends(Long userIdReq, Long userIdRecv);
     void rmFriends(Long userId1, Long userId2);
     void rmAllFriends(Long userId);
     Boolean isFriend(Long userId1, Long userId2);

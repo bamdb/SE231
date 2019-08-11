@@ -28,10 +28,10 @@ public class FriendController {
         return friendService.isFriend(userId1, userId2);
     }
 
-    @PreAuthorize("hasRole('USER') and (#friend.getUserId1() == authentication.principal.id ||#friend.getUserId2() == authentication.principal.id )")
+    @PreAuthorize("hasRole('USER') and (#userIdReq == authentication.principal.id)")
     @PostMapping(value = "/addreq", produces = "application/json")
-    void reqFriends(@RequestParam("userId") Long userId) {
-        friendService.reqFriends(userId);
+    void reqFriends(@RequestParam("userIdReq") Long userIdReq, @RequestParam("userIdRecv") Long userIdRecv) {
+        friendService.reqFriends(userIdReq, userIdRecv);
     }
 
     @PreAuthorize("hasRole('USER') and (#friend.getUserId1() == authentication.principal.id ||#friend.getUserId2() == authentication.principal.id )")

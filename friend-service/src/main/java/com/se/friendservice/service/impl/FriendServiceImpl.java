@@ -34,10 +34,10 @@ public class FriendServiceImpl implements FriendService {
         return writeDao.save(friend);
     }
 
-    public void reqFriends(Long userId) {
+    public void reqFriends(Long userIdReq, Long userIdRecv) {
         // notify qrcode login page
-        restTemplate.getForObject("http://47.103.123.5:8080/friend/{1}", void.class,
-                userId);
+        restTemplate.getForObject("http://47.103.123.5:8080/friend?userIdReq={1}&userIdRecv={2}", void.class,
+                userIdReq, userIdRecv);
     }
 
     public void rmFriends(Long userId1, Long userId2) {
