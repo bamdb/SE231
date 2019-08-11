@@ -44,7 +44,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public ResponseEntity<?> deleteItemTag(Long itemId, Long userId, List<String> tagList) {
-        Itemtag itemtag = mongoDao.findByItemId(itemId);
+        Itemtag itemtag = mongoDao.findItemtagByItemId(itemId);
         List<Tag> tags = itemtag.getTags();
         List<Tag> tagDeleted = new ArrayList<>();
         for (String tagname : tagList) {
@@ -93,7 +93,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     public Itemtag findItemtag(Long itemId) {
-        return mongoDao.findByItemId(itemId);
+        return mongoDao.findItemtagByItemId(itemId);
     }
 
 
@@ -115,7 +115,12 @@ public class ItemServiceImpl implements ItemService {
             return null;
         }
 
-        Root root = new Root();
+        Root root;
+        if ((root = mongoDao.findRootByItemId(itemId)) != null) {
+            return root;
+        }
+        root = new Root();
+
         Long nodeId = 0L;
         Long nextNodeId = 1L;
         List<Edge> edges = new ArrayList<>();
@@ -154,11 +159,13 @@ public class ItemServiceImpl implements ItemService {
         } while (nodeId < nodes.size());
         root.setEdges(edges);
         root.setNodes(nodes);
+        root.setItemId(itemId);
+        mongoDao.save(root);
         return root;
     }
 
     public Itemtag postItemTag(Long itemId, Long userId, List<String> tagList) {
-        Itemtag itemtag = mongoDao.findByItemId(itemId);
+        Itemtag itemtag = mongoDao.findItemtagByItemId(itemId);
         Item item = itemReadDao.findById(itemId);
 
         if (item == null) {
