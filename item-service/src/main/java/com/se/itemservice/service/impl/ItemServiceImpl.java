@@ -156,7 +156,7 @@ public class ItemServiceImpl implements ItemService {
                 }
             }
             nodeId++;
-        } while (nodeId < nodes.size());
+        } while (nodeId < nodes.size() && nodeId < 50);
         root.setEdges(edges);
         root.setNodes(nodes);
         root.setItemId(itemId);
