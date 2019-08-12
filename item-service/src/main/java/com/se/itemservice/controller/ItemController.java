@@ -42,7 +42,7 @@ public class ItemController {
         return itemService.findItemGraph(itemId);
     }
 
-    @DeleteMapping(value = "/delete/graph/id/{itemId}")
+    @GetMapping(value = "/delete/graph/id/{itemId}")
     public void deleteItemGraph(@PathVariable Long itemId) {
         itemService.deleteItemGraph(itemId);
     }

@@ -125,7 +125,7 @@ public class ItemServiceImpl implements ItemService {
         Long nextNodeId = 1L;
         List<Edge> edges = new ArrayList<>();
         List<Node> nodes = new ArrayList<>();
-        Node firstNode = new Node(nodeId, item.getImgurl(), item.getItemname(), item.getItemname(), item.getId());
+        Node firstNode = new Node(nodeId, "http://"+item.getImgurl(), item.getItemname(), item.getItemname(), item.getId());
         nodes.add(firstNode);
 
         do {
@@ -146,7 +146,7 @@ public class ItemServiceImpl implements ItemService {
 
                 // a new node should be added to nodes?
                 if (nodeList.size() == 0) {
-                    nodes.add(new Node(nextNodeId, targetItem.getImgurl(), targetItem.getItemname(),
+                    nodes.add(new Node(nextNodeId, "http://"+targetItem.getImgurl(), targetItem.getItemname(),
                             targetItem.getItemname(), targetItem.getId()));
                     edges.add(new Edge(edgeId, relation.getRelateType(), false, currNodeId, nextNodeId));
                     nextNodeId++;
