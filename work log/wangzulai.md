@@ -122,3 +122,7 @@
 # 2019-08-11
 * finish item relation graph calculation
 * finish visualization of relation
+
+# 2019-08-12
+* complete visualization of relation
+* init ios config
