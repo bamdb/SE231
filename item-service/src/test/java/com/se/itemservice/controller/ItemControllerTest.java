@@ -186,7 +186,7 @@ public class ItemControllerTest {
                 .andExpect(status().isOk());
         mvc.perform(get("/graph/id/"+item.getId()))
                 .andExpect(status().isOk());
-        mvc.perform(get("/delete/graph/id/"+item.getId()))
+        mvc.perform(delete("/delete/graph/id/"+item.getId()))
                 .andExpect(status().isOk());
 
         mvc.perform(post("/add/relation?source="+item.getId()+"&target="+item1.getId()+"&relateType=前作")
@@ -196,7 +196,7 @@ public class ItemControllerTest {
                 .andExpect(status().isOk());
         mvc.perform(get("/graph/id/"+item.getId()))
                 .andExpect(status().isOk());
-        mvc.perform(get("/delete/graph/id/"+item.getId()))
+        mvc.perform(delete("/delete/graph/id/"+item.getId()))
                 .andExpect(status().isOk());
 
         mvc.perform(post("/add/relation?source="+item1.getId()+"&target="+item.getId()+"&relateType=续作")
@@ -204,7 +204,7 @@ public class ItemControllerTest {
                 .andExpect(status().isOk());
         mvc.perform(get("/graph/id/"+item.getId()))
                 .andExpect(status().isOk());
-        mvc.perform(get("/delete/graph/id/"+item.getId()))
+        mvc.perform(delete("/delete/graph/id/"+item.getId()))
                 .andExpect(status().isOk());
 
         itemWriteDao.deleteById(item1.getId());

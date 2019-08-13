@@ -42,7 +42,8 @@ public class ItemController {
         return itemService.findItemGraph(itemId);
     }
 
-    @GetMapping(value = "/delete/graph/id/{itemId}")
+    @PreAuthorize("hasRole('USER')")
+    @DeleteMapping(value = "/delete/graph/id/{itemId}")
     public void deleteItemGraph(@PathVariable Long itemId) {
         itemService.deleteItemGraph(itemId);
     }
