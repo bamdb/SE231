@@ -56,6 +56,7 @@ export default class HomeScreen extends React.Component {
                   },
                   withCredentials:true}).then(
                     function(res){
+                        global.userid=res.data.id;
                         AsyncStorage.setItem("access_token",res.data.access_token)
                         AsyncStorage.setItem("refresh_token",res.data.refresh_token)
                         axios.defaults.headers.common['Authorization'] = "Bearer "+res.data.access_token;
@@ -102,6 +103,7 @@ export default class HomeScreen extends React.Component {
                         
                         
                         global.userid=res.data.id;
+                        
                         AsyncStorage.setItem("username",this.state.username)  
                         AsyncStorage.setItem("password",this.state.password)   
                         AsyncStorage.setItem("userid",String(res.data.id))  

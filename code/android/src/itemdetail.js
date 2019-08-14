@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text ,TextInput,Image,StyleSheet,ScrollView,FlatList} from "react-native";
+import { View, Text ,TextInput,Image,StyleSheet,ScrollView,FlatList,AsyncStorage} from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import {Button,List, Card, Flex,Drawer,  WhiteSpace} from '@ant-design/react-native';
 import Storage from 'react-native-storage'
@@ -34,6 +34,7 @@ export default class Itemdetail extends React.Component{
           }
         }
         this.handlepress=this.handlepress.bind(this)
+        this.handlepressnormal=this.handlepressnormal.bind(this)
     }
     handlepress(i,j)
     {
@@ -43,6 +44,13 @@ export default class Itemdetail extends React.Component{
         progress.chapters[i].sections[j]=!progress.chapters[i].sections[j];
         this.setState({progress:progress})
 
+    }
+    handlepressnormal(i)
+    {
+        var progress=this.state.progress;
+        progress.chapters[i].finish=!progress.chapters[i].finish;
+        axios.put("http://202.120.40.8:30741/activity/update/progress",{userId: this.state.progress.userId, itemId: this.state.progress.itemId, chapters: this.state.progress.chapters})
+        this.setState({progress:progress})
     }
     componentDidMount()
     {
@@ -64,15 +72,21 @@ export default class Itemdetail extends React.Component{
                 alert(err);
             }
         )
-        axios.get("http://202.120.40.8:30741/activity/progress",{params:{itemId:this.props.navigation.getParam("itemid"),userId:global.userid}}).then(
-            function(res){
-                if(res.data)
-                {
-                    this.setState({showprogress:true,progress:res.data})
-                }
-                
-            }.bind(this)
-        )
+        AsyncStorage.getItem("userid",(error,result)=>{
+            axios.get("http://202.120.40.8:30741/activity/progress",{params:{itemId:this.props.navigation.getParam("itemid"),userId:result}}).then(
+                function(res){
+                    if(res.data)
+                    {
+                        this.setState({showprogress:true,progress:res.data})
+                        
+                    }
+                    
+                }.bind(this)
+            ).catch(
+                (err)=>{alert(err)}
+            )
+        })
+        
         
         
     }
@@ -110,7 +124,7 @@ export default class Itemdetail extends React.Component{
                             var tmpj=j;
                             rows1.push(
                                 
-                                <Button type={this.state.progress.chapters[i].sections[j]?"primary":"warning"} style={{width:80,felx:1}} onPress={()=>this.handlepress(tmpi,tmpj)}>
+                                <Button type={this.state.progress.chapters[i].sections[j]?"primary":"warning"} style={{}} onPress={()=>this.handlepress(tmpi,tmpj)}>
                                     {i+"."+j}
                                 </Button>
                                 
@@ -119,11 +133,13 @@ export default class Itemdetail extends React.Component{
                         })
                     }
                     else{
+                        var tmpi=i;
                         rows1.push(
-                                
-                            <Button type={this.state.progress.chapters[i].sections[j]?"primary":"warning"} style={{width:80,felx:1}} onPress={()=>this.handlepress(tmpi,tmpj)}>
-                                {i+"."+j}
+                            
+                            <Button type={this.state.progress.chapters[i].finish?"primary":"warning"} style={{width:70}} onPress={()=>this.handlepressnormal(tmpi)}>
+                                {i}
                             </Button>
+                            
                             
                         )
                     }
@@ -136,6 +152,7 @@ export default class Itemdetail extends React.Component{
         }
         var item=this.state.item;
         return(
+            <ScrollView>
             <View>
                 <View style={{alignItems:"center"}}>
                 <Image style={{width:200,height:200}} source={{uri:"http://"+item.imgurl}}></Image>
@@ -155,7 +172,7 @@ export default class Itemdetail extends React.Component{
                     </List.Item>
                 </List>
                 {this.state.showprogress&&
-                <Flex justify="start">
+                <Flex justify="start" wrap="wrap">
                 {rows1}
                 </Flex>
                 }
@@ -165,6 +182,7 @@ export default class Itemdetail extends React.Component{
                 </List>
                 
             </View>
+            </ScrollView>
         )
     }
 }
