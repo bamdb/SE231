@@ -60,7 +60,7 @@ export default class Collect extends React.Component{
                     <View  style={{ height: 20 }}>
                         <Flex justify="start">
                         <Flex.Item style={{flex:1}}>
-                        <Image source={{uri:"http://"+item.item.imgurl}} style={{width:40,height:40}}></Image>
+                        <Image source={{uri:"http://"+item.item?item.item.imgurl:""}} style={{width:40,height:40}}></Image>
                         </Flex.Item>
                         <Flex.Item style={{flex:5}}>
                         <Text onPress={()=>this.props.navigation.navigate("Itemdetail",{itemid:item.item.id})}>{item.item.itemname}</Text>
