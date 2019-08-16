@@ -51,7 +51,7 @@ class Searchpage extends Component {
         var dataSource=[];
         var id=[];
         console.log("start search");
-        axios.get('http://202.120.40.8:30741/search/ik/item',{params:{keystring:value,page:0,size:8}})
+        axios.get('https://api.bamdb.cn/search/ik/item',{params:{keystring:value,page:0,size:8}})
             .then(function (res) {
                 if(res.data.content!==undefined){
                     res.data.content.forEach(item=>{
@@ -72,7 +72,7 @@ class Searchpage extends Component {
     handlepagechange(page){
         this.setState({currentpage:page})
         var id=[];
-        axios.get('http://202.120.40.8:30741/search/ik/item',{params:{keystring:this.state.search,page:page-1,size:8}})
+        axios.get('https://api.bamdb.cn/search/ik/item',{params:{keystring:this.state.search,page:page-1,size:8}})
             .then(function (res) {
                 if (res.data.content !== undefined) {
                     res.data.content.forEach(item => {
@@ -105,7 +105,7 @@ class Searchpage extends Component {
             }
             return newData
         }]
-        axios.get('http://202.120.40.8:30741/search/ik/item',{params:{keystring:decodeURI(search),page:0,size:8}})
+        axios.get('https://api.bamdb.cn/search/ik/item',{params:{keystring:decodeURI(search),page:0,size:8}})
             .then(function (res) {
                 if(res.data.content!==undefined){
                     res.data.content.forEach(item=>{
@@ -128,11 +128,11 @@ class Searchpage extends Component {
         console.log(id);
         if(id.length !== undefined && id.length !== 0)
         id.forEach(id => {
-            axios.get('http://202.120.40.8:30741/rating/itemid/'+id)
+            axios.get('https://api.bamdb.cn/rating/itemid/'+id)
                 .then(function (res) {
                     if(res.data!==null){
                         const rating=res.data;
-                        axios.get('http://202.120.40.8:30741/item/id/'+id)
+                        axios.get('https://api.bamdb.cn/item/id/'+id)
                             .then(function (response) {
                                 const item = response.data;
                                 items.push(

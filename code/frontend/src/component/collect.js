@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-/* 
+/*
 * 需要传入的props（包装成json后可以简化）
 * props.status : 用户的收藏状态 （如 "在看"）
 * props.comment : 用户对条目的评论 (一段用户在收藏时写下的评论，可能需要字数限制)
@@ -80,13 +80,13 @@ class Collect extends Component {
     }
     componentWillMount() {
 
-        axios.get("http://202.120.40.8:30741/comment",{params:{itemId:this.props.itemid,userId:this.props.userid}}).then(
+        axios.get("https://api.bamdb.cn/comment",{params:{itemId:this.props.itemid,userId:this.props.userid}}).then(
             function(response)
             {
                 this.setState({comment:response.data});
             }.bind(this)
         )
-        axios.get("http://202.120.40.8:30741/rating/score",{params:{itemId:this.props.itemid,userId:this.props.userid}}).then(
+        axios.get("https://api.bamdb.cn/rating/score",{params:{itemId:this.props.itemid,userId:this.props.userid}}).then(
             function(response)
             {
                 this.setState({score:response.data.score});
@@ -95,13 +95,13 @@ class Collect extends Component {
 
     }
     componentWillReceiveProps(nextProps, nextContext) {
-        axios.get("http://202.120.40.8:30741/comment",{params:{itemId:this.props.itemid,userId:nextProps.userid}}).then(
+        axios.get("https://api.bamdb.cn/comment",{params:{itemId:this.props.itemid,userId:nextProps.userid}}).then(
             function(response)
             {
                 this.setState({comment:response.data});
             }.bind(this)
         )
-        axios.get("http://202.120.40.8:30741/rating/score",{params:{itemId:this.props.itemid,userId:nextProps.userid}}).then(
+        axios.get("https://api.bamdb.cn/rating/score",{params:{itemId:this.props.itemid,userId:nextProps.userid}}).then(
             function(response)
             {
                 this.setState({score:response.data.score});

@@ -68,7 +68,7 @@ class Register extends Component {
             mail: this.state.email
         }
         //开始验证
-        axios.post("http://202.120.40.8:30741/auth/verify",rows,{headers:{"Content-Type":'application/json'}})
+        axios.post("https://api.bamdb.cn/auth/verify",rows,{headers:{"Content-Type":'application/json'}})
 
         this.setState({verify:true});
     }
@@ -87,7 +87,7 @@ class Register extends Component {
         o[e.target.id]=e.target.value;
         this.setState(o);
     }
- 
+
     render() {
         var checkname = (this.state.name==="" ) ? <span /> : (usernameRegex.test(this.state.name) ? <Icon type={"check"} id={"checkdone"} /> : <Icon type={"warning"} id={"checkfalse"} />);
 

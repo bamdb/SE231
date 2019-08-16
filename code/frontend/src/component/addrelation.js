@@ -23,7 +23,7 @@ class Addrelation extends Component
         this.handleAlert=this.handleAlert.bind(this);
     }
     componentDidMount() {
-        axios.get("http://202.120.40.8:30741/item/id/"+this.props.itemid).then(
+        axios.get("https://api.bamdb.cn/item/id/"+this.props.itemid).then(
             function(res){
                 this.setState({prev:res.data.relationPrior,prior:res.data.relationSubsequent,normal:res.data.relationNormal});
 
@@ -36,7 +36,7 @@ class Addrelation extends Component
     }
     handledelete(id1,id2)
     {
-        axios.delete("http://202.120.40.8:30741/item/delete/relation",{params:{itemId:id2,relatedItemId:id1}}).then(
+        axios.delete("https://api.bamdb.cn/item/delete/relation",{params:{itemId:id2,relatedItemId:id1}}).then(
             function(res){
 
             }
@@ -48,21 +48,21 @@ class Addrelation extends Component
         axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
         switch(this.state.type)
         {
-            case 1:axios.post("http://202.120.40.8:30741/item/add/relation",{},{params:{priorId:this.props.itemid,subsequentId:this.state.id,relateType:0}}).then(
+            case 1:axios.post("https://api.bamdb.cn/item/add/relation",{},{params:{priorId:this.props.itemid,subsequentId:this.state.id,relateType:0}}).then(
                 function(res)
                 {
                    this.setState({content:"success!"})
                 }
             );
             break;
-            case 2:axios.post("http://202.120.40.8:30741/item/add/relation",{},{params:{priorId:this.state.id,subsequentId:this.props.itemid,relateType:1}}).then(
+            case 2:axios.post("https://api.bamdb.cn/item/add/relation",{},{params:{priorId:this.state.id,subsequentId:this.props.itemid,relateType:1}}).then(
                 function(res)
                 {
                     this.setState({content:"success!"})
                 }
             );
             break;
-            case 3:axios.post("http://202.120.40.8:30741/item/add/relation",{},{params:{priorId:this.props.itemid,subsequentId:this.state.id,relateType:1}}).then(
+            case 3:axios.post("https://api.bamdb.cn/item/add/relation",{},{params:{priorId:this.props.itemid,subsequentId:this.state.id,relateType:1}}).then(
                 function(res)
                 {
                     this.setState({content:"success!"})

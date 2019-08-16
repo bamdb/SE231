@@ -19,12 +19,12 @@ class Message extends Component{
     handleaddfriend()
     {
         console.log("您和Ta已经是好友！");
-        axios.get("http://202.120.40.8:30741/friend/isfriend?userId1="+this.state.message.message.senderId+"&userId2="+this.state.message.message.receiverId).then(
+        axios.get("https://api.bamdb.cn/friend/isfriend?userId1="+this.state.message.message.senderId+"&userId2="+this.state.message.message.receiverId).then(
             function(res)
             {
                 if(res.data==false)
                 {
-                    axios.post("http://202.120.40.8:30741/friend/add",{userId1:this.state.message.message.senderId,userId2:this.state.message.message.receiverId,status:0})
+                    axios.post("https://api.bamdb.cn/friend/add",{userId1:this.state.message.message.senderId,userId2:this.state.message.message.receiverId,status:0})
                 }
                 else {
                     this.setState({content:"您和Ta已经是好友！"})

@@ -36,7 +36,7 @@ class Useriteminfopage extends Component {
         var uri=window.location.href;;
         var id=uri.split('#')[1].split('/')[2];
         var text=this.state.totgrade;
-        var url2="http://202.120.40.8:30741/rating/update/itemid/"+id;
+        var url2="https://api.bamdb.cn/rating/update/itemid/"+id;
         $.ajax({
             url:url2,
             type:"PUT",
@@ -66,10 +66,10 @@ class Useriteminfopage extends Component {
         var id=uri.split('#')[1].split('/')[2];
         this.setState({userid:localStorage.getItem("userid"),id:id})
         axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
-        var url="http://202.120.40.8:30741/item/id/"+id;
-        var url1="http://202.120.40.8:30741/rating/itemid/"+id;
-        var url2="http://202.120.40.8:30741/activity/itemid/"+id;
-        var url3="http://202.120.40.8:30741/comment/itemid/"+id;
+        var url="https://api.bamdb.cn/item/id/"+id;
+        var url1="https://api.bamdb.cn/rating/itemid/"+id;
+        var url2="https://api.bamdb.cn/activity/itemid/"+id;
+        var url3="https://api.bamdb.cn/comment/itemid/"+id;
 
         axios.get(url).then(
             function (response){

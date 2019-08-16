@@ -25,7 +25,7 @@ class Edititem extends Component{
         if (this.state.update==false) {
             console.log("add")
             var pubtime = Date.parse(new Date(this.state.pubtime))
-            axios.post("http://202.120.40.8:30741/item/add", {
+            axios.post("https://api.bamdb.cn/item/add", {
                 itemname: this.state.itemname,
                 pubTime: pubtime,
                 chapterNum: this.state.chapternum,
@@ -41,7 +41,7 @@ class Edititem extends Component{
         }else if (this.state.update==true) {
             console.log("update")
             var pubtime = Date.parse(new Date(this.state.pubtime))
-            axios.put("http://202.120.40.8:30741/item/update", {
+            axios.put("https://api.bamdb.cn/item/update", {
                 id: this.state.itemid,
                 itemname: this.state.itemname,
                 pubTime: pubtime,
@@ -61,7 +61,7 @@ class Edititem extends Component{
 
     handlequery()
     {
-        axios.get("http://202.120.40.8:30741/item/id/"+this.state.itemid).then(
+        axios.get("https://api.bamdb.cn/item/id/"+this.state.itemid).then(
             function(response){
                 if (response.data != null) {
                     this.setState({update:true,itemname:response.data.itemname,pubtime:response.data.pubTime,chapternum:response.data.chapterNum,author:response.data.mainAuthor,imgurl:response.data.imgurl,type:response.data.type});

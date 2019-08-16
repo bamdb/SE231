@@ -19,7 +19,7 @@ class Adminpage extends Component{
     submit()
     {
         axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
-        axios.put("http://202.120.40.8:30741/auth/update/"+this.state.username,{},{params:{id:this.state.id,mail:this.state.email,password:this.state.password}}).then(
+        axios.put("https://api.bamdb.cn/auth/update/"+this.state.username,{},{params:{id:this.state.id,mail:this.state.email,password:this.state.password}}).then(
             function(res)
             {
                 alert("success");
@@ -27,12 +27,12 @@ class Adminpage extends Component{
         )
         if(this.state.role!="")
         {
-            axios.post("http://202.120.40.8:30741/auth/grant/role/"+this.state.role,{},{params:{username:this.state.username,operation:"+"}});
+            axios.post("https://api.bamdb.cn/auth/grant/role/"+this.state.role,{},{params:{username:this.state.username,operation:"+"}});
         }
     }
 
     componentWillMount() {
-        /*axios.get("http://202.120.40.8:30741/auth/id/"+this.state.userid+"?access_token="+localStorage.getItem("access_token")).then(
+        /*axios.get("https://api.bamdb.cn/auth/id/"+this.state.userid+"?access_token="+localStorage.getItem("access_token")).then(
             function(res){
                 this.setState({userinfo:res.data});
             }.bind(this)
@@ -55,7 +55,7 @@ class Adminpage extends Component{
     }
 
     handlesearch(){
-        axios.get("http://202.120.40.8:30741/auth/id/"+this.state.userid).then(
+        axios.get("https://api.bamdb.cn/auth/id/"+this.state.userid).then(
             function(res)
             {
                 this.setState({username:res.data.username||"",email:res.data.mail||"",imgurl:res.data.imgUrl||""});

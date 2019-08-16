@@ -132,7 +132,7 @@ class Collectform extends Component {
         var date = Date.parse(new Date());
         //var yourtags=this.state.yourtags;
         axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
-        axios.post("http://202.120.40.8:30741/activity/add",{actTime:date,actType:this.state.status,userId:this.state.userid,itemId:this.props.itemid})
+        axios.post("https://api.bamdb.cn/activity/add",{actTime:date,actType:this.state.status,userId:this.state.userid,itemId:this.props.itemid})
             .then(function (res) {
                 console.log("add activity:",res.data)
             })
@@ -140,10 +140,10 @@ class Collectform extends Component {
                 console.log("add activity error!",err)
             });
         console.log(date)
-        axios.post("http://202.120.40.8:30741/comment/insert",{itemId:this.props.itemid,userId:localStorage.getItem("userid"),content:this.state.content,pubTime:date});
+        axios.post("https://api.bamdb.cn/comment/insert",{itemId:this.props.itemid,userId:localStorage.getItem("userid"),content:this.state.content,pubTime:date});
 
-        axios.put("http://202.120.40.8:30741/rating/update","success",{params:{userId:localStorage.getItem("userid"),itemId:this.props.itemid,score:this.state.score}});
-        //axios.post("http://202.120.40.8:30741/item/add/tag?"+"userId="+localStorage.getItem("userid")+"&itemId="+this.props.itemid,yourtags);
+        axios.put("https://api.bamdb.cn/rating/update","success",{params:{userId:localStorage.getItem("userid"),itemId:this.props.itemid,score:this.state.score}});
+        //axios.post("https://api.bamdb.cn/item/add/tag?"+"userId="+localStorage.getItem("userid")+"&itemId="+this.props.itemid,yourtags);
 
         var chapters=[];
         switch (this.state.status) {
@@ -168,7 +168,7 @@ class Collectform extends Component {
         }
         if(this.state.status<=3) {
             axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("access_token");
-            axios.put("http://202.120.40.8:30741/activity/update/progress",
+            axios.put("https://api.bamdb.cn/activity/update/progress",
                 {userId: localStorage.getItem("userid"), itemId: this.props.itemid, chapters: chapters}
             ).then(function (res) {
                 console.log("success:", res.data);

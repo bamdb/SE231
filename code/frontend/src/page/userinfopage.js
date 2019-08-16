@@ -15,7 +15,7 @@ class Userinfopage extends Component{
     componentWillMount() {
         if(localStorage.getItem("username")!=null) {
             var imgurls=[];
-            axios.get("http://202.120.40.8:30741/rating/browser", {
+            axios.get("https://api.bamdb.cn/rating/browser", {
                 params: {
                     type: 0,
                     page: 0,
@@ -28,7 +28,7 @@ class Userinfopage extends Component{
                         imgurls.push(response.data[1].item.imgurl);
                     }
                 })
-            axios.get("http://202.120.40.8:30741/rating/browser", {
+            axios.get("https://api.bamdb.cn/rating/browser", {
                 params: {
                     type: 2,
                     page: 0,
