@@ -32,8 +32,8 @@ code for summer project
 
 ### 访问
 <https://www.bamdb.cn>
-
-
+### API
+<https://api.bamdb.cn>
 
 ### 集群信息
 * ubuntularge: 		202.120.40.8	
