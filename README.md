@@ -31,13 +31,14 @@ code for summer project
 * 当学生手头同时在观看/阅读多个作品的时候，便于学生进行学习进度、观看进度的管理，以防遗忘。
 
 ### 访问
-<http://www.bamdb.cn>
+<https://www.bamdb.cn>
+
 
 
 ### 集群信息
 * ubuntularge: 		202.120.40.8	
 	* 4 vCPU | 8 GiB | Ubuntu 18.04
-	* Nginx | Elastic master | Redis slave | MySQL master
+	* Nginx(frontend proxy) | Elastic master | Redis slave | MySQL master
 * bamdb-elastic: 	47.103.123.5	
 	* 4 vCPU | 16 GiB | Ubuntu 18.04
 	* Elastic master | MongoDB shard3 | Mongo router
@@ -74,9 +75,9 @@ code for summer project
 * pleiadesian: 47.102.207.87 	
 	* 1 vCPU | 2 GiB | Ubuntu 18.04
 	* MySQL slave | Redis slave | MongoDB shard3
-* bandwagon: 216.24.184.190	
-	* 1 vCPU | 2 GiB | Centos 7
-	* Nginx
+* bandwagon: 69.171.66.155
+	* 4 vCPU | 4 GiB | Centos 7
+	* Nginx(backend proxy) | SSL Cert
 
 
 ### 技术栈
@@ -161,6 +162,7 @@ code for summer project
 * RESTful
     * Open API
         * [openapi.yml](https://app.swaggerhub.com/apis/ba818/open-api/1.0.0 "swaggerhub")
+* ssl认证
 * 性能测试
     * Locust
 
