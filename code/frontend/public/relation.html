@@ -132,7 +132,7 @@
   var reg = new RegExp("(^|&)"+ paramname +"=([^&]*)(&|$)")
   var r = window.location.search.substr(1).match(reg)
   var itemid = unescape(r[2])
-  var url = "http://202.120.40.8:30741/item/graph/id/" + itemid
+  var url = "https://api.bamdb.cn/item/graph/id/" + itemid
   console.log(url)
 
   d3.json(url, function (error, root) {
