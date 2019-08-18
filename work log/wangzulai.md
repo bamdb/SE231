@@ -126,3 +126,9 @@
 # 2019-08-12
 * complete visualization of relation
 * init ios config
+
+# 2019-08-16
+* finish ssl cert
+
+# 2019-08-17
+* run app on ios
