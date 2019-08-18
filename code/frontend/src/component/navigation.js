@@ -93,9 +93,9 @@ class Navigation extends Component {
     }
 
     componentWillMount() {
-        if(window.location.href.split("#")[1]!=undefined)
+        if(window.location.href.split("/")[3]!=undefined)
         {
-            var x=window.location.href.split("#")[1].split("/")[1];
+            var x=window.location.href.split("/")[4];
             console.log(x);
             switch (x)
             {

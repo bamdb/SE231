@@ -18,7 +18,7 @@ class Messagepage extends Component{
 
         if(localStorage.getItem("userid")==null)
         {
-            window.location.href="/#/login";
+            window.location.href="/login";
         }
         else this.setState({userid:localStorage.getItem("userid")})
     }

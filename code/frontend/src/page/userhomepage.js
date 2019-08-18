@@ -39,7 +39,7 @@ class Userhomepage extends Component{
             )
         }
         else{
-            //window.location.href="/#/login";
+            //window.location.href="/login";
         }
     }
 

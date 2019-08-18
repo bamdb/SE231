@@ -73,10 +73,8 @@ class Login extends Component{
                     function(res)
                     {
                         localStorage.setItem("userid",res.data.id);
-                        window.location.href="/#/";
-                        window.location.reload();
+                        window.location.href="/";
                     }
-
                 )
                 axios.get("https://api.bamdb.cn/auth/oauth/check_token",{params:{token:localStorage.getItem("access_token")}}).then(
                     function(res)
@@ -112,7 +110,7 @@ class Login extends Component{
 
     render(){
         if(this.state.islogin === 1) {
-            window.location.href("http://localhost:3000/#/");
+            window.location.href("https://www.bamdb.cn");
         }
         return(
             <div id={"login"}>

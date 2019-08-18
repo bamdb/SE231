@@ -41,9 +41,9 @@ class Topic extends Component {
     }
     componentDidMount()
     {
-        if(window.location.href.split("#")[1]!==undefined)
+        if(window.location.href.split("/")[1]!==undefined)
         {
-            var x = window.location.href.split("#")[1].split("/")[1];
+            var x = window.location.href.split("/")[1].split("/")[1];
         }
         if(this.props.topicId!==undefined)
         {

@@ -36,7 +36,7 @@ class Editorpage extends React.Component {
     componentWillMount() {
         if(localStorage.getItem("userid")==null)
         {
-          //  window.location.href="/#/login";
+          //  window.location.href="/login";
         }
     }
 

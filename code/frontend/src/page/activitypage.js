@@ -30,7 +30,7 @@ class Activitypage extends Component{
         var friends=[];
         if(localStorage.getItem("userid")==null)
         {
-            window.location.href="/#/login";
+            window.location.href="/login";
         }
         else {
             userid=localStorage.getItem("userid");

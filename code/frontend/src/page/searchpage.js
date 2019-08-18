@@ -87,7 +87,7 @@ class Searchpage extends Component {
     }
 
     componentWillMount() {
-        const search = window.location.href.split('#')[1].split('/')[2];
+        const search = window.location.href.split('/')[4];
         console.log(decodeURI(search));
         this.setState({
             search:decodeURI(search),

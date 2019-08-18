@@ -5,7 +5,7 @@ import UserHomepage from './page/userhomepage'
 import Itembrowsepage from './page/itembrowsepage'
 import LoginPage from './page/loginpage'
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Route,
   Switch,
 } from "react-router-dom";
@@ -49,7 +49,7 @@ class App extends Component{
     }
 
     componentWillMount() {
-        if(window.location.href.split('#')[1]==='/404') {
+        if(window.location.href.split('/')[3]==='/404') {
             this.setState({page404: true});
         }
     }

@@ -42,10 +42,10 @@ class Reply extends Component {
     }
     componentWillMount() {
         axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
-        this.setState({topicid:window.location.href.split("#")[1].split("/")[2]})
+        this.setState({topicid:window.location.href.split("/")[4]})
         if(localStorage.getItem("userid")==null)
         {
-            window.location.href="/#/login";
+            window.location.href="/login";
         }
         else {
             this.setState({userid:localStorage.getItem("userid")})

@@ -47,7 +47,7 @@ class Userinfopage extends Component{
             })
         }
         else {
-            window.location.href="/#/login";
+            window.location.href="/login";
         }
     }
 

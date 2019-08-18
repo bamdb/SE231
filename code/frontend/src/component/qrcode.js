@@ -28,7 +28,7 @@ class QRcode extends Component{
                 }.bind(this))
         }
         else {
-            window.location.href = "/#/404";
+            window.location.href = "/404";
             window.location.reload();
         }
     }
@@ -52,7 +52,7 @@ class QRcode extends Component{
                     }
                 })
                 localStorage.setItem("role",role);
-                window.location.href="/#/";
+                window.location.href="/";
                 window.location.reload();
             }
         )

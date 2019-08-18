@@ -26,9 +26,9 @@ class Topicdetailpage extends Component{
 
     componentWillMount() {
 
-        if(window.location.href.split("#")[1]!==undefined)
+        if(window.location.href.split("/")[3]!==undefined)
         {
-            var id = window.location.href.split("#")[1].split("/")[2];
+            var id = window.location.href.split("/")[4];
             console.log(id);
             var url="https://api.bamdb.cn/topic/id/"+id;
         }
