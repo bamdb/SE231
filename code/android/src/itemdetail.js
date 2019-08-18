@@ -9,8 +9,8 @@ import Navigationbar from "./navigationbar";
 export default class Itemdetail extends React.Component{
     static navigationOptions = ({ navigation }) => {
         return {
-            
-            
+
+
           };
       }
     constructor(props)
@@ -49,19 +49,19 @@ export default class Itemdetail extends React.Component{
     {
         var progress=this.state.progress;
         progress.chapters[i].finish=!progress.chapters[i].finish;
-        axios.put("http://202.120.40.8:30741/activity/update/progress",{userId: this.state.progress.userId, itemId: this.state.progress.itemId, chapters: this.state.progress.chapters})
+        axios.put("https://api.bamdb.cn/activity/update/progress",{userId: this.state.progress.userId, itemId: this.state.progress.itemId, chapters: this.state.progress.chapters})
         this.setState({progress:progress})
     }
     componentDidMount()
     {
-        
-        axios.get("http://202.120.40.8:30741/item/id/"+this.props.navigation.getParam("itemid")).then(
+
+        axios.get("https://api.bamdb.cn/item/id/"+this.props.navigation.getParam("itemid")).then(
             function(res)
             {
                 this.setState({item:res.data});
             }.bind(this)
         );
-        axios.get("http://202.120.40.8:30741/comment/itemid/"+this.props.navigation.getParam("itemid")).then(
+        axios.get("https://api.bamdb.cn/comment/itemid/"+this.props.navigation.getParam("itemid")).then(
             function(res)
             {
                 this.setState({comments:res.data});
@@ -73,22 +73,22 @@ export default class Itemdetail extends React.Component{
             }
         )
         AsyncStorage.getItem("userid",(error,result)=>{
-            axios.get("http://202.120.40.8:30741/activity/progress",{params:{itemId:this.props.navigation.getParam("itemid"),userId:result}}).then(
+            axios.get("https://api.bamdb.cn/activity/progress",{params:{itemId:this.props.navigation.getParam("itemid"),userId:result}}).then(
                 function(res){
                     if(res.data)
                     {
                         this.setState({showprogress:true,progress:res.data})
-                        
+
                     }
-                    
+
                 }.bind(this)
             ).catch(
                 (err)=>{alert(err)}
             )
         })
-        
-        
-        
+
+
+
     }
     render()
     {
@@ -99,7 +99,7 @@ export default class Itemdetail extends React.Component{
                     <Card>
                         <Flex>
                             <Flex.Item>
-                            <Image source={{uri: 'http://202.120.40.8:30741/image/id/'+comment.user.id+"0"}} style={{width:30,height:30}}></Image>
+                            <Image source={{uri: 'https://api.bamdb.cn/image/id/'+comment.user.id+"0"}} style={{width:30,height:30}}></Image>
                             </Flex.Item>
                             <Flex.Item>
                             <Text >{comment.comment.content}</Text>
@@ -113,7 +113,7 @@ export default class Itemdetail extends React.Component{
         if(this.state.showprogress)
         {
             var i=0;
-           
+
             this.state.progress.chapters.map(
                 chapter=>{
                     var j=0
@@ -123,11 +123,11 @@ export default class Itemdetail extends React.Component{
                             var tmpi=i;
                             var tmpj=j;
                             rows1.push(
-                                
+
                                 <Button type={this.state.progress.chapters[i].sections[j]?"primary":"warning"} style={{}} onPress={()=>this.handlepress(tmpi,tmpj)}>
                                     {i+"."+j}
                                 </Button>
-                                
+
                             )
                             j++
                         })
@@ -135,20 +135,20 @@ export default class Itemdetail extends React.Component{
                     else{
                         var tmpi=i;
                         rows1.push(
-                            
+
                             <Button type={this.state.progress.chapters[i].finish?"primary":"warning"} style={{width:70}} onPress={()=>this.handlepressnormal(tmpi)}>
                                 {i}
                             </Button>
-                            
-                            
+
+
                         )
                     }
-                    
+
                     i++
                 }
             )
-                
-            
+
+
         }
         var item=this.state.item;
         return(
@@ -176,11 +176,11 @@ export default class Itemdetail extends React.Component{
                 {rows1}
                 </Flex>
                 }
-                
+
                 <List>
                     {rows}
                 </List>
-                
+
             </View>
             </ScrollView>
         )

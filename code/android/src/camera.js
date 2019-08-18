@@ -20,9 +20,9 @@ export default class camera2 extends React.Component{
         {
             this.startAnimation();
             this.setState({ focusedScreen: true })
-            
+
         }
-        
+
         );
         navigation.addListener("willBlur", () =>
         this.setState({ focusedScreen: false, showModal: false })
@@ -40,17 +40,17 @@ export default class camera2 extends React.Component{
             }
         ).start(() => this.startAnimation());
       };
-    
+
     barcodeReceived(e)
     {
         if(e)
         {
-            
+
             this.setState({code:e.data})
-            
+
             AsyncStorage.getItem("access_token",(error,result)=>{
-                
-                axios.put("http://202.120.40.8:30741/auth/settoken",{},{params:{uuid:e.data,token:result}}).then(
+
+                axios.put("https://api.bamdb.cn/auth/settoken",{},{params:{uuid:e.data,token:result}}).then(
                 function(res)
                 {
                     alert("success");
@@ -62,20 +62,20 @@ export default class camera2 extends React.Component{
                     alert("fail");
                 }
             )
-            
+
             })
-            
+
         }
         else{
             alert("fail")
         }
     }
-    
+
     render()
     {
-        
+
         return(
-            
+
             this.state.focusedScreen &&<RNCamera
                 style={{
                     flex: 1,
@@ -96,7 +96,7 @@ export default class camera2 extends React.Component{
                 />
                 </View>
             </RNCamera>
-            
+
         )
     }
 }

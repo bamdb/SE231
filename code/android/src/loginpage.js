@@ -17,11 +17,11 @@ export default class HomeScreen extends React.Component {
     super(props);
     this.state={username:"",password:""};
     this.handlesubmit=this.handlesubmit.bind(this);
-    
+
   }
   componentDidMount()
   {
-    
+
     AsyncStorage.getItem("refresh_token",
     (error,result)=>{
       if(error){
@@ -30,7 +30,7 @@ export default class HomeScreen extends React.Component {
         var refresh_token=result
         AsyncStorage.getItem("username",
         (error,result)=>{
-          
+
           if(error)
           {
 
@@ -49,7 +49,7 @@ export default class HomeScreen extends React.Component {
                 params.append("password", password);
                 params.append("client_id", "browser");
                 params.append("client_secret", "");
-                axios.post("http://202.120.40.8:30741/auth/oauth/token",params,{
+                axios.post("https://api.bamdb.cn/auth/oauth/token",params,{
                   params:{refresh_token:refresh_token},
                   headers: {
                   'Content-Type': 'application/x-www-form-urlencoded'
@@ -72,9 +72,9 @@ export default class HomeScreen extends React.Component {
       }
     }
     )
-    
+
   }
-  
+
   handlesubmit()
   {
         var params = new URLSearchParams();
@@ -83,7 +83,7 @@ export default class HomeScreen extends React.Component {
         params.append("password", this.state.password);
         params.append("client_id", "browser");
         params.append("client_secret", "");
-        axios.post("http://202.120.40.8:30741/auth/oauth/token",
+        axios.post("https://api.bamdb.cn/auth/oauth/token",
             params,
             {headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -91,25 +91,25 @@ export default class HomeScreen extends React.Component {
             withCredentials:true}).then(
               function(res)
               {
-                
+
                 global.access_token=res.data.access_token;
                 global.username=this.state.username;
                 axios.defaults.headers.common['Authorization'] = "Bearer "+res.data.access_token;
                 AsyncStorage.setItem("access_token",res.data.access_token)
                 AsyncStorage.setItem("refresh_token",res.data.refresh_token)
-                axios.get("http://202.120.40.8:30741/auth/username/"+this.state.username).then(
+                axios.get("https://api.bamdb.cn/auth/username/"+this.state.username).then(
                     function(res)
                     {
-                        
-                        
+
+
                         global.userid=res.data.id;
-                        
-                        AsyncStorage.setItem("username",this.state.username)  
-                        AsyncStorage.setItem("password",this.state.password)   
-                        AsyncStorage.setItem("userid",String(res.data.id))  
+
+                        AsyncStorage.setItem("username",this.state.username)
+                        AsyncStorage.setItem("password",this.state.password)
+                        AsyncStorage.setItem("userid",String(res.data.id))
                         this.props.navigation.navigate("Home")
-                        
-                                            
+
+
                     }.bind(this)
 
                 ).catch(
@@ -118,23 +118,23 @@ export default class HomeScreen extends React.Component {
                     alert(err);
                   }
                 )
-                
-                
+
+
               }.bind(this)
             ).catch(
               function(err)
               {
-                
+
                 alert(err);
-                
+
               }
             )
   }
   render() {
-    
+
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center",padding:30 }}>
-        
+
         <InputItem
             defaultValue=""
             clear
@@ -156,13 +156,13 @@ export default class HomeScreen extends React.Component {
           <Flex>
             <Flex.Item>
               <Button  type="primary" onPress={this.handlesubmit}>login</Button>
-              
+
             </Flex.Item>
-            
+
           </Flex>
-        
-        
-        
+
+
+
       </View>
     );
   }

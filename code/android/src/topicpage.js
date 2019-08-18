@@ -9,7 +9,7 @@ import Navigationbar from "./navigationbar";
 export default class Topicpage extends React.Component{
     static navigationOptions = ({ navigation }) => {
         return {
-            
+
           };
       }
     constructor(props)
@@ -21,7 +21,7 @@ export default class Topicpage extends React.Component{
     {
         const {navigation}=this.props;
         this.focusListener = navigation.addListener("didFocus", () => {
-            axios.get("http://202.120.40.8:30741/topic/all").then(
+            axios.get("https://api.bamdb.cn/topic/all").then(
                 function (response){
 
                 this.setState({topics:response.data});
@@ -33,8 +33,8 @@ export default class Topicpage extends React.Component{
                 }
             )
         })
-        
-    }    
+
+    }
     render()
     {
         /*var rows=[];
@@ -63,12 +63,12 @@ export default class Topicpage extends React.Component{
             </View>*/
             <FlatList
             data={this.state.topics}
-               renderItem={({item}) => 
+               renderItem={({item}) =>
                <Card >
                <Card.Header
                title={item.title}
                extra={item.id}
-               thumb={"http://202.120.40.8:30741/image/id/"+item.id+"1"}
+               thumb={"https://api.bamdb.cn/image/id/"+item.id+"1"}
                />
                <Card.Body>
                <View onPress={()=>this.props.navigation.navigate('Topicdetail',{topicid:item.id})} style={{ height: 10 }}>
@@ -80,10 +80,10 @@ export default class Topicpage extends React.Component{
                extra="powered by bamdb"
                />
            </Card>
-             
+
              }
             >
- 
+
             </FlatList>
         )
     }

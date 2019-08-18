@@ -33,10 +33,10 @@ export default class Itemlist extends React.Component{
         }
         else{
           tmptype=2
-        }  
+        }
         var current=this.state.current+1;
         axios.get(
-              "http://202.120.40.8:30741/rating/browser",{params:{
+              "https://api.bamdb.cn/rating/browser",{params:{
                       type:tmptype,
                       page:current,
                       pageSize:10
@@ -48,7 +48,7 @@ export default class Itemlist extends React.Component{
               console.log(response.data);
           }.bind(this)
           ).catch(
-            function (err) 
+            function (err)
             {
                 alert(err);
             }
@@ -66,9 +66,9 @@ export default class Itemlist extends React.Component{
         }
         else{
           tmptype=2
-        }  
+        }
         axios.get(
-              "http://202.120.40.8:30741/rating/browser",{params:{
+              "https://api.bamdb.cn/rating/browser",{params:{
                       type:tmptype,
                       page:0,
                       pageSize:10
@@ -80,7 +80,7 @@ export default class Itemlist extends React.Component{
               console.log(response.data);
           }.bind(this)
           ).catch(
-            function (err) 
+            function (err)
             {
                 alert(err);
             }
@@ -104,9 +104,9 @@ export default class Itemlist extends React.Component{
       }
       else{
         tmptype=2
-      }  
+      }
       axios.get(
-            "http://202.120.40.8:30741/rating/browser",{params:{
+            "https://api.bamdb.cn/rating/browser",{params:{
                     type:tmptype,
                     page:0,
                     pageSize:10
@@ -118,13 +118,13 @@ export default class Itemlist extends React.Component{
             console.log(response.data);
         }.bind(this)
         ).catch(
-          function (err) 
+          function (err)
           {
               alert(err);
           }
         )
     })
-      
+
     }
     componentWillUpdate()
     {
@@ -132,7 +132,7 @@ export default class Itemlist extends React.Component{
     }
     render()
     {
-        
+
         return(
             <View>
             <View style={{height:50}}>
@@ -164,21 +164,21 @@ export default class Itemlist extends React.Component{
                       >
 
                       </TabBar.Item>
-                      
+
                 </TabBar>
             </View>
             <View style={{height:550}}>
               <FlatList
                   data={this.state.itemlist}
                   renderItem={
-                    ({item}) => 
+                    ({item}) =>
                         <Card >
                         <Card.Header
                           title={item.item.itemname}
                           thumbStyle={{ width: 30, height: 30 }}
                           thumb={"http://"+item.item.imgurl}
                           extra=""
-                          
+
                         />
                         <Card.Body>
                           <View onPress={()=>this.props.navigation.navigate('Itemdetail',{itemid:item.item.id})} style={{ height: 10 }}>
@@ -193,17 +193,17 @@ export default class Itemlist extends React.Component{
                 }
                 onEndReached={()=>this.handlebottom()}
                 >
-                    
+
               </FlatList>
           </View>
-          
+
           </View>
         )
 
-              
-                
-                
-                 
-           
+
+
+
+
+
     }
 }

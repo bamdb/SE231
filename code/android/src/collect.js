@@ -13,19 +13,19 @@ export default class Collect extends React.Component{
     }
     componentDidMount()
     {
-        
+
         const { navigation } = this.props;
-        
+
         this.focusListener = navigation.addListener("didFocus", () => {
             AsyncStorage.getItem("userid",(error,result)=>
             {
                 if(error)
                 {
-                    
+
                 }
                 else{
-                    
-                    axios.get("http://202.120.40.8:30741/activity/userid/"+result).then(
+
+                    axios.get("https://api.bamdb.cn/activity/userid/"+result).then(
                         function(res){
                             this.setState({activities:res.data})
                         }.bind(this)
@@ -36,16 +36,16 @@ export default class Collect extends React.Component{
                         }
                     )
                 }
-                
+
             })
-        
+
         }
         )
     }
     render()
     {
         return(
-            <FlatList 
+            <FlatList
                 data={this.state.activities}
                 renderItem={({item}) =>
                 <Card >
@@ -54,7 +54,7 @@ export default class Collect extends React.Component{
                     thumbStyle={{ width: 30, height: 30 }}
                     thumb={"http://"+item.item.imgurl}
                     extra=""
-                    
+
                     />
                     <Card.Body>
                     <View  style={{ height: 20 }}>
@@ -65,8 +65,8 @@ export default class Collect extends React.Component{
                         <Flex.Item style={{flex:5}}>
                         <Text onPress={()=>this.props.navigation.navigate("Itemdetail",{itemid:item.item.id})}>{item.item.itemname}</Text>
                         </Flex.Item>
-                        
-                        
+
+
                         </Flex>
                     </View>
                     </Card.Body>
@@ -76,7 +76,7 @@ export default class Collect extends React.Component{
                     />
                 </Card>
             }
-            >            
+            >
             </FlatList>
         )
     }

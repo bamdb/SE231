@@ -8,8 +8,8 @@ import Navigationbar from "./navigationbar";
 export default class Topicdetail extends React.Component{
     static navigationOptions = ({ navigation }) => {
         return {
-            
-            
+
+
           };
       }
     constructor(props)
@@ -19,18 +19,18 @@ export default class Topicdetail extends React.Component{
     }
     componentWillMount()
     {
-        axios.get("http://202.120.40.8:30741/topic/id/"+this.props.navigation.getParam("topicid","1"))
+        axios.get("https://api.bamdb.cn/topic/id/"+this.props.navigation.getParam("topicid","1"))
             .then(
-                function (res) 
+                function (res)
                 {
                 this.setState({data: res.data});
                 }.bind(this)
             ).catch(
                 function(err)
                 {
-                    this.setState({data: {replyList:[{replyContent:"networkerr"}]}});                    
+                    this.setState({data: {replyList:[{replyContent:"networkerr"}]}});
                 }.bind(this)
-                
+
             )
     }
     render()
@@ -38,27 +38,27 @@ export default class Topicdetail extends React.Component{
         var rows=[];
         this.state.data.replyList.map(
             reply=>{
-                
+
                 rows.push(
                     <List.Item>
                         <Card>
                         <Flex>
                             <Flex.Item>
-                            <Image source={{uri:"http://202.120.40.8:30741/image/id/"+reply.user.id+"0"}} style={{width:30,height:30}}></Image>
+                            <Image source={{uri:"https://api.bamdb.cn/image/id/"+reply.user.id+"0"}} style={{width:30,height:30}}></Image>
                             </Flex.Item>
-                            
+
                             <Flex.Item>
                             <Text >{reply.replyContent}</Text>
                             </Flex.Item>
                         </Flex>
                         </Card>
-                        
+
                     </List.Item>
                 )
             }
         )
         return(
-            
+
             <ScrollView
                 style={{ flex: 1, backgroundColor: '#f5f5f9' }}
                 automaticallyAdjustContentInsets={false}
