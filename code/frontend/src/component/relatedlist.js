@@ -9,6 +9,8 @@ import Browserlist from "./browserlist";
 import Briefitemlist from "./briefitemlist";
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
+import {Icon} from "antd";
+import {Link, Redirect} from "react-router-dom";
 
 class Relateditem extends Component {
     constructor(props) {
@@ -60,9 +62,28 @@ class Relateditem extends Component {
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
                 </Grid>
+                <Grid item xs={12}>
+                    <ExpansionPanel>
+                        <ExpansionPanelSummary
+                            expandIcon={<ExpandMoreIcon/>}
+                            aria-controls="panel3a-content"
+                            id="panel3a-header"
+                        >
+                            <Typography >关联可视化</Typography>
+                        </ExpansionPanelSummary>
+                        <ExpansionPanelDetails>
+                            <a href={'https://www.bamdb.cn/relation.html?id='+this.props.itemid}>
+                                <Icon type="radar-chart" />
+                                <span>
+                                    开始绘图
+                                </span>
+                            </a>
+                        </ExpansionPanelDetails>
+                    </ExpansionPanel>
+                </Grid>
             </Grid>
         );
     }
 }
- 
+
 export default Relateditem;

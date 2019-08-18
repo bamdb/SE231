@@ -128,7 +128,7 @@ class Useriteminfopage extends Component {
                         </Grid>
                         <Grid  item xs={3} >
                             <Collect status={this.state.status} totGrade={this.state.totgrade} avgGrade={this.state.rating.avgScore} rank={this.state.rating.rank} itemid={this.state.id} userid={this.state.userid}/>
-                            <Relateditem prior={itemdata.relationPrior} subsequent={itemdata.relationSubsequent} normal={itemdata.relationNormal}/>
+                            <Relateditem prior={itemdata.relationPrior} subsequent={itemdata.relationSubsequent} normal={itemdata.relationNormal} itemid={itemdata.id}/>
                         </Grid>
                         <Grid item xs={1}/>
                     </Grid>

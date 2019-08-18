@@ -82,7 +82,7 @@ class Comment extends Component {
                 <Divider />
                 <Grid container spacing={2}>
                     <Grid item xs={2} justify="center">
-                        <Avatar src={"https://api.bamdb.cn/image/"+this.props.userid+"0"} className={useStyles.avatar} onClick={this.handlevisible}/>
+                        <Avatar src={"https://api.bamdb.cn/image/id/"+this.props.userid+"0"} className={useStyles.avatar} onClick={this.handlevisible}/>
                         <Modal title="加为好友" visible={this.state.visible}
                                onOk={this.handleOk} onCancel={this.handleCancel}
                         >
