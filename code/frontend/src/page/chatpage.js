@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Chat from 'chat-react';
 import Identicon from "identicon.js";
 import '../css/chatbox.css';
+import Websocket from 'react-websocket';
+import axios from "axios";
 
 class Chatpage extends Component {
     state = {
@@ -16,6 +18,7 @@ class Chatpage extends Component {
         timestamp: new Date().getTime(),
         uuid: ""
     }
+
     componentWillMount() {
         this.setState({uuid : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
             var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
@@ -24,24 +27,60 @@ class Chatpage extends Component {
         });
     }
 
+    handlesocket(message) {
+        const userid = message.split(' ')[0]
+        const content = message.slice(2)
+        const {messages = []} = this.state;
+        if (userid == localStorage.getItem("id")) {
+            console.log("self")
+            return
+        }
+        axios.get("https://api.bamdb.cn/auth/id/"+userid).then(
+            function (response){
+                const v = {
+                    timestamp: (new Date()).getTime(),
+                    userInfo: {
+                        avatar: response.data.imgUrl,
+                        name: response.data.username,
+                        userId: response.data.id
+                    },
+                    value: content
+                };
+                messages.push(v);
+                console.log(messages)
+                this.setState({messages, timestamp: new Date().getTime(), inputValue: ''});
+            }.bind(this)
+        )
+    }
+
     setInputfoucs = () => {
         this.chat.refs.input.inputFocus();  //set input foucus
     }
+
     setScrollTop = () => {
         this.chat.refs.message.setScrollTop(1200);  //set scrollTop position
     }
+
     sendMessage = (v) => {
         const {value} = v;
         if (!value) return;
         const {messages = []} = this.state;
         messages.push(v);
+        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+        axios.put("https://api.bamdb.cn/message/chat",{},{params:{userId:v.userInfo.userId,content:v.value}}).then(
+            function(res)
+            {
+                console.log("success")
+            }
+        );
         this.setState({messages, timestamp: new Date().getTime(), inputValue: ''});
     }
+
     render() {
         const {inputValue, messages, timestamp} = this.state;
         const islogin = (localStorage.getItem("userid")!=null);
-
-        var data = new Identicon(this.state.uuid, 420).toString();
+        const url = "wss://ws.bamdb.cn/chatwebsocket"
+        const data = new Identicon(this.state.uuid, 420).toString();
         const userInfo = islogin? {
             avatar: "https://api.bamdb.cn/image/id/"+localStorage.getItem("userid")+"0",
             name: localStorage.getItem("username"),
@@ -51,20 +90,22 @@ class Chatpage extends Component {
             name: "匿名",
             userId: 0
         }
-        console.log(messages)
         return (
-            <Chat
-                width="400px"
-                ref={el => this.chat = el}
-                className="my-chat-box"
-                dataSource={messages}
-                userInfo={userInfo}
-                value={inputValue}
-                sendMessage={this.sendMessage}
-                timestamp={timestamp}
-                placeholder="write some thing..."
-                messageListStyle={{width: '100%', height: window.outerHeight}}
-            />
+            <div class="chat-box-wrapper">
+                <Websocket onMessage={this.handlesocket.bind(this)} url={url}/>
+                <Chat
+                    width="400px"
+                    ref={el => this.chat = el}
+                    className="my-chat-box"
+                    dataSource={messages}
+                    userInfo={userInfo}
+                    value={inputValue}
+                    sendMessage={this.sendMessage}
+                    timestamp={timestamp}
+                    placeholder="请输入内容"
+                    messageListStyle={{width: '100%', height: window.outerHeight}}
+                />
+            </div>
         );
     }
 }
