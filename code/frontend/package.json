@@ -25,7 +25,8 @@
     "react-scripts": "3.0.1",
     "react-testing-library": "^8.0.1",
     "react-websocket": "^2.0.1",
-    "chat-react": "latest"
+    "chat-react": "latest",
+    "identicon.js": "latest"
   },
   "jest": {
     "collectCoverageFrom": [
