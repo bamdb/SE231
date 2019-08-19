@@ -31,10 +31,10 @@ class Chatpage extends Component {
         const userid = message.split(' ')[0]
         const content = message.slice(2)
         const {messages = []} = this.state;
-        if (userid == localStorage.getItem("id")) {
-            console.log("self")
+        if (userid == localStorage.getItem("userid")) {
             return
         }
+        axios.defaults.headers.common['Authorization'] = "";
         axios.get("https://api.bamdb.cn/auth/id/"+userid).then(
             function (response){
                 const v = {
