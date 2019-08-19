@@ -132,3 +132,8 @@
 
 # 2019-08-17
 * run app on ios
+
+# 2019-08-18
+* try release ios app
+* rm # in url
+* add visualization to frontend
