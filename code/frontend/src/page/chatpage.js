@@ -48,7 +48,7 @@ class Chatpage extends Component {
                 };
                 messages.push(v);
                 console.log(messages)
-                this.setState({messages, timestamp: new Date().getTime(), inputValue: ''});
+                this.setState({messages, timestamp: new Date().getTime()});
             }.bind(this)
         )
     }
