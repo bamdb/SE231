@@ -137,3 +137,6 @@
 * try release ios app
 * rm # in url
 * add visualization to frontend
+
+# 2019-08-19
+* finish chatroom
