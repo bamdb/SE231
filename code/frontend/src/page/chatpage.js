@@ -40,7 +40,7 @@ class Chatpage extends Component {
                 const v = {
                     timestamp: (new Date()).getTime(),
                     userInfo: {
-                        avatar: response.data.imgUrl,
+                        avatar: "https://api.bamdb.cn/image/id/"+response.data.id+"0",
                         name: response.data.username,
                         userId: response.data.id
                     },
