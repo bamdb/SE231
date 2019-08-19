@@ -441,10 +441,13 @@ class LeftBar extends Component {
                     <Menu.Item key="7">
                         <Link to={'/topic'}><Icon type="coffee" /><span>讨论区</span></Link>
                     </Menu.Item>
-                    <Menu.Item key="8" hidden={notLogin||isUser}>
+                    <Menu.Item key="8">
+                        <Link to={'/chatroom'}><Icon type="sound" /><span>聊天室</span></Link>
+                    </Menu.Item>
+                    <Menu.Item key="9" hidden={notLogin||isUser}>
                         <Link to={'/editor'}><Icon type="edit" /><span>编辑</span></Link>
                     </Menu.Item>
-                    <Menu.Item key="9" hidden={notLogin||isUser||isEditor}>
+                    <Menu.Item key="10" hidden={notLogin||isUser||isEditor}>
                         <Link to={'/admin'}><Icon type="profile" /><span>管理中心</span></Link>
                     </Menu.Item>
                     <Menu.Divider style={{margin:20}}/>

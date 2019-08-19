@@ -24,7 +24,8 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "react-testing-library": "^8.0.1",
-    "react-websocket": "^2.0.1"
+    "react-websocket": "^2.0.1",
+    "chat-react": "latest"
   },
   "jest": {
     "collectCoverageFrom": [

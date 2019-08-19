@@ -29,6 +29,7 @@ import Errorpage from "./page/404errorpage";
 import {Layout} from 'antd';
 import Head from "./component/header";
 import Searchpage from "./page/searchpage";
+import Chatpage from "./page/chatpage";
 
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -88,6 +89,7 @@ class App extends Component{
                                   <Route path={'/admin'} component={Adminpage}></Route>
                                   <Route path={'/recommend'} component={Recommendpage}></Route>
                                   <Route path={'/search/*'} component={Searchpage}></Route>
+                                  <Route path={'/chatroom'} component={Chatpage}></Route>
                               </Switch>
                           </div>
                       </Content>
