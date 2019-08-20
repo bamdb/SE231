@@ -27,6 +27,7 @@ public class ResourceServer extends ResourceServerConfigurerAdapter {
                 .antMatchers("/settoken").permitAll()
                 .antMatchers("/oauth/**").permitAll()
                 .antMatchers("/id/**").permitAll()
+                .antMatchers("/all").permitAll()
                 .anyRequest().authenticated();
     }
 }
