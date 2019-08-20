@@ -35,7 +35,6 @@ public class UserController {
         return myPrincipal;
     }
 
-    @PreAuthorize("#oauth2.hasScope('server')")
     @GetMapping(value ="/all", produces ="application/json")
     public Iterable<User> getAllUsers() {
         Iterable<User> it = userService.selectAll();
