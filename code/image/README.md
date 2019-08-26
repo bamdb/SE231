@@ -13,4 +13,5 @@
     tf.keras.layers.Dense(3, activation='softmax')
     ])
 ## data
-input (3993,128,128,3)
+* input (:,128,128,3)
+* output (3) [x,y,z] x is cowboy y is eva z is tianyuan
