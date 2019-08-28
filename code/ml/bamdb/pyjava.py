@@ -9,8 +9,8 @@ from keras.utils.vis_utils import plot_model
 import numpy as np
 from keras import backend as K
 import tensorflow as tf
-model=model_from_json(open('model.json').read())
-model.load_weights('weight.h5', by_name=True)
+model=model_from_json(open('model2.json').read())
+model.load_weights('weight2.h5', by_name=True)
 print(model.input.op.name)
 print(model.output.op.name)
 
@@ -41,4 +41,4 @@ def freeze_session(session, keep_var_names=None, output_names=None, clear_device
                                                       output_names, freeze_var_names)
         return frozen_graph
 frozen_graph = freeze_session(K.get_session(), output_names=["output"])
-tf.train.write_graph(frozen_graph, "./", "model.pb", as_text=False)
+tf.train.write_graph(frozen_graph, "./", "model2.pb", as_text=False)

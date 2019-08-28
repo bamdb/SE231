@@ -28,7 +28,6 @@ model.add(LSTM(256,return_sequences=True))
 model.add(Dropout(dropout))
 model.add(LSTM(128))
 model.add(Dropout(dropout))
-
 model.add(Dense(tagnums))
 model.add(Activation("softmax"))
 model.compile(loss="categorical_crossentropy", optimizer="Adam",metrics=['accuracy'])
@@ -40,6 +39,7 @@ print(np.argsort(model.predict(np.zeros((1,5,71)))))
 jsonstr=model.to_json()
 open("model.json",'w').write(jsonstr)
 model.save_weights('weight.h5')
+
 
 
 
