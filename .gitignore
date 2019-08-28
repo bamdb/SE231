@@ -3,7 +3,7 @@
 *.zip
 *.tar.gz
 *.class
-
+code/image/video
 .idea/
 node_modules/
 

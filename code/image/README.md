@@ -13,5 +13,14 @@
     tf.keras.layers.Dense(3, activation='softmax')
     ])
 ## data
-* input (:,128,128,3)
+* input (:,128,128,3)(the image should be reshaped in to(128,128,3))
 * output (3) [x,y,z] x is cowboy y is eva z is tianyuan
+## model
+### use in python model
+#### the model stored in model1.json and weight1.json use tensorflow.keras
+* the model is stored in *model.json* 
+* the weight is stored in *weight.h5*
+### use in java model1
+#### havenot find useful way to use model using tensorflow.keras in java,so i use keras which backend is tensorflow to generate model which can use in java 
+* the model is stored in *model1.pb*
+* the model load is the same as the example 
