@@ -32,10 +32,10 @@ x=x/255.0
 y=np.array(y)
 model = keras.models.Sequential([
 
-  keras.layers.Conv2D(64, (2, 2), padding='same', input_shape=(128, 128,3),kernel_regularizer=keras.regularizers.l2(0.01)),
+  keras.layers.Conv2D(64, (2, 2), input_shape=(128, 128,3),kernel_regularizer=keras.regularizers.l2(0.01)),
   keras.layers.ReLU(),
   keras.layers.MaxPool2D((2, 2)),
-  keras.layers.Conv2D(128, (2, 2), padding='same', kernel_regularizer=keras.regularizers.l2(0.01)),
+  keras.layers.Conv2D(128, (2, 2), kernel_regularizer=keras.regularizers.l2(0.01)),
   keras.layers.ReLU(),
   keras.layers.MaxPool2D((2, 2)),
   keras .layers.Flatten(),
