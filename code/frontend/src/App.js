@@ -31,9 +31,9 @@ import Head from "./component/header";
 import Searchpage from "./page/searchpage";
 import Chatpage from "./page/chatpage";
 
+import './component/axios';
 
 const { Header, Content, Footer, Sider } = Layout;
-
 
 class App extends Component{
     constructor(props){

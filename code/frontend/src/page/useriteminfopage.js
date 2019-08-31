@@ -65,7 +65,7 @@ class Useriteminfopage extends Component {
         var uri=window.location.href;
         var id=uri.split('/')[4];
         this.setState({userid:localStorage.getItem("userid"),id:id})
-        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
         var url="https://api.bamdb.cn/item/id/"+id;
         var url1="https://api.bamdb.cn/rating/itemid/"+id;
         var url2="https://api.bamdb.cn/activity/itemid/"+id;

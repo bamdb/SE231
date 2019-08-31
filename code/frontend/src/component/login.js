@@ -15,7 +15,6 @@ class Login extends Component{
             name:"",
             password:"",
             content:"",
-            islogin: 7,
             forgetPassword: false,
         }
         this.handleInforChange = this.handleInforChange.bind(this);
@@ -41,12 +40,10 @@ class Login extends Component{
             }.bind(this))
     }
 
-    submit(){
+    async submit(){
+        localStorage.setItem("username",this.state.name);
         const _this = this;
-        let user = {
-            username: this.state.name,
-            password: this.state.password,
-        }
+
         var params = new URLSearchParams();
         params.append("grant_type", "password");
         params.append("username", this.state.name);
@@ -54,52 +51,31 @@ class Login extends Component{
         params.append("client_id", "browser");
         params.append("client_secret", "");
 
-        axios.post("https://api.bamdb.cn/auth/oauth/token",
-            params,
-            {headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            withCredentials:true})
-            .then(function (res) {
-                _this.setState({
-                    islogin: res.data,
-                })
-                localStorage.setItem("access_token",res.data.access_token);
-                localStorage.setItem("username",_this.state.name);
-
-                axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
-                var url="https://api.bamdb.cn/auth/username/"+localStorage.getItem("username");
-                axios.get(url,{params:{}}).then(
-                    function(res)
-                    {
-                        localStorage.setItem("userid",res.data.id);
-                        window.location.href="/";
-                    }
-                )
-                axios.get("https://api.bamdb.cn/auth/oauth/check_token",{params:{token:localStorage.getItem("access_token")}}).then(
-                    function(res)
-                    {
-                        var auths=res.data.authorities;
-                        var role="";
-                        auths.map(auth=>{
-                            if(role==""&&auth.indexOf("ROLE")!=-1)
-                            {
-                                role=auth;
-                            }
-                        })
-                        localStorage.setItem("role",role);
-                    }
-                )
-
+        const token = await axios.post("https://api.bamdb.cn/auth/oauth/token", params,
+            {headers: {'Content-Type': 'application/x-www-form-urlencoded'}, withCredentials:true});
+        console.log(token);
+        localStorage.setItem("access_token", token.data.access_token);
+        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+        await axios.get("https://api.bamdb.cn/auth/username/"+localStorage.getItem("username"),{params:{}}).then(function(res)
+            {
+                localStorage.setItem("userid",res.data.id);
             })
-            .catch(function (error) {
-                _this.setState({
-                    islogin: 0,
+
+        axios.get("https://api.bamdb.cn/auth/oauth/check_token",{params:{token:localStorage.getItem("access_token")}}).then(
+            function(res)
+            {
+                var auths=res.data.authorities;
+                var role="";
+                auths.map(auth=>{
+                    if(role==""&&auth.indexOf("ROLE")!=-1)
+                    {
+                        role=auth;
+                    }
                 })
-            });
-
-
-
+                localStorage.setItem("role",role);
+                window.location.href="/";
+            }
+        )
     }
 
     handleInforChange(e){

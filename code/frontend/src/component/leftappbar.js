@@ -136,9 +136,9 @@ const useStyles = makeStyles(theme=>({
         if(localStorage.getItem("username")!=null)
         {
             setusername(localStorage.getItem("username"))
-            axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
             /*setusername(localStorage.getItem("username"))
-            axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
             var url="https://api.bamdb.cn/auth/username/"+localStorage.getItem("username");
             axios.get(url,{params:{access_token:localStorage.getItem("access_token")}}).then(
                 function(res)
@@ -389,7 +389,7 @@ class LeftBar extends Component {
     componentWillReceiveProps(nextProps, nextContext) {
         if(localStorage.getItem("username")!=null) {
             this.setState({username:localStorage.getItem("username")})
-            axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
 
         }
         else this.setState({username:"游客"})

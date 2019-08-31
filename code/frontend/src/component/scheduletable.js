@@ -72,9 +72,7 @@ class Scheduletable extends Component {
     transform(tree, readdata, parentTitle,parentValue, value){
 
         const length=readdata.length;
-        console.log(length);
         for (var i=0;i<length;++i){
-            console.log("child",readdata[i].length)
             if(readdata[i].sections.length===0) //下面没有子章节了
             {
                 if(readdata[i].finish===1) {
@@ -133,8 +131,7 @@ class Scheduletable extends Component {
             userId:localStorage.getItem("userid"),
             chapters:this.state.data
         }
-        console.log(rows);
-        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
         axios.put("https://api.bamdb.cn/activity/update/progress",rows,{
             params:{},
             headers:{"Content-Type":'application/json'}
@@ -144,7 +141,7 @@ class Scheduletable extends Component {
     componentWillMount() {
         var treeData = [];
         var value=[];
-        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
 
         axios.get("https://api.bamdb.cn/activity/progress", {params:{
                     userId:localStorage.getItem("userid"),
@@ -152,13 +149,10 @@ class Scheduletable extends Component {
 
                 }}).then(function(response)
             {
-                console.log(this.props.itemid);
-                console.log(response.data);
                 //this.transform(treeData,response.data.chapters,'','0',value);
                 const readdata=response.data.chapters;
                 const length = (readdata===undefined) ? 0 :readdata.length ;
                 for (var i=0;i<length;++i){
-                    console.log("child",readdata[i].sections.length)
                     if(readdata[i].sections.length==0) //下面没有子章节了
                     {
                         if(readdata[i].finish==true) {
@@ -208,7 +202,6 @@ class Scheduletable extends Component {
                         });
                     }
                 }
-                console.log(treeData);
                 this.setState({
                 data: readdata,
                 treeData:treeData,
@@ -251,7 +244,6 @@ class Scheduletable extends Component {
                 node[item.split('-')[1]].sections[item.split('-')[2]] = true;
             }
         }
-        console.log(node)
         this.setState({
             data:node,
             value:value

@@ -37,7 +37,7 @@ class QRcode extends Component{
         console.log("get message")
         console.log(data);
         localStorage.setItem("access_token",data);
-        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
 
         axios.get("https://api.bamdb.cn/auth/user").then(
             function (res) {

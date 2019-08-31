@@ -45,7 +45,7 @@ class Addrelation extends Component
 
     handlesubmit()
     {
-        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
         switch(this.state.type)
         {
             case 1:axios.post("https://api.bamdb.cn/item/add/relation",{},{params:{priorId:this.props.itemid,subsequentId:this.state.id,relateType:0}}).then(

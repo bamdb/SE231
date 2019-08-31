@@ -66,7 +66,7 @@ class Chatpage extends Component {
         if (!value) return;
         const {messages = []} = this.state;
         messages.push(v);
-        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
         axios.put("https://api.bamdb.cn/message/chat",{},{params:{userId:v.userInfo.userId,content:v.value}}).then(
             function(res)
             {

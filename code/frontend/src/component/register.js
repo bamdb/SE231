@@ -210,7 +210,7 @@ class Register extends Component {
                     <Grid container spacing={1}>
                         <Grid item xs={8} >
                             <Typography variant={"subtitle1"} component="h4">已有账户？</Typography><br/>
-                            <Link to={"/loginpage"}><Button variant="outlined" color="primary" > 去登录</Button></Link><br/>
+                            <Link to={"/login"}><Button variant="outlined" color="primary" > 去登录</Button></Link><br/>
                             <br/><br/>
                             <Typography variant={"subtitle1"} component="h4">忘记密码？</Typography><br/>
                             <Link to={"/resetpassword"}>

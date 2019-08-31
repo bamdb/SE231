@@ -35,7 +35,7 @@ class Activitypage extends Component{
         else {
             userid=localStorage.getItem("userid");
         }
-        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
 
         axios.get('https://api.bamdb.cn/friend/all/userid/'+userid).then(
             function(response){

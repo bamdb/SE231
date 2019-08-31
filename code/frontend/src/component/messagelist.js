@@ -55,13 +55,13 @@ class Messagelist extends Component{
 
         }
         else {
-            axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
             this.setState({userid:localStorage.getItem("userid")})
         }
     }
 
     componentDidMount() {
-        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
         var url="https://api.bamdb.cn/message/"+this.props.type+"/"+localStorage.getItem("userid");
         axios.get(url).then(
             function(response)
@@ -71,7 +71,7 @@ class Messagelist extends Component{
         )
     }
     componentWillReceiveProps(nextProps, nextContext) {
-        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
         var url="https://api.bamdb.cn/message/"+nextProps.type+"/"+localStorage.getItem("userid");
         axios.get(url).then(
             function(response)

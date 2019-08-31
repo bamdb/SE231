@@ -41,7 +41,7 @@ class Reply extends Component {
         this.setState({text:e.target.value})
     }
     componentWillMount() {
-        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
         this.setState({topicid:window.location.href.split("/")[4]})
         if(localStorage.getItem("userid")==null)
         {

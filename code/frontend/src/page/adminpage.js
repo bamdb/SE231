@@ -1,24 +1,30 @@
 import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles/index';
-import Grid from '@material-ui/core/Grid/index'
-import InputLabel from "@material-ui/core/InputLabel";
-import Input from "@material-ui/core/Input";
-import FormControl from "@material-ui/core/FormControl";
+import Grid from '@material-ui/core/Grid/index';
+import {Menu, Icon, List, Table} from "antd";
 import  axios from "axios";
-import Button from "@material-ui/core/Button";
+import Usermanage from "../component/usermanage";
 
 class Adminpage extends Component{
     constructor(props){
         super(props);
-        this.state={userid:1,username:"",password:"",email:"",imgurl:"",role:""};
+        this.state={
+            userid:1,username:"",password:"",email:"",imgurl:"",role:"",
+            //记录操作种类 1-对用户进行操作，eg.封禁   2-对举报内容进行操作
+            current: 'user',
+        };
         this.handlesearch=this.handlesearch.bind(this);
         this.handlechange=this.handlechange.bind(this);
         this.submit=this.submit.bind(this);
+        this.handleMenu = this.handleMenu.bind(this);
 
+    }
+
+    handleMenu(e) {
+        this.setState({current:e.key})
     }
     submit()
     {
-        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
         axios.put("https://api.bamdb.cn/auth/update/"+this.state.username,{},{params:{id:this.state.id,mail:this.state.email,password:this.state.password}}).then(
             function(res)
             {
@@ -32,6 +38,10 @@ class Adminpage extends Component{
     }
 
     componentWillMount() {
+        if(localStorage.getItem("role")!="ROLE_ADMIN") {
+            alert("无权限");
+            window.history.go(-1);  //非管理员自动回退上一页面
+        }
         /*axios.get("https://api.bamdb.cn/auth/id/"+this.state.userid+"?access_token="+localStorage.getItem("access_token")).then(
             function(res){
                 this.setState({userinfo:res.data});
@@ -64,22 +74,27 @@ class Adminpage extends Component{
     }
 
     render(){
-
-
-
-
-
+        const {current} = this.state;
+        const users = (current=='user') ? <Usermanage /> : <span/>;
         return(
-            <Grid container spacing={10}>
-                <Grid item xs={6}>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <FormControl margin="normal" required fullWidth>
-                        <InputLabel htmlFor="id">userid</InputLabel>
-                        <Input type="text" id="userid" value={this.state.userid} onChange={this.handlechange}></Input>
-                    </FormControl>
+            <Grid container alignItems={"flex-start"}>
+                <Menu onClick={this.handleMenu} selectedKeys={current} mode="horizontal">
+                    <Menu.Item key={'user'}>管理用户</Menu.Item>
+                    <Menu.Item key={'complain'}>举报内容</Menu.Item>
+
+                </Menu>
+                <Grid item xs={12}>
+                {users}
                 </Grid>
+            </Grid>
+        )
+    }
+}
+
+export  default Adminpage;
+
+/*
+
                 <Grid item xs={6}>
                     <br/>
                     <br/>
@@ -116,9 +131,4 @@ class Adminpage extends Component{
                         提交
                     </Button>
                 </Grid>
-            </Grid>
-        )
-    }
-}
-
-export  default Adminpage;
+ */

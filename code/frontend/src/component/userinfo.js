@@ -33,13 +33,12 @@ class Userinfo extends Component {
         if(localStorage.getItem("userid")!=null)
         {
             var username=localStorage.getItem("username");
-            axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
             axios({url: 'https://api.bamdb.cn/auth/username/'+username,method:'GET'})
                 .then(
                     function (response)
                     {
-                        console.log(response.data);
-                        this.setState({username:response.data.username,password:response.data.password,email:response.data.mail,imgurl:response.data.imgUrl,id:localStorage.getItem("userid")})
+              //          this.setState({username:response.data.username,password:response.data.password,email:response.data.mail,imgurl:response.data.imgUrl,id:localStorage.getItem("userid")})
                     }.bind(this)
                 )
         }
@@ -67,7 +66,7 @@ class Userinfo extends Component {
 
             var url='https://api.bamdb.cn/auth/update/'+this.state.username;
             this.setState({edit:false});
-            axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
             axios.put('https://api.bamdb.cn/auth/update/'+this.state.username,{},{params:{mail:this.state.email,imgUrl:"https://api.bamdb.cn/image/id/"+this.state.id+"0"}});
 
         }
