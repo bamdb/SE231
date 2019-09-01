@@ -5,8 +5,10 @@ axios.defaults.timeout=10000;
 axios.defaults.withCredentials = true;
 
 axios.interceptors.request.use(config => {
-    if(localStorage.getItem("access_token")!=null)
-        axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+    console.log(window.location.href.split('/')[3]);
+    if(localStorage.getItem("access_token") != null && window.location.href.split('/')[3]!='search') {
+        axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("access_token");
+    }
     return config
 })
 
@@ -37,6 +39,8 @@ axios.interceptors.response.use(
         return response
     },
     error => {
+        console.log(error)
+
         if (error === undefined || error.code === 'ECONNABORTED') {
             message.warning('服务请求超时')
             return Promise.reject(error)
@@ -50,7 +54,8 @@ axios.interceptors.response.use(
         const info = response.data
         if (status === 401 || info.status === 40101) {
             message.error('你已被登出，可以取消继续留在该页面，或者重新登录')
-            //window.location.href = '/login';
+            localStorage.clear();
+            window.location.reload();
         }
         if (status === 403) {
             message.error(`${status}:${text}`)

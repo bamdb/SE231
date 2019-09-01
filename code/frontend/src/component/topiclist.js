@@ -30,7 +30,6 @@ class TopicList extends Component {
     }
     componentWillReceiveProps(nextProps, nextContext) {
 
-        console.log(nextProps.topics);
         this.setState({topics:nextProps.topics})
     }
 

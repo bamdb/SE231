@@ -26,12 +26,21 @@ class Topicpage extends Component{
 
     }
     componentWillMount() {
-        axios.get("https://api.bamdb.cn/topic/all").then(
-            function (response){
+        const CancelToken = axios.CancelToken
+        const source = CancelToken.source()
 
+        axios.get("https://api.bamdb.cn/topic/all",{cancelToken: source.token}).then(
+            function (response){
+                if (response.status === 200)
             this.setState({topics:response.data});
-        }.bind(this)
-        )
+        }.bind(this)).
+        catch(function(thrown) {
+            if (axios.isCancel(thrown)) {
+                console.log('Request canceled', thrown.message);
+            } else {
+                // handle error
+            }
+        })
     }
 
     render(){

@@ -62,6 +62,9 @@ class Useriteminfopage extends Component {
         this.setState({tags:tags});
     }
     componentWillMount() {
+        if(localStorage.getItem("userid") == null)
+            window.location.href="/login";
+
         var uri=window.location.href;
         var id=uri.split('/')[4];
         this.setState({userid:localStorage.getItem("userid"),id:id})

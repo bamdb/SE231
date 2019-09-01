@@ -94,7 +94,7 @@ class Searchpage extends Component {
         })
         var dataSource=[];
         var id=[];
-        console.log("start search");
+
         axios.defaults.headers = {
             "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
         }
@@ -218,7 +218,7 @@ class Searchpage extends Component {
                         {this.state.loading ? <Spin/> : <span/>}
                     </List>
                     <Grid container alignContent={"center"} justify={"center"}>
-                    <Pagination size="small"  total={1000} current={this.props.currentpage} onChange={current=>this.handlepagechange(current)}/>
+                    <Pagination size="small"  total={1000} current={this.state.currentpage} onChange={current=>this.handlepagechange(current)}/>
                     </Grid>
                 </Grid>
             </Grid>

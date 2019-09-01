@@ -40,7 +40,7 @@ class Itembrowsepage extends Component{
 
     Search(value){
         const win=window.open('about:blank');
-        win.location.href='/search/'+value;
+        win.location.href='/search/'+encodeURI(value);
     }
     handleSearch(value){
         var dataSource=[];

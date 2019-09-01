@@ -22,14 +22,16 @@ class Activitylist extends Component {
         super(props);
         this.state={
             len:0,
-            activities: [],
+            activities: undefined,
         }
     }
-    componentDidMount() {
+
+    /*
+    async componentDidMount() {
         var activities = [];
         var temp=[];
         const friends=this.props.friends;
-        friends.map(friend => {
+        await friends.map(friend => {
             axios.get("https://api.bamdb.cn/activity/userid/" + friend.id)
                 .then(function (res) {
                         temp.push({
@@ -38,18 +40,17 @@ class Activitylist extends Component {
                         })
                         console.log(temp);
                         activities.push(temp);
-                        this.setState({activities:activities})
-                    }.bind(this)
+                    }
                 )
-                .catch(function (error) {
-                })
         });
+        this.setState({activities:activities})
     }
+
+     */
 
     componentWillReceiveProps(nextProps, nextContext) {
         const friends=nextProps.friends;
         var temp=[];
-        console.log(friends.length)
         if(this.state.len!==friends.length) {
             this.setState({len: friends.length});
             var activities = [];
@@ -68,7 +69,6 @@ class Activitylist extends Component {
                     .catch(function (error) {
                     })
             });
-
         }
     }
 
@@ -86,7 +86,7 @@ class Activitylist extends Component {
                     const user = act.user;
                     const activities = act.activities;
                     console.log("act", act)
-                    if (activities !== undefined)
+                    if (activities !== undefined && activities.length != 0)
                         activities.map(activity => {
                             console.log("start to activity")
                             if (activity.activity.actType >= 0 || activity.activity.actType <= 5) {

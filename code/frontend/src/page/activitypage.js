@@ -36,7 +36,6 @@ class Activitypage extends Component{
             userid=localStorage.getItem("userid");
         }
 
-
         axios.get('https://api.bamdb.cn/friend/all/userid/'+userid).then(
             function(response){
                 friends = response.data;

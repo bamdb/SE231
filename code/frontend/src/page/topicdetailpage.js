@@ -25,6 +25,8 @@ class Topicdetailpage extends Component{
 
 
     componentWillMount() {
+        if(localStorage.getItem("userid") == null)
+            window.location.href="/login";
 
         if(window.location.href.split("/")[3]!==undefined)
         {

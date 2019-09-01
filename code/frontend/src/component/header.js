@@ -25,7 +25,7 @@ class Head extends Component{
     logout()
     {
         localStorage.clear();
-        window.location.reload();
+        window.location.href = '/login';
     }
 
     handlesocket(){

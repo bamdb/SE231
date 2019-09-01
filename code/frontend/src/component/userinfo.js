@@ -38,14 +38,12 @@ class Userinfo extends Component {
                 .then(
                     function (response)
                     {
-              //          this.setState({username:response.data.username,password:response.data.password,email:response.data.mail,imgurl:response.data.imgUrl,id:localStorage.getItem("userid")})
+                        if(response.status === 200 )
+                        this.setState({username:response.data.username,password:response.data.password,email:response.data.mail,imgurl:response.data.imgUrl,id:localStorage.getItem("userid")})
                     }.bind(this)
                 )
         }
-
     }
-
-
 
     handleedit(){
         this.setState({edit:true});
@@ -53,7 +51,6 @@ class Userinfo extends Component {
 
     handlesave(e){
         /*data of the image*/
-
         var email=this.state.email;
         var s=email.split("@");
         if(s.length!==2) {

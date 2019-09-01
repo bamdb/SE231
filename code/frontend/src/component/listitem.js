@@ -63,7 +63,7 @@ class Listitem extends Component {
     handlepagechange(e){
         this.props.handlepagechange(e);
     }
-    componentDidMount() {
+    componentWillMount() {
         var rows=[];
         var items=[];
         var currentpage=this.props.currentpage;
