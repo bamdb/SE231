@@ -36,6 +36,7 @@ class Uploadavatar extends Component {
                     loading: false,
                 }),
             );
+            this.props.change();
         }
     };
 

@@ -65,7 +65,7 @@ class Register extends Component {
         const rows={
             username: this.state.name,
             password: this.state.password,
-            mail: this.state.email
+            mail: this.state.email,
         }
         //开始验证
         axios.post("https://api.bamdb.cn/auth/verify",rows,{headers:{"Content-Type":'application/json'}})

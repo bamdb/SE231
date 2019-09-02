@@ -387,10 +387,9 @@ class LeftBar extends Component {
         this.props.toggleCollapesd();
     };
     componentWillReceiveProps(nextProps, nextContext) {
+
         if(localStorage.getItem("username")!=null) {
             this.setState({username:localStorage.getItem("username")})
-
-
         }
         else this.setState({username:"游客"})
     }

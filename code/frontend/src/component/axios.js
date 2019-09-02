@@ -5,7 +5,6 @@ axios.defaults.timeout=10000;
 axios.defaults.withCredentials = true;
 
 axios.interceptors.request.use(config => {
-    console.log(window.location.href.split('/')[3]);
     if(localStorage.getItem("access_token") != null && window.location.href.split('/')[3]!='search') {
         axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("access_token");
     }
@@ -36,6 +35,7 @@ axios.interceptors.response.use(
         if (response.status !== 200) {
             message.error(response.data.message)
         }
+        else message.success("请求成功")
         return response
     },
     error => {
@@ -70,7 +70,7 @@ axios.interceptors.response.use(
             //     duration: 2 * 1000,
             // })
         }
-        if (response.status === 504) {
+        else{
             message.error(`${status}:${text}`)
             // dispatch(routerRedux.push('/exception/500'))
             // Message({

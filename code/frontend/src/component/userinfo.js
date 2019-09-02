@@ -21,28 +21,17 @@ import Uploadavatar from "./uploadavatar";
 class Userinfo extends Component {
     constructor(props) {
         super(props);
-        this.state={edit:false,username:"shenruien",password:"123456",email:"123456@qq.com",id:"1",date:"2019-7-1",grade:"1",imgurl:"/img/3.jpg",content:""};
+        this.state={edit:false,username:"",password:"",email:"",id:"",date:"",grade:"",imgurl:"",content:"",avater:false};
+        this.handleavater = this.handleavater.bind(this)
         this.handleedit=this.handleedit.bind(this);
         this.handlechange=this.handlechange.bind(this);
         this.handlesave=this.handlesave.bind(this);
         this.handlecancel=this.handlecancel.bind(this);
         this.handleAlert=this.handleAlert.bind(this);
     }
-    componentDidMount() {
 
-        if(localStorage.getItem("userid")!=null)
-        {
-            var username=localStorage.getItem("username");
-
-            axios({url: 'https://api.bamdb.cn/auth/username/'+username,method:'GET'})
-                .then(
-                    function (response)
-                    {
-                        if(response.status === 200 )
-                        this.setState({username:response.data.username,password:response.data.password,email:response.data.mail,imgurl:response.data.imgUrl,id:localStorage.getItem("userid")})
-                    }.bind(this)
-                )
-        }
+    handleavater(){
+        this.setState({avater:true})
     }
 
     handleedit(){
@@ -61,11 +50,19 @@ class Userinfo extends Component {
         }
         else {
 
-            var url='https://api.bamdb.cn/auth/update/'+this.state.username;
             this.setState({edit:false});
 
-            axios.put('https://api.bamdb.cn/auth/update/'+this.state.username,{},{params:{mail:this.state.email,imgUrl:"https://api.bamdb.cn/image/id/"+this.state.id+"0"}});
+            const param = (this.state.avater) ?
+                {
+                    mail:this.state.email,
+                    imgUrl:"https://api.bamdb.cn/image/id/"+this.state.id+"0",
+                }
+                :
+                {
+                    mail:this.state.email
+                };
 
+            axios.put('https://api.bamdb.cn/auth/update/'+this.state.username,{},{params:param});
         }
 
     }
@@ -97,7 +94,7 @@ class Userinfo extends Component {
 
     render() {
 
-        const upload = this.state.edit ? <Uploadavatar imageid={this.state.id + "0"}/> : <div/>;
+        const upload = this.state.edit ? <Uploadavatar imageid={this.state.id + "0"} change={this.handleavater}/> : <div/>;
         const email = this.state.edit ? <FormControl>
             <InputLabel htmlFor="id">email</InputLabel>
             <Input type="text" id="email" value={this.state.email} onChange={this.handlechange}></Input>
@@ -111,12 +108,13 @@ class Userinfo extends Component {
             <div><Button id="button" onClick={this.handleedit} variant="contained" color="primary">edit user
             information</Button></div>;
 
+        const img = (this.state.imgurl == null) ? require('../default_avater.jpg') : "https://api.bamdb.cn/image/id/"+localStorage.getItem("userid")+"0";
         return (
             <Grid container id="userinfo">
                 <Alert content={this.state.content} confirmAlert={this.handleAlert} cancelAlert={this.handleAlert} />
                 <Grid item xs={3}>
                     <Grid container justify={"center"}>
-                    <Avatar alt="" src={"https://api.bamdb.cn/image/id/"+localStorage.getItem("userid")+"0"} id={"avatar"}/>
+                    <Avatar alt="" src={img} id={"avatar"}/>
                     <br/>
                     <div id="upload">{upload}</div>
                     </Grid>
@@ -154,6 +152,24 @@ class Userinfo extends Component {
                 </Grid>
             </Grid>
         )
+    }
+
+    componentDidMount() {
+
+        if(localStorage.getItem("userid")!=null)
+        {
+            var username=localStorage.getItem("username");
+
+            axios({url: 'https://api.bamdb.cn/auth/username/'+username,method:'GET'})
+                .then(
+                    function (response)
+                    {
+                        if(response.status === 200 )
+                            this.setState({username:response.data.username,password:response.data.password,email:response.data.mail,imgurl:response.data.imgUrl,id:localStorage.getItem("userid")})
+                        else this.setState({content:"请求错误，无法获取用户信息"})
+                    }.bind(this)
+                )
+        }
     }
 }
 export default Userinfo;
