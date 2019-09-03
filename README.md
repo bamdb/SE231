@@ -138,6 +138,7 @@ code for summer project
 			* bamdb-worker1 | bamdb-worker2 | bamdb1-worker1 | bamdb1-worker2 | bamdb2-worker1 | bamdb2-worker2
 * Nginx
     * 反向代理
+    * 代理缓存
     * 负载均衡
 		* ubuntularge Nginx
 			* 前端负载均衡
