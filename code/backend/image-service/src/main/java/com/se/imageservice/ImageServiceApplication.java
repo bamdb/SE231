@@ -1,4 +1,3 @@
-<<<<<<< HEAD:code/backend/image-service/src/main/java/com/se/imageservice/ImageServiceApplication.java
 package com.se.imageservice;
 
 import org.springframework.boot.SpringApplication;
@@ -16,22 +15,3 @@ public class ImageServiceApplication {
         SpringApplication.run(ImageServiceApplication.class, args);
     }
 }
-=======
-package com.se.imageservice;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
-
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
-@EnableEurekaClient
-@EnableOAuth2Client
-public class ImageServiceApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(ImageServiceApplication.class, args);
-    }
-}
->>>>>>> master:code/backend/image-service/src/main/java/com/se/imageservice/ImageServiceApplication.java
