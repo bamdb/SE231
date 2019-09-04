@@ -12,8 +12,8 @@ tmpy = json.load(open('y1.json', 'r'))
 x=np.array(tmpx)
 y=np.array(tmpy)
 model = keras.Sequential([
-keras.layers.Dense(10000, input_shape=(5180,)),
-keras.layers.Dense(7500),
+keras.layers.Dense(2500, input_shape=(5180,)),
+keras.layers.Dense(2500),
 keras.layers.Dense(5180, activation='softmax')
 ])
 
