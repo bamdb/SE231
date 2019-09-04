@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: rating
+
+eureka:
+  instance:
+    hostname: rating
+
+server:
+  port: 8096
+security:
+  oauth2:
+    client:
+      clientId: rating-service
+      clientSecret: rating-service
+      accessTokenUri: http://gateway:8000/auth/oauth/token
+      grant-type: client_credentials
+      scope: server
+    resource:
+      user-info-uri: http://gateway:8000/auth/user
