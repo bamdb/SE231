@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args)throws Exception {
-        BufferedImage bimg = ImageIO.read(new File("D:\\BaiduNetdiskDownload\\video\\img_eva\\img_476.jpg"));
+        BufferedImage bimg = ImageIO.read(new File("D:\\BaiduNetdiskDownload\\video\\img_eva\\img_250.jpg"));
         BufferedImage buffImg = null;
         buffImg = new BufferedImage(128, 128, BufferedImage.TYPE_INT_RGB);
         buffImg.getGraphics().drawImage(bimg.getScaledInstance(128, 128, Image.SCALE_SMOOTH), 0, 0, null);
@@ -38,6 +38,7 @@ public class Main {
         Tensor y = sess.runner().feed("conv2d_1_input" ,x).fetch("output").run().get(0);
         float[][] result = new float[1][3];
         y.copyTo(result);
+        System.out.println(Arrays.toString(imagedata[0][50][50]));
         System.out.println(Arrays.toString(y.shape()));
         System.out.println(Arrays.toString(result[0]));
 
