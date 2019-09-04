@@ -52,6 +52,13 @@ class Usermanage extends Component {
                          <a title="用户删除">删除</a>
                      </Popconfirm>
                     <span className="ant-divider"/>
+                    <Popconfirm title="您确定禁言此用户吗" onConfirm={this.deleteUser.bind(this,text)} >
+                         <a title="用户删除">删除</a>
+                     </Popconfirm>
+                    <span className="ant-divider"/>
+                    <Popconfirm title="删除不可恢复，你确定要删除吗?" onConfirm={this.deleteUser.bind(this,text)} >
+                         <a title="用户删除">删除</a>
+                     </Popconfirm>
                 </span>
                 ,
             },
