@@ -52,15 +52,27 @@ class Login extends Component{
         params.append("client_secret", "");
 
         const token = await axios.post("https://api.bamdb.cn/auth/oauth/token", params,
-            {headers: {'Content-Type': 'application/x-www-form-urlencoded'}, withCredentials:true});
+            {headers: {'Content-Type': 'application/x-www-form-urlencoded'}, withCredentials:true}).catch(
+            function(err)
+            {
+
+            }
+        );
         console.log(token);
         localStorage.setItem("access_token", token.data.access_token);
         axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
 
         await axios.get("https://api.bamdb.cn/auth/username/"+localStorage.getItem("username"),{params:{}}).then(function(res)
             {
+
                 localStorage.setItem("userid",res.data.id);
-            })
+
+            }).catch(
+                function(err)
+                {
+
+                }
+        )
 
         axios.get("https://api.bamdb.cn/auth/oauth/check_token",{params:{token:localStorage.getItem("access_token")}}).then(
             function(res)
@@ -75,6 +87,11 @@ class Login extends Component{
                 })
                 localStorage.setItem("role",role);
                 window.location.href="/";
+            }
+        ).catch(
+            function(err)
+            {
+
             }
         )
     }
