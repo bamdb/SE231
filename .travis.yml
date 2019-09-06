@@ -25,10 +25,10 @@ cache:
 addons:
   ssh_known_hosts: 202.120.40.8:30740
 install:
-- npm update
-- npm install
+# - npm update
+# - npm install
 script:
-- npm test
+# - npm test
 - cd ../backend
 - mvn clean install -Dmaven.test.skip=true
 after_success:
