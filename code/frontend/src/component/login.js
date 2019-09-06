@@ -56,6 +56,7 @@ class Login extends Component{
         console.log(token);
         localStorage.setItem("access_token", token.data.access_token);
         axios.defaults.headers.common['Authorization'] = "Bearer "+localStorage.getItem("access_token");
+
         await axios.get("https://api.bamdb.cn/auth/username/"+localStorage.getItem("username"),{params:{}}).then(function(res)
             {
                 localStorage.setItem("userid",res.data.id);
