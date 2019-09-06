@@ -1,13 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
-import {
-    HashRouter as Router,
-    Route,
-    Link,
-    Redirect,
-    withRouter
-} from "react-router-dom";
+
+
 import { StaticRouter } from 'react-router'
 import Tag from './component/tag'
 import Activity from './component/activity'
@@ -41,7 +35,7 @@ import Pagetable from './component/pagetable';
 
 it('_test_ activity', () => {
 
-    const testrenderer=TestRenderer.create(<StaticRouter><Activity/></StaticRouter>);
+    const testrenderer=TestRenderer.create(<StaticRouter><Activity date={"2019-T123"}/></StaticRouter>);
     /*const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
@@ -150,8 +144,8 @@ it('_test_ reply', () => {
     expect(tree).toMatchSnapshot();*/
 });
 it('_test_ scheduletable', () => {
-    const testrenderer=TestRenderer.create(<Scheduletable/>);
-    const testrenderer1=TestRenderer.create(<Scheduletable readstat={[0,[1,0,1,0],0,1]}/>);
+    const testrenderer=TestRenderer.create(<Scheduletable imgurl={"http://15615"}/>);
+    const testrenderer1=TestRenderer.create(<Scheduletable imgurl={"http://15615"} readstat={[0,[1,0,1,0],0,1]}/>);
    /* const testinstance=testrenderer.root;
     let tree = testrenderer.toJSON();
     expect(tree).toMatchSnapshot();*/
