@@ -6,8 +6,6 @@ import TextField from '@material-ui/core/TextField';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Navigation from "../component/navigation";
 import {Input} from "antd";
 
 const useStyles = makeStyles(theme => ({

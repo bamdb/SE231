@@ -19,7 +19,6 @@ import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 
 
-
 const openNotificationWithIcon = type => {
     notification[type]({
         message: "发送成功",

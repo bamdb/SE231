@@ -32,15 +32,14 @@ const codeMessage = {
 // respone拦截器
 axios.interceptors.response.use(
     response => {
+        console.log(JSON.stringify(response))
         if (response.status !== 200) {
             message.error(response.data.message)
         }
-        else message.success("请求成功")
         return response
     },
     error => {
-        console.log(error)
-
+         console.log(JSON.stringify(error)) // for debug
         if (error === undefined || error.code === 'ECONNABORTED') {
             message.warning('服务请求超时')
             return Promise.reject(error)
@@ -51,37 +50,16 @@ axios.interceptors.response.use(
         if (status === 400) {
             message.warning('账户或密码错误！')
         }
-        const info = response.data
+        const info = response.data;
+        if (status === 400) message.warning("用户名密码错误，请重试！");
         if (status === 401 || info.status === 40101) {
             message.error('你已被登出，可以取消继续留在该页面，或者重新登录')
             localStorage.clear();
             window.location.reload();
         }
-        if (status === 403) {
-            message.error(`${status}:${text}`)
+        else {
+            message.error("服务器出错")
         }
-        if (info.status === 30101) {
-            message.error(`${status}:${text}`)
-            // dispatch(routerRedux.push('/exception/500'))
-            // Notification.warning({
-            //     title: '失败',
-            //     message: info.message,
-            //     type: 'error',
-            //     duration: 2 * 1000,
-            // })
-        }
-        else{
-            message.error(`${status}:${text}`)
-            // dispatch(routerRedux.push('/exception/500'))
-            // Message({
-            //     message: '后端服务异常，请联系管理员！',
-            //     type: 'error',
-            //     duration: 5 * 1000,
-            // })
-        }
-        //message.error(`${status}:${text}`)
-        // throw error
-        // return error
         return Promise.reject(error)
     }
 )

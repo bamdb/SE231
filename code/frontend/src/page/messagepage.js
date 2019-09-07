@@ -25,32 +25,6 @@ class Messagepage extends Component{
 
     render(){
         return(
-/*
-            <Grid container spacing={10}>
-                <Grid item xs={10}>
-                    <Grid container>
-                        <Grid item xs={3}></Grid>
-                        <Grid item xs={9}>
-                            <Tabs  value={this.state.value} onChange={this.handleChange}>
-                                <Tab label="收件箱" value={"senderid"}/>
-                                <Tab label="发件箱" value={"receiverid"}/>
-
-                            </Tabs>
-                        </Grid>
-
-                        <Grid item xs={3}/>
-                        <Grid item xs={6}>
-                            <br/>
-                            <Messagelist type={this.state.type}/>
-                        </Grid>
-                    </Grid>
-                </Grid>
-                <Grid item xs={2}>
-                    <Addmessage />
-                </Grid>
-            </Grid>
-
- */
             <Tabs defaultActiveKey="receiverid" onChange={this.handleChange}>
                 <TabPane tab="收件箱" key="receiverid">
                     <Messagelist type="receiverid"/>
