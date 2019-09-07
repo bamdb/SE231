@@ -32,14 +32,13 @@ const codeMessage = {
 // respone拦截器
 axios.interceptors.response.use(
     response => {
-        console.log(JSON.stringify(response))
         if (response.status !== 200) {
             message.error(response.data.message)
         }
         return response
     },
     error => {
-         console.log(JSON.stringify(error)) // for debug
+        // console.log(JSON.stringify(error)) // for debug
         if (error === undefined || error.code === 'ECONNABORTED') {
             message.warning('服务请求超时')
             return Promise.reject(error)

@@ -79,7 +79,7 @@ class Collect extends Component {
         this.handleExpandClick = this.handleExpandClick.bind(this);
     }
     componentWillMount() {
-
+/*
         axios.get("https://api.bamdb.cn/comment",{params:{itemId:this.props.itemid,userId:this.props.userid}}).then(
             function(response)
             {
@@ -93,20 +93,8 @@ class Collect extends Component {
             }.bind(this)
         )
 
-    }
-    componentWillReceiveProps(nextProps, nextContext) {
-        axios.get("https://api.bamdb.cn/comment",{params:{itemId:this.props.itemid,userId:nextProps.userid}}).then(
-            function(response)
-            {
-                this.setState({comment:response.data});
-            }.bind(this)
-        )
-        axios.get("https://api.bamdb.cn/rating/score",{params:{itemId:this.props.itemid,userId:nextProps.userid}}).then(
-            function(response)
-            {
-                this.setState({score:response.data.score});
-            }.bind(this)
-        )
+ */
+
     }
 
 
@@ -152,33 +140,6 @@ class Collect extends Component {
                 />
                 <hr className={useStyles.board} color="#C7C7C7"/>
                 <CardContent>
-                    <Grid container spacing={2} direction={"row"} justify={"space-around"} alignContent={"center"}>
-                        <Typography variant="subtitle1" color="textPrimary">
-                            我的评分
-                        </Typography>
-                        <Typography variant="h5"  >
-                            {this.state.score}
-                        </Typography>
-                    </Grid>
-                    <br/>
-                    <Grid container spacing={2} direction={"row"} justify={"space-around"} alignContent={"center"}>
-                    <Typography variant="subtitle1" color="textPrimary" component="p">
-                        我的评论
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {this.state.comment.content}
-                    </Typography>
-                    </Grid>
-                </CardContent>
-                <hr className={useStyles.board} color="#C7C7C7"/>
-                <CardContent>
-                    <Typography variant="subtitle1" color="textPrimary" component="p">
-                        我的完成度:{this.props.completed}/{this.props.total}
-                    </Typography>
-                    <LinearProgress variant="determinate" value={this.props.completed * 100 / this.props.total}/>
-                </CardContent>
-                <hr className={useStyles.board} color="#C7C7C7"/>
-                <CardContent>
                     <Typography variant="subtitle1" color="textPrimary" component="p">
                         评分与排名
                     </Typography>
@@ -205,7 +166,41 @@ class Collect extends Component {
 
                     <BarChart data={data} options={options} width="600" height="200" />
                 </CardContent>
-                <CardActions disableSpacing>
+            </Card>
+        );
+    }
+
+}
+
+export default Collect;
+
+/*<CardContent>
+                    <Grid container spacing={2} direction={"row"} justify={"space-around"} alignContent={"center"}>
+                        <Typography variant="subtitle1" color="textPrimary">
+                            我的评分
+                        </Typography>
+                        <Typography variant="h5"  >
+                            {this.state.score}
+                        </Typography>
+                    </Grid>
+                    <br/>
+                    <Grid container spacing={2} direction={"row"} justify={"space-around"} alignContent={"center"}>
+                    <Typography variant="subtitle1" color="textPrimary" component="p">
+                        我的评论
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        {this.state.comment.content}
+                    </Typography>
+                    </Grid>
+                </CardContent>
+                <hr className={useStyles.board} color="#C7C7C7"/>
+                <CardContent>
+                    <Typography variant="subtitle1" color="textPrimary" component="p">
+                        我的完成度:{this.props.completed}/{this.props.total}
+                    </Typography>
+                    <LinearProgress variant="determinate" value={this.props.completed * 100 / this.props.total}/>
+                </CardContent>
+ <CardActions disableSpacing>
                     <Grid container justify={"space-around"} alignContent={"center"}>
                     <Collectform itemid={this.props.itemid}/>
                     <IconButton aria-label="Share">
@@ -228,10 +223,5 @@ class Collect extends Component {
                         <Typography paragraph>个性化推荐</Typography>
                     </CardContent>
                 </Collapse>
-            </Card>
-        );
-    }
 
-}
-
-export default Collect;
+ */

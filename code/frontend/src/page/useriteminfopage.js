@@ -76,7 +76,6 @@ class Useriteminfopage extends Component {
 
         axios.get(url).then(
             function (response){
-                console.log(response.data);
                 this.setState({data:response.data,chapterNum:response.data.chapterNum});
             }.bind(this)
         ).catch(function (error) {
@@ -94,7 +93,14 @@ class Useriteminfopage extends Component {
 
         axios.get(url3).then(
             function(response){
-                this.setState({comments:response.data});
+                console.log(response.data);
+                var status="未收藏";
+                if(response.data.length != 0)
+                    response.data.forEach(comment =>{
+                        if(comment.user.id == localStorage.getItem("userid"))
+                            status = "收藏了";
+                    })
+                this.setState({comments:response.data,status: status});
             }.bind(this)
         )
         /*axios.get(url4,{params:{itemId:id,userId:1}}).then(
@@ -121,12 +127,11 @@ class Useriteminfopage extends Component {
                         <Grid item xs={2} >
                             <Item imgurl={itemdata.imgurl} date={itemdata.pubTime} name={itemdata.itemname} pages={itemdata.chapterNum} author={itemdata.mainAuthor}/>
                             <Grid container justify={"center"} alignContent={"center"}>
-                            <Icon type={"star"} onClick={this.handleCollect}/>
+                            <Icon type={"star"} style={{fontSize:20}} onClick={this.handleCollect}/>
                             </Grid>
                         </Grid>
                         <Divider type={"vertical"} style={{height:400}}/>
                         <Grid  item xs={6} >
-                            <Scheduletableold readstat={this.state.readstat}/>
                             <Commentlist comments={this.state.comments}/>
                         </Grid>
                         <Grid  item xs={3} >

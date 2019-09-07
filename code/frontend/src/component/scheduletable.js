@@ -280,7 +280,7 @@ class Scheduletable extends Component {
                     image={this.props.imgurl.substring(0, 4) == "http"? this.props.imgurl : "http://"+this.props.imgurl}
                 />
                 <CardContent >
-                        {this.state.itemname}
+                        {this.props.itemname}
                     <LinearProgress variant="determinate" value={this.state.completed} />
                 </CardContent>
                 </CardActionArea>

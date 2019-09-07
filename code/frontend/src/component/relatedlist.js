@@ -31,7 +31,7 @@ class Relateditem extends Component {
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
                         <Briefitemlist data={this.props.prior}/>
-                    </ExpansionPanelDetails>
+                    </ExpansionPanelDetails>                               v
                 </ExpansionPanel>
                 </Grid>
                 <Grid item xs={12}>

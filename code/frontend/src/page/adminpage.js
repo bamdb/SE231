@@ -80,7 +80,6 @@ class Adminpage extends Component{
             <Grid container alignItems={"flex-start"}>
                 <Menu onClick={this.handleMenu} selectedKeys={current} mode="horizontal">
                     <Menu.Item key={'user'}>管理用户</Menu.Item>
-                    <Menu.Item key={'complain'}>举报内容</Menu.Item>
 
                 </Menu>
                 <Grid item xs={12}>

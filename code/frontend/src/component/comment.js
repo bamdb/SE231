@@ -40,7 +40,7 @@ const useStyles = makeStyles({
 class Comment extends Component {
     constructor(props) {
         super(props);
-        this.state={visible:false,grade:""};
+        this.state={visible:false,grade:"",imgurl:null};
         this.handlevisible=this.handlevisible.bind(this);
         this.handleOk=this.handleOk.bind(this);
         this.handleCancel=this.handleCancel.bind(this);
@@ -74,15 +74,25 @@ class Comment extends Component {
                 this.setState({grade:res.data.score})
             }.bind(this))
 
+        axios({url: 'https://api.bamdb.cn/auth/username/'+this.props.name,method:'GET'})
+            .then(
+                function (response)
+                {
+                    if(response.status === 200 )
+                        this.setState({imgurl:response.data.imgUrl})
+                    else this.setState({content:"请求错误，无法获取用户信息"})
+                }.bind(this)
+            )
     }
 
     render() {
+        const img = (this.state.imgurl == null) ? require('../default_avater.jpg') : "https://api.bamdb.cn/image/id/"+this.props.userid+"0"
         return(
             <Container >
                 <Divider />
                 <Grid container spacing={2}>
                     <Grid item xs={2} justify="center">
-                        <Avatar src={"https://api.bamdb.cn/image/id/"+this.props.userid+"0"} className={useStyles.avatar} onClick={this.handlevisible}/>
+                        <Avatar src={img} className={useStyles.avatar} onClick={this.handlevisible}/>
                         <Modal title="加为好友" visible={this.state.visible}
                                onOk={this.handleOk} onCancel={this.handleCancel}
                         >
