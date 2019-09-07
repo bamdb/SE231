@@ -5,7 +5,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
 import  axios from "axios";
-import Typography from "antd/es/typography/Typography";
+import Typography from "@material-ui/core/Typography";
 import {List} from "antd";
 import { Radio } from 'antd';
 import Alert from '../component/alert';

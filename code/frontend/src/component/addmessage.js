@@ -80,7 +80,7 @@ class Addmessage extends Component {
     {
         var date = Date.parse(new Date())
 
-        axios.post("https://api.bamdb.cn/message/add",{senderId:localStorage.getItem("userid"),receiverId:this.state.to,senTime:date,content:this.state.text},{params:{}});
+        axios.post("https://api.bamdb.cn/message/add",{senderId:localStorage.getItem("userid"),receiverId:this.state.to,sendTime:date,content:this.state.text},{params:{}});
         openNotificationWithIcon('success');
         this.handleCancel();
     }
