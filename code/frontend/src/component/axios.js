@@ -1,7 +1,6 @@
 import axios from 'axios';
 import {message} from 'antd';
 
-axios.defaults.timeout=20000;
 axios.defaults.withCredentials = true;
 
 axios.interceptors.request.use(config => {
