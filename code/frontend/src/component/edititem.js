@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper/index'
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import FormControl from "@material-ui/core/FormControl";
-import * as axios from "axios";
+import axios from "axios";
 import Button from "@material-ui/core/Button";
 import Uploadavatar from "./uploadavatar";
 
@@ -26,13 +26,13 @@ class Edititem extends Component{
             console.log("add")
             var pubtime = Date.parse(new Date(this.state.pubtime))
             axios.post("https://api.bamdb.cn/item/add", {
-                itemname: this.state.itemname,
-                pubTime: pubtime,
-                chapterNum: this.state.chapternum,
-                imgurl: null,
-                mainAuthor: this.state.author,
-                type: this.state.type
-            }).then(
+                "itemname": this.state.itemname,
+                "pubTime": pubtime,
+                "chapterNum": this.state.chapternum,
+                "imgurl": null,
+                "mainAuthor": this.state.author,
+                "type": this.state.type
+            },{headers:{"Content-Type":"application/json"}}).then(
                 function (response) {
                     this.props.setid(response.data);
                     this.setState({submit: true});
