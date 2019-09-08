@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {message} from 'antd';
 
-axios.defaults.timeout=10000;
+axios.defaults.timeout=20000;
 axios.defaults.withCredentials = true;
 
 axios.interceptors.request.use(config => {
@@ -56,6 +56,8 @@ axios.interceptors.response.use(
             localStorage.clear();
             window.location.reload();
         }
+        if(status === 500)
+        {}
         else {
             message.error("服务器出错")
         }

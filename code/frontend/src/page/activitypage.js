@@ -40,11 +40,9 @@ class Activitypage extends Component{
             function(response){
                 friends = response.data;
                 console.log(response.data);
-
-
-            this.setState({
-                userid:userid,
-                friends:friends
+                this.setState({
+                    userid:userid,
+                    friends:friends
             })
             }.bind(this)
         )

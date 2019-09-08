@@ -11,11 +11,12 @@ import Reply from "../component/reply";
 import Relateditem from "../component/relatedlist";
 import axios from 'axios';
 import TopicList from "../component/topiclist";
+import TopItemList from "../component/topitemlist";
 
 class Topicdetailpage extends Component{
     constructor(props){
         super(props);
-        this.state = {topic:[],data:[],search:""}
+        this.state = {topic:[],data:[],search:"",rankitem:[]}
         this.handleSearch=this.handleSearch.bind(this);
     }
 
@@ -34,6 +35,18 @@ class Topicdetailpage extends Component{
             console.log(id);
             var url="https://api.bamdb.cn/topic/id/"+id;
         }
+
+        axios.get("https://api.bamdb.cn/rating/browser",{params:{
+
+                type:0,
+                page:0,
+                pageSize:10
+            }}).then(
+            function(response)
+            {
+                this.setState({rankitem:response.data});
+            }.bind(this)
+        )
 
         /*axios.get("/topic/all")
             .then(function (res) {
@@ -66,7 +79,7 @@ class Topicdetailpage extends Component{
                   </Grid>
               </Grid>
               <Grid item xs={3}>
-                  <Relateditem />
+                  <TopItemList itemList={this.state.rankitem}/>
               </Grid>
           </Grid>
         );

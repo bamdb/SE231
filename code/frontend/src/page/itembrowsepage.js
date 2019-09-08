@@ -78,7 +78,7 @@ class Itembrowsepage extends Component{
             <div>
             <Grid container id={"browser-item"}>
                 <Grid item xs={9} style={{padding:20}}>
-                    <Tags select={true} tagchange={this.handletagchange} tags={["热血","王道","搞怪","不高兴","没头脑"]}/>
+                    <Tags select={true} tagchange={this.handletagchange} tags={[]}/>
                 </Grid>
                 <Grid item xs={3} style={{padding:20}}>
                     <AutoComplete

@@ -61,10 +61,10 @@ class DiscussBody extends Component{
     {
         this.setState({visible:true});
     }
-    componentDidMount() {
+    componentWillMount() {
         const id = this.props.data.user.id;
        // this.state.data.replyContent;
-        axios.get("https://api.bamdb.cn/user/id/"+id).then(
+        axios.get("https://api.bamdb.cn/auth/id/"+id).then(
             function (response){
                 this.setState({username:response.data.username});
             }.bind(this)
@@ -74,8 +74,9 @@ class DiscussBody extends Component{
 
     render(){
         return(
-            <Grid container justify={"space-around"}  >
-                <Grid item xs={1}>
+            <Grid container alignContent={"space-around"}  >
+                <Grid item xs={1}/>
+                <Grid item xs={2}>
                     <Avatar alt="" src={"https://api.bamdb.cn/image/id/"+this.props.data.user.id+"0"} onClick={this.handlevisible}/>
                     <Modal title="加为好友" visible={this.state.visible}
                            onOk={this.handleOk} onCancel={this.handleCancel}
@@ -83,19 +84,17 @@ class DiscussBody extends Component{
 
                     </Modal>
                 </Grid>
-                <Grid item xs={11}>
-                    <Typography variant={"h6"} component={"h6"}
+                <Grid item xs={9}>
+                    <Typography variant={"subtitle1"} component={"h6"}
                                 color={"textPrimary"} >{this.state.username}</Typography>
                     <Typography
-                        component="p"
-                        variant="subtitle1"
+                        variant="subtitle2"
                         color="textSecondary"
                     >
                         {this.state.date.split("T")[0]} - #{this.props.floor}
                     </Typography>
                     <Typography
-                        component="p"
-                        variant="subtitle1"
+                        variant="subtitle2"
                         color="textPrimary"
                     >
                         {this.state.discuss}
@@ -113,12 +112,13 @@ class Discuss extends Component {
 
     render() {
         const replies = this.props.replies;
+        console.log(replies);
         var rows=[];
         if(replies !== undefined) {
             for (var i=0; i<replies.length;++i) {
                 rows.push(
 
-                    <DiscussBody data={replies[i]} floor={i} />
+                    <DiscussBody key={i} data={replies[i]} floor={i} />
                 )
                 rows.push(<Divider variant="inset"/>);
             }
