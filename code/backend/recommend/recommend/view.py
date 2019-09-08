@@ -5,15 +5,20 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from tensorflow.keras.models import model_from_json
 import numpy as np
+import csv
 
 
 @csrf_exempt
 @require_POST
 def api(request):
+    with open('./recommend/bangumi-idmap.csv', mode='r') as infile:
+        reader = csv.reader(infile)
+        f2s = {rows[0]: rows[1] for rows in reader}
+        s2f = {v: k for k, v in f2s.items()}
     body = json.loads(request.body.decode())
     itemids = body.get('itemids')
     item2id = json.load(open('./recommend/planb-item2id.json', 'r'))
-    ids = [item2id.get(str(id)) for id in itemids]
+    ids = [item2id.get(s2f.get(str(id))) for id in itemids]
     # input is a one-hot array whose input[id]=1
     input = np.zeros((1, 5180))
     for id in ids:
@@ -27,5 +32,5 @@ def api(request):
     #  change the id into itemid
     # print(id2item[str(output[0][0])])
     output = output[0][0:5]
-    its = [id2item[str(id)] for id in output]
+    its = [f2s.get(id2item[str(id)]) for id in output]
     return JsonResponse(data=its, safe=False)
