@@ -136,10 +136,6 @@ class Userinfo extends Component {
                                 <ListItem id={"li"}>
                                     <ListItemText primary="ID" secondary={this.state.id}/>
                                 </ListItem>
-                                <ListItem id={"li"}>
-                                    <ListItemText primary="注册日期" secondary={this.state.date}></ListItemText>
-                                </ListItem>
-
                             </List>
                         </Grid>
                     </Grid>

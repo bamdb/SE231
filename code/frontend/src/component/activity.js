@@ -100,11 +100,6 @@ class Activity extends Component {
             <div id={"activity"}>
             <List.Item
                 key={"activity"}
-                actions={[
-                    <IconText type="star-o" text="156" />,
-                    <IconText type="like-o" text="156" />,
-                    <IconText type="message" text="2" />,
-                ]}
                 extra={
                     <img
                         width={200}
