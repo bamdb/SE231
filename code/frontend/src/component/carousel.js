@@ -25,8 +25,7 @@ class CarouselItem extends Component{
             activities.forEach(activity =>{
                 ids.push(activity.item.id)
             })
-        console.log(ids);
-        var items = await axios.post("https://api.bamdb.cn/recommend",{itemids:ids},{headers:{"Content-Type":"application/json"}})
+        var items = await axios.post("https://api.bamdb.cn/recommend",{"itemids":ids},{headers:{"Content-Type":"application/json"}})
         items = items.data;
 
         /*
@@ -42,7 +41,6 @@ class CarouselItem extends Component{
                 .then(function (res) {
                     if(res.status == 200)
                     {
-                        console.log(res.data)
                         imgs.push(res.data)
                         this.setState({imgs:imgs})
                     }
