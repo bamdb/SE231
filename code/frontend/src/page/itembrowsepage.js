@@ -44,7 +44,6 @@ class Itembrowsepage extends Component{
     }
     handleSearch(value){
         var dataSource=[];
-        console.log("start search");
         axios.get('https://api.bamdb.cn/search/ik',{params:{keystring:value,page:0,size:8}})
             .then(function (res) {
                 if(res.data.content!==undefined){
