@@ -105,7 +105,7 @@ class Activity extends Component {
                         width={200}
                         alt="暂无图片"
                         src={"http://"+this.state.imgurl}
-                        height={120}
+                        height={80}
                     />
                 }
             >

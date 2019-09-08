@@ -61,7 +61,6 @@ class Activitylist extends Component {
                                 user: friend,
                                 activities: res.data,
                             })
-                            console.log(temp);
                             activities.push(temp);
                             this.setState({activities:activities})
                         }.bind(this)
@@ -80,16 +79,13 @@ class Activitylist extends Component {
         });*/
         if(activitylist!==undefined)
         {
-            console.log(activitylist);
             activitylist.forEach(act =>{
                 act.forEach(act=> {
                     const user = act.user;
                     const activities = act.activities;
-                    console.log("act", act)
                     if (activities !== undefined && activities.length != 0)
                         activities.map(activity => {
-                            console.log("start to activity")
-                            if (activity.activity.actType >= 0 || activity.activity.actType <= 5) {
+                            if (activity.item!=null && activity.activity!=null && (activity.activity.actType >= 0 || activity.activity.actType <= 5)) {
                                 rows.push(
                                     <Activity
                                         key={user.id}
