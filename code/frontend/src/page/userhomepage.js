@@ -5,6 +5,7 @@ import TopItemList from "../component/topitemlist";
 import Progressmanage from '../component/progressmanage';
 import axios from 'axios';
 import TextField from '@material-ui/core/TextField';
+import CarouselItem from "../component/carousel";
 
 
 class Userhomepage extends Component{
@@ -49,6 +50,7 @@ class Userhomepage extends Component{
             <Grid container justify={"space-around"} >
                 <Grid item xs={9}>
                     <Progressmanage userid={this.state.userid} />
+                    <CarouselItem />
                 </Grid>
                 <Grid item xs={3} >
                     <TopItemList itemList={this.state.rankitem}/>

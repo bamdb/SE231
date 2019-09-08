@@ -29,7 +29,7 @@ class Topicpage extends Component{
         const CancelToken = axios.CancelToken
         const source = CancelToken.source()
 
-        axios.get("https://api.bamdb.cn/topic/all",{cancelToken: source.token}).then(
+        axios.get("https://api.bamdb.cn/topic/all",{headers:{"Cache-Control": "no-cache"},cancelToken: source.token}).then(
             function (response){
                 if (response.status === 200)
             this.setState({topics:response.data});

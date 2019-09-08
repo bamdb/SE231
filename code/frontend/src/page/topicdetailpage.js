@@ -55,7 +55,7 @@ class Topicdetailpage extends Component{
             )*/
 
 
-        axios.get("https://api.bamdb.cn/topic/id/"+id)
+        axios.get("https://api.bamdb.cn/topic/id/"+id,{headers:{"Cache-Control": "no-cache"}})
             .then(function (res) {
                 this.setState({data: res.data});
             }.bind(this)

@@ -91,7 +91,7 @@ class DiscussBody extends Component{
                         variant="subtitle2"
                         color="textSecondary"
                     >
-                        {this.state.date.split("T")[0]} - #{this.props.floor}
+                         #{this.props.floor}
                     </Typography>
                     <Typography
                         variant="subtitle2"

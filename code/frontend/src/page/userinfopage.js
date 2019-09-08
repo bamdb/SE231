@@ -8,43 +8,11 @@ class Userinfopage extends Component{
     constructor(props){
         super(props);
         this.state={
-            imgurls:[]
         }
 
     }
     componentWillMount() {
         if(localStorage.getItem("username")!=null) {
-            var imgurls=[];
-            axios.get("https://api.bamdb.cn/rating/browser", {
-                params: {
-                    type: 0,
-                    page: 0,
-                    pageSize: 2
-                }
-            })
-                .then(function (response) {
-                    if (response != null) {
-                        imgurls.push(response.data[0].item.imgurl);
-                        imgurls.push(response.data[1].item.imgurl);
-                    }
-                })
-            axios.get("https://api.bamdb.cn/rating/browser", {
-                params: {
-                    type: 2,
-                    page: 0,
-                    pageSize: 2
-                }
-            })
-                .then(function (response) {
-                    if(response!=null) {
-                        imgurls.push(response.data[0].item.imgurl);
-                        imgurls.push(response.data[1].item.imgurl);
-                    }
-                })
-
-            this.setState({
-                imgurls: imgurls
-            })
         }
         else {
             window.location.href="/login";
@@ -56,9 +24,6 @@ class Userinfopage extends Component{
             <Grid container spacing={10} justify={"center"} alignContent={"center"}>
                 <Grid item xs={8}>
                     <Userinfo></Userinfo>
-                </Grid>
-                <Grid item xs={8}>
-                    <CarouselItem imgurls={this.state.imgurls}/>
                 </Grid>
             </Grid>
         )
