@@ -83,8 +83,8 @@ code for summer project
 ### 技术栈
 
 * frontend: React React-Native
-* backend: Spring
-* database: Mysql 8.0 | Redis 5.0 | MongoDB 3.6 | H2
+* backend: Spring Django
+* database: Mysql 8.0 | Redis 5.0 | MongoDB 3.6 | H2 | Elasticsearch |
 * OAuth2 | Spring Security
 * Mysql 读写分离
     * master: ubuntularge 4 vCPU | 8 GiB
