@@ -15,7 +15,7 @@ class Addrelation extends Component
     constructor(props)
     {
         super(props);
-        this.state={id:1,type:1,item:{},prev:[],normal:[],prior:[],content:[]}
+        this.state={id:1,type:1,item:{},relations:[]}
         this.handleidchange=this.handleidchange.bind(this);
         this.handletyepchange=this.handletyepchange.bind(this);
         this.handlesubmit=this.handlesubmit.bind(this);
@@ -25,7 +25,7 @@ class Addrelation extends Component
     componentDidMount() {
         axios.get("https://api.bamdb.cn/item/id/"+this.props.itemid).then(
             function(res){
-                this.setState({prev:res.data.relationPrior,prior:res.data.relationSubsequent,normal:res.data.relationNormal});
+                this.setState({relations:res.data.relations});
 
             }.bind(this)
         )
@@ -48,21 +48,14 @@ class Addrelation extends Component
 
         switch(this.state.type)
         {
-            case 1:axios.post("https://api.bamdb.cn/item/add/relation",{},{params:{priorId:this.props.itemid,subsequentId:this.state.id,relateType:0}}).then(
+            case 1:axios.post("https://api.bamdb.cn/item/add/relation",{},{params:{source:this.props.itemid,target:this.state.id,relateType:"不同版本"}}).then(
                 function(res)
                 {
                    this.setState({content:"success!"})
                 }
             );
             break;
-            case 2:axios.post("https://api.bamdb.cn/item/add/relation",{},{params:{priorId:this.state.id,subsequentId:this.props.itemid,relateType:1}}).then(
-                function(res)
-                {
-                    this.setState({content:"success!"})
-                }
-            );
-            break;
-            case 3:axios.post("https://api.bamdb.cn/item/add/relation",{},{params:{priorId:this.props.itemid,subsequentId:this.state.id,relateType:1}}).then(
+            case 2:axios.post("https://api.bamdb.cn/item/add/relation",{},{params:{source:this.props.itemid,target:this.state.id,relateType:"内容相关"}}).then(
                 function(res)
                 {
                     this.setState({content:"success!"})
@@ -89,35 +82,7 @@ class Addrelation extends Component
             <Grid container>
 
                 <Grid item xs={12}>
-                    <Typography>续作</Typography>
-                    <List
-                        itemLayout="horizontal"
-                        dataSource={this.state.prev}
-                        renderItem={item => (
-                            <List.Item  >
-                                <List.Item.Meta
-
-                                    title={<Typography>{item.id+" "+item.itemname}</Typography>}
-
-                                />
-                            </List.Item>
-                        )}
-                    />
-                    <Typography>前作</Typography>
-                    <List
-                        itemLayout="horizontal"
-                        dataSource={this.state.prior}
-                        renderItem={item => (
-                            <List.Item >
-                                <List.Item.Meta
-
-                                    title={<Typography>{item.id+" "+item.itemname}</Typography>}
-
-                                />
-                            </List.Item>
-                        )}
-                    />
-                    <Typography>普通关联</Typography>
+                    <Typography>关联</Typography>
                     <List
                         itemLayout="horizontal"
                         dataSource={this.state.normal}
@@ -136,9 +101,8 @@ class Addrelation extends Component
                     <Input type="text"  value={this.state.id} onChange={this.handleidchange}></Input>
                 </FormControl>
                     <Radio.Group onChange={(e)=>{this.setState({type:e.target.value})}} value={this.state.type}>
-                        <Radio value={1}>普通关联</Radio>
-                        <Radio value={2}>前作</Radio>
-                        <Radio value={3}>续作</Radio>
+                        <Radio value={1}>不同版本</Radio>
+                        <Radio value={2}>内容相关</Radio>
                     </Radio.Group>
                     <Button onClick={this.handlesubmit}>
                         submit
