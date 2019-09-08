@@ -15,20 +15,30 @@ class Addrelation extends Component
     constructor(props)
     {
         super(props);
-        this.state={id:1,type:1,item:{},relations:[]}
+        this.state={id:1,type:1,item:{},relations:[],content:""}
         this.handleidchange=this.handleidchange.bind(this);
         this.handletyepchange=this.handletyepchange.bind(this);
         this.handlesubmit=this.handlesubmit.bind(this);
         this.handledelete=this.handledelete.bind(this);
         this.handleAlert=this.handleAlert.bind(this);
     }
-    componentDidMount() {
-        axios.get("https://api.bamdb.cn/item/id/"+this.props.itemid).then(
+    async componentDidMount() {
+        var relations = await axios.get("https://api.bamdb.cn/item/id/"+this.props.itemid).then(
             function(res){
-                this.setState({relations:res.data.relations});
-
-            }.bind(this)
+            }
         )
+        var relation  = relations.data.relations;
+        console.log("relations:",relation);
+        var items=[];
+        for (var i=0;i<relation.length;i++)
+        {
+            var item = await axios.get("https://api.bamdb.cn/item/id/"+relation[i].target)
+            items.push({
+                id: item.data.id,
+                itemname:item.data.itemname
+            })
+            this.setState({relations:items})
+        }
     }
 
     handleAlert(){
@@ -85,7 +95,7 @@ class Addrelation extends Component
                     <Typography>关联</Typography>
                     <List
                         itemLayout="horizontal"
-                        dataSource={this.state.normal}
+                        dataSource={this.state.relations}
                         renderItem={item => (
                             <List.Item >
                                 <List.Item.Meta
