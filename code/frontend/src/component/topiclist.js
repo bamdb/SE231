@@ -49,6 +49,7 @@ class TopicList extends Component {
                 dataIndex: 'userId',
                 width: 100,
             },
+            /*
             {
                 title:'回复数',
                 dataIndex:'replyTotal',
@@ -58,6 +59,8 @@ class TopicList extends Component {
                     else return text;
                 }
             },
+
+             */
             {
                 title: '发表时间',
                 dataIndex: 'pubTime',

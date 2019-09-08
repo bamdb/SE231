@@ -16,6 +16,9 @@ class Relateditem extends Component {
     constructor(props) {
         super(props);
     }
+    componentWillMount() {
+        console.log(this.props.relations);
+    }
 
     render() {
         return (
@@ -27,38 +30,10 @@ class Relateditem extends Component {
                         aria-controls="panel1a-content"
                         id="panel1a-header"
                     >
-                        <Typography >前作</Typography>
-                    </ExpansionPanelSummary>
-                    <ExpansionPanelDetails>
-                        <Briefitemlist data={this.props.prior}/>
-                    </ExpansionPanelDetails>                               v
-                </ExpansionPanel>
-                </Grid>
-                <Grid item xs={12}>
-                <ExpansionPanel>
-                    <ExpansionPanelSummary
-                        expandIcon={<ExpandMoreIcon/>}
-                        aria-controls="panel2a-content"
-                        id="panel2a-header"
-                    >
-                        <Typography >续集</Typography>
-                    </ExpansionPanelSummary>
-                    <ExpansionPanelDetails>
-                        <Briefitemlist data={this.props.subsequent}/>
-                    </ExpansionPanelDetails>
-                </ExpansionPanel>
-                </Grid>
-                <Grid item xs={12}>
-                <ExpansionPanel>
-                    <ExpansionPanelSummary
-                        expandIcon={<ExpandMoreIcon/>}
-                        aria-controls="panel3a-content"
-                        id="panel3a-header"
-                    >
                         <Typography >相关作品</Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
-                        <Briefitemlist data={this.props.normal}/>
+                        <Briefitemlist data={this.props.relations}/>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
                 </Grid>

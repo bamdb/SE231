@@ -131,14 +131,13 @@ class Useriteminfopage extends Component {
                             </Grid>
                         </Grid>
                         <Divider type={"vertical"} style={{height:400}}/>
-                        <Grid  item xs={6} >
+                        <Grid  item xs={5} >
                             <Commentlist comments={this.state.comments}/>
                         </Grid>
-                        <Grid  item xs={3} >
+                        <Grid  item xs={4} >
                             <Collect status={this.state.status} totGrade={this.state.totgrade} avgGrade={this.state.rating.avgScore} rank={this.state.rating.rank} itemid={this.state.id} userid={this.state.userid}/>
-                            <Relateditem prior={itemdata.relationPrior} subsequent={itemdata.relationSubsequent} normal={itemdata.relationNormal} itemid={itemdata.id}/>
+                            <Relateditem relations={itemdata.relations} itemid={itemdata.id}/>
                         </Grid>
-                        <Grid item xs={1}/>
                     </Grid>
         );
     }
