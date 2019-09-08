@@ -81,9 +81,6 @@ class Head extends Component{
                 <Icon type="qq" onClick={this.shareTo.bind(this,'qq')}/>
             </Menu.Item>
             <Menu.Item>
-                <Icon type="wechat" onClick={this.shareTo.bind(this,'wechat')} />
-            </Menu.Item>
-            <Menu.Item>
                 <Icon type="weibo" onClick={this.shareTo.bind(this,'sina')} />
             </Menu.Item>
         </Menu>;
