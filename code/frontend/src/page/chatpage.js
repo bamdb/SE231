@@ -50,8 +50,9 @@ class Chatpage extends Component {
                     value: content
                 };
                 messages.push(v);
-                console.log(messages)
-                this.setState({messages: messages, timestamp: new Date().getTime()});
+                var inputValue = document.getElementById("content").getElementsByClassName("chat-input").value;
+                this.setState({inputValue:inputValue,messages: messages, timestamp: new Date().getTime()});
+                // this.setState({messages: messages, timestamp: new Date().getTime()});
             }.bind(this)
         )
     }
