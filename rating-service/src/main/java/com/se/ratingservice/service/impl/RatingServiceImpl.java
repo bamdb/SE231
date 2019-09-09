@@ -176,7 +176,7 @@ public class RatingServiceImpl implements RatingService {
 
         Integer totScoreNum = rating.getTotScoreNum()+1;
         float avgScore = (rating.getAvgScore() * rating.getTotScoreNum() + score) / totScoreNum;
-        Integer rank = 1 + ratingReadDao.findRankByTypeAndItemId(rating.getType(), avgScore, rating.getItemId()git);
+        Integer rank = 1 + ratingReadDao.findRankByTypeAndItemId(rating.getType(), avgScore, rating.getItemId());
         rating.setTotScoreNum(totScoreNum);
         rating.setRank(rank);
         rating.setAvgScore(avgScore);
