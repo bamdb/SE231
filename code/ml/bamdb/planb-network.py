@@ -13,7 +13,9 @@ x=np.array(tmpx)
 y=np.array(tmpy)
 model = keras.Sequential([
 keras.layers.Dense(2500, input_shape=(5180,)),
+keras.layers.Dropout(0.1),
 keras.layers.Dense(2500),
+keras.layers.Dropout(0.1),
 keras.layers.Dense(5180, activation='softmax')
 ])
 
