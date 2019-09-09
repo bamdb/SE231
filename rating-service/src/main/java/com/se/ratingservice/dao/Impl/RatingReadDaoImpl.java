@@ -39,8 +39,8 @@ public class RatingReadDaoImpl implements RatingReadDao {
 
     @Override
     @DataSource("slave")
-    public Integer findRankByTypeAndItemId(Integer type, float avgScore) {
-        return ratingRepository.findRankByTypeAndItemId(type, avgScore);
+    public Integer findRankByTypeAndItemId(Integer type, float avgScore, Long itemId) {
+        return ratingRepository.findRankByTypeAndItemId(type, avgScore, itemId);
     }
 
     @Override

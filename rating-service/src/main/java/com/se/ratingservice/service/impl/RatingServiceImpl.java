@@ -95,7 +95,7 @@ public class RatingServiceImpl implements RatingService {
         if (!item.getType().equals(rating.getType())) {
             rating.setType(item.getType());
         }
-        Integer rank = 1 + ratingReadDao.findRankByTypeAndItemId(rating.getType(), rating.getAvgScore());
+        Integer rank = 1 + ratingReadDao.findRankByTypeAndItemId(rating.getType(), rating.getAvgScore(), rating.getItemId());
         rating.setRank(rank);
         return ratingReadDao.findByItemId(itemId);
     }
@@ -114,7 +114,7 @@ public class RatingServiceImpl implements RatingService {
             if (item == null) {
                 deleteRatingByItemId(rating.getId());
             }else {
-                Integer rank = 1 + ratingReadDao.findRankByTypeAndItemId(rating.getType(), rating.getAvgScore());
+                Integer rank = 1 + ratingReadDao.findRankByTypeAndItemId(rating.getType(), rating.getAvgScore(), rating.getItemId());
                 rating.setRank(rank);
                 ratingOut.setItem(item);
                 ratingOut.setTotalPage(totalPage);
@@ -142,7 +142,7 @@ public class RatingServiceImpl implements RatingService {
         }
         Integer totScoreNum = rating.getTotScoreNum() + totNum;
         float avgScore = (rating.getAvgScore() * rating.getTotScoreNum() + totScore) / totScoreNum;
-        Integer rank = 1 + ratingReadDao.findRankByTypeAndItemId(rating.getType(), avgScore);
+        Integer rank = 1 + ratingReadDao.findRankByTypeAndItemId(rating.getType(), avgScore, rating.getItemId());
         rating.setTotScoreNum(totScoreNum);
         rating.setAvgScore(avgScore);
         rating.setRank(rank);
@@ -176,7 +176,7 @@ public class RatingServiceImpl implements RatingService {
 
         Integer totScoreNum = rating.getTotScoreNum()+1;
         float avgScore = (rating.getAvgScore() * rating.getTotScoreNum() + score) / totScoreNum;
-        Integer rank = 1 + ratingReadDao.findRankByTypeAndItemId(rating.getType(), avgScore);
+        Integer rank = 1 + ratingReadDao.findRankByTypeAndItemId(rating.getType(), avgScore, rating.getItemId()git);
         rating.setTotScoreNum(totScoreNum);
         rating.setRank(rank);
         rating.setAvgScore(avgScore);

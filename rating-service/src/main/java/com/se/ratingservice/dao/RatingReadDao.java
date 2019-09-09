@@ -12,7 +12,7 @@ public interface RatingReadDao {
 
     Rating findById(Long ratingId);
 
-    Integer findRankByTypeAndItemId(Integer type, float avgScore);
+    Integer findRankByTypeAndItemId(Integer type, float avgScore, Long itemId);
 
     Page<Rating> findAllByType(Integer type, PageRequest pageRequest);
 }
