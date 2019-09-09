@@ -95,11 +95,6 @@ public class RatingServiceImpl implements RatingService {
         if (!item.getType().equals(rating.getType())) {
             rating.setType(item.getType());
         }
-        List<Integer> ratingList = new ArrayList<>();
-        for (int i=0; i<10; i++) {
-            ratingList.add(0);
-        }
-        updateRating(item.getId(), ratingList);
         Integer rank = 1 + ratingReadDao.findRankByTypeAndItemId(rating.getType(), rating.getAvgScore());
         rating.setRank(rank);
         return ratingReadDao.findByItemId(itemId);
@@ -119,11 +114,6 @@ public class RatingServiceImpl implements RatingService {
             if (item == null) {
                 deleteRatingByItemId(rating.getId());
             }else {
-                List<Integer> ratingList1 = new ArrayList<>();
-                for (int i=0; i<10; i++) {
-                    ratingList1.add(0);
-                }
-                updateRating(item.getId(), ratingList1);
                 Integer rank = 1 + ratingReadDao.findRankByTypeAndItemId(rating.getType(), rating.getAvgScore());
                 rating.setRank(rank);
                 ratingOut.setItem(item);
