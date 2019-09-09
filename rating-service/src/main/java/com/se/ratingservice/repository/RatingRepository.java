@@ -18,6 +18,6 @@ public interface RatingRepository extends CrudRepository<Rating, Long> {
     void deleteRatingByItemId(Long itemId);
     Page<Rating> findAllByType(Integer type, Pageable pageable);
 
-    @Query("select count(r.id) from Rating r where r.type = ?1 and r.avgScore > ?2 + 0.000001")
+    @Query("select count(r.id) from Rating r where r.type = ?1 and r.avgScore > ?2")
     Integer findRankByTypeAndItemId(Integer type, float avgScore);
 }
